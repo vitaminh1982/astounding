@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { X, Copy, Check } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Copy, Check, Save, Trash2, Eye, EyeOff, Tag } from 'lucide-react';
 import { Prompt } from '../../types/prompt';
 
 interface PromptModalProps {
-  type: 'edit' | 'delete' | 'use';
-  prompt: Prompt;
+  type: 'edit' | 'delete' | 'use' | 'create';
+  prompt?: Prompt;
   onClose: () => void;
   onSave?: (updatedPrompt: Prompt) => void;
   onDelete?: () => void;
@@ -19,12 +19,59 @@ export default function PromptModal({
   onDelete,
   onCopy
 }: PromptModalProps) {
-  const [editedPrompt, setEditedPrompt] = useState<Prompt>({ ...prompt });
+  // Initialize with empty prompt if creating new, or the provided prompt if editing
+  const [editedPrompt, setEditedPrompt] = useState<Prompt>(
+    prompt || {
+      id: `prompt-${Date.now()}`,
+      title: '',
+      description: '',
+      category: 'custom',
+      status: 'draft',
+      content: '',
+      tags: [],
+      lastModified: new Date().toISOString(),
+      usageCount: 0,
+      isFavorite: false,
+      author: 'You'
+    }
+  );
+  
+  // State for UI controls
   const [isCopied, setIsCopied] = useState(false);
+  const [showPreview, setShowPreview] = useState(true);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isDirty, setIsDirty] = useState(false);
+  const [newTag, setNewTag] = useState('');
+  const [visibility, setVisibility] = useState<'public' | 'private'>(
+    prompt?.status === 'published' ? 'public' : 'private'
+  );
+  
+  // Character limits
+  const TITLE_MAX_LENGTH = 100;
+  const DESCRIPTION_MAX_LENGTH = 500;
+  
+  // Update isDirty when form changes
+  useEffect(() => {
+    if (type === 'edit' || type === 'create') {
+      setIsDirty(true);
+    }
+  }, [editedPrompt, visibility]);
   
   // Handler for input changes
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
+    
+    // Clear error when field is edited
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
+    
     setEditedPrompt(prev => ({
       ...prev,
       [name]: value
@@ -32,144 +79,334 @@ export default function PromptModal({
   };
   
   // Handler for tags changes
-  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const tagsArray = e.target.value.split(',').map(tag => tag.trim()).filter(Boolean);
+  const handleAddTag = () => {
+    if (newTag.trim() && !editedPrompt.tags.includes(newTag.trim())) {
+      setEditedPrompt(prev => ({
+        ...prev,
+        tags: [...prev.tags, newTag.trim()]
+      }));
+      setNewTag('');
+    }
+  };
+  
+  const handleRemoveTag = (tagToRemove: string) => {
     setEditedPrompt(prev => ({
       ...prev,
-      tags: tagsArray
+      tags: prev.tags.filter(tag => tag !== tagToRemove)
     }));
   };
   
   // Handler for save button
-  const handleSave = (e: React.FormEvent) => {
+  const handleSave = (e: React.FormEvent, saveAsDraft = false) => {
     e.preventDefault();
+    
+    // Validate form
+    const newErrors: Record<string, string> = {};
+    
+    if (!editedPrompt.title.trim()) {
+      newErrors.title = 'Title is required';
+    } else if (editedPrompt.title.length > TITLE_MAX_LENGTH) {
+      newErrors.title = `Title must be ${TITLE_MAX_LENGTH} characters or less`;
+    }
+    
+    if (editedPrompt.description.length > DESCRIPTION_MAX_LENGTH) {
+      newErrors.description = `Description must be ${DESCRIPTION_MAX_LENGTH} characters or less`;
+    }
+    
+    if (!editedPrompt.content.trim()) {
+      newErrors.content = 'Prompt content is required';
+    }
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    
+    // Update status based on save type
+    const finalPrompt = {
+      ...editedPrompt,
+      status: saveAsDraft ? 'draft' : 'published',
+      lastModified: new Date().toISOString()
+    };
+    
     if (onSave) {
-      onSave(editedPrompt);
+      onSave(finalPrompt);
     }
   };
   
   // Handler for copy button
   const handleCopy = () => {
-    if (onCopy) {
+    if (onCopy && prompt) {
       onCopy(prompt.content);
     }
     setIsCopied(true);
     setTimeout(() => setIsCopied(false), 2000);
   };
   
+  // Handler for key press in tag input
+  const handleTagKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleAddTag();
+    }
+  };
+  
   // Render different modal content based on type
   const renderModalContent = () => {
     switch (type) {
+      case 'create':
       case 'edit':
         return (
-          <form onSubmit={handleSave} className="space-y-4">
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
-                Title
-              </label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                value={editedPrompt.title}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required
-              />
+          <div className="flex flex-col md:flex-row h-full">
+            {/* Left Panel - Form */}
+            <div className={`flex-1 overflow-y-auto p-4 ${showPreview ? 'md:w-1/2' : 'w-full'}`}>
+              <form onSubmit={(e) => handleSave(e, false)} className="space-y-4">
+                <div>
+                  <div className="flex justify-between items-center">
+                    <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                      Title <span className="text-red-500">*</span>
+                    </label>
+                    <span className={`text-xs ${
+                      editedPrompt.title.length > TITLE_MAX_LENGTH ? 'text-red-500' : 'text-gray-500'
+                    }`}>
+                      {editedPrompt.title.length}/{TITLE_MAX_LENGTH}
+                    </span>
+                  </div>
+                  <input
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={editedPrompt.title}
+                    onChange={handleInputChange}
+                    className={`mt-1 w-full px-3 py-2 border ${
+                      errors.title ? 'border-red-500' : 'border-gray-300'
+                    } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                    required
+                    maxLength={TITLE_MAX_LENGTH}
+                  />
+                  {errors.title && (
+                    <p className="mt-1 text-sm text-red-500">{errors.title}</p>
+                  )}
+                </div>
+                
+                <div>
+                  <div className="flex justify-between items-center">
+                    <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+                      Description
+                    </label>
+                    <span className={`text-xs ${
+                      editedPrompt.description.length > DESCRIPTION_MAX_LENGTH ? 'text-red-500' : 'text-gray-500'
+                    }`}>
+                      {editedPrompt.description.length}/{DESCRIPTION_MAX_LENGTH}
+                    </span>
+                  </div>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={editedPrompt.description}
+                    onChange={handleInputChange}
+                    rows={2}
+                    className={`mt-1 w-full px-3 py-2 border ${
+                      errors.description ? 'border-red-500' : 'border-gray-300'
+                    } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                    maxLength={DESCRIPTION_MAX_LENGTH}
+                  />
+                  {errors.description && (
+                    <p className="mt-1 text-sm text-red-500">{errors.description}</p>
+                  )}
+                </div>
+                
+                <div>
+                  <div className="flex justify-between items-center">
+                    <label htmlFor="content" className="block text-sm font-medium text-gray-700">
+                      Prompt Content <span className="text-red-500">*</span>
+                    </label>
+                  </div>
+                  <textarea
+                    id="content"
+                    name="content"
+                    value={editedPrompt.content}
+                    onChange={handleInputChange}
+                    rows={8}
+                    className={`mt-1 w-full px-3 py-2 border ${
+                      errors.content ? 'border-red-500' : 'border-gray-300'
+                    } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm font-mono`}
+                    required
+                  />
+                  {errors.content && (
+                    <p className="mt-1 text-sm text-red-500">{errors.content}</p>
+                  )}
+                  <p className="mt-1 text-xs text-gray-500">
+                    Use {'{placeholders}'} for variables that users will replace.
+                  </p>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
+                      Category
+                    </label>
+                    <select
+                      id="category"
+                      name="category"
+                      value={editedPrompt.category}
+                      onChange={handleInputChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    >
+                      <option value="marketing">Marketing</option>
+                      <option value="content_creation">Content Creation</option>
+                      <option value="development">Development</option>
+                      <option value="support">Support</option>
+                      <option value="hr">HR</option>
+                      <option value="custom">Custom</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Visibility
+                    </label>
+                    <div className="flex space-x-4">
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          className="form-radio h-4 w-4 text-indigo-600"
+                          checked={visibility === 'private'}
+                          onChange={() => setVisibility('private')}
+                        />
+                        <span className="ml-2 text-sm text-gray-700">Private</span>
+                      </label>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          className="form-radio h-4 w-4 text-indigo-600"
+                          checked={visibility === 'public'}
+                          onChange={() => setVisibility('public')}
+                        />
+                        <span className="ml-2 text-sm text-gray-700">Public</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Tags
+                  </label>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {editedPrompt.tags.map((tag, index) => (
+                      <span 
+                        key={index} 
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
+                      >
+                        {tag}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveTag(tag)}
+                          className="ml-1.5 inline-flex items-center justify-center h-4 w-4 rounded-full text-indigo-400 hover:text-indigo-600 focus:outline-none"
+                        >
+                          <span className="sr-only">Remove tag</span>
+                          <X className="h-3 w-3" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="text"
+                      value={newTag}
+                      onChange={(e) => setNewTag(e.target.value)}
+                      onKeyPress={handleTagKeyPress}
+                      placeholder="Add a tag"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-l-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddTag}
+                      className="inline-flex items-center px-3 py-2 border border-l-0 border-gray-300 rounded-r-md bg-gray-50 text-gray-700 sm:text-sm hover:bg-gray-100"
+                    >
+                      <Tag className="h-4 w-4 mr-1" />
+                      Add
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
             
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={editedPrompt.description}
-                onChange={handleInputChange}
-                rows={2}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
-                Prompt Content
-              </label>
-              <textarea
-                id="content"
-                name="content"
-                value={editedPrompt.content}
-                onChange={handleInputChange}
-                rows={8}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm font-mono"
-                required
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">
-                Category
-              </label>
-              <select
-                id="category"
-                name="category"
-                value={editedPrompt.category}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                <option value="marketing">Marketing</option>
-                <option value="content_creation">Content Creation</option>
-                <option value="development">Development</option>
-                <option value="support">Support</option>
-                <option value="hr">HR</option>
-                <option value="custom">Custom</option>
-              </select>
-            </div>
-            
-            <div>
-              <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
-                Tags (comma separated)
-              </label>
-              <input
-                id="tags"
-                name="tags"
-                type="text"
-                value={editedPrompt.tags.join(', ')}
-                onChange={handleTagsChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-            
-            <div className="flex justify-end space-x-3 pt-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                Save Changes
-              </button>
-            </div>
-          </form>
+            {/* Right Panel - Preview */}
+            {showPreview && (
+              <div className="flex-1 md:w-1/2 border-t md:border-t-0 md:border-l border-gray-200 p-4 bg-gray-50 overflow-y-auto">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-medium text-gray-900">Preview</h3>
+                </div>
+                
+                <div className="bg-white rounded-lg shadow p-4 mb-4">
+                  <div className="bg-indigo-50 px-4 py-1.5 border-b border-indigo-100 flex justify-between items-center rounded-t-lg">
+                    <span className="text-xs font-semibold text-indigo-700 uppercase tracking-wider">
+                      {editedPrompt.category.replace('_', ' ')}
+                    </span>
+                    <span className={`p-1 rounded-full ${
+                      editedPrompt.isFavorite ? 'text-yellow-500' : 'text-gray-400'
+                    }`}>
+                      <svg className="h-4 w-4" fill={editedPrompt.isFavorite ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                      </svg>
+                    </span>
+                  </div>
+                  
+                  <div className="p-4">
+                    <div className="inline-block px-2 py-1 rounded-full bg-gray-100 text-xs text-gray-600 mb-2">
+                      {`Used ${editedPrompt.usageCount} times`}
+                    </div>
+                    
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                      {editedPrompt.title || 'Untitled Prompt'}
+                    </h3>
+                    
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                      {editedPrompt.description || 'No description provided.'}
+                    </p>
+                    
+                    <div className="flex flex-wrap gap-2">
+                      {editedPrompt.tags.slice(0, 3).map((tag, index) => (
+                        <span 
+                          key={index} 
+                          className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {editedPrompt.tags.length > 3 && (
+                        <span className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-700">
+                          +{editedPrompt.tags.length - 3}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="bg-white rounded-lg shadow p-4">
+                  <h4 className="text-sm font-medium text-gray-700 mb-2">Prompt Content Preview</h4>
+                  <div className="bg-gray-50 p-3 rounded border border-gray-200">
+                    <pre className="text-sm text-gray-700 whitespace-pre-wrap font-mono">
+                      {editedPrompt.content || 'No content yet.'}
+                    </pre>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         );
         
       case 'delete':
         return (
-          <div className="text-center">
+          <div className="text-center p-6">
             <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
-              <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <Trash2 className="h-6 w-6 text-red-600" />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">Delete Prompt</h3>
             <p className="text-sm text-gray-500 mb-6">
-              Are you sure you want to delete the prompt "{prompt.title}"? This action cannot be undone.
+              Are you sure you want to delete the prompt "{prompt?.title}"? This action cannot be undone.
             </p>
             <div className="flex justify-center space-x-3">
               <button
@@ -192,20 +429,20 @@ export default function PromptModal({
         
       case 'use':
         return (
-          <div className="space-y-4">
+          <div className="p-6 space-y-4">
             <div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">{prompt.title}</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-2">{prompt?.title}</h3>
               <div className="flex flex-wrap gap-2 mb-4">
                 <span className="px-2 py-1 rounded-full text-xs bg-indigo-100 text-indigo-800">
-                  {prompt.category.replace('_', ' ')}
+                  {prompt?.category.replace('_', ' ')}
                 </span>
-                {prompt.tags.map((tag, index) => (
+                {prompt?.tags.map((tag, index) => (
                   <span key={index} className="px-2 py-1 rounded-full text-xs bg-gray-100 text-gray-800">
                     {tag}
                   </span>
                 ))}
               </div>
-              <p className="text-sm text-gray-500 mb-4">{prompt.description}</p>
+              <p className="text-sm text-gray-500 mb-4">{prompt?.description}</p>
             </div>
             
             <div className="bg-gray-50 p-4 rounded-lg">
@@ -229,7 +466,7 @@ export default function PromptModal({
                 </button>
               </div>
               <pre className="text-sm text-gray-700 whitespace-pre-wrap bg-white p-3 rounded border border-gray-200 font-mono">
-                {prompt.content}
+                {prompt?.content}
               </pre>
             </div>
             
@@ -242,16 +479,6 @@ export default function PromptModal({
                 <li>Submit to the AI and review the response</li>
               </ol>
             </div>
-            
-            <div className="flex justify-end pt-4">
-              <button
-                type="button"
-                onClick={onClose}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              >
-                Close
-              </button>
-            </div>
           </div>
         );
         
@@ -260,20 +487,134 @@ export default function PromptModal({
     }
   };
   
+  // Render modal footer based on type
+  const renderModalFooter = () => {
+    switch (type) {
+      case 'create':
+      case 'edit':
+        return (
+          <div className="flex justify-between items-center px-6 py-4 bg-gray-50 border-t">
+            <div className="flex items-center">
+              {type === 'edit' && onDelete && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (onDelete) onDelete();
+                  }}
+                  className="flex items-center px-3 py-2 text-sm font-medium text-red-700 hover:text-red-800 focus:outline-none"
+                >
+                  <Trash2 className="h-4 w-4 mr-1" />
+                  Delete
+                </button>
+              )}
+              
+              <button
+                type="button"
+                onClick={() => setShowPreview(!showPreview)}
+                className="flex items-center ml-4 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-800 focus:outline-none"
+              >
+                {showPreview ? (
+                  <>
+                    <EyeOff className="h-4 w-4 mr-1" />
+                    Hide Preview
+                  </>
+                ) : (
+                  <>
+                    <Eye className="h-4 w-4 mr-1" />
+                    Show Preview
+                  </>
+                )}
+              </button>
+            </div>
+            
+            <div className="flex space-x-3">
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                Cancel
+              </button>
+              
+              <button
+                type="button"
+                onClick={(e) => handleSave(e, true)}
+                className="px-4 py-2 border border-gray-300 bg-white rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                Save as Draft
+              </button>
+              
+              <button
+                type="button"
+                onClick={(e) => handleSave(e, false)}
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                {visibility === 'public' ? 'Publish' : 'Save'}
+              </button>
+            </div>
+          </div>
+        );
+        
+      case 'use':
+        return (
+          <div className="flex justify-end px-6 py-4 bg-gray-50 border-t">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            >
+              Close
+            </button>
+          </div>
+        );
+        
+      default:
+        return null;
+    }
+  };
+  
+  // Warn user about unsaved changes
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    // Only close if clicking directly on the backdrop
+    if (e.target === e.currentTarget) {
+      if (isDirty && (type === 'edit' || type === 'create')) {
+        if (window.confirm('You have unsaved changes. Are you sure you want to close?')) {
+          onClose();
+        }
+      } else {
+        onClose();
+      }
+    }
+  };
+  
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div 
+      className="fixed inset-0 z-50 overflow-y-auto" 
+      aria-labelledby="modal-title" 
+      role="dialog" 
+      aria-modal="true"
+      onClick={handleBackdropClick}
+    >
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         {/* Background overlay */}
         <div 
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
           aria-hidden="true"
-          onClick={onClose}
         ></div>
 
         {/* Modal panel */}
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <div className="absolute top-0 right-0 pt-4 pr-4">
+        <div className={`inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle ${
+          type === 'delete' ? 'sm:max-w-lg' : 'sm:max-w-5xl'
+        } sm:w-full`}>
+          {/* Modal header */}
+          <div className="bg-white px-6 py-4 border-b border-gray-200">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-medium text-gray-900">
+                {type === 'create' ? 'Create New Prompt' : 
+                 type === 'edit' ? 'Edit Prompt' :
+                 type === 'delete' ? 'Delete Prompt' : 
+                 'Use Prompt'}
+              </h3>
               <button
                 type="button"
                 className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -283,9 +624,15 @@ export default function PromptModal({
                 <X className="h-6 w-6" aria-hidden="true" />
               </button>
             </div>
-            
+          </div>
+          
+          {/* Modal body */}
+          <div className={`${type === 'delete' ? '' : 'max-h-[60vh] overflow-y-auto'}`}>
             {renderModalContent()}
           </div>
+          
+          {/* Modal footer */}
+          {renderModalFooter()}
         </div>
       </div>
     </div>

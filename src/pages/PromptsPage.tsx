@@ -4,7 +4,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { LanguageContext } from '../context/LanguageContext';
 import { Prompt } from '../types/prompt';
 import { toast } from 'react-hot-toast';
-import { LayoutGrid, List, SlidersHorizontal } from 'lucide-react';
+import { LayoutGrid, List, SlidersHorizontal, Plus } from 'lucide-react';
 
 // Import the components
 import PromptsHeader from '../components/prompts/PromptsHeader';
@@ -39,7 +39,7 @@ export default function PromptsPage() {
   });
   
   // State for modals
-  const [modalType, setModalType] = useState<'edit' | 'delete' | 'use' | null>(null);
+  const [modalType, setModalType] = useState<'edit' | 'delete' | 'use' | 'create' | null>(null);
   const [modalPrompt, setModalPrompt] = useState<Prompt | null>(null);
   
   // Save view preference to localStorage when it changes
@@ -92,13 +92,26 @@ export default function PromptsPage() {
     }
   };
   
-  // Handler for saving edited prompt
+  // Handler for creating a new prompt
+  const handleCreatePrompt = () => {
+    setModalPrompt(null);
+    setModalType('create');
+  };
+  
+  // Handler for saving edited or created prompt
   const handleSavePrompt = (updatedPrompt: Prompt) => {
-    const updatedPrompts = prompts.map(p => 
-      p.id === updatedPrompt.id ? updatedPrompt : p
-    );
-    setPrompts(updatedPrompts);
-    toast.success(`Prompt "${updatedPrompt.title}" updated successfully`);
+    if (modalType === 'create') {
+      // Add new prompt
+      setPrompts([...prompts, updatedPrompt]);
+      toast.success(`Prompt "${updatedPrompt.title}" created successfully`);
+    } else {
+      // Update existing prompt
+      const updatedPrompts = prompts.map(p => 
+        p.id === updatedPrompt.id ? updatedPrompt : p
+      );
+      setPrompts(updatedPrompts);
+      toast.success(`Prompt "${updatedPrompt.title}" updated successfully`);
+    }
     setModalType(null);
     setModalPrompt(null);
   };
@@ -167,7 +180,36 @@ export default function PromptsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
 
         {/* Render the Header for the Prompts page */}
-        <PromptsHeader />
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-800">
+              {t('prompts.header.title', 'Prompts')}
+            </h1>
+            <p className="text-sm sm:text-base text-gray-600">
+              {t('prompts.header.subtitle', 'Manage and discover AI prompts')}
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <button
+              onClick={() => {}}
+              className="flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors text-sm sm:text-base"
+            >
+              <Plus className="w-4 h-4" />
+              <span className="whitespace-nowrap">
+                {t('prompts.header.newRole', 'New Role')}
+              </span>
+            </button>
+            <button
+              onClick={handleCreatePrompt}
+              className="flex items-center justify-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors text-sm sm:text-base"
+            >
+              <Plus className="w-4 h-4" />
+              <span className="whitespace-nowrap">
+                {t('prompts.header.generatePrompt', 'Create New Prompt')}
+              </span>
+            </button>
+          </div>
+        </div>
         
         {/* View Toggle */}
         <div className="flex justify-between items-center mb-4">
@@ -261,7 +303,7 @@ export default function PromptsPage() {
       </div>
       
       {/* Modals */}
-      {modalType && modalPrompt && (
+      {modalType && (
         <PromptModal
           type={modalType}
           prompt={modalPrompt}
