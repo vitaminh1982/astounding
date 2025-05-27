@@ -387,10 +387,10 @@ export default function PromptsList({
     );
   }
 
-  // Updated grid layout with responsive columns
+  // Responsive grid layout with consistent spacing
   return (
     <div
-      className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${className}`}
+      className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ${className}`}
     >
       {prompts.map((prompt) => (
         <PromptCard

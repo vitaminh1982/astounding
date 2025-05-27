@@ -27,6 +27,7 @@ export default function PromptCard({
   onSelect
 }: PromptCardProps) {
   const { t } = useContext(LanguageContext);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Function to handle card selection
   const handleCardClick = (e: React.MouseEvent) => {
@@ -75,38 +76,49 @@ export default function PromptCard({
   return (
     <article
       onClick={handleCardClick}
-      className={`bg-white border ${isSelected ? 'border-indigo-500' : 'border-gray-200'} rounded-xl shadow-md overflow-hidden flex flex-col hover:shadow-lg transition-shadow duration-200 ease-in-out ${className} relative ${isSelected ? 'ring-2 ring-indigo-500' : ''} max-w-[300px]`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`
+        bg-white border rounded-xl shadow-sm overflow-hidden flex flex-col
+        transition-all duration-200 ease-in-out
+        ${isSelected ? 'border-indigo-500 ring-2 ring-indigo-500' : 'border-gray-200'}
+        ${isHovered ? 'shadow-md transform scale-[1.01]' : ''}
+        ${className}
+        max-w-[300px] h-[220px]
+      `}
       aria-labelledby={`prompt-title-${prompt.id}`}
     >
-      {/* Category label at top */}
-      <div className="bg-indigo-50 px-4 py-1.5 border-b border-indigo-100">
+      {/* Category badge */}
+      <div className="bg-indigo-50 px-4 py-1.5 border-b border-indigo-100 flex justify-between items-center">
         <span className="text-xs font-semibold text-indigo-700 uppercase tracking-wider">
           {prompt.category.replace('_', ' ')}
         </span>
-      </div>
-      
-      {/* Main Content Area */}
-      <div className="p-4 flex-grow">
-        {/* Favorite Star */}
+        
+        {/* Favorite button - moved to header */}
         {onToggleFavorite && (
           <button
             onClick={handleFavoriteClick}
-            className={`absolute top-3 right-4 p-1.5 rounded-full hover:bg-yellow-100 focus:outline-none focus:ring-2 focus:ring-yellow-400 ${prompt.isFavorite ? 'text-yellow-500' : 'text-gray-400 hover:text-yellow-400'}`}
+            className={`p-1 rounded-full transition-colors ${
+              prompt.isFavorite ? 'text-yellow-500' : 'text-gray-400 hover:text-yellow-400'
+            }`}
             aria-label={prompt.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
-            <Star className={`h-5 w-5 ${prompt.isFavorite ? 'fill-current' : ''}`} />
+            <Star className={`h-4 w-4 ${prompt.isFavorite ? 'fill-current' : ''}`} />
           </button>
         )}
-
+      </div>
+      
+      {/* Main Content Area */}
+      <div className="p-4 flex-grow flex flex-col">
         {/* Usage Count Badge */}
-        <div className="inline-block px-2 py-1 rounded-full bg-gray-100 text-xs text-gray-600 mb-2">
+        <div className="inline-block px-2 py-1 rounded-full bg-gray-100 text-xs text-gray-600 mb-2 self-start">
           {`Used ${prompt.usageCount} times`}
         </div>
 
         {/* Prompt Title */}
         <h3
           id={`prompt-title-${prompt.id}`}
-          className="text-lg font-semibold text-gray-900 mb-2 pr-8"
+          className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2"
           title={prompt.title}
         >
           {prompt.title}
@@ -118,7 +130,7 @@ export default function PromptCard({
         </p>
         
         {/* Tags */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 mt-auto">
           {prompt.tags && prompt.tags.slice(0, 2).map((tag, index) => (
             <span 
               key={index} 
@@ -143,11 +155,11 @@ export default function PromptCard({
           {onUsePrompt && (
             <button
               onClick={handleUseClick}
-              className="px-3 py-1.5 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-1 transition-colors"
+              className="flex items-center gap-1 px-3 py-1.5 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700 transition-colors"
               title="Use Prompt"
             >
-              <PlayCircle className="h-4 w-4 inline mr-1" />
-              Use
+              <PlayCircle className="h-4 w-4" />
+              <span>Use</span>
             </button>
           )}
 
@@ -155,7 +167,7 @@ export default function PromptCard({
           {onEditPrompt && (
             <button
               onClick={handleEditClick}
-              className="p-1.5 text-gray-500 hover:text-blue-600 rounded-full hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="p-1.5 text-gray-500 hover:text-blue-600 rounded-full hover:bg-blue-100 transition-colors"
               title="Edit Prompt"
             >
               <Pencil className="h-4 w-4" />
@@ -166,7 +178,7 @@ export default function PromptCard({
           {onDeletePrompt && (
             <button
               onClick={handleDeleteClick}
-              className="p-1.5 text-gray-500 hover:text-red-600 rounded-full hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-400"
+              className="p-1.5 text-gray-500 hover:text-red-600 rounded-full hover:bg-red-100 transition-colors"
               title="Delete Prompt"
             >
               <Trash2 className="h-4 w-4" />
