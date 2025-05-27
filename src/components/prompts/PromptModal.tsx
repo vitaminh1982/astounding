@@ -4,7 +4,7 @@ import { Prompt } from '../../types/prompt';
 
 interface PromptModalProps {
   type: 'edit' | 'delete' | 'use' | 'create';
-  prompt?: Prompt;
+  prompt?: Prompt | null;
   onClose: () => void;
   onSave?: (updatedPrompt: Prompt) => void;
   onDelete?: () => void;

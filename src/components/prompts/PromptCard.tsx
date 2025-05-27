@@ -3,7 +3,6 @@ import { PlayCircle, Pencil, Trash2, Star } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import { Prompt } from '../../types/prompt';
 import { useContext } from 'react';
-import { toast } from 'react-hot-toast';
 
 interface PromptCardProps {
   prompt: Prompt;
@@ -84,7 +83,7 @@ export default function PromptCard({
         ${isSelected ? 'border-indigo-500 ring-2 ring-indigo-500' : 'border-gray-200'}
         ${isHovered ? 'shadow-md transform scale-[1.01]' : ''}
         ${className}
-        max-w-[300px] h-[220px]
+        h-[220px]
       `}
       aria-labelledby={`prompt-title-${prompt.id}`}
     >
