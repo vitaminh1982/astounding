@@ -1,5 +1,7 @@
 import React, { useState, useContext, memo } from 'react';
-import { Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info } from 'lucide-react';
+import { 
+  Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info 
+} from 'lucide-react';
 import { Page } from '../../App';
 import LanguageSwitcher from "../LanguageSwitcher";
 import { LanguageContext } from '../../context/LanguageContext';
@@ -19,7 +21,8 @@ const ProfileDropdown = memo(({
   isOpen, 
   onClose, 
   onNavigate, 
-  t 
+  t,
+  onOpenWorkspaceModal
 }) => {
   if (!isOpen) return null;
   
@@ -81,6 +84,7 @@ const ProfileDropdown = memo(({
         <p className="px-4 py-1 text-xs font-medium text-gray-500 uppercase">Your workspace</p>
         <button 
           className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          onClick={onOpenWorkspaceModal}
         >
           <span className="flex items-center gap-3">
             <span className="w-8 h-8 rounded-md bg-teal-400 flex-shrink-0"></span>
@@ -116,6 +120,7 @@ const Navbar = ({
 }: NavbarProps) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { t } = useContext(LanguageContext);
+  const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
   
   // Sample workspaces data
   const currentWorkspace = {
@@ -153,6 +158,11 @@ const Navbar = ({
   const handleWorkspaceChange = (workspaceId: string) => {
     console.log(`Switching to workspace: ${workspaceId}`);
     // In a real app, this would update the current workspace
+  };
+  
+  const handleOpenWorkspaceModal = () => {
+    setIsWorkspaceModalOpen(true);
+    setIsProfileOpen(false);
   };
 
   return (
@@ -235,10 +245,19 @@ const Navbar = ({
               onClose={closeProfile}
               onNavigate={onNavigate}
               t={t}
+              onOpenWorkspaceModal={handleOpenWorkspaceModal}
             />
           </div>
         </div>
       </div>
+      
+      {/* Workspace Modal */}
+      {isWorkspaceModalOpen && (
+        <WorkspaceModal 
+          isOpen={isWorkspaceModalOpen} 
+          onClose={() => setIsWorkspaceModalOpen(false)} 
+        />
+      )}
     </nav>
   );
 };
