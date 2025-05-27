@@ -349,10 +349,12 @@ The template should include:
 interface PromptsListProps {
   prompts?: Prompt[];
   onUsePrompt?: (promptId: string) => void;
-  onEditPrompt?: (promptId: string) => void;
+  onEditPrompt?: (updatedPrompt: Prompt) => void;
   onDeletePrompt?: (promptId: string) => void;
   onToggleFavorite?: (promptId: string, isFavorite: boolean) => void;
   className?: string;
+  onSelect?: (promptId: string) => void;
+  selectedPromptId?: string | null;
 }
 
 export default function PromptsList({
@@ -361,7 +363,9 @@ export default function PromptsList({
   onEditPrompt,
   onDeletePrompt,
   onToggleFavorite,
-  className = ''
+  className = '',
+  onSelect,
+  selectedPromptId
 }: PromptsListProps) {
   const { t } = useContext(LanguageContext);
 
@@ -396,6 +400,8 @@ export default function PromptsList({
           onDeletePrompt={onDeletePrompt}
           onToggleFavorite={onToggleFavorite}
           className="h-full" // Make cards fill their container height
+          isSelected={selectedPromptId === prompt.id}
+          onSelect={onSelect}
         />
       ))}
     </div>
