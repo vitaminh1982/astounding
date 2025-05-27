@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* Remove the overflow: hidden or change it to auto */
+body {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.react-flow__node {
+  padding: 10px;
+  border-radius: 12px;
+  min-width: 150px;
+  font-size: 14px;
+  text-align: center;
+  border: 2px solid #2563eb;
+  background-color: white;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.react-flow__node-trigger {
+  border-color: #ef4444;
+}
+
+.react-flow__node-ai_agent {
+  border-color: #8b5cf6;
+}
+
+.react-flow__node-action {
+  border-color: #10b981;
+}
+
+.react-flow__node-tool {
+  border-color: #f59e0b;
+}
+
+.react-flow__handle {
+  width: 8px;
+  height: 8px;
+  background-color: #2563eb;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.react-flow__edge-path {
+  stroke: #94a3b8;
+  stroke-width: 2;
+}
+
+.react-flow__edge {
+  pointer-events: all;
+}
+
+.react-flow__edge-button {
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.react-flow__edge-button:hover circle {
+  fill: #2563eb;
+}
+
+.react-flow__node-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.react-flow__minimap {
+  background-color: #f8fafc;
+  border-radius: 8px;
+}
+
+.react-flow__controls {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.react-flow__controls button {
+  border-radius: 4px;
+  background-color: white;
+  border-bottom: none;
+}
+
+.react-flow__controls button:hover {
+  background-color: #f1f5f9;
+}
