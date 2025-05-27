@@ -4,12 +4,18 @@ import React, { useState, useContext, useEffect } from 'react';
 import { LanguageContext } from '../context/LanguageContext';
 import { Prompt } from '../types/prompt';
 import { toast } from 'react-hot-toast';
+import { LayoutGrid, List, SlidersHorizontal } from 'lucide-react';
 
 // Import the components
 import PromptsHeader from '../components/prompts/PromptsHeader';
 import PromptsCategories from '../components/prompts/PromptsCategories';
 import PromptsSearch from '../components/prompts/PromptsSearch';
 import PromptsList, { mockPrompts } from '../components/prompts/PromptsList';
+import PromptsTableView from '../components/prompts/PromptsTableView';
+import PromptModal from '../components/prompts/PromptModal';
+
+// View type enum
+type ViewType = 'card' | 'list';
 
 // Define the main PromptsPage component
 export default function PromptsPage() {
@@ -24,6 +30,22 @@ export default function PromptsPage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPromptId, setSelectedPromptId] = useState<string | null>(null);
+  
+  // State for view type (card or list)
+  const [viewType, setViewType] = useState<ViewType>(() => {
+    // Try to get the saved view preference from localStorage
+    const savedView = localStorage.getItem('promptsViewType');
+    return (savedView === 'list' || savedView === 'card') ? savedView as ViewType : 'card';
+  });
+  
+  // State for modals
+  const [modalType, setModalType] = useState<'edit' | 'delete' | 'use' | null>(null);
+  const [modalPrompt, setModalPrompt] = useState<Prompt | null>(null);
+  
+  // Save view preference to localStorage when it changes
+  useEffect(() => {
+    localStorage.setItem('promptsViewType', viewType);
+  }, [viewType]);
   
   // Filter prompts when category or search query changes
   useEffect(() => {
@@ -56,33 +78,50 @@ export default function PromptsPage() {
   const handleUsePrompt = (promptId: string) => {
     const prompt = prompts.find(p => p.id === promptId);
     if (prompt) {
-      // Copy to clipboard
-      navigator.clipboard.writeText(prompt.content);
-      toast.success(`Prompt "${prompt.title}" copied to clipboard`);
-      
-      // Update usage count
-      const updatedPrompts = prompts.map(p => 
-        p.id === promptId ? { ...p, usageCount: p.usageCount + 1 } : p
-      );
-      setPrompts(updatedPrompts);
+      setModalPrompt(prompt);
+      setModalType('use');
     }
   };
   
   // Handler for editing a prompt
-  const handleEditPrompt = (updatedPrompt: Prompt) => {
+  const handleEditPromptClick = (promptId: string) => {
+    const prompt = prompts.find(p => p.id === promptId);
+    if (prompt) {
+      setModalPrompt(prompt);
+      setModalType('edit');
+    }
+  };
+  
+  // Handler for saving edited prompt
+  const handleSavePrompt = (updatedPrompt: Prompt) => {
     const updatedPrompts = prompts.map(p => 
       p.id === updatedPrompt.id ? updatedPrompt : p
     );
     setPrompts(updatedPrompts);
     toast.success(`Prompt "${updatedPrompt.title}" updated successfully`);
+    setModalType(null);
+    setModalPrompt(null);
   };
   
   // Handler for deleting a prompt
-  const handleDeletePrompt = (promptId: string) => {
-    const updatedPrompts = prompts.filter(p => p.id !== promptId);
-    setPrompts(updatedPrompts);
-    setSelectedPromptId(null);
-    toast.success('Prompt deleted successfully');
+  const handleDeletePromptClick = (promptId: string) => {
+    const prompt = prompts.find(p => p.id === promptId);
+    if (prompt) {
+      setModalPrompt(prompt);
+      setModalType('delete');
+    }
+  };
+  
+  // Handler for confirming prompt deletion
+  const handleConfirmDelete = () => {
+    if (modalPrompt) {
+      const updatedPrompts = prompts.filter(p => p.id !== modalPrompt.id);
+      setPrompts(updatedPrompts);
+      setSelectedPromptId(null);
+      toast.success('Prompt deleted successfully');
+      setModalType(null);
+      setModalPrompt(null);
+    }
   };
   
   // Handler for toggling favorite status
@@ -94,11 +133,31 @@ export default function PromptsPage() {
     toast.success(isFavorite ? 'Added to favorites' : 'Removed from favorites');
   };
   
-  // Handler for filter button click (placeholder for now)
+  // Handler for filter button click
   const handleFiltersClick = () => {
     toast('Advanced filters coming soon', {
-      icon: 'ℹ️'
+      icon: '🔍'
     });
+  };
+  
+  // Handler for closing modals
+  const handleCloseModal = () => {
+    setModalType(null);
+    setModalPrompt(null);
+  };
+  
+  // Handler for copying prompt content
+  const handleCopyPrompt = (content: string) => {
+    navigator.clipboard.writeText(content);
+    toast.success('Prompt copied to clipboard');
+    
+    // Update usage count if in use modal
+    if (modalType === 'use' && modalPrompt) {
+      const updatedPrompts = prompts.map(p => 
+        p.id === modalPrompt.id ? { ...p, usageCount: p.usageCount + 1 } : p
+      );
+      setPrompts(updatedPrompts);
+    }
   };
 
   return (
@@ -109,6 +168,39 @@ export default function PromptsPage() {
 
         {/* Render the Header for the Prompts page */}
         <PromptsHeader />
+        
+        {/* View Toggle */}
+        <div className="flex justify-between items-center mb-4">
+          <div className="flex items-center space-x-2">
+            <span className="text-sm text-gray-500">View:</span>
+            <div className="flex border rounded-md overflow-hidden">
+              <button
+                onClick={() => setViewType('card')}
+                className={`flex items-center px-3 py-1.5 text-sm ${
+                  viewType === 'card' 
+                    ? 'bg-indigo-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+                aria-label="Card View"
+              >
+                <LayoutGrid className="w-4 h-4 mr-1.5" />
+                <span className="hidden sm:inline">Cards</span>
+              </button>
+              <button
+                onClick={() => setViewType('list')}
+                className={`flex items-center px-3 py-1.5 text-sm ${
+                  viewType === 'list' 
+                    ? 'bg-indigo-600 text-white' 
+                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                }`}
+                aria-label="List View"
+              >
+                <List className="w-4 h-4 mr-1.5" />
+                <span className="hidden sm:inline">List</span>
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* Mobile Menu Toggle Button for Categories/Roles */}
         <div className="mb-4 lg:hidden">
@@ -140,21 +232,45 @@ export default function PromptsPage() {
               onFiltersClick={handleFiltersClick}
             />
 
-            {/* Render the List of Prompts */}
+            {/* Render the appropriate view based on viewType */}
             <div className="mt-4">
-              <PromptsList
-                prompts={filteredPrompts}
-                onUsePrompt={handleUsePrompt}
-                onEditPrompt={handleEditPrompt}
-                onDeletePrompt={handleDeletePrompt}
-                onToggleFavorite={handleToggleFavorite}
-                onSelect={handleSelectPrompt}
-                selectedPromptId={selectedPromptId}
-              />
+              {viewType === 'card' ? (
+                <PromptsList
+                  prompts={filteredPrompts}
+                  onUsePrompt={handleUsePrompt}
+                  onEditPrompt={handleEditPromptClick}
+                  onDeletePrompt={handleDeletePromptClick}
+                  onToggleFavorite={handleToggleFavorite}
+                  onSelect={handleSelectPrompt}
+                  selectedPromptId={selectedPromptId}
+                />
+              ) : (
+                <PromptsTableView
+                  prompts={filteredPrompts}
+                  onUsePrompt={handleUsePrompt}
+                  onEditPrompt={handleEditPromptClick}
+                  onDeletePrompt={handleDeletePromptClick}
+                  onToggleFavorite={handleToggleFavorite}
+                  selectedPromptId={selectedPromptId}
+                  onSelect={handleSelectPrompt}
+                />
+              )}
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Modals */}
+      {modalType && modalPrompt && (
+        <PromptModal
+          type={modalType}
+          prompt={modalPrompt}
+          onClose={handleCloseModal}
+          onSave={handleSavePrompt}
+          onDelete={handleConfirmDelete}
+          onCopy={handleCopyPrompt}
+        />
+      )}
     </div>
   );
 }

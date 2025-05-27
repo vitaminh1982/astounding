@@ -6,7 +6,7 @@ import { Prompt } from '../../types/prompt';
 import PromptCard from './PromptCard';
 import { LanguageContext } from '../../context/LanguageContext';
 
-// Mock prompts data for development and testing
+// Mock data for prompts
 export const mockPrompts: Prompt[] = [
   // Marketing Category
   {
@@ -349,7 +349,7 @@ The template should include:
 interface PromptsListProps {
   prompts?: Prompt[];
   onUsePrompt?: (promptId: string) => void;
-  onEditPrompt?: (updatedPrompt: Prompt) => void;
+  onEditPrompt?: (promptId: string) => void;
   onDeletePrompt?: (promptId: string) => void;
   onToggleFavorite?: (promptId: string, isFavorite: boolean) => void;
   className?: string;
@@ -386,10 +386,10 @@ export default function PromptsList({
     );
   }
 
-  // Updated grid layout with fewer columns for larger cards
+  // Updated grid layout with responsive columns
   return (
     <div
-      className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 ${className}`}
+      className={`grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ${className}`}
     >
       {prompts.map((prompt) => (
         <PromptCard
