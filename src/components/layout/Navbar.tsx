@@ -3,6 +3,7 @@ import { Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info } f
 import { Page } from '../../App';
 import LanguageSwitcher from "../LanguageSwitcher";
 import { LanguageContext } from '../../context/LanguageContext';
+import WorkspaceSelector from '../workspace/WorkspaceSelector';
 
 interface NavbarProps {
   onNavigate: (page: Page) => void;
@@ -115,6 +116,31 @@ const Navbar = ({
 }: NavbarProps) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { t } = useContext(LanguageContext);
+  
+  // Sample workspaces data
+  const currentWorkspace = {
+    id: '1',
+    name: 'Miranki',
+    color: '#10B981'
+  };
+  
+  const workspaces = [
+    {
+      id: '1',
+      name: 'Miranki',
+      color: '#10B981'
+    },
+    {
+      id: '2',
+      name: 'Personal',
+      color: '#6366F1'
+    },
+    {
+      id: '3',
+      name: 'Client Project',
+      color: '#F59E0B'
+    }
+  ];
 
   const handleProfileToggle = () => {
     setIsProfileOpen(prev => !prev);
@@ -122,6 +148,11 @@ const Navbar = ({
 
   const closeProfile = () => {
     setIsProfileOpen(false);
+  };
+  
+  const handleWorkspaceChange = (workspaceId: string) => {
+    console.log(`Switching to workspace: ${workspaceId}`);
+    // In a real app, this would update the current workspace
   };
 
   return (
@@ -152,12 +183,12 @@ const Navbar = ({
             </button>
           )}
 
-          <button 
-            onClick={() => onNavigate('dashboard')}
-            className="text-xl lg:text-2xl font-bold text-[#10B981] cursor-pointer hover:opacity-80 transition-opacity"
-          >
-            Sendplex
-          </button>
+          {/* Workspace Selector */}
+          <WorkspaceSelector 
+            currentWorkspace={currentWorkspace}
+            workspaces={workspaces}
+            onWorkspaceChange={handleWorkspaceChange}
+          />
 
           {/* Credits display */}
           <div className="hidden md:flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full">
