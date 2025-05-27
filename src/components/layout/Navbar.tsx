@@ -183,12 +183,12 @@ const Navbar = ({
             </button>
           )}
 
-          {/* Workspace Selector */}
-          <WorkspaceSelector 
-            currentWorkspace={currentWorkspace}
-            workspaces={workspaces}
-            onWorkspaceChange={handleWorkspaceChange}
-          />
+          <button 
+            onClick={() => onNavigate('dashboard')}
+            className="text-xl lg:text-2xl font-bold text-[#10B981] cursor-pointer hover:opacity-80 transition-opacity"
+          >
+            Sendplex
+          </button>
 
           {/* Credits display */}
           <div className="hidden md:flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full">
