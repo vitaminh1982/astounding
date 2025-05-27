@@ -96,7 +96,9 @@ export default function PromptsPage() {
   
   // Handler for filter button click (placeholder for now)
   const handleFiltersClick = () => {
-    toast.info('Advanced filters coming soon');
+    toast('Advanced filters coming soon', {
+      icon: 'ℹ️'
+    });
   };
 
   return (
