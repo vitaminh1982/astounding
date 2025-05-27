@@ -1,10 +1,11 @@
 // src/components/prompts/PromptsList.tsx
 
-import React, { useContext } from 'react';
+import React from 'react';
 import { SearchX } from 'lucide-react';
 import { Prompt } from '../../types/prompt';
 import PromptCard from './PromptCard';
 import { LanguageContext } from '../../context/LanguageContext';
+import { useContext } from 'react';
 
 // Mock data for prompts
 export const mockPrompts: Prompt[] = [

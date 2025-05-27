@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { PlayCircle, Pencil, Trash2, Star, Copy, X, Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { PlayCircle, Pencil, Trash2, Star } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import { Prompt } from '../../types/prompt';
 import { useContext } from 'react';
@@ -27,8 +27,6 @@ export default function PromptCard({
   onSelect
 }: PromptCardProps) {
   const { t } = useContext(LanguageContext);
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isContentExpanded, setIsContentExpanded] = useState(false);
 
   // Function to handle card selection
   const handleCardClick = (e: React.MouseEvent) => {
@@ -74,25 +72,6 @@ export default function PromptCard({
     }
   };
 
-  const handleCopyContent = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    navigator.clipboard.writeText(prompt.content);
-    toast.success('Prompt copied to clipboard');
-  };
-
-  // Determine if description should be truncated
-  const shouldTruncateDescription = prompt.description.length > 100 && !isExpanded;
-  const truncatedDescription = shouldTruncateDescription
-    ? `${prompt.description.substring(0, 100)}...`
-    : prompt.description;
-
-  // Determine if content should be truncated
-  const shouldTruncateContent = prompt.content.length > 200 && !isContentExpanded;
-  const truncatedContent = shouldTruncateContent
-    ? `${prompt.content.substring(0, 200)}...`
-    : prompt.content;
-
   return (
     <article
       onClick={handleCardClick}
@@ -133,77 +112,14 @@ export default function PromptCard({
           {prompt.title}
         </h3>
 
-        {/* Prompt Description with expand/collapse */}
-        <div className="mb-3">
-          <p className="text-sm text-gray-600" title={prompt.description}>
-            {truncatedDescription}
-          </p>
-          {prompt.description.length > 100 && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsExpanded(!isExpanded);
-              }}
-              className="text-xs text-indigo-600 hover:text-indigo-800 mt-1 flex items-center"
-            >
-              {isExpanded ? (
-                <>
-                  <ChevronUp className="w-3 h-3 mr-1" />
-                  Show less
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-3 h-3 mr-1" />
-                  Show more
-                </>
-              )}
-            </button>
-          )}
-        </div>
-        
-        {/* Prompt Content Preview */}
-        <div className="mb-3 bg-gray-50 p-3 rounded-md">
-          <div className="flex justify-between items-center mb-1">
-            <h4 className="text-xs font-medium text-gray-700">Prompt Content</h4>
-            <button
-              onClick={handleCopyContent}
-              className="text-xs text-indigo-600 hover:text-indigo-800 p-1"
-              title="Copy prompt content"
-            >
-              <Copy className="w-3 h-3" />
-            </button>
-          </div>
-          <pre className="text-xs text-gray-600 whitespace-pre-wrap font-mono">
-            {truncatedContent}
-          </pre>
-          {prompt.content.length > 200 && (
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setIsContentExpanded(!isContentExpanded);
-              }}
-              className="text-xs text-indigo-600 hover:text-indigo-800 mt-1 flex items-center"
-            >
-              {isContentExpanded ? (
-                <>
-                  <ChevronUp className="w-3 h-3 mr-1" />
-                  Show less
-                </>
-              ) : (
-                <>
-                  <ChevronDown className="w-3 h-3 mr-1" />
-                  Show more
-                </>
-              )}
-            </button>
-          )}
-        </div>
+        {/* Prompt Description - Truncated */}
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2" title={prompt.description}>
+          {prompt.description || 'No description provided.'}
+        </p>
         
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {prompt.tags && prompt.tags.map((tag, index) => (
+          {prompt.tags && prompt.tags.slice(0, 2).map((tag, index) => (
             <span 
               key={index} 
               className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-700"
@@ -211,6 +127,11 @@ export default function PromptCard({
               {tag}
             </span>
           ))}
+          {prompt.tags && prompt.tags.length > 2 && (
+            <span className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-700">
+              +{prompt.tags.length - 2}
+            </span>
+          )}
         </div>
       </div>
 
