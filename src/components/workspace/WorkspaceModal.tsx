@@ -68,7 +68,7 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
     color: '#10B981',
     defaultRole: 'Custodian',
     autoOnboarding: true,
-    welcomeMessage: 'Welcome to Miranki! We're excited to have you join our workspace. Here you'll find all the tools and resources you need to get started.',
+    welcomeMessage: 'Welcome to Miranki! We\'re excited to have you join our workspace. Here you'll find all the tools and resources you need to get started.',
     requiredTasks: ['Complete profile', 'Review documentation', 'Join team channel']
   });
   
