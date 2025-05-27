@@ -6,6 +6,7 @@ import { Page } from '../../App';
 import LanguageSwitcher from "../LanguageSwitcher";
 import { LanguageContext } from '../../context/LanguageContext';
 import WorkspaceSelector from '../workspace/WorkspaceSelector';
+import WorkspaceModal from '../workspace/WorkspaceModal';
 
 interface NavbarProps {
   onNavigate: (page: Page) => void;
