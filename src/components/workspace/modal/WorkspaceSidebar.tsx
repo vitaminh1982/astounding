@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, Users, Shield, Calendar, Settings } from 'lucide-react';
+import { Briefcase, Users, Shield, Calendar, Settings, Database } from 'lucide-react';
 
 interface TabItem {
   id: string;
@@ -23,6 +23,7 @@ const WorkspaceSidebar: React.FC<WorkspaceSidebarProps> = ({ activeTab, setActiv
     { id: 'members', label: 'Members', icon: <Users className="w-5 h-5" /> },
     { id: 'roles', label: 'Roles & Permissions', icon: <Shield className="w-5 h-5" /> },
     { id: 'onboarding', label: 'Onboarding', icon: <Calendar className="w-5 h-5" /> },
+    { id: 'data-wallet', label: 'Data Wallet', icon: <Database className="w-5 h-5" /> },
     { id: 'settings', label: 'Settings', icon: <Settings className="w-5 h-5" /> },
   ];
 

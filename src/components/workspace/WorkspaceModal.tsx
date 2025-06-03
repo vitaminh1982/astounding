@@ -7,6 +7,7 @@ import MembersTab from './modal/tabs/MembersTab';
 import RolesTab from './modal/tabs/RolesTab';
 import OnboardingTab from './modal/tabs/OnboardingTab';
 import SettingsTab from './modal/tabs/SettingsTab';
+import DataWalletTab from './modal/tabs/DataWalletTab';
 import { WorkspaceData } from './modal/types';
 
 interface WorkspaceModalProps {
@@ -23,7 +24,7 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
   if (!isOpen) return null;
   
   // State for active tab
-  const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'roles' | 'onboarding' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'members' | 'roles' | 'onboarding' | 'data-wallet' | 'settings'>('overview');
   
   // Sample workspace data
   const [workspaceData, setWorkspaceData] = useState<WorkspaceData>({
@@ -70,6 +71,8 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
         return <RolesTab workspaceData={workspaceData} />;
       case 'onboarding':
         return <OnboardingTab workspaceData={workspaceData} setWorkspaceData={setWorkspaceData} />;
+      case 'data-wallet':
+        return <DataWalletTab workspaceData={workspaceData} />;
       case 'settings':
         return <SettingsTab workspaceData={workspaceData} setWorkspaceData={setWorkspaceData} />;
       default:
