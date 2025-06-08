@@ -81,8 +81,8 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
   };
   
   return (
-    <div className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center p-4" style={{ zIndex: 10000 }}>
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl max-h-[90vh] flex flex-col relative" style={{ zIndex: 10001 }}>
+    <div className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center p-4" style={{ zIndex: 9999 }}>
+      <div className="bg-white rounded-xl shadow-xl w-full max-w-6xl max-h-[90vh] flex flex-col relative" style={{ zIndex: 10000 }}>
         {/* Header */}
         <WorkspaceHeader onClose={onClose} />
         

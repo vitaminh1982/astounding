@@ -148,7 +148,7 @@ const Sidebar = ({
       bg-gray-900 
       text-white 
       flex flex-col
-      z-40
+      z-30
       transition-all duration-300 ease-in-out
       ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
     `}>

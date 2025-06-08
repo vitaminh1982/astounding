@@ -402,7 +402,7 @@ const Navbar = ({
   }, [isNotificationsOpen]);
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed w-full z-30 top-0">
+    <nav className="bg-white border-b border-gray-200 fixed w-full z-40 top-0">
       <div className="px-4 py-3 lg:px-6 flex justify-between items-center">
         {/* Left section */}
         <div className="flex items-center gap-4">
