@@ -453,7 +453,7 @@ Remember that your main goal is customer satisfaction while respecting company p
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold">Chat with {agentConfig.name}</h3>
             <a
-              href="https://cute-kulfi-32508b.netlify.app"
+              href="https://miranki.netlify.app"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-indigo-600 text-white px-3 py-1 text-sm rounded-lg hover:bg-indigo-700 transition-colors"
