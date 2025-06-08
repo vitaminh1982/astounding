@@ -162,14 +162,7 @@ export default function Preview({ agent }: PreviewProps) {
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold">Chat with {agent?.name || 'Agent'}</h3>
-        <a
-          href="https://miranki.netlify.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-indigo-600 text-white px-3 py-1 text-sm rounded-lg hover:bg-indigo-700 transition-colors"
-        >
-          Open Chat
-        </a>
+
       </div>
 
       <div className="border rounded-lg p-4 space-y-4">
