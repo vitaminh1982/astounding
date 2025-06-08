@@ -452,14 +452,6 @@ Remember that your main goal is customer satisfaction while respecting company p
         <main className="flex-1 flex flex-col p-4">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-lg font-semibold">Chat with {agentConfig.name}</h3>
-            <a
-              href="https://miranki.netlify.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-indigo-600 text-white px-3 py-1 text-sm rounded-lg hover:bg-indigo-700 transition-colors"
-            >
-              Open Chat
-            </a>
           </div>
           
           <div className="flex-1 overflow-y-auto bg-white rounded-lg shadow-md p-4 mb-4">
