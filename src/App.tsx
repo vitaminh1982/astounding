@@ -16,7 +16,7 @@ import WorkflowsPage from './pages/WorkflowsPage';
 import IntegrationsPage from './pages/IntegrationsPage';
 import PromptsPage from './pages/PromptsPage'; // Import the new PromptsPage
 import UsagePage from './pages/UsagePage'; // Import the new UsagePage
-import FloatingAssistant from './components/common/FloatingAssistant';
+import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
 export type Page = 
