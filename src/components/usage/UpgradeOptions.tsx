@@ -29,7 +29,7 @@ export default function UpgradeOptions() {
   };
   
   const calculateStarterTotal = () => {
-    return 49 + (additionalPacks * 15);
+    return 149 + (additionalPacks * 15);
   };
   
   const calculateTotalConversations = (base: number, pack: number) => {
@@ -40,7 +40,7 @@ export default function UpgradeOptions() {
     {
       name: 'Starter',
       description: 'Collaborate across 10 users at one time',
-      price: '49€',
+      price: '149€',
       conversations: 5000,
       isAvailable: true,
       isRecommended: true,
@@ -196,7 +196,7 @@ export default function UpgradeOptions() {
                 {additionalPacks > 0 && (
                   <div className="mt-2 pt-2 border-t border-gray-200">
                     <p className="text-xs text-gray-600">
-                      Base price: 49€ + {additionalPacks} × 15€
+                      Base price: 149€ + {additionalPacks} × 15€
                     </p>
                   </div>
                 )}
