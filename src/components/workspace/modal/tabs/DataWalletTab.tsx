@@ -22,7 +22,7 @@ interface DataItem {
  * Data Wallet tab component for the workspace modal
  * Displays and manages platform data across three categories:
  * - Transaction Data
- * - Public Data
+ * - Corporate / Public Data
  * - Private Data
  */
 const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
@@ -260,7 +260,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
       case 'transaction':
         return 'Transaction data includes all interactions and platform transactions. This data is used for analytics, auditing, and service improvement.';
       case 'public':
-        return 'Public data is openly accessible across the platform. This includes shared documents, public profiles, and community content.';
+        return 'Corporate data is openly accessible across the platform. This includes shared documents, public profiles, and community content.';
       case 'private':
         return 'Private data contains sensitive and personal information. This data is encrypted and access is strictly controlled.';
     }
@@ -337,7 +337,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
           }`}
         >
           <Globe className="w-4 h-4 mr-2" />
-          Public Data
+          Corporate Data
         </button>
         <button
           onClick={() => setActiveCategory('private')}
