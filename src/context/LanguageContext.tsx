@@ -821,7 +821,7 @@ saveError: 'Failed to save configuration',
     // démarre ici
     
     navbar: {
-      administrator: 'Propriétaire',
+      administrator: 'Admin',
       profile: 'Profil',
       disconnect: 'Déconnexion',
       settings: 'Paramètres',
