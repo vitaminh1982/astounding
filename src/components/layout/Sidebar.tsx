@@ -147,10 +147,10 @@ const Sidebar = ({
     setIsAgentsMenuOpen(!isAgentsMenuOpen);
   };
 
-  const isAnyAgentsSubmenuActive = () => {
-    return aiAgentsSubmenu.some(item => item.page === currentPage);
+ const isAnyAgentsSubmenuActive = () => {
+    return aiAgentsSubmenu.some(item => item.page === currentPage) || currentPage === 'agents-list';
   };
-
+  
   const isAnyGovernanceSubmenuActive = () => {
     return governanceSubmenu.some(item => item.page === currentPage);
   };
