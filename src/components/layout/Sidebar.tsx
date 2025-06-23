@@ -230,61 +230,7 @@ const Sidebar = ({
                 </span>
               )}
             </button>
-            
-            {/* Nested menu items for Governance */}
-            {isGovernanceMenuOpen && (
-              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
-                <SubMenuItem
-                  icon={ShieldAlert}
-                  label={t('sidebar.governanceMonitoring')}
-                  page="governance"
-                  currentPage={currentPage}
-                  onClick={handleMenuItemClick}
-                  isExpanded={isExpanded}
-                />
-                <SubMenuItem
-                  icon={FileText}
-                  label={t('sidebar.policyManagement')}
-                  page="policy-management"
-                  currentPage={currentPage}
-                  onClick={handleMenuItemClick}
-                  isExpanded={isExpanded}
-                />
-                <SubMenuItem
-                  icon={ClipboardCheck}
-                  label={t('sidebar.auditCompliance')}
-                  page="audit-compliance"
-                  currentPage={currentPage}
-                  onClick={handleMenuItemClick}
-                  isExpanded={isExpanded}
-                />
-                <SubMenuItem
-                  icon={AlertTriangle}
-                  label={t('sidebar.riskManagement')}
-                  page="risk-management"
-                  currentPage={currentPage}
-                  onClick={handleMenuItemClick}
-                  isExpanded={isExpanded}
-                />
-                <SubMenuItem
-                  icon={BarChart2}
-                  label={t('sidebar.performanceAnalytics')}
-                  page="performance-analytics"
-                  currentPage={currentPage}
-                  onClick={handleMenuItemClick}
-                  isExpanded={isExpanded}
-                />
-                <SubMenuItem
-                  icon={Settings2}
-                  label={t('sidebar.agentConfiguration')}
-                  page="agent-configuration"
-                  currentPage={currentPage}
-                  onClick={handleMenuItemClick}
-                  isExpanded={isExpanded}
-                />
-              </div>
-            )}
-          </div>
+    
 
           {/* AI Agents with collapsible submenu */}
           <div className="space-y-1">
@@ -347,6 +293,61 @@ const Sidebar = ({
           ))}
         </nav>
       </div>
+
+                    {/* Nested menu items for Governance */}
+            {isGovernanceMenuOpen && (
+              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
+                <SubMenuItem
+                  icon={ShieldAlert}
+                  label={t('sidebar.governanceMonitoring')}
+                  page="governance"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={FileText}
+                  label={t('sidebar.policyManagement')}
+                  page="policy-management"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={ClipboardCheck}
+                  label={t('sidebar.auditCompliance')}
+                  page="audit-compliance"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={AlertTriangle}
+                  label={t('sidebar.riskManagement')}
+                  page="risk-management"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={BarChart2}
+                  label={t('sidebar.performanceAnalytics')}
+                  page="performance-analytics"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={Settings2}
+                  label={t('sidebar.agentConfiguration')}
+                  page="agent-configuration"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+              </div>
+            )}
+          </div>
       
       {/* Contact and demo buttons */}
       <div className="p-4 border-t border-gray-800 space-y-2">
