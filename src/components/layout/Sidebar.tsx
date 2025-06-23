@@ -307,57 +307,6 @@ const Sidebar = ({
             )}
           </div>
 
-          {/* Onboarding with collapsible submenu */}
-          <div className="space-y-1">
-            <button
-              onClick={() => {
-                if (currentPage === 'onboarding' || isAnyOnboardingSubmenuActive()) {
-                  handleMenuItemClick('onboarding');
-                } else {
-                  setIsOnboardingMenuOpen(!isOnboardingMenuOpen);
-                }
-              }}
-              className={`
-                flex w-full items-center justify-between px-4 py-3 
-                text-sm rounded-lg 
-                hover:bg-gray-800 
-                transition-colors
-                ${currentPage === 'onboarding' || isAnyOnboardingSubmenuActive() ? 'bg-gray-800' : ''}
-                ${!isExpanded && 'justify-center'}
-              `}
-              aria-expanded={isOnboardingMenuOpen}
-            >
-              <div className="flex items-center gap-3">
-                <FileText size={20} />
-                {isExpanded && <span>{t('sidebar.onboarding')}</span>}
-              </div>
-              {isExpanded && (
-                <span className="text-gray-400">
-                  {isOnboardingMenuOpen ? 
-                    <ChevronDown size={16} /> : 
-                    <ChevronRight size={16} />
-                  }
-                </span>
-              )}
-            </button>
-            
-            {/* Nested menu items for Onboarding */}
-            {isOnboardingMenuOpen && (
-              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
-                {onboardingSubmenu.map((subItem) => (
-                  <SubMenuItem
-                    key={subItem.page}
-                    icon={subItem.icon}
-                    label={subItem.label}
-                    page={subItem.page}
-                    currentPage={currentPage}
-                    onClick={handleMenuItemClick}
-                    isExpanded={isExpanded}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
 
           {/* Regular menu items after AI Agents */}
           {mainMenuItems.slice(1).map((item) => (
