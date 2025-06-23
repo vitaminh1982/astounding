@@ -46,21 +46,7 @@ const CreditConsumptionBar: React.FC<CreditConsumptionBarProps> = ({
         </div>
       </div>
       
-      {/* Separator */}
-      <div className="h-8 w-px bg-gray-300 mx-1 hidden sm:block"></div>
-      
-      {/* Background Processing Credits */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
-        <div className="text-sm text-gray-600 whitespace-nowrap">
-          <span className="hidden sm:inline">Background:</span> {backgroundCredits.used.toLocaleString()}/{backgroundCredits.total.toLocaleString()}
-        </div>
-        <div className="w-full sm:w-16 h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div 
-            className={`h-full ${getColorClass(backgroundPercentage)}`} 
-            style={{ width: `${backgroundPercentage}%` }}
-          ></div>
-        </div>
-      </div>
+
       
       {/* Info Button */}
       <div className="relative">
