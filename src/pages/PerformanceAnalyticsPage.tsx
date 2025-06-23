@@ -214,30 +214,13 @@ export default function PerformanceAnalyticsPage() {
                   </div>
                 </div>
 
-                {/* Performance chart placeholder */}
-                <div className="bg-white rounded-lg border p-6 mb-8">
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-medium text-gray-900">Performance Trends</h3>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-indigo-500 rounded-full mr-2"></div>
-                        <span className="text-sm text-gray-500">Response Time</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                        <span className="text-sm text-gray-500">Resolution Rate</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2"></div>
-                        <span className="text-sm text-gray-500">Satisfaction</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-                    <BarChart2 className="h-12 w-12 text-gray-300" />
-                    <span className="ml-2 text-gray-500">Performance chart visualization</span>
-                  </div>
-                </div>
+                {/* Performance Chart Component */}
+                <PerformanceChart 
+                  title="Performance Trends" 
+                  description="Track key performance indicators over time"
+                  height={350}
+                  className="mb-8"
+                />
 
                 {/* Top performing agents */}
                 <div className="bg-white rounded-lg border p-6">
@@ -453,29 +436,12 @@ export default function PerformanceAnalyticsPage() {
                 </div>
 
                 {/* Resource usage chart placeholder */}
-                <div className="bg-white rounded-lg border p-6 mb-8">
-                  <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-medium text-gray-900">Resource Usage Over Time</h3>
-                    <div className="flex items-center space-x-4">
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
-                        <span className="text-sm text-gray-500">CPU</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
-                        <span className="text-sm text-gray-500">Memory</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                        <span className="text-sm text-gray-500">API Calls</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="h-64 bg-gray-50 rounded-lg flex items-center justify-center">
-                    <BarChart2 className="h-12 w-12 text-gray-300" />
-                    <span className="ml-2 text-gray-500">Resource usage chart visualization</span>
-                  </div>
-                </div>
+                <PerformanceChart 
+                  title="Resource Usage Over Time" 
+                  description="Monitor CPU, memory, and API call usage"
+                  height={350}
+                  className="mb-8"
+                />
 
                 {/* Optimization recommendations */}
                 <div className="bg-white rounded-lg border p-6">
