@@ -1,12 +1,37 @@
 import React, { useState } from 'react';
-import { Database, Globe, Lock, Search, Download, Trash2, Edit2, Eye, EyeOff, Filter, ArrowDown, ArrowUp, Info } from 'lucide-react';
+import { 
+  Database, 
+  Globe, 
+  Lock, 
+  Search, 
+  Download, 
+  Trash2, 
+  Edit2, 
+  Eye, 
+  EyeOff, 
+  Filter, 
+  ArrowDown, 
+  ArrowUp, 
+  Info,
+  User,
+  Building,
+  Users,
+  Settings,
+  Shield,
+  CheckCircle,
+  BarChart3,
+  Calendar,
+  UserCheck,
+  ShieldCheck,
+  ArrowRight,
+  Edit
+} from 'lucide-react';
 import { WorkspaceData } from '../types';
 
 interface DataWalletTabProps {
   workspaceData: WorkspaceData;
 }
 
-// Data types for the different categories
 interface DataItem {
   id: string;
   name: string;
@@ -15,19 +40,217 @@ interface DataItem {
   lastModified: string;
   location: string;
   type: string;
+  owner: 'user' | 'company' | 'shared' | 'system';
+  privacyLevel: 'public' | 'internal' | 'confidential' | 'restricted';
   metadata?: Record<string, any>;
 }
+
+// Categories configuration
+const categories = {
+  'personal': {
+    label: 'Personal Data',
+    icon: User,
+    color: 'purple',
+    description: 'Your personal settings, preferences, and private information. Only you have access to this data.'
+  },
+  'business': {
+    label: 'Business Data',
+    icon: Building,
+    color: 'blue',
+    description: 'Shared business information, documents, and corporate resources accessible across your organization.'
+  },
+  'activity': {
+    label: 'Activity & Usage',
+    icon: BarChart3,
+    color: 'green',
+    description: 'Platform usage data, transaction history, and activity logs for analytics and audit purposes.'
+  }
+};
+
+// Data Ownership Badge Component
+const DataOwnershipBadge = ({ owner }: { owner: string }) => {
+  const getOwnershipConfig = () => {
+    switch (owner) {
+      case 'user':
+        return { label: 'Your Data', color: 'purple', icon: User };
+      case 'company':
+        return { label: 'Company Data', color: 'blue', icon: Building };
+      case 'shared':
+        return { label: 'Shared', color: 'green', icon: Users };
+      default:
+        return { label: 'System', color: 'gray', icon: Settings };
+    }
+  };
+
+  const config = getOwnershipConfig();
+  
+  return (
+    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-${config.color}-100 text-${config.color}-800`}>
+      <config.icon className="w-3 h-3 mr-1" />
+      {config.label}
+    </span>
+  );
+};
+
+// Privacy Level Indicator Component
+const PrivacyLevelIndicator = ({ level }: { level: string }) => {
+  const levels = {
+    'public': { label: 'Public', color: 'green', icon: Globe },
+    'internal': { label: 'Company Only', color: 'blue', icon: Building },
+    'confidential': { label: 'Confidential', color: 'orange', icon: EyeOff },
+    'restricted': { label: 'Restricted', color: 'red', icon: Lock }
+  };
+
+  const config = levels[level as keyof typeof levels];
+  
+  return (
+    <div className={`flex items-center text-${config.color}-600`}>
+      <config.icon className="w-4 h-4 mr-1" />
+      <span className="text-xs font-medium">{config.label}</span>
+    </div>
+  );
+};
+
+// Data Governance Overview Component
+const DataGovernanceOverview = () => (
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+    <div className="bg-white rounded-lg border p-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-gray-600">Data Compliance</p>
+          <p className="text-2xl font-bold text-green-600">98%</p>
+        </div>
+        <ShieldCheck className="w-8 h-8 text-green-500" />
+      </div>
+      <p className="text-xs text-gray-500 mt-2">GDPR & SOC2 compliant</p>
+    </div>
+    
+    <div className="bg-white rounded-lg border p-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-gray-600">Access Requests</p>
+          <p className="text-2xl font-bold text-blue-600">3</p>
+        </div>
+        <UserCheck className="w-8 h-8 text-blue-500" />
+      </div>
+      <p className="text-xs text-gray-500 mt-2">Pending your approval</p>
+    </div>
+    
+    <div className="bg-white rounded-lg border p-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-medium text-gray-600">Retention Policy</p>
+          <p className="text-2xl font-bold text-purple-600">Active</p>
+        </div>
+        <Calendar className="w-8 h-8 text-purple-500" />
+      </div>
+      <p className="text-xs text-gray-500 mt-2">Auto-cleanup enabled</p>
+    </div>
+  </div>
+);
+
+// User Data Controls Component
+const UserDataControls = () => (
+  <div className="bg-white rounded-lg border p-4 mb-6">
+    <h4 className="text-lg font-medium text-gray-900 mb-4">Your Data Rights</h4>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <button className="flex flex-col items-center p-3 border rounded-lg hover:bg-gray-50 transition-colors">
+        <Download className="w-6 h-6 text-blue-600 mb-2" />
+        <span className="text-sm font-medium">Export Data</span>
+        <span className="text-xs text-gray-500 text-center">Download your data</span>
+      </button>
+      
+      <button className="flex flex-col items-center p-3 border rounded-lg hover:bg-gray-50 transition-colors">
+        <Edit className="w-6 h-6 text-green-600 mb-2" />
+        <span className="text-sm font-medium">Update Info</span>
+        <span className="text-xs text-gray-500 text-center">Modify your data</span>
+      </button>
+      
+      <button className="flex flex-col items-center p-3 border rounded-lg hover:bg-gray-50 transition-colors">
+        <EyeOff className="w-6 h-6 text-purple-600 mb-2" />
+        <span className="text-sm font-medium">Privacy Settings</span>
+        <span className="text-xs text-gray-500 text-center">Control visibility</span>
+      </button>
+      
+      <button className="flex flex-col items-center p-3 border rounded-lg hover:bg-gray-50 transition-colors">
+        <Trash2 className="w-6 h-6 text-red-600 mb-2" />
+        <span className="text-sm font-medium">Delete Data</span>
+        <span className="text-xs text-gray-500 text-center">Remove permanently</span>
+      </button>
+    </div>
+  </div>
+);
+
+// Data Flow Diagram Component
+const DataFlowDiagram = () => (
+  <div className="bg-gray-50 rounded-lg p-4 mb-6">
+    <h4 className="font-medium text-gray-900 mb-3">How Your Data is Organized</h4>
+    <div className="flex items-center justify-between">
+      <div className="text-center">
+        <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+          <User className="w-6 h-6 text-purple-600" />
+        </div>
+        <p className="text-sm font-medium">Personal Data</p>
+        <p className="text-xs text-gray-500">Only you control</p>
+      </div>
+      
+      <ArrowRight className="w-5 h-5 text-gray-400" />
+      
+      <div className="text-center">
+        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+          <Building className="w-6 h-6 text-blue-600" />
+        </div>
+        <p className="text-sm font-medium">Business Data</p>
+        <p className="text-xs text-gray-500">Team accessible</p>
+      </div>
+      
+      <ArrowRight className="w-5 h-5 text-gray-400" />
+      
+      <div className="text-center">
+        <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+          <BarChart3 className="w-6 h-6 text-green-600" />
+        </div>
+        <p className="text-sm font-medium">Usage Analytics</p>
+        <p className="text-xs text-gray-500">System generated</p>
+      </div>
+    </div>
+  </div>
+);
+
+// Enhanced Header Component
+const DataWalletHeader = () => (
+  <div className="mb-6">
+    <div className="flex justify-between items-start">
+      <div>
+        <h3 className="text-2xl font-bold text-gray-900">Secure Data Vault</h3>
+        <p className="text-gray-600 mt-1">
+          Your secure data hub with full transparency and control
+        </p>
+      </div>
+      <div className="flex items-center space-x-4">
+        <div className="flex items-center text-green-600 text-sm">
+          <Shield className="w-4 h-4 mr-1" />
+          <span>Secured</span>
+        </div>
+        <div className="flex items-center text-blue-600 text-sm">
+          <CheckCircle className="w-4 h-4 mr-1" />
+          <span>GDPR Compliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 /**
  * Data Wallet tab component for the workspace modal
  * Displays and manages platform data across three categories:
- * - Transaction Data
- * - Corporate / Public Data
- * - Private Data
+ * - Personal Data (user-owned)
+ * - Business Data (company-owned)
+ * - Activity & Usage Data (system-generated)
  */
 const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
   // State for active category
-  const [activeCategory, setActiveCategory] = useState<'transaction' | 'public' | 'private'>('transaction');
+  const [activeCategory, setActiveCategory] = useState<'personal' | 'business' | 'activity'>('personal');
   
   // State for search and filters
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,102 +265,97 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
   });
 
   // Mock data for each category
-  const transactionData: DataItem[] = [
+  const personalData: DataItem[] = [
     {
-      id: 'tr-001',
-      name: 'Payment Confirmation #12345',
-      description: 'Transaction record for subscription renewal',
-      size: '24 KB',
+      id: 'per-001',
+      name: 'Profile Settings',
+      description: 'Your personal profile information and preferences',
+      size: '124 KB',
       lastModified: '2025-03-15',
       location: 'EU-West',
       type: 'JSON',
+      owner: 'user',
+      privacyLevel: 'restricted',
       metadata: {
-        transactionId: 'tx-9876543',
-        amount: '€49.00',
-        status: 'completed'
+        fields: ['name', 'email', 'preferences'],
+        lastUpdate: '2025-03-15'
       }
     },
     {
-      id: 'tr-002',
-      name: 'User Session Log',
-      description: 'Activity log for user session',
-      size: '156 KB',
-      lastModified: '2025-03-14',
+      id: 'per-002',
+      name: 'Personal Documents',
+      description: 'Documents you have uploaded to the platform',
+      size: '15.2 MB',
+      lastModified: '2025-03-12',
       location: 'EU-West',
-      type: 'JSON',
+      type: 'PDF',
+      owner: 'user',
+      privacyLevel: 'restricted',
       metadata: {
-        sessionId: 'sess-123456',
-        duration: '45 minutes',
-        actions: 32
+        documents: 8,
+        totalSize: '15.2 MB'
       }
     },
     {
-      id: 'tr-003',
-      name: 'API Usage Report',
-      description: 'Monthly API call statistics',
-      size: '1.2 MB',
+      id: 'per-003',
+      name: 'Communication Preferences',
+      description: 'Your notification and communication settings',
+      size: '2.1 KB',
       lastModified: '2025-03-10',
       location: 'EU-West',
-      type: 'CSV',
-      metadata: {
-        period: 'March 2025',
-        totalCalls: 12567,
-        avgResponseTime: '230ms'
-      }
-    },
-    {
-      id: 'tr-004',
-      name: 'Conversation History',
-      description: 'Chat logs with AI agents',
-      size: '3.4 MB',
-      lastModified: '2025-03-08',
-      location: 'EU-West',
       type: 'JSON',
+      owner: 'user',
+      privacyLevel: 'restricted',
       metadata: {
-        conversations: 45,
-        messages: 312,
-        agents: ['Customer Support', 'Sales Assistant']
+        notifications: 12,
+        channels: ['email', 'sms', 'push']
       }
     }
   ];
 
-  const publicData: DataItem[] = [
+  const businessData: DataItem[] = [
     {
-      id: 'pub-001',
+      id: 'bus-001',
       name: 'Company Profile',
-      description: 'Public company information',
+      description: 'Business information and company details',
       size: '128 KB',
       lastModified: '2025-02-20',
       location: 'Global CDN',
       type: 'JSON',
+      owner: 'company',
+      privacyLevel: 'internal',
       metadata: {
-        visibility: 'Public',
-        views: 1245,
-        shares: 87
+        visibility: 'Internal',
+        departments: 5,
+        employees: 150
       }
     },
     {
-      id: 'pub-002',
-      name: 'Product Catalog',
-      description: 'Public product listings',
+      id: 'bus-002',
+      name: 'Team Directories',
+      description: 'Organizational structure and team information',
       size: '4.5 MB',
       lastModified: '2025-03-05',
-      location: 'Global CDN',
+      location: 'EU-West',
       type: 'JSON',
+      owner: 'company',
+      privacyLevel: 'internal',
       metadata: {
-        products: 128,
-        categories: 12,
-        lastFullUpdate: '2025-03-01'
+        teams: 12,
+        members: 89,
+        lastUpdate: '2025-03-01'
       }
     },
     {
-      id: 'pub-003',
-      name: 'Knowledge Base Articles',
-      description: 'Public help documentation',
+      id: 'bus-003',
+      name: 'Knowledge Base',
+      description: 'Internal documentation and procedures',
       size: '8.2 MB',
       lastModified: '2025-03-12',
-      location: 'Global CDN',
+      location: 'EU-West',
       type: 'Markdown',
+      owner: 'company',
+      privacyLevel: 'internal',
       metadata: {
         articles: 56,
         categories: 8,
@@ -146,139 +364,91 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
     }
   ];
 
-  const privateData: DataItem[] = [
+  const activityData: DataItem[] = [
     {
-      id: 'priv-001',
-      name: 'Customer Database',
-      description: 'Encrypted customer records',
-      size: '24.5 MB',
+      id: 'act-001',
+      name: 'Session Analytics',
+      description: 'Your platform usage and activity patterns',
+      size: '24 KB',
       lastModified: '2025-03-15',
-      location: 'EU-West (Encrypted)',
-      type: 'Database',
-      metadata: {
-        records: 1567,
-        encryptionLevel: 'AES-256',
-        lastBackup: '2025-03-15'
-      }
-    },
-    {
-      id: 'priv-002',
-      name: 'Payment Methods',
-      description: 'Stored payment information',
-      size: '1.8 MB',
-      lastModified: '2025-03-10',
-      location: 'EU-West (Encrypted)',
+      location: 'EU-West',
       type: 'JSON',
+      owner: 'system',
+      privacyLevel: 'confidential',
       metadata: {
-        methods: 3,
-        pciCompliance: 'Level 1',
-        tokenized: true
+        sessions: 45,
+        avgDuration: '32 minutes',
+        lastLogin: '2025-03-15'
       }
     },
     {
-      id: 'priv-003',
-      name: 'User Preferences',
-      description: 'Personal settings and preferences',
-      size: '512 KB',
+      id: 'act-002',
+      name: 'Feature Usage Statistics',
+      description: 'Analytics on platform features and tools usage',
+      size: '156 KB',
       lastModified: '2025-03-14',
       location: 'EU-West',
       type: 'JSON',
+      owner: 'system',
+      privacyLevel: 'confidential',
       metadata: {
-        settings: 24,
-        defaultLanguage: 'English',
-        theme: 'Light'
+        features: 23,
+        interactions: 567,
+        favoriteFeatures: ['Dashboard', 'Reports']
       }
     },
     {
-      id: 'priv-004',
-      name: 'API Keys',
-      description: 'Secure API credentials',
-      size: '32 KB',
-      lastModified: '2025-02-28',
-      location: 'EU-West (Encrypted)',
-      type: 'JSON',
+      id: 'act-003',
+      name: 'API Usage Logs',
+      description: 'System-generated API call logs and metrics',
+      size: '1.2 MB',
+      lastModified: '2025-03-10',
+      location: 'EU-West',
+      type: 'CSV',
+      owner: 'system',
+      privacyLevel: 'confidential',
       metadata: {
-        keys: 5,
-        permissions: 'Read/Write',
-        rotationPolicy: '90 days'
+        period: 'March 2025',
+        totalCalls: 12567,
+        avgResponseTime: '230ms'
       }
     }
   ];
 
-  // Get active data based on selected category
-  const getActiveData = (): DataItem[] => {
-    let data: DataItem[] = [];
-    
+  // Get data for active category
+  const getActiveData = () => {
     switch (activeCategory) {
-      case 'transaction':
-        data = transactionData;
-        break;
-      case 'public':
-        data = publicData;
-        break;
-      case 'private':
-        data = privateData;
-        break;
+      case 'personal':
+        return personalData;
+      case 'business':
+        return businessData;
+      case 'activity':
+        return activityData;
+      default:
+        return [];
     }
-    
-    // Apply search filter
-    if (searchQuery) {
-      data = data.filter(item => 
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.type.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    }
-    
-    // Apply sorting
-    data = [...data].sort((a, b) => {
-      if (sortField === 'name') {
-        return sortDirection === 'asc' 
-          ? a.name.localeCompare(b.name)
-          : b.name.localeCompare(a.name);
-      } else if (sortField === 'size') {
-        // Simple size comparison (not perfect but works for demo)
-        const aSize = parseFloat(a.size.split(' ')[0]);
-        const bSize = parseFloat(b.size.split(' ')[0]);
-        return sortDirection === 'asc' ? aSize - bSize : bSize - aSize;
-      } else {
-        // lastModified
-        const aDate = new Date(a.lastModified);
-        const bDate = new Date(b.lastModified);
-        return sortDirection === 'asc' 
-          ? aDate.getTime() - bDate.getTime()
-          : bDate.getTime() - aDate.getTime();
+  };
+
+  // Filter and sort data
+  const filteredData = getActiveData()
+    .filter(item => 
+      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => {
+      const direction = sortDirection === 'asc' ? 1 : -1;
+      switch (sortField) {
+        case 'name':
+          return a.name.localeCompare(b.name) * direction;
+        case 'size':
+          return (parseFloat(a.size) - parseFloat(b.size)) * direction;
+        case 'lastModified':
+          return (new Date(a.lastModified).getTime() - new Date(b.lastModified).getTime()) * direction;
+        default:
+          return 0;
       }
     });
-    
-    return data;
-  };
 
-  // Get category description
-  const getCategoryDescription = (): string => {
-    switch (activeCategory) {
-      case 'transaction':
-        return 'Transaction data includes all interactions and platform transactions. This data is used for analytics, auditing, and service improvement.';
-      case 'public':
-        return 'Corporate data is openly accessible across the platform. This includes shared documents, public profiles, and community content.';
-      case 'private':
-        return 'Private data contains sensitive and personal information. This data is encrypted and access is strictly controlled.';
-    }
-  };
-
-  // Get category icon
-  const getCategoryIcon = () => {
-    switch (activeCategory) {
-      case 'transaction':
-        return <Database className="w-5 h-5 text-indigo-600" />;
-      case 'public':
-        return <Globe className="w-5 h-5 text-green-600" />;
-      case 'private':
-        return <Lock className="w-5 h-5 text-red-600" />;
-    }
-  };
-
-  // Toggle sort direction or change sort field
   const handleSort = (field: 'name' | 'size' | 'lastModified') => {
     if (sortField === field) {
       setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
@@ -288,157 +458,173 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
     }
   };
 
-  // Render sort indicator
-  const renderSortIndicator = (field: 'name' | 'size' | 'lastModified') => {
-    if (sortField !== field) return null;
-    
-    return sortDirection === 'asc' 
-      ? <ArrowUp className="w-4 h-4 ml-1" /> 
-      : <ArrowDown className="w-4 h-4 ml-1" />;
+  const getCategoryColor = (category: string) => {
+    return categories[category as keyof typeof categories]?.color || 'gray';
+  };
+
+  const getCategoryIcon = (category: string) => {
+    const IconComponent = categories[category as keyof typeof categories]?.icon || Database;
+    return <IconComponent className="w-5 h-5" />;
   };
 
   return (
     <div className="space-y-6">
-      <h3 className="text-lg font-medium text-gray-900">Data Wallet</h3>
-      
-      {/* Storage usage indicator */}
+      {/* Header */}
+      <DataWalletHeader />
+
+      {/* Data Flow Diagram */}
+      <DataFlowDiagram />
+
+      {/* Data Governance Overview */}
+      <DataGovernanceOverview />
+
+      {/* User Data Controls */}
+      <UserDataControls />
+
+      {/* Storage Usage */}
       <div className="bg-white rounded-lg border p-4">
-        <div className="flex justify-between items-center mb-2">
-          <h4 className="font-medium text-gray-700">Storage Usage</h4>
-          <span className="text-sm text-gray-500">{storageUsage.used} GB of {storageUsage.total} GB used</span>
+        <div className="flex justify-between items-center mb-3">
+          <h4 className="font-medium text-gray-900">Storage Usage</h4>
+          <span className="text-sm text-gray-500">
+            {storageUsage.used} GB of {storageUsage.total} GB used
+          </span>
         </div>
-        <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div className="w-full bg-gray-200 rounded-full h-2">
           <div 
-            className="h-full bg-indigo-600"
+            className="bg-blue-600 h-2 rounded-full transition-all duration-300"
             style={{ width: `${storageUsage.percentage}%` }}
-          ></div>
+          />
         </div>
       </div>
-      
-      {/* Category tabs */}
-      <div className="flex border-b">
-        <button
-          onClick={() => setActiveCategory('transaction')}
-          className={`flex items-center px-4 py-2 border-b-2 font-medium text-sm ${
-            activeCategory === 'transaction'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-          }`}
-        >
-          <Database className="w-4 h-4 mr-2" />
-          Transaction Data
-        </button>
-        <button
-          onClick={() => setActiveCategory('public')}
-          className={`flex items-center px-4 py-2 border-b-2 font-medium text-sm ${
-            activeCategory === 'public'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-          }`}
-        >
-          <Globe className="w-4 h-4 mr-2" />
-          Corporate Data
-        </button>
-        <button
-          onClick={() => setActiveCategory('private')}
-          className={`flex items-center px-4 py-2 border-b-2 font-medium text-sm ${
-            activeCategory === 'private'
-              ? 'border-indigo-600 text-indigo-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-          }`}
-        >
-          <Lock className="w-4 h-4 mr-2" />
-          Private Data
-        </button>
+
+      {/* Category Tabs */}
+      <div className="border-b border-gray-200">
+        <nav className="flex space-x-8">
+          {Object.entries(categories).map(([key, category]) => {
+            const IconComponent = category.icon;
+            return (
+              <button
+                key={key}
+                onClick={() => setActiveCategory(key as any)}
+                className={`
+                  flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors
+                  ${activeCategory === key 
+                    ? `border-${category.color}-500 text-${category.color}-600` 
+                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                  }
+                `}
+              >
+                <IconComponent className="w-5 h-5" />
+                <span>{category.label}</span>
+                <span className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full text-xs">
+                  {getActiveData().length}
+                </span>
+              </button>
+            );
+          })}
+        </nav>
       </div>
-      
-      {/* Category description */}
-      <div className="bg-gray-50 p-4 rounded-lg flex items-start">
-        {getCategoryIcon()}
-        <p className="ml-3 text-sm text-gray-600">{getCategoryDescription()}</p>
+
+      {/* Category Description */}
+      <div className="bg-gray-50 rounded-lg p-4">
+        <p className="text-sm text-gray-600">
+          {categories[activeCategory].description}
+        </p>
       </div>
-      
-      {/* Search and filters */}
+
+      {/* Search and Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
-        <div className="relative flex-grow">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+        <div className="flex-1 relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
           <input
             type="text"
             placeholder="Search data..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
-        <div className="flex gap-2">
-          <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
+        
+        <div className="flex items-center space-x-2">
+          <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
             <Filter className="w-4 h-4" />
-            <span>Filters</span>
-          </button>
-          <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
-            <Download className="w-4 h-4" />
-            <span>Export</span>
+            <span className="text-sm">Filter</span>
           </button>
         </div>
       </div>
-      
-      {/* Data table */}
+
+      {/* Data Table */}
       <div className="bg-white rounded-lg border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
                 <th 
-                  scope="col" 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                   onClick={() => handleSort('name')}
                 >
-                  <div className="flex items-center">
-                    Name {renderSortIndicator('name')}
+                  <div className="flex items-center space-x-1">
+                    <span>Name</span>
+                    {sortField === 'name' && (
+                      sortDirection === 'asc' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />
+                    )}
                   </div>
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Type
                 </th>
                 <th 
-                  scope="col" 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                   onClick={() => handleSort('size')}
                 >
-                  <div className="flex items-center">
-                    Size {renderSortIndicator('size')}
+                  <div className="flex items-center space-x-1">
+                    <span>Size</span>
+                    {sortField === 'size' && (
+                      sortDirection === 'asc' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />
+                    )}
                   </div>
                 </th>
                 <th 
-                  scope="col" 
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:bg-gray-100"
                   onClick={() => handleSort('lastModified')}
                 >
-                  <div className="flex items-center">
-                    Last Modified {renderSortIndicator('lastModified')}
+                  <div className="flex items-center space-x-1">
+                    <span>Last Modified</span>
+                    {sortField === 'lastModified' && (
+                      sortDirection === 'asc' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />
+                    )}
                   </div>
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Location
                 </th>
-                <th scope="col" className="relative px-6 py-3">
-                  <span className="sr-only">Actions</span>
+                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Actions
                 </th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
-              {getActiveData().map((item) => (
+              {filteredData.map((item) => (
                 <tr key={item.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
+                  <td className="px-6 py-4">
+                    <div className="flex items-start space-x-3">
                       <div className="flex-shrink-0">
-                        {activeCategory === 'transaction' && <Database className="h-5 w-5 text-indigo-500" />}
-                        {activeCategory === 'public' && <Globe className="h-5 w-5 text-green-500" />}
-                        {activeCategory === 'private' && <Lock className="h-5 w-5 text-red-500" />}
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-${getCategoryColor(activeCategory)}-100`}>
+                          {getCategoryIcon(activeCategory)}
+                        </div>
                       </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">{item.name}</div>
-                        <div className="text-sm text-gray-500">{item.description}</div>
+                      <div className="flex-grow">
+                        <div className="flex items-center space-x-2">
+                          <h4 className="text-sm font-medium text-gray-900">{item.name}</h4>
+                          <DataOwnershipBadge owner={item.owner} />
+                        </div>
+                        <p className="text-sm text-gray-500 mt-1">{item.description}</p>
+                        <div className="flex items-center space-x-4 mt-2">
+                          <PrivacyLevelIndicator level={item.privacyLevel} />
+                          <span className="text-xs text-gray-400">
+                            Modified {new Date(item.lastModified).toLocaleDateString()}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </td>
@@ -458,15 +644,22 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
-                      <button className="text-indigo-600 hover:text-indigo-900">
+                      <button className="text-indigo-600 hover:text-indigo-900 p-1 rounded hover:bg-indigo-50">
                         <Eye className="w-4 h-4" />
                       </button>
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <Edit2 className="w-4 h-4" />
+                      <button className="text-blue-600 hover:text-blue-900 p-1 rounded hover:bg-blue-50">
+                        <Download className="w-4 h-4" />
                       </button>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      {item.owner === 'user' && (
+                        <>
+                          <button className="text-green-600 hover:text-green-900 p-1 rounded hover:bg-green-50">
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button className="text-red-600 hover:text-red-900 p-1 rounded hover:bg-red-50">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>
@@ -476,7 +669,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
         </div>
         
         {/* Empty state */}
-        {getActiveData().length === 0 && (
+        {filteredData.length === 0 && (
           <div className="py-12 text-center">
             <div className="mx-auto h-12 w-12 text-gray-400">
               <Database className="h-full w-full" />
@@ -491,38 +684,38 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
         )}
       </div>
       
-      {/* Data privacy information */}
-      {activeCategory === 'private' && (
-        <div className="bg-red-50 border border-red-100 rounded-lg p-4 flex items-start">
-          <Info className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+      {/* Category-specific information panels */}
+      {activeCategory === 'personal' && (
+        <div className="bg-purple-50 border border-purple-100 rounded-lg p-4 flex items-start">
+          <Info className="w-5 h-5 text-purple-600 mt-0.5 flex-shrink-0" />
           <div className="ml-3">
-            <h4 className="text-sm font-medium text-red-800">Privacy Notice</h4>
-            <p className="mt-1 text-sm text-red-600">
-              Private data is encrypted at rest and in transit. Access is restricted and all operations are logged for security auditing.
+            <h4 className="text-sm font-medium text-purple-800">Personal Data Protection</h4>
+            <p className="mt-1 text-sm text-purple-600">
+              Your personal data is encrypted at rest and in transit. Only you have access to this information, and you can modify or delete it at any time.
             </p>
           </div>
         </div>
       )}
       
-      {activeCategory === 'public' && (
+      {activeCategory === 'business' && (
+        <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 flex items-start">
+          <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+          <div className="ml-3">
+            <h4 className="text-sm font-medium text-blue-800">Business Data Sharing</h4>
+            <p className="mt-1 text-sm text-blue-600">
+              Business data is shared within your organization according to your company's data governance policies. Access is controlled and audited.
+            </p>
+          </div>
+        </div>
+      )}
+      
+      {activeCategory === 'activity' && (
         <div className="bg-green-50 border border-green-100 rounded-lg p-4 flex items-start">
           <Info className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
           <div className="ml-3">
-            <h4 className="text-sm font-medium text-green-800">Visibility Notice</h4>
+            <h4 className="text-sm font-medium text-green-800">Usage Analytics</h4>
             <p className="mt-1 text-sm text-green-600">
-              Public data is visible to all platform users. Be mindful of what information you choose to make public.
-            </p>
-          </div>
-        </div>
-      )}
-      
-      {activeCategory === 'transaction' && (
-        <div className="bg-indigo-50 border border-indigo-100 rounded-lg p-4 flex items-start">
-          <Info className="w-5 h-5 text-indigo-600 mt-0.5 flex-shrink-0" />
-          <div className="ml-3">
-            <h4 className="text-sm font-medium text-indigo-800">Transaction Data Notice</h4>
-            <p className="mt-1 text-sm text-indigo-600">
-              Transaction data is retained according to our data retention policy and used for service improvement and analytics.
+              Activity data is used to improve platform performance and user experience. This data is anonymized and retained according to our data retention policy.
             </p>
           </div>
         </div>
