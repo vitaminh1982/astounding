@@ -129,12 +129,18 @@ const Sidebar = ({
     { icon: GitBranch, label: t('sidebar.workflows'), page: 'workflows' as const },
   ];
 
-  // Main menu items (excluding AI Agents which has its own custom rendering)
+  // Main menu items - defined with direct icon references
   const mainMenuItems = [
     { icon: LayoutDashboard, label: t('sidebar.dashboard'), page: 'dashboard' as const },
-    { icon: MessageSquare, label: t('sidebar.chat'), page: 'chat' as const, hasNotification: true },
-    { icon: Users, label: t('sidebar.customers'), page: 'human-ai' as const },
-    { icon: Settings, label: t('sidebar.settings'), page: 'settings' as const },
+    { 
+      icon: MessageSquare, 
+      label: t('sidebar.discussions'), 
+      page: 'conversations' as const,
+      hasNotification: true
+    },
+    { icon: Users, label: t('sidebar.customers'), page: 'clients' as const }
+    //{ icon: BarChart2, label: 'Usage', page: 'usage' as const },
+    //{ icon: Settings, label: t('sidebar.settings'), page: 'paramètres' as const },
   ];
 
   const toggleAgentsMenu = () => {
