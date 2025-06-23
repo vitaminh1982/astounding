@@ -19,8 +19,7 @@ import {
   Sparkles,
   Wrench,
   ChevronDown,
-  ChevronRight,
-  BarChart2
+  ChevronRight
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
