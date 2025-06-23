@@ -29,7 +29,7 @@ export default function UpgradeOptions() {
   };
   
   const calculateStarterTotal = () => {
-    return 149 + (additionalPacks * 15);
+    return 49 + (additionalPacks * 15);
   };
   
   const calculateTotalConversations = (base: number, pack: number) => {
