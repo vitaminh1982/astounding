@@ -11,7 +11,8 @@ import {
   RefreshCw,
   Download,
   Filter,
-  Calendar
+  Calendar,
+  FileText
 } from 'lucide-react';
 
 interface GovernancePageProps {
