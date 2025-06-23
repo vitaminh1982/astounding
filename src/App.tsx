@@ -22,6 +22,7 @@ import AuditCompliancePage from './pages/AuditCompliancePage';
 import RiskManagementPage from './pages/RiskManagementPage';
 import PerformanceAnalyticsPage from './pages/PerformanceAnalyticsPage';
 import AgentConfigurationPage from './pages/AgentConfigurationPage';
+import OnboardingPage from './pages/OnboardingPage';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
