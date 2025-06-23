@@ -16,7 +16,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import 'chartjs-adapter-date-fns';
-import { format, subDays, subMonths, parseISO } from 'date-fns';
+import { format, subDays, subMonths, parseISO, isValid } from 'date-fns';
 import { Download, Calendar, Filter, ArrowDown, ArrowUp } from 'lucide-react';
 
 // Register ChartJS components
@@ -276,8 +276,17 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
         callbacks: {
           title: (tooltipItems: TooltipItem<'line'>[]) => {
             if (tooltipItems.length > 0) {
-              const date = parseISO(tooltipItems[0].label);
-              return format(date, 'PPP'); // Localized date format
+              // Use the parsed x value (timestamp) instead of label
+              const timestamp = tooltipItems[0].parsed.x;
+              const date = new Date(timestamp);
+              
+              // Validate the date before formatting
+              if (isValid(date)) {
+                return format(date, 'PPP'); // Localized date format
+              }
+              
+              // Fallback to raw label if date is invalid
+              return tooltipItems[0].label || 'Invalid Date';
             }
             return '';
           },
