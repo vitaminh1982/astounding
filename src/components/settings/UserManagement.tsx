@@ -6,7 +6,12 @@ const roleTypes = [
   {
     name: 'Owner',
     description: 'Full access to all features',
-    permissions: ['User management', 'System configuration', 'Reports']
+    permissions: ['User management', 'System configuration', 'Reports', 'Billing & subscriptions']
+  },
+  {
+    name: 'Admin', 
+    description: 'Administrative access with user management',
+    permissions: ['User management', 'Agent management', 'View reports', 'System settings']
   },
   {
     name: 'Steward',
@@ -19,6 +24,7 @@ const roleTypes = [
     permissions: ['Conversation management', 'Basic view']
   }
 ];
+
 
 const teamTypes = [
   { name: 'Customer Support', members: 12 },
