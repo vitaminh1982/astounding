@@ -1,7 +1,7 @@
 import React, { useState, useContext, memo, useRef, useEffect } from 'react';
 import { 
   Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info, 
-  Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail, BarChart3, UserPlus
+  Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail, BarChart3, BookOpen
 } from 'lucide-react';
 import CreditConsumptionBar from './CreditConsumptionBar';
 import { Page } from '../../App';
@@ -95,7 +95,7 @@ const ProfileDropdown = memo(({
           className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
         >
           <span className="flex items-center gap-3">
-            <UserPlus className="h-5 w-5 text-gray-400" />
+            <BookOpen className="h-5 w-5 text-gray-400" />
             Onboarding
           </span>
         </button>
