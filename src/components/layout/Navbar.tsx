@@ -56,7 +56,6 @@ const ProfileDropdown = memo(({
       <div className="md:hidden px-4 py-2 border-b border-gray-100 flex items-center justify-between">
         <CreditConsumptionBar 
           directCredits={{ used: 1250, total: 4000 }}
-          backgroundCredits={{ used: 350, total: 1000 }}
           className="w-full"
         />
       </div>
