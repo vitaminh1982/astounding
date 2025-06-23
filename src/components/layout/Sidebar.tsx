@@ -197,12 +197,12 @@ const Sidebar = ({
     if (isAnyAgentsSubmenuActive()) {
       // If we're already on an agents sub-page, toggle the menu
       setIsAgentsMenuOpen(!isAgentsMenuOpen);
-    } else if (currentPage === 'ai-agents') {
+    } else if (currentPage === 'agents') {
       // If we're on the main agents page, toggle the menu
       setIsAgentsMenuOpen(!isAgentsMenuOpen);
     } else {
       // If we're on a different page, navigate to agents and open the menu
-      handleMenuItemClick('ai-agents');
+      handleMenuItemClick('agents');
       setIsAgentsMenuOpen(true);
     }
   };
