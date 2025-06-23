@@ -15,10 +15,12 @@ import HumanCenteredAI from '../components/onboarding/HumanCenteredAI';
 import TrustFramework from '../components/onboarding/TrustFramework';
 import GettingStarted from '../components/onboarding/GettingStarted';
 import OnboardingProgress from '../components/onboarding/OnboardingProgress';
+import { useEffect, useRef } from 'react';
 
 export default function OnboardingPage() {
   const [activeSection, setActiveSection] = useState<number>(0);
   const [completedSections, setCompletedSections] = useState<number[]>([]);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Sections data for the progress tracker
   const sections = [
@@ -32,6 +34,16 @@ export default function OnboardingPage() {
   // Handle section navigation
   const navigateToSection = (sectionId: number) => {
     setActiveSection(sectionId);
+    
+    // Scroll to top of content area
+    setTimeout(() => {
+      if (contentRef.current) {
+        contentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        // Fallback if ref is not available
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      }
+    }, 100);
     
     // Mark section as completed if it's not already
     if (!completedSections.includes(sectionId)) {
@@ -84,7 +96,7 @@ export default function OnboardingPage() {
           
           {/* Main content area */}
           <div className="lg:col-span-9">
-            <div className="bg-white rounded-xl shadow-sm p-6 md:p-8">
+            <div ref={contentRef} className="bg-white rounded-xl shadow-sm p-6 md:p-8">
               {renderActiveSection()}
             </div>
           </div>

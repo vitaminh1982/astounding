@@ -7,18 +7,6 @@ interface CoreFeaturesProps {
 }
 
 const CoreFeatures: React.FC<CoreFeaturesProps> = ({ onNext }) => {
-
-  const handleNext = () => {
-    // Scroll to top of the page
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-    
-    // Call the original onNext function
-    onNext();
-  };
   
   // Feature data
   const features = [

@@ -7,18 +7,6 @@ interface TrustFrameworkProps {
 }
 
 const TrustFramework: React.FC<TrustFrameworkProps> = ({ onNext }) => {
-
-  const handleNext = () => {
-    // Scroll to top of the page
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-    
-    // Call the original onNext function
-    onNext();
-  };
   
   return (
     <div className="space-y-8">
