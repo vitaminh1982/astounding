@@ -65,6 +65,7 @@ const translations = {
       performanceAnalytics: 'Performance Analytics',
       agentConfiguration: 'Agent Configuration',
       templates: 'Templates',
+      onboarding: 'Onboarding',
       prompts: 'Prompts', // New translation for Prompts
       knowledgeBase: 'Knowledge Base',
       integrations: 'Tools',
@@ -851,6 +852,7 @@ saveError: 'Failed to save configuration',
       performanceAnalytics: 'Analyse de Performance',
       agentConfiguration: 'Configuration des Agents',
       templates: 'Modèles',
+      onboarding: 'Intégration',
       prompts: 'Prompts', // New translation for Prompts
       knowledgeBase: 'Connaissances',
       integrations: 'Outils',

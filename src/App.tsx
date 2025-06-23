@@ -40,6 +40,7 @@ export type Page =
   | 'audit-compliance'
   | 'risk-management'
   | 'performance-analytics'
+  | 'onboarding'
   | 'agent-configuration'
   | 'usage'
   | 'paramètres';
@@ -57,6 +58,7 @@ const navigationItems: NavItem[] = [
   { id: 'agents', label: 'AI Agents', icon: 'robot' },
   { id: 'prompts', label: 'Prompts', icon: 'prompt' }, // New prompts item
   { id: 'governance', label: 'Governance', icon: 'governance' },
+  { id: 'onboarding', label: 'Onboarding', icon: 'onboarding' },
   { id: 'templates', label: 'Templates', icon: 'template' },
   { id: 'documents', label: 'Documents', icon: 'document' },
   { id: 'integrations', label: 'Integrations', icon: 'link' }, 
@@ -102,6 +104,8 @@ function AppContent() {
         return <RiskManagementPage />;
       case 'performance-analytics':
         return <PerformanceAnalyticsPage />;
+      case 'onboarding':
+        return <OnboardingPage />;
       case 'agent-configuration':
         return <AgentConfigurationPage />;
       case 'workflows':
