@@ -106,10 +106,6 @@ const Sidebar = ({
   const [isGovernanceMenuOpen, setIsGovernanceMenuOpen] = useState(false);
   const [isOnboardingMenuOpen, setIsOnboardingMenuOpen] = useState(false);
 
-  // Onboarding submenu items
-  const onboardingSubmenu = [
-    { icon: ShieldAlert, label: 'AI Governance', page: 'onboarding' as const },
-  ];
 
   // Governance submenu items
   const governanceSubmenu = [
