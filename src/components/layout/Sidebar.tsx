@@ -1,7 +1,13 @@
 import React, { useState, useContext, memo } from 'react';
 import { 
   LayoutDashboard, 
-  Bot, 
+  Bot,
+  ShieldAlert,
+  FileText,
+  ClipboardCheck,
+  AlertTriangle,
+  BarChart2,
+  Settings2,
   MessageSquare, 
   Users, 
   Settings, 
@@ -99,6 +105,7 @@ const Sidebar = ({
 }: SidebarProps) => {
   const { t } = useContext(LanguageContext);
   const [isAgentsMenuOpen, setIsAgentsMenuOpen] = useState(false);
+  const [isGovernanceMenuOpen, setIsGovernanceMenuOpen] = useState(false);
 
   // AI Agents submenu items - defined with direct icon references
   const aiAgentsSubmenu = [
@@ -182,6 +189,104 @@ const Sidebar = ({
             isExpanded={isExpanded}
             hasNotification={mainMenuItems[0].hasNotification}
           />
+          {/* Governance with collapsible submenu */}
+          <div className="space-y-1">
+            <button
+              onClick={() => {
+                if (currentPage === 'governance' || 
+                    currentPage === 'policy-management' || 
+                    currentPage === 'audit-compliance' || 
+                    currentPage === 'risk-management' || 
+                    currentPage === 'performance-analytics' || 
+                    currentPage === 'agent-configuration') {
+                  handleMenuItemClick('governance');
+                } else {
+                  setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
+                }
+              }}
+              className={`
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
+                transition-colors
+                ${(currentPage === 'governance' || 
+                   currentPage === 'policy-management' || 
+                   currentPage === 'audit-compliance' || 
+                   currentPage === 'risk-management' || 
+                   currentPage === 'performance-analytics' || 
+                   currentPage === 'agent-configuration') ? 'bg-gray-800' : ''}
+                ${!isExpanded && 'justify-center'}
+              `}
+              aria-expanded={isGovernanceMenuOpen}
+            >
+              <div className="flex items-center gap-3">
+                <ShieldAlert size={20} />
+                {isExpanded && <span>{t('sidebar.governance')}</span>}
+              </div>
+              {isExpanded && (
+                <span className="text-gray-400">
+                  {isGovernanceMenuOpen ? 
+                    <ChevronDown size={16} /> : 
+                    <ChevronRight size={16} />
+                  }
+                </span>
+              )}
+            </button>
+            
+            {/* Nested menu items for Governance */}
+            {isGovernanceMenuOpen && (
+              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
+                <SubMenuItem
+                  icon={ShieldAlert}
+                  label={t('sidebar.governanceMonitoring')}
+                  page="governance"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={FileText}
+                  label={t('sidebar.policyManagement')}
+                  page="policy-management"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={ClipboardCheck}
+                  label={t('sidebar.auditCompliance')}
+                  page="audit-compliance"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={AlertTriangle}
+                  label={t('sidebar.riskManagement')}
+                  page="risk-management"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={BarChart2}
+                  label={t('sidebar.performanceAnalytics')}
+                  page="performance-analytics"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+                <SubMenuItem
+                  icon={Settings2}
+                  label={t('sidebar.agentConfiguration')}
+                  page="agent-configuration"
+                  currentPage={currentPage}
+                  onClick={handleMenuItemClick}
+                  isExpanded={isExpanded}
+                />
+              </div>
+            )}
+          </div>
 
           {/* AI Agents with collapsible submenu */}
           <div className="space-y-1">

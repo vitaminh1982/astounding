@@ -1,7 +1,7 @@
 // App.tsx
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';  // Import Toaster
+import { Toaster } from 'react-hot-toast';
 import { LanguageProvider } from './context/LanguageContext';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
@@ -14,8 +14,14 @@ import SettingsPage from './pages/SettingsPage';
 import DocumentsPage from './pages/DocumentsPage';
 import WorkflowsPage from './pages/WorkflowsPage';
 import IntegrationsPage from './pages/IntegrationsPage';
-import PromptsPage from './pages/PromptsPage'; // Import the new PromptsPage
-import UsagePage from './pages/UsagePage'; // Import the new UsagePage
+import PromptsPage from './pages/PromptsPage';
+import UsagePage from './pages/UsagePage';
+import GovernancePage from './pages/GovernancePage';
+import PolicyManagementPage from './pages/PolicyManagementPage';
+import AuditCompliancePage from './pages/AuditCompliancePage';
+import RiskManagementPage from './pages/RiskManagementPage';
+import PerformanceAnalyticsPage from './pages/PerformanceAnalyticsPage';
+import AgentConfigurationPage from './pages/AgentConfigurationPage';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
@@ -29,6 +35,12 @@ export type Page =
   | 'workflows'
   | 'integrations'
   | 'prompts'
+  | 'governance'
+  | 'policy-management'
+  | 'audit-compliance'
+  | 'risk-management'
+  | 'performance-analytics'
+  | 'agent-configuration'
   | 'usage'
   | 'paramètres';
 
@@ -44,6 +56,7 @@ const navigationItems: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
   { id: 'agents', label: 'AI Agents', icon: 'robot' },
   { id: 'prompts', label: 'Prompts', icon: 'prompt' }, // New prompts item
+  { id: 'governance', label: 'Governance', icon: 'governance' },
   { id: 'templates', label: 'Templates', icon: 'template' },
   { id: 'documents', label: 'Documents', icon: 'document' },
   { id: 'integrations', label: 'Integrations', icon: 'link' }, 
@@ -79,6 +92,18 @@ function AppContent() {
         return <TemplatesPage />;
       case 'prompts':
         return <PromptsPage />; // Render the new PromptsPage
+      case 'governance':
+        return <GovernancePage onNavigate={handleNavigation} />;
+      case 'policy-management':
+        return <PolicyManagementPage />;
+      case 'audit-compliance':
+        return <AuditCompliancePage />;
+      case 'risk-management':
+        return <RiskManagementPage />;
+      case 'performance-analytics':
+        return <PerformanceAnalyticsPage />;
+      case 'agent-configuration':
+        return <AgentConfigurationPage />;
       case 'workflows':
         return <WorkflowsPage />;
       case 'conversations':
