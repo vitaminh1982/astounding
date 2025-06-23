@@ -37,7 +37,10 @@ const CreditConsumptionBar: React.FC<CreditConsumptionBarProps> = ({
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
         <div className="text-sm text-gray-700 whitespace-nowrap font-medium">
           {directCredits.used.toLocaleString()}/{directCredits.total.toLocaleString()} credits
-
+        </div>
+        <div className="w-full sm:w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+        </div>
+      </div>
       
 
       
