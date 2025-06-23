@@ -133,7 +133,7 @@ const Sidebar = ({
   const mainMenuItems = [
     { icon: LayoutDashboard, label: t('sidebar.dashboard'), page: 'dashboard' as const },
     { icon: MessageSquare, label: t('sidebar.chat'), page: 'chat' as const, hasNotification: true },
-    { icon: Users, label: t('sidebar.humanAI'), page: 'human-ai' as const },
+    { icon: Users, label: t('sidebar.customers'), page: 'human-ai' as const },
     { icon: Settings, label: t('sidebar.settings'), page: 'settings' as const },
   ];
 
