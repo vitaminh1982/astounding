@@ -31,17 +31,19 @@ const CreditConsumptionBar: React.FC<CreditConsumptionBarProps> = ({
     return 'bg-green-500';
   };
 
+  // Format numbers without commas
+  const formatNumber = (num: number) => {
+    return num.toString();
+  };
+
   return (
     <div className={`flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border ${className}`}>
       {/* Direct Conversations Credits */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-3">
         <div className="text-sm text-gray-700 whitespace-nowrap font-medium">
-          {directCredits.used.toLocaleString()}/{directCredits.total.toLocaleString()} credits
+          {formatNumber(directCredits.used)}/{formatNumber(directCredits.total)} credits
         </div>
-
       </div>
-      
-
       
       {/* Info Button */}
       <div className="relative">
