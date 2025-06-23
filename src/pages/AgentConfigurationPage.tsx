@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Settings2, Save, RotateCcw, Bot, Shield, Brain, Activity, MessageSquare, Database, Link, AlertTriangle, Search, Filter } from 'lucide-react';
+import { Settings2, Save, RotateCcw, Bot, Shield, Brain, Activity, MessageSquare, Database, Link, AlertTriangle, Search, Filter, Plus } from 'lucide-react';
 
 export default function AgentConfigurationPage() {
   const [searchQuery, setSearchQuery] = useState('');
