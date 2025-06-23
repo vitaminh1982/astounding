@@ -48,37 +48,47 @@ export default function FloatingAssistant() {
 
   return (
     <>
-      {/* Bouton flottant */}
-      <button
-        data-floating-button
-        onClick={handleToggle}
+      {/* Container for floating button with minimal footprint */}
+      <div 
         className={`
           fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50
-          ${isOpen ? 'hidden' : 'flex'}
-          items-center justify-center
-          w-12 h-12 md:w-14 md:h-14 rounded-full
-          bg-indigo-600 text-white
-          shadow-lg hover:shadow-xl
-          ${TRANSITIONS.default}
-          hover:scale-110
+          ${isOpen ? 'hidden' : 'block'}
+          w-12 h-12 md:w-14 md:h-14
           group
         `}
       >
-        <Bot className="w-5 h-5 md:w-6 md:h-6" />
-        <span className="absolute -top-2 -right-2 px-2 py-0.5 text-[10px] md:text-xs font-bold bg-orange-500 text-white rounded-full">
-          BETA
-        </span>
-        <div className="hidden md:block absolute bottom-full right-0 mb-2 w-48 p-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
-          Need help ?  I am here to guide you !
+        {/* Bouton flottant - exact circle size */}
+        <button
+          data-floating-button
+          onClick={handleToggle}
+          className={`
+            relative
+            flex items-center justify-center
+            w-full h-full rounded-full
+            bg-indigo-600 text-white
+            shadow-lg hover:shadow-xl
+            ${TRANSITIONS.default}
+            hover:scale-110
+          `}
+        >
+          <Bot className="w-5 h-5 md:w-6 md:h-6" />
+          <span className="absolute -top-2 -right-2 px-2 py-0.5 text-[10px] md:text-xs font-bold bg-orange-500 text-white rounded-full pointer-events-none">
+            BETA
+          </span>
+        </button>
+
+        {/* Tooltip - positioned outside clickable area */}
+        <div className="hidden md:block absolute bottom-full right-0 mb-2 w-48 p-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+          Need help? I am here to guide you!
         </div>
-      </button>
+      </div>
 
       {/* Fenêtre de chat */}
       {isOpen && (
         <div
           ref={assistantRef}
           className={`
-            fixed z-50
+            fixed z-[49]
             ${isMinimized 
               ? 'bottom-4 right-4 md:bottom-6 md:right-6 w-auto h-12' 
               : 'bottom-0 right-0 sm:bottom-4 sm:right-4 md:bottom-6 md:right-6'
