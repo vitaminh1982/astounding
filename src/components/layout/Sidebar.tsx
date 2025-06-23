@@ -105,6 +105,15 @@ const Sidebar = ({
   const [isAgentsMenuOpen, setIsAgentsMenuOpen] = useState(false);
   const [isGovernanceMenuOpen, setIsGovernanceMenuOpen] = useState(false);
 
+  // Governance submenu items
+  const governanceSubmenu = [
+    { icon: FileText, label: t('sidebar.policyManagement'), page: 'policy-management' as const },
+    { icon: ClipboardCheck, label: t('sidebar.auditCompliance'), page: 'audit-compliance' as const },
+    { icon: AlertTriangle, label: t('sidebar.riskManagement'), page: 'risk-management' as const },
+    { icon: BarChart2, label: t('sidebar.performanceAnalytics'), page: 'performance-analytics' as const },
+    { icon: Settings2, label: t('sidebar.agentConfiguration'), page: 'agent-configuration' as const },
+  ];
+
   // AI Agents submenu items - defined with direct icon references
   const aiAgentsSubmenu = [
     { icon: Sparkles, label: t('sidebar.prompts'), page: 'prompts' as const },
@@ -134,6 +143,10 @@ const Sidebar = ({
 
   const isAnyAgentsSubmenuActive = () => {
     return aiAgentsSubmenu.some(item => item.page === currentPage);
+  };
+
+  const isAnyGovernanceSubmenuActive = () => {
+    return governanceSubmenu.some(item => item.page === currentPage);
   };
 
   const handleMenuItemClick = (page: Page) => {
@@ -191,12 +204,7 @@ const Sidebar = ({
           <div className="space-y-1">
             <button
               onClick={() => {
-                if (currentPage === 'governance' || 
-                    currentPage === 'policy-management' || 
-                    currentPage === 'audit-compliance' || 
-                    currentPage === 'risk-management' || 
-                    currentPage === 'performance-analytics' || 
-                    currentPage === 'agent-configuration') {
+                if (currentPage === 'governance' || isAnyGovernanceSubmenuActive()) {
                   handleMenuItemClick('governance');
                 } else {
                   setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
@@ -207,12 +215,7 @@ const Sidebar = ({
                 text-sm rounded-lg 
                 hover:bg-gray-800 
                 transition-colors
-                ${(currentPage === 'governance' || 
-                   currentPage === 'policy-management' || 
-                   currentPage === 'audit-compliance' || 
-                   currentPage === 'risk-management' || 
-                   currentPage === 'performance-analytics' || 
-                   currentPage === 'agent-configuration') ? 'bg-gray-800' : ''}
+                ${currentPage === 'governance' || isAnyGovernanceSubmenuActive() ? 'bg-gray-800' : ''}
                 ${!isExpanded && 'justify-center'}
               `}
               aria-expanded={isGovernanceMenuOpen}
@@ -230,7 +233,24 @@ const Sidebar = ({
                 </span>
               )}
             </button>
-    
+            
+            {/* Nested menu items for Governance */}
+            {isGovernanceMenuOpen && (
+              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
+                {governanceSubmenu.map((subItem) => (
+                  <SubMenuItem
+                    key={subItem.page}
+                    icon={subItem.icon}
+                    label={subItem.label}
+                    page={subItem.page}
+                    currentPage={currentPage}
+                    onClick={handleMenuItemClick}
+                    isExpanded={isExpanded}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
 
           {/* AI Agents with collapsible submenu */}
           <div className="space-y-1">
