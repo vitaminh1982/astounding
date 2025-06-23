@@ -11,7 +11,7 @@ import {
   ChartData
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { Download, Calendar } from 'lucide-react';
+import { Download, Calendar, ChevronUp, ChevronDown } from 'lucide-react';
 
 // Register ChartJS components
 ChartJS.register(
