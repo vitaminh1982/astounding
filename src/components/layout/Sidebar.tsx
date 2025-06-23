@@ -200,6 +200,54 @@ const Sidebar = ({
             isExpanded={isExpanded}
             hasNotification={mainMenuItems[0].hasNotification}
           />
+
+
+          {/* AI Agents with collapsible submenu */}
+          <div className="space-y-1">
+            <button
+              onClick={toggleAgentsMenu}
+              className={`
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
+                transition-colors
+                ${isAnyAgentsSubmenuActive() || currentPage === 'agents' ? 'bg-gray-800' : ''}
+                ${!isExpanded && 'justify-center'}
+              `}
+              aria-expanded={isAgentsMenuOpen}
+            >
+              <div className="flex items-center gap-3">
+                <Bot size={20} />
+                {isExpanded && <span>{t('sidebar.aiAgents')}</span>}
+              </div>
+              {isExpanded && (
+                <span className="text-gray-400">
+                  {isAgentsMenuOpen ? 
+                    <ChevronDown size={16} /> : 
+                    <ChevronRight size={16} />
+                  }
+                </span>
+              )}
+            </button>
+            
+            {/* Nested menu items for AI Agents */}
+            {isAgentsMenuOpen && (
+              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
+                {aiAgentsSubmenu.map((subItem) => (
+                  <SubMenuItem
+                    key={subItem.page}
+                    icon={subItem.icon}
+                    label={subItem.label}
+                    page={subItem.page}
+                    currentPage={currentPage}
+                    onClick={handleMenuItemClick}
+                    isExpanded={isExpanded}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+          
           {/* Governance with collapsible submenu */}
           <div className="space-y-1">
             <button
@@ -252,51 +300,6 @@ const Sidebar = ({
             )}
           </div>
 
-          {/* AI Agents with collapsible submenu */}
-          <div className="space-y-1">
-            <button
-              onClick={toggleAgentsMenu}
-              className={`
-                flex w-full items-center justify-between px-4 py-3 
-                text-sm rounded-lg 
-                hover:bg-gray-800 
-                transition-colors
-                ${isAnyAgentsSubmenuActive() || currentPage === 'agents' ? 'bg-gray-800' : ''}
-                ${!isExpanded && 'justify-center'}
-              `}
-              aria-expanded={isAgentsMenuOpen}
-            >
-              <div className="flex items-center gap-3">
-                <Bot size={20} />
-                {isExpanded && <span>{t('sidebar.aiAgents')}</span>}
-              </div>
-              {isExpanded && (
-                <span className="text-gray-400">
-                  {isAgentsMenuOpen ? 
-                    <ChevronDown size={16} /> : 
-                    <ChevronRight size={16} />
-                  }
-                </span>
-              )}
-            </button>
-            
-            {/* Nested menu items for AI Agents */}
-            {isAgentsMenuOpen && (
-              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
-                {aiAgentsSubmenu.map((subItem) => (
-                  <SubMenuItem
-                    key={subItem.page}
-                    icon={subItem.icon}
-                    label={subItem.label}
-                    page={subItem.page}
-                    currentPage={currentPage}
-                    onClick={handleMenuItemClick}
-                    isExpanded={isExpanded}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
 
           {/* Regular menu items after AI Agents */}
           {mainMenuItems.slice(1).map((item) => (
