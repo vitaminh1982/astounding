@@ -53,7 +53,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
       type: 'JSON',
       metadata: {
         transactionId: 'tx-9876543',
-        amount: '€149.00',
+        amount: '€49.00',
         status: 'completed'
       }
     },
