@@ -61,11 +61,6 @@ const ProfileDropdown = memo(({
         />
       </div>
 
-import { 
-  Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info, 
-  Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail, BarChart3, UserPlus
-} from 'lucide-react';
-
       {/* Navigation items */}
       <div className="py-2 border-b border-gray-100">
         <button 
