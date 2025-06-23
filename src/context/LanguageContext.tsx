@@ -12,7 +12,7 @@ const translations = {
   en: {
     // start here
     navbar: {
-      administrator: 'Owner',
+      administrator: 'Admin',
       profile: 'Profile',
       disconnect: 'Disconnect',
       settings: 'Settings',
