@@ -1,6 +1,7 @@
 import React from 'react';
 import { Users, MessageSquare, Eye, RefreshCw } from 'lucide-react';
 import SectionNavigation from './SectionNavigation';
+import HumanAICollaborationFramework from './HumanAICollaborationFramework';
 
 interface HumanCenteredAIProps {
   onNext: () => void;
@@ -187,16 +188,9 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
       <div className="bg-indigo-50 rounded-xl p-6">
         <h3 className="text-lg font-semibold text-gray-800 mb-4">Human-AI Collaboration Framework</h3>
         <p className="text-gray-600 mb-6">
-          Sendplex is designed to facilitate effective collaboration between humans and AI systems, creating a partnership that leverages the strengths of both.
+          Sendplex is designed to facilitate effective collaboration between humans and AI systems, creating a partnership that leverages the strengths of both to achieve optimal outcomes.
         </p>
-        <div className="relative h-48 bg-white rounded-lg p-4 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-gray-500">Human-AI collaboration diagram placeholder</p>
-              <p className="text-sm text-gray-400 mt-2">Illustrating how humans and AI work together in the Sendplex ecosystem</p>
-            </div>
-          </div>
-        </div>
+        <HumanAICollaborationFramework />
       </div>
       
       <SectionNavigation onNext={onNext} />
