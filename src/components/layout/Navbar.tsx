@@ -48,7 +48,7 @@ const ProfileDropdown = memo(({
       {/* User info section */}
       <div className="px-4 py-3 border-b border-gray-100">
         <p className="text-gray-500 text-sm">Minh Nguyen</p>
-        <p className="text-gray-800 font-medium">Owner</p>
+        <p className="text-gray-800 font-medium">Admin</p>
       </div>
 
       {/* Mobile credits display */}
