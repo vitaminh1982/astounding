@@ -194,7 +194,8 @@ const translations = {
           title: 'AI Agents',
           subtitle: 'Manage and configure your virtual assistants',
           newAgent: 'Create Agent',
-          importAgent: 'Import Agent'
+          importAgent: 'Import Agent',
+          connectAgent: 'Connect Agent'
         },
         search: {
           placeholder: 'Search for an agent',
@@ -1003,7 +1004,8 @@ saveError: 'Failed to save configuration',
           title: 'Agents IA',
           subtitle: 'Gérer et configurer vos assistants virtuels',
           newAgent: 'Créer un Agent',
-          importAgent: 'Importer un Agent'
+          importAgent: 'Importer un Agent',
+          connectAgent: 'Connecter un Agent'
         },
         search: {
           placeholder: 'Rechercher un agent',

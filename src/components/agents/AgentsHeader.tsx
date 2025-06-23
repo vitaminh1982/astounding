@@ -1,14 +1,16 @@
 import React, { useState, useContext } from 'react';
-import { Plus, Upload } from 'lucide-react';
+import { Plus, Upload, Link, ExternalLink } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import AgentConfigModal from './config/AgentConfigModal';
 import ImportAgentModal from './config/ImportAgentModal'; 
+import ConnectAgentModal from './config/ConnectAgentModal';
 import { AgentConfig } from '../../../types/agent-config';
 
 export default function AgentsHeader() {
   const { t } = useContext(LanguageContext);
   const [showConfigModal, setShowConfigModal] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false); // Add state for import modal
+  const [showConnectModal, setShowConnectModal] = useState(false); // Add state for connect modal
   const [newAgentConfig, setNewAgentConfig] = useState<AgentConfig>({
     id: '',
     name: '',
@@ -51,6 +53,10 @@ export default function AgentsHeader() {
     // Here you would typically call an API to save the new agent
   };
 
+  const handleConnect = () => {
+    setShowConnectModal(true);
+  };
+
   const handleImport = () => {
     // Implement import functionality
     setShowImportModal(true);
@@ -69,6 +75,15 @@ export default function AgentsHeader() {
       </div>
       
       <div className="flex gap-2">
+        {/* Connect Agent button */}
+        <button 
+          className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50"
+          onClick={handleConnect}
+        >
+          <Link className="w-4 h-4" />
+          {t('agents.page.header.connectAgent')}
+        </button>
+        
         {/* Import Agent button */}
         <button 
           className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50"
@@ -93,6 +108,17 @@ export default function AgentsHeader() {
           agent={newAgentConfig}
           onClose={() => setShowConfigModal(false)}
           onSave={handleSave}
+        />
+      )}
+
+      {/* Connect Agent Modal */}
+      {showConnectModal && (
+        <ConnectAgentModal
+          onClose={() => setShowConnectModal(false)}
+          onConnect={(provider, config) => {
+            console.log('Connected to provider:', provider, 'with config:', config);
+            setShowConnectModal(false);
+          }}
         />
       )}
       
