@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { BarChart2, Calendar, Download, Filter, Search, TrendingUp, TrendingDown, Clock, CheckCircle, XCircle, AlertCircle } from 'lucide-react';
 
 import MetricComparisonChart from '../components/analytics/MetricComparisonChart';
+import PerformanceChart from '../components/analytics/PerformanceChart';
 export default function PerformanceAnalyticsPage() {
   const [timeRange, setTimeRange] = useState('30d');
   const [searchQuery, setSearchQuery] = useState('');
