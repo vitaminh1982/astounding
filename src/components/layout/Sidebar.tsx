@@ -148,7 +148,7 @@ const Sidebar = ({
   };
 
  const isAnyAgentsSubmenuActive = () => {
-    return aiAgentsSubmenu.some(item => item.page === currentPage) || currentPage === 'agents-list';
+    return aiAgentsSubmenu.some(item => item.page === currentPage) || currentPage === 'agents';
   };
   
   const isAnyGovernanceSubmenuActive = () => {
