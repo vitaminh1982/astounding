@@ -1,4 +1,4 @@
-import React, { useState, useContext, memo } from 'react';
+import React, { useState, useContext, memo, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   Bot,
@@ -129,18 +129,12 @@ const Sidebar = ({
     { icon: GitBranch, label: t('sidebar.workflows'), page: 'workflows' as const },
   ];
 
-  // Main menu items - defined with direct icon references
+  // Main menu items (excluding AI Agents which has its own custom rendering)
   const mainMenuItems = [
     { icon: LayoutDashboard, label: t('sidebar.dashboard'), page: 'dashboard' as const },
-    { 
-      icon: MessageSquare, 
-      label: t('sidebar.discussions'), 
-      page: 'conversations' as const,
-      hasNotification: true
-    },
-    { icon: Users, label: t('sidebar.customers'), page: 'clients' as const }
-    //{ icon: BarChart2, label: 'Usage', page: 'usage' as const },
-    //{ icon: Settings, label: t('sidebar.settings'), page: 'paramètres' as const },
+    { icon: MessageSquare, label: t('sidebar.chat'), page: 'chat' as const, hasNotification: true },
+    { icon: Users, label: t('sidebar.humanAI'), page: 'human-ai' as const },
+    { icon: Settings, label: t('sidebar.settings'), page: 'settings' as const },
   ];
 
   const toggleAgentsMenu = () => {
@@ -154,7 +148,19 @@ const Sidebar = ({
   const isAnyGovernanceSubmenuActive = () => {
     return governanceSubmenu.some(item => item.page === currentPage);
   };
-  
+
+  // Add useEffect to automatically open/close submenus based on current page
+  useEffect(() => {
+    // Auto-open AI Agents submenu if on any of its sub-pages
+    if (isAnyAgentsSubmenuActive()) {
+      setIsAgentsMenuOpen(true);
+    }
+    
+    // Auto-open Governance submenu if on any of its sub-pages
+    if (isAnyGovernanceSubmenuActive()) {
+      setIsGovernanceMenuOpen(true);
+    }
+  }, [currentPage]); // Re-run when currentPage changes
 
   const handleMenuItemClick = (page: Page) => {
     onNavigate(page);
@@ -163,6 +169,36 @@ const Sidebar = ({
 
   const handleExternalLink = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  // Improved governance button click handler
+  const handleGovernanceClick = () => {
+    if (isAnyGovernanceSubmenuActive()) {
+      // If we're already on a governance sub-page, toggle the menu
+      setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
+    } else if (currentPage === 'governance') {
+      // If we're on the main governance page, toggle the menu
+      setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
+    } else {
+      // If we're on a different page, navigate to governance and open the menu
+      handleMenuItemClick('governance');
+      setIsGovernanceMenuOpen(true);
+    }
+  };
+
+  // Improved AI Agents button click handler
+  const handleAgentsClick = () => {
+    if (isAnyAgentsSubmenuActive()) {
+      // If we're already on an agents sub-page, toggle the menu
+      setIsAgentsMenuOpen(!isAgentsMenuOpen);
+    } else if (currentPage === 'ai-agents') {
+      // If we're on the main agents page, toggle the menu
+      setIsAgentsMenuOpen(!isAgentsMenuOpen);
+    } else {
+      // If we're on a different page, navigate to agents and open the menu
+      handleMenuItemClick('ai-agents');
+      setIsAgentsMenuOpen(true);
+    }
   };
 
   return (
@@ -177,48 +213,41 @@ const Sidebar = ({
       transition-all duration-300 ease-in-out
       ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
     `}>
+      
       {/* Mobile close button */}
-      <div className="lg:hidden flex justify-between items-center p-4 border-b border-gray-800">
-        <span className="text-lg font-semibold">{t('sidebar.menu')}</span>
-        <button 
+      <div className="lg:hidden flex justify-end p-4">
+        <button
           onClick={onClose}
-          className="p-2 hover:bg-gray-800 rounded-lg transition-colors"
+          className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800 transition-colors"
           aria-label="Close menu"
         >
           <X size={20} />
         </button>
       </div>
 
-      {/* Mobile logo */}
-      <div className="lg:hidden p-4 border-b border-gray-800">
-        <span className="text-xl font-bold text-[#10B981]">Sendplex</span>
-      </div>
-
       {/* Main menu */}
       <div className="p-4 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800">
         <nav className="space-y-1">
-          {/* Dashboard item */}
-          <MenuItem 
+          {/* Dashboard */}
+          <MenuItem
             icon={mainMenuItems[0].icon}
             label={mainMenuItems[0].label}
             page={mainMenuItems[0].page}
             currentPage={currentPage}
             onClick={handleMenuItemClick}
             isExpanded={isExpanded}
-            hasNotification={mainMenuItems[0].hasNotification}
           />
-
 
           {/* AI Agents with collapsible submenu */}
           <div className="space-y-1">
             <button
-              onClick={toggleAgentsMenu}
+              onClick={handleAgentsClick}
               className={`
                 flex w-full items-center justify-between px-4 py-3 
                 text-sm rounded-lg 
                 hover:bg-gray-800 
                 transition-colors
-                ${isAnyAgentsSubmenuActive() || currentPage === 'agents' ? 'bg-gray-800' : ''}
+                ${currentPage === 'ai-agents' || isAnyAgentsSubmenuActive() ? 'bg-gray-800' : ''}
                 ${!isExpanded && 'justify-center'}
               `}
               aria-expanded={isAgentsMenuOpen}
@@ -258,13 +287,7 @@ const Sidebar = ({
           {/* Governance with collapsible submenu */}
           <div className="space-y-1">
             <button
-              onClick={() => {
-                if (currentPage === 'governance' || isAnyGovernanceSubmenuActive()) {
-                  handleMenuItemClick('governance');
-                } else {
-                  setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
-                }
-              }}
+              onClick={handleGovernanceClick}
               className={`
                 flex w-full items-center justify-between px-4 py-3 
                 text-sm rounded-lg 
@@ -306,7 +329,6 @@ const Sidebar = ({
               </div>
             )}
           </div>
-
 
           {/* Regular menu items after AI Agents */}
           {mainMenuItems.slice(1).map((item) => (
