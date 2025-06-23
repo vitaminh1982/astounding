@@ -34,8 +34,8 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
     logo: null,
     color: '#10B981',
     members: [
-      { id: '1', name: 'Minh Nguyen', email: 'minh@miranki.com', role: 'Owner', avatar: null },
-      { id: '2', name: 'Sophie Martin', email: 'sophie@miranki.com', role: 'Admin', avatar: null },
+      { id: '1', name: 'Minh Nguyen', email: 'minh@miranki.com', role: 'Admin', avatar: null },
+      { id: '2', name: 'Sophie Martin', email: 'sophie@miranki.com', role: 'Owner', avatar: null },
       { id: '3', name: 'Thomas Dubois', email: 'thomas@miranki.com', role: 'Steward', avatar: null },
       { id: '4', name: 'Marie Lambert', email: 'marie@miranki.com', role: 'Custodian', avatar: null },
     ],
