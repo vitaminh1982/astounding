@@ -40,7 +40,7 @@ export default function UpgradeOptions() {
     {
       name: 'Starter',
       description: 'Collaborate across 10 users at one time',
-      price: '149€',
+      price: '49€',
       conversations: 5000,
       isAvailable: true,
       isRecommended: true,
