@@ -11,7 +11,6 @@ import {
   MessageSquare, 
   Users, 
   Settings, 
-  FileText, 
   Mail, 
   PlayCircle, 
   X, 
