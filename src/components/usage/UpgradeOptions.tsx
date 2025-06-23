@@ -196,7 +196,7 @@ export default function UpgradeOptions() {
                 {additionalPacks > 0 && (
                   <div className="mt-2 pt-2 border-t border-gray-200">
                     <p className="text-xs text-gray-600">
-                      Base price: 149€ + {additionalPacks} × 15€
+                      Base price: 49€ + {additionalPacks} × 15€
                     </p>
                   </div>
                 )}
