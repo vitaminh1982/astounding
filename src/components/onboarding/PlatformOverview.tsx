@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, ShieldCheck, Bot, Workflow, Building } from 'lucide-react';
 import SectionNavigation from './SectionNavigation';
+import WorkflowVisualization from './WorkflowVisualization';
 
 interface PlatformOverviewProps {
   onNext: () => void;
@@ -111,13 +112,8 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
           Create sophisticated AI-powered workflows that automate business processes, enhance customer 
           experiences, and improve operational efficiency.
         </p>
-        <div className="relative h-24 bg-white rounded-lg p-4 overflow-hidden">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="text-gray-500">Workflow visualization placeholder</p>
-            </div>
-          </div>
-        </div>
+        {/* Workflow Visualization Component */}
+        <WorkflowVisualization height={240} />
       </div>
       
       <SectionNavigation onNext={onNext} />
