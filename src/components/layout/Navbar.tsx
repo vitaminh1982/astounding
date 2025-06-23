@@ -3,7 +3,6 @@ import {
   Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info, 
   Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail
 } from 'lucide-react';
-import CreditConsumptionBar from './CreditConsumptionBar';
 import { Page } from '../../App';
 import LanguageSwitcher from "../LanguageSwitcher";
 import { LanguageContext } from '../../context/LanguageContext';
@@ -55,11 +54,9 @@ const ProfileDropdown = memo(({
       {/* Mobile credits display */}
       <div className="md:hidden px-4 py-2 border-b border-gray-100 flex items-center justify-between">
         <span className="text-gray-700 text-sm">1250 / 4000 {t('navbar.credits')}</span>
-        <CreditConsumptionBar 
-          directCredits={{ used: 1250, total: 4000 }}
-          backgroundCredits={{ used: 350, total: 1000 }}
-          className="w-full"
-        />
+        <button className="text-gray-500">
+          <Info className="h-4 w-4" />
+        </button>
       </div>
 
       {/* Navigation items */}
@@ -439,12 +436,16 @@ const Navbar = ({
             Sendplex
           </button>
 
-          {/* Credit Consumption Bar */}
-          <CreditConsumptionBar 
-            directCredits={{ used: 1250, total: 4000 }}
-            backgroundCredits={{ used: 350, total: 1000 }}
-            className="hidden md:flex"
-          />
+          {/* Credits display */}
+          <div className="hidden md:flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full">
+            <span className="text-gray-700 text-sm whitespace-nowrap">1250 / 4000 {t('navbar.credits')}</span>
+            <button 
+              className="text-gray-500 hover:text-gray-700"
+              aria-label="Credit information"
+            >
+              <Info className="h-4 w-4" />
+            </button>
+          </div>
         </div>
         
         {/* Right section */}
