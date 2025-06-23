@@ -57,7 +57,7 @@ const translations = {
       menu: 'Menu',
       dashboard: 'Dashboard',
       aiAgents: 'AI Agents',
-      governance: 'Governance',
+      governance: 'AI Governance',
       governanceMonitoring: 'Monitoring Dashboard',
       policyManagement: 'Policy Management',
       auditCompliance: 'Audit & Compliance',
