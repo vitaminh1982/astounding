@@ -7,6 +7,18 @@ interface PlatformOverviewProps {
 }
 
 const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
+  const handleNext = () => {
+    // Scroll to top of the page
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+    
+    // Call the original onNext function
+    onNext();
+  };
+
   return (
     <div className="space-y-8">
       <div>
@@ -120,7 +132,7 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
         </div>
       </div>
       
-      <SectionNavigation onNext={onNext} />
+      <SectionNavigation onNext={handleNext} />
     </div>
   );
 };
