@@ -187,6 +187,50 @@ const Sidebar = ({
             isExpanded={isExpanded}
             hasNotification={mainMenuItems[0].hasNotification}
           />
+          {/* Governance with collapsible submenu */}
+          <div className="space-y-1">
+            <button
+              onClick={() => {
+                if (currentPage === 'governance' || 
+                    currentPage === 'policy-management' || 
+                    currentPage === 'audit-compliance' || 
+                    currentPage === 'risk-management' || 
+                    currentPage === 'performance-analytics' || 
+                    currentPage === 'agent-configuration') {
+                  handleMenuItemClick('governance');
+                } else {
+                  setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
+                }
+              }}
+              className={`
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
+                transition-colors
+                ${(currentPage === 'governance' || 
+                   currentPage === 'policy-management' || 
+                   currentPage === 'audit-compliance' || 
+                   currentPage === 'risk-management' || 
+                   currentPage === 'performance-analytics' || 
+                   currentPage === 'agent-configuration') ? 'bg-gray-800' : ''}
+                ${!isExpanded && 'justify-center'}
+              `}
+              aria-expanded={isGovernanceMenuOpen}
+            >
+              <div className="flex items-center gap-3">
+                <ShieldAlert size={20} />
+                {isExpanded && <span>{t('sidebar.governance')}</span>}
+              </div>
+              {isExpanded && (
+                <span className="text-gray-400">
+                  {isGovernanceMenuOpen ? 
+                    <ChevronDown size={16} /> : 
+                    <ChevronRight size={16} />
+                  }
+                </span>
+              )}
+            </button>
+    
 
           {/* AI Agents with collapsible submenu */}
           <div className="space-y-1">
@@ -234,52 +278,7 @@ const Sidebar = ({
             )}
           </div>
 
-          {/* Governance with collapsible submenu - NOW AFTER AI AGENTS */}
-          <div className="space-y-1">
-            <button
-              onClick={() => {
-                if (currentPage === 'governance' || 
-                    currentPage === 'policy-management' || 
-                    currentPage === 'audit-compliance' || 
-                    currentPage === 'risk-management' || 
-                    currentPage === 'performance-analytics' || 
-                    currentPage === 'agent-configuration') {
-                  handleMenuItemClick('governance');
-                } else {
-                  setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
-                }
-              }}
-              className={`
-                flex w-full items-center justify-between px-4 py-3 
-                text-sm rounded-lg 
-                hover:bg-gray-800 
-                transition-colors
-                ${(currentPage === 'governance' || 
-                   currentPage === 'policy-management' || 
-                   currentPage === 'audit-compliance' || 
-                   currentPage === 'risk-management' || 
-                   currentPage === 'performance-analytics' || 
-                   currentPage === 'agent-configuration') ? 'bg-gray-800' : ''}
-                ${!isExpanded && 'justify-center'}
-              `}
-              aria-expanded={isGovernanceMenuOpen}
-            >
-              <div className="flex items-center gap-3">
-                <ShieldAlert size={20} />
-                {isExpanded && <span>{t('sidebar.governance')}</span>}
-              </div>
-              {isExpanded && (
-                <span className="text-gray-400">
-                  {isGovernanceMenuOpen ? 
-                    <ChevronDown size={16} /> : 
-                    <ChevronRight size={16} />
-                  }
-                </span>
-              )}
-            </button>
-          </div>
-
-          {/* Regular menu items after both AI Agents and Governance */}
+          {/* Regular menu items after AI Agents */}
           {mainMenuItems.slice(1).map((item) => (
             <MenuItem
               key={item.page}
