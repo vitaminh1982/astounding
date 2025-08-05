@@ -15,7 +15,10 @@ import {
   Database,
   Network,
   UserCheck,
-  Share2
+  Share2,
+  FileText,
+  Bell,
+  TrendingUp
 } from 'lucide-react';
 import { Page } from '../App';
 
