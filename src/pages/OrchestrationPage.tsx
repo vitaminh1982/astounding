@@ -676,99 +676,121 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
                 <h3 className="text-sm font-semibold text-gray-700 mb-1">
                   {metric.title}
                 </h3>
-                <p className="text-2xl font-bold text-gray-900 mb-1">
-                  {metric.value}
-                </p>
-                <p className="text-xs text-gray-600 font-medium">
-                  {metric.changeLabel}
-                </p>
+                <div className="mt-2">
+                  <span className="text-3xl font-bold text-gray-900">
+                    {metric.value}
+                  </span>
+                </div>
               </div>
+              <p className="text-sm text-gray-600 font-medium">{metric.changeLabel}</p>
             </motion.div>
           ))}
         </section>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Quick Access Cards */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-bold text-gray-900">Quick Access</h2>
-                <div className="flex items-center bg-gray-50 border border-gray-300 rounded-lg overflow-hidden">
-                  <Search className="ml-3 w-4 h-4 text-gray-600" />
-                  <input
-                    type="text"
-                    placeholder="Search modules..."
-                    className="w-full py-2 pl-2 pr-3 bg-transparent border-none focus:ring-0 text-sm text-gray-800 font-medium"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
+        {/* Enhanced AI Assistant Chat Interface */}
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+          <ChatInterface isModal={false} />
+        </section>
+
+        {/* Enhanced Quick Access Cards */}
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+          {quickAccessCards.map((card, index) => (
+            <motion.button
+              key={card.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              onClick={() => onNavigate(card.page)}
+              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-left hover:shadow-md hover:border-indigo-300 transition-all duration-200 group"
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className="bg-indigo-50 p-3 rounded-xl group-hover:bg-indigo-100 transition-colors">
+                  <card.icon className="h-6 w-6 text-indigo-600" />
                 </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {quickAccessCards
-                  .filter(card => 
-                    searchQuery === '' || 
-                    card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    card.description.toLowerCase().includes(searchQuery.toLowerCase())
-                  )
-                  .map((card, index) => (
-                    <motion.div
-                      key={card.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      onClick={() => onNavigate(card.page)}
-                      className="group p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 hover:border-gray-300 cursor-pointer transition-all duration-200 hover:shadow-sm"
-                    >
-                      <div className="flex items-start gap-3">
-                        <div className="p-2 bg-white rounded-lg border border-gray-200 group-hover:border-gray-300 transition-colors">
-                          <card.icon className="w-5 h-5 text-gray-700" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-gray-900 text-sm mb-1 group-hover:text-indigo-700 transition-colors">
-                            {card.title}
-                          </h3>
-                          <p className="text-xs text-gray-600 font-medium leading-relaxed">
-                            {card.description}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-              </div>
-            </div>
-          </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-700 transition-colors">
+                {card.title}
+              </h3>
+              <p className="text-gray-600 text-sm font-medium leading-relaxed">
+                {card.description}
+              </p>
+            </motion.button>
+          ))}
+        </section>
 
-          {/* AI Chat Interface */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-              <ChatInterface isModal={false} />
-            </div>
-          </div>
-        </div>
-
-        {/* Chat Modal */}
-        <AnimatePresence>
-          {isChatMaximized && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-            >
-              <motion.div
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                className="bg-white rounded-xl shadow-2xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden"
+        {/* Enhanced AI Tools Grid */}
+        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">AI-Powered Tools</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              { name: 'AI Slides', icon: Layout, color: 'text-orange-600', bgColor: 'bg-orange-50', isNew: false },
+              { name: 'AI Sheets', icon: Table, color: 'text-green-600', bgColor: 'bg-green-50', isNew: false },
+              { name: 'AI Docs', icon: FileText, color: 'text-blue-600', bgColor: 'bg-blue-50', isNew: true },
+              { name: 'AI Pods', icon: Lightbulb, color: 'text-purple-600', bgColor: 'bg-purple-50', isNew: true },
+              { name: 'AI Chat', icon: MessageSquare, color: 'text-teal-600', bgColor: 'bg-teal-50', isNew: false },
+              { name: 'AI Image', icon: Image, color: 'text-yellow-600', bgColor: 'bg-yellow-50', isNew: false },
+              { name: 'AI Video', icon: Play, color: 'text-red-600', bgColor: 'bg-red-50', isNew: false },
+              { name: 'Deep Research', icon: Globe, color: 'text-lime-600', bgColor: 'bg-lime-50', isNew: false },
+              { name: 'Call For Me', icon: Phone, color: 'text-pink-600', bgColor: 'bg-pink-50', isNew: false },
+              { name: 'Download For Me', icon: Download, color: 'text-cyan-600', bgColor: 'bg-cyan-50', isNew: false },
+              { name: 'All Agents', icon: Bot, color: 'text-gray-600', bgColor: 'bg-gray-50', isNew: false },
+              { name: 'Workflows', icon: GitBranch, color: 'text-indigo-600', bgColor: 'bg-indigo-50', isNew: false }
+            ].map((tool, index) => (
+              <motion.button
+                key={tool.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="group flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 cursor-pointer transition-all duration-200 border border-transparent hover:border-gray-200"
               >
-                <ChatInterface isModal={true} />
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                <div className="relative">
+                  <div className={`w-12 h-12 ${tool.bgColor} rounded-xl flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-gray-200`}>
+                    <tool.icon className={`w-6 h-6 ${tool.color}`} />
+                  </div>
+                  {tool.isNew && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
+                      New
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-gray-800 text-center font-semibold group-hover:text-gray-900 transition-colors">
+                  {tool.name}
+                </span>
+              </motion.button>
+            ))}
+          </div>
+        </section>
       </div>
+
+      {/* Full-Screen Chat Modal */}
+      <AnimatePresence>
+        {isChatMaximized && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4"
+            onClick={(e) => {
+              // Close modal when clicking on backdrop
+              if (e.target === e.currentTarget) {
+                setIsChatMaximized(false);
+              }
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white rounded-xl shadow-2xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ChatInterface isModal={true} />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
