@@ -217,10 +217,10 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
               <Network className="w-8 h-8 text-indigo-600" />
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">
+              <h1 className="text-2xl font-bold text-gray-800">
                 Multi-Agent Orchestration Hub
               </h1>
-              <p className="text-lg text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600">
                 Central command center for managing and coordinating AI agent workflows
               </p>
             </div>
