@@ -23,6 +23,12 @@ import RiskManagementPage from './pages/RiskManagementPage';
 import PerformanceAnalyticsPage from './pages/PerformanceAnalyticsPage';
 import AgentConfigurationPage from './pages/AgentConfigurationPage';
 import OnboardingPage from './pages/OnboardingPage';
+import OrchestrationPage from './pages/OrchestrationPage';
+import AgentManagementPage from './components/orchestration/AgentManagementPage';
+import WorkflowManagementPage from './components/orchestration/WorkflowManagementPage';
+import MonitoringAnalyticsPage from './components/orchestration/MonitoringAnalyticsPage';
+import ResourceManagementPage from './components/orchestration/ResourceManagementPage';
+import CollaborationPage from './components/orchestration/CollaborationPage';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
@@ -44,6 +50,12 @@ export type Page =
   | 'onboarding'
   | 'agent-configuration'
   | 'usage'
+  | 'orchestration'
+  | 'agent-management'
+  | 'workflow-management'
+  | 'monitoring-analytics'
+  | 'resource-management'
+  | 'collaboration'
   | 'paramètres';
 
 // You might want to create a type for navigation items
@@ -121,6 +133,18 @@ function AppContent() {
         return <IntegrationsPage />; // New Integrations page
       case 'usage':
         return <UsagePage />; // Render the new UsagePage
+      case 'orchestration':
+        return <OrchestrationPage onNavigate={handleNavigation} />;
+      case 'agent-management':
+        return <AgentManagementPage onNavigate={handleNavigation} />;
+      case 'workflow-management':
+        return <WorkflowManagementPage onNavigate={handleNavigation} />;
+      case 'monitoring-analytics':
+        return <MonitoringAnalyticsPage onNavigate={handleNavigation} />;
+      case 'resource-management':
+        return <ResourceManagementPage onNavigate={handleNavigation} />;
+      case 'collaboration':
+        return <CollaborationPage onNavigate={handleNavigation} />;
       case 'paramètres':
         return <SettingsPage />;
       default:
