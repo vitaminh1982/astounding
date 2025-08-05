@@ -437,8 +437,6 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
           ))}
         </div>
 
-        {/* Main Content Grid */}
-
 
         {/* AI Assistant Chat Interface */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
