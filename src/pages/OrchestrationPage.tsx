@@ -449,5 +449,3 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
     </div>
   );
 }
-
-export default OrchestrationPage
