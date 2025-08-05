@@ -202,17 +202,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header with breadcrumb */}
         <div className="mb-6">
-          <div className="flex items-center gap-2 mb-4">
-            <button
-              onClick={() => onNavigate('orchestration')}
-              className="flex items-center text-indigo-600 hover:text-indigo-800 text-sm"
-            >
-              <ArrowLeft className="w-4 h-4 mr-1" />
-              Orchestration Hub
-            </button>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-600">Agent Management</span>
-          </div>
+
           
           <div className="flex justify-between items-center">
             <div>
