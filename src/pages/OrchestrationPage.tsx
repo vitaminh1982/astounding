@@ -198,32 +198,118 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
           { agentName: 'Agent Management System', purpose: 'Retrieve active agent list and status' }
         ],
         finalResponse: (
-          <div className="text-gray-800">
-            <p className="mb-3 font-medium">
-              Currently, there are <strong className="text-blue-700">24 active agents</strong> in your ecosystem:
-            </p>
-            <div className="bg-gray-800 rounded-lg p-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-                  <span className="text-gray-200">Customer Support:</span>
-                  <span className="text-green-400 font-medium">Active</span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-                  <span className="text-gray-200">Sales Assistant:</span>
-                  <span className="text-green-400 font-medium">Active</span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-                  <span className="text-gray-200">Technical Support:</span>
-                  <span className="text-yellow-400 font-medium">High Load</span>
-                </div>
-                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-                  <span className="text-gray-200">E-commerce:</span>
-                  <span className="text-green-400 font-medium">Active</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        ),
+  <div className="text-gray-800">
+    <p className="mb-3 font-medium">
+      Currently, there are <strong className="text-blue-700">24 active agents</strong> in your ecosystem:
+    </p>
+    <div className="bg-gray-800 rounded-lg p-4 max-h-80 overflow-y-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Customer Support:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Sales Assistant:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Technical Support:</span>
+          <span className="text-yellow-400 font-medium">High Load</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">E-commerce:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Data Analytics:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Content Generator:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Marketing Automation:</span>
+          <span className="text-blue-400 font-medium">Processing</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">HR Assistant:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Financial Advisor:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Security Monitor:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Inventory Manager:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Translation Service:</span>
+          <span className="text-yellow-400 font-medium">High Load</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Email Classifier:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Document Processor:</span>
+          <span className="text-blue-400 font-medium">Processing</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Quality Assurance:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Workflow Orchestrator:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Image Recognition:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Voice Assistant:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Anomaly Detection:</span>
+          <span className="text-orange-400 font-medium">Maintenance</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Knowledge Base:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Backup Manager:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Performance Monitor:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">API Gateway:</span>
+          <span className="text-yellow-400 font-medium">High Load</span>
+        </div>
+        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+          <span className="text-gray-200">Report Generator:</span>
+          <span className="text-green-400 font-medium">Active</span>
+        </div>
+      </div>
+    </div>
+    <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+      <p className="text-sm text-blue-800 font-medium">
+        📊 Status Summary: 19 Active • 3 High Load • 1 Processing • 1 Maintenance
+      </p>
+    </div>
+  </div>
+)
+,
       };
     } 
     
