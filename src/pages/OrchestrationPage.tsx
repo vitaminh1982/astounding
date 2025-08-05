@@ -156,10 +156,10 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
               You can ask me anything, like:
             </p>
             <ul className="list-disc list-inside space-y-1 text-gray-700 bg-gray-50 p-3 rounded-lg">
-              <li>"Show active agents"</li>
-              <li>"Create a new customer onboarding workflow"</li>
-              <li>"Analyze sales performance"</li>
-              <li>"What's the system health?"</li>
+              <li>&quot;Show active agents&quot;</li>
+              <li>&quot;Create a new customer onboarding workflow&quot;</li>
+              <li>&quot;Analyze sales performance&quot;</li>
+              <li>&quot;What&apos;s the system health?&quot;</li>
             </ul>
           </div>
         ),
@@ -183,7 +183,7 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
 
   const generateAIResponse = useCallback((prompt: string): AiContent => {
     const lowerCasePrompt = prompt.toLowerCase();
-
+    
     if (lowerCasePrompt.includes('hello') || lowerCasePrompt.includes('hi')) {
       return {
         reasoningSteps: ["Acknowledging greeting and preparing assistance."],
@@ -202,270 +202,266 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
           { agentName: 'Agent Management System', purpose: 'Retrieve active agent list and status' }
         ],
         finalResponse: (
-  <div className="text-gray-800">
-    <p className="mb-3 font-medium">
-      Currently, there are <strong className="text-blue-700">24 active agents</strong> in your ecosystem:
-    </p>
-    <div className="bg-gray-800 rounded-lg p-4 max-h-80 overflow-y-auto">
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Customer Support:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Sales Assistant:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Technical Support:</span>
-          <span className="text-yellow-400 font-medium">High Load</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">E-commerce:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Data Analytics:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Content Generator:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Marketing Automation:</span>
-          <span className="text-blue-400 font-medium">Processing</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">HR Assistant:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Financial Advisor:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Security Monitor:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Inventory Manager:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Translation Service:</span>
-          <span className="text-yellow-400 font-medium">High Load</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Email Classifier:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Document Processor:</span>
-          <span className="text-blue-400 font-medium">Processing</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Quality Assurance:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Workflow Orchestrator:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Image Recognition:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Voice Assistant:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Anomaly Detection:</span>
-          <span className="text-orange-400 font-medium">Maintenance</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Knowledge Base:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Backup Manager:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Performance Monitor:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">API Gateway:</span>
-          <span className="text-yellow-400 font-medium">High Load</span>
-        </div>
-        <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
-          <span className="text-gray-200">Report Generator:</span>
-          <span className="text-green-400 font-medium">Active</span>
-        </div>
-      </div>
-    </div>
-    <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-      <p className="text-sm text-blue-800 font-medium">
-        📊 Status Summary: 19 Active • 3 High Load • 1 Processing • 1 Maintenance
-      </p>
-    </div>
-  </div>
-)
-,
+          <div className="text-gray-800">
+            <p className="mb-3 font-medium">
+              Currently, there are <strong className="text-blue-700">24 active agents</strong> in your ecosystem:
+            </p>
+            <div className="bg-gray-800 rounded-lg p-4 max-h-80 overflow-y-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Customer Support:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Sales Assistant:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Technical Support:</span>
+                  <span className="text-yellow-400 font-medium">High Load</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">E-commerce:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Data Analytics:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Content Generator:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Marketing Automation:</span>
+                  <span className="text-blue-400 font-medium">Processing</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">HR Assistant:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Financial Advisor:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Security Monitor:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Inventory Manager:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Translation Service:</span>
+                  <span className="text-yellow-400 font-medium">High Load</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Email Classifier:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Document Processor:</span>
+                  <span className="text-blue-400 font-medium">Processing</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Quality Assurance:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Workflow Orchestrator:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Image Recognition:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Voice Assistant:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Anomaly Detection:</span>
+                  <span className="text-orange-400 font-medium">Maintenance</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Knowledge Base:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Backup Manager:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Performance Monitor:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">API Gateway:</span>
+                  <span className="text-yellow-400 font-medium">High Load</span>
+                </div>
+                <div className="flex justify-between items-center p-2 bg-gray-700 rounded">
+                  <span className="text-gray-200">Report Generator:</span>
+                  <span className="text-green-400 font-medium">Active</span>
+                </div>
+              </div>
+            </div>
+            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-sm text-blue-800 font-medium">
+                📊 Status Summary: 19 Active • 3 High Load • 1 Processing • 1 Maintenance
+              </p>
+            </div>
+          </div>
+        )
       };
-    } 
-    
-    if (lowerCasePrompt.includes('system health') || lowerCasePrompt.includes('health check')) {
+    }
+
+    if (lowerCasePrompt.includes('system health') || lowerCasePrompt.includes('health')) {
       return {
         reasoningSteps: [
-          "Assessing overall system status.",
-          "Checking monitoring logs and performance metrics.",
-          "Evaluating resource utilization."
+          "Checking system health metrics",
+          "Analyzing performance indicators",
+          "Generating health report"
         ],
         agentCalls: [
-          { agentName: 'Monitoring & Analytics System', purpose: 'Retrieve system health metrics' },
-          { agentName: 'Security Auditor Agent', purpose: 'Perform security compliance check' },
+          { agentName: 'System Monitor', purpose: 'Retrieve system health metrics' }
         ],
         finalResponse: (
           <div className="text-gray-800">
-            <p className="mb-3 font-medium">
-              System health is <strong className="text-green-700">excellent</strong> with 99.8% uptime.
-            </p>
-            <div className="bg-gray-800 rounded-lg p-4 space-y-2">
-              <div className="flex justify-between items-center p-2 bg-gray-700 rounded text-sm">
-                <span className="text-gray-200">CPU Usage:</span>
-                <span className="text-orange-300 font-medium">78%</span>
+            <p className="mb-3 font-medium">System Health Report:</p>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-600" />
+                  <span className="font-bold text-green-800">Overall: 99.8%</span>
+                </div>
               </div>
-              <div className="flex justify-between items-center p-2 bg-gray-700 rounded text-sm">
-                <span className="text-gray-200">Memory:</span>
-                <span className="text-green-300 font-medium">65%</span>
-              </div>
-              <div className="flex justify-between items-center p-2 bg-gray-700 rounded text-sm">
-                <span className="text-gray-200">Active Connections:</span>
-                <span className="text-blue-300 font-medium">1,247</span>
+              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <div className="flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-blue-600" />
+                  <span className="font-bold text-blue-800">Uptime: 99.97%</span>
+                </div>
               </div>
             </div>
+            <ul className="list-disc list-inside space-y-1 text-gray-700">
+              <li>All critical systems operational</li>
+              <li>Resource utilization within normal limits</li>
+              <li>No security alerts detected</li>
+            </ul>
           </div>
-        ),
+        )
       };
     }
-    
+
+    if (lowerCasePrompt.includes('workflow') || lowerCasePrompt.includes('create')) {
+      return {
+        reasoningSteps: [
+          "Understanding workflow creation request",
+          "Analyzing available workflow templates",
+          "Preparing workflow designer interface"
+        ],
+        agentCalls: [
+          { agentName: 'Workflow Manager', purpose: 'Initialize workflow creation process' }
+        ],
+        finalResponse: (
+          <div className="text-gray-800">
+            <p className="mb-3 font-medium">I can help you create a new workflow!</p>
+            <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
+              <p className="text-purple-800 font-medium mb-2">Available Templates:</p>
+              <ul className="list-disc list-inside space-y-1 text-purple-700">
+                <li>Customer Onboarding</li>
+                <li>Data Processing Pipeline</li>
+                <li>Content Generation</li>
+                <li>Quality Assurance</li>
+              </ul>
+            </div>
+            <p className="mt-3 text-gray-700">Would you like me to navigate you to the Workflow Designer?</p>
+          </div>
+        )
+      };
+    }
+
     return {
       reasoningSteps: [
-        "Analyzing user query for orchestration-related keywords.",
-        "Preparing general assistance response."
+        "Processing your request",
+        "Searching knowledge base for relevant information",
+        "Formulating comprehensive response"
       ],
-      finalResponse: "I can help you with agent management, workflow creation, system monitoring, and more. What specific aspect of your AI ecosystem would you like to explore?",
+      finalResponse: "I understand you're asking about: \"" + prompt + "\". Could you please provide more specific details so I can better assist you with your multi-agent system needs?"
     };
   }, []);
 
   const handleSendPrompt = useCallback(async () => {
-    if (promptInput.trim() === '' || isLoading) return;
+    if (!promptInput.trim() || isLoading) return;
 
-    const userMessage: Message = { 
-      type: 'user', 
+    const userMessage: Message = {
+      type: 'user',
       text: promptInput,
       timestamp: new Date()
     };
-    
-    setConversationHistory((prev) => [...prev, userMessage]);
-    const currentPrompt = promptInput;
-    setPromptInput('');
+
+    setConversationHistory(prev => [...prev, userMessage]);
     setIsLoading(true);
+    setPromptInput('');
 
     // Simulate AI processing delay
     setTimeout(() => {
-      const aiContent = generateAIResponse(currentPrompt);
-      
-      setConversationHistory((prev) => [...prev, { 
-        type: 'ai', 
-        content: aiContent,
+      const aiResponse = generateAIResponse(promptInput);
+      const aiMessage: Message = {
+        type: 'ai',
+        content: aiResponse,
         timestamp: new Date()
-      }]);
+      };
+
+      setConversationHistory(prev => [...prev, aiMessage]);
       setIsLoading(false);
     }, 1500);
   }, [promptInput, isLoading, generateAIResponse]);
 
-  const handleKeyDown = useCallback((event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
       handleSendPrompt();
     }
-    if (event.key === 'Escape' && isChatMaximized) {
-      setIsChatMaximized(false);
-    }
-  }, [handleSendPrompt, isChatMaximized]);
+  }, [handleSendPrompt]);
 
   const handleRefresh = useCallback(() => {
-    // Add refresh logic here
-    console.log('Refreshing data...');
+    // Simulate refresh action
+    console.log('Refreshing system metrics...');
   }, []);
 
-  // Handle ESC key to close modal
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isChatMaximized) {
-        setIsChatMaximized(false);
-      }
-    };
-
-    if (isChatMaximized) {
-      document.addEventListener('keydown', handleEscapeKey);
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeKey);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isChatMaximized]);
-
-  // Chat interface component that can be used in both embedded and modal views
-  const ChatInterface = ({ isModal = false }: { isModal?: boolean }) => (
+  // Chat Interface Component
+  const ChatInterface = ({ isModal }: { isModal: boolean }) => (
     <>
       {/* Chat Header */}
-      <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-5">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-white bg-opacity-20 rounded-lg">
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-white">
-                Orchestration AI Assistant
-              </h2>
-              <p className="text-indigo-100 text-sm font-medium">
-                Intelligent multi-agent system management
-              </p>
-            </div>
+      <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <Sparkles className="w-4 h-4 text-white" />
           </div>
-          <div className="flex items-center gap-2">
-            {!isModal && (
-              <button
-                onClick={() => setIsChatMaximized(true)}
-                className="p-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
-                title="Maximize chat"
-                aria-label="Maximize chat interface"
-              >
-                <Maximize2 className="w-5 h-5 text-white" />
-              </button>
-            )}
-            {isModal && (
-              <button
-                onClick={() => setIsChatMaximized(false)}
-                className="p-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
-                title="Minimize chat"
-                aria-label="Minimize chat interface"
-              >
-                <Minimize2 className="w-5 h-5 text-white" />
-              </button>
-            )}
+          <div>
+            <h3 className="font-bold text-gray-900 text-lg">AI Assistant</h3>
+            <p className="text-sm text-gray-600 font-medium">Multi-Agent Orchestration</p>
           </div>
+        </div>
+        <div className="flex items-center gap-2">
+          {!isModal ? (
+            <button
+              onClick={() => setIsChatMaximized(true)}
+              className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Maximize chat"
+            >
+              <Maximize2 className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsChatMaximized(false)}
+              className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Close chat"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </div>
 
@@ -679,96 +675,3 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
               <div className="mb-2">
                 <h3 className="text-sm font-semibold text-gray-700 mb-1">
                   {metric.title}
-                </h3>
-                <div className="mt-2">
-                  <span className="text-3xl font-bold text-gray-900">
-                    {metric.value}
-                  </span>
-                </div>
-              </div>
-              <p className="text-sm text-gray-600 font-medium">{metric.changeLabel}</p>
-            </motion.div>
-          ))}
-        </section>
-
-        {/* Enhanced AI Assistant Chat Interface */}
-        <section className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-          <ChatInterface isModal={false} />
-        </section>
-
-        {/* Enhanced AI Tools Grid */}
-        <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">AI-Powered Tools</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            {[
-              { name: 'AI Slides', icon: Layout, color: 'text-orange-600', bgColor: 'bg-orange-50', isNew: false },
-              { name: 'AI Sheets', icon: Table, color: 'text-green-600', bgColor: 'bg-green-50', isNew: false },
-              { name: 'AI Docs', icon: FileText, color: 'text-blue-600', bgColor: 'bg-blue-50', isNew: true },
-              { name: 'AI Pods', icon: Lightbulb, color: 'text-purple-600', bgColor: 'bg-purple-50', isNew: true },
-              { name: 'AI Chat', icon: MessageSquare, color: 'text-teal-600', bgColor: 'bg-teal-50', isNew: false },
-              { name: 'AI Image', icon: Image, color: 'text-yellow-600', bgColor: 'bg-yellow-50', isNew: false },
-              { name: 'AI Video', icon: Play, color: 'text-red-600', bgColor: 'bg-red-50', isNew: false },
-              { name: 'Deep Research', icon: Globe, color: 'text-lime-600', bgColor: 'bg-lime-50', isNew: false },
-              { name: 'Call For Me', icon: Phone, color: 'text-pink-600', bgColor: 'bg-pink-50', isNew: false },
-              { name: 'Download For Me', icon: Download, color: 'text-cyan-600', bgColor: 'bg-cyan-50', isNew: false },
-              { name: 'All Agents', icon: Bot, color: 'text-gray-600', bgColor: 'bg-gray-50', isNew: false },
-              { name: 'Workflows', icon: GitBranch, color: 'text-indigo-600', bgColor: 'bg-indigo-50', isNew: false }
-            ].map((tool, index) => (
-              <motion.button
-                key={tool.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="group flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 cursor-pointer transition-all duration-200 border border-transparent hover:border-gray-200"
-              >
-                <div className="relative">
-                  <div className={`w-12 h-12 ${tool.bgColor} rounded-xl flex items-center justify-center mb-3 group-hover:scale-105 transition-transform border border-gray-200`}>
-                    <tool.icon className={`w-6 h-6 ${tool.color}`} />
-                  </div>
-                  {tool.isNew && (
-                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
-                      New
-                    </span>
-                  )}
-                </div>
-                <span className="text-xs text-gray-800 text-center font-semibold group-hover:text-gray-900 transition-colors">
-                  {tool.name}
-                </span>
-              </motion.button>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      {/* Full-Screen Chat Modal */}
-      <AnimatePresence>
-        {isChatMaximized && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center p-4"
-            onClick={(e) => {
-              // Close modal when clicking on backdrop
-              if (e.target === e.currentTarget) {
-                setIsChatMaximized(false);
-              }
-            }}
-          >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white rounded-xl shadow-2xl w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ChatInterface isModal={true} />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
