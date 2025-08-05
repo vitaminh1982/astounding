@@ -404,10 +404,10 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
                 <h2 className="text-lg font-semibold text-white">
                   Orchestration AI Assistant
                 </h2>
-                <p className="text-sm text-indigo-100">
-                  Your intelligent command center for multi-agent coordination
-                </p>
-              </div>
+                    <div className="text-white">• Customer Support: <span className="text-green-400">Active</span></div>
+                    <div className="text-white">• Sales Assistant: <span className="text-green-400">Active</span></div>
+                    <div className="text-white">• Technical Support: <span className="text-yellow-400">High Load</span></div>
+                    <div className="text-white">• E-commerce: <span className="text-green-400">Active</span></div>
             </div>
           </div>
 
