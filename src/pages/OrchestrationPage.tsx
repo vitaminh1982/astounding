@@ -1,45 +1,198 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  Bot,
-  Send,
-  Sparkles,
-  User,
-  Search, // Added Search icon
-  Settings, // Used for the "magic wand/settings" icon
-  Mic, // Microphone icon
-  CornerUpLeft, // Return/undo arrow icon
-  MessageSquare, Users, FileText, Globe, Lightbulb, Cloud, GitBranch, Shield, Package, Layout
+import { 
+  Bot, 
+  Send, 
+  Sparkles, 
+  User, 
+  Search, 
+  Settings, 
+  Mic, 
+  CornerUpLeft, 
+  MessageSquare, 
+  Users, 
+  FileText, 
+  Globe, 
+  Lightbulb, 
+  Cloud, 
+  GitBranch, 
+  Shield, 
+  Package, 
+  Layout,
+  Table,
+  Image,
+  Play,
+  Phone,
+  Download,
+  Activity,
+  Clock,
+  CheckCircle,
+  AlertTriangle,
+  TrendingUp,
+  TrendingDown,
+  BarChart3,
+  Cpu,
+  Server,
+  Network,
+  Share2,
+  Zap,
+  Eye,
+  ArrowRight,
+  RefreshCw,
+  Filter,
+  Calendar
 } from 'lucide-react';
-import { Page } from '../App'; // Assuming 'Page' type is defined in App.tsx
+import { Page } from '../App';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface OrchestrationPageProps {
   onNavigate: (page: Page) => void;
 }
 
-// Define the structure for AI message content, including reasoning and agent calls
+// Define the structure for AI message content
 interface AiContent {
   reasoningSteps?: string[];
   agentCalls?: { agentName: string; purpose: string; }[];
-  finalResponse: string | JSX.Element; // Allow JSX for richer responses
+  finalResponse: string | JSX.Element;
 }
 
 interface Message {
   type: 'user' | 'ai';
-  text?: string; // For user messages
-  content?: AiContent; // For AI messages
+  text?: string;
+  content?: AiContent;
+  timestamp: Date;
 }
 
-// Mock data for AI agents that the Super AI might interact with
-const mockAgents = [
-  { id: 'customer-support', name: 'Customer Support Agent', capability: 'handles inquiries, provides solutions, generates FAQs' },
-  { id: 'sales-assistant', name: 'Sales Assistant Agent', capability: 'qualifies leads, generates quotes, schedules demos' },
-  { id: 'ecommerce-manager', name: 'E-commerce Manager Agent', capability: 'manages product listings, processes orders, updates inventory' },
-  { id: 'billing-service', name: 'Billing Service Agent', capability: 'processes payments, handles billing inquiries, sends invoices' },
-  { id: 'hr-assistant', name: 'HR Assistant Agent', capability: 'manages employee data, answers HR questions, processes leave requests' },
-  { id: 'data-analyst', name: 'Data Analyst Agent', capability: 'processes data, generates reports, visualizes trends' },
-  { id: 'workflow-manager', name: 'Workflow Manager Agent', capability: 'creates, modifies, and manages multi-agent workflows' },
-  { id: 'security-auditor', name: 'Security Auditor Agent', capability: 'monitors system for vulnerabilities, performs compliance checks' },
-  { id: 'deployment-engineer', name: 'Deployment Engineer Agent', capability: 'deploys and scales agents and services' },
+// Mock data for system metrics
+const systemMetrics = [
+  {
+    id: 'active-agents',
+    title: 'Active Agents',
+    value: '24',
+    change: '+3',
+    changeLabel: 'since last week',
+    icon: Bot,
+    color: 'text-blue-600',
+    bgColor: 'bg-blue-100',
+    trend: 'up'
+  },
+  {
+    id: 'workflows',
+    title: 'Active Workflows',
+    value: '8',
+    change: '+2',
+    changeLabel: 'new this month',
+    icon: GitBranch,
+    color: 'text-purple-600',
+    bgColor: 'bg-purple-100',
+    trend: 'up'
+  },
+  {
+    id: 'system-health',
+    title: 'System Health',
+    value: '99.8%',
+    change: '+0.2%',
+    changeLabel: 'uptime improvement',
+    icon: Activity,
+    color: 'text-green-600',
+    bgColor: 'bg-green-100',
+    trend: 'up'
+  },
+  {
+    id: 'resource-usage',
+    title: 'Resource Usage',
+    value: '78%',
+    change: '-5%',
+    changeLabel: 'optimization gain',
+    icon: Cpu,
+    color: 'text-orange-600',
+    bgColor: 'bg-orange-100',
+    trend: 'down'
+  }
+];
+
+// Mock data for quick access cards
+const quickAccessCards = [
+  {
+    id: 'agent-management',
+    title: 'Agent Management',
+    description: 'Manage agent lifecycle, configuration, and deployment',
+    icon: Bot,
+    color: 'bg-blue-500',
+    page: 'agent-management' as Page,
+    stats: { agents: 24, active: 18, pending: 3 }
+  },
+  {
+    id: 'workflow-management',
+    title: 'Workflow & Tasks',
+    description: 'Design and manage multi-agent workflows',
+    icon: GitBranch,
+    color: 'bg-purple-500',
+    page: 'workflow-management' as Page,
+    stats: { workflows: 8, running: 6, scheduled: 2 }
+  },
+  {
+    id: 'monitoring-analytics',
+    title: 'Monitoring & Analytics',
+    description: 'Real-time insights and performance tracking',
+    icon: BarChart3,
+    color: 'bg-green-500',
+    page: 'monitoring-analytics' as Page,
+    stats: { uptime: '99.8%', alerts: 2, resolved: 15 }
+  },
+  {
+    id: 'resource-management',
+    title: 'Resource Management',
+    description: 'Infrastructure and environment optimization',
+    icon: Server,
+    color: 'bg-orange-500',
+    page: 'resource-management' as Page,
+    stats: { cpu: '78%', memory: '65%', storage: '45%' }
+  },
+  {
+    id: 'collaboration',
+    title: 'Collaboration',
+    description: 'Human-AI and inter-agent coordination',
+    icon: Share2,
+    color: 'bg-teal-500',
+    page: 'collaboration' as Page,
+    stats: { handoffs: 77, success: '95.2%', avgTime: '2.1min' }
+  }
+];
+
+// Mock data for recent activities
+const recentActivities = [
+  {
+    id: 1,
+    type: 'deployment',
+    message: 'Customer Support Agent v2.1.3 deployed successfully',
+    timestamp: '5 minutes ago',
+    status: 'success',
+    agent: 'Customer Support'
+  },
+  {
+    id: 2,
+    type: 'workflow',
+    message: 'Sales Lead Processing workflow completed 15 tasks',
+    timestamp: '12 minutes ago',
+    status: 'success',
+    agent: 'Sales Assistant'
+  },
+  {
+    id: 3,
+    type: 'alert',
+    message: 'High CPU usage detected on Technical Assistant',
+    timestamp: '18 minutes ago',
+    status: 'warning',
+    agent: 'Technical Assistant'
+  },
+  {
+    id: 4,
+    type: 'collaboration',
+    message: 'Human handoff completed for complex billing inquiry',
+    timestamp: '25 minutes ago',
+    status: 'success',
+    agent: 'Billing Service'
+  }
 ];
 
 export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps) {
@@ -62,333 +215,514 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
           </span>
         ),
       },
+      timestamp: new Date()
     },
   ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTimeRange, setSelectedTimeRange] = useState('24h');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to the bottom of the conversation history
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); [1, 2, 4, 8, 9]
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
     scrollToBottom();
   }, [conversationHistory]);
 
-  const handleSendPrompt = () => {
-    if (promptInput.trim() === '') return;
+  const handleSendPrompt = async () => {
+    if (promptInput.trim() === '' || isLoading) return;
 
-    const userMessage: Message = { type: 'user', text: promptInput };
+    const userMessage: Message = { 
+      type: 'user', 
+      text: promptInput,
+      timestamp: new Date()
+    };
+    
     setConversationHistory((prev) => [...prev, userMessage]);
     setPromptInput('');
+    setIsLoading(true);
 
-    let aiContent: AiContent;
-    const lowerCasePrompt = promptInput.toLowerCase();
-
-    // --- Reasoning and Agent Call Simulation Logic ---
-    if (lowerCasePrompt.includes('hello') || lowerCasePrompt.includes('hi')) {
-      aiContent = {
-        reasoningSteps: ["Acknowledging greeting."],
-        finalResponse: "Hello there! How can I assist you with your multi-agent ecosystem today?",
-      };
-    } else if (lowerCasePrompt.includes('active agents') || lowerCasePrompt.includes('agents status')) {
-      aiContent = {
-        reasoningSteps: [
-          "Understanding request for agent status.",
-          "Querying Agent Management System for active agents.",
-        ],
-        agentCalls: [
-          { agentName: 'Agent Management System', purpose: 'Retrieve active agent list' }
-        ],
-        finalResponse: "Currently, there are 24 active agents in your ecosystem. The most active ones are the Customer Support Agent and the Sales Assistant Agent.",
-      };
-    } else if (lowerCasePrompt.includes('new workflow') || lowerCasePrompt.includes('create workflow')) {
-      const workflowNameMatch = promptInput.match(/(?:create|new)\s+(.+?)\s+workflow/i);
-      const workflowName = workflowNameMatch ? workflowNameMatch[1] : 'a new unspecified';
-
-      aiContent = {
-        reasoningSteps: [
-          `Interpreting request to create ${workflowName} workflow.`,
-          "Identifying the need for workflow definition and agent allocation.",
-          "Preparing to interact with Workflow Manager Agent.",
-        ],
-        agentCalls: [
-          { agentName: 'Workflow Manager Agent', purpose: `Initiating creation of ${workflowName} workflow` },
-          { agentName: 'Sales Assistant Agent', purpose: 'Potentially involving for lead handling in new workflow' },
-          { agentName: 'Billing Service Agent', purpose: 'Potentially involving for financial processes in new workflow' },
-        ],
-        finalResponse: `Alright, I'm setting up ${workflowName} workflow. Please provide more details on its steps and involved agents, or I can suggest a template.`,
-      };
-    } else if (lowerCasePrompt.includes('system health') || lowerCasePrompt.includes('health check')) {
-      aiContent = {
-        reasoningSteps: [
-          "Assessing overall system status.",
-          "Checking monitoring logs and performance metrics.",
-        ],
-        agentCalls: [
-          { agentName: 'Monitoring & Analytics System', purpose: 'Retrieve system health metrics' },
-          { agentName: 'Security Auditor Agent', purpose: 'Perform quick security compliance check' },
-        ],
-        finalResponse: (
-          <>
-            System health is **excellent** with 99.8% uptime. All core services are operational.
-            <div className="mt-2 text-xs text-gray-400">
-              <CheckCircle className="inline-block w-4 h-4 mr-1 text-green-400" /> No critical alerts.
-            </div>
-          </>
-        ),
-      };
-    } else if (lowerCasePrompt.includes('analyze sales performance') || lowerCasePrompt.includes('sales report')) {
-      aiContent = {
-        reasoningSteps: [
-          "Understanding request for sales data analysis.",
-          "Identifying relevant agents for data retrieval and processing.",
-        ],
-        agentCalls: [
-          { agentName: 'Sales Assistant Agent', purpose: 'Extracting recent sales transaction data' },
-          { agentName: 'Data Analyst Agent', purpose: 'Processing sales data and generating insights' },
-        ],
-        finalResponse: (
-          <>
-            Analyzing recent sales performance...
-            <div className="mt-2 text-sm text-gray-300">
-              <p>Sales increased by **10%** last quarter.</p>
-              <p>Top performing product category: **Electronics**.</p>
-              <p>Sales Assistant Agent successfully qualified **892 new leads** this month.</p>
-            </div>
-          </>
-        ),
-      };
-    } else if (lowerCasePrompt.includes('deploy new agent')) {
-        aiContent = {
-            reasoningSteps: [
-                "Interpreting request to deploy a new AI agent.",
-                "Consulting with Deployment Engineer Agent for resource allocation and configuration.",
-            ],
-            agentCalls: [
-                { agentName: 'Deployment Engineer Agent', purpose: 'Preparing environment for new agent deployment' },
-                { agentName: 'Agent Management System', purpose: 'Registering new agent configuration' },
-            ],
-            finalResponse: "To deploy a new agent, please specify its type (e.g., 'Customer Support', 'Data Analyst') and any specific initial configurations. I'm ready to proceed once you provide these details."
-        };
-    }
-    else {
-      aiContent = {
-        reasoningSteps: ["Attempting to understand the request.", "Looking for keywords related to agent management, workflow, or system status."],
-        finalResponse: "I'm not sure how to respond to that specific query yet. Could you please rephrase or ask something related to managing your AI agents, workflows, or system status?",
-      };
-    }
-
+    // Simulate AI processing delay
     setTimeout(() => {
-      setConversationHistory((prev) => [...prev, { type: 'ai', content: aiContent }]);
-    }, 1000); // Simulate a short delay for AI response
+      let aiContent: AiContent;
+      const lowerCasePrompt = promptInput.toLowerCase();
+
+      // Enhanced AI response logic
+      if (lowerCasePrompt.includes('hello') || lowerCasePrompt.includes('hi')) {
+        aiContent = {
+          reasoningSteps: ["Acknowledging greeting and preparing assistance."],
+          finalResponse: "Hello there! How can I assist you with your multi-agent ecosystem today?",
+        };
+      } else if (lowerCasePrompt.includes('active agents') || lowerCasePrompt.includes('agents status')) {
+        aiContent = {
+          reasoningSteps: [
+            "Understanding request for agent status.",
+            "Querying Agent Management System for active agents.",
+            "Analyzing current performance metrics."
+          ],
+          agentCalls: [
+            { agentName: 'Agent Management System', purpose: 'Retrieve active agent list and status' }
+          ],
+          finalResponse: (
+            <div>
+              <p className="mb-3">Currently, there are <strong>24 active agents</strong> in your ecosystem:</p>
+              <div className="bg-gray-800 rounded-lg p-3 text-sm">
+                <div className="grid grid-cols-2 gap-2">
+                  <div>• Customer Support: <span className="text-green-400">Active</span></div>
+                  <div>• Sales Assistant: <span className="text-green-400">Active</span></div>
+                  <div>• Technical Support: <span className="text-yellow-400">High Load</span></div>
+                  <div>• E-commerce: <span className="text-green-400">Active</span></div>
+                </div>
+              </div>
+            </div>
+          ),
+        };
+      } else if (lowerCasePrompt.includes('system health') || lowerCasePrompt.includes('health check')) {
+        aiContent = {
+          reasoningSteps: [
+            "Assessing overall system status.",
+            "Checking monitoring logs and performance metrics.",
+            "Evaluating resource utilization."
+          ],
+          agentCalls: [
+            { agentName: 'Monitoring & Analytics System', purpose: 'Retrieve system health metrics' },
+            { agentName: 'Security Auditor Agent', purpose: 'Perform security compliance check' },
+          ],
+          finalResponse: (
+            <div>
+              <p className="mb-3">System health is <strong className="text-green-400">excellent</strong> with 99.8% uptime.</p>
+              <div className="bg-gray-800 rounded-lg p-3 text-sm space-y-1">
+                <div className="flex justify-between">
+                  <span>CPU Usage:</span>
+                  <span className="text-orange-400">78%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Memory:</span>
+                  <span className="text-green-400">65%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Active Connections:</span>
+                  <span className="text-blue-400">1,247</span>
+                </div>
+              </div>
+            </div>
+          ),
+        };
+      } else {
+        aiContent = {
+          reasoningSteps: [
+            "Analyzing user query for orchestration-related keywords.",
+            "Preparing general assistance response."
+          ],
+          finalResponse: "I can help you with agent management, workflow creation, system monitoring, and more. What specific aspect of your AI ecosystem would you like to explore?",
+        };
+      }
+
+      setConversationHistory((prev) => [...prev, { 
+        type: 'ai', 
+        content: aiContent,
+        timestamp: new Date()
+      }]);
+      setIsLoading(false);
+    }, 1500);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault(); // Prevent new line in textarea
+      event.preventDefault();
       handleSendPrompt();
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-900 flex flex-col text-white">
-      {/* Header - Aligned with the new design's feel */}
-      <div className="px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-3">
-        <div className="p-2 bg-indigo-500 rounded-lg">
-          <Sparkles className="w-7 h-7 text-white" />
-        </div>
-        <div>
-          <h1 className="text-xl font-bold text-white">
-            Orchestration AI Assistant
-          </h1>
-          <p className="text-sm text-gray-400">
-            Your command center for multi-agent AI ecosystems
-          </p>
-        </div>
-      </div>
+  const getActivityIcon = (type: string) => {
+    switch (type) {
+      case 'deployment': return <Package className="w-4 h-4 text-blue-500" />;
+      case 'workflow': return <GitBranch className="w-4 h-4 text-purple-500" />;
+      case 'alert': return <AlertTriangle className="w-4 h-4 text-yellow-500" />;
+      case 'collaboration': return <Share2 className="w-4 h-4 text-teal-500" />;
+      default: return <Activity className="w-4 h-4 text-gray-500" />;
+    }
+  };
 
-      {/* Conversation Area */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6">
-        {conversationHistory.map((message, index) => (
-          <div
-            key={index}
-            className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-          >
-            <div
-              className={`flex items-start max-w-[80%] p-3 rounded-xl shadow-md ${
-                message.type === 'user'
-                  ? 'bg-indigo-700 text-white'
-                  : 'bg-gray-800 text-gray-100'
-              }`}
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'success': return 'text-green-600';
+      case 'warning': return 'text-yellow-600';
+      case 'error': return 'text-red-600';
+      default: return 'text-gray-600';
+    }
+  };
+
+  // Filter quick access cards based on search
+  const filteredCards = quickAccessCards.filter(card =>
+    card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    card.description.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        {/* Header */}
+        <div className="mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-800">
+                Orchestration Hub
+              </h1>
+              <p className="text-sm sm:text-base text-gray-600">
+                Central command center for multi-agent AI ecosystem management
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              <div className="flex items-center bg-white border border-gray-300 rounded-lg overflow-hidden">
+                <Calendar className="ml-3 w-4 h-4 text-gray-500" />
+                <select
+                  className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm"
+                  value={selectedTimeRange}
+                  onChange={(e) => setSelectedTimeRange(e.target.value)}
+                >
+                  <option value="1h">Last Hour</option>
+                  <option value="24h">Last 24 Hours</option>
+                  <option value="7d">Last 7 Days</option>
+                  <option value="30d">Last 30 Days</option>
+                </select>
+              </div>
+              <button className="flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                <RefreshCw className="w-4 h-4" />
+                <span>Refresh</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* System Metrics Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8">
+          {systemMetrics.map((metric, index) => (
+            <motion.div
+              key={metric.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-lg shadow-md border border-gray-200 p-4 sm:p-6 hover:shadow-lg transition-all duration-200"
             >
-              {message.type === 'ai' && (
-                <Bot className="w-5 h-5 text-indigo-400 mr-2 flex-shrink-0" />
-              )}
-              {message.type === 'user' && (
-                <User className="w-5 h-5 text-indigo-200 mr-2 flex-shrink-0" />
-              )}
-              <div className="text-sm">
-                {message.type === 'user' && message.text}
-                {message.type === 'ai' && message.content && (
-                  <>
-                    {message.content.reasoningSteps && message.content.reasoningSteps.length > 0 && (
-                      <div className="mb-2 p-2 bg-gray-700 rounded-lg text-gray-300 text-xs">
-                        <p className="font-semibold text-gray-200 mb-1">Reasoning:</p>
-                        <ul className="list-disc list-inside space-y-0.5">
-                          {message.content.reasoningSteps.map((step, i) => (
-                            <li key={i}>{step}</li>
-                          ))}
-                        </ul>
+              <div className="flex items-center justify-between mb-4">
+                <div className={`${metric.bgColor} p-2 sm:p-3 rounded-full`}>
+                  <metric.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${metric.color}`} />
+                </div>
+                <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-50">
+                  {metric.trend === 'up' ? (
+                    <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" />
+                  ) : (
+                    <TrendingDown className="h-3 w-3 sm:h-4 sm:w-4 text-green-500" />
+                  )}
+                  <span className="text-xs sm:text-sm font-medium text-green-600">
+                    {metric.change}
+                  </span>
+                </div>
+              </div>
+              <div className="mb-2">
+                <h3 className="text-sm sm:text-base font-medium text-gray-600">
+                  {metric.title}
+                </h3>
+                <div className="mt-1 sm:mt-2">
+                  <span className="text-2xl sm:text-3xl font-bold text-gray-900">
+                    {metric.value}
+                  </span>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500">{metric.changeLabel}</p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Left Column - Quick Access */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                <h2 className="text-lg font-semibold text-gray-900">Quick Access</h2>
+                <div className="relative w-full sm:w-64">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                  <input
+                    type="text"
+                    placeholder="Search orchestration tools..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <AnimatePresence>
+                  {filteredCards.map((card, index) => (
+                    <motion.div
+                      key={card.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ delay: index * 0.05 }}
+                      onClick={() => onNavigate(card.page)}
+                      className="group bg-gray-50 rounded-xl p-6 hover:bg-white hover:shadow-md border border-gray-200 hover:border-indigo-200 cursor-pointer transition-all duration-200"
+                    >
+                      <div className="flex items-start justify-between mb-4">
+                        <div className={`${card.color} p-3 rounded-lg text-white group-hover:scale-105 transition-transform`}>
+                          <card.icon className="w-6 h-6" />
+                        </div>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-indigo-600 transition-colors" />
                       </div>
-                    )}
-                    {message.content.agentCalls && message.content.agentCalls.length > 0 && (
-                      <div className="mb-2 p-2 bg-gray-700 rounded-lg text-gray-300 text-xs">
-                        <p className="font-semibold text-gray-200 mb-1">Agent Calls:</p>
-                        <ul className="list-disc list-inside space-y-0.5">
-                          {message.content.agentCalls.map((call, i) => (
-                            <li key={i}>
-                              <span className="font-medium text-indigo-300">{call.agentName}:</span> {call.purpose}
-                            </li>
-                          ))}
-                        </ul>
+                      <h3 className="font-semibold text-gray-900 mb-2">{card.title}</h3>
+                      <p className="text-sm text-gray-600 mb-4">{card.description}</p>
+                      <div className="grid grid-cols-3 gap-2 text-xs">
+                        {Object.entries(card.stats).map(([key, value]) => (
+                          <div key={key} className="text-center">
+                            <div className="font-medium text-gray-900">{value}</div>
+                            <div className="text-gray-500 capitalize">{key}</div>
+                          </div>
+                        ))}
                       </div>
-                    )}
-                    <div className="text-base text-white">
-                      {message.content.finalResponse}
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+
+              {filteredCards.length === 0 && (
+                <div className="text-center py-8">
+                  <Search className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+                  <h3 className="text-lg font-medium text-gray-900 mb-2">No results found</h3>
+                  <p className="text-gray-500">Try adjusting your search query</p>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column - Recent Activity */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-lg font-semibold text-gray-900">Recent Activity</h2>
+                <button className="text-sm text-indigo-600 hover:text-indigo-800">
+                  View All
+                </button>
+              </div>
+              <div className="space-y-4">
+                {recentActivities.map((activity) => (
+                  <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                    <div className="flex-shrink-0">
+                      {getActivityIcon(activity.type)}
                     </div>
-                  </>
-                )}
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-900">{activity.message}</p>
+                      <div className="flex items-center justify-between mt-1">
+                        <span className="text-xs text-gray-500">{activity.timestamp}</span>
+                        <span className={`text-xs font-medium ${getStatusColor(activity.status)}`}>
+                          {activity.status}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-        ))}
-        <div ref={messagesEndRef} /> {/* Scroll to this element */}
-      </div>
-
-      {/* Personalized Tools Banner (Simulated) */}
-      <div className="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8 mb-4">
-        <div className="bg-gray-800 rounded-lg p-3 flex items-center justify-between text-sm text-gray-300 shadow-lg">
-          <div className="flex items-center gap-2">
-            {/* Replace with actual icons or images for integrated apps */}
-            <span className="bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">M</span>
-            <span className="bg-blue-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">G</span>
-            <span className="bg-yellow-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">C</span>
-            <span className="bg-green-600 rounded-full w-5 h-5 flex items-center justify-center text-xs">D</span>
-            <span>Genspark supports personalized tools</span>
-          </div>
-          <button className="text-gray-400 hover:text-white" onClick={() => {/* Close banner */}}>
-            &times;
-          </button>
-        </div>
-      </div>
-
-      {/* Prompt Input Area - Styled to match the image */}
-      <div className="sticky bottom-0 bg-gray-900 pb-4 pt-2 px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto w-full max-w-3xl relative flex items-center bg-gray-700 rounded-3xl pr-2 shadow-lg">
-          <button className="p-3 text-gray-400 hover:text-white rounded-l-3xl">
-            <Search className="w-5 h-5" />
-          </button>
-          <button className="p-3 text-gray-400 hover:text-white">
-            <Settings className="w-5 h-5" /> {/* Using Settings for the magic wand look */}
-          </button>
-          <textarea
-            className="flex-1 resize-none bg-transparent py-3 px-2 focus:outline-none text-white placeholder-gray-400 text-base"
-            rows={1}
-            placeholder="Ask anything, create anything"
-            value={promptInput}
-            onChange={(e) => setPromptInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            style={{ minHeight: '48px', maxHeight: '120px', overflowY: 'auto' }}
-          />
-          <button className="p-3 text-gray-400 hover:text-white">
-            <Mic className="w-5 h-5" />
-          </button>
-          <button
-            onClick={handleSendPrompt}
-            className="p-3 text-gray-400 hover:text-white rounded-r-3xl"
-            aria-label="Send message"
-          >
-            <CornerUpLeft className="w-5 h-5 transform rotate-90" /> {/* Rotated arrow for "return" */}
-          </button>
         </div>
 
-        {/* Bottom Row of Tool Icons */}
-        <div className="flex justify-center flex-wrap gap-x-4 gap-y-2 mt-6">
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Layout className="w-6 h-6 text-orange-400" />
+        {/* AI Assistant Chat Interface */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-white bg-opacity-20 rounded-lg">
+                <Sparkles className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-lg font-semibold text-white">
+                  Orchestration AI Assistant
+                </h2>
+                <p className="text-sm text-indigo-100">
+                  Your intelligent command center for multi-agent coordination
+                </p>
+              </div>
             </div>
-            AI Slides
           </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Table className="w-6 h-6 text-green-400" /> {/* Assuming Table for AI Sheets */}
+
+          {/* Chat Messages */}
+          <div className="h-96 overflow-y-auto p-6 bg-gray-50">
+            <div className="space-y-4">
+              <AnimatePresence>
+                {conversationHistory.map((message, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`flex items-start max-w-[80%] p-4 rounded-xl shadow-sm ${
+                        message.type === 'user'
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-white text-gray-800 border border-gray-200'
+                      }`}
+                    >
+                      {message.type === 'ai' && (
+                        <Bot className="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0 mt-0.5" />
+                      )}
+                      {message.type === 'user' && (
+                        <User className="w-5 h-5 text-indigo-200 mr-3 flex-shrink-0 mt-0.5" />
+                      )}
+                      <div className="text-sm">
+                        {message.type === 'user' && message.text}
+                        {message.type === 'ai' && message.content && (
+                          <>
+                            {message.content.reasoningSteps && message.content.reasoningSteps.length > 0 && (
+                              <div className="mb-3 p-3 bg-gray-100 rounded-lg text-gray-700 text-xs">
+                                <p className="font-semibold text-gray-800 mb-2 flex items-center gap-1">
+                                  <Settings className="w-3 h-3" />
+                                  Reasoning Process:
+                                </p>
+                                <ul className="list-disc list-inside space-y-1">
+                                  {message.content.reasoningSteps.map((step, i) => (
+                                    <li key={i}>{step}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {message.content.agentCalls && message.content.agentCalls.length > 0 && (
+                              <div className="mb-3 p-3 bg-blue-50 rounded-lg text-blue-800 text-xs">
+                                <p className="font-semibold text-blue-900 mb-2 flex items-center gap-1">
+                                  <Network className="w-3 h-3" />
+                                  Agent Interactions:
+                                </p>
+                                <ul className="list-disc list-inside space-y-1">
+                                  {message.content.agentCalls.map((call, i) => (
+                                    <li key={i}>
+                                      <span className="font-medium text-indigo-700">{call.agentName}:</span> {call.purpose}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            <div className="text-sm">
+                              {message.content.finalResponse}
+                            </div>
+                          </>
+                        )}
+                        <div className="text-xs opacity-70 mt-2">
+                          {message.timestamp.toLocaleTimeString()}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+              
+              {isLoading && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex justify-start"
+                >
+                  <div className="flex items-center bg-white p-4 rounded-xl shadow-sm border border-gray-200">
+                    <Bot className="w-5 h-5 text-indigo-500 mr-3" />
+                    <div className="flex items-center gap-1">
+                      <span className="text-sm text-gray-600">Processing</span>
+                      <div className="flex gap-1">
+                        <div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce"></div>
+                        <div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                        <div className="w-1 h-1 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+              <div ref={messagesEndRef} />
             </div>
-            AI Sheets
           </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <FileText className="w-6 h-6 text-blue-400" />
+
+          {/* Chat Input */}
+          <div className="p-6 bg-white border-t border-gray-200">
+            <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-3 border border-gray-200 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+              <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+              <textarea
+                className="flex-1 resize-none bg-transparent py-2 focus:outline-none text-gray-900 placeholder-gray-500 text-sm"
+                rows={1}
+                placeholder="Ask about agents, workflows, system status, or request assistance..."
+                value={promptInput}
+                onChange={(e) => setPromptInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                disabled={isLoading}
+                style={{ minHeight: '40px', maxHeight: '120px' }}
+              />
+              <div className="flex items-center gap-2">
+                <button 
+                  className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                  disabled={isLoading}
+                >
+                  <Mic className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleSendPrompt}
+                  disabled={!promptInput.trim() || isLoading}
+                  className={`p-2 rounded-lg transition-colors ${
+                    promptInput.trim() && !isLoading
+                      ? 'bg-indigo-600 text-white hover:bg-indigo-700'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                  aria-label="Send message"
+                >
+                  <Send className="w-4 h-4" />
+                </button>
+              </div>
             </div>
-            AI Docs <span className="text-[10px] bg-red-500 text-white px-1 rounded-md ml-0.5">New</span>
           </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Lightbulb className="w-6 h-6 text-purple-400" /> {/* Placeholder for AI Pods */}
-            </div>
-            AI Pods <span className="text-[10px] bg-red-500 text-white px-1 rounded-md ml-0.5">New</span>
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <MessageSquare className="w-6 h-6 text-teal-400" />
-            </div>
-            AI Chat
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Image className="w-6 h-6 text-yellow-400" /> {/* Assuming Image for AI Image */}
-            </div>
-            AI Image
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Play className="w-6 h-6 text-red-400" /> {/* Assuming Play for AI Video */}
-            </div>
-            AI Video
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Globe className="w-6 h-6 text-lime-400" /> {/* Assuming Globe for Deep Research */}
-            </div>
-            Deep Research
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Phone className="w-6 h-6 text-pink-400" /> {/* Assuming Phone for Call For Me */}
-            </div>
-            Call For Me
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Download className="w-6 h-6 text-cyan-400" /> {/* Assuming Download for Download For Me */}
-            </div>
-            Download For Me
-          </div>
-          <div className="flex flex-col items-center cursor-pointer text-xs text-gray-300 hover:text-white transition-colors duration-200">
-            <div className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center mb-1 border border-gray-700 hover:border-indigo-500">
-              <Bot className="w-6 h-6 text-gray-300" />
-            </div>
-            All Agents
+        </div>
+
+        {/* AI Tools Grid */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <h2 className="text-lg font-semibold text-gray-900 mb-6">AI-Powered Tools</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+            {[
+              { name: 'AI Slides', icon: Layout, color: 'text-orange-500', bgColor: 'bg-orange-100', isNew: false },
+              { name: 'AI Sheets', icon: Table, color: 'text-green-500', bgColor: 'bg-green-100', isNew: false },
+              { name: 'AI Docs', icon: FileText, color: 'text-blue-500', bgColor: 'bg-blue-100', isNew: true },
+              { name: 'AI Pods', icon: Lightbulb, color: 'text-purple-500', bgColor: 'bg-purple-100', isNew: true },
+              { name: 'AI Chat', icon: MessageSquare, color: 'text-teal-500', bgColor: 'bg-teal-100', isNew: false },
+              { name: 'AI Image', icon: Image, color: 'text-yellow-500', bgColor: 'bg-yellow-100', isNew: false },
+              { name: 'AI Video', icon: Play, color: 'text-red-500', bgColor: 'bg-red-100', isNew: false },
+              { name: 'Deep Research', icon: Globe, color: 'text-lime-500', bgColor: 'bg-lime-100', isNew: false },
+              { name: 'Call For Me', icon: Phone, color: 'text-pink-500', bgColor: 'bg-pink-100', isNew: false },
+              { name: 'Download For Me', icon: Download, color: 'text-cyan-500', bgColor: 'bg-cyan-100', isNew: false },
+              { name: 'All Agents', icon: Bot, color: 'text-gray-500', bgColor: 'bg-gray-100', isNew: false },
+              { name: 'Workflows', icon: GitBranch, color: 'text-indigo-500', bgColor: 'bg-indigo-100', isNew: false }
+            ].map((tool, index) => (
+              <motion.div
+                key={tool.name}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05 }}
+                className="group flex flex-col items-center p-4 rounded-lg hover:bg-gray-50 cursor-pointer transition-all duration-200"
+              >
+                <div className="relative">
+                  <div className={`w-12 h-12 ${tool.bgColor} rounded-xl flex items-center justify-center mb-3 group-hover:scale-105 transition-transform`}>
+                    <tool.icon className={`w-6 h-6 ${tool.color}`} />
+                  </div>
+                  {tool.isNew && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                      New
+                    </span>
+                  )}
+                </div>
+                <span className="text-xs text-gray-700 text-center font-medium group-hover:text-gray-900 transition-colors">
+                  {tool.name}
+                </span>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
-
-// Additional icons imported for the bottom bar, replace with actual if from specific library or custom SVGs
-// For demonstration, these are placeholders if not already imported from 'lucide-react'
-// If these are not part of lucide-react, you'd import them from elsewhere or define them as SVG components.
-// For simplicity, I'm assuming they exist or using close equivalents from lucide-react.
-import { Table, Image, Play, Phone, Download } from 'lucide-react';
