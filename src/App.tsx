@@ -24,11 +24,11 @@ import PerformanceAnalyticsPage from './pages/PerformanceAnalyticsPage';
 import AgentConfigurationPage from './pages/AgentConfigurationPage';
 import OnboardingPage from './pages/OnboardingPage';
 import OrchestrationPage from './pages/OrchestrationPage';
-import OrchestrationAgentManagementPage from './pages/orchestration/OrchestrationAgentManagementPage';
-import OrchestrationWorkflowManagementPage from './pages/orchestration/OrchestrationWorkflowManagementPage';
-import OrchestrationMonitoringPage from './pages/orchestration/OrchestrationMonitoringPage';
-import OrchestrationResourcesPage from './pages/orchestration/OrchestrationResourcesPage';
-import OrchestrationCollaborationPage from './pages/orchestration/OrchestrationCollaborationPage';
+import AgentManagementPage from './pages/orchestration/AgentManagementPage';
+import WorkflowManagementPage from './pages/orchestration/WorkflowManagementPage';
+import MonitoringAnalyticsPage from './pages/orchestration/MonitoringAnalyticsPage';
+import ResourceManagementPage from './pages/orchestration/ResourceManagementPage';
+import CollaborationPage from './pages/orchestration/CollaborationPage';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
@@ -51,11 +51,11 @@ export type Page =
   | 'agent-configuration'
   | 'usage'
   | 'orchestration'
-  | 'orchestration-agent-management'
-  | 'orchestration-workflow-management'
-  | 'orchestration-monitoring'
-  | 'orchestration-resources'
-  | 'orchestration-collaboration'
+  | 'agent-management'
+  | 'workflow-management'
+  | 'monitoring-analytics'
+  | 'resource-management'
+  | 'collaboration'
   | 'paramètres';
 
 // You might want to create a type for navigation items
@@ -135,16 +135,16 @@ function AppContent() {
         return <UsagePage />; // Render the new UsagePage
       case 'orchestration':
         return <OrchestrationPage onNavigate={handleNavigation} />;
-      case 'orchestration-agent-management':
-        return <OrchestrationAgentManagementPage onNavigate={handleNavigation} />;
-      case 'orchestration-workflow-management':
-        return <OrchestrationWorkflowManagementPage onNavigate={handleNavigation} />;
-      case 'orchestration-monitoring':
-        return <OrchestrationMonitoringPage onNavigate={handleNavigation} />;
-      case 'orchestration-resources':
-        return <OrchestrationResourcesPage onNavigate={handleNavigation} />;
-      case 'orchestration-collaboration':
-        return <OrchestrationCollaborationPage onNavigate={handleNavigation} />;
+      case 'agent-management':
+        return <AgentManagementPage onNavigate={handleNavigation} />;
+      case 'workflow-management':
+        return <WorkflowManagementPage onNavigate={handleNavigation} />;
+      case 'monitoring-analytics':
+        return <MonitoringAnalyticsPage onNavigate={handleNavigation} />;
+      case 'resource-management':
+        return <ResourceManagementPage onNavigate={handleNavigation} />;
+      case 'collaboration':
+        return <CollaborationPage onNavigate={handleNavigation} />;
       case 'paramètres':
         return <SettingsPage />;
       default:

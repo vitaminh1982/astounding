@@ -13,11 +13,15 @@ import {
   BarChart3,
   AlertTriangle,
   CheckCircle,
-  RefreshCw
+  RefreshCw,
+  Plus,
+  Edit2,
+  Eye,
+  Trash2
 } from 'lucide-react';
 import { Page } from '../../App';
 
-interface OrchestrationResourcesPageProps {
+interface ResourceManagementPageProps {
   onNavigate: (page: Page) => void;
 }
 
@@ -30,7 +34,8 @@ const resourceMetrics = [
     max: 100,
     unit: '%',
     status: 'optimal',
-    trend: 'stable'
+    trend: 'stable',
+    details: 'Distributed across 12 cores'
   },
   {
     id: 'memory',
@@ -39,7 +44,8 @@ const resourceMetrics = [
     max: 32,
     unit: 'GB',
     status: 'good',
-    trend: 'increasing'
+    trend: 'increasing',
+    details: 'Peak usage: 15.2 GB'
   },
   {
     id: 'gpu',
@@ -48,7 +54,8 @@ const resourceMetrics = [
     max: 100,
     unit: '%',
     status: 'optimal',
-    trend: 'stable'
+    trend: 'stable',
+    details: 'NVIDIA A100 cluster'
   },
   {
     id: 'storage',
@@ -57,7 +64,28 @@ const resourceMetrics = [
     max: 500,
     unit: 'GB',
     status: 'good',
-    trend: 'increasing'
+    trend: 'increasing',
+    details: 'SSD storage pool'
+  },
+  {
+    id: 'network',
+    name: 'Network I/O',
+    current: 2.8,
+    max: 10,
+    unit: 'Gbps',
+    status: 'optimal',
+    trend: 'stable',
+    details: 'Inbound/Outbound traffic'
+  },
+  {
+    id: 'api-calls',
+    name: 'API Calls/Min',
+    current: 1247,
+    max: 5000,
+    unit: '',
+    status: 'good',
+    trend: 'increasing',
+    details: 'External API requests'
   }
 ];
 
@@ -69,7 +97,9 @@ const environments = [
     status: 'active',
     agents: 18,
     uptime: '99.9%',
-    lastDeployment: '2025-03-15 14:30'
+    lastDeployment: '2025-03-15 14:30',
+    region: 'EU-West',
+    resources: { cpu: 85, memory: 78, storage: 45 }
   },
   {
     id: 'staging',
@@ -77,7 +107,9 @@ const environments = [
     status: 'active',
     agents: 6,
     uptime: '99.5%',
-    lastDeployment: '2025-03-15 12:15'
+    lastDeployment: '2025-03-15 12:15',
+    region: 'EU-West',
+    resources: { cpu: 45, memory: 38, storage: 25 }
   },
   {
     id: 'dev',
@@ -85,7 +117,9 @@ const environments = [
     status: 'active',
     agents: 3,
     uptime: '98.2%',
-    lastDeployment: '2025-03-15 16:45'
+    lastDeployment: '2025-03-15 16:45',
+    region: 'EU-Central',
+    resources: { cpu: 25, memory: 22, storage: 15 }
   },
   {
     id: 'test',
@@ -93,7 +127,9 @@ const environments = [
     status: 'inactive',
     agents: 0,
     uptime: '0%',
-    lastDeployment: '2025-03-10 09:30'
+    lastDeployment: '2025-03-10 09:30',
+    region: 'US-East',
+    resources: { cpu: 0, memory: 0, storage: 5 }
   }
 ];
 
@@ -105,7 +141,8 @@ const scalingRules = [
     condition: 'CPU > 80% for 5 minutes',
     action: 'Scale up by 2 instances',
     status: 'active',
-    lastTriggered: '2025-03-14 22:15'
+    lastTriggered: '2025-03-14 22:15',
+    triggerCount: 3
   },
   {
     id: 'rule-002',
@@ -113,7 +150,8 @@ const scalingRules = [
     condition: 'Memory > 90% for 3 minutes',
     action: 'Scale up by 1 instance',
     status: 'active',
-    lastTriggered: 'Never'
+    lastTriggered: 'Never',
+    triggerCount: 0
   },
   {
     id: 'rule-003',
@@ -121,11 +159,21 @@ const scalingRules = [
     condition: 'Queue length > 100 requests',
     action: 'Scale up by 3 instances',
     status: 'active',
-    lastTriggered: '2025-03-15 08:30'
+    lastTriggered: '2025-03-15 08:30',
+    triggerCount: 7
+  },
+  {
+    id: 'rule-004',
+    name: 'Off-hours Scaling',
+    condition: 'Time between 22:00-06:00',
+    action: 'Scale down to minimum',
+    status: 'active',
+    lastTriggered: '2025-03-15 22:00',
+    triggerCount: 15
   }
 ];
 
-export default function OrchestrationResourcesPage({ onNavigate }: OrchestrationResourcesPageProps) {
+export default function ResourceManagementPage({ onNavigate }: ResourceManagementPageProps) {
   const [activeTab, setActiveTab] = useState<'allocation' | 'environment' | 'scalability'>('allocation');
 
   const getStatusColor = (status: string) => {
@@ -192,6 +240,40 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
           </div>
         </div>
 
+        {/* Resource overview */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="bg-white rounded-lg p-4 border shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Total Resources</p>
+                <p className="text-2xl font-bold text-indigo-600">78%</p>
+              </div>
+              <Server className="w-8 h-8 text-indigo-500" />
+            </div>
+            <div className="mt-2 text-xs text-green-600">Within optimal range</div>
+          </div>
+          <div className="bg-white rounded-lg p-4 border shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Active Environments</p>
+                <p className="text-2xl font-bold text-green-600">3</p>
+              </div>
+              <Monitor className="w-8 h-8 text-green-500" />
+            </div>
+            <div className="mt-2 text-xs text-blue-600">1 inactive</div>
+          </div>
+          <div className="bg-white rounded-lg p-4 border shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm text-gray-500">Auto-scaling Rules</p>
+                <p className="text-2xl font-bold text-purple-600">4</p>
+              </div>
+              <TrendingUp className="w-8 h-8 text-purple-500" />
+            </div>
+            <div className="mt-2 text-xs text-green-600">All active</div>
+          </div>
+        </div>
+
         {/* Main content */}
         <div className="bg-white rounded-lg shadow">
           {/* Tabs */}
@@ -223,7 +305,7 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
             {activeTab === 'allocation' && (
               <div className="space-y-6">
                 {/* Resource usage cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {resourceMetrics.map((resource) => (
                     <div key={resource.id} className="bg-white rounded-lg border p-6">
                       <div className="flex justify-between items-center mb-4">
@@ -238,12 +320,13 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
                       <div className="text-sm text-gray-500 mb-3">
                         of {resource.max}{resource.unit}
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-3">
                         <div 
-                          className={`h-2 rounded-full ${getResourceBarColor(resource.status)}`}
+                          className={`h-2 rounded-full transition-all duration-300 ${getResourceBarColor(resource.status)}`}
                           style={{ width: `${(resource.current / resource.max) * 100}%` }}
                         ></div>
                       </div>
+                      <p className="text-xs text-gray-500">{resource.details}</p>
                     </div>
                   ))}
                 </div>
@@ -252,19 +335,31 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
                 <div className="bg-gray-50 rounded-lg p-8 text-center">
                   <BarChart3 className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">Resource Usage Over Time</h3>
-                  <p className="text-gray-500">Interactive chart showing resource consumption patterns</p>
+                  <p className="text-gray-500">Interactive chart showing resource consumption patterns and trends</p>
+                  <button className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                    View Detailed Analytics
+                  </button>
                 </div>
               </div>
             )}
 
             {activeTab === 'environment' && (
               <div className="space-y-6">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-medium text-gray-900">Environment Configuration</h3>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                    <Plus className="w-4 h-4" />
+                    New Environment
+                  </button>
+                </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {environments.map((env) => (
                     <div key={env.id} className="border rounded-lg p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
                           <h3 className="font-semibold text-gray-900">{env.name}</h3>
+                          <p className="text-sm text-gray-500">Region: {env.region}</p>
                           <p className="text-sm text-gray-500">Last deployment: {env.lastDeployment}</p>
                         </div>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(env.status)}`}>
@@ -272,7 +367,7 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
                         </span>
                       </div>
                       
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-4 mb-4">
                         <div>
                           <p className="text-sm text-gray-500">Active Agents</p>
                           <p className="text-xl font-bold text-indigo-600">{env.agents}</p>
@@ -282,14 +377,43 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
                           <p className="text-xl font-bold text-green-600">{env.uptime}</p>
                         </div>
                       </div>
+
+                      {/* Resource usage for this environment */}
+                      <div className="space-y-2 mb-4">
+                        <div className="flex justify-between text-sm">
+                          <span>CPU</span>
+                          <span>{env.resources.cpu}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                          <div 
+                            className="bg-blue-500 h-1.5 rounded-full"
+                            style={{ width: `${env.resources.cpu}%` }}
+                          ></div>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span>Memory</span>
+                          <span>{env.resources.memory}%</span>
+                        </div>
+                        <div className="w-full bg-gray-200 rounded-full h-1.5">
+                          <div 
+                            className="bg-purple-500 h-1.5 rounded-full"
+                            style={{ width: `${env.resources.memory}%` }}
+                          ></div>
+                        </div>
+                      </div>
                       
-                      <div className="flex justify-end gap-2 mt-4 pt-4 border-t">
-                        <button className="px-3 py-1 text-xs bg-indigo-600 text-white rounded hover:bg-indigo-700">
-                          Configure
+                      <div className="flex justify-end gap-2 pt-4 border-t">
+                        <button className="p-2 text-gray-400 hover:text-indigo-600 rounded-full hover:bg-indigo-50" title="View Details">
+                          <Eye className="w-4 h-4" />
                         </button>
-                        <button className="px-3 py-1 text-xs border rounded hover:bg-gray-50">
-                          View Details
+                        <button className="p-2 text-gray-400 hover:text-indigo-600 rounded-full hover:bg-indigo-50" title="Configure">
+                          <Edit2 className="w-4 h-4" />
                         </button>
+                        {env.status === 'inactive' && (
+                          <button className="p-2 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-50" title="Delete">
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
                       </div>
                     </div>
                   ))}
@@ -299,13 +423,23 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
 
             {activeTab === 'scalability' && (
               <div className="space-y-6">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-medium text-gray-900">Auto-scaling Rules</h3>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                    <Plus className="w-4 h-4" />
+                    New Rule
+                  </button>
+                </div>
+
                 <div className="space-y-4">
                   {scalingRules.map((rule) => (
                     <div key={rule.id} className="border rounded-lg p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
                           <h3 className="font-semibold text-gray-900">{rule.name}</h3>
-                          <p className="text-sm text-gray-500 mt-1">Last triggered: {rule.lastTriggered}</p>
+                          <p className="text-sm text-gray-500 mt-1">
+                            Last triggered: {rule.lastTriggered} • Triggered {rule.triggerCount} times
+                          </p>
                         </div>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(rule.status)}`}>
                           {rule.status.charAt(0).toUpperCase() + rule.status.slice(1)}
@@ -326,8 +460,11 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
                       </div>
                       
                       <div className="flex justify-end gap-2 mt-4">
-                        <button className="px-3 py-1 text-xs bg-indigo-600 text-white rounded hover:bg-indigo-700">
-                          Edit Rule
+                        <button className="p-2 text-gray-400 hover:text-indigo-600 rounded-full hover:bg-indigo-50" title="View Details">
+                          <Eye className="w-4 h-4" />
+                        </button>
+                        <button className="p-2 text-gray-400 hover:text-indigo-600 rounded-full hover:bg-indigo-50" title="Edit Rule">
+                          <Edit2 className="w-4 h-4" />
                         </button>
                         <button className="px-3 py-1 text-xs border rounded hover:bg-gray-50">
                           Test Rule
@@ -335,6 +472,25 @@ export default function OrchestrationResourcesPage({ onNavigate }: Orchestration
                       </div>
                     </div>
                   ))}
+                </div>
+
+                {/* Scaling metrics */}
+                <div className="bg-indigo-50 rounded-lg p-6 border">
+                  <h4 className="font-medium text-indigo-900 mb-4">Scaling Performance</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-indigo-600">2.3min</p>
+                      <p className="text-sm text-indigo-700">Avg Scale-up Time</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-indigo-600">98.5%</p>
+                      <p className="text-sm text-indigo-700">Scaling Success Rate</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-indigo-600">25</p>
+                      <p className="text-sm text-indigo-700">Scaling Events (24h)</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
