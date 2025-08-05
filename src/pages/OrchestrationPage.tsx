@@ -675,3 +675,4 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
               <div className="mb-2">
                 <h3 className="text-sm font-semibold text-gray-700 mb-1">
                   {metric.title}
+                </h3>
