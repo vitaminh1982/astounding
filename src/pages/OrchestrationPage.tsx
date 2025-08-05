@@ -27,7 +27,7 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
 
   // Scroll to the bottom of the conversation history
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
