@@ -676,3 +676,99 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
                 <h3 className="text-sm font-semibold text-gray-700 mb-1">
                   {metric.title}
                 </h3>
+                <p className="text-2xl font-bold text-gray-900 mb-1">
+                  {metric.value}
+                </p>
+                <p className="text-xs text-gray-600 font-medium">
+                  {metric.changeLabel}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </section>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Quick Access Cards */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl font-bold text-gray-900">Quick Access</h2>
+                <div className="flex items-center bg-gray-50 border border-gray-300 rounded-lg overflow-hidden">
+                  <Search className="ml-3 w-4 h-4 text-gray-600" />
+                  <input
+                    type="text"
+                    placeholder="Search modules..."
+                    className="w-full py-2 pl-2 pr-3 bg-transparent border-none focus:ring-0 text-sm text-gray-800 font-medium"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {quickAccessCards
+                  .filter(card => 
+                    searchQuery === '' || 
+                    card.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    card.description.toLowerCase().includes(searchQuery.toLowerCase())
+                  )
+                  .map((card, index) => (
+                    <motion.div
+                      key={card.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => onNavigate(card.page)}
+                      className="group p-4 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 hover:border-gray-300 cursor-pointer transition-all duration-200 hover:shadow-sm"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="p-2 bg-white rounded-lg border border-gray-200 group-hover:border-gray-300 transition-colors">
+                          <card.icon className="w-5 h-5 text-gray-700" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-gray-900 text-sm mb-1 group-hover:text-indigo-700 transition-colors">
+                            {card.title}
+                          </h3>
+                          <p className="text-xs text-gray-600 font-medium leading-relaxed">
+                            {card.description}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
+            </div>
+          </div>
+
+          {/* AI Chat Interface */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              <ChatInterface isModal={false} />
+            </div>
+          </div>
+        </div>
+
+        {/* Chat Modal */}
+        <AnimatePresence>
+          {isChatMaximized && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+            >
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-white rounded-xl shadow-2xl w-full max-w-4xl h-[80vh] flex flex-col overflow-hidden"
+              >
+                <ChatInterface isModal={true} />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
