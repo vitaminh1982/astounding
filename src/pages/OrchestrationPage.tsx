@@ -692,31 +692,6 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
           <ChatInterface isModal={false} />
         </section>
 
-        {/* Enhanced Quick Access Cards */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
-          {quickAccessCards.map((card, index) => (
-            <motion.button
-              key={card.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              onClick={() => onNavigate(card.page)}
-              className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 text-left hover:shadow-md hover:border-indigo-300 transition-all duration-200 group"
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="bg-indigo-50 p-3 rounded-xl group-hover:bg-indigo-100 transition-colors">
-                  <card.icon className="h-6 w-6 text-indigo-600" />
-                </div>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-indigo-700 transition-colors">
-                {card.title}
-              </h3>
-              <p className="text-gray-600 text-sm font-medium leading-relaxed">
-                {card.description}
-              </p>
-            </motion.button>
-          ))}
-        </section>
 
         {/* Enhanced AI Tools Grid */}
         <section className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
