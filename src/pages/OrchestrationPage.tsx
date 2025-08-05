@@ -110,6 +110,46 @@ const systemMetrics = [
   }
 ];
 
+// Mock data for quick access cards
+const quickAccessCards = [
+  {
+    title: 'Agent Management',
+    description: 'Manage agent directory, configuration, and lifecycle',
+    icon: Bot,
+    page: 'agent-management' as Page
+  },
+  {
+    title: 'Workflow Designer',
+    description: 'Create and manage AI workflows visually',
+    icon: GitBranch,
+    page: 'workflow-management' as Page
+  },
+  {
+    title: 'System Monitoring',
+    description: 'Real-time analytics and performance metrics',
+    icon: Activity,
+    page: 'monitoring-analytics' as Page
+  },
+  {
+    title: 'Resource Management',
+    description: 'Manage system resources and scaling',
+    icon: Server,
+    page: 'resource-management' as Page
+  },
+  {
+    title: 'Collaboration Hub',
+    description: 'Human-AI collaboration and communication',
+    icon: Users,
+    page: 'collaboration' as Page
+  },
+  {
+    title: 'AI Documentation',
+    description: 'Access AI system documentation and guides',
+    icon: FileText,
+    page: 'documents' as Page
+  }
+];
+
 export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps) {
   const [promptInput, setPromptInput] = useState<string>('');
   const [conversationHistory, setConversationHistory] = useState<Message[]>([
