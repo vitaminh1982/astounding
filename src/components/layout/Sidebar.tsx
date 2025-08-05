@@ -19,7 +19,12 @@ import {
   Sparkles,
   Wrench,
   ChevronDown,
-  ChevronRight
+  ChevronRight,
+  Network,
+  Server,
+  Share2,
+  TrendingUp,
+  Bell
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -104,6 +109,7 @@ const Sidebar = ({
   const { t } = useContext(LanguageContext);
   const [isAgentsMenuOpen, setIsAgentsMenuOpen] = useState(false);
   const [isGovernanceMenuOpen, setIsGovernanceMenuOpen] = useState(false);
+  const [isOrchestrationMenuOpen, setIsOrchestrationMenuOpen] = useState(false);
   const [isOnboardingMenuOpen, setIsOnboardingMenuOpen] = useState(false);
 
   // Onboarding submenu items
@@ -120,6 +126,14 @@ const Sidebar = ({
     { icon: Settings2, label: t('sidebar.agentConfiguration'), page: 'agent-configuration' as const },
   ];
 
+  // Orchestration submenu items
+  const orchestrationSubmenu = [
+    { icon: Bot, label: 'Agent Management', page: 'agent-management' as const },
+    { icon: GitBranch, label: 'Workflow & Tasks', page: 'workflow-management' as const },
+    { icon: BarChart2, label: 'Monitoring & Analytics', page: 'monitoring-analytics' as const },
+    { icon: Server, label: 'Resource Management', page: 'resource-management' as const },
+    { icon: Share2, label: 'Collaboration', page: 'collaboration' as const },
+  ];
   // AI Agents submenu items - defined with direct icon references
   const aiAgentsSubmenu = [
     { icon: Sparkles, label: t('sidebar.prompts'), page: 'prompts' as const },
@@ -155,6 +169,9 @@ const Sidebar = ({
     return governanceSubmenu.some(item => item.page === currentPage);
   };
 
+  const isAnyOrchestrationSubmenuActive = () => {
+    return orchestrationSubmenu.some(item => item.page === currentPage) || currentPage === 'orchestration';
+  };
   // Add useEffect to automatically open/close submenus based on current page
   useEffect(() => {
     // Auto-open AI Agents submenu if on any of its sub-pages
@@ -165,6 +182,11 @@ const Sidebar = ({
     // Auto-open Governance submenu if on any of its sub-pages
     if (isAnyGovernanceSubmenuActive()) {
       setIsGovernanceMenuOpen(true);
+    }
+    
+    // Auto-open Orchestration submenu if on any of its sub-pages
+    if (isAnyOrchestrationSubmenuActive()) {
+      setIsOrchestrationMenuOpen(true);
     }
   }, [currentPage]); // Re-run when currentPage changes
 
@@ -192,6 +214,20 @@ const Sidebar = ({
     }
   };
 
+  // Orchestration button click handler
+  const handleOrchestrationClick = () => {
+    if (isAnyOrchestrationSubmenuActive()) {
+      // If we're already on an orchestration sub-page, toggle the menu
+      setIsOrchestrationMenuOpen(!isOrchestrationMenuOpen);
+    } else if (currentPage === 'orchestration') {
+      // If we're on the main orchestration page, toggle the menu
+      setIsOrchestrationMenuOpen(!isOrchestrationMenuOpen);
+    } else {
+      // If we're on a different page, navigate to orchestration and open the menu
+      handleMenuItemClick('orchestration');
+      setIsOrchestrationMenuOpen(true);
+    }
+  };
   // Improved AI Agents button click handler
   const handleAgentsClick = () => {
     if (isAnyAgentsSubmenuActive()) {
@@ -336,6 +372,51 @@ const Sidebar = ({
             )}
           </div>
 
+          {/* Orchestration with collapsible submenu */}
+          <div className="space-y-1">
+            <button
+              onClick={handleOrchestrationClick}
+              className={`
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
+                transition-colors
+                ${currentPage === 'orchestration' || isAnyOrchestrationSubmenuActive() ? 'bg-gray-800' : ''}
+                ${!isExpanded && 'justify-center'}
+              `}
+              aria-expanded={isOrchestrationMenuOpen}
+            >
+              <div className="flex items-center gap-3">
+                <Network size={20} />
+                {isExpanded && <span>Orchestration</span>}
+              </div>
+              {isExpanded && (
+                <span className="text-gray-400">
+                  {isOrchestrationMenuOpen ? 
+                    <ChevronDown size={16} /> : 
+                    <ChevronRight size={16} />
+                  }
+                </span>
+              )}
+            </button>
+            
+            {/* Nested menu items for Orchestration */}
+            {isOrchestrationMenuOpen && (
+              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
+                {orchestrationSubmenu.map((subItem) => (
+                  <SubMenuItem
+                    key={subItem.page}
+                    icon={subItem.icon}
+                    label={subItem.label}
+                    page={subItem.page}
+                    currentPage={currentPage}
+                    onClick={handleMenuItemClick}
+                    isExpanded={isExpanded}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
           {/* Regular menu items after AI Agents */}
           {mainMenuItems.slice(1).map((item) => (
             <MenuItem
@@ -384,4 +465,3 @@ const Sidebar = ({
 };
 
 export default memo(Sidebar);
-
