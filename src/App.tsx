@@ -24,6 +24,11 @@ import PerformanceAnalyticsPage from './pages/PerformanceAnalyticsPage';
 import AgentConfigurationPage from './pages/AgentConfigurationPage';
 import OnboardingPage from './pages/OnboardingPage';
 import OrchestrationPage from './pages/OrchestrationPage';
+import OrchestrationAgentManagementPage from './pages/orchestration/OrchestrationAgentManagementPage';
+import OrchestrationWorkflowManagementPage from './pages/orchestration/OrchestrationWorkflowManagementPage';
+import OrchestrationMonitoringPage from './pages/orchestration/OrchestrationMonitoringPage';
+import OrchestrationResourcesPage from './pages/orchestration/OrchestrationResourcesPage';
+import OrchestrationCollaborationPage from './pages/orchestration/OrchestrationCollaborationPage';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
@@ -46,23 +51,11 @@ export type Page =
   | 'agent-configuration'
   | 'usage'
   | 'orchestration'
-  | 'agent-directory'
-  | 'agent-config'
-  | 'agent-versioning'
-  | 'agent-lifecycle'
-  | 'workflow-designer'
-  | 'task-assignment'
-  | 'workflow-templates'
-  | 'dependencies-triggers'
-  | 'activity-dashboard'
-  | 'performance-metrics'
-  | 'logs-tracing'
-  | 'alerts-notifications'
-  | 'resource-allocation'
-  | 'environment-config'
-  | 'scalability-settings'
-  | 'human-agent-collaboration'
-  | 'inter-agent-communication'
+  | 'orchestration-agent-management'
+  | 'orchestration-workflow-management'
+  | 'orchestration-monitoring'
+  | 'orchestration-resources'
+  | 'orchestration-collaboration'
   | 'paramètres';
 
 // You might want to create a type for navigation items
@@ -142,24 +135,16 @@ function AppContent() {
         return <UsagePage />; // Render the new UsagePage
       case 'orchestration':
         return <OrchestrationPage onNavigate={handleNavigation} />;
-      case 'agent-directory':
-      case 'agent-config':
-      case 'agent-versioning':
-      case 'agent-lifecycle':
-      case 'workflow-designer':
-      case 'task-assignment':
-      case 'workflow-templates':
-      case 'dependencies-triggers':
-      case 'activity-dashboard':
-      case 'performance-metrics':
-      case 'logs-tracing':
-      case 'alerts-notifications':
-      case 'resource-allocation':
-      case 'environment-config':
-      case 'scalability-settings':
-      case 'human-agent-collaboration':
-      case 'inter-agent-communication':
-        return <OrchestrationPage onNavigate={handleNavigation} />;
+      case 'orchestration-agent-management':
+        return <OrchestrationAgentManagementPage onNavigate={handleNavigation} />;
+      case 'orchestration-workflow-management':
+        return <OrchestrationWorkflowManagementPage onNavigate={handleNavigation} />;
+      case 'orchestration-monitoring':
+        return <OrchestrationMonitoringPage onNavigate={handleNavigation} />;
+      case 'orchestration-resources':
+        return <OrchestrationResourcesPage onNavigate={handleNavigation} />;
+      case 'orchestration-collaboration':
+        return <OrchestrationCollaborationPage onNavigate={handleNavigation} />;
       case 'paramètres':
         return <SettingsPage />;
       default:
