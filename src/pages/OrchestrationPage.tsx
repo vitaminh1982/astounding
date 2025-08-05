@@ -441,12 +441,12 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
                         {message.type === 'ai' && message.content && (
                           <>
                             {message.content.reasoningSteps && message.content.reasoningSteps.length > 0 && (
-                              <div className="mb-3 p-3 bg-gray-100 rounded-lg text-gray-700 text-xs">
-                                <p className="font-semibold text-gray-800 mb-2 flex items-center gap-1">
+                              <div className="mb-3 p-3 bg-gray-100 rounded-lg border border-gray-200">
+                                <p className="font-semibold text-gray-900 mb-2 flex items-center gap-1 text-sm">
                                   <Settings className="w-3 h-3" />
                                   Reasoning Process:
                                 </p>
-                                <ul className="list-disc list-inside space-y-1">
+                                <ul className="list-disc list-inside space-y-1 text-xs text-gray-700">
                                   {message.content.reasoningSteps.map((step, i) => (
                                     <li key={i}>{step}</li>
                                   ))}
@@ -454,21 +454,21 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
                               </div>
                             )}
                             {message.content.agentCalls && message.content.agentCalls.length > 0 && (
-                              <div className="mb-3 p-3 bg-blue-50 rounded-lg text-blue-800 text-xs">
-                                <p className="font-semibold text-blue-900 mb-2 flex items-center gap-1">
+                              <div className="mb-3 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                                <p className="font-semibold text-blue-900 mb-2 flex items-center gap-1 text-sm">
                                   <Network className="w-3 h-3" />
                                   Agent Interactions:
                                 </p>
-                                <ul className="list-disc list-inside space-y-1">
+                                <ul className="list-disc list-inside space-y-1 text-xs text-blue-800">
                                   {message.content.agentCalls.map((call, i) => (
                                     <li key={i}>
-                                      <span className="font-medium text-indigo-700">{call.agentName}:</span> {call.purpose}
+                                      <span className="font-medium text-blue-700">{call.agentName}:</span> {call.purpose}
                                     </li>
                                   ))}
                                 </ul>
                               </div>
                             )}
-                            <div className="text-sm">
+                            <div className="text-sm text-gray-800 leading-relaxed">
                               {message.content.finalResponse}
                             </div>
                           </>
