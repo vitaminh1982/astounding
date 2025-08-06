@@ -173,6 +173,75 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
   const [isChatMaximized, setIsChatMaximized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Add these at the top of your component
+const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+// Updated input change handler
+const handleInputChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const value = e.target.value;
+  setPromptInput(value);
+  
+  // Auto-resize textarea
+  if (textareaRef.current) {
+    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 120) + 'px';
+  }
+}, []);
+
+// Updated textarea resize handler
+const handleTextareaResize = useCallback((e: React.FormEvent<HTMLTextAreaElement>) => {
+  const textarea = e.currentTarget;
+  textarea.style.height = 'auto';
+  textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
+}, []);
+
+// Updated key down handler
+const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (promptInput.trim() && !isLoading) {
+      handleSendPrompt();
+    }
+  }
+}, [promptInput, isLoading, handleSendPrompt]);
+
+// Updated send prompt handler
+const handleSendPrompt = useCallback(() => {
+  if (!promptInput.trim() || isLoading) return;
+  
+  const message = promptInput.trim();
+  setPromptInput(''); // Clear input immediately
+  
+  // Reset textarea height
+  if (textareaRef.current) {
+    textareaRef.current.style.height = '40px';
+  }
+  
+  // Add user message
+  const userMessage: Message = {
+    type: 'user',
+    text: message,
+    timestamp: new Date()
+  };
+  
+  setMessages(prev => [...prev, userMessage]);
+  setIsLoading(true);
+  
+  // Process the message
+  setTimeout(() => {
+    const aiResponse = generateAIResponse(message);
+    const aiMessage: Message = {
+      type: 'ai',
+      content: aiResponse,
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => [...prev, aiMessage]);
+    setIsLoading(false);
+  }, 1500);
+}, [promptInput, isLoading]);
+
+
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
@@ -570,41 +639,58 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
 
       {/* Chat Input */}
       <div className="p-6 bg-white border-t border-gray-200">
-        <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-3 border border-gray-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-200">
-          <Search className="w-5 h-5 text-gray-500 flex-shrink-0" />
-          <textarea
-            className="flex-1 resize-none bg-transparent py-2 focus:outline-none text-gray-900 placeholder-gray-600 text-sm font-medium"
-            rows={1}
-            placeholder="Ask about agents, workflows, system status, or request assistance..."
-            value={promptInput}
-            onChange={(e) => setPromptInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            disabled={isLoading}
-            style={{ minHeight: '40px', maxHeight: '120px' }}
-          />
-          <div className="flex items-center gap-2">
-            <button 
-              className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
-              disabled={isLoading}
-              aria-label="Voice input"
-            >
-              <Mic className="w-4 h-4" />
-            </button>
-            <button
-              onClick={handleSendPrompt}
-              disabled={!promptInput.trim() || isLoading}
-              className={`p-2 rounded-lg transition-colors ${
-                promptInput.trim() && !isLoading
-                  ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-              }`}
-              aria-label="Send message"
-            >
-              <Send className="w-4 h-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+  <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-3 border border-gray-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-200">
+    <Search className="w-5 h-5 text-gray-500 flex-shrink-0" />
+    <textarea
+      ref={textareaRef}
+      className="flex-1 resize-none bg-transparent py-2 focus:outline-none text-gray-900 placeholder-gray-600 text-sm font-medium"
+      rows={1}
+      placeholder="Ask about agents, workflows, system status, or request assistance..."
+      value={promptInput}
+      onChange={handleInputChange}
+      onKeyDown={handleKeyDown}
+      onInput={handleTextareaResize}
+      disabled={isLoading}
+      style={{ 
+        minHeight: '40px', 
+        maxHeight: '120px',
+        lineHeight: '1.5'
+      }}
+      spellCheck="true"
+      autoComplete="off"
+      autoCorrect="on"
+    />
+    <div className="flex items-center gap-2">
+      <button 
+        type="button"
+        className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+        disabled={isLoading}
+        aria-label="Voice input"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          // Voice input logic here
+        }}
+      >
+        <Mic className="w-4 h-4" />
+      </button>
+      <button
+        type="button"
+        onClick={handleSendPrompt}
+        disabled={!promptInput.trim() || isLoading}
+        className={`p-2 rounded-lg transition-colors ${
+          promptInput.trim() && !isLoading
+            ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm'
+            : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+        }`}
+        aria-label="Send message"
+      >
+        <Send className="w-4 h-4" />
+      </button>
+    </div>
+  </div>
+</div>
+
     </>
   );
 
