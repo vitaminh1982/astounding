@@ -173,13 +173,13 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
   const [isChatMaximized, setIsChatMaximized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = useCallback(() => {
+  const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, []);
+  };
 
   useEffect(() => {
     scrollToBottom();
-  }, [conversationHistory, scrollToBottom]);
+  }, [conversationHistory]);
 
   const generateAIResponse = useCallback((prompt: string): AiContent => {
     const lowerCasePrompt = prompt.toLowerCase();
@@ -431,7 +431,7 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
   }, []);
 
   // Chat Interface Component
-  const ChatInterface = ({ isModal }: { isModal: boolean }) => (
+  const ChatInterface = React.memo(({ isModal }: { isModal: boolean }) => (
     <>
       {/* Chat Header */}
       <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
@@ -606,7 +606,9 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
         </div>
       </div>
     </>
-  );
+  ));
+
+  ChatInterface.displayName = 'ChatInterface';
 
   return (
     <div className="min-h-screen bg-gray-50">
