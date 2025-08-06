@@ -450,33 +450,6 @@ const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) 
     }, 1500);
   }, [promptInput, isLoading, generateAIResponse]);
 
-  const handleSendPrompt = useCallback(async () => {
-    if (!promptInput.trim() || isLoading) return;
-
-    const userMessage: Message = {
-      type: 'user',
-      text: promptInput,
-      timestamp: new Date()
-    };
-
-    setConversationHistory(prev => [...prev, userMessage]);
-    setIsLoading(true);
-    setPromptInput('');
-
-    // Simulate AI processing delay
-    setTimeout(() => {
-      const aiResponse = generateAIResponse(promptInput);
-      const aiMessage: Message = {
-        type: 'ai',
-        content: aiResponse,
-        timestamp: new Date()
-      };
-
-      setConversationHistory(prev => [...prev, aiMessage]);
-      setIsLoading(false);
-    }, 1500);
-  }, [promptInput, isLoading, generateAIResponse]);
-
   const handleRefresh = useCallback(() => {
     // Simulate refresh action
     console.log('Refreshing system metrics...');
