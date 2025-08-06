@@ -205,43 +205,6 @@ const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) 
   }
 }, [promptInput, isLoading, handleSendPrompt]);
 
-// Updated send prompt handler
-const handleSendPrompt = useCallback(() => {
-  if (!promptInput.trim() || isLoading) return;
-  
-  const message = promptInput.trim();
-  setPromptInput(''); // Clear input immediately
-  
-  // Reset textarea height
-  if (textareaRef.current) {
-    textareaRef.current.style.height = '40px';
-  }
-  
-  // Add user message
-  const userMessage: Message = {
-    type: 'user',
-    text: message,
-    timestamp: new Date()
-  };
-  
-  setMessages(prev => [...prev, userMessage]);
-  setIsLoading(true);
-  
-  // Process the message
-  setTimeout(() => {
-    const aiResponse = generateAIResponse(message);
-    const aiMessage: Message = {
-      type: 'ai',
-      content: aiResponse,
-      timestamp: new Date()
-    };
-    
-    setMessages(prev => [...prev, aiMessage]);
-    setIsLoading(false);
-  }, 1500);
-}, [promptInput, isLoading]);
-
-
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, []);
