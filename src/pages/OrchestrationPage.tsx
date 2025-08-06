@@ -450,13 +450,6 @@ const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLTextAreaElement>) 
     }, 1500);
   }, [promptInput, isLoading, generateAIResponse]);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendPrompt();
-    }
-  }, [handleSendPrompt]);
-
   const handleRefresh = useCallback(() => {
     // Simulate refresh action
     console.log('Refreshing system metrics...');
