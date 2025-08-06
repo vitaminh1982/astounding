@@ -431,7 +431,8 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
   }, []);
 
   // Chat Interface Component
-  const ChatInterface = React.memo(({ isModal }: { isModal: boolean }) => (
+  const ChatInterface = React.memo(({ isModal }: { isModal: boolean }) => {
+    return (
     <>
       {/* Chat Header */}
       <div className="flex items-center justify-between p-4 bg-white border-b border-gray-200">
@@ -606,7 +607,8 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
         </div>
       </div>
     </>
-  ));
+    );
+  });
 
   ChatInterface.displayName = 'ChatInterface';
 
