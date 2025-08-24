@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { ArrowLeft, Play, Pause, Settings, Envelope, Search, Code, Image, BarChart2, Plus } from 'lucide-react';
+import { ArrowLeft, Play, Pause, Settings, Envelope, Search, Code, Image, BarChart2, Plus, Mic, MicOff, Upload, X, FileText, AlertCircle, CheckCircle } from 'lucide-react';
 import AgentConfigModal from './config/AgentConfigModal'; // Import the AgentConfigModal
 
 interface Tool {
@@ -176,6 +176,21 @@ Remember that your main goal is customer satisfaction while respecting company p
   const [displayText, setDisplayText] = useState('');
   const [isAgentActive, setIsAgentActive] = useState(true);
   const [showAgentConfigModal, setShowAgentConfigModal] = useState(false); // Changed from showConfig
+  
+  // Voice recording states
+  const [isRecording, setIsRecording] = useState(false);
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const [recordingTime, setRecordingTime] = useState(0);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Document upload states
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   // Tools state
   const [tools, setTools] = useState<Tool[]>([
@@ -391,6 +406,173 @@ Remember that your main goal is customer satisfaction while respecting company p
     setMessages(prev => [...prev, configUpdateMessage]);
   };
 
+  // Voice recording functions
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream);
+      const audioChunks: Blob[] = [];
+
+      recorder.ondataavailable = (event) => {
+        audioChunks.push(event.data);
+      };
+
+      recorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        setAudioBlob(audioBlob);
+        transcribeAudio(audioBlob);
+        
+        // Stop all tracks to release microphone
+        stream.getTracks().forEach(track => track.stop());
+      };
+
+      recorder.start();
+      setMediaRecorder(recorder);
+      setIsRecording(true);
+      setRecordingTime(0);
+      
+      // Start recording timer
+      recordingIntervalRef.current = setInterval(() => {
+        setRecordingTime(prev => prev + 1);
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Error accessing microphone:', error);
+      alert('Unable to access microphone. Please check your browser permissions.');
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      mediaRecorder.stop();
+      setIsRecording(false);
+      
+      if (recordingIntervalRef.current) {
+        clearInterval(recordingIntervalRef.current);
+        recordingIntervalRef.current = null;
+      }
+    }
+  };
+
+  const transcribeAudio = async (audioBlob: Blob) => {
+    setIsTranscribing(true);
+    
+    try {
+      const formData = new FormData();
+      formData.append('file', audioBlob, 'recording.wav');
+      formData.append('model', 'whisper-1');
+      
+      const response = await axios.post(
+        'https://api.openai.com/v1/audio/transcriptions',
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      
+      if (response.data && response.data.text) {
+        setNewMessage(response.data.text);
+      }
+    } catch (error) {
+      console.error('Error transcribing audio:', error);
+      alert('Failed to transcribe audio. Please try again or check your OpenAI API key.');
+    } finally {
+      setIsTranscribing(false);
+    }
+  };
+
+  // Document upload functions
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    const allowedTypes = [
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'text/plain'
+    ];
+    
+    if (!allowedTypes.includes(file.type)) {
+      setUploadError('Unsupported file type. Please select PDF, DOC, DOCX, or TXT files.');
+      return;
+    }
+
+    // Validate file size (max 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      setUploadError('File size too large. Please select a file smaller than 10MB.');
+      return;
+    }
+
+    setSelectedFile(file);
+    setUploadError(null);
+    uploadFile(file);
+  };
+
+  const uploadFile = async (file: File) => {
+    setIsUploading(true);
+    setUploadProgress(0);
+    
+    try {
+      // Simulate file upload with progress
+      const interval = setInterval(() => {
+        setUploadProgress(prev => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            setIsUploading(false);
+            
+            // Add file upload message to chat
+            const fileMessage: Message = {
+              sender: 'user',
+              content: `📎 Uploaded file: ${file.name} (${(file.size / 1024).toFixed(1)} KB)`,
+              timestamp: new Date(),
+            };
+            
+            setMessages(prev => [...prev, fileMessage]);
+            
+            // Agent response about file
+            setTimeout(() => {
+              const agentResponse: Message = {
+                sender: 'agent',
+                content: `I've received your file "${file.name}". I can help you analyze or work with this document. What would you like me to do with it?`,
+                timestamp: new Date(),
+              };
+              setMessages(prev => [...prev, agentResponse]);
+            }, 1000);
+            
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 200);
+      
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      setUploadError('Failed to upload file. Please try again.');
+      setIsUploading(false);
+    }
+  };
+
+  const removeSelectedFile = () => {
+    setSelectedFile(null);
+    setUploadError(null);
+    setUploadProgress(0);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const formatRecordingTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
   return (
 <div className="flex flex-col h-screen bg-gray-100">
   <header className="bg-white border-b p-4 shadow-sm">
@@ -521,22 +703,124 @@ Remember that your main goal is customer satisfaction while respecting company p
           
           <form onSubmit={handleSendMessage} className="mt-4">
             <div className="flex gap-2">
-              <input
-                type="text"
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                placeholder={isAgentActive ? "Type your message..." : "Agent is deactivated"}
-                className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                disabled={isLoading || isTyping || !isAgentActive}
-              />
+              {/* Selected file display */}
+              {selectedFile && (
+                <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg text-sm">
+                  <FileText className="w-4 h-4 text-blue-600" />
+                  <span className="text-blue-800 truncate max-w-32">{selectedFile.name}</span>
+                  {isUploading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-16 bg-gray-200 rounded-full h-1">
+                        <div 
+                          className="bg-blue-600 h-1 rounded-full transition-all duration-300"
+                          style={{ width: `${uploadProgress}%` }}
+                        />
+                      </div>
+                      <span className="text-xs text-blue-600">{uploadProgress}%</span>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={removeSelectedFile}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              )}
+              
+              {/* Upload error display */}
+              {uploadError && (
+                <div className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-sm">
+                  <AlertCircle className="w-4 h-4 text-red-600" />
+                  <span className="text-red-800">{uploadError}</span>
+                  <button
+                    type="button"
+                    onClick={() => setUploadError(null)}
+                    className="text-red-600 hover:text-red-800"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+              
+              {/* Recording indicator */}
+              {isRecording && (
+                <div className="flex items-center gap-2 px-3 py-2 bg-red-50 border border-red-200 rounded-lg text-sm">
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                  <span className="text-red-800">Recording: {formatRecordingTime(recordingTime)}</span>
+                </div>
+              )}
+              
+              {/* Transcribing indicator */}
+              {isTranscribing && (
+                <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 border border-blue-200 rounded-lg text-sm">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600" />
+                  <span className="text-blue-800">Transcribing audio...</span>
+                </div>
+              )}
+              
+              <div className="flex-1 relative">
+                <div className="flex items-center gap-2 border rounded-lg bg-white">
+                  {/* Document upload button */}
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current?.click()}
+                    disabled={isLoading || isTyping || !isAgentActive || isUploading}
+                    className="p-2 text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                    aria-label="Upload document"
+                  >
+                    <Upload className="w-5 h-5" />
+                  </button>
+                  
+                  {/* Hidden file input */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".pdf,.doc,.docx,.txt"
+                    onChange={handleFileSelect}
+                    className="hidden"
+                    aria-label="Select file to upload"
+                  />
+                  
+                  {/* Microphone button */}
+                  <button
+                    type="button"
+                    onClick={isRecording ? stopRecording : startRecording}
+                    disabled={isLoading || isTyping || !isAgentActive || isTranscribing}
+                    className={`p-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+                      isRecording 
+                        ? 'text-red-600 hover:text-red-700 bg-red-50' 
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                    aria-label={isRecording ? "Stop recording" : "Start voice recording"}
+                  >
+                    {isRecording ? <MicOff className="w-5 h-5" /> : <Mic className="w-5 h-5" />}
+                  </button>
+                  
+                  <input
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder={
+                      isRecording ? "Recording..." :
+                      isTranscribing ? "Transcribing..." :
+                      isAgentActive ? "Type your message..." : "Agent is deactivated"
+                    }
+                    className="flex-1 p-2 border-none focus:outline-none focus:ring-0 disabled:bg-gray-50"
+                    disabled={isLoading || isTyping || !isAgentActive || isRecording || isTranscribing}
+                  />
+                </div>
+              </div>
               <button
                 type="submit"
                 className={`bg-indigo-600 text-white px-4 py-2 rounded-lg transition-colors ${
-                  isLoading || isTyping || !newMessage.trim() || !isAgentActive
+                  isLoading || isTyping || !newMessage.trim() || !isAgentActive || isRecording || isTranscribing
                     ? 'opacity-50 cursor-not-allowed' 
                     : 'hover:bg-indigo-700'
                 }`}
-                disabled={isLoading || isTyping || !newMessage.trim() || !isAgentActive}
+                disabled={isLoading || isTyping || !newMessage.trim() || !isAgentActive || isRecording || isTranscribing}
               >
                 {isLoading ? 'Sending...' : 'Send'}
               </button>
