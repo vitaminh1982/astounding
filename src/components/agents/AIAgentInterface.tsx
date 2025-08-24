@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { ArrowLeft, Play, Pause, Settings, Telescope as Envelope, Search, Code, Image, BarChart2, Plus, Mic, MicOff, Upload, X, FileText, AlertCircle, CheckCircle } from 'lucide-react';
-import { AgentConfigModal } from './config/AgentConfigModal';
+import AgentConfigModal from './config/AgentConfigModal';
 
 interface Tool {
   id: string;
