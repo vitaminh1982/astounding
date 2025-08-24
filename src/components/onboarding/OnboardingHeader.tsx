@@ -37,8 +37,7 @@ const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({ onNavigate, onClose
       </div>
       <div className="flex gap-3">
         <button className="px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 text-gray-700 text-sm">
-          onClick={handleSkipTour}
-          Skip Tour
+          Skip Tour={handleSkipTour}
         </button>
       </div>
     </div>
