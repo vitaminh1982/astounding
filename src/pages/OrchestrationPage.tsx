@@ -5,7 +5,7 @@ import SystemMetricsGrid from '../components/orchestration/components/SystemMetr
 import ChatInterface from '../components/orchestration/components/ChatInterface';
 import AIToolsGrid from '../components/orchestration/components/AIToolsGrid';
 import ChatModal from '../components/orchestration/components/ChatModal';
-import { useOrchestrationLogic } from '../components/orchestration/hooks/useOrchestrationLogic';
+import { useOrchestrationLogic } from '../components/orchestration/hooks/useOrchestrationLogic.tsx';
 import { systemMetrics } from '../components/orchestration/data/mockData';
 import { OrchestrationPageProps } from '../components/orchestration/types';
 
