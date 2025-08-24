@@ -691,6 +691,19 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             {/* Voice Recording Button */}
             <button
               onClick={handleVoiceRecording}
+              disabled={isLoading}
+              className={`
+                flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200
+                min-w-[60px] h-12
+                ${getVoiceButtonStyles()}
+              `}
+              aria-label={
+                voiceState.isRecording 
+                  ? 'Stop recording' 
+                  : voiceState.isTranscribing 
+                  ? 'Transcribing audio' 
+                  : 'Start voice recording'
+              }
             >
               {getVoiceButtonContent()}
             </button>
@@ -714,22 +727,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
               </span>
             )}
-              disabled={isLoading}
-              className={`
-                flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200
-                min-w-[60px] h-12
-                ${getVoiceButtonStyles()}
-              `}
-              aria-label={
-                voiceState.isRecording 
-                  ? 'Stop recording' 
-                  : voiceState.isTranscribing 
-                  ? 'Transcribing audio' 
-                  : 'Start voice recording'
-              }
-            >
-              {getVoiceButtonContent()}
-            </button>
             
             {/* Enhanced Send Button - Only show when there's content */}
             {shouldShowSendButton && (
@@ -776,7 +773,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
               </span>
             )}
-            <span>
+            <span
               className={`p-2 rounded-lg transition-colors ${
                 localPromptInput.length > 0 ? 'text-gray-700' : 'text-gray-400'
               }`}
