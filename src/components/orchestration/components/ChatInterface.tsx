@@ -1,7 +1,33 @@
 import React, { useRef, useEffect } from 'react';
-import { Bot, User, Send, Search, Mic, MicOff, Loader, Maximize2, Minimize2, X } from 'lucide-react';
+import { 
+  Bot, User, Send, Search, Mic, MicOff, Loader, Maximize2, Minimize2, X,
+  Paperclip, FileText, Image, Globe, Brain, MessageSquare, Volume2, VolumeX,
+  Type, Eye, Zap, Upload, Check, AlertCircle
+} from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChatInterfaceProps } from '../types';
+
+// Enhanced interfaces for new features
+interface ModelSelection {
+  textOnly: boolean;
+  imageOnly: boolean;
+  webResearchOnly: boolean;
+  reasoningOnly: boolean;
+}
+
+interface AttachmentFile {
+  id: string;
+  file: File;
+  preview?: string;
+  type: 'image' | 'document' | 'other';
+}
+
+interface VoiceConversationState {
+  isActive: boolean;
+  isListening: boolean;
+  isSpeaking: boolean;
+  autoListen: boolean;
+}
 
 // Voice recording state interface
 interface VoiceRecordingState {
@@ -27,6 +53,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
+  // File input ref for attachments
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  
   // Voice recording state
   const [voiceState, setVoiceState] = React.useState<VoiceRecordingState>({
     isRecording: false,
@@ -35,6 +64,33 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     mediaRecorder: null,
     audioChunks: []
   });
+
+  // New feature states
+  const [modelSelection, setModelSelection] = React.useState<ModelSelection>({
+    textOnly: false,
+    imageOnly: false,
+    webResearchOnly: false,
+    reasoningOnly: false
+  });
+  
+  const [attachments, setAttachments] = React.useState<AttachmentFile[]>([]);
+  const [voiceConversation, setVoiceConversation] = React.useState<VoiceConversationState>({
+    isActive: false,
+    isListening: false,
+    isSpeaking: false,
+    autoListen: false
+  });
+  
+  const [showModelOptions, setShowModelOptions] = React.useState(false);
+  const [isDictationMode, setIsDictationMode] = React.useState(false);
+  
+  // Enhanced prompt input state to handle voice transcription
+  const [localPromptInput, setLocalPromptInput] = React.useState(promptInput);
+  
+  // Sync local state with parent prop
+  React.useEffect(() => {
+    setLocalPromptInput(promptInput);
+  }, [promptInput]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -161,6 +217,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     return result.text || '';
   };
 
+  // Enhanced voice recording handler with dictation support
   const formatRecordingTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -172,6 +229,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       if (voiceState.isRecording) {
         const transcription = await stopRecording();
         if (transcription.trim()) {
+          setLocalPromptInput(transcription);
           setPromptInput(transcription);
         }
       } else {
@@ -182,6 +240,137 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       // You could add a toast notification here
     }
   };
+
+  // File attachment handlers
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files || []);
+    
+    files.forEach(file => {
+      const attachment: AttachmentFile = {
+        id: `attachment-${Date.now()}-${Math.random()}`,
+        file,
+        type: file.type.startsWith('image/') ? 'image' : 
+              file.type.includes('pdf') || file.type.includes('document') ? 'document' : 'other'
+      };
+      
+      // Create preview for images
+      if (attachment.type === 'image') {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setAttachments(prev => prev.map(att => 
+            att.id === attachment.id ? { ...att, preview: e.target?.result as string } : att
+          ));
+        };
+        reader.readAsDataURL(file);
+      }
+      
+      setAttachments(prev => [...prev, attachment]);
+    });
+    
+    // Clear the input
+    if (event.target) {
+      event.target.value = '';
+    }
+  };
+
+  const removeAttachment = (attachmentId: string) => {
+    setAttachments(prev => prev.filter(att => att.id !== attachmentId));
+  };
+
+  // Model selection handlers
+  const toggleModelSelection = (model: keyof ModelSelection) => {
+    setModelSelection(prev => ({
+      ...prev,
+      [model]: !prev[model]
+    }));
+  };
+
+  const clearAllModelSelections = () => {
+    setModelSelection({
+      textOnly: false,
+      imageOnly: false,
+      webResearchOnly: false,
+      reasoningOnly: false
+    });
+  };
+
+  // Voice conversation handlers
+  const toggleVoiceConversation = () => {
+    setVoiceConversation(prev => ({
+      ...prev,
+      isActive: !prev.isActive,
+      isListening: false,
+      isSpeaking: false
+    }));
+  };
+
+  // Dictation mode handler
+  const toggleDictationMode = () => {
+    setIsDictationMode(!isDictationMode);
+    if (!isDictationMode) {
+      // Start continuous dictation
+      handleVoiceRecording();
+    }
+  };
+
+  // Enhanced send handler with attachments and model selection
+  const handleEnhancedSend = () => {
+    if (!localPromptInput.trim() && attachments.length === 0) return;
+    
+    // Include model selection and attachments in the send logic
+    const messageData = {
+      text: localPromptInput,
+      attachments: attachments.map(att => ({
+        name: att.file.name,
+        type: att.type,
+        size: att.file.size
+      })),
+      modelPreferences: Object.entries(modelSelection)
+        .filter(([_, enabled]) => enabled)
+        .map(([model, _]) => model)
+    };
+    
+    console.log('Sending enhanced message:', messageData);
+    
+    // Call original send handler
+    handleSendPrompt();
+    
+    // Clear local state
+    setLocalPromptInput('');
+    setAttachments([]);
+  };
+
+  // Enhanced key handler
+  const handleEnhancedKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleEnhancedSend();
+    } else {
+      handleKeyDown(e);
+    }
+  };
+
+  // Format file size helper
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  };
+
+  // Get active model count
+  const getActiveModelCount = () => {
+    return Object.values(modelSelection).filter(Boolean).length;
+  };
+
+  // Model selection options
+  const modelOptions = [
+    { key: 'textOnly', label: 'Text Only', icon: Type, color: 'blue' },
+    { key: 'imageOnly', label: 'Image Processing', icon: Eye, color: 'purple' },
+    { key: 'webResearchOnly', label: 'Web Research', icon: Globe, color: 'green' },
+    { key: 'reasoningOnly', label: 'Advanced Reasoning', icon: Brain, color: 'orange' }
+  ] as const;
 
   const getVoiceButtonContent = () => {
     if (voiceState.isTranscribing) {
@@ -224,6 +413,15 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     }
     
     return 'text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100';
+  };
+
+  // Show send button when there's text input or attachments
+  const shouldShowSendButton = localPromptInput.trim() || attachments.length > 0;
+
+  // Update parent prompt input when local changes
+  const handleInputChange = (value: string) => {
+    setLocalPromptInput(value);
+    setPromptInput(value);
   };
 
   return (
@@ -365,21 +563,154 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
       {/* Chat Input */}
       <div className="p-6 bg-white border-t border-gray-200">
+        {/* Attachments Preview */}
+        {attachments.length > 0 && (
+          <div className="mb-4 flex flex-wrap gap-2">
+            {attachments.map(attachment => (
+              <div key={attachment.id} className="relative bg-gray-50 border rounded-lg p-2 flex items-center gap-2 max-w-xs">
+                {attachment.type === 'image' && attachment.preview ? (
+                  <img src={attachment.preview} alt="Preview" className="w-8 h-8 rounded object-cover" />
+                ) : (
+                  <FileText className="w-5 h-5 text-gray-500" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{attachment.file.name}</p>
+                  <p className="text-xs text-gray-500">{formatFileSize(attachment.file.size)}</p>
+                </div>
+                <button
+                  onClick={() => removeAttachment(attachment.id)}
+                  className="text-gray-400 hover:text-red-500 transition-colors"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        
+        {/* Model Selection Panel */}
+        {showModelOptions && (
+          <div className="mb-4 p-4 bg-gray-50 border rounded-lg">
+            <div className="flex justify-between items-center mb-3">
+              <h4 className="text-sm font-medium text-gray-700">AI Model Selection</h4>
+              <button
+                onClick={clearAllModelSelections}
+                className="text-xs text-gray-500 hover:text-gray-700"
+              >
+                Clear All
+              </button>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {modelOptions.map(({ key, label, icon: Icon, color }) => (
+                <button
+                  key={key}
+                  onClick={() => toggleModelSelection(key)}
+                  className={`flex items-center gap-2 p-2 rounded-lg border transition-colors ${
+                    modelSelection[key]
+                      ? `bg-${color}-50 border-${color}-200 text-${color}-700`
+                      : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="text-xs font-medium">{label}</span>
+                  {modelSelection[key] && <Check className="w-3 h-3 ml-auto" />}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+        
         <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-3 border border-gray-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-200">
           <Search className="w-5 h-5 text-gray-500 flex-shrink-0" />
+          
+          {/* Enhanced Input Area */}
           <textarea
             className="flex-1 resize-none bg-transparent py-2 focus:outline-none text-gray-900 placeholder-gray-600 text-sm font-medium"
             rows={1}
-            placeholder="Ask about agents, workflows, system status, or request assistance..."
-            value={promptInput}
-            onChange={(e) => setPromptInput(e.target.value)}
-            onKeyDown={handleKeyDown}
+            placeholder={
+              isDictationMode 
+                ? "Dictation mode active - speak your message..."
+                : voiceConversation.isActive
+                ? "Voice conversation mode - speak or type..."
+                : "Ask about agents, workflows, system status, or request assistance..."
+            }
+            value={localPromptInput}
+            onChange={(e) => handleInputChange(e.target.value)}
+            onKeyDown={handleEnhancedKeyDown}
             disabled={isLoading}
             style={{ minHeight: '40px', maxHeight: '120px' }}
           />
+          
+          {/* Enhanced Control Buttons */}
           <div className="flex items-center gap-2">
+            {/* File Attachment Button */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept="image/*,.pdf,.doc,.docx,.txt"
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+            <button
+              onClick={() => fileInputRef.current?.click()}
+              disabled={isLoading}
+              className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+              title="Attach files"
+            >
+              <Paperclip className="w-4 h-4" />
+            </button>
+            
+            {/* Model Selection Toggle */}
+            <button
+              onClick={() => setShowModelOptions(!showModelOptions)}
+              className={`p-2 rounded-lg transition-colors ${
+                showModelOptions || getActiveModelCount() > 0
+                  ? 'bg-indigo-100 text-indigo-600'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+              }`}
+              title="Select AI models"
+            >
+              <Brain className="w-4 h-4" />
+            </button>
+            
+            {/* Dictation Mode Toggle */}
+            <button
+              onClick={toggleDictationMode}
+              disabled={isLoading}
+              className={`p-2 rounded-lg transition-colors ${
+                isDictationMode
+                  ? 'bg-purple-100 text-purple-600'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+              }`}
+              title={isDictationMode ? 'Disable dictation mode' : 'Enable dictation mode'}
+            >
+              <MessageSquare className="w-4 h-4" />
+            </button>
+            
+            {/* Voice Recording Button */}
             <button
               onClick={handleVoiceRecording}
+            
+            {/* Voice Conversation Toggle */}
+            <button
+              onClick={toggleVoiceConversation}
+              className={`p-2 rounded-lg transition-colors ${
+                voiceConversation.isActive 
+                  ? 'bg-green-100 text-green-600' 
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+              }`}
+              title={voiceConversation.isActive ? 'Disable voice conversation' : 'Enable voice conversation'}
+            >
+              {voiceConversation.isActive ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </button>
+            
+            {/* Model Selection Indicator */}
+            {getActiveModelCount() > 0 && (
+              <span className="px-2 py-1 bg-indigo-100 text-indigo-600 text-xs rounded-full font-medium">
+                {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
+              </span>
+            )}
               disabled={isLoading}
               className={`
                 flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200
@@ -396,18 +727,59 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             >
               {getVoiceButtonContent()}
             </button>
-            <button
-              onClick={handleSendPrompt}
-              disabled={!promptInput.trim() || isLoading}
+            
+            {/* Enhanced Send Button - Only show when there's content */}
+            {shouldShowSendButton && (
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                onClick={handleEnhancedSend}
+                disabled={isLoading}
+                className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-sm transition-colors"
+                title="Send message"
+              >
+                <Send className="w-4 h-4" />
+              </motion.button>
+            )}
+          </div>
+        </div>
+        
+        {/* Enhanced Status Indicators */}
+        <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
+          <div className="flex items-center gap-4">
+            {voiceConversation.isActive && (
+              <span className="flex items-center gap-1 text-green-600">
+                <Volume2 className="w-3 h-3" />
+                Voice mode active
+              </span>
+            )}
+            {isDictationMode && (
+              <span className="flex items-center gap-1 text-purple-600">
+                <Mic className="w-3 h-3" />
+                Dictation mode
+              </span>
+            )}
+            {attachments.length > 0 && (
+              <span className="flex items-center gap-1 text-blue-600">
+                <Paperclip className="w-3 h-3" />
+                {attachments.length} file{attachments.length > 1 ? 's' : ''} attached
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            {getActiveModelCount() > 0 && (
+              <span className="text-indigo-600">
+                {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
+              </span>
+            )}
+            <span>
               className={`p-2 rounded-lg transition-colors ${
-                promptInput.trim() && !isLoading
-                  ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm'
-                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                localPromptInput.length > 0 ? 'text-gray-700' : 'text-gray-400'
               }`}
-              aria-label="Send message"
             >
-              <Send className="w-4 h-4" />
-            </button>
+              {localPromptInput.length}/1000
+            </span>
           </div>
         </div>
       </div>
