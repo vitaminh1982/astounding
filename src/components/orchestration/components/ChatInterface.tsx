@@ -691,6 +691,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             {/* Voice Recording Button */}
             <button
               onClick={handleVoiceRecording}
+            >
+              {getVoiceButtonContent()}
+            </button>
             
             {/* Voice Conversation Toggle */}
             <button
