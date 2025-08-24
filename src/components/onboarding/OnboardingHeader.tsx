@@ -1,7 +1,25 @@
 import React from 'react';
 import { ShieldCheck } from 'lucide-react';
+import { Page } from '../../App';
 
-const OnboardingHeader: React.FC = () => {
+interface OnboardingHeaderProps {
+  onNavigate?: (page: Page) => void;
+  onClose?: () => void;
+}
+
+const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({ onNavigate, onClose }) => {
+  const handleSkipTour = () => {
+    // Close the current modal/onboarding flow
+    if (onClose) {
+      onClose();
+    }
+    
+    // Navigate back to the Dashboard Page
+    if (onNavigate) {
+      onNavigate('dashboard');
+    }
+  };
+
   return (
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
@@ -19,6 +37,7 @@ const OnboardingHeader: React.FC = () => {
       </div>
       <div className="flex gap-3">
         <button className="px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 text-gray-700 text-sm">
+          onClick={handleSkipTour}
           Skip Tour
         </button>
       </div>

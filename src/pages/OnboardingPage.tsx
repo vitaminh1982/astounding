@@ -16,8 +16,13 @@ import TrustFramework from '../components/onboarding/TrustFramework';
 import GettingStarted from '../components/onboarding/GettingStarted';
 import OnboardingProgress from '../components/onboarding/OnboardingProgress';
 import { useEffect, useRef } from 'react';
+import { Page } from '../App';
 
-export default function OnboardingPage() {
+interface OnboardingPageProps {
+  onNavigate?: (page: Page) => void;
+}
+
+export default function OnboardingPage({ onNavigate }: OnboardingPageProps) {
   const [activeSection, setActiveSection] = useState<number>(0);
   const [completedSections, setCompletedSections] = useState<number[]>([]);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -58,6 +63,13 @@ export default function OnboardingPage() {
     }
   };
 
+  const handleCloseOnboarding = () => {
+    // Navigate back to dashboard when onboarding is closed
+    if (onNavigate) {
+      onNavigate('dashboard');
+    }
+  };
+
   // Render the active section content
   const renderActiveSection = () => {
     switch (activeSection) {
@@ -80,7 +92,10 @@ export default function OnboardingPage() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <OnboardingHeader />
+        <OnboardingHeader 
+          onNavigate={onNavigate}
+          onClose={handleCloseOnboarding}
+        />
         
         {/* Main content grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">

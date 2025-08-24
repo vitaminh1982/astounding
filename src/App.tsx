@@ -118,7 +118,7 @@ function AppContent() {
       case 'performance-analytics':
         return <PerformanceAnalyticsPage />;
       case 'onboarding':
-        return <OnboardingPage />;
+        return <OnboardingPage onNavigate={handleNavigation} />;
       case 'agent-configuration':
         return <AgentConfigurationPage />;
       case 'workflows':
