@@ -11,9 +11,6 @@ import {
 
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
-/**
- * Custom hook for managing chat logic including voice recording and file handling
- */
 export const useChatLogic = (
   conversationHistory: Message[],
   setConversationHistory: React.Dispatch<React.SetStateAction<Message[]>>,
@@ -24,7 +21,7 @@ export const useChatLogic = (
   const speechSynthesisRef = useRef<SpeechSynthesisUtterance | null>(null);
   const [lastInputWasVoice, setLastInputWasVoice] = useState(false);
   
-  // Voice recording state
+  // Simplified voice recording state - single source of truth
   const [voiceState, setVoiceState] = useState<VoiceRecordingState>({
     isRecording: false,
     isTranscribing: false,
@@ -52,13 +49,8 @@ export const useChatLogic = (
   });
   
   const [attachments, setAttachments] = useState<AttachmentFile[]>([]);
-  const [voiceConversation, setVoiceConversation] = useState<VoiceConversationState>({
-    isActive: false,
-    isListening: false,
-    isSpeaking: false,
-    autoListen: false
-  });
   
+  // Removed redundant voiceConversation state - using voiceState instead
   const [showModelOptions, setShowModelOptions] = useState(false);
   const [isDictationMode, setIsDictationMode] = useState(false);
 
@@ -67,7 +59,6 @@ export const useChatLogic = (
     if ('speechSynthesis' in window) {
       const voices = speechSynthesis.getVoices();
       
-      // Find a female voice (prioritize English female voices)
       const femaleVoice = voices.find(voice => 
         voice.lang.startsWith('en') && 
         (voice.name.toLowerCase().includes('female') || 
@@ -85,10 +76,8 @@ export const useChatLogic = (
     }
   }, []);
 
-  // Initialize TTS when voices are loaded
   React.useEffect(() => {
     if ('speechSynthesis' in window) {
-      // Voices might not be loaded immediately
       if (speechSynthesis.getVoices().length === 0) {
         speechSynthesis.addEventListener('voiceschanged', initializeTTS);
       } else {
@@ -105,21 +94,18 @@ export const useChatLogic = (
 
   // Text-to-speech function
   const speakText = useCallback((text: string) => {
-    // Only speak if TTS is enabled, we have a voice, and the last input was voice
     if (!ttsState.isEnabled || !ttsState.voice || !lastInputWasVoice) {
       return;
     }
 
-    // Stop any ongoing speech
     if (speechSynthesis.speaking) {
       speechSynthesis.cancel();
     }
 
-    // Clean the text for better speech synthesis
     const cleanText = text
-      .replace(/[*_`]/g, '') // Remove markdown formatting
-      .replace(/\n+/g, '. ') // Replace line breaks with pauses
-      .replace(/\s+/g, ' ') // Normalize whitespace
+      .replace(/[*_`]/g, '')
+      .replace(/\n+/g, '. ')
+      .replace(/\s+/g, ' ')
       .trim();
 
     if (!cleanText) return;
@@ -128,32 +114,26 @@ export const useChatLogic = (
       const utterance = new SpeechSynthesisUtterance(cleanText);
       speechSynthesisRef.current = utterance;
       
-      // Configure voice settings
       utterance.voice = ttsState.voice;
       utterance.rate = ttsState.rate;
       utterance.pitch = ttsState.pitch;
       utterance.volume = ttsState.volume;
       
-      // Set up event handlers
       utterance.onstart = () => {
         setTtsState(prev => ({ ...prev, isSpeaking: true }));
-        setVoiceConversation(prev => ({ ...prev, isSpeaking: true }));
       };
       
       utterance.onend = () => {
         setTtsState(prev => ({ ...prev, isSpeaking: false }));
-        setVoiceConversation(prev => ({ ...prev, isSpeaking: false }));
         speechSynthesisRef.current = null;
       };
       
       utterance.onerror = (event) => {
         console.error('Speech synthesis error:', event.error);
         setTtsState(prev => ({ ...prev, isSpeaking: false }));
-        setVoiceConversation(prev => ({ ...prev, isSpeaking: false }));
         speechSynthesisRef.current = null;
       };
       
-      // Start speaking
       speechSynthesis.speak(utterance);
       
     } catch (error) {
@@ -162,16 +142,13 @@ export const useChatLogic = (
     }
   }, [ttsState.isEnabled, ttsState.voice, ttsState.rate, ttsState.pitch, ttsState.volume, lastInputWasVoice]);
 
-  // Stop speaking function
   const stopSpeaking = useCallback(() => {
     if (speechSynthesis.speaking) {
       speechSynthesis.cancel();
     }
     setTtsState(prev => ({ ...prev, isSpeaking: false }));
-    setVoiceConversation(prev => ({ ...prev, isSpeaking: false }));
   }, []);
 
-  // Toggle TTS enabled state
   const toggleTTS = useCallback(() => {
     setTtsState(prev => {
       const newEnabled = !prev.isEnabled;
@@ -182,7 +159,7 @@ export const useChatLogic = (
     });
   }, []);
 
-  // Voice recording functions
+  // Fixed voice recording functions
   const startRecording = useCallback(async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -197,82 +174,99 @@ export const useChatLogic = (
 
       mediaRecorder.start();
 
-      setVoiceState(prev => ({
-        ...prev,
+      // Reset recording time and set initial state
+      setVoiceState({
         isRecording: true,
+        isTranscribing: false,
         mediaRecorder,
         audioChunks,
         recordingTime: 0
-      }));
+      });
 
+      // Fixed timer - update state properly
       recordingIntervalRef.current = setInterval(() => {
-        setVoiceState(prev => ({
-          ...prev,
-          recordingTime: prev.recordingTime + 1
-        }));
+        setVoiceState(prev => {
+          // Only update if still recording
+          if (prev.isRecording) {
+            return {
+              ...prev,
+              recordingTime: prev.recordingTime + 1
+            };
+          }
+          return prev;
+        });
       }, 1000);
 
     } catch (error) {
       console.error('Error starting recording:', error);
+      setVoiceState(prev => ({
+        ...prev,
+        isRecording: false,
+        isTranscribing: false
+      }));
     }
   }, []);
 
   const stopRecording = useCallback((): Promise<string> => {
     return new Promise((resolve, reject) => {
-      if (!voiceState.mediaRecorder) {
+      const currentState = voiceState;
+      
+      if (!currentState.mediaRecorder) {
         reject(new Error('No active recording'));
         return;
       }
 
-      voiceState.mediaRecorder.onstop = async () => {
-        try {
-          if (recordingIntervalRef.current) {
-            clearInterval(recordingIntervalRef.current);
-            recordingIntervalRef.current = null;
-          }
+      // Clear interval immediately
+      if (recordingIntervalRef.current) {
+        clearInterval(recordingIntervalRef.current);
+        recordingIntervalRef.current = null;
+      }
 
-          const stream = voiceState.mediaRecorder?.stream;
+      currentState.mediaRecorder.onstop = async () => {
+        try {
+          const stream = currentState.mediaRecorder?.stream;
           if (stream) {
             stream.getTracks().forEach(track => track.stop());
           }
 
+          // Update state to show transcribing
           setVoiceState(prev => ({
             ...prev,
             isRecording: false,
             isTranscribing: true
           }));
 
-          const audioBlob = new Blob(voiceState.audioChunks, { type: 'audio/wav' });
+          const audioBlob = new Blob(currentState.audioChunks, { type: 'audio/wav' });
           const transcription = await transcribeAudio(audioBlob);
           
-          setVoiceState(prev => ({
-            ...prev,
-            isTranscribing: false,
-            mediaRecorder: null,
-            audioChunks: [],
-            recordingTime: 0
-          }));
-
-          // Mark that the last input was voice-based
-          setLastInputWasVoice(true);
-
-          resolve(transcription);
-        } catch (error) {
-          setVoiceState(prev => ({
-            ...prev,
+          // Reset state completely
+          setVoiceState({
             isRecording: false,
             isTranscribing: false,
             mediaRecorder: null,
             audioChunks: [],
             recordingTime: 0
-          }));
+          });
+
+          setLastInputWasVoice(true);
+          resolve(transcription);
+          
+        } catch (error) {
+          // Reset state on error
+          setVoiceState({
+            isRecording: false,
+            isTranscribing: false,
+            mediaRecorder: null,
+            audioChunks: [],
+            recordingTime: 0
+          });
           reject(error);
         }
       };
 
-      voiceState.mediaRecorder.stop();
+      currentState.mediaRecorder.stop();
     });
-  }, [voiceState.mediaRecorder, voiceState.audioChunks]);
+  }, [voiceState]);
 
   const transcribeAudio = async (audioBlob: Blob): Promise<string> => {
     if (!OPENAI_API_KEY) {
@@ -301,7 +295,6 @@ export const useChatLogic = (
 
   // File handling functions
   const handleFileSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    // Mark that the last input was not voice-based
     setLastInputWasVoice(false);
     
     const files = Array.from(event.target.files || []);
@@ -336,7 +329,6 @@ export const useChatLogic = (
     setAttachments(prev => prev.filter(att => att.id !== attachmentId));
   }, []);
 
-  // Model selection functions
   const toggleModelSelection = useCallback((model: keyof ModelSelection) => {
     setModelSelection(prev => ({
       ...prev,
@@ -353,20 +345,11 @@ export const useChatLogic = (
     });
   }, []);
 
-  // Voice functions
-  const toggleVoiceConversation = useCallback(() => {
-    setVoiceConversation(prev => ({
-      ...prev,
-      isActive: !prev.isActive,
-      isListening: false,
-      isSpeaking: false
-    }));
-  }, []);
-
   const toggleDictationMode = useCallback(() => {
     setIsDictationMode(!isDictationMode);
   }, [isDictationMode]);
 
+  // Simplified voice recording handler
   const handleVoiceRecording = useCallback(async () => {
     try {
       if (voiceState.isRecording) {
@@ -379,37 +362,41 @@ export const useChatLogic = (
       }
     } catch (error) {
       console.error('Voice recording error:', error);
+      // Reset state on error
+      setVoiceState({
+        isRecording: false,
+        isTranscribing: false,
+        mediaRecorder: null,
+        audioChunks: [],
+        recordingTime: 0
+      });
     }
     return '';
   }, [voiceState.isRecording, stopRecording, startRecording]);
 
-  // Function to handle text input (marks as non-voice input)
   const handleTextInput = useCallback((value: string) => {
     setLastInputWasVoice(false);
     return value;
   }, []);
 
-  // Cleanup function for component unmount
+  // Cleanup function
   React.useEffect(() => {
     return () => {
-      // Stop any ongoing speech synthesis
       if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
       }
       
-      // Clear recording interval
       if (recordingIntervalRef.current) {
         clearInterval(recordingIntervalRef.current);
+        recordingIntervalRef.current = null;
       }
       
-      // Stop any active media streams
       if (voiceState.mediaRecorder?.stream) {
         voiceState.mediaRecorder.stream.getTracks().forEach(track => track.stop());
       }
     };
   }, [voiceState.mediaRecorder]);
 
-  // Utility functions
   const formatFileSize = useCallback((bytes: number): string => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -429,7 +416,6 @@ export const useChatLogic = (
     ttsState,
     modelSelection,
     attachments,
-    voiceConversation,
     showModelOptions,
     isDictationMode,
     lastInputWasVoice,
@@ -437,7 +423,6 @@ export const useChatLogic = (
     removeAttachment,
     toggleModelSelection,
     clearAllModelSelections,
-    toggleVoiceConversation,
     toggleDictationMode,
     handleVoiceRecording,
     speakText,
@@ -446,6 +431,11 @@ export const useChatLogic = (
     handleTextInput,
     formatFileSize,
     formatRecordingTime,
-    setShowModelOptions
+    setShowModelOptions,
+    // Expose individual recording states for UI
+    isRecording: voiceState.isRecording,
+    isTranscribing: voiceState.isTranscribing,
+    recordingTime: voiceState.recordingTime,
+    isSpeaking: ttsState.isSpeaking
   };
 };
