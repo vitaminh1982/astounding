@@ -50,7 +50,10 @@ export const useChatLogic = (
   
   const [attachments, setAttachments] = useState<AttachmentFile[]>([]);
   
-  // Removed redundant voiceConversation state - using voiceState instead
+  const [voiceConversation, setVoiceConversation] = useState<VoiceConversationState>({
+    isActive: false
+  });
+  
   const [showModelOptions, setShowModelOptions] = useState(false);
   const [isDictationMode, setIsDictationMode] = useState(false);
 
@@ -379,6 +382,12 @@ export const useChatLogic = (
     return value;
   }, []);
 
+  const toggleVoiceConversation = useCallback(() => {
+    setVoiceConversation(prev => ({
+      isActive: !prev.isActive
+    }));
+  }, []);
+
   // Cleanup function
   React.useEffect(() => {
     return () => {
@@ -416,6 +425,7 @@ export const useChatLogic = (
     ttsState,
     modelSelection,
     attachments,
+    voiceConversation,
     showModelOptions,
     isDictationMode,
     lastInputWasVoice,
@@ -425,6 +435,7 @@ export const useChatLogic = (
     clearAllModelSelections,
     toggleDictationMode,
     handleVoiceRecording,
+    toggleVoiceConversation,
     speakText,
     stopSpeaking,
     toggleTTS,
