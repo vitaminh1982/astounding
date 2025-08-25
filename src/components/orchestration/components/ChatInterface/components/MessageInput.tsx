@@ -7,37 +7,49 @@ import {
 import { 
   ModelSelection, 
   AttachmentFile, 
-  VoiceConversationState, 
-  VoiceRecordingState,
   TextToSpeechState
 } from '../types';
 
 interface MessageInputProps {
+  // Basic input
   promptInput: string;
   setPromptInput: (value: string) => void;
   onSendMessage: () => void;
   onKeyDown: (e: React.KeyboardEvent) => void;
   isLoading: boolean;
+
+  // Model selection
   modelSelection: ModelSelection;
   onToggleModelSelection: (model: keyof ModelSelection) => void;
-  attachments: AttachmentFile[];
-  onFileSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onRemoveAttachment: (attachmentId: string) => void;
-  voiceConversation: VoiceConversationState;
-  onToggleVoiceConversation: () => void;
-  voiceState: VoiceRecordingState;
-  ttsState: TextToSpeechState;
-  onVoiceRecording: () => void;
-  onToggleTTS: () => void;
-  onStopSpeaking: () => void;
-  isDictationMode: boolean;
-  onToggleDictationMode: () => void;
   showModelOptions: boolean;
   onToggleModelOptions: () => void;
   onClearAllModelSelections: () => void;
-  onTextInput: (value: string) => string;
+
+  // File attachments
+  attachments: AttachmentFile[];
+  onFileSelect: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onRemoveAttachment: (attachmentId: string) => void;
   formatFileSize: (bytes: number) => string;
+
+  // Voice recording (simplified)
+  isRecording: boolean;
+  isTranscribing: boolean;
+  recordingTime: number;
+  onVoiceRecording: () => Promise<void>;
   formatRecordingTime: (seconds: number) => string;
+
+  // Text-to-speech
+  ttsState: TextToSpeechState;
+  onToggleTTS: () => void;
+  onStopSpeaking: () => void;
+  isSpeaking: boolean;
+
+  // Dictation mode
+  isDictationMode: boolean;
+  onToggleDictationMode: () => void;
+
+  // Utility functions
+  onTextInput?: (value: string) => string;
 }
 
 /**
@@ -55,21 +67,22 @@ const MessageInput: React.FC<MessageInputProps> = ({
   attachments,
   onFileSelect,
   onRemoveAttachment,
-  voiceConversation,
-  onToggleVoiceConversation,
-  voiceState,
-  ttsState,
+  isRecording,
+  isTranscribing,
+  recordingTime,
   onVoiceRecording,
+  formatRecordingTime,
+  ttsState,
   onToggleTTS,
   onStopSpeaking,
+  isSpeaking,
   isDictationMode,
   onToggleDictationMode,
   showModelOptions,
   onToggleModelOptions,
   onClearAllModelSelections,
   onTextInput,
-  formatFileSize,
-  formatRecordingTime
+  formatFileSize
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -85,38 +98,43 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
   // Enhanced input change handler to track input method
   const handleInputChange = (value: string) => {
-    onTextInput(value); // Mark as text input
+    if (onTextInput) {
+      onTextInput(value); // Mark as text input
+    }
     setPromptInput(value);
   };
 
+  // Single voice button with clear state indication
   const getVoiceButtonContent = () => {
-    if (voiceState.isTranscribing) {
+    if (isTranscribing) {
       return (
-        <>
+        <div className="flex flex-col items-center gap-1">
           <Loader className="w-4 h-4 animate-spin" />
-          <span className="text-xs">Transcribing...</span>
-        </>
+          <span className="text-xs">Processing...</span>
+        </div>
       );
     }
     
-    if (voiceState.isRecording) {
+    if (isRecording) {
       return (
-        <>
+        <div className="flex flex-col items-center gap-1">
           <div className="relative">
             <MicOff className="w-4 h-4" />
             <div className="absolute -inset-1 rounded-full bg-red-500 animate-ping opacity-75" />
           </div>
           <span className="text-xs font-mono">
-            {formatRecordingTime(voiceState.recordingTime)}
+            {formatRecordingTime(recordingTime)}
           </span>
-          <span className="text-xs font-mono">
-            {formatRecordingTime(voiceState.recordingTime)}
-          </span>
-        </>
+        </div>
       );
     }
     
-    return <Mic className="w-4 h-4" />;
+    return (
+      <div className="flex flex-col items-center gap-1">
+        <Mic className="w-4 h-4" />
+        <span className="text-xs">Voice</span>
+      </div>
+    );
   };
 
   const getVoiceButtonStyles = () => {
@@ -124,15 +142,23 @@ const MessageInput: React.FC<MessageInputProps> = ({
       return 'bg-gray-200 text-gray-400 cursor-not-allowed';
     }
     
-    if (voiceState.isRecording) {
-      return 'bg-red-500 text-white hover:bg-red-600';
+    if (isRecording) {
+      return 'bg-red-500 text-white hover:bg-red-600 shadow-lg';
     }
     
-    if (voiceState.isTranscribing) {
-      return 'bg-blue-500 text-white';
+    if (isTranscribing) {
+      return 'bg-blue-500 text-white animate-pulse';
     }
     
-    return 'text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100';
+    return 'text-gray-500 hover:text-gray-700 hover:bg-gray-100';
+  };
+
+  const handleVoiceRecording = async () => {
+    try {
+      await onVoiceRecording();
+    } catch (error) {
+      console.error('Voice recording failed:', error);
+    }
   };
 
   return (
@@ -204,14 +230,16 @@ const MessageInput: React.FC<MessageInputProps> = ({
           placeholder={
             isDictationMode 
               ? "Dictation mode active - speak your message..."
-              : voiceConversation.isActive
-              ? "Voice conversation mode - speak or type..."
+              : isRecording
+              ? "Recording in progress..."
+              : isTranscribing
+              ? "Processing your voice input..."
               : "Ask about agents, workflows, system status, or request assistance..."
           }
           value={promptInput}
           onChange={(e) => handleInputChange(e.target.value)}
           onKeyDown={onKeyDown}
-          disabled={isLoading}
+          disabled={isLoading || isRecording || isTranscribing}
           style={{ minHeight: '40px', maxHeight: '120px' }}
         />
         
@@ -228,8 +256,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
           />
           <button
             onClick={() => fileInputRef.current?.click()}
-            disabled={isLoading}
-            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors"
+            disabled={isLoading || isRecording || isTranscribing}
+            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             title="Attach files"
           >
             <Paperclip className="w-4 h-4" />
@@ -238,7 +266,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
           {/* Model Selection Toggle */}
           <button
             onClick={onToggleModelOptions}
-            className={`p-2 rounded-lg transition-colors ${
+            disabled={isRecording || isTranscribing}
+            className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               showModelOptions || getActiveModelCount() > 0
                 ? 'bg-indigo-100 text-indigo-600'
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
@@ -251,8 +280,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
           {/* Dictation Mode Toggle */}
           <button
             onClick={onToggleDictationMode}
-            disabled={isLoading}
-            className={`p-2 rounded-lg transition-colors ${
+            disabled={isLoading || isRecording || isTranscribing}
+            className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               isDictationMode
                 ? 'bg-purple-100 text-purple-600'
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
@@ -264,17 +293,17 @@ const MessageInput: React.FC<MessageInputProps> = ({
           
           {/* Text-to-Speech Toggle */}
           <button
-            onClick={ttsState.isSpeaking ? onStopSpeaking : onToggleTTS}
-            disabled={isLoading}
-            className={`p-2 rounded-lg transition-colors ${
-              ttsState.isSpeaking
+            onClick={isSpeaking ? onStopSpeaking : onToggleTTS}
+            disabled={isLoading || isRecording || isTranscribing}
+            className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+              isSpeaking
                 ? 'bg-red-100 text-red-600 hover:bg-red-200'
                 : ttsState.isEnabled
                 ? 'bg-green-100 text-green-600'
                 : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
             }`}
             title={
-              ttsState.isSpeaking 
+              isSpeaking 
                 ? 'Stop speaking' 
                 : ttsState.isEnabled 
                 ? 'Disable text-to-speech' 
@@ -284,37 +313,25 @@ const MessageInput: React.FC<MessageInputProps> = ({
             <Speaker className="w-4 h-4" />
           </button>
 
-          {/* Voice Recording Button */}
+          {/* Voice Recording Button - Single, Clear State */}
           <button
-            onClick={onVoiceRecording}
+            onClick={handleVoiceRecording}
             disabled={isLoading}
             className={`
               flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200
-              min-w-[60px] h-12
+              min-w-[60px] h-12 border-2
               ${getVoiceButtonStyles()}
+              ${isRecording ? 'border-red-500' : isTranscribing ? 'border-blue-500' : 'border-transparent'}
             `}
             aria-label={
-              voiceState.isRecording 
+              isRecording 
                 ? 'Stop recording' 
-                : voiceState.isTranscribing 
-                ? 'Transcribing audio' 
+                : isTranscribing 
+                ? 'Processing audio' 
                 : 'Start voice recording'
             }
           >
             {getVoiceButtonContent()}
-          </button>
-          
-          {/* Voice Conversation Toggle */}
-          <button
-            onClick={onToggleVoiceConversation}
-            className={`p-2 rounded-lg transition-colors ${
-              voiceConversation.isActive 
-                ? 'bg-green-100 text-green-600' 
-                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
-            }`}
-            title={voiceConversation.isActive ? 'Disable voice conversation' : 'Enable voice conversation'}
-          >
-            {voiceConversation.isActive ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
           </button>
           
           {/* Enhanced Send Button - Only show when there's content */}
@@ -324,8 +341,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0 }}
               onClick={onSendMessage}
-              disabled={isLoading}
-              className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-sm transition-colors"
+              disabled={isLoading || isRecording || isTranscribing}
+              className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               title="Send message"
             >
               <Send className="w-4 h-4" />
@@ -337,24 +354,39 @@ const MessageInput: React.FC<MessageInputProps> = ({
       {/* Status Indicators */}
       <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
         <div className="flex items-center gap-4">
-          {voiceConversation.isActive && (
-            <span className="flex items-center gap-1 text-green-600">
-              <Volume2 className="w-3 h-3" />
-              Voice mode active
+          {/* Recording Status - Single, Clear Indicator */}
+          {(isRecording || isTranscribing) && (
+            <span className={`flex items-center gap-1 ${
+              isRecording ? 'text-red-600' : 'text-blue-600'
+            }`}>
+              {isRecording ? (
+                <>
+                  <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                  Recording {formatRecordingTime(recordingTime)}
+                </>
+              ) : (
+                <>
+                  <Loader className="w-3 h-3 animate-spin" />
+                  Processing audio...
+                </>
+              )}
             </span>
           )}
-          {isDictationMode && (
+          
+          {isDictationMode && !isRecording && !isTranscribing && (
             <span className="flex items-center gap-1 text-purple-600">
               <Mic className="w-3 h-3" />
               Dictation mode
             </span>
           )}
+          
           {ttsState.isEnabled && (
             <span className="flex items-center gap-1 text-green-600">
               <Speaker className="w-3 h-3" />
-              {ttsState.isSpeaking ? 'Speaking...' : 'TTS enabled'}
+              {isSpeaking ? 'Speaking...' : 'TTS enabled'}
             </span>
           )}
+          
           {attachments.length > 0 && (
             <span className="flex items-center gap-1 text-blue-600">
               <Paperclip className="w-3 h-3" />
@@ -362,17 +394,14 @@ const MessageInput: React.FC<MessageInputProps> = ({
             </span>
           )}
         </div>
+        
         <div className="flex items-center gap-2">
           {getActiveModelCount() > 0 && (
             <span className="text-indigo-600">
               {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
             </span>
           )}
-          <span
-            className={`p-2 rounded-lg transition-colors ${
-              promptInput.length > 0 ? 'text-gray-700' : 'text-gray-400'
-            }`}
-          >
+          <span className="text-gray-400">
             {promptInput.length}/1000
           </span>
         </div>
