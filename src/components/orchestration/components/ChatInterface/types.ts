@@ -42,6 +42,15 @@ export interface VoiceRecordingState {
   audioChunks: Blob[];
 }
 
+export interface TextToSpeechState {
+  isSpeaking: boolean;
+  isEnabled: boolean;
+  voice: SpeechSynthesisVoice | null;
+  rate: number;
+  pitch: number;
+  volume: number;
+}
+
 export interface ChatInterfaceProps {
   conversationHistory: Message[];
   isLoading: boolean;

@@ -2,13 +2,14 @@ import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Search, Send, Paperclip, Brain, MessageSquare, Mic, MicOff, 
-  Loader, Volume2, VolumeX, Type, Eye, Globe, Check, X, FileText
+  Loader, Volume2, VolumeX, Type, Eye, Globe, Check, X, FileText, Speaker
 } from 'lucide-react';
 import { 
   ModelSelection, 
   AttachmentFile, 
   VoiceConversationState, 
-  VoiceRecordingState 
+  VoiceRecordingState,
+  TextToSpeechState
 } from '../types';
 
 interface MessageInputProps {
@@ -25,12 +26,16 @@ interface MessageInputProps {
   voiceConversation: VoiceConversationState;
   onToggleVoiceConversation: () => void;
   voiceState: VoiceRecordingState;
+  ttsState: TextToSpeechState;
   onVoiceRecording: () => void;
+  onToggleTTS: () => void;
+  onStopSpeaking: () => void;
   isDictationMode: boolean;
   onToggleDictationMode: () => void;
   showModelOptions: boolean;
   onToggleModelOptions: () => void;
   onClearAllModelSelections: () => void;
+  onTextInput: (value: string) => string;
   formatFileSize: (bytes: number) => string;
   formatRecordingTime: (seconds: number) => string;
 }
@@ -53,12 +58,16 @@ const MessageInput: React.FC<MessageInputProps> = ({
   voiceConversation,
   onToggleVoiceConversation,
   voiceState,
+  ttsState,
   onVoiceRecording,
+  onToggleTTS,
+  onStopSpeaking,
   isDictationMode,
   onToggleDictationMode,
   showModelOptions,
   onToggleModelOptions,
   onClearAllModelSelections,
+  onTextInput,
   formatFileSize,
   formatRecordingTime
 }) => {
@@ -73,6 +82,12 @@ const MessageInput: React.FC<MessageInputProps> = ({
     { key: 'webResearchOnly', label: 'Web Research', icon: Globe, color: 'green' },
     { key: 'reasoningOnly', label: 'Advanced Reasoning', icon: Brain, color: 'orange' }
   ] as const;
+
+  // Enhanced input change handler to track input method
+  const handleInputChange = (value: string) => {
+    onTextInput(value); // Mark as text input
+    setPromptInput(value);
+  };
 
   const getVoiceButtonContent = () => {
     if (voiceState.isTranscribing) {
@@ -191,7 +206,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               : "Ask about agents, workflows, system status, or request assistance..."
           }
           value={promptInput}
-          onChange={(e) => setPromptInput(e.target.value)}
+          onChange={(e) => handleInputChange(e.target.value)}
           onKeyDown={onKeyDown}
           disabled={isLoading}
           style={{ minHeight: '40px', maxHeight: '120px' }}
@@ -244,6 +259,28 @@ const MessageInput: React.FC<MessageInputProps> = ({
             <MessageSquare className="w-4 h-4" />
           </button>
           
+          {/* Text-to-Speech Toggle */}
+          <button
+            onClick={ttsState.isSpeaking ? onStopSpeaking : onToggleTTS}
+            disabled={isLoading}
+            className={`p-2 rounded-lg transition-colors ${
+              ttsState.isSpeaking
+                ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                : ttsState.isEnabled
+                ? 'bg-green-100 text-green-600'
+                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+            }`}
+            title={
+              ttsState.isSpeaking 
+                ? 'Stop speaking' 
+                : ttsState.isEnabled 
+                ? 'Disable text-to-speech' 
+                : 'Enable text-to-speech'
+            }
+          >
+            <Speaker className="w-4 h-4" />
+          </button>
+
           {/* Voice Recording Button */}
           <button
             onClick={onVoiceRecording}
@@ -307,6 +344,12 @@ const MessageInput: React.FC<MessageInputProps> = ({
             <span className="flex items-center gap-1 text-purple-600">
               <Mic className="w-3 h-3" />
               Dictation mode
+            </span>
+          )}
+          {ttsState.isEnabled && (
+            <span className="flex items-center gap-1 text-green-600">
+              <Speaker className="w-3 h-3" />
+              {ttsState.isSpeaking ? 'Speaking...' : 'TTS enabled'}
             </span>
           )}
           {attachments.length > 0 && (

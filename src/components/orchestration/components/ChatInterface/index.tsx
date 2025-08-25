@@ -25,11 +25,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   // Custom hook for chat logic
   const {
     voiceState,
+    ttsState,
     modelSelection,
     attachments,
     voiceConversation,
     showModelOptions,
     isDictationMode,
+    lastInputWasVoice,
     handleFileSelect,
     removeAttachment,
     toggleModelSelection,
@@ -37,6 +39,10 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     toggleVoiceConversation,
     toggleDictationMode,
     handleVoiceRecording,
+    speakText,
+    stopSpeaking,
+    toggleTTS,
+    handleTextInput,
     formatFileSize,
     formatRecordingTime,
     setShowModelOptions
@@ -47,9 +53,52 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     setLocalPromptInput(promptInput);
   }, [promptInput]);
 
+  // Auto-speak AI responses when they arrive (only for voice inputs)
+  React.useEffect(() => {
+    if (conversationHistory.length > 0) {
+      const lastMessage = conversationHistory[conversationHistory.length - 1];
+      
+      // Only speak AI responses that follow voice input
+      if (lastMessage.type === 'ai' && lastInputWasVoice && ttsState.isEnabled) {
+        let textToSpeak = '';
+        
+        if (lastMessage.content?.finalResponse) {
+          if (typeof lastMessage.content.finalResponse === 'string') {
+            textToSpeak = lastMessage.content.finalResponse;
+          } else {
+            // Extract text from JSX elements for TTS
+            const extractTextFromJSX = (element: any): string => {
+              if (typeof element === 'string') return element;
+              if (typeof element === 'number') return element.toString();
+              if (React.isValidElement(element)) {
+                if (element.props.children) {
+                  if (Array.isArray(element.props.children)) {
+                    return element.props.children.map(extractTextFromJSX).join(' ');
+                  }
+                  return extractTextFromJSX(element.props.children);
+                }
+              }
+              return '';
+            };
+            
+            textToSpeak = extractTextFromJSX(lastMessage.content.finalResponse);
+          }
+        }
+        
+        if (textToSpeak.trim()) {
+          // Small delay to ensure message is rendered before speaking
+          setTimeout(() => {
+            speakText(textToSpeak);
+          }, 500);
+        }
+      }
+    }
+  }, [conversationHistory, lastInputWasVoice, ttsState.isEnabled, speakText]);
+
   // Enhanced input change handler
   const handleInputChange = (value: string) => {
-    setLocalPromptInput(value);
+    const processedValue = handleTextInput(value);
+    setLocalPromptInput(processedValue);
     setPromptInput(value);
   };
 
@@ -126,12 +175,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         voiceConversation={voiceConversation}
         onToggleVoiceConversation={toggleVoiceConversation}
         voiceState={voiceState}
+        ttsState={ttsState}
         onVoiceRecording={handleEnhancedVoiceRecording}
+        onToggleTTS={toggleTTS}
+        onStopSpeaking={stopSpeaking}
         isDictationMode={isDictationMode}
         onToggleDictationMode={toggleDictationMode}
         showModelOptions={showModelOptions}
         onToggleModelOptions={() => setShowModelOptions(!showModelOptions)}
         onClearAllModelSelections={clearAllModelSelections}
+        onTextInput={handleTextInput}
         formatFileSize={formatFileSize}
         formatRecordingTime={formatRecordingTime}
       />

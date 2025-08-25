@@ -4,7 +4,8 @@ import {
   ModelSelection, 
   AttachmentFile, 
   VoiceConversationState, 
-  VoiceRecordingState 
+  VoiceRecordingState,
+  TextToSpeechState
 } from '../types';
 
 const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
@@ -19,6 +20,8 @@ export const useChatLogic = (
 ) => {
   const recordingIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const speechSynthesisRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const [lastInputWasVoice, setLastInputWasVoice] = useState(false);
   
   // Voice recording state
   const [voiceState, setVoiceState] = useState<VoiceRecordingState>({
@@ -27,6 +30,16 @@ export const useChatLogic = (
     recordingTime: 0,
     mediaRecorder: null,
     audioChunks: []
+  });
+
+  // Text-to-speech state
+  const [ttsState, setTtsState] = useState<TextToSpeechState>({
+    isSpeaking: false,
+    isEnabled: true,
+    voice: null,
+    rate: 1.0,
+    pitch: 1.0,
+    volume: 0.8
   });
 
   // Feature states
@@ -47,6 +60,126 @@ export const useChatLogic = (
   
   const [showModelOptions, setShowModelOptions] = useState(false);
   const [isDictationMode, setIsDictationMode] = useState(false);
+
+  // Initialize text-to-speech with female voice
+  const initializeTTS = useCallback(() => {
+    if ('speechSynthesis' in window) {
+      const voices = speechSynthesis.getVoices();
+      
+      // Find a female voice (prioritize English female voices)
+      const femaleVoice = voices.find(voice => 
+        voice.lang.startsWith('en') && 
+        (voice.name.toLowerCase().includes('female') || 
+         voice.name.toLowerCase().includes('woman') ||
+         voice.name.toLowerCase().includes('samantha') ||
+         voice.name.toLowerCase().includes('karen') ||
+         voice.name.toLowerCase().includes('victoria'))
+      ) || voices.find(voice => 
+        voice.lang.startsWith('en') && voice.name.toLowerCase().includes('zira')
+      ) || voices.find(voice => voice.lang.startsWith('en'));
+      
+      if (femaleVoice) {
+        setTtsState(prev => ({ ...prev, voice: femaleVoice }));
+      }
+    }
+  }, []);
+
+  // Initialize TTS when voices are loaded
+  React.useEffect(() => {
+    if ('speechSynthesis' in window) {
+      // Voices might not be loaded immediately
+      if (speechSynthesis.getVoices().length === 0) {
+        speechSynthesis.addEventListener('voiceschanged', initializeTTS);
+      } else {
+        initializeTTS();
+      }
+    }
+    
+    return () => {
+      if ('speechSynthesis' in window) {
+        speechSynthesis.removeEventListener('voiceschanged', initializeTTS);
+      }
+    };
+  }, [initializeTTS]);
+
+  // Text-to-speech function
+  const speakText = useCallback((text: string) => {
+    // Only speak if TTS is enabled, we have a voice, and the last input was voice
+    if (!ttsState.isEnabled || !ttsState.voice || !lastInputWasVoice) {
+      return;
+    }
+
+    // Stop any ongoing speech
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+
+    // Clean the text for better speech synthesis
+    const cleanText = text
+      .replace(/[*_`]/g, '') // Remove markdown formatting
+      .replace(/\n+/g, '. ') // Replace line breaks with pauses
+      .replace(/\s+/g, ' ') // Normalize whitespace
+      .trim();
+
+    if (!cleanText) return;
+
+    try {
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      speechSynthesisRef.current = utterance;
+      
+      // Configure voice settings
+      utterance.voice = ttsState.voice;
+      utterance.rate = ttsState.rate;
+      utterance.pitch = ttsState.pitch;
+      utterance.volume = ttsState.volume;
+      
+      // Set up event handlers
+      utterance.onstart = () => {
+        setTtsState(prev => ({ ...prev, isSpeaking: true }));
+        setVoiceConversation(prev => ({ ...prev, isSpeaking: true }));
+      };
+      
+      utterance.onend = () => {
+        setTtsState(prev => ({ ...prev, isSpeaking: false }));
+        setVoiceConversation(prev => ({ ...prev, isSpeaking: false }));
+        speechSynthesisRef.current = null;
+      };
+      
+      utterance.onerror = (event) => {
+        console.error('Speech synthesis error:', event.error);
+        setTtsState(prev => ({ ...prev, isSpeaking: false }));
+        setVoiceConversation(prev => ({ ...prev, isSpeaking: false }));
+        speechSynthesisRef.current = null;
+      };
+      
+      // Start speaking
+      speechSynthesis.speak(utterance);
+      
+    } catch (error) {
+      console.error('Error in text-to-speech:', error);
+      setTtsState(prev => ({ ...prev, isSpeaking: false }));
+    }
+  }, [ttsState.isEnabled, ttsState.voice, ttsState.rate, ttsState.pitch, ttsState.volume, lastInputWasVoice]);
+
+  // Stop speaking function
+  const stopSpeaking = useCallback(() => {
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+    }
+    setTtsState(prev => ({ ...prev, isSpeaking: false }));
+    setVoiceConversation(prev => ({ ...prev, isSpeaking: false }));
+  }, []);
+
+  // Toggle TTS enabled state
+  const toggleTTS = useCallback(() => {
+    setTtsState(prev => {
+      const newEnabled = !prev.isEnabled;
+      if (!newEnabled && speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+      }
+      return { ...prev, isEnabled: newEnabled, isSpeaking: false };
+    });
+  }, []);
 
   // Voice recording functions
   const startRecording = useCallback(async () => {
@@ -119,6 +252,9 @@ export const useChatLogic = (
             recordingTime: 0
           }));
 
+          // Mark that the last input was voice-based
+          setLastInputWasVoice(true);
+
           resolve(transcription);
         } catch (error) {
           setVoiceState(prev => ({
@@ -164,6 +300,9 @@ export const useChatLogic = (
 
   // File handling functions
   const handleFileSelect = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    // Mark that the last input was not voice-based
+    setLastInputWasVoice(false);
+    
     const files = Array.from(event.target.files || []);
     
     files.forEach(file => {
@@ -243,6 +382,32 @@ export const useChatLogic = (
     return '';
   }, [voiceState.isRecording, stopRecording, startRecording]);
 
+  // Function to handle text input (marks as non-voice input)
+  const handleTextInput = useCallback((value: string) => {
+    setLastInputWasVoice(false);
+    return value;
+  }, []);
+
+  // Cleanup function for component unmount
+  React.useEffect(() => {
+    return () => {
+      // Stop any ongoing speech synthesis
+      if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+      }
+      
+      // Clear recording interval
+      if (recordingIntervalRef.current) {
+        clearInterval(recordingIntervalRef.current);
+      }
+      
+      // Stop any active media streams
+      if (voiceState.mediaRecorder?.stream) {
+        voiceState.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+      }
+    };
+  }, [voiceState.mediaRecorder]);
+
   // Utility functions
   const formatFileSize = useCallback((bytes: number): string => {
     if (bytes === 0) return '0 Bytes';
@@ -260,11 +425,13 @@ export const useChatLogic = (
 
   return {
     voiceState,
+    ttsState,
     modelSelection,
     attachments,
     voiceConversation,
     showModelOptions,
     isDictationMode,
+    lastInputWasVoice,
     handleFileSelect,
     removeAttachment,
     toggleModelSelection,
@@ -272,6 +439,10 @@ export const useChatLogic = (
     toggleVoiceConversation,
     toggleDictationMode,
     handleVoiceRecording,
+    speakText,
+    stopSpeaking,
+    toggleTTS,
+    handleTextInput,
     formatFileSize,
     formatRecordingTime,
     setShowModelOptions
