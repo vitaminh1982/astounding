@@ -109,6 +109,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
           <span className="text-xs font-mono">
             {formatRecordingTime(voiceState.recordingTime)}
           </span>
+          <span className="text-xs font-mono">
+            {formatRecordingTime(voiceState.recordingTime)}
+          </span>
         </>
       );
     }
