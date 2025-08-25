@@ -22,14 +22,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   // Local state for enhanced prompt input
   const [localPromptInput, setLocalPromptInput] = useState(promptInput);
   
-  // Custom hook for chat logic
+  // Custom hook for chat logic - using actual props from updated hook
   const {
     voiceState,
     ttsState,
     modelSelection,
     attachments,
-    voiceConversation,
-    voiceConversation,
     showModelOptions,
     isDictationMode,
     lastInputWasVoice,
@@ -37,17 +35,20 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     removeAttachment,
     toggleModelSelection,
     clearAllModelSelections,
-    toggleVoiceConversation,
     toggleDictationMode,
     handleVoiceRecording,
-    toggleVoiceConversation,
     speakText,
     stopSpeaking,
     toggleTTS,
     handleTextInput,
     formatFileSize,
     formatRecordingTime,
-    setShowModelOptions
+    setShowModelOptions,
+    // New simplified state indicators
+    isRecording,
+    isTranscribing,
+    recordingTime,
+    isSpeaking
   } = useChatLogic([], () => {}, () => {});
 
   // Sync local state with parent prop
@@ -124,7 +125,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     
     handleSendPrompt();
     setLocalPromptInput('');
-    removeAttachment(''); // Clear attachments after sending
+    
+    // Clear all attachments after sending
+    attachments.forEach(att => removeAttachment(att.id));
   };
 
   // Enhanced key handler
@@ -169,26 +172,40 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         onSendMessage={handleEnhancedSend}
         onKeyDown={handleEnhancedKeyDown}
         isLoading={isLoading}
+        
+        // Model selection
         modelSelection={modelSelection}
         onToggleModelSelection={toggleModelSelection}
-        attachments={attachments}
-        onFileSelect={handleFileSelect}
-        onRemoveAttachment={removeAttachment}
-        voiceConversation={voiceConversation}
-        onToggleVoiceConversation={toggleVoiceConversation}
-        voiceState={voiceState}
-        ttsState={ttsState}
-        onVoiceRecording={handleEnhancedVoiceRecording}
-        onToggleTTS={toggleTTS}
-        onStopSpeaking={stopSpeaking}
-        isDictationMode={isDictationMode}
-        onToggleDictationMode={toggleDictationMode}
         showModelOptions={showModelOptions}
         onToggleModelOptions={() => setShowModelOptions(!showModelOptions)}
         onClearAllModelSelections={clearAllModelSelections}
-        onTextInput={handleTextInput}
+        
+        // File attachments
+        attachments={attachments}
+        onFileSelect={handleFileSelect}
+        onRemoveAttachment={removeAttachment}
         formatFileSize={formatFileSize}
+        
+        // Voice recording - simplified state
+        isRecording={isRecording}
+        isTranscribing={isTranscribing}
+        recordingTime={recordingTime}
+        onVoiceRecording={handleEnhancedVoiceRecording}
         formatRecordingTime={formatRecordingTime}
+        
+        // Text-to-speech
+        ttsState={ttsState}
+        onToggleTTS={toggleTTS}
+        onStopSpeaking={stopSpeaking}
+        isSpeaking={isSpeaking}
+        
+        // Dictation mode
+        isDictationMode={isDictationMode}
+        onToggleDictationMode={toggleDictationMode}
+        
+        // Legacy support (if needed by MessageInput component)
+        voiceState={voiceState}
+        onTextInput={handleTextInput}
       />
     </>
   );
