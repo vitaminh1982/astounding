@@ -407,7 +407,7 @@ export default function ProjectPage(): JSX.Element {
             <div className="bg-white rounded-lg shadow border overflow-hidden">
               <div className="p-4 border-b">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-lg font-semibold text-gray-900">AI Agents</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">Project Athena</h2>
                   <button
                     className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
                     title="Manage Agents"
