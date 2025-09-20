@@ -696,7 +696,7 @@ export default function ProjectPage() {
                       </div>
                     )}
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 bg-white rounded-lg border p-3">
                       <input
                         ref={fileInputRef}
                         type="file"
@@ -708,7 +708,7 @@ export default function ProjectPage() {
                       
                       <button
                         onClick={() => fileInputRef.current?.click()}
-                        className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
+                        className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-50"
                         title="Attach files"
                       >
                         <Paperclip className="w-4 h-4" />
@@ -725,7 +725,7 @@ export default function ProjectPage() {
                             }
                           }}
                           placeholder="Ask your AI agents anything... "
-                          className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
+                          className="w-full px-3 py-2 bg-transparent border-none focus:outline-none placeholder-gray-500"
                           rows={1}
                           disabled={isLoading}
                         />
@@ -736,7 +736,7 @@ export default function ProjectPage() {
                       <button
                         onClick={handleSendMessage}
                         disabled={(!newMessage.trim() && attachments.length === 0) || isLoading}
-                        className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
                       >
                         <Send className="w-4 h-4" />
                       </button>
