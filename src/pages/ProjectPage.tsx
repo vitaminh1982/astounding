@@ -417,7 +417,7 @@ export default function ProjectPage(): JSX.Element {
                   </button>
                 </div>
                 <p className="text-sm text-gray-500 mt-1">
-                  {agents.filter((a) => a.status === 'active').length} of {agents.length} agents active
+                  {agents.filter((a) => a.status === 'active').length} of {agents.length} AI agents active
                 </p>
               </div>
 
