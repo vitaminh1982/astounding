@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Users,
+  Project,
   Bot,
   MessageSquare,
   FileText,
@@ -393,7 +394,7 @@ export default function ProjectPage(): JSX.Element {
               onClick={() => setIsAgentPanelOpen((s) => !s)}
               className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
             >
-              <Users className="w-4 h-4" />
+              <Project className="w-4 h-4" />
               <span>Toggle Workspace</span>
             </button>
           </div>
