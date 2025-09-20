@@ -491,12 +491,7 @@ export default function ProjectPage() {
                         </div>
                       </div>
                       
-                      <p className="text-xs text-gray-600 mb-2">{agent.description}</p>
-                      
-                      <div className="flex justify-between items-center text-xs text-gray-500">
-                        <span>Last: {agent.lastActivity}</span>
-                        <span>{agent.successRate}% success</span>
-                      </div>
+
                       
                       <div className="mt-2 flex flex-wrap gap-1">
                         {agent.capabilities.slice(0, 2).map(capability => (
