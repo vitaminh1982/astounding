@@ -736,8 +736,7 @@ export default function ProjectPage() {
                         />
                         
                         {/* @mention suggestions could be added here */}
-                          <input
-                            type="text"
+                      </div>
                       
                       <button
                         onClick={handleSendMessage}
@@ -747,7 +746,7 @@ export default function ProjectPage() {
                         <Send className="w-4 h-4" />
                       </button>
                     </div>
-                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    
                     <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
                       <div className="flex items-center gap-4">
                         {selectedAgents.length > 0 && (
