@@ -435,7 +435,7 @@ const Sidebar = ({
           {/* Projects menu item */}
           <MenuItem
             icon={Briefcase}
-            label={t('sidebar.developedBy')}
+            label={t('sidebar.projects')}
             page="projects"
             currentPage={currentPage}
             onClick={handleMenuItemClick}
