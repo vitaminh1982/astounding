@@ -76,7 +76,12 @@ const translations = {
       contact: 'Contact',
       askDemo: 'Ask for a demo',
       developedBy: 'Developed by Miranki Sàrl',
-      projects: 'Projects'
+      projects: 'Projects',
+      agentManagement: 'Agent Management',
+      workflowManagement: 'Workflow & Tasks',
+      monitoringAnalytics: 'Monitoring & Analytics',
+      resourceManagement: 'Resource Management',
+      collaboration: 'Collaboration'
     },
     agentsList: {
       title: 'AI Agents',
@@ -864,7 +869,12 @@ saveError: 'Failed to save configuration',
       contact: 'Contact',
       askDemo: 'Demander une démo',
       developedBy: 'Développé par Miranki Sàrl',
-      projects: 'Projets'
+      projects: 'Projets',
+      agentManagement: 'Gestion des Agents',
+      workflowManagement: 'Workflow & Tâches',
+      monitoringAnalytics: 'Monitoring & Analytique',
+      resourceManagement: 'Gestion des Ressources',
+      collaboration: 'Collaboration'
     },
     dashboard: {
       title: 'Tableau de bord',
