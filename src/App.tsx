@@ -29,6 +29,7 @@ import WorkflowManagementPage from './components/orchestration/WorkflowManagemen
 import MonitoringAnalyticsPage from './components/orchestration/MonitoringAnalyticsPage';
 import ResourceManagementPage from './components/orchestration/ResourceManagementPage';
 import CollaborationPage from './components/orchestration/CollaborationPage';
+import ProjectPage from './pages/ProjectPage';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
 
 // Update Page type to include 'prompts' and 'usage'
@@ -51,6 +52,7 @@ export type Page =
   | 'agent-configuration'
   | 'usage'
   | 'orchestration'
+  | 'projects'
   | 'agent-management'
   | 'workflow-management'
   | 'monitoring-analytics'
@@ -76,6 +78,7 @@ const navigationItems: NavItem[] = [
   { id: 'documents', label: 'Documents', icon: 'document' },
   { id: 'integrations', label: 'Integrations', icon: 'link' }, 
   { id: 'workflows', label: 'Workflows', icon: 'workflow' },
+  { id: 'projects', label: 'Projects', icon: 'project' },
   { id: 'conversations', label: 'Conversations', icon: 'chat' },
   { id: 'clients', label: 'Clients', icon: 'users' },
   { id: 'usage', label: 'Usage', icon: 'chart' }, // New usage item
@@ -123,6 +126,8 @@ function AppContent() {
         return <AgentConfigurationPage />;
       case 'workflows':
         return <WorkflowsPage />;
+      case 'projects':
+        return <ProjectPage />;
       case 'conversations':
         return <ConversationsPage />;
       case 'clients':

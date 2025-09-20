@@ -24,7 +24,8 @@ import {
   Server,
   Share2,
   TrendingUp,
-  Bell
+  Bell,
+  Briefcase
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -430,6 +431,16 @@ const Sidebar = ({
               hasNotification={item.hasNotification}
             />
           ))}
+          
+          {/* Projects menu item */}
+          <MenuItem
+            icon={Briefcase}
+            label="Projects"
+            page="projects"
+            currentPage={currentPage}
+            onClick={handleMenuItemClick}
+            isExpanded={isExpanded}
+          />
         </nav>
       </div>
         
