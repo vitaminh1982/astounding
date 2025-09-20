@@ -729,7 +729,7 @@ export default function ProjectPage() {
                               handleSendMessage();
                             }
                           }}
-                          placeholder="Ask your AI agents anything... Use @Alex, @Sarah, @Marcus, @Diana, or @Robert to mention specific agents"
+                          placeholder="Ask your AI agents anything... "
                           className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
                           rows={2}
                           disabled={isLoading}
