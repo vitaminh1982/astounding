@@ -129,11 +129,11 @@ const Sidebar = ({
 
   // Orchestration submenu items
   const orchestrationSubmenu = [
-    { icon: Bot, label: 'Agent Management', page: 'agent-management' as const },
-    { icon: GitBranch, label: 'Workflow & Tasks', page: 'workflow-management' as const },
-    { icon: BarChart2, label: 'Monitoring & Analytics', page: 'monitoring-analytics' as const },
-    { icon: Server, label: 'Resource Management', page: 'resource-management' as const },
-    { icon: Share2, label: 'Collaboration', page: 'collaboration' as const },
+    { icon: Bot, label: t('sidebar.agentManagement'), page: 'agent-management' as const },
+    { icon: GitBranch, label: t('sidebar.workflowManagement'), page: 'workflow-management' as const },
+    { icon: BarChart2, label: t('sidebar.monitoringAnalytics'), page: 'monitoring-analytics' as const },
+    { icon: Server, label: t('sidebar.resourceManagement'), page: 'resource-management' as const },
+    { icon: Share2, label: t('sidebar.collaboration'), page: 'collaboration' as const },
   ];
   // AI Agents submenu items - defined with direct icon references
   const aiAgentsSubmenu = [
