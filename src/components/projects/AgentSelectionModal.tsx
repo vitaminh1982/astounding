@@ -608,16 +608,6 @@ const AgentSelectionModal: React.FC<AgentSelectionModalProps> = ({
           {/* Modal Footer */}
           <div className="p-6 border-t border-gray-200 bg-gray-50">
             <div className="flex justify-between items-center">
-              <div className="text-sm text-gray-500">
-                {tempSelectedIds.length > 0 && (
-                  <span>
-                    Total monthly cost: €{sortedAgents
-                      .filter(agent => tempSelectedIds.includes(agent.id))
-                      .reduce((sum, agent) => sum + agent.monthlyPrice, 0)
-                      .toLocaleString()}
-                  </span>
-                )}
-              </div>
               <div className="flex gap-3">
                 <button
                   onClick={onClose}
