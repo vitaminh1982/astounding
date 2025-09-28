@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Settings, Briefcase } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import ProjectManagementModal, { ProjectConfiguration } from './ProjectManagementModal';
