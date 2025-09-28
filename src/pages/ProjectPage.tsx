@@ -6,6 +6,7 @@ import ChatInterface from '../components/projects/ChatInterface';
 import ConvertMessageModal from '../components/projects/ConvertMessageModal';
 import ProjectSwitchModal, { Project } from '../components/projects/ProjectSwitchModal';
 import AgentSelectionModal, { ProjectContext } from '../components/projects/AgentSelectionModal';
+import { ProjectConfiguration } from '../components/projects/ProjectManagementModal';
 import { useProjectLogic } from '../hooks/useProjectLogic';
 
 // Types
@@ -207,6 +208,23 @@ export default function ProjectPage(): JSX.Element {
     setShowConvertModal(null);
   };
 
+  // Handle project configuration update
+  const handleProjectConfigUpdate = (updatedProject: ProjectConfiguration) => {
+    // Update the current project with new configuration
+    const updatedCurrentProject: Project = {
+      ...currentProject,
+      name: updatedProject.name,
+      description: updatedProject.description,
+      budget: updatedProject.budget,
+      priority: updatedProject.priority,
+      startDate: updatedProject.startDate,
+      endDate: updatedProject.endDate
+    };
+    
+    handleProjectSwitch(updatedCurrentProject);
+    toast.success('Project configuration updated successfully');
+  };
+
   // Utility functions
   const formatFileSize = (bytes: number): string => {
     if (bytes === 0) return '0 Bytes';
@@ -242,6 +260,7 @@ export default function ProjectPage(): JSX.Element {
               selectedAgents={selectedAgents}
               onToggleAgentSelection={toggleAgentSelection}
               onManageAgents={() => setIsAgentModalOpen(true)}
+              onProjectUpdate={handleProjectConfigUpdate}
             />
           </div>
 

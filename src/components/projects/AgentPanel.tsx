@@ -1,6 +1,7 @@
 import React from 'react';
-import { Settings } from 'lucide-react';
+import { Settings, Briefcase } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import ProjectManagementModal, { ProjectConfiguration } from './ProjectManagementModal';
 
 interface Agent {
   id: string;
@@ -24,6 +25,7 @@ interface AgentPanelProps {
   selectedAgents: string[];
   onToggleAgentSelection: (agentId: string) => void;
   onManageAgents: () => void;
+  onProjectUpdate?: (project: ProjectConfiguration) => void;
 }
 
 const AgentPanel: React.FC<AgentPanelProps> = ({
@@ -32,7 +34,60 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
   selectedAgents,
   onToggleAgentSelection,
   onManageAgents
+  onProjectUpdate
 }) => {
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+
+  // Convert current project to ProjectConfiguration format
+  const projectConfiguration: ProjectConfiguration = {
+    id: 'proj-001',
+    name: currentProject.name,
+    description: 'Digital transformation initiative for TechCorp Solutions',
+    client: {
+      id: 'client-001',
+      name: 'TechCorp Solutions',
+      industry: 'Technology',
+      contactPerson: {
+        name: 'John Smith',
+        email: 'john.smith@techcorp.com',
+        phone: '+1 (555) 123-4567',
+        role: 'CTO'
+      },
+      address: {
+        street: '123 Innovation Drive',
+        city: 'San Francisco',
+        country: 'USA',
+        postalCode: '94105'
+      },
+      website: 'https://techcorp.com',
+      description: 'Leading technology solutions provider specializing in enterprise software and digital transformation.'
+    },
+    status: 'active',
+    startDate: '2025-01-15',
+    endDate: '2025-06-30',
+    budget: '€450,000',
+    priority: 'high',
+    securitySettings: {
+      dataEncryption: true,
+      accessLogging: true,
+      sessionTimeout: 30,
+      ipRestrictions: [],
+      twoFactorRequired: true
+    },
+    knowledgeBase: [],
+    authorizedUsers: [],
+    createdBy: 'Admin',
+    createdAt: '2025-01-15',
+    lastModified: new Date().toISOString()
+  };
+
+  const handleProjectUpdate = (updatedProject: ProjectConfiguration) => {
+    if (onProjectUpdate) {
+      onProjectUpdate(updatedProject);
+    }
+    setIsProjectModalOpen(false);
+  };
+
   const getAgentStatusColor = (status: Agent['status']) => {
     switch (status) {
       case 'active':
@@ -53,13 +108,23 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
       <div className="p-4 border-b">
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-900">{currentProject.name}</h2>
-          <button
-            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
-            title="Manage Projects"
-            onClick={() => toast('Project management panel coming soon', { icon: '⚙️' })}
-          >
-            <Settings className="w-4 h-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsProjectModalOpen(true)}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition-colors"
+              title="Manage Project"
+            >
+              <Briefcase className="w-4 h-4" />
+              <span className="hidden sm:inline">Manage Project</span>
+            </button>
+            <button
+              className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
+              title="Project Settings"
+              onClick={() => toast('Additional project settings coming soon', { icon: '⚙️' })}
+            >
+              <Settings className="w-4 h-4" />
+            </button>
+          </div>
         </div>
         <p className="text-sm text-gray-500 mt-1">
           {agents.filter((a) => a.status === 'active').length} of {agents.length} AI agents active
@@ -120,6 +185,14 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Project Management Modal */}
+      <ProjectManagementModal
+        isOpen={isProjectModalOpen}
+        onClose={() => setIsProjectModalOpen(false)}
+        currentProject={projectConfiguration}
+        onProjectUpdate={handleProjectUpdate}
+      />
     </div>
   );
 };
