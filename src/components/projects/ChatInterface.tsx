@@ -230,7 +230,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                         onSendMessage();
                       }
                     }}
-                    placeholder="Ask your AI agents anything... Use @Alex, @Sarah, @Marcus, @Diana, or @Robert to mention specific agents"
+                    placeholder="Ask your AI agents anything... Use @Seiya, @Shiryu, @Hyôga, @Shun, or @Ikki to mention specific agents"
                     className="w-full px-4 py-2 border-0 focus:outline-none placeholder-gray-500"
                     aria-label="Message input"
                   />
