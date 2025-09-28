@@ -503,8 +503,8 @@ export default function ProjectPage(): JSX.Element {
                   <h2 className="text-lg font-semibold text-gray-900">{currentProject.name}</h2>
                   <button
                     className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
-                    title="Manage Agents"
-                    onClick={() => toast('Agent management panel coming soon', { icon: '⚙️' })}
+                    title="Manage Projects"
+                    onClick={() => toast('Project management panel coming soon', { icon: '⚙️' })}
                   >
                     <Settings className="w-4 h-4" />
                   </button>
