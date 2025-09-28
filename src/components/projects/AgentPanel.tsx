@@ -109,14 +109,6 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-semibold text-gray-900">{currentProject.name}</h2>
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setIsProjectModalOpen(true)}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition-colors"
-              title="Manage Project"
-            >
-              <Briefcase className="w-4 h-4" />
-              <span className="hidden sm:inline">Manage Project</span>
-            </button>
             
             <button
               className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
