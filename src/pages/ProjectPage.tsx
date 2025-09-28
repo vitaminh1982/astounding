@@ -62,7 +62,7 @@ interface ProjectMetrics {
 const PROJECT_AGENTS: Agent[] = [
   {
     id: 'pm-001',
-    name: 'Alex',
+    name: 'Seiya',
     role: 'Project Manager',
     status: 'active',
     avatar: '🧭',
@@ -75,7 +75,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'ba-001',
-    name: 'Sarah',
+    name: 'Ikki',
     role: 'Business Analyst',
     status: 'idle',
     avatar: '📝',
@@ -88,7 +88,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'da-001',
-    name: 'Marcus',
+    name: 'Shiryu',
     role: 'Data Analyst',
     status: 'active',
     avatar: '📊',
@@ -101,7 +101,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'sc-001',
-    name: 'Diana',
+    name: 'Hyôga',
     role: 'Strategy Consultant',
     status: 'active',
     avatar: '🎯',
@@ -114,7 +114,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'pmo-001',
-    name: 'Robert',
+    name: 'Shun',
     role: 'PMO Analyst',
     status: 'active',
     avatar: '📋',
@@ -134,7 +134,7 @@ export default function ProjectPage(): JSX.Element {
     {
       id: `sys-${Date.now()}`,
       content:
-        'Welcome to your AI Project Workspace! 🚀\n\nYour specialized team of 5 AI agents is ready to assist:\n• Alex (PM) - Project management & timelines\n• Sarah (BA) - Requirements & user stories\n• Marcus (DA) - Data analysis & insights\n• Diana (SC) - Strategy & market analysis\n• Robert (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.',
+        'Welcome to your AI Project Workspace! 🚀\n\nYour specialized team of 5 AI agents is ready to assist:\n• Seiya (PM) - Project management & timelines\n• Ikki (BA) - Requirements & user stories\n• Shiryu (DA) - Data analysis & insights\n• Hyôga (SC) - Strategy & market analysis\n• Shun (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.',
       sender: 'agent',
       agentId: 'collaborative',
       timestamp: new Date(),
