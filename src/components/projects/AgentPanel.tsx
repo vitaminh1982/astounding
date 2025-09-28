@@ -117,10 +117,11 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
               <Briefcase className="w-4 h-4" />
               <span className="hidden sm:inline">Manage Project</span>
             </button>
+            
             <button
               className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
               title="Project Settings"
-              onClick={() => toast('Additional project settings coming soon', { icon: '⚙️' })}
+              onClick={() => setIsProjectModalOpen(true), { icon: '⚙️' })}
             >
               <Settings className="w-4 h-4" />
             </button>
