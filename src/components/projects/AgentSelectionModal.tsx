@@ -591,22 +591,7 @@ const AgentSelectionModal: React.FC<AgentSelectionModalProps> = ({
                           </div>
                         )}
 
-                        {/* Pricing */}
-                        <div className="mt-4 pt-4 border-t border-gray-100">
-                          <div className="flex justify-between items-center">
-                            <span className="text-sm text-gray-500">Monthly Rate</span>
-                            <span className="text-lg font-bold text-gray-900">
-                              €{agent.monthlyPrice.toLocaleString()}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+
 
           {/* Modal Footer */}
           <div className="p-6 border-t border-gray-200 bg-gray-50">
