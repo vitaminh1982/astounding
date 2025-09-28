@@ -444,13 +444,6 @@ export default function ProjectPage(): JSX.Element {
               <span>Switch Project</span>
             </button>
             
-            <button
-              onClick={() => setIsAgentPanelOpen((s) => !s)}
-              className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
-            >
-              <Settings className="w-4 h-4" />
-              <span>Toggle Panel</span>
-            </button>
           </div>
         </div>
 
