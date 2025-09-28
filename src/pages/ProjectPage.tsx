@@ -78,7 +78,7 @@ const PROJECT_AGENTS: Agent[] = [
     id: 'ba-001',
     name: 'Ikki',
     role: 'Business Analyst',
-    status: 'idle',
+    status: 'active',
     avatar: '📝',
     description: 'Requirements, user stories, acceptance criteria',
     capabilities: ['Requirement Capture', 'User Stories', 'Acceptance Criteria'],
