@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import ProjectSwitchModal, { Project } from '../components/projects/ProjectSwitchModal';
+import AgentSelectionModal, { SelectableAgent, ProjectContext } from '../components/projects/AgentSelectionModal';
 
 // Types for the multi-agent system
 interface Agent {
@@ -152,6 +153,7 @@ export default function ProjectPage(): JSX.Element {
   const [agents, setAgents] = useState<Agent[]>(PROJECT_AGENTS);
   const [currentProject, setCurrentProject] = useState<Project>(CURRENT_PROJECT);
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
+  const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [
     {
       id: `sys-${Date.now()}`,
@@ -170,6 +172,9 @@ export default function ProjectPage(): JSX.Element {
   const [visibility, setVisibility] = useState<'project' | 'team' | 'private'>('project');
   const [isAgentPanelOpen, setIsAgentPanelOpen] = useState(true);
   const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [selectedAgentIds, setSelectedAgentIds] = useState<string[]>(
+    PROJECT_AGENTS.map(agent => agent.id) // Initially select all current agents
+  );
   const [metrics, setMetrics] = useState<ProjectMetrics>({
     activeAgents: PROJECT_AGENTS.filter((a) => a.status === 'active').length,
     totalQueries: 1247,
@@ -376,6 +381,47 @@ export default function ProjectPage(): JSX.Element {
     toast(`Switched to project: ${newProject.name}`, {
       icon: '🔄'
     });
+    
+    // Reset agent selection when switching projects
+    setSelectedAgentIds(PROJECT_AGENTS.map(agent => agent.id));
+  };
+
+  // Handle agent selection update
+  const handleAgentsUpdate = (newAgentIds: string[]) => {
+    setSelectedAgentIds(newAgentIds);
+    
+    // Update the agents list to reflect the new selection
+    // In a real implementation, this would fetch the selected agents from an API
+    const updatedAgents = PROJECT_AGENTS.filter(agent => newAgentIds.includes(agent.id));
+    setAgents(updatedAgents);
+    
+    // Update metrics
+    setMetrics(prev => ({
+      ...prev,
+      activeAgents: updatedAgents.filter(a => a.status === 'active').length
+    }));
+    
+    // Add system message about agent team update
+    const agentNames = updatedAgents.map(agent => `${agent.name} (${agent.role})`).join(', ');
+    const systemMessage: Message = {
+      id: `sys-${Date.now()}`,
+      content: `Agent team updated! 🤖\n\nActive agents: ${agentNames}\n\nYour new AI team is ready to assist with ${currentProject.name}.`,
+      sender: 'agent',
+      agentId: 'system',
+      timestamp: new Date(),
+      visibility: 'project',
+      canConvertToTask: false,
+      canConvertToDocument: false,
+    };
+    
+    setMessages(prev => [...prev, systemMessage]);
+  };
+
+  // Create project context for agent filtering
+  const projectContext: ProjectContext = {
+    id: currentProject.id,
+    name: currentProject.name,
+    client: currentProject.client
   };
 
   const handleConvertMessage = (messageId: string, type: 'task' | 'document') => {
@@ -514,8 +560,8 @@ export default function ProjectPage(): JSX.Element {
 
                 <div className="mt-4 pt-4 border-t">
                   <button
-                    className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                    onClick={() => toast('Agent management panel coming soon', { icon: '⚙️' })}
+                    className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition-colors"
+                    onClick={() => setIsAgentModalOpen(true)}
                   >
                     <Settings className="w-4 h-4" />
                     <span>Manage Agents</span>
@@ -763,6 +809,16 @@ export default function ProjectPage(): JSX.Element {
         onClose={() => setIsProjectModalOpen(false)}
         currentProjectId={currentProject.id}
         onProjectSelect={handleProjectSwitch}
+      />
+
+      {/* Agent Selection Modal */}
+      <AgentSelectionModal
+        isOpen={isAgentModalOpen}
+        onClose={() => setIsAgentModalOpen(false)}
+        currentProject={projectContext}
+        selectedAgentIds={selectedAgentIds}
+        onAgentsUpdate={handleAgentsUpdate}
+        maxAgents={5}
       />
     </div>
   );
