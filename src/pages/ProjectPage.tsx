@@ -44,9 +44,9 @@ interface ProjectMetrics {
 // Initial data
 const CURRENT_PROJECT: Project = {
   id: 'proj-001',
-  name: 'Digital Transformation Initiative',
+  name: 'Project Athena',
   client: {
-    name: 'TechCorp Solutions',
+    name: 'Graude Corporation',
     industry: 'Technology'
   },
   status: 'active',
@@ -63,7 +63,7 @@ const CURRENT_PROJECT: Project = {
 const PROJECT_AGENTS: Agent[] = [
   {
     id: 'pm-001',
-    name: 'Alex',
+    name: 'Seiya',
     role: 'Project Manager',
     status: 'active',
     avatar: '🧭',
@@ -76,7 +76,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'ba-001',
-    name: 'Sarah',
+    name: 'Ikki',
     role: 'Business Analyst',
     status: 'idle',
     avatar: '📝',
@@ -89,7 +89,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'da-001',
-    name: 'Marcus',
+    name: 'Shiryu',
     role: 'Data Analyst',
     status: 'active',
     avatar: '📊',
@@ -102,7 +102,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'sc-001',
-    name: 'Diana',
+    name: 'Hyôga',
     role: 'Strategy Consultant',
     status: 'active',
     avatar: '🎯',
@@ -115,7 +115,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'pmo-001',
-    name: 'Robert',
+    name: 'Shun',
     role: 'PMO Analyst',
     status: 'active',
     avatar: '📋',
