@@ -12,6 +12,7 @@ import {
   Calendar,
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
+import ProjectSwitchModal, { Project } from '../components/projects/ProjectSwitchModal';
 
 // Types for the multi-agent system
 interface Agent {
@@ -58,11 +59,30 @@ interface ProjectMetrics {
   documentsCreated: number;
 }
 
+// Current project data
+const CURRENT_PROJECT: Project = {
+  id: 'proj-001',
+  name: 'Digital Transformation Initiative',
+  client: {
+    name: 'TechCorp Solutions',
+    industry: 'Technology'
+  },
+  status: 'active',
+  progress: 65,
+  startDate: '2025-01-15',
+  endDate: '2025-06-30',
+  teamSize: 8,
+  description: 'Comprehensive digital transformation strategy and implementation',
+  priority: 'high',
+  budget: '€450,000',
+  lastActivity: '2 hours ago'
+};
+
 // Sample agents (5 agents)
 const PROJECT_AGENTS: Agent[] = [
   {
     id: 'pm-001',
-    name: 'Seiya',
+    name: 'Alex',
     role: 'Project Manager',
     status: 'active',
     avatar: '🧭',
@@ -75,7 +95,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'ba-001',
-    name: 'Ikki',
+    name: 'Sarah',
     role: 'Business Analyst',
     status: 'idle',
     avatar: '📝',
@@ -88,7 +108,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'da-001',
-    name: 'Shiryu',
+    name: 'Marcus',
     role: 'Data Analyst',
     status: 'active',
     avatar: '📊',
@@ -101,7 +121,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'sc-001',
-    name: 'Hyôga',
+    name: 'Diana',
     role: 'Strategy Consultant',
     status: 'active',
     avatar: '🎯',
@@ -114,7 +134,7 @@ const PROJECT_AGENTS: Agent[] = [
   },
   {
     id: 'pmo-001',
-    name: 'Shun',
+    name: 'Robert',
     role: 'PMO Analyst',
     status: 'active',
     avatar: '📋',
@@ -130,11 +150,12 @@ const PROJECT_AGENTS: Agent[] = [
 export default function ProjectPage(): JSX.Element {
   // State management
   const [agents, setAgents] = useState<Agent[]>(PROJECT_AGENTS);
+  const [currentProject, setCurrentProject] = useState<Project>(CURRENT_PROJECT);
+  const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>(() => [
     {
       id: `sys-${Date.now()}`,
-      content:
-        'Welcome to your AI Project Workspace! 🚀\n\nYour specialized team of 5 AI agents is ready to assist:\n• Seiya (PM) - Project management & timelines\n• Ikki (BA) - Requirements & user stories\n• Shiryu (DA) - Data analysis & insights\n• Hyôga (SC) - Strategy & market analysis\n• Shun (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.',
+      content: `Welcome to your AI Project Workspace! 🚀\n\nProject: ${currentProject.name}\nClient: ${currentProject.client.name}\n\nYour specialized team of 5 AI agents is ready to assist:\n• Alex (PM) - Project management & timelines\n• Sarah (BA) - Requirements & user stories\n• Marcus (DA) - Data analysis & insights\n• Diana (SC) - Strategy & market analysis\n• Robert (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.`,
       sender: 'agent',
       agentId: 'collaborative',
       timestamp: new Date(),
@@ -333,6 +354,30 @@ export default function ProjectPage(): JSX.Element {
   // Convert message to task/document (simple stub)
   const [showConvertModal, setShowConvertModal] = useState<{ type: 'task' | 'document'; messageId: string } | null>(null);
 
+  // Handle project switching
+  const handleProjectSwitch = (newProject: Project) => {
+    setCurrentProject(newProject);
+    
+    // Update welcome message with new project info
+    const welcomeMessage = {
+      id: `sys-${Date.now()}`,
+      content: `Switched to project: ${newProject.name} 🔄\n\nClient: ${newProject.client.name}\nStatus: ${newProject.status}\nProgress: ${newProject.progress}%\n\nYour AI team is now ready to assist with this project. How can we help you today?`,
+      sender: 'agent',
+      agentId: 'collaborative',
+      timestamp: new Date(),
+      visibility: 'project',
+      canConvertToTask: false,
+      canConvertToDocument: false,
+    };
+    
+    setMessages([welcomeMessage]);
+    setSelectedAgents([]);
+    
+    toast(`Switched to project: ${newProject.name}`, {
+      icon: '🔄'
+    });
+  };
+
   const handleConvertMessage = (messageId: string, type: 'task' | 'document') => {
     setShowConvertModal({ type, messageId });
   };
@@ -373,8 +418,8 @@ export default function ProjectPage(): JSX.Element {
         {/* Header */}
         <div className="mb-6 flex justify-between items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800">AI Project Workspace</h1>
-            <p className="text-gray-600">Multi-agent collaboration for enhanced project management</p>
+            <h1 className="text-2xl font-bold text-gray-800">{currentProject.name}</h1>
+            <p className="text-gray-600">{currentProject.client.name} • {currentProject.client.industry}</p>
           </div>
 
           <div className="flex items-center gap-4">
@@ -392,10 +437,19 @@ export default function ProjectPage(): JSX.Element {
 
             <button
               onClick={() => setIsAgentPanelOpen((s) => !s)}
+              onClick={() => setIsProjectModalOpen(true)}
               className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
             >
               <Briefcase className="w-4 h-4" />
-              <span>Toggle Project</span>
+              <span>Switch Project</span>
+            </button>
+            
+            <button
+              onClick={() => setIsAgentPanelOpen((s) => !s)}
+              className="flex items-center gap-2 bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors"
+            >
+              <Settings className="w-4 h-4" />
+              <span>Toggle Panel</span>
             </button>
           </div>
         </div>
@@ -407,11 +461,11 @@ export default function ProjectPage(): JSX.Element {
             <div className="bg-white rounded-lg shadow border overflow-hidden">
               <div className="p-4 border-b">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-lg font-semibold text-gray-900">Project Athena</h2>
+                  <h2 className="text-lg font-semibold text-gray-900">{currentProject.name}</h2>
                   <button
                     className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
                     title="Manage Agents"
-                    onClick={() => toast.info('Agent management panel coming soon')}
+                    onClick={() => toast('Agent management panel coming soon', { icon: '⚙️' })}
                   >
                     <Settings className="w-4 h-4" />
                   </button>
@@ -468,7 +522,7 @@ export default function ProjectPage(): JSX.Element {
                 <div className="mt-4 pt-4 border-t">
                   <button
                     className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                    onClick={() => toast.info('Agent management panel coming soon')}
+                    onClick={() => toast('Agent management panel coming soon', { icon: '⚙️' })}
                   >
                     <Settings className="w-4 h-4" />
                     <span>Manage Agents</span>
@@ -709,6 +763,14 @@ export default function ProjectPage(): JSX.Element {
           </div>
         )}
       </div>
+
+      {/* Project Switch Modal */}
+      <ProjectSwitchModal
+        isOpen={isProjectModalOpen}
+        onClose={() => setIsProjectModalOpen(false)}
+        currentProjectId={currentProject.id}
+        onProjectSelect={handleProjectSwitch}
+      />
     </div>
   );
 }
