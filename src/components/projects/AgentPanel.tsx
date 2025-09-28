@@ -33,7 +33,7 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
   agents,
   selectedAgents,
   onToggleAgentSelection,
-  onManageAgents
+  onManageAgents,
   onProjectUpdate
 }) => {
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
