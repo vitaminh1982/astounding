@@ -121,7 +121,7 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
             <button
               className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100"
               title="Project Settings"
-              onClick={() => setIsProjectModalOpen(true), { icon: '⚙️' })}
+              onClick={() => setIsProjectModalOpen(true)}
             >
               <Settings className="w-4 h-4" />
             </button>
