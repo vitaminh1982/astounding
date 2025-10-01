@@ -67,6 +67,23 @@ export interface TaskFilter {
   search: string;
 }
 
+export interface Document {
+  id: string;
+  name: string;
+  description: string;
+  type: string; // pdf, docx, xlsx, etc.
+  size: number; // in bytes
+  generatedBy: string; // Agent name
+  createdAt: Date;
+  status: 'draft' | 'review' | 'final';
+  isAIGenerated: boolean;
+  category: string;
+  version?: string;
+  tags?: string[];
+  url?: string;
+}
+
+
 export interface HistoryFilter {
   agent: string;
   search: string;
