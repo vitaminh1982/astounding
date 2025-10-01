@@ -2,7 +2,7 @@
  * Custom hook for managing project tasks
  */
 import { useState } from 'react';
-import { Task, TaskFilter, Agent } from '../types';
+import { Task, TaskFilter } from '../types';
 
 // Mock task data
 const INITIAL_TASKS: Task[] = [
@@ -57,6 +57,36 @@ const INITIAL_TASKS: Task[] = [
     completedAt: new Date('2025-01-21T16:00:00'),
     priority: 'low',
     estimatedDuration: '1 day'
+  },
+  {
+    id: 'task-006',
+    name: 'User Interface Design',
+    description: 'Create mockups and prototypes for the new dashboard interface',
+    assignedAgent: 'Shiryu',
+    status: 'in-progress',
+    createdAt: new Date('2025-01-21T09:00:00'),
+    priority: 'high',
+    estimatedDuration: '4 days'
+  },
+  {
+    id: 'task-007',
+    name: 'Database Migration',
+    description: 'Migrate legacy database to new cloud infrastructure',
+    assignedAgent: 'Ikki',
+    status: 'pending',
+    createdAt: new Date('2025-01-22T10:00:00'),
+    priority: 'high',
+    estimatedDuration: '5 days'
+  },
+  {
+    id: 'task-008',
+    name: 'Security Audit',
+    description: 'Conduct comprehensive security audit of all systems',
+    assignedAgent: 'Hyôga',
+    status: 'pending',
+    createdAt: new Date('2025-01-23T11:00:00'),
+    priority: 'medium',
+    estimatedDuration: '3 days'
   }
 ];
 
@@ -71,7 +101,7 @@ export const useTaskManagement = () => {
   const handleRetryTask = (taskId: string) => {
     setTasks(prev => prev.map(task => 
       task.id === taskId 
-        ? { ...task, status: 'pending' as const }
+        ? { ...task, status: 'pending' as const, completedAt: undefined }
         : task
     ));
   };
@@ -86,11 +116,22 @@ export const useTaskManagement = () => {
     return matchesAgent && matchesStatus && matchesSearch;
   });
 
+  const getTaskStats = () => {
+    return {
+      total: tasks.length,
+      pending: tasks.filter(t => t.status === 'pending').length,
+      inProgress: tasks.filter(t => t.status === 'in-progress').length,
+      completed: tasks.filter(t => t.status === 'completed').length,
+      failed: tasks.filter(t => t.status === 'failed').length,
+    };
+  };
+
   return {
     tasks,
     taskFilter,
     setTaskFilter,
     filteredTasks,
-    handleRetryTask
+    handleRetryTask,
+    getTaskStats
   };
 };
