@@ -14,10 +14,26 @@ export const useChatInterface = (
   const [activeTab, setActiveTab] = useState<TabType>('chat');
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const previousMessageCount = useRef(initialMessages.length);
+  const isInitialMount = useRef(true);
 
-  // Auto-scroll to bottom when messages change
+  // Auto-scroll to bottom only when new messages are added (not on initial mount)
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Skip scroll on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      previousMessageCount.current = initialMessages.length;
+      return;
+    }
+
+    // Only scroll if message count increased (new message added)
+    const messageCountIncreased = initialMessages.length > previousMessageCount.current;
+    
+    if (messageCountIncreased && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    previousMessageCount.current = initialMessages.length;
   }, [initialMessages]);
 
   const handleTabChange = (tab: TabType) => {

@@ -17,9 +17,25 @@ const MessageList: React.FC<MessageListProps> = ({
   isLoading
 }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const previousMessageCount = useRef(conversationHistory.length);
+  const isInitialMount = useRef(true);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Skip scroll on initial mount
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      previousMessageCount.current = conversationHistory.length;
+      return;
+    }
+
+    // Only scroll if message count increased or isLoading changed
+    const messageCountIncreased = conversationHistory.length > previousMessageCount.current;
+    
+    if ((messageCountIncreased || isLoading) && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+    
+    previousMessageCount.current = conversationHistory.length;
   }, [conversationHistory, isLoading]);
 
   return (
