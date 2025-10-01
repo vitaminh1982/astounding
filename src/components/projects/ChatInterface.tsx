@@ -721,9 +721,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               </div>
             </div>
           </div>
-    </div>
-  );
-};
 
           {/* History Content */}
           <div className="flex-1 overflow-y-auto p-6">
@@ -904,4 +901,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
 export default ChatInterface;
