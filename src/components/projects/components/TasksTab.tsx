@@ -1,8 +1,8 @@
 /**
- * Tasks tab component - Kanban Board Layout
+ * Tasks tab component - Kanban Board Layout with improved scrolling
  */
-import React from 'react';
-import { CheckSquare, Search, Plus, Filter, LayoutGrid } from 'lucide-react';
+import React, { useRef, useState, useEffect } from 'react';
+import { CheckSquare, Search, Plus, Filter, LayoutGrid, ChevronLeft, ChevronRight } from 'lucide-react';
 import TaskCard from './TaskCard';
 import { useTaskManagement } from '../hooks/useTaskManagement';
 import { Agent, Task } from '../types';
@@ -28,6 +28,13 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
     filteredTasks,
     handleRetryTask
   } = useTaskManagement();
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const columns: ColumnConfig[] = [
     {
@@ -56,6 +63,63 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
     }
   ];
 
+  // Check scroll position to show/hide navigation arrows
+  const checkScrollPosition = () => {
+    if (!scrollContainerRef.current) return;
+    
+    const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+    setCanScrollLeft(scrollLeft > 0);
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
+  };
+
+  useEffect(() => {
+    checkScrollPosition();
+    window.addEventListener('resize', checkScrollPosition);
+    return () => window.removeEventListener('resize', checkScrollPosition);
+  }, [filteredTasks]);
+
+  // Smooth scroll functions
+  const scrollToLeft = () => {
+    scrollContainerRef.current?.scrollBy({ left: -350, behavior: 'smooth' });
+  };
+
+  const scrollToRight = () => {
+    scrollContainerRef.current?.scrollBy({ left: 350, behavior: 'smooth' });
+  };
+
+  // Mouse drag to scroll
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollContainerRef.current.offsetLeft);
+    setScrollLeft(scrollContainerRef.current.scrollLeft);
+    scrollContainerRef.current.style.cursor = 'grabbing';
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.style.cursor = 'grab';
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollContainerRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX) * 1.5; // Scroll speed multiplier
+    scrollContainerRef.current.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.style.cursor = 'grab';
+      }
+    }
+  };
+
   const getTasksByStatus = (status: Task['status']) => {
     return filteredTasks.filter(task => task.status === status);
   };
@@ -65,7 +129,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
   return (
     <div className="flex flex-col h-full bg-gradient-to-br from-gray-50 to-gray-100">
       {/* Header */}
-      <div className="p-6 bg-white border-b shadow-sm">
+      <div className="p-6 bg-white border-b shadow-sm flex-shrink-0">
         <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
           <div>
             <h3 className="text-2xl font-bold text-gray-900 mb-1">Task Board</h3>
@@ -112,7 +176,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
 
         {/* Active Filters Badge */}
         {showFilters && (
-          <div className="mt-3 flex items-center gap-2">
+          <div className="mt-3 flex items-center gap-2 flex-wrap">
             <span className="text-xs text-gray-500">Active filters:</span>
             {taskFilter.agent !== 'all' && (
               <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium flex items-center gap-1">
@@ -146,64 +210,150 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
         )}
       </div>
 
-      {/* Kanban Board */}
-      <div className="flex-1 overflow-x-auto overflow-y-hidden p-6">
-        <div className="flex gap-6 h-full min-w-max">
-          {columns.map(column => {
-            const columnTasks = getTasksByStatus(column.id);
-            return (
-              <div key={column.id} className="flex flex-col w-80 bg-white rounded-xl shadow-sm border border-gray-200">
-                {/* Column Header */}
-                <div className="p-4 border-b border-gray-200">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className={`w-3 h-3 rounded-full ${column.color}`}></div>
-                      <h4 className="font-semibold text-gray-900">{column.title}</h4>
-                    </div>
-                    <span className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-1 rounded-full">
-                      {columnTasks.length}
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
-                    <div 
-                      className={`h-full ${column.color} transition-all duration-300`}
-                      style={{ width: `${filteredTasks.length > 0 ? (columnTasks.length / filteredTasks.length) * 100 : 0}%` }}
-                    ></div>
-                  </div>
-                </div>
+      {/* Kanban Board with Navigation */}
+      <div className="flex-1 relative overflow-hidden">
+        {/* Left Scroll Button */}
+        {canScrollLeft && (
+          <button
+            onClick={scrollToLeft}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="w-5 h-5 text-gray-700" />
+          </button>
+        )}
 
-                {/* Column Content */}
-                <div className="flex-1 overflow-y-auto p-4 space-y-3">
-                  {columnTasks.length === 0 ? (
-                    <div className="text-center py-8">
-                      <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                        {column.icon}
+        {/* Right Scroll Button */}
+        {canScrollRight && (
+          <button
+            onClick={scrollToRight}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="w-5 h-5 text-gray-700" />
+          </button>
+        )}
+
+        {/* Scrollable Board Container */}
+        <div 
+          ref={scrollContainerRef}
+          onScroll={checkScrollPosition}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className="h-full overflow-x-auto overflow-y-hidden p-6 cursor-grab select-none"
+          style={{ 
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#CBD5E1 #F1F5F9'
+          }}
+        >
+          <div className="flex gap-6 h-full min-w-max pb-2">
+            {columns.map(column => {
+              const columnTasks = getTasksByStatus(column.id);
+              return (
+                <div 
+                  key={column.id} 
+                  className="flex flex-col w-80 bg-white rounded-xl shadow-sm border border-gray-200 flex-shrink-0"
+                  onMouseDown={(e) => e.stopPropagation()} // Prevent drag on column interaction
+                >
+                  {/* Column Header */}
+                  <div className="p-4 border-b border-gray-200 flex-shrink-0">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <div className={`w-3 h-3 rounded-full ${column.color}`}></div>
+                        <h4 className="font-semibold text-gray-900">{column.title}</h4>
                       </div>
-                      <p className="text-sm text-gray-400">No tasks</p>
+                      <span className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-1 rounded-full">
+                        {columnTasks.length}
+                      </span>
                     </div>
-                  ) : (
-                    columnTasks.map(task => (
-                      <TaskCard
-                        key={task.id}
-                        task={task}
-                        onRetryTask={handleRetryTask}
-                      />
-                    ))
-                  )}
-                </div>
+                    <div className="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+                      <div 
+                        className={`h-full ${column.color} transition-all duration-300`}
+                        style={{ width: `${filteredTasks.length > 0 ? (columnTasks.length / filteredTasks.length) * 100 : 0}%` }}
+                      ></div>
+                    </div>
+                  </div>
 
-                {/* Column Footer */}
-                <div className="p-3 border-t border-gray-100">
-                  <button className="w-full py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium flex items-center justify-center gap-2">
-                    <Plus className="w-4 h-4" />
-                    Add Task
-                  </button>
+                  {/* Column Content - Scrollable */}
+                  <div 
+                    className="flex-1 overflow-y-auto p-4 space-y-3"
+                    style={{ 
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: '#CBD5E1 #F1F5F9'
+                    }}
+                  >
+                    {columnTasks.length === 0 ? (
+                      <div className="text-center py-8">
+                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                          {column.icon}
+                        </div>
+                        <p className="text-sm text-gray-400">No tasks</p>
+                      </div>
+                    ) : (
+                      columnTasks.map(task => (
+                        <TaskCard
+                          key={task.id}
+                          task={task}
+                          onRetryTask={handleRetryTask}
+                        />
+                      ))
+                    )}
+                  </div>
+
+                  {/* Column Footer */}
+                  <div className="p-3 border-t border-gray-100 flex-shrink-0">
+                    <button className="w-full py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium flex items-center justify-center gap-2">
+                      <Plus className="w-4 h-4" />
+                      Add Task
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Scroll Hint */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gray-900/75 text-white text-xs px-3 py-1.5 rounded-full pointer-events-none opacity-0 hover:opacity-100 transition-opacity">
+          💡 Click and drag to scroll horizontally
         </div>
       </div>
+
+      {/* Custom Scrollbar Styles */}
+      <style>{`
+        /* Webkit browsers (Chrome, Safari, Edge) */
+        .overflow-x-auto::-webkit-scrollbar {
+          height: 8px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-track {
+          background: #F1F5F9;
+          border-radius: 4px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-thumb {
+          background: #CBD5E1;
+          border-radius: 4px;
+        }
+        .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+          background: #94A3B8;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar {
+          width: 6px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-track {
+          background: #F1F5F9;
+          border-radius: 3px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-thumb {
+          background: #CBD5E1;
+          border-radius: 3px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+          background: #94A3B8;
+        }
+      `}</style>
     </div>
   );
 };
