@@ -24,7 +24,7 @@ interface Attachment {
   url?: string;
 }
 
-interface Message {
+export interface Message {
   id: string;
   content: string;
   sender: 'user' | 'agent';
@@ -35,6 +35,11 @@ interface Message {
   visibility: 'project' | 'team' | 'private';
   canConvertToTask?: boolean;
   canConvertToDocument?: boolean;
+  feedback?: {
+    type: 'positive' | 'negative';
+    comment?: string;
+    timestamp: string;
+  };
 }
 
 interface ProjectMetrics {
@@ -84,59 +89,95 @@ export const useProjectLogic = (
     return mentions;
   }, [agents]);
 
-  // Simulate agent-specific response
+  // Simulate agent-specific response with personality
   const createAgentResponse = useCallback((agent: Agent, query: string): Message => {
     const roleResponses: Record<string, string[]> = {
       'Project Manager': [
-        'From a project management perspective, I recommend focusing on the next milestone.',
-        'I can update the timeline and create tasks if you confirm.',
+        'From a project management perspective, I recommend focusing on the next milestone. Let me break down the timeline for you.',
+        'I can update the project schedule and create actionable tasks if you confirm the approach.',
+        'Based on current velocity, we should adjust our sprint goals. I\'ll create a revised timeline.',
+        'I\'ve identified 3 critical path items that need attention. Shall I prioritize them?',
       ],
       'Business Analyst': [
-        'I captured the requirement: we should translate this into user stories.',
-        'Suggested acceptance criteria: ...',
+        'I\'ve captured this requirement. Let me translate it into structured user stories with acceptance criteria.',
+        'From a business perspective, this aligns with our value proposition. Here\'s how we can document it:',
+        'Suggested acceptance criteria: [Given-When-Then format]. Should I create the full specification?',
+        'This requirement impacts 3 existing features. I recommend a dependency analysis before proceeding.',
       ],
       'Data Analyst': [
-        'I can run a quick aggregation on the provided dataset and return a summary.',
-        'Preliminary insight: the KPI increased by 12% month-over-month.',
+        'I can run a quick aggregation on the provided dataset and return actionable insights.',
+        'Preliminary analysis shows: the KPI increased by 12% month-over-month. Let me create a detailed report.',
+        'I\'ve identified 3 data patterns that warrant investigation. Shall I deep-dive into each?',
+        'Based on historical trends, I project a 15% improvement if we implement this change. Here\'s the data:',
       ],
       'Strategy Consultant': [
-        'Market trend indicates a shift towards ...',
-        'Recommended strategic option: pursue a pilot in this segment.',
+        'Market trend analysis indicates a significant shift towards digital transformation in this sector.',
+        'From a strategic standpoint, I recommend pursuing a pilot program in this segment first.',
+        'Competitive landscape assessment: 2 key players are vulnerable. Here\'s our opportunity window.',
+        'Long-term strategic option: This positions us for market leadership within 18-24 months.',
       ],
       'PMO Analyst': [
-        'Governance check: resource allocation variance is 8% vs baseline.',
-        'I can create a PMO report and share it.',
+        'Governance check complete: Resource allocation variance is 8% vs baseline - within tolerance.',
+        'I can generate a comprehensive PMO report covering budget, timeline, and risk metrics.',
+        'Portfolio health assessment: This project is tracking green on all governance indicators.',
+        'Compliance review: All deliverables meet our quality gates. Documentation is audit-ready.',
       ],
     };
 
-    const responses = roleResponses[agent.role] || ["I'll help you with that request."];
-    const content = `${responses[Math.floor(Math.random() * responses.length)]}`;
+    const responses = roleResponses[agent.role] || ["I'll help you with that request. Let me analyze this for you."];
+    const selectedResponse = responses[Math.floor(Math.random() * responses.length)];
+
+    // Add contextual information based on query
+    const contextualAdditions = [];
+    if (query.toLowerCase().includes('timeline') || query.toLowerCase().includes('schedule')) {
+      contextualAdditions.push('⏰ Timeline consideration noted');
+    }
+    if (query.toLowerCase().includes('budget') || query.toLowerCase().includes('cost')) {
+      contextualAdditions.push('💰 Budget impact will be assessed');
+    }
+    if (query.toLowerCase().includes('risk')) {
+      contextualAdditions.push('⚠️ Risk analysis included');
+    }
+
+    const fullResponse = contextualAdditions.length > 0
+      ? `${selectedResponse}\n\n${contextualAdditions.join(' • ')}`
+      : selectedResponse;
 
     return {
       id: `msg-${Date.now()}-${agent.id}`,
-      content: `**${agent.name} (${agent.role})**: ${content}`,
+      content: `**${agent.name} (${agent.role})**: ${fullResponse}`,
       sender: 'agent',
       agentId: agent.id,
       timestamp: new Date(),
       visibility: 'project',
       mentions: [],
-      canConvertToTask: true,
-      canConvertToDocument: true,
+      canConvertToTask: agent.role === 'Project Manager',
+      canConvertToDocument: agent.role === 'Business Analyst' || agent.role === 'Data Analyst',
     };
   }, []);
 
-  // Generate collaborative response
+  // Generate collaborative response from multiple agents
   const generateCollaborativeResponse = useCallback((query: string): Message => {
-    const responses = [
-      "Based on our collective analysis, here's what we recommend...",
-      "From a project management perspective, we should prioritize the next milestone.",
-      "The data suggests we need to focus on the top 3 drivers.",
-      "Our strategic assessment indicates opportunity in the new segment.",
+    const collaborativeResponses = [
+      "Based on our collective analysis across PM, BA, and Strategy perspectives, here's our recommended approach:",
+      "Our integrated team assessment suggests a phased implementation strategy:",
+      "From project, data, and governance viewpoints, we align on these key priorities:",
+      "Cross-functional analysis complete. Here's what each discipline recommends:",
     ];
+
+    const insights = [
+      "\n\n📊 **Data**: Metrics support this direction with 94% confidence",
+      "\n🎯 **Strategy**: Aligns with Q2 objectives and market positioning",
+      "\n📋 **Governance**: Meets all compliance requirements",
+      "\n⏱️ **Timeline**: Achievable within current sprint capacity",
+    ];
+
+    const selectedResponse = collaborativeResponses[Math.floor(Math.random() * collaborativeResponses.length)];
+    const selectedInsights = insights.slice(0, 2 + Math.floor(Math.random() * 2)).join('');
 
     return {
       id: `msg-${Date.now()}`,
-      content: responses[Math.floor(Math.random() * responses.length)],
+      content: `${selectedResponse}${selectedInsights}`,
       sender: 'agent',
       agentId: 'collaborative',
       timestamp: new Date(),
@@ -147,7 +188,7 @@ export const useProjectLogic = (
     };
   }, []);
 
-  // Send message handler
+  // Send message handler with enhanced logic
   const handleSendMessage = useCallback((
     newMessage: string,
     selectedAgents: string[],
@@ -159,6 +200,7 @@ export const useProjectLogic = (
 
     const mentions = extractMentions(trimmed);
 
+    // Create user message
     const userMsg: Message = {
       id: `msg-${Date.now()}-user`,
       content: trimmed,
@@ -173,26 +215,40 @@ export const useProjectLogic = (
 
     setMessages((prev) => [...prev, userMsg]);
 
-    // Simulate agent responses
-    const targetAgentIds = selectedAgents.length > 0 ? selectedAgents : agents.map((a) => a.id);
+    // Determine which agents should respond
+    const targetAgentIds = selectedAgents.length > 0 
+      ? selectedAgents 
+      : mentions.length > 0 
+        ? mentions 
+        : agents.map((a) => a.id);
 
     // Mark selected agents as thinking
     setAgents((prev) =>
-      prev.map((a) => (targetAgentIds.includes(a.id) ? { ...a, status: 'thinking' } : a)),
+      prev.map((a) => (targetAgentIds.includes(a.id) ? { ...a, status: 'thinking' as const } : a)),
     );
 
+    // Simulate agent response delay (realistic thinking time)
+    const responseDelay = 600 + Math.random() * 400; // 600-1000ms
+
     setTimeout(() => {
-      const responses: Message[] =
-        selectedAgents.length === 0
-          ? [generateCollaborativeResponse(trimmed)]
-          : targetAgentIds
-              .map((id) => agents.find((a) => a.id === id))
-              .filter(Boolean)
-              .map((a) => createAgentResponse(a as Agent, trimmed));
+      let responses: Message[];
+
+      if (selectedAgents.length === 0 && mentions.length === 0) {
+        // Collaborative response when no specific agents selected
+        responses = [generateCollaborativeResponse(trimmed)];
+      } else {
+        // Individual agent responses
+        responses = targetAgentIds
+          .map((id) => agents.find((a) => a.id === id))
+          .filter((agent): agent is Agent => agent !== undefined)
+          .map((agent) => createAgentResponse(agent, trimmed));
+      }
 
       setMessages((prev) => [...prev, ...responses]);
+      
+      // Update agent statuses back to active
       setAgents((prev) =>
-        prev.map((a) => (targetAgentIds.includes(a.id) ? { ...a, status: 'active' } : a)),
+        prev.map((a) => (targetAgentIds.includes(a.id) ? { ...a, status: 'active' as const, lastActivity: 'just now' } : a)),
       );
 
       // Update metrics
@@ -201,16 +257,16 @@ export const useProjectLogic = (
         totalQueries: m.totalQueries + 1,
         activeAgents: agents.filter((a) => a.status === 'active').length,
       }));
-    }, 800);
+    }, responseDelay);
   }, [agents, extractMentions, createAgentResponse, generateCollaborativeResponse]);
 
-  // Handle project switching
+  // Handle project switching with context preservation
   const handleProjectSwitch = useCallback((newProject: Project) => {
     setCurrentProject(newProject);
     
-    const welcomeMessage = {
+    const welcomeMessage: Message = {
       id: `sys-${Date.now()}`,
-      content: `Switched to project: ${newProject.name} 🔄\n\nClient: ${newProject.client.name}\nStatus: ${newProject.status}\nProgress: ${newProject.progress}%\n\nYour AI team is now ready to assist with this project. How can we help you today?`,
+      content: `Switched to project: ${newProject.name} 🔄\n\nClient: ${newProject.client.name}\nStatus: ${newProject.status}\nProgress: ${newProject.progress}%\nBudget: ${newProject.budget}\nTeam Size: ${newProject.teamSize}\n\nYour AI team is now ready to assist with this project. How can we help you today?`,
       sender: 'agent',
       agentId: 'collaborative',
       timestamp: new Date(),
@@ -221,14 +277,21 @@ export const useProjectLogic = (
     
     setMessages([welcomeMessage]);
     
-    toast(`Switched to project: ${newProject.name}`, {
-      icon: '🔄'
+    toast(`Switched to: ${newProject.name}`, {
+      icon: '🔄',
+      duration: 3000,
     });
   }, []);
 
-  // Handle agent selection update
+  // Handle agent selection update with validation
   const handleAgentsUpdate = useCallback((newAgentIds: string[]) => {
     const updatedAgents = initialAgents.filter(agent => newAgentIds.includes(agent.id));
+    
+    if (updatedAgents.length === 0) {
+      toast.error('At least one agent must be selected');
+      return;
+    }
+
     setAgents(updatedAgents);
     
     setMetrics(prev => ({
@@ -236,10 +299,10 @@ export const useProjectLogic = (
       activeAgents: updatedAgents.filter(a => a.status === 'active').length
     }));
     
-    const agentNames = updatedAgents.map(agent => `${agent.name} (${agent.role})`).join(', ');
+    const agentNames = updatedAgents.map(agent => `${agent.avatar} ${agent.name} (${agent.role})`).join('\n• ');
     const systemMessage: Message = {
       id: `sys-${Date.now()}`,
-      content: `Agent team updated! 🤖\n\nActive agents: ${agentNames}\n\nYour new AI team is ready to assist with ${currentProject.name}.`,
+      content: `Agent team updated! 🤖\n\nActive agents:\n• ${agentNames}\n\nYour ${updatedAgents.length}-agent team is ready to assist with ${currentProject.name}.`,
       sender: 'agent',
       agentId: 'system',
       timestamp: new Date(),
@@ -249,14 +312,23 @@ export const useProjectLogic = (
     };
     
     setMessages(prev => [...prev, systemMessage]);
+    
+    toast.success(`Team updated: ${updatedAgents.length} agents active`, {
+      duration: 3000,
+    });
   }, [currentProject.name, initialAgents]);
+
+  // Expose setMessages for external updates (e.g., feedback)
+  const updateMessages = useCallback((updater: Message[] | ((prev: Message[]) => Message[])) => {
+    setMessages(updater);
+  }, []);
 
   return {
     currentProject,
     agents,
     metrics,
     messages,
-    setMessages,
+    setMessages: updateMessages,
     handleSendMessage,
     handleProjectSwitch,
     handleAgentsUpdate
