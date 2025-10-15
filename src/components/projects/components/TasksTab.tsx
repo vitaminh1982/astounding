@@ -1,5 +1,5 @@
 /**
- * Tasks tab component - Kanban Board Layout with improved scrolling
+ * Tasks tab component - Kanban Board Layout with proper height management
  */
 import React, { useRef, useState, useEffect } from 'react';
 import { CheckSquare, Search, Plus, Filter, LayoutGrid, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -74,8 +74,9 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
 
   useEffect(() => {
     checkScrollPosition();
-    window.addEventListener('resize', checkScrollPosition);
-    return () => window.removeEventListener('resize', checkScrollPosition);
+    const handleResize = () => checkScrollPosition();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, [filteredTasks]);
 
   // Smooth scroll functions
@@ -127,47 +128,52 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
   const showFilters = taskFilter.agent !== 'all' || taskFilter.search !== '';
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-br from-gray-50 to-gray-100">
-      {/* Header */}
-      <div className="p-6 bg-white border-b shadow-sm flex-shrink-0">
+    <div className="flex flex-col h-full min-h-0 bg-gradient-to-br from-gray-50 to-gray-100">
+      {/* Header - Fixed height */}
+      <div className="flex-shrink-0 p-6 bg-white border-b shadow-sm">
         <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-          <div>
+          <div className="flex-shrink-0">
             <h3 className="text-2xl font-bold text-gray-900 mb-1">Task Board</h3>
             <p className="text-sm text-gray-500">
               {filteredTasks.length} tasks across {agents.length} agents
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto flex-shrink-0">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
               <input
                 type="text"
                 placeholder="Search tasks..."
                 value={taskFilter.search}
                 onChange={(e) => setTaskFilter(prev => ({ ...prev, search: e.target.value }))}
-                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm w-full sm:w-64 bg-white"
+                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm w-full sm:w-64 bg-white transition-shadow"
               />
             </div>
 
             {/* Agent Filter */}
             <div className="relative">
-              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4 pointer-events-none" />
               <select
                 value={taskFilter.agent}
                 onChange={(e) => setTaskFilter(prev => ({ ...prev, agent: e.target.value }))}
-                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm appearance-none bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full sm:w-auto"
+                className="pl-10 pr-8 py-2 border border-gray-200 rounded-lg text-sm appearance-none bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full sm:w-auto cursor-pointer transition-shadow"
               >
                 <option value="all">All Agents</option>
                 {agents.map(agent => (
                   <option key={agent.id} value={agent.name}>{agent.name}</option>
                 ))}
               </select>
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
             </div>
 
             {/* Add Task Button */}
-            <button className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors text-sm font-medium shadow-sm">
+            <button className="flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 active:bg-indigo-800 transition-colors text-sm font-medium shadow-sm hover:shadow-md">
               <Plus className="w-4 h-4" />
               New Task
             </button>
@@ -176,33 +182,39 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
 
         {/* Active Filters Badge */}
         {showFilters && (
-          <div className="mt-3 flex items-center gap-2 flex-wrap">
-            <span className="text-xs text-gray-500">Active filters:</span>
+          <div className="mt-4 flex items-center gap-2 flex-wrap">
+            <span className="text-xs text-gray-500 font-medium">Active filters:</span>
             {taskFilter.agent !== 'all' && (
-              <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium flex items-center gap-1">
+              <span className="px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium flex items-center gap-1.5">
                 Agent: {taskFilter.agent}
                 <button 
                   onClick={() => setTaskFilter(prev => ({ ...prev, agent: 'all' }))}
-                  className="hover:bg-indigo-200 rounded-full p-0.5"
+                  className="hover:bg-indigo-200 rounded-full p-0.5 transition-colors ml-1"
+                  aria-label="Remove agent filter"
                 >
-                  ×
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </span>
             )}
             {taskFilter.search && (
-              <span className="px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium flex items-center gap-1">
-                Search: "{taskFilter.search}"
+              <span className="px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-full text-xs font-medium flex items-center gap-1.5">
+                Search: "{taskFilter.search.length > 20 ? taskFilter.search.substring(0, 20) + '...' : taskFilter.search}"
                 <button 
                   onClick={() => setTaskFilter(prev => ({ ...prev, search: '' }))}
-                  className="hover:bg-indigo-200 rounded-full p-0.5"
+                  className="hover:bg-indigo-200 rounded-full p-0.5 transition-colors ml-1"
+                  aria-label="Clear search"
                 >
-                  ×
+                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
                 </button>
               </span>
             )}
             <button 
               onClick={() => setTaskFilter({ agent: 'all', status: 'all', search: '' })}
-              className="text-xs text-indigo-600 hover:text-indigo-800 font-medium"
+              className="text-xs text-indigo-600 hover:text-indigo-800 font-medium hover:underline transition-colors"
             >
               Clear all
             </button>
@@ -210,13 +222,13 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
         )}
       </div>
 
-      {/* Kanban Board with Navigation */}
-      <div className="flex-1 relative overflow-hidden">
+      {/* Kanban Board Container - Takes remaining space */}
+      <div className="flex-1 min-h-0 relative">
         {/* Left Scroll Button */}
         {canScrollLeft && (
           <button
             onClick={scrollToLeft}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 border border-gray-200"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-5 h-5 text-gray-700" />
@@ -227,7 +239,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
         {canScrollRight && (
           <button
             onClick={scrollToRight}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-50 shadow-lg rounded-full p-3 transition-all duration-200 hover:scale-110 border border-gray-200"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-5 h-5 text-gray-700" />
@@ -242,54 +254,56 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
           onMouseUp={handleMouseUp}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="h-full overflow-x-auto overflow-y-hidden p-6 cursor-grab select-none"
+          className="h-full overflow-x-auto overflow-y-hidden p-6 cursor-grab active:cursor-grabbing select-none"
           style={{ 
             scrollbarWidth: 'thin',
             scrollbarColor: '#CBD5E1 #F1F5F9'
           }}
         >
-          <div className="flex gap-6 h-full min-w-max pb-2">
+          {/* Columns Container */}
+          <div className="flex gap-6 h-full min-w-max">
             {columns.map(column => {
               const columnTasks = getTasksByStatus(column.id);
               return (
                 <div 
                   key={column.id} 
-                  className="flex flex-col w-80 bg-white rounded-xl shadow-sm border border-gray-200 flex-shrink-0"
+                  className="flex flex-col w-80 h-full bg-white rounded-xl shadow-sm border border-gray-200"
                   onMouseDown={(e) => e.stopPropagation()} // Prevent drag on column interaction
                 >
-                  {/* Column Header */}
-                  <div className="p-4 border-b border-gray-200 flex-shrink-0">
+                  {/* Column Header - Fixed */}
+                  <div className="flex-shrink-0 p-4 border-b border-gray-200 bg-white rounded-t-xl">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
-                        <div className={`w-3 h-3 rounded-full ${column.color}`}></div>
+                        <div className={`w-3 h-3 rounded-full ${column.color} shadow-sm`}></div>
                         <h4 className="font-semibold text-gray-900">{column.title}</h4>
                       </div>
-                      <span className="bg-gray-100 text-gray-600 text-xs font-medium px-2 py-1 rounded-full">
+                      <span className="bg-gray-100 text-gray-600 text-xs font-bold px-2.5 py-1 rounded-full min-w-[2rem] text-center">
                         {columnTasks.length}
                       </span>
                     </div>
-                    <div className="w-full bg-gray-200 h-1 rounded-full overflow-hidden">
+                    <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden">
                       <div 
-                        className={`h-full ${column.color} transition-all duration-300`}
+                        className={`h-full ${column.color} transition-all duration-500 ease-out`}
                         style={{ width: `${filteredTasks.length > 0 ? (columnTasks.length / filteredTasks.length) * 100 : 0}%` }}
                       ></div>
                     </div>
                   </div>
 
-                  {/* Column Content - Scrollable */}
+                  {/* Column Content - Scrollable, takes remaining space */}
                   <div 
-                    className="flex-1 overflow-y-auto p-4 space-y-3"
+                    className="flex-1 min-h-0 overflow-y-auto p-4 space-y-3 scrollbar-thin"
                     style={{ 
                       scrollbarWidth: 'thin',
                       scrollbarColor: '#CBD5E1 #F1F5F9'
                     }}
                   >
                     {columnTasks.length === 0 ? (
-                      <div className="text-center py-8">
-                        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <div className="flex flex-col items-center justify-center h-full min-h-[200px] text-center py-8">
+                        <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-200 rounded-full flex items-center justify-center mx-auto mb-3 text-gray-400">
                           {column.icon}
                         </div>
-                        <p className="text-sm text-gray-400">No tasks</p>
+                        <p className="text-sm text-gray-400 font-medium">No tasks</p>
+                        <p className="text-xs text-gray-400 mt-1">Tasks will appear here</p>
                       </div>
                     ) : (
                       columnTasks.map(task => (
@@ -302,9 +316,9 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
                     )}
                   </div>
 
-                  {/* Column Footer */}
-                  <div className="p-3 border-t border-gray-100 flex-shrink-0">
-                    <button className="w-full py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors font-medium flex items-center justify-center gap-2">
+                  {/* Column Footer - Fixed */}
+                  <div className="flex-shrink-0 p-3 border-t border-gray-100 bg-gray-50 rounded-b-xl">
+                    <button className="w-full py-2 text-sm text-gray-600 hover:text-gray-900 hover:bg-white rounded-lg transition-all duration-200 font-medium flex items-center justify-center gap-2 border border-transparent hover:border-gray-200 hover:shadow-sm">
                       <Plus className="w-4 h-4" />
                       Add Task
                     </button>
@@ -315,9 +329,15 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
           </div>
         </div>
 
-        {/* Scroll Hint */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-gray-900/75 text-white text-xs px-3 py-1.5 rounded-full pointer-events-none opacity-0 hover:opacity-100 transition-opacity">
-          💡 Click and drag to scroll horizontally
+        {/* Scroll Hint Tooltip */}
+        <div 
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-gray-900/90 text-white text-xs px-4 py-2 rounded-full pointer-events-none transition-opacity duration-300 opacity-0 hover:opacity-0 flex items-center gap-2 shadow-lg"
+          style={{ animation: 'fadeInOut 3s ease-in-out 1s' }}
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+          </svg>
+          Click and drag to scroll horizontally
         </div>
       </div>
 
@@ -325,33 +345,44 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
       <style>{`
         /* Webkit browsers (Chrome, Safari, Edge) */
         .overflow-x-auto::-webkit-scrollbar {
-          height: 8px;
+          height: 10px;
         }
         .overflow-x-auto::-webkit-scrollbar-track {
           background: #F1F5F9;
-          border-radius: 4px;
+          border-radius: 5px;
+          margin: 0 1.5rem;
         }
         .overflow-x-auto::-webkit-scrollbar-thumb {
           background: #CBD5E1;
-          border-radius: 4px;
+          border-radius: 5px;
+          border: 2px solid #F1F5F9;
         }
         .overflow-x-auto::-webkit-scrollbar-thumb:hover {
           background: #94A3B8;
         }
 
-        .overflow-y-auto::-webkit-scrollbar {
+        .overflow-y-auto::-webkit-scrollbar,
+        .scrollbar-thin::-webkit-scrollbar {
           width: 6px;
         }
-        .overflow-y-auto::-webkit-scrollbar-track {
+        .overflow-y-auto::-webkit-scrollbar-track,
+        .scrollbar-thin::-webkit-scrollbar-track {
           background: #F1F5F9;
           border-radius: 3px;
         }
-        .overflow-y-auto::-webkit-scrollbar-thumb {
+        .overflow-y-auto::-webkit-scrollbar-thumb,
+        .scrollbar-thin::-webkit-scrollbar-thumb {
           background: #CBD5E1;
           border-radius: 3px;
         }
-        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+        .overflow-y-auto::-webkit-scrollbar-thumb:hover,
+        .scrollbar-thin::-webkit-scrollbar-thumb:hover {
           background: #94A3B8;
+        }
+
+        @keyframes fadeInOut {
+          0%, 100% { opacity: 0; }
+          10%, 90% { opacity: 1; }
         }
       `}</style>
     </div>
