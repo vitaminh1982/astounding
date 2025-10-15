@@ -35,6 +35,11 @@ export interface Message {
   visibility: 'project' | 'team' | 'private';
   canConvertToTask?: boolean;
   canConvertToDocument?: boolean;
+    feedback?: {
+    type: 'positive' | 'negative';
+    comment?: string;
+    timestamp: Date;
+  };
 }
 
 export interface Task {
