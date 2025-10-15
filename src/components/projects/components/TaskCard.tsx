@@ -16,10 +16,10 @@ interface TaskCardProps {
 const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
   const getPriorityStyles = (priority: Task['priority']) => {
     switch (priority) {
-      case 'high': return 'border-l-red-500 bg-red-50';
-      case 'medium': return 'border-l-yellow-500 bg-yellow-50';
-      case 'low': return 'border-l-green-500 bg-green-50';
-      default: return 'border-l-gray-500 bg-gray-50';
+      case 'high': return 'border-l-red-500 bg-red-50/30';
+      case 'medium': return 'border-l-yellow-500 bg-yellow-50/30';
+      case 'low': return 'border-l-green-500 bg-green-50/30';
+      default: return 'border-l-gray-500 bg-gray-50/30';
     }
   };
 
@@ -33,19 +33,31 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
   };
 
   return (
-    <div className={`bg-white rounded-lg border-l-4 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer group ${getPriorityStyles(task.priority)}`}>
+    <div 
+      className={`bg-white rounded-lg border-l-4 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer group ${getPriorityStyles(task.priority)}`}
+      onClick={(e) => {
+        // Handle card click (e.g., open modal)
+        console.log('Task clicked:', task.id);
+      }}
+    >
       {/* Card Header */}
       <div className="p-4">
         <div className="flex items-start justify-between mb-3">
           <h4 className="font-semibold text-gray-900 text-sm leading-tight flex-1 pr-2 group-hover:text-indigo-600 transition-colors">
             {task.name}
           </h4>
-          <button className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded">
+          <button 
+            className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Handle more options
+            }}
+          >
             <MoreVertical className="w-4 h-4 text-gray-400" />
           </button>
         </div>
 
-        <p className="text-xs text-gray-600 mb-3 line-clamp-2">
+        <p className="text-xs text-gray-600 mb-3 line-clamp-2 leading-relaxed">
           {task.description}
         </p>
 
@@ -64,11 +76,11 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
 
         {/* Agent & Date Info */}
         <div className="flex items-center justify-between text-xs text-gray-500 mb-3 pb-3 border-b border-gray-100">
-          <div className="flex items-center gap-1">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xs font-medium">
-              {task.assignedAgent.charAt(0)}
+          <div className="flex items-center gap-1.5">
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white shadow-sm">
+              {task.assignedAgent.charAt(0).toUpperCase()}
             </div>
-            <span className="font-medium text-gray-700">{task.assignedAgent}</span>
+            <span className="font-medium text-gray-700 text-xs">{task.assignedAgent}</span>
           </div>
           <div className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
@@ -84,17 +96,20 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
                 e.stopPropagation();
                 onRetryTask(task.id);
               }}
-              className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-indigo-50 text-indigo-700 rounded hover:bg-indigo-100 transition-colors text-xs font-medium"
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-indigo-50 text-indigo-700 rounded-lg hover:bg-indigo-100 active:bg-indigo-200 transition-colors text-xs font-medium"
             >
-              <RotateCcw className="w-3 h-3" />
+              <RotateCcw className="w-3.5 h-3.5" />
               Retry
             </button>
           )}
           <button 
-            onClick={(e) => e.stopPropagation()}
-            className="flex-1 flex items-center justify-center gap-1 px-2 py-1.5 bg-gray-50 text-gray-700 rounded hover:bg-gray-100 transition-colors text-xs font-medium"
+            onClick={(e) => {
+              e.stopPropagation();
+              // Handle view action
+            }}
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors text-xs font-medium"
           >
-            <Eye className="w-3 h-3" />
+            <Eye className="w-3.5 h-3.5" />
             View
           </button>
         </div>
