@@ -127,7 +127,7 @@ function AppContent() {
       case 'workflows':
         return <WorkflowsPage />;
       case 'projects':
-        return <ProjectPage />;
+        return <ProjectPage onNavigate={handleNavigation} />;
       case 'conversations':
         return <ConversationsPage />;
       case 'clients':
