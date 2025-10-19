@@ -338,6 +338,3 @@ export const useProjectLogic = (
     handleAgentsUpdate
   };
 };
-
-
-//
