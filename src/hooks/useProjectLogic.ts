@@ -129,14 +129,17 @@ export const useProjectLogic = (
 
     // Add contextual information based on query
     const contextualAdditions = [];
-    if (query.toLowerCase().includes('timeline') || query.toLowerCase().includes('schedule')) {
-      contextualAdditions.push('⏰ Timeline consideration noted');
-    }
-    if (query.toLowerCase().includes('budget') || query.toLowerCase().includes('cost')) {
-      contextualAdditions.push('💰 Budget impact will be assessed');
-    }
-    if (query.toLowerCase().includes('risk')) {
-      contextualAdditions.push('⚠️ Risk analysis included');
+    if (query) {
+      const lowerQuery = query.toLowerCase();
+      if (lowerQuery.includes('timeline') || lowerQuery.includes('schedule')) {
+        contextualAdditions.push('⏰ Timeline consideration noted');
+      }
+      if (lowerQuery.includes('budget') || lowerQuery.includes('cost')) {
+        contextualAdditions.push('💰 Budget impact will be assessed');
+      }
+      if (lowerQuery.includes('risk')) {
+        contextualAdditions.push('⚠️ Risk analysis included');
+      }
     }
 
     const fullResponse = contextualAdditions.length > 0
@@ -195,6 +198,7 @@ export const useProjectLogic = (
     visibility: 'project' | 'team' | 'private',
     attachments: Attachment[]
   ) => {
+    if (!newMessage) return;
     const trimmed = newMessage.trim();
     if (!trimmed && attachments.length === 0) return;
 
