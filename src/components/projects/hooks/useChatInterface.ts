@@ -11,7 +11,6 @@ export const useChatInterface = (
   onRemoveAttachment: (attachmentId: string) => void,
   onConvertMessage: (messageId: string, type: 'task' | 'document') => void
 ) => {
-  const [activeTab, setActiveTab] = useState<TabType>('chat');
   const [isNearBottom, setIsNearBottom] = useState(true);
   const [showScrollButton, setShowScrollButton] = useState(false);
   
@@ -29,7 +28,7 @@ export const useChatInterface = (
     const container = messageContainerRef.current;
     if (!container) return true;
 
-    const threshold = 100; // pixels from bottom
+    const threshold = 100;
     const position = container.scrollHeight - container.scrollTop - container.clientHeight;
     return position < threshold;
   }, []);
@@ -44,7 +43,6 @@ export const useChatInterface = (
     const nearBottom = checkIfNearBottom();
     setIsNearBottom(nearBottom);
 
-    // Show scroll-to-bottom button when user scrolls up
     const scrolledUp = container.scrollHeight - container.scrollTop - container.clientHeight > 200;
     setShowScrollButton(scrolledUp);
   }, [checkIfNearBottom]);
@@ -57,28 +55,18 @@ export const useChatInterface = (
   }, []);
 
   /**
-   * Auto-scroll to bottom only when:
-   * 1. NOT on initial mount (respect page-level scroll position)
-   * 2. New messages are added
-   * 3. User is already near the bottom (don't interrupt reading)
+   * Auto-scroll to bottom only when appropriate
    */
   useEffect(() => {
-    // Skip ALL scrolling on initial mount to respect page scroll position
     if (isInitialMount.current) {
       isInitialMount.current = false;
       previousMessageCount.current = initialMessages.length;
-      
-      // Mark that we've handled initial position (but don't scroll)
       hasScrolledToInitialPosition.current = true;
       return;
     }
 
-    // Only scroll if message count increased (new message added)
     const messageCountIncreased = initialMessages.length > previousMessageCount.current;
     
-    // Auto-scroll only if:
-    // - New message was added
-    // - User is near bottom OR it's their first interaction after page load
     if (messageCountIncreased && (isNearBottom || !hasScrolledToInitialPosition.current)) {
       scrollToBottom('smooth');
       hasScrolledToInitialPosition.current = true;
@@ -86,13 +74,6 @@ export const useChatInterface = (
     
     previousMessageCount.current = initialMessages.length;
   }, [initialMessages, isNearBottom, scrollToBottom]);
-
-  /**
-   * Handle tab changes
-   */
-  const handleTabChange = useCallback((tab: TabType) => {
-    setActiveTab(tab);
-  }, []);
 
   /**
    * Trigger file input click
@@ -110,8 +91,6 @@ export const useChatInterface = (
   }, [scrollToBottom]);
 
   return {
-    activeTab,
-    setActiveTab: handleTabChange,
     messagesEndRef,
     messageContainerRef,
     fileInputRef,
