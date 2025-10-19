@@ -1,7 +1,9 @@
 /**
- * Main chat interface component for project collaboration - Enhanced with Feedback
+ * Main chat interface component for project collaboration
+ * Manages chat messages, tasks, documents, and conversation history
  */
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
+import { toast } from 'react-hot-toast';
 import ChatHeader from './components/ChatHeader';
 import MessageList from './components/MessageList';
 import MessageInput from './components/MessageInput';
@@ -12,15 +14,17 @@ import ScrollToBottomButton from './components/ScrollToBottomButton';
 import { useChatInterface } from './hooks/useChatInterface';
 import { Agent, Attachment, Message, TabType } from './types';
 
+// ============================================================================
+// TYPES
+// ============================================================================
+
 interface ChatInterfaceProps {
-  activeTab: TabType;
-  setActiveTab: (tab: TabType) => void;
   selectedAgents: string[];
   agents: Agent[];
   visibility: 'project' | 'team' | 'private';
   setVisibility: (visibility: 'project' | 'team' | 'private') => void;
   messages: Message[];
-  setMessages?: (messages: Message[] | ((prev: Message[]) => Message[])) => void;
+  setMessages: (messages: Message[] | ((prev: Message[]) => Message[])) => void;
   newMessage: string;
   setNewMessage: (message: string) => void;
   attachments: Attachment[];
@@ -32,13 +36,26 @@ interface ChatInterfaceProps {
   formatFileSize: (bytes: number) => string;
 }
 
-/**
- * ChatInterface is the main container for project collaboration features
- * including chat, tasks, documents, and history management
- */
+interface FeedbackState {
+  [messageId: string]: {
+    loading: boolean;
+    error: string | null;
+  };
+}
+
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
+const FEEDBACK_API_ENDPOINT = '/api/feedback';
+const CONTEXT_MESSAGE_COUNT = 5;
+const FEEDBACK_TIMEOUT = 10000; // 10 seconds
+
+// ============================================================================
+// COMPONENT
+// ============================================================================
+
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
-  activeTab,
-  setActiveTab,
   selectedAgents,
   agents,
   visibility,
@@ -55,16 +72,29 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   onFeedback,
   formatFileSize
 }) => {
-  const [feedbackError, setFeedbackError] = useState<string | null>(null);
+  
+  // ============================================================================
+  // STATE
+  // ============================================================================
+  
+  const [feedbackStates, setFeedbackStates] = useState<FeedbackState>({});
 
+  // ============================================================================
+  // HOOKS
+  // ============================================================================
+  
   const {
+    activeTab,
+    setActiveTab,
     messagesEndRef,
     messageContainerRef,
     fileInputRef,
     handleFileButtonClick,
     handleScroll,
+    scrollToBottom,
+    handleScrollToBottomClick,
     showScrollButton,
-    handleScrollToBottomClick
+    isNearBottom
   } = useChatInterface(
     messages,
     onSendMessage,
@@ -73,174 +103,245 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     onConvertMessage
   );
 
+  // ============================================================================
+  // COMPUTED VALUES
+  // ============================================================================
+  
+  const activeAgents = useMemo(() => 
+    agents.filter(agent => selectedAgents.includes(agent.id)),
+    [agents, selectedAgents]
+  );
+
+  // ============================================================================
+  // FEEDBACK HANDLERS
+  // ============================================================================
+  
   /**
-   * Handle feedback submission with error handling and optimistic updates
+   * Get conversation context for feedback submission
    */
-  const handleFeedbackSubmission = async (
-    messageId: string,
-    feedback: 'positive' | 'negative',
-    comment?: string
-  ) => {
-    setFeedbackError(null);
-
-    // Optimistic update - immediately update UI
-    if (setMessages) {
-      setMessages(prev => prev.map(msg =>
-        msg.id === messageId
-          ? {
-              ...msg,
-              feedback: {
-                type: feedback,
-                comment,
-                timestamp: new Date()
-              }
-            }
-          : msg
-      ));
-    }
-
-    // Call the provided feedback handler or use default
-    if (onFeedback) {
-      try {
-        await onFeedback(messageId, feedback, comment);
-      } catch (error) {
-        console.error('Failed to submit feedback:', error);
-        setFeedbackError('Failed to submit feedback. Please try again.');
-        
-        // Revert optimistic update on error
-        if (setMessages) {
-          setMessages(prev => prev.map(msg =>
-            msg.id === messageId
-              ? {
-                  ...msg,
-                  feedback: undefined
-                }
-              : msg
-          ));
-        }
-      }
-    } else {
-      // Default feedback handler if none provided
-      try {
-        await defaultFeedbackHandler(messageId, feedback, comment);
-      } catch (error) {
-        console.error('Failed to submit feedback:', error);
-        setFeedbackError('Failed to submit feedback. Please try again.');
-        
-        // Revert optimistic update on error
-        if (setMessages) {
-          setMessages(prev => prev.map(msg =>
-            msg.id === messageId
-              ? {
-                  ...msg,
-                  feedback: undefined
-                }
-              : msg
-          ));
-        }
-      }
-    }
-  };
-
-  /**
-   * Default feedback handler - sends to API endpoint
-   */
-  const defaultFeedbackHandler = async (
-    messageId: string,
-    feedback: 'positive' | 'negative',
-    comment?: string
-  ) => {
-    const message = messages.find(m => m.id === messageId);
-    if (!message) return;
-
-    // Get recent conversation context (last 5 messages)
-    const contextMessages = messages
-      .slice(Math.max(0, messages.length - 5))
+  const getConversationContext = useCallback(() => {
+    return messages
+      .slice(Math.max(0, messages.length - CONTEXT_MESSAGE_COUNT))
       .map(m => ({
         id: m.id,
         content: m.content,
         sender: m.sender,
         timestamp: m.timestamp
       }));
+  }, [messages]);
 
-    const response = await fetch('/api/feedback', {
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        messageId,
-        feedback,
-        comment,
-        timestamp: new Date().toISOString(),
-        messageContent: message.content,
-        selectedAgents,
-        conversationContext: contextMessages,
-        visibility
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to submit feedback');
+  /**
+   * Default feedback handler - sends to API endpoint
+   */
+  const defaultFeedbackHandler = useCallback(async (
+    messageId: string,
+    feedback: 'positive' | 'negative',
+    comment?: string
+  ): Promise<void> => {
+    const message = messages.find(m => m.id === messageId);
+    if (!message) {
+      throw new Error('Message not found');
     }
 
-    return response.json();
-  };
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), FEEDBACK_TIMEOUT);
 
-  const handleResumeSession = (sessionId: string) => {
-    // Switch to chat tab and populate with session context
-    setActiveTab('chat');
-    console.log('Resuming session:', sessionId);
-    
-    // TODO: Load session messages
-    // if (setMessages) {
-    //   loadSessionMessages(sessionId).then(setMessages);
-    // }
-  };
+    try {
+      const response = await fetch(FEEDBACK_API_ENDPOINT, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          messageId,
+          feedback,
+          comment,
+          timestamp: new Date().toISOString(),
+          messageContent: message.content,
+          selectedAgents,
+          conversationContext: getConversationContext(),
+          visibility
+        }),
+        signal: controller.signal
+      });
 
-  const renderTabContent = () => {
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Failed to submit feedback');
+      }
+
+      return response.json();
+    } catch (error) {
+      clearTimeout(timeoutId);
+      
+      if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          throw new Error('Request timeout - please try again');
+        }
+        throw error;
+      }
+      throw new Error('An unexpected error occurred');
+    }
+  }, [messages, selectedAgents, visibility, getConversationContext]);
+
+  /**
+   * Handle feedback submission with optimistic updates and error handling
+   */
+  const handleFeedbackSubmission = useCallback(async (
+    messageId: string,
+    feedback: 'positive' | 'negative',
+    comment?: string
+  ): Promise<void> => {
+    // Prevent duplicate submissions
+    if (feedbackStates[messageId]?.loading) {
+      return;
+    }
+
+    // Set loading state
+    setFeedbackStates(prev => ({
+      ...prev,
+      [messageId]: { loading: true, error: null }
+    }));
+
+    // Store original message for rollback
+    const originalMessage = messages.find(m => m.id === messageId);
+    if (!originalMessage) {
+      setFeedbackStates(prev => ({
+        ...prev,
+        [messageId]: { loading: false, error: 'Message not found' }
+      }));
+      return;
+    }
+
+    // Optimistic update
+    setMessages(prev => prev.map(msg =>
+      msg.id === messageId
+        ? {
+            ...msg,
+            feedback: {
+              type: feedback,
+              comment,
+              timestamp: new Date()
+            }
+          }
+        : msg
+    ));
+
+    try {
+      // Call the provided feedback handler or use default
+      if (onFeedback) {
+        await onFeedback(messageId, feedback, comment);
+      } else {
+        await defaultFeedbackHandler(messageId, feedback, comment);
+      }
+
+      // Success
+      setFeedbackStates(prev => ({
+        ...prev,
+        [messageId]: { loading: false, error: null }
+      }));
+
+      // Show success toast
+      toast.success(
+        feedback === 'positive' 
+          ? 'Thanks for your positive feedback!' 
+          : 'Thanks for your feedback - we\'ll improve!',
+        { duration: 3000 }
+      );
+
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
+      
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Failed to submit feedback. Please try again.';
+
+      // Revert optimistic update
+      setMessages(prev => prev.map(msg =>
+        msg.id === messageId
+          ? { ...msg, feedback: originalMessage.feedback }
+          : msg
+      ));
+
+      // Set error state
+      setFeedbackStates(prev => ({
+        ...prev,
+        [messageId]: { loading: false, error: errorMessage }
+      }));
+
+      // Show error toast
+      toast.error(errorMessage, { duration: 5000 });
+    }
+  }, [feedbackStates, messages, setMessages, onFeedback, defaultFeedbackHandler]);
+
+  // ============================================================================
+  // SESSION HANDLERS
+  // ============================================================================
+  
+  /**
+   * Handle resuming a previous conversation session
+   */
+  const handleResumeSession = useCallback(async (sessionId: string) => {
+    try {
+      setActiveTab('chat');
+      
+      // Show loading state
+      toast.loading('Loading conversation...', { id: 'session-load' });
+
+      // TODO: Implement actual session loading
+      // const sessionMessages = await loadSessionMessages(sessionId);
+      // setMessages(sessionMessages);
+      
+      // For now, just log
+      console.log('Resuming session:', sessionId);
+      
+      // Scroll to bottom after loading
+      setTimeout(() => scrollToBottom('auto'), 100);
+      
+      toast.success('Conversation loaded', { id: 'session-load' });
+    } catch (error) {
+      console.error('Failed to load session:', error);
+      toast.error('Failed to load conversation', { id: 'session-load' });
+    }
+  }, [setActiveTab, scrollToBottom]);
+
+  // ============================================================================
+  // TAB CONTENT RENDERER
+  // ============================================================================
+  
+  /**
+   * Render content based on active tab
+   * Memoized to prevent unnecessary re-renders
+   */
+  const tabContent = useMemo(() => {
     switch (activeTab) {
       case 'chat':
         return (
-          <div className="relative flex flex-col h-full">
-            {/* Feedback Error Toast */}
-            {feedbackError && (
-              <div className="mx-4 mt-4 mb-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-red-800">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                  </svg>
-                  <span>{feedbackError}</span>
-                </div>
-                <button
-                  onClick={() => setFeedbackError(null)}
-                  className="text-red-600 hover:text-red-800"
-                >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </div>
-            )}
-
+          <div className="flex-1 flex flex-col relative">
             <MessageList
               messages={messages}
               messagesEndRef={messagesEndRef}
               messageContainerRef={messageContainerRef}
               onConvertMessage={onConvertMessage}
               onFeedback={handleFeedbackSubmission}
+              feedbackStates={feedbackStates}
               formatFileSize={formatFileSize}
               onScroll={handleScroll}
             />
-
-            {/* Scroll to bottom button */}
+            
+            {/* Scroll to Bottom Button */}
             {showScrollButton && (
-              <ScrollToBottomButton onClick={handleScrollToBottomClick} />
+              <ScrollToBottomButton 
+                onClick={handleScrollToBottomClick}
+                messageCount={messages.length}
+              />
             )}
 
             <MessageInput
               selectedAgents={selectedAgents}
-              agents={agents}
+              agents={activeAgents}
               visibility={visibility}
               setVisibility={setVisibility}
               newMessage={newMessage}
@@ -255,28 +356,88 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
             />
           </div>
         );
+
       case 'documents':
         return <DocumentsTab />;
+
       case 'tasks':
-        return <TasksTab agents={agents} />;
+        return <TasksTab agents={activeAgents} />;
+
       case 'history':
         return (
           <HistoryTab 
-            agents={agents} 
+            agents={activeAgents}
             onResumeSession={handleResumeSession}
           />
         );
-      default:
-        return null;
-    }
-  };
 
+      default:
+        return (
+          <div className="flex-1 flex items-center justify-center text-gray-500">
+            <p>Select a tab to view content</p>
+          </div>
+        );
+    }
+  }, [
+    activeTab,
+    messages,
+    messagesEndRef,
+    messageContainerRef,
+    onConvertMessage,
+    handleFeedbackSubmission,
+    feedbackStates,
+    formatFileSize,
+    handleScroll,
+    showScrollButton,
+    handleScrollToBottomClick,
+    selectedAgents,
+    activeAgents,
+    visibility,
+    setVisibility,
+    newMessage,
+    setNewMessage,
+    attachments,
+    onSendMessage,
+    onFileUpload,
+    onRemoveAttachment,
+    fileInputRef,
+    handleFileButtonClick,
+    handleResumeSession
+  ]);
+
+  // ============================================================================
+  // VALIDATION
+  // ============================================================================
+  
+  // Warn if no agents are available
+  React.useEffect(() => {
+    if (agents.length === 0) {
+      console.warn('ChatInterface: No agents available');
+    }
+    if (selectedAgents.length === 0) {
+      console.warn('ChatInterface: No agents selected');
+    }
+  }, [agents, selectedAgents]);
+
+  // ============================================================================
+  // RENDER
+  // ============================================================================
+  
   return (
     <div className="bg-white rounded-lg shadow border h-[calc(100vh-14rem)] flex flex-col overflow-hidden">
-      <ChatHeader activeTab={activeTab} onTabChange={setActiveTab} />
-      {renderTabContent()}
+      <ChatHeader 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab}
+        messageCount={messages.length}
+        selectedAgentsCount={selectedAgents.length}
+      />
+      {tabContent}
     </div>
   );
 };
+
+// ============================================================================
+// EXPORT
+// ============================================================================
 
 export default ChatInterface;
