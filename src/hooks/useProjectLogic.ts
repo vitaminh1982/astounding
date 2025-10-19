@@ -143,7 +143,58 @@ export const useProjectLogic = (
     }
 
     const fullResponse = contextualAdditions.length > 0
-@@ -195,142 +198,143 @@
+      ? `${selectedResponse}\n\n${contextualAdditions.join(' • ')}`
+      : selectedResponse;
+
+    return {
+      id: `msg-${Date.now()}-${agent.id}`,
+      content: `**${agent.name} (${agent.role})**: ${fullResponse}`,
+      sender: 'agent',
+      agentId: agent.id,
+      timestamp: new Date(),
+      visibility: 'project',
+      mentions: [],
+      canConvertToTask: agent.role === 'Project Manager',
+      canConvertToDocument: agent.role === 'Business Analyst' || agent.role === 'Data Analyst',
+    };
+  }, []);
+
+  // Generate collaborative response from multiple agents
+  const generateCollaborativeResponse = useCallback((query: string): Message => {
+    const collaborativeResponses = [
+      "Based on our collective analysis across PM, BA, and Strategy perspectives, here's our recommended approach:",
+      "Our integrated team assessment suggests a phased implementation strategy:",
+      "From project, data, and governance viewpoints, we align on these key priorities:",
+      "Cross-functional analysis complete. Here's what each discipline recommends:",
+    ];
+
+    const insights = [
+      "\n\n📊 **Data**: Metrics support this direction with 94% confidence",
+      "\n🎯 **Strategy**: Aligns with Q2 objectives and market positioning",
+      "\n📋 **Governance**: Meets all compliance requirements",
+      "\n⏱️ **Timeline**: Achievable within current sprint capacity",
+    ];
+
+    const selectedResponse = collaborativeResponses[Math.floor(Math.random() * collaborativeResponses.length)];
+    const selectedInsights = insights.slice(0, 2 + Math.floor(Math.random() * 2)).join('');
+
+    return {
+      id: `msg-${Date.now()}`,
+      content: `${selectedResponse}${selectedInsights}`,
+      sender: 'agent',
+      agentId: 'collaborative',
+      timestamp: new Date(),
+      visibility: 'project',
+      mentions: [],
+      canConvertToTask: true,
+      canConvertToDocument: true,
+    };
+  }, []);
+
+  // Send message handler with enhanced logic
+  const handleSendMessage = useCallback((
+    newMessage: string,
+    selectedAgents: string[],
     visibility: 'project' | 'team' | 'private',
     attachments: Attachment[]
   ) => {
@@ -198,7 +249,7 @@ export const useProjectLogic = (
       }
 
       setMessages((prev) => [...prev, ...responses]);
-
+      
       // Update agent statuses back to active
       setAgents((prev) =>
         prev.map((a) => (targetAgentIds.includes(a.id) ? { ...a, status: 'active' as const, lastActivity: 'just now' } : a)),
@@ -216,7 +267,7 @@ export const useProjectLogic = (
   // Handle project switching with context preservation
   const handleProjectSwitch = useCallback((newProject: Project) => {
     setCurrentProject(newProject);
-
+    
     const welcomeMessage: Message = {
       id: `sys-${Date.now()}`,
       content: `Switched to project: ${newProject.name} 🔄\n\nClient: ${newProject.client.name}\nStatus: ${newProject.status}\nProgress: ${newProject.progress}%\nBudget: ${newProject.budget}\nTeam Size: ${newProject.teamSize}\n\nYour AI team is now ready to assist with this project. How can we help you today?`,
@@ -227,9 +278,9 @@ export const useProjectLogic = (
       canConvertToTask: false,
       canConvertToDocument: false,
     };
-
+    
     setMessages([welcomeMessage]);
-
+    
     toast(`Switched to: ${newProject.name}`, {
       icon: '🔄',
       duration: 3000,
@@ -239,19 +290,19 @@ export const useProjectLogic = (
   // Handle agent selection update with validation
   const handleAgentsUpdate = useCallback((newAgentIds: string[]) => {
     const updatedAgents = initialAgents.filter(agent => newAgentIds.includes(agent.id));
-
+    
     if (updatedAgents.length === 0) {
       toast.error('At least one agent must be selected');
       return;
     }
 
     setAgents(updatedAgents);
-
+    
     setMetrics(prev => ({
       ...prev,
       activeAgents: updatedAgents.filter(a => a.status === 'active').length
     }));
-
+    
     const agentNames = updatedAgents.map(agent => `${agent.avatar} ${agent.name} (${agent.role})`).join('\n• ');
     const systemMessage: Message = {
       id: `sys-${Date.now()}`,
@@ -263,9 +314,9 @@ export const useProjectLogic = (
       canConvertToTask: false,
       canConvertToDocument: false,
     };
-
+    
     setMessages(prev => [...prev, systemMessage]);
-
+    
     toast.success(`Team updated: ${updatedAgents.length} agents active`, {
       duration: 3000,
     });
