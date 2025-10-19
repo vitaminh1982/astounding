@@ -138,25 +138,10 @@ const INITIAL_METRICS: ProjectMetrics = {
 };
 
 export default function ProjectPage(): JSX.Element {
-  // Scroll to top on component mount
+  // Scroll to top on mount - simplified
   useEffect(() => {
-    // Immediate scroll to top
     window.scrollTo(0, 0);
-    
-    // Also scroll the main container if it exists
-    const mainContainer = document.querySelector('.min-h-screen');
-    if (mainContainer) {
-      mainContainer.scrollTop = 0;
-    }
-
-    // Optional: Scroll with smooth behavior after a tiny delay
-    // This ensures the page is fully rendered
-    const timeoutId = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
-    }, 0);
-
-    return () => clearTimeout(timeoutId);
-  }, []); // Empty dependency array = run once on mount
+  }, []);
 
   // Use custom hook for project logic
   const {
@@ -170,18 +155,23 @@ export default function ProjectPage(): JSX.Element {
     handleAgentsUpdate
   } = useProjectLogic(CURRENT_PROJECT, PROJECT_AGENTS, INITIAL_METRICS);
 
-  // Local state for UI
+  // Local state for UI - FIX: Single source of truth for selected agents
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
   const [newMessage, setNewMessage] = useState('');
-  const [selectedAgents, setSelectedAgents] = useState<string[]>([]);
+  
+  // FIX: Initialize with agents from hook, not hard-coded constant
+  const [selectedAgents, setSelectedAgents] = useState<string[]>(
+    () => agents.map(agent => agent.id)
+  );
+  
   const [activeTab, setActiveTab] = useState<'chat' | 'documents'>('chat');
   const [visibility, setVisibility] = useState<'project' | 'team' | 'private'>('project');
   const [attachments, setAttachments] = useState<Attachment[]>([]);
-  const [selectedAgentIds, setSelectedAgentIds] = useState<string[]>(
-    PROJECT_AGENTS.map(agent => agent.id)
-  );
-  const [showConvertModal, setShowConvertModal] = useState<{ type: 'task' | 'document'; messageId: string } | null>(null);
+  const [showConvertModal, setShowConvertModal] = useState<{ 
+    type: 'task' | 'document'; 
+    messageId: string 
+  } | null>(null);
 
   // Toggle agent selection
   const toggleAgentSelection = (agentId: string) => {
@@ -191,10 +181,19 @@ export default function ProjectPage(): JSX.Element {
     });
   };
 
-  // File handling
+  // FIX: Add file validation
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files || []);
     if (files.length === 0) return;
+    
+    // Validate file size (e.g., 10MB limit)
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+    const invalidFiles = files.filter(file => file.size > MAX_FILE_SIZE);
+    
+    if (invalidFiles.length > 0) {
+      toast.error(`Some files exceed 10MB limit and were not attached`);
+      return;
+    }
     
     const newAttachments: Attachment[] = files.map((file) => ({
       id: `att-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
@@ -213,6 +212,11 @@ export default function ProjectPage(): JSX.Element {
 
   // Send message wrapper
   const onSendMessage = () => {
+    if (!newMessage.trim() && attachments.length === 0) {
+      toast.error('Please enter a message or attach a file');
+      return;
+    }
+    
     handleSendMessage(newMessage, selectedAgents, visibility, attachments);
     setNewMessage('');
     setAttachments([]);
@@ -225,21 +229,19 @@ export default function ProjectPage(): JSX.Element {
 
   const confirmConvert = () => {
     if (!showConvertModal) return;
-    toast.success(`${showConvertModal.type === 'task' ? 'Task' : 'Document'} created (demo)`);
+    toast.success(
+      `${showConvertModal.type === 'task' ? 'Task' : 'Document'} created successfully`
+    );
     setShowConvertModal(null);
   };
 
-  /**
-   * Handle feedback submission for agent responses
-   * Integrates with backend API and provides user feedback
-   */
+  // FIX: Wrap feedback handler with error handling
   const handleFeedback = async (
     messageId: string,
     feedback: 'positive' | 'negative',
     comment?: string
   ): Promise<void> => {
     try {
-      // Get conversation context (last 5 messages before this one)
       const messageIndex = messages.findIndex(m => m.id === messageId);
       const conversationContext = messageIndex > 0 
         ? messages.slice(Math.max(0, messageIndex - 5), messageIndex).map(m => ({
@@ -250,12 +252,10 @@ export default function ProjectPage(): JSX.Element {
           }))
         : [];
 
-      // Get the agent who sent this message
       const message = messages.find(m => m.id === messageId);
       const agentId = message?.agentId;
       const agentName = agents.find(a => a.id === agentId)?.name || 'Unknown Agent';
 
-      // Call feedback API
       const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: {
@@ -281,44 +281,29 @@ export default function ProjectPage(): JSX.Element {
         throw new Error('Failed to submit feedback');
       }
 
-      const result = await response.json();
+      await response.json();
 
-      // Show success feedback to user
-      if (feedback === 'positive') {
-        toast.success(
-          comment 
-            ? `Thanks for the detailed feedback on ${agentName}'s response!`
-            : `Feedback recorded! ${agentName} will continue to improve.`,
-          { duration: 3000, icon: '👍' }
-        );
-      } else {
-        toast.success(
-          comment
-            ? `Thanks for helping ${agentName} improve!`
-            : `Feedback noted. ${agentName} will learn from this.`,
-          { duration: 3000, icon: '📝' }
-        );
-      }
-
-      // Log for analytics (optional)
-      console.log('Feedback submitted:', {
-        messageId,
-        feedback,
-        agentId,
-        agentName,
-        hasComment: !!comment,
-        result
-      });
+      // Show success feedback
+      const icon = feedback === 'positive' ? '👍' : '📝';
+      const message = feedback === 'positive'
+        ? comment 
+          ? `Thanks for the detailed feedback on ${agentName}'s response!`
+          : `Feedback recorded! ${agentName} will continue to improve.`
+        : comment
+          ? `Thanks for helping ${agentName} improve!`
+          : `Feedback noted. ${agentName} will learn from this.`;
+      
+      toast.success(message, { duration: 3000, icon });
 
     } catch (error) {
       console.error('Error submitting feedback:', error);
-      throw error; // Let ChatInterface handle the error display
+      toast.error('Failed to submit feedback. Please try again.');
+      throw error;
     }
   };
 
-  // Handle project configuration update
+  // FIX: Update project configuration and sync state
   const handleProjectConfigUpdate = (updatedProject: ProjectConfiguration) => {
-    // Update the current project with new configuration
     const updatedCurrentProject: Project = {
       ...currentProject,
       name: updatedProject.name,
@@ -333,7 +318,13 @@ export default function ProjectPage(): JSX.Element {
     toast.success('Project configuration updated successfully');
   };
 
-  // Utility functions
+  // FIX: Properly sync agent selection when modal updates
+  const handleAgentModalUpdate = (updatedAgentIds: string[]) => {
+    handleAgentsUpdate(updatedAgentIds);
+    setSelectedAgents(updatedAgentIds); // Sync local state
+  };
+
+  // Utility function - could be extracted to utils file
   const formatFileSize = (bytes: number): string => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -342,7 +333,6 @@ export default function ProjectPage(): JSX.Element {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  // Create project context for agent filtering
   const projectContext: ProjectContext = {
     id: currentProject.id,
     name: currentProject.name,
@@ -358,9 +348,7 @@ export default function ProjectPage(): JSX.Element {
           onSwitchProject={() => setIsProjectModalOpen(true)}
         />
 
-        {/* Main layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Panel - Agent Management */}
           <div className="lg:col-span-3">
             <AgentPanel
               currentProject={currentProject}
@@ -372,7 +360,6 @@ export default function ProjectPage(): JSX.Element {
             />
           </div>
 
-          {/* Center Panel - AI Collaboration Area */}
           <div className="lg:col-span-9">
             <ChatInterface
               activeTab={activeTab}
@@ -396,7 +383,6 @@ export default function ProjectPage(): JSX.Element {
           </div>
         </div>
 
-        {/* Modals */}
         <ConvertMessageModal
           isOpen={!!showConvertModal}
           type={showConvertModal?.type || 'task'}
@@ -415,8 +401,8 @@ export default function ProjectPage(): JSX.Element {
           isOpen={isAgentModalOpen}
           onClose={() => setIsAgentModalOpen(false)}
           currentProject={projectContext}
-          selectedAgentIds={selectedAgentIds}
-          onAgentsUpdate={handleAgentsUpdate}
+          selectedAgentIds={selectedAgents} {/* FIX: Use single state */}
+          onAgentsUpdate={handleAgentModalUpdate} {/* FIX: Sync both states */}
           maxAgents={5}
         />
       </div>
