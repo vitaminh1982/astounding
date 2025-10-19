@@ -375,24 +375,25 @@ export default function ProjectPage(): JSX.Element {
           {/* Center Panel - AI Collaboration Area */}
           <div className="lg:col-span-9">
             <ChatInterface
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-              selectedAgents={selectedAgents}
-              agents={agents}
-              visibility={visibility}
-              setVisibility={setVisibility}
-              messages={messages}
-              setMessages={setMessages}
-              newMessage={newMessage}
-              setNewMessage={setNewMessage}
-              attachments={attachments}
-              onSendMessage={onSendMessage}
-              onFileUpload={handleFileUpload}
-              onRemoveAttachment={removeAttachment}
-              onConvertMessage={handleConvertMessage}
-              onFeedback={handleFeedback}
-              formatFileSize={formatFileSize}
-            />
+  activeTab={activeTab}
+  setActiveTab={setActiveTab}
+  selectedAgents={selectedAgents}
+  agents={agents}
+  visibility={visibility}
+  setVisibility={setVisibility}
+  messages={messages}
+  setMessages={setMessages} // ✅ Required for feedback
+  newMessage={newMessage}
+  setNewMessage={setNewMessage}
+  attachments={attachments}
+  onSendMessage={handleSendMessage}
+  onFileUpload={handleFileUpload}
+  onRemoveAttachment={removeAttachment}
+  onConvertMessage={handleConvertMessage}
+  onFeedback={handleFeedback} // ✅ Optional but recommended
+  formatFileSize={formatFileSize}
+/>
+
           </div>
         </div>
 
