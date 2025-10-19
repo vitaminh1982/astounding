@@ -8,6 +8,7 @@ import MessageInput from './components/MessageInput';
 import TasksTab from './components/TasksTab';
 import HistoryTab from './components/HistoryTab';
 import DocumentsTab from './components/DocumentsTab';
+import ScrollToBottomButton from './components/ScrollToBottomButton';
 import { useChatInterface } from './hooks/useChatInterface';
 import { Agent, Attachment, Message, TabType } from './types';
 
@@ -61,7 +62,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     messageContainerRef,
     fileInputRef,
     handleFileButtonClick,
-    handleScroll
+    handleScroll,
+    showScrollButton,
+    handleScrollToBottomClick
   } = useChatInterface(
     messages,
     onSendMessage,
@@ -199,7 +202,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     switch (activeTab) {
       case 'chat':
         return (
-          <>
+          <div className="relative flex flex-col h-full">
             {/* Feedback Error Toast */}
             {feedbackError && (
               <div className="mx-4 mt-4 mb-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
@@ -229,6 +232,12 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               formatFileSize={formatFileSize}
               onScroll={handleScroll}
             />
+
+            {/* Scroll to bottom button */}
+            {showScrollButton && (
+              <ScrollToBottomButton onClick={handleScrollToBottomClick} />
+            )}
+
             <MessageInput
               selectedAgents={selectedAgents}
               agents={agents}
@@ -244,7 +253,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               fileInputRef={fileInputRef}
               onFileButtonClick={handleFileButtonClick}
             />
-          </>
+          </div>
         );
       case 'documents':
         return <DocumentsTab />;

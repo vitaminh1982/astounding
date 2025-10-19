@@ -36,7 +36,7 @@ interface UseChatInterfaceReturn {
 // ============================================================================
 
 export const useChatInterface = (
-  initialMessages: Message[],
+  messages: Message[],
   onSendMessage: () => void,
   onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void,
   onRemoveAttachment: (attachmentId: string) => void,
@@ -59,7 +59,7 @@ export const useChatInterface = (
   const fileInputRef = useRef<HTMLInputElement>(null);
   
   // Track state without causing re-renders
-  const previousMessageCount = useRef(initialMessages.length);
+  const previousMessageCount = useRef(messages.length);
   const isInitialRender = useRef(true);
   const userHasScrolled = useRef(false);
   
@@ -183,7 +183,7 @@ export const useChatInterface = (
       // Small delay to ensure DOM is fully rendered
       const timer = setTimeout(() => {
         const container = messageContainerRef.current;
-        if (container && initialMessages.length > 0) {
+        if (container && messages.length > 0) {
           // Start at bottom for initial render
           container.scrollTop = container.scrollHeight;
         }
@@ -204,15 +204,15 @@ export const useChatInterface = (
   useEffect(() => {
     // Skip on initial render
     if (isInitialRender.current) {
-      previousMessageCount.current = initialMessages.length;
+      previousMessageCount.current = messages.length;
       return;
     }
 
-    const messageCountIncreased = initialMessages.length > previousMessageCount.current;
-    
+    const messageCountIncreased = messages.length > previousMessageCount.current;
+
     if (messageCountIncreased) {
       const shouldAutoScroll = isNearBottom() || !userHasScrolled.current;
-      
+
       if (shouldAutoScroll) {
         scrollToBottom('smooth');
       } else {
@@ -220,9 +220,9 @@ export const useChatInterface = (
         setShowScrollButton(true);
       }
     }
-    
-    previousMessageCount.current = initialMessages.length;
-  }, [initialMessages.length, isNearBottom, scrollToBottom]); // Only depend on length, not entire array
+
+    previousMessageCount.current = messages.length;
+  }, [messages.length, isNearBottom, scrollToBottom]); // Only depend on length, not entire array
 
   /**
    * Cleanup effect
