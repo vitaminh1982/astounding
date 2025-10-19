@@ -33,7 +33,6 @@ interface ChatInterfaceProps {
 
 /**
  * ChatInterface is the main container for project collaboration features
- * including chat, tasks, documents, and history management
  */
 const ChatInterface: React.FC<ChatInterfaceProps> = ({
   activeTab,
@@ -61,7 +60,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     messageContainerRef,
     fileInputRef,
     handleFileButtonClick,
-    handleScroll
+    handleScroll,
+    showScrollButton,
+    handleScrollToBottomClick
   } = useChatInterface(
     messages,
     onSendMessage,
@@ -80,7 +81,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   ) => {
     setFeedbackError(null);
 
-    // Optimistic update - immediately update UI
+    // Optimistic update
     if (setMessages) {
       setMessages(prev => prev.map(msg =>
         msg.id === messageId
@@ -89,14 +90,14 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
               feedback: {
                 type: feedback,
                 comment,
-                timestamp: new Date()
+                timestamp: new Date().toISOString()
               }
             }
           : msg
       ));
     }
 
-    // Call the provided feedback handler or use default
+    // Call the provided feedback handler
     if (onFeedback) {
       try {
         await onFeedback(messageId, feedback, comment);
@@ -108,30 +109,23 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         if (setMessages) {
           setMessages(prev => prev.map(msg =>
             msg.id === messageId
-              ? {
-                  ...msg,
-                  feedback: undefined
-                }
+              ? { ...msg, feedback: undefined }
               : msg
           ));
         }
       }
     } else {
-      // Default feedback handler if none provided
+      // Default feedback handler
       try {
         await defaultFeedbackHandler(messageId, feedback, comment);
       } catch (error) {
         console.error('Failed to submit feedback:', error);
         setFeedbackError('Failed to submit feedback. Please try again.');
         
-        // Revert optimistic update on error
         if (setMessages) {
           setMessages(prev => prev.map(msg =>
             msg.id === messageId
-              ? {
-                  ...msg,
-                  feedback: undefined
-                }
+              ? { ...msg, feedback: undefined }
               : msg
           ));
         }
@@ -150,7 +144,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     const message = messages.find(m => m.id === messageId);
     if (!message) return;
 
-    // Get recent conversation context (last 5 messages)
     const contextMessages = messages
       .slice(Math.max(0, messages.length - 5))
       .map(m => ({
@@ -185,14 +178,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   };
 
   const handleResumeSession = (sessionId: string) => {
-    // Switch to chat tab and populate with session context
     setActiveTab('chat');
     console.log('Resuming session:', sessionId);
-    
-    // TODO: Load session messages
-    // if (setMessages) {
-    //   loadSessionMessages(sessionId).then(setMessages);
-    // }
   };
 
   const renderTabContent = () => {
@@ -200,7 +187,6 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
       case 'chat':
         return (
           <>
-            {/* Feedback Error Toast */}
             {feedbackError && (
               <div className="mx-4 mt-4 mb-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm text-red-800">
@@ -213,22 +199,36 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                   onClick={() => setFeedbackError(null)}
                   className="text-red-600 hover:text-red-800"
                 >
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  ×
                 </button>
               </div>
             )}
 
-            <MessageList
-              messages={messages}
-              messagesEndRef={messagesEndRef}
-              messageContainerRef={messageContainerRef}
-              onConvertMessage={onConvertMessage}
-              onFeedback={handleFeedbackSubmission}
-              formatFileSize={formatFileSize}
-              onScroll={handleScroll}
-            />
+            <div className="relative flex-1 overflow-hidden">
+              <MessageList
+                messages={messages}
+                messagesEndRef={messagesEndRef}
+                messageContainerRef={messageContainerRef}
+                onConvertMessage={onConvertMessage}
+                onFeedback={handleFeedbackSubmission}
+                formatFileSize={formatFileSize}
+                onScroll={handleScroll}
+              />
+
+              {/* Scroll to bottom button */}
+              {showScrollButton && (
+                <button
+                  onClick={handleScrollToBottomClick}
+                  className="absolute bottom-4 right-4 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-200 z-10"
+                  aria-label="Scroll to bottom"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  </svg>
+                </button>
+              )}
+            </div>
+
             <MessageInput
               selectedAgents={selectedAgents}
               agents={agents}
