@@ -72,23 +72,6 @@ export const useProjectLogic = (
     },
   ]);
 
-  // Extract @mentions from message
-  const extractMentions = useCallback((content: string): string[] => {
-    const mentionRegex = /@(\w+)/g;
-    const mentions: string[] = [];
-    let match: RegExpExecArray | null;
-
-    while ((match = mentionRegex.exec(content)) !== null) {
-      const mentionedName = match[1].toLowerCase();
-      const agent = agents.find((a) => a.name.toLowerCase() === mentionedName);
-      if (agent) {
-        mentions.push(agent.id);
-      }
-    }
-
-    return mentions;
-  }, [agents]);
-
   // Simulate agent-specific response with personality
   const createAgentResponse = useCallback((agent: Agent, query: string): Message => {
     const roleResponses: Record<string, string[]> = {
@@ -157,7 +140,7 @@ export const useProjectLogic = (
       canConvertToTask: agent.role === 'Project Manager',
       canConvertToDocument: agent.role === 'Business Analyst' || agent.role === 'Data Analyst',
     };
-  }, []);
+  }, []); // ✅ No dependencies needed - uses only parameters
 
   // Generate collaborative response from multiple agents
   const generateCollaborativeResponse = useCallback((query: string): Message => {
@@ -189,7 +172,24 @@ export const useProjectLogic = (
       canConvertToTask: true,
       canConvertToDocument: true,
     };
-  }, []);
+  }, []); // ✅ No dependencies needed
+
+  // Extract @mentions from message - moved AFTER createAgentResponse
+  const extractMentions = useCallback((content: string): string[] => {
+    const mentionRegex = /@(\w+)/g;
+    const mentions: string[] = [];
+    let match: RegExpExecArray | null;
+
+    while ((match = mentionRegex.exec(content)) !== null) {
+      const mentionedName = match[1].toLowerCase();
+      const agent = agents.find((a) => a.name.toLowerCase() === mentionedName);
+      if (agent) {
+        mentions.push(agent.id);
+      }
+    }
+
+    return mentions;
+  }, [agents]); // ✅ Only depends on agents
 
   // Send message handler with enhanced logic
   const handleSendMessage = useCallback((
@@ -262,7 +262,7 @@ export const useProjectLogic = (
         activeAgents: agents.filter((a) => a.status === 'active').length,
       }));
     }, responseDelay);
-  }, [agents, extractMentions, createAgentResponse, generateCollaborativeResponse]);
+  }, [agents, extractMentions, createAgentResponse, generateCollaborativeResponse]); // ✅ All dependencies included
 
   // Handle project switching with context preservation
   const handleProjectSwitch = useCallback((newProject: Project) => {
@@ -285,7 +285,7 @@ export const useProjectLogic = (
       icon: '🔄',
       duration: 3000,
     });
-  }, []);
+  }, []); // ✅ No dependencies needed
 
   // Handle agent selection update with validation
   const handleAgentsUpdate = useCallback((newAgentIds: string[]) => {
@@ -320,7 +320,7 @@ export const useProjectLogic = (
     toast.success(`Team updated: ${updatedAgents.length} agents active`, {
       duration: 3000,
     });
-  }, [currentProject.name, initialAgents]);
+  }, [currentProject.name, initialAgents]); // ✅ All dependencies included
 
   // Expose setMessages for external updates (e.g., feedback)
   const updateMessages = useCallback((updater: Message[] | ((prev: Message[]) => Message[])) => {
