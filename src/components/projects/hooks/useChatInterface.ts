@@ -20,6 +20,7 @@ export const useChatInterface = (
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const previousMessageCount = useRef(initialMessages.length);
   const isInitialMount = useRef(true);
+  const hasScrolledToInitialPosition = useRef(false);
 
   /**
    * Check if user is near the bottom of the scroll container
@@ -57,25 +58,30 @@ export const useChatInterface = (
 
   /**
    * Auto-scroll to bottom only when:
-   * 1. New messages are added (not on initial mount)
-   * 2. User is already near the bottom (don't interrupt reading)
+   * 1. NOT on initial mount (respect page-level scroll position)
+   * 2. New messages are added
+   * 3. User is already near the bottom (don't interrupt reading)
    */
   useEffect(() => {
-    // Skip scroll on initial mount
+    // Skip ALL scrolling on initial mount to respect page scroll position
     if (isInitialMount.current) {
       isInitialMount.current = false;
       previousMessageCount.current = initialMessages.length;
-      // Scroll to bottom instantly on first load
-      scrollToBottom('auto');
+      
+      // Mark that we've handled initial position (but don't scroll)
+      hasScrolledToInitialPosition.current = true;
       return;
     }
 
     // Only scroll if message count increased (new message added)
     const messageCountIncreased = initialMessages.length > previousMessageCount.current;
     
-    // Auto-scroll only if user is near bottom or if it's their own message
-    if (messageCountIncreased && isNearBottom) {
+    // Auto-scroll only if:
+    // - New message was added
+    // - User is near bottom OR it's their first interaction after page load
+    if (messageCountIncreased && (isNearBottom || !hasScrolledToInitialPosition.current)) {
       scrollToBottom('smooth');
+      hasScrolledToInitialPosition.current = true;
     }
     
     previousMessageCount.current = initialMessages.length;
