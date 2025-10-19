@@ -144,7 +144,6 @@ export default function ProjectPage(): JSX.Element {
     agents,
     metrics,
     messages,
-    setMessages,
     handleSendMessage,
     handleProjectSwitch,
     handleAgentsUpdate
@@ -207,93 +206,6 @@ export default function ProjectPage(): JSX.Element {
     if (!showConvertModal) return;
     toast.success(`${showConvertModal.type === 'task' ? 'Task' : 'Document'} created (demo)`);
     setShowConvertModal(null);
-  };
-
-  /**
-   * Handle feedback submission for agent responses
-   * Integrates with backend API and provides user feedback
-   */
-  const handleFeedback = async (
-    messageId: string,
-    feedback: 'positive' | 'negative',
-    comment?: string
-  ): Promise<void> => {
-    try {
-      // Get conversation context (last 5 messages before this one)
-      const messageIndex = messages.findIndex(m => m.id === messageId);
-      const conversationContext = messageIndex > 0 
-        ? messages.slice(Math.max(0, messageIndex - 5), messageIndex).map(m => ({
-            role: m.sender === 'You' ? 'user' : 'assistant',
-            content: m.content,
-            agentId: m.agentId,
-            timestamp: m.timestamp
-          }))
-        : [];
-
-      // Get the agent who sent this message
-      const message = messages.find(m => m.id === messageId);
-      const agentId = message?.agentId;
-      const agentName = agents.find(a => a.id === agentId)?.name || 'Unknown Agent';
-
-      // Call feedback API
-      const response = await fetch('/api/feedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          messageId,
-          feedback,
-          comment,
-          timestamp: new Date().toISOString(),
-          projectId: currentProject.id,
-          agentId,
-          conversationContext,
-          metadata: {
-            selectedAgents,
-            visibility,
-            projectName: currentProject.name
-          }
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to submit feedback');
-      }
-
-      const result = await response.json();
-
-      // Show success feedback to user
-      if (feedback === 'positive') {
-        toast.success(
-          comment 
-            ? `Thanks for the detailed feedback on ${agentName}'s response!`
-            : `Feedback recorded! ${agentName} will continue to improve.`,
-          { duration: 3000, icon: '👍' }
-        );
-      } else {
-        toast.success(
-          comment
-            ? `Thanks for helping ${agentName} improve!`
-            : `Feedback noted. ${agentName} will learn from this.`,
-          { duration: 3000, icon: '📝' }
-        );
-      }
-
-      // Log for analytics (optional)
-      console.log('Feedback submitted:', {
-        messageId,
-        feedback,
-        agentId,
-        agentName,
-        hasComment: !!comment,
-        result
-      });
-
-    } catch (error) {
-      console.error('Error submitting feedback:', error);
-      throw error; // Let ChatInterface handle the error display
-    }
   };
 
   // Handle project configuration update
@@ -362,7 +274,6 @@ export default function ProjectPage(): JSX.Element {
               visibility={visibility}
               setVisibility={setVisibility}
               messages={messages}
-              setMessages={setMessages}
               newMessage={newMessage}
               setNewMessage={setNewMessage}
               attachments={attachments}
@@ -370,7 +281,6 @@ export default function ProjectPage(): JSX.Element {
               onFileUpload={handleFileUpload}
               onRemoveAttachment={removeAttachment}
               onConvertMessage={handleConvertMessage}
-              onFeedback={handleFeedback}
               formatFileSize={formatFileSize}
             />
           </div>
