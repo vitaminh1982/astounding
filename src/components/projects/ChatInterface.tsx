@@ -1,6 +1,4 @@
-/**
- * Main chat interface component for project collaboration - Enhanced with Feedback
- */
+
 import React, { useState } from 'react';
 import ChatHeader from './components/ChatHeader';
 import MessageList from './components/MessageList';
