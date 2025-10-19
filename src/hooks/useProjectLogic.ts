@@ -62,7 +62,7 @@ export const useProjectLogic = (
   const [messages, setMessages] = useState<Message[]>(() => [
     {
       id: `sys-${Date.now()}`,
-      content: `Welcome to your AI Project Workspace! 🚀\n\nYour specialized team of 5 AI agents is ready to assist:\n• Seiya (PM) - Project management & timelines\n• Ikki (BA) - Requirements & user stories\n• Shiryu (DA) - Data analysis & insights\n• Hyôga (SC) - Strategy & market analysis\n• Shun (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.`,
+      content: `Welcome to your AI Project Workspace! 🚀\n\nProject: ${initialProject.name}\nClient: ${initialProject.client.name}\n\nYour specialized team of 5 AI agents is ready to assist:\n• Seiya (PM) - Project management & timelines\n• Ikki (BA) - Requirements & user stories\n• Shiryu (DA) - Data analysis & insights\n• Hyôga (SC) - Strategy & market analysis\n• Shun (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.`,
       sender: 'agent',
       agentId: 'collaborative',
       timestamp: new Date(),
@@ -71,6 +71,23 @@ export const useProjectLogic = (
       canConvertToDocument: false,
     },
   ]);
+
+  // Extract @mentions from message
+  const extractMentions = useCallback((content: string): string[] => {
+    const mentionRegex = /@(\w+)/g;
+    const mentions: string[] = [];
+    let match: RegExpExecArray | null;
+
+    while ((match = mentionRegex.exec(content)) !== null) {
+      const mentionedName = match[1].toLowerCase();
+      const agent = agents.find((a) => a.name.toLowerCase() === mentionedName);
+      if (agent) {
+        mentions.push(agent.id);
+      }
+    }
+
+    return mentions;
+  }, [agents]);
 
   // Simulate agent-specific response with personality
   const createAgentResponse = useCallback((agent: Agent, query: string): Message => {
@@ -126,75 +143,7 @@ export const useProjectLogic = (
     }
 
     const fullResponse = contextualAdditions.length > 0
-      ? `${selectedResponse}\n\n${contextualAdditions.join(' • ')}`
-      : selectedResponse;
-
-    return {
-      id: `msg-${Date.now()}-${agent.id}`,
-      content: `**${agent.name} (${agent.role})**: ${fullResponse}`,
-      sender: 'agent',
-      agentId: agent.id,
-      timestamp: new Date(),
-      visibility: 'project',
-      mentions: [],
-      canConvertToTask: agent.role === 'Project Manager',
-      canConvertToDocument: agent.role === 'Business Analyst' || agent.role === 'Data Analyst',
-    };
-  }, []); // ✅ No dependencies needed - uses only parameters
-
-  // Generate collaborative response from multiple agents
-  const generateCollaborativeResponse = useCallback((query: string): Message => {
-    const collaborativeResponses = [
-      "Based on our collective analysis across PM, BA, and Strategy perspectives, here's our recommended approach:",
-      "Our integrated team assessment suggests a phased implementation strategy:",
-      "From project, data, and governance viewpoints, we align on these key priorities:",
-      "Cross-functional analysis complete. Here's what each discipline recommends:",
-    ];
-
-    const insights = [
-      "\n\n📊 **Data**: Metrics support this direction with 94% confidence",
-      "\n🎯 **Strategy**: Aligns with Q2 objectives and market positioning",
-      "\n📋 **Governance**: Meets all compliance requirements",
-      "\n⏱️ **Timeline**: Achievable within current sprint capacity",
-    ];
-
-    const selectedResponse = collaborativeResponses[Math.floor(Math.random() * collaborativeResponses.length)];
-    const selectedInsights = insights.slice(0, 2 + Math.floor(Math.random() * 2)).join('');
-
-    return {
-      id: `msg-${Date.now()}`,
-      content: `${selectedResponse}${selectedInsights}`,
-      sender: 'agent',
-      agentId: 'collaborative',
-      timestamp: new Date(),
-      visibility: 'project',
-      mentions: [],
-      canConvertToTask: true,
-      canConvertToDocument: true,
-    };
-  }, []); // ✅ No dependencies needed
-
-  // Extract @mentions from message - moved AFTER createAgentResponse
-  const extractMentions = useCallback((content: string): string[] => {
-    const mentionRegex = /@(\w+)/g;
-    const mentions: string[] = [];
-    let match: RegExpExecArray | null;
-
-    while ((match = mentionRegex.exec(content)) !== null) {
-      const mentionedName = match[1].toLowerCase();
-      const agent = agents.find((a) => a.name.toLowerCase() === mentionedName);
-      if (agent) {
-        mentions.push(agent.id);
-      }
-    }
-
-    return mentions;
-  }, [agents]); // ✅ Only depends on agents
-
-  // Send message handler with enhanced logic
-  const handleSendMessage = useCallback((
-    newMessage: string,
-    selectedAgents: string[],
+@@ -195,142 +198,143 @@
     visibility: 'project' | 'team' | 'private',
     attachments: Attachment[]
   ) => {
@@ -249,7 +198,7 @@ export const useProjectLogic = (
       }
 
       setMessages((prev) => [...prev, ...responses]);
-      
+
       // Update agent statuses back to active
       setAgents((prev) =>
         prev.map((a) => (targetAgentIds.includes(a.id) ? { ...a, status: 'active' as const, lastActivity: 'just now' } : a)),
@@ -262,12 +211,12 @@ export const useProjectLogic = (
         activeAgents: agents.filter((a) => a.status === 'active').length,
       }));
     }, responseDelay);
-  }, [agents, extractMentions, createAgentResponse, generateCollaborativeResponse]); // ✅ All dependencies included
+  }, [agents, extractMentions, createAgentResponse, generateCollaborativeResponse]);
 
   // Handle project switching with context preservation
   const handleProjectSwitch = useCallback((newProject: Project) => {
     setCurrentProject(newProject);
-    
+
     const welcomeMessage: Message = {
       id: `sys-${Date.now()}`,
       content: `Switched to project: ${newProject.name} 🔄\n\nClient: ${newProject.client.name}\nStatus: ${newProject.status}\nProgress: ${newProject.progress}%\nBudget: ${newProject.budget}\nTeam Size: ${newProject.teamSize}\n\nYour AI team is now ready to assist with this project. How can we help you today?`,
@@ -278,31 +227,31 @@ export const useProjectLogic = (
       canConvertToTask: false,
       canConvertToDocument: false,
     };
-    
+
     setMessages([welcomeMessage]);
-    
+
     toast(`Switched to: ${newProject.name}`, {
       icon: '🔄',
       duration: 3000,
     });
-  }, []); // ✅ No dependencies needed
+  }, []);
 
   // Handle agent selection update with validation
   const handleAgentsUpdate = useCallback((newAgentIds: string[]) => {
     const updatedAgents = initialAgents.filter(agent => newAgentIds.includes(agent.id));
-    
+
     if (updatedAgents.length === 0) {
       toast.error('At least one agent must be selected');
       return;
     }
 
     setAgents(updatedAgents);
-    
+
     setMetrics(prev => ({
       ...prev,
       activeAgents: updatedAgents.filter(a => a.status === 'active').length
     }));
-    
+
     const agentNames = updatedAgents.map(agent => `${agent.avatar} ${agent.name} (${agent.role})`).join('\n• ');
     const systemMessage: Message = {
       id: `sys-${Date.now()}`,
@@ -314,13 +263,13 @@ export const useProjectLogic = (
       canConvertToTask: false,
       canConvertToDocument: false,
     };
-    
+
     setMessages(prev => [...prev, systemMessage]);
-    
+
     toast.success(`Team updated: ${updatedAgents.length} agents active`, {
       duration: 3000,
     });
-  }, [currentProject.name, initialAgents]); // ✅ All dependencies included
+  }, [currentProject.name, initialAgents]);
 
   // Expose setMessages for external updates (e.g., feedback)
   const updateMessages = useCallback((updater: Message[] | ((prev: Message[]) => Message[])) => {
@@ -338,5 +287,3 @@ export const useProjectLogic = (
     handleAgentsUpdate
   };
 };
-
-//
