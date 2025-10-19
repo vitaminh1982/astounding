@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import ProjectHeader from '../components/projects/ProjectHeader';
 import AgentPanel from '../components/projects/AgentPanel';
@@ -138,6 +138,26 @@ const INITIAL_METRICS: ProjectMetrics = {
 };
 
 export default function ProjectPage(): JSX.Element {
+  // Scroll to top on component mount
+  useEffect(() => {
+    // Immediate scroll to top
+    window.scrollTo(0, 0);
+    
+    // Also scroll the main container if it exists
+    const mainContainer = document.querySelector('.min-h-screen');
+    if (mainContainer) {
+      mainContainer.scrollTop = 0;
+    }
+
+    // Optional: Scroll with smooth behavior after a tiny delay
+    // This ensures the page is fully rendered
+    const timeoutId = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
+  }, []); // Empty dependency array = run once on mount
+
   // Use custom hook for project logic
   const {
     currentProject,
@@ -223,7 +243,7 @@ export default function ProjectPage(): JSX.Element {
       const messageIndex = messages.findIndex(m => m.id === messageId);
       const conversationContext = messageIndex > 0 
         ? messages.slice(Math.max(0, messageIndex - 5), messageIndex).map(m => ({
-            role: m.sender === 'You' ? 'user' : 'assistant',
+            role: m.sender === 'user' ? 'user' : 'assistant',
             content: m.content,
             agentId: m.agentId,
             timestamp: m.timestamp
