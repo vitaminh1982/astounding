@@ -1,15 +1,21 @@
 /**
- * Custom hook for chat interface logic with proper auto-scroll
+ * Custom hook for managing chat interface state and logic
+ * Handles message scrolling, file uploads, and tab navigation
  */
-import { useState, useRef, useCallback, useEffect } from 'react';
-import { TabType } from '../types';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Message, Attachment, TabType } from '../types';
 
-type ScrollBehavior = 'auto' | 'smooth';
+// ============================================================================
+// CONSTANTS
+// ============================================================================
 
-interface UseChatInterfaceProps {
-  initialMessages: any[];
-  onSendMessage?: (message: string) => void;
-}
+const SCROLL_THRESHOLD = 100; // pixels from bottom to consider "near bottom"
+const SCROLL_BUTTON_THRESHOLD = 200; // pixels from bottom to show scroll button
+const INITIAL_RENDER_DELAY = 50; // ms to wait before checking initial scroll position
+
+// ============================================================================
+// TYPES
+// ============================================================================
 
 interface UseChatInterfaceReturn {
   activeTab: TabType;
@@ -25,10 +31,18 @@ interface UseChatInterfaceReturn {
   isNearBottom: () => boolean;
 }
 
-export const useChatInterface = ({ 
-  initialMessages,
-  onSendMessage 
-}: UseChatInterfaceProps): UseChatInterfaceReturn => {
+// ============================================================================
+// HOOK
+// ============================================================================
+
+export const useChatInterface = (
+  initialMessages: Message[],
+  onSendMessage: () => void,
+  onFileUpload: (event: React.ChangeEvent<HTMLInputElement>) => void,
+  onRemoveAttachment: (attachmentId: string) => void,
+  onConvertMessage: (messageId: string, type: 'task' | 'document') => void
+): UseChatInterfaceReturn => {
+  
   // ============================================================================
   // STATE
   // ============================================================================
@@ -43,166 +57,192 @@ export const useChatInterface = ({
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messageContainerRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const previousMessageCount = useRef(0);
-  const isUserScrolling = useRef(false);
-  const scrollTimeout = useRef<NodeJS.Timeout>();
-  const lastScrollTop = useRef(0);
+  
+  // Track state without causing re-renders
+  const previousMessageCount = useRef(initialMessages.length);
+  const isInitialRender = useRef(true);
+  const userHasScrolled = useRef(false);
   
   // ============================================================================
-  // CALLBACKS
+  // UTILITY FUNCTIONS
   // ============================================================================
   
   /**
-   * Check if user is near bottom of scroll container
+   * Check if user is near the bottom of the scroll container
+   * Pure function - no state updates
    */
   const isNearBottom = useCallback((): boolean => {
-    if (!messageContainerRef.current) return true;
+    const container = messageContainerRef.current;
+    if (!container) return true;
+
+    const distanceFromBottom = 
+      container.scrollHeight - container.scrollTop - container.clientHeight;
     
-    const { scrollTop, scrollHeight, clientHeight } = messageContainerRef.current;
-    const distanceFromBottom = scrollHeight - scrollTop - clientHeight;
-    
-    // Consider "near bottom" if within 150px of bottom
-    return distanceFromBottom < 150;
+    return distanceFromBottom < SCROLL_THRESHOLD;
   }, []);
-  
+
   /**
-   * Scroll to bottom of messages
+   * Get current scroll position info
    */
-  const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth') => {
-    // Use messagesEndRef for more reliable scrolling
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ 
+  const getScrollInfo = useCallback(() => {
+    const container = messageContainerRef.current;
+    if (!container) {
+      return {
+        scrollHeight: 0,
+        scrollTop: 0,
+        clientHeight: 0,
+        distanceFromBottom: 0,
+        isAtBottom: true
+      };
+    }
+
+    const distanceFromBottom = 
+      container.scrollHeight - container.scrollTop - container.clientHeight;
+
+    return {
+      scrollHeight: container.scrollHeight,
+      scrollTop: container.scrollTop,
+      clientHeight: container.clientHeight,
+      distanceFromBottom,
+      isAtBottom: distanceFromBottom < SCROLL_THRESHOLD
+    };
+  }, []);
+
+  /**
+   * Scroll to bottom programmatically
+   */
+  const scrollToBottom = useCallback((behavior: ScrollBehavior = 'smooth'): void => {
+    // Use requestAnimationFrame for smoother scrolling
+    requestAnimationFrame(() => {
+      messagesEndRef.current?.scrollIntoView({ 
         behavior,
         block: 'end',
         inline: 'nearest'
       });
-    }
-    
-    // Fallback to container scroll
-    if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTo({
-        top: messageContainerRef.current.scrollHeight,
-        behavior
-      });
-    }
+    });
   }, []);
+
+  // ============================================================================
+  // EVENT HANDLERS
+  // ============================================================================
   
   /**
-   * Handle scroll button click
+   * Handle scroll events - track scroll position and show/hide scroll button
+   * Throttled by browser's scroll event frequency
    */
-  const handleScrollToBottomClick = useCallback(() => {
-    isUserScrolling.current = false;
-    scrollToBottom('smooth');
+  const handleScroll = useCallback((): void => {
+    const scrollInfo = getScrollInfo();
+    
+    // Mark that user has interacted with scroll
+    if (scrollInfo.scrollTop > 0) {
+      userHasScrolled.current = true;
+    }
+
+    // Show scroll button when user scrolls up significantly
+    const shouldShowButton = scrollInfo.distanceFromBottom > SCROLL_BUTTON_THRESHOLD;
+    setShowScrollButton(shouldShowButton);
+  }, [getScrollInfo]);
+
+  /**
+   * Handle tab changes
+   */
+  const handleTabChange = useCallback((tab: TabType): void => {
+    setActiveTab(tab);
+    
+    // Scroll to bottom when switching to chat tab
+    if (tab === 'chat') {
+      setTimeout(() => scrollToBottom('auto'), 100);
+    }
   }, [scrollToBottom]);
-  
+
   /**
-   * Handle scroll events with debouncing
+   * Trigger file input click
    */
-  const handleScroll = useCallback(() => {
-    if (!messageContainerRef.current) return;
-    
-    const { scrollTop } = messageContainerRef.current;
-    
-    // Detect if user is manually scrolling up
-    if (scrollTop < lastScrollTop.current) {
-      isUserScrolling.current = true;
-    }
-    
-    lastScrollTop.current = scrollTop;
-    
-    // Clear existing timeout
-    if (scrollTimeout.current) {
-      clearTimeout(scrollTimeout.current);
-    }
-    
-    // Set new timeout to detect when scrolling stops
-    scrollTimeout.current = setTimeout(() => {
-      const nearBottom = isNearBottom();
-      
-      // If user scrolled back to bottom, reset manual scroll flag
-      if (nearBottom) {
-        isUserScrolling.current = false;
-      }
-      
-      // Show/hide scroll button
-      setShowScrollButton(!nearBottom);
-    }, 150);
-  }, [isNearBottom]);
-  
-  /**
-   * Handle file button click
-   */
-  const handleFileButtonClick = useCallback(() => {
+  const handleFileButtonClick = useCallback((): void => {
     fileInputRef.current?.click();
   }, []);
-  
+
+  /**
+   * Force scroll to bottom (for manual scroll button)
+   */
+  const handleScrollToBottomClick = useCallback((): void => {
+    scrollToBottom('smooth');
+    setShowScrollButton(false);
+    userHasScrolled.current = false;
+  }, [scrollToBottom]);
+
   // ============================================================================
   // EFFECTS
   // ============================================================================
   
   /**
-   * Auto-scroll on new messages
+   * Initial mount effect - set up initial scroll position
    */
   useEffect(() => {
-    const messageCount = initialMessages.length;
-    const hasNewMessages = messageCount > previousMessageCount.current;
-    
-    if (!hasNewMessages) {
-      previousMessageCount.current = messageCount;
+    if (isInitialRender.current) {
+      // Small delay to ensure DOM is fully rendered
+      const timer = setTimeout(() => {
+        const container = messageContainerRef.current;
+        if (container && initialMessages.length > 0) {
+          // Start at bottom for initial render
+          container.scrollTop = container.scrollHeight;
+        }
+        isInitialRender.current = false;
+      }, INITIAL_RENDER_DELAY);
+
+      return () => clearTimeout(timer);
+    }
+  }, []); // Run only once
+
+  /**
+   * Auto-scroll effect when new messages arrive
+   * Only scrolls if:
+   * 1. Not initial render (already handled above)
+   * 2. Message count increased (new message added)
+   * 3. User is near bottom OR hasn't scrolled yet
+   */
+  useEffect(() => {
+    // Skip on initial render
+    if (isInitialRender.current) {
+      previousMessageCount.current = initialMessages.length;
       return;
     }
+
+    const messageCountIncreased = initialMessages.length > previousMessageCount.current;
     
-    // Get the last message to check if it's from user or agent
-    const lastMessage = initialMessages[messageCount - 1];
-    const isUserMessage = lastMessage?.sender === 'user';
-    
-    // Scroll behavior logic:
-    // 1. Always scroll on user's own messages (instant)
-    // 2. Scroll on AI responses if user is near bottom or hasn't manually scrolled up
-    // 3. Don't scroll if user has manually scrolled up (unless it's their own message)
-    
-    const shouldScroll = isUserMessage || !isUserScrolling.current || isNearBottom();
-    
-    if (shouldScroll) {
-      // Use instant scroll for user messages, smooth for AI responses
-      const behavior = isUserMessage ? 'auto' : 'smooth';
+    if (messageCountIncreased) {
+      const shouldAutoScroll = isNearBottom() || !userHasScrolled.current;
       
-      // Small delay to ensure DOM has updated
-      requestAnimationFrame(() => {
-        scrollToBottom(behavior);
-      });
+      if (shouldAutoScroll) {
+        scrollToBottom('smooth');
+      } else {
+        // Show notification that new messages arrived
+        setShowScrollButton(true);
+      }
     }
     
-    previousMessageCount.current = messageCount;
-  }, [initialMessages, isNearBottom, scrollToBottom]);
-  
+    previousMessageCount.current = initialMessages.length;
+  }, [initialMessages.length, isNearBottom, scrollToBottom]); // Only depend on length, not entire array
+
   /**
-   * Reset scroll state when tab changes
-   */
-  useEffect(() => {
-    isUserScrolling.current = false;
-    lastScrollTop.current = 0;
-    setShowScrollButton(false);
-  }, [activeTab]);
-  
-  /**
-   * Cleanup timeout on unmount
+   * Cleanup effect
    */
   useEffect(() => {
     return () => {
-      if (scrollTimeout.current) {
-        clearTimeout(scrollTimeout.current);
-      }
+      // Reset refs on unmount
+      isInitialRender.current = true;
+      userHasScrolled.current = false;
+      previousMessageCount.current = 0;
     };
   }, []);
-  
+
   // ============================================================================
   // RETURN
   // ============================================================================
   
   return {
     activeTab,
-    setActiveTab,
+    setActiveTab: handleTabChange,
     messagesEndRef,
     messageContainerRef,
     fileInputRef,
@@ -214,3 +254,9 @@ export const useChatInterface = ({
     isNearBottom
   };
 };
+
+// ============================================================================
+// EXPORT
+// ============================================================================
+
+export default useChatInterface;
