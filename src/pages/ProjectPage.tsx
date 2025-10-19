@@ -9,7 +9,10 @@ import AgentSelectionModal, { ProjectContext } from '../components/projects/Agen
 import { ProjectConfiguration } from '../components/projects/ProjectManagementModal';
 import { useProjectLogic } from '../hooks/useProjectLogic';
 
-// Types
+// ============================================================================
+// TYPES
+// ============================================================================
+
 interface Agent {
   id: string;
   name: string;
@@ -41,7 +44,10 @@ interface ProjectMetrics {
   documentsCreated: number;
 }
 
-// Initial data
+// ============================================================================
+// CONSTANTS
+// ============================================================================
+
 const CURRENT_PROJECT: Project = {
   id: 'proj-001',
   name: 'Project Athena',
@@ -137,8 +143,63 @@ const INITIAL_METRICS: ProjectMetrics = {
   documentsCreated: 34,
 };
 
+// File upload constraints
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_ATTACHMENTS = 10;
+const ALLOWED_FILE_TYPES = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/vnd.ms-excel',
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+  'text/csv',
+  'text/plain',
+  'image/jpeg',
+  'image/png',
+  'image/gif',
+  'image/webp'
+];
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+const formatFileSize = (bytes: number): string => {
+  if (bytes === 0) return '0 Bytes';
+  const k = 1024;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+};
+
+const generateUniqueId = (prefix: string): string => {
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+};
+
+const validateFile = (file: File): { valid: boolean; error?: string } => {
+  if (file.size > MAX_FILE_SIZE) {
+    return {
+      valid: false,
+      error: `File "${file.name}" exceeds ${formatFileSize(MAX_FILE_SIZE)} limit`
+    };
+  }
+
+  if (!ALLOWED_FILE_TYPES.includes(file.type) && file.type !== '') {
+    return {
+      valid: false,
+      error: `File type "${file.type}" is not supported`
+    };
+  }
+
+  return { valid: true };
+};
+
+// ============================================================================
+// MAIN COMPONENT
+// ============================================================================
+
 export default function ProjectPage(): JSX.Element {
-  // Scroll to top on mount - simplified
+  // Scroll to top on component mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -155,95 +216,229 @@ export default function ProjectPage(): JSX.Element {
     handleAgentsUpdate
   } = useProjectLogic(CURRENT_PROJECT, PROJECT_AGENTS, INITIAL_METRICS);
 
-  // Local state for UI - FIX: Single source of truth for selected agents
+  // ============================================================================
+  // LOCAL STATE
+  // ============================================================================
+
+  // Modal states
   const [isProjectModalOpen, setIsProjectModalOpen] = useState(false);
   const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
-  const [newMessage, setNewMessage] = useState('');
-  
-  // FIX: Initialize with agents from hook, not hard-coded constant
-  const [selectedAgents, setSelectedAgents] = useState<string[]>(
-    () => agents.map(agent => agent.id)
-  );
-  
-  const [activeTab, setActiveTab] = useState<'chat' | 'documents'>('chat');
-  const [visibility, setVisibility] = useState<'project' | 'team' | 'private'>('project');
-  const [attachments, setAttachments] = useState<Attachment[]>([]);
-  const [showConvertModal, setShowConvertModal] = useState<{ 
-    type: 'task' | 'document'; 
-    messageId: string 
+  const [showConvertModal, setShowConvertModal] = useState<{
+    type: 'task' | 'document';
+    messageId: string;
   } | null>(null);
 
-  // Toggle agent selection
-  const toggleAgentSelection = (agentId: string) => {
+  // Chat interface states
+  const [newMessage, setNewMessage] = useState('');
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
+  const [activeTab, setActiveTab] = useState<'chat' | 'documents'>('chat');
+  const [visibility, setVisibility] = useState<'project' | 'team' | 'private'>('project');
+
+  // Agent selection state (single source of truth)
+  const [selectedAgents, setSelectedAgents] = useState<string[]>(() => 
+    agents.map(agent => agent.id)
+  );
+
+  // Sync selectedAgents when agents change (e.g., after project switch)
+  useEffect(() => {
+    setSelectedAgents(prev => {
+      // Keep only agent IDs that still exist
+      const validIds = prev.filter(id => agents.some(agent => agent.id === id));
+      // If all agents were removed, select all new agents
+      if (validIds.length === 0) {
+        return agents.map(agent => agent.id);
+      }
+      return validIds;
+    });
+  }, [agents]);
+
+  // ============================================================================
+  // EVENT HANDLERS - AGENT MANAGEMENT
+  // ============================================================================
+
+  const toggleAgentSelection = (agentId: string): void => {
     setSelectedAgents((prev) => {
-      if (prev.includes(agentId)) return prev.filter((id) => id !== agentId);
+      if (prev.includes(agentId)) {
+        // Don't allow deselecting all agents
+        if (prev.length === 1) {
+          toast.error('At least one agent must be selected');
+          return prev;
+        }
+        return prev.filter((id) => id !== agentId);
+      }
       return [...prev, agentId];
     });
   };
 
-  // FIX: Add file validation
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = Array.from(event.target.files || []);
-    if (files.length === 0) return;
-    
-    // Validate file size (e.g., 10MB limit)
-    const MAX_FILE_SIZE = 10 * 1024 * 1024;
-    const invalidFiles = files.filter(file => file.size > MAX_FILE_SIZE);
-    
-    if (invalidFiles.length > 0) {
-      toast.error(`Some files exceed 10MB limit and were not attached`);
+  const handleAgentModalUpdate = (updatedAgentIds: string[]): void => {
+    if (updatedAgentIds.length === 0) {
+      toast.error('At least one agent must be selected');
       return;
     }
     
-    const newAttachments: Attachment[] = files.map((file) => ({
-      id: `att-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
-      name: file.name,
-      type: file.type,
-      size: file.size,
-    }));
-
-    setAttachments((prev) => [...prev, ...newAttachments]);
-    toast.success(`${files.length} file(s) attached`);
+    handleAgentsUpdate(updatedAgentIds);
+    setSelectedAgents(updatedAgentIds);
+    
+    const selectedAgentNames = agents
+      .filter(agent => updatedAgentIds.includes(agent.id))
+      .map(agent => agent.name)
+      .join(', ');
+    
+    toast.success(`Active agents updated: ${selectedAgentNames}`);
   };
 
-  const removeAttachment = (attachmentId: string) => {
-    setAttachments((prev) => prev.filter((att) => att.id !== attachmentId));
+  // ============================================================================
+  // EVENT HANDLERS - FILE MANAGEMENT
+  // ============================================================================
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    const files = Array.from(event.target.files || []);
+    
+    if (files.length === 0) return;
+
+    // Check total attachment limit
+    if (attachments.length + files.length > MAX_ATTACHMENTS) {
+      toast.error(`Maximum ${MAX_ATTACHMENTS} attachments allowed`);
+      return;
+    }
+
+    // Validate each file
+    const validFiles: File[] = [];
+    const errors: string[] = [];
+
+    files.forEach(file => {
+      const validation = validateFile(file);
+      if (validation.valid) {
+        validFiles.push(file);
+      } else {
+        errors.push(validation.error!);
+      }
+    });
+
+    // Show errors if any
+    if (errors.length > 0) {
+      errors.forEach(error => toast.error(error, { duration: 4000 }));
+    }
+
+    // Add valid files
+    if (validFiles.length > 0) {
+      const newAttachments: Attachment[] = validFiles.map((file) => ({
+        id: generateUniqueId('att'),
+        name: file.name,
+        type: file.type,
+        size: file.size,
+      }));
+
+      setAttachments((prev) => [...prev, ...newAttachments]);
+      
+      const message = validFiles.length === 1
+        ? `File "${validFiles[0].name}" attached`
+        : `${validFiles.length} files attached`;
+      
+      toast.success(message);
+    }
+
+    // Reset input
+    event.target.value = '';
   };
 
-  // Send message wrapper
-  const onSendMessage = () => {
-    if (!newMessage.trim() && attachments.length === 0) {
+  const removeAttachment = (attachmentId: string): void => {
+    setAttachments((prev) => {
+      const attachment = prev.find(att => att.id === attachmentId);
+      if (attachment) {
+        toast.success(`Removed "${attachment.name}"`);
+      }
+      return prev.filter((att) => att.id !== attachmentId);
+    });
+  };
+
+  // ============================================================================
+  // EVENT HANDLERS - MESSAGE MANAGEMENT
+  // ============================================================================
+
+  const onSendMessage = (): void => {
+    const trimmedMessage = newMessage.trim();
+
+    // Validation
+    if (!trimmedMessage && attachments.length === 0) {
       toast.error('Please enter a message or attach a file');
       return;
     }
-    
-    handleSendMessage(newMessage, selectedAgents, visibility, attachments);
-    setNewMessage('');
-    setAttachments([]);
+
+    if (selectedAgents.length === 0) {
+      toast.error('Please select at least one agent');
+      return;
+    }
+
+    try {
+      // Send message through hook
+      handleSendMessage(trimmedMessage, selectedAgents, visibility, attachments);
+
+      // Clear input and attachments
+      setNewMessage('');
+      setAttachments([]);
+
+      // Success feedback
+      const agentCount = selectedAgents.length;
+      const agentText = agentCount === 1 
+        ? agents.find(a => a.id === selectedAgents[0])?.name || 'agent'
+        : `${agentCount} agents`;
+      
+      toast.success(`Message sent to ${agentText}`);
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast.error('Failed to send message. Please try again.');
+    }
   };
 
-  // Convert message handlers
-  const handleConvertMessage = (messageId: string, type: 'task' | 'document') => {
+  const handleConvertMessage = (messageId: string, type: 'task' | 'document'): void => {
     setShowConvertModal({ type, messageId });
   };
 
-  const confirmConvert = () => {
+  const confirmConvert = (): void => {
     if (!showConvertModal) return;
-    toast.success(
-      `${showConvertModal.type === 'task' ? 'Task' : 'Document'} created successfully`
-    );
+
+    const { type, messageId } = showConvertModal;
+    const message = messages.find(m => m.id === messageId);
+    
+    if (message) {
+      const typeText = type === 'task' ? 'Task' : 'Document';
+      const preview = message.content.length > 50 
+        ? message.content.substring(0, 50) + '...'
+        : message.content;
+      
+      toast.success(
+        `${typeText} created: "${preview}"`,
+        { duration: 4000 }
+      );
+    }
+
     setShowConvertModal(null);
   };
 
-  // FIX: Wrap feedback handler with error handling
+  // ============================================================================
+  // EVENT HANDLERS - FEEDBACK
+  // ============================================================================
+
   const handleFeedback = async (
     messageId: string,
     feedback: 'positive' | 'negative',
     comment?: string
   ): Promise<void> => {
     try {
+      // Find message and related data
       const messageIndex = messages.findIndex(m => m.id === messageId);
-      const conversationContext = messageIndex > 0 
+      const message = messages[messageIndex];
+      
+      if (!message) {
+        throw new Error('Message not found');
+      }
+
+      const agent = agents.find(a => a.id === message.agentId);
+      const agentName = agent?.name || 'Unknown Agent';
+
+      // Build conversation context
+      const conversationContext = messageIndex > 0
         ? messages.slice(Math.max(0, messageIndex - 5), messageIndex).map(m => ({
             role: m.sender === 'user' ? 'user' : 'assistant',
             content: m.content,
@@ -252,10 +447,7 @@ export default function ProjectPage(): JSX.Element {
           }))
         : [];
 
-      const message = messages.find(m => m.id === messageId);
-      const agentId = message?.agentId;
-      const agentName = agents.find(a => a.id === agentId)?.name || 'Unknown Agent';
-
+      // Submit feedback to API
       const response = await fetch('/api/feedback', {
         method: 'POST',
         headers: {
@@ -267,71 +459,84 @@ export default function ProjectPage(): JSX.Element {
           comment,
           timestamp: new Date().toISOString(),
           projectId: currentProject.id,
-          agentId,
+          agentId: message.agentId,
           conversationContext,
           metadata: {
             selectedAgents,
             visibility,
-            projectName: currentProject.name
+            projectName: currentProject.name,
+            agentRole: agent?.role
           }
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit feedback');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || 'Failed to submit feedback');
       }
 
       await response.json();
 
       // Show success feedback
       const icon = feedback === 'positive' ? '👍' : '📝';
-      const message = feedback === 'positive'
-        ? comment 
+      const successMessage = feedback === 'positive'
+        ? comment
           ? `Thanks for the detailed feedback on ${agentName}'s response!`
           : `Feedback recorded! ${agentName} will continue to improve.`
         : comment
           ? `Thanks for helping ${agentName} improve!`
           : `Feedback noted. ${agentName} will learn from this.`;
-      
-      toast.success(message, { duration: 3000, icon });
+
+      toast.success(successMessage, { duration: 3000, icon });
 
     } catch (error) {
       console.error('Error submitting feedback:', error);
-      toast.error('Failed to submit feedback. Please try again.');
+      const errorMessage = error instanceof Error 
+        ? error.message 
+        : 'Failed to submit feedback';
+      toast.error(errorMessage);
       throw error;
     }
   };
 
-  // FIX: Update project configuration and sync state
-  const handleProjectConfigUpdate = (updatedProject: ProjectConfiguration) => {
-    const updatedCurrentProject: Project = {
-      ...currentProject,
-      name: updatedProject.name,
-      description: updatedProject.description,
-      budget: updatedProject.budget,
-      priority: updatedProject.priority,
-      startDate: updatedProject.startDate,
-      endDate: updatedProject.endDate
-    };
-    
-    handleProjectSwitch(updatedCurrentProject);
-    toast.success('Project configuration updated successfully');
+  // ============================================================================
+  // EVENT HANDLERS - PROJECT MANAGEMENT
+  // ============================================================================
+
+  const handleProjectConfigUpdate = (updatedProject: ProjectConfiguration): void => {
+    try {
+      const updatedCurrentProject: Project = {
+        ...currentProject,
+        name: updatedProject.name,
+        description: updatedProject.description,
+        budget: updatedProject.budget,
+        priority: updatedProject.priority,
+        startDate: updatedProject.startDate,
+        endDate: updatedProject.endDate
+      };
+
+      handleProjectSwitch(updatedCurrentProject);
+      toast.success('Project configuration updated successfully');
+    } catch (error) {
+      console.error('Error updating project configuration:', error);
+      toast.error('Failed to update project configuration');
+    }
   };
 
-  // FIX: Properly sync agent selection when modal updates
-  const handleAgentModalUpdate = (updatedAgentIds: string[]) => {
-    handleAgentsUpdate(updatedAgentIds);
-    setSelectedAgents(updatedAgentIds); // Sync local state
+  const handleProjectSwitchWrapper = (project: Project): void => {
+    try {
+      handleProjectSwitch(project);
+      setIsProjectModalOpen(false);
+      toast.success(`Switched to ${project.name}`);
+    } catch (error) {
+      console.error('Error switching project:', error);
+      toast.error('Failed to switch project');
+    }
   };
 
-  // Utility function - could be extracted to utils file
-  const formatFileSize = (bytes: number): string => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-  };
+  // ============================================================================
+  // DERIVED DATA
+  // ============================================================================
 
   const projectContext: ProjectContext = {
     id: currentProject.id,
@@ -339,16 +544,23 @@ export default function ProjectPage(): JSX.Element {
     client: currentProject.client
   };
 
+  // ============================================================================
+  // RENDER
+  // ============================================================================
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        {/* Header Section */}
         <ProjectHeader
           currentProject={currentProject}
           metrics={metrics}
           onSwitchProject={() => setIsProjectModalOpen(true)}
         />
 
+        {/* Main Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Left Panel - Agent Management */}
           <div className="lg:col-span-3">
             <AgentPanel
               currentProject={currentProject}
@@ -360,6 +572,7 @@ export default function ProjectPage(): JSX.Element {
             />
           </div>
 
+          {/* Center Panel - AI Collaboration Area */}
           <div className="lg:col-span-9">
             <ChatInterface
               activeTab={activeTab}
@@ -383,6 +596,7 @@ export default function ProjectPage(): JSX.Element {
           </div>
         </div>
 
+        {/* Modals */}
         <ConvertMessageModal
           isOpen={!!showConvertModal}
           type={showConvertModal?.type || 'task'}
@@ -394,15 +608,15 @@ export default function ProjectPage(): JSX.Element {
           isOpen={isProjectModalOpen}
           onClose={() => setIsProjectModalOpen(false)}
           currentProjectId={currentProject.id}
-          onProjectSelect={handleProjectSwitch}
+          onProjectSelect={handleProjectSwitchWrapper}
         />
 
         <AgentSelectionModal
           isOpen={isAgentModalOpen}
           onClose={() => setIsAgentModalOpen(false)}
           currentProject={projectContext}
-          selectedAgentIds={selectedAgents} {/* FIX: Use single state */}
-          onAgentsUpdate={handleAgentModalUpdate} {/* FIX: Sync both states */}
+          selectedAgentIds={selectedAgents}
+          onAgentsUpdate={handleAgentModalUpdate}
           maxAgents={5}
         />
       </div>
