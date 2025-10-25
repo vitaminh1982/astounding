@@ -33,30 +33,30 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
                 {t('dashboard.title')}
               </h1>
-              <p className="text-sm sm:text-base text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
                 {t('dashboard.overview')}
               </p>
             </div>
             {/* Quick actions */}
             <div className="flex gap-3">
-              <button 
-                className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 transition-colors duration-200"
+              <button
+                className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
               >
                 <Download className="w-4 h-4" />
                 {t('dashboard.export')}
               </button>
-              <button 
+              <button
                 onClick={() => setShowReportModal(true)}
-                className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200"
+                className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors duration-200"
               >
                 <Plus className="w-4 h-4" />
                 {t('dashboard.newReport')}
@@ -68,9 +68,9 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
         {/* Main grid */}
         <div className="space-y-6">
           {/* Metrics Section */}
-          <section className="rounded-lg bg-white shadow">
+          <section className="rounded-lg bg-white dark:bg-gray-800 shadow dark:shadow-gray-900">
             <div className="p-4 sm:p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">
+              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                 {t('dashboard.keyMetrics')}
               </h2>
               <MetricsCards onNavigate={onNavigate} />
@@ -78,9 +78,9 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
           </section>
 
           {/* Agents Section */}
-          <section className="rounded-lg bg-white shadow">
+          <section className="rounded-lg bg-white dark:bg-gray-800 shadow dark:shadow-gray-900">
             <div className="p-4 sm:p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">
+              <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4">
                 {t('dashboard.latestAgents')}
               </h2>
               <div className="overflow-hidden">
@@ -90,21 +90,21 @@ export default function DashboardPage({ onNavigate }: DashboardPageProps) {
           </section>
 
           {/* Reports Section */}
-          <section className="rounded-lg bg-white shadow">
+          <section className="rounded-lg bg-white dark:bg-gray-800 shadow dark:shadow-gray-900">
             <div className="p-4 sm:p-6">
               <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-medium text-gray-900">
+                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">
                   {t('dashboard.reports')}
                 </h2>
-                <button 
+                <button
                   onClick={() => setShowReportModal(true)}
-                  className="flex items-center gap-2 text-sm text-indigo-600 hover:text-indigo-700"
+                  className="flex items-center gap-2 text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300"
                 >
                   <Plus className="w-4 h-4" />
                   {t('dashboard.addReport')}
                 </button>
               </div>
-              <div className="bg-gray-50 rounded-lg p-4 text-center text-gray-500">
+              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center text-gray-500 dark:text-gray-400">
                 {t('dashboard.noReports')}
               </div>
             </div>

@@ -1,12 +1,14 @@
 import React, { useState, useContext, memo, useRef, useEffect } from 'react';
-import { 
-  Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info, 
-  Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail, BarChart3, BookOpen
+import {
+  Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight, Info,
+  Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail, BarChart3, BookOpen,
+  Sun, Moon
 } from 'lucide-react';
 import CreditConsumptionBar from './CreditConsumptionBar';
 import { Page } from '../../App';
 import LanguageSwitcher from "../LanguageSwitcher";
 import { LanguageContext } from '../../context/LanguageContext';
+import { useTheme } from '../../context/ThemeContext';
 import WorkspaceSelector from '../workspace/WorkspaceSelector';
 import WorkspaceModal from '../workspace/WorkspaceModal';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,28 +34,28 @@ interface Notification {
 }
 
 // Memoized dropdown menu to prevent unnecessary re-renders
-const ProfileDropdown = memo(({ 
-  isOpen, 
-  onClose, 
-  onNavigate, 
+const ProfileDropdown = memo(({
+  isOpen,
+  onClose,
+  onNavigate,
   t,
   onOpenWorkspaceModal
 }) => {
   if (!isOpen) return null;
-  
+
   return (
-    <div 
-      className="absolute right-0 mt-2 w-72 bg-white rounded-md shadow-lg py-1 border border-gray-200 z-50"
+    <div
+      className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 border border-gray-200 dark:border-gray-700 z-50 transition-colors"
       onMouseLeave={onClose}
     >
       {/* User info section */}
-      <div className="px-4 py-3 border-b border-gray-100">
-        <p className="text-gray-500 text-sm">Minh Nguyen</p>
-        <p className="text-gray-800 font-medium">Admin</p>
+      <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
+        <p className="text-gray-500 dark:text-gray-400 text-sm">Minh Nguyen</p>
+        <p className="text-gray-800 dark:text-gray-200 font-medium">Admin</p>
       </div>
 
       {/* Mobile credits display */}
-      <div className="md:hidden px-4 py-2 border-b border-gray-100 flex items-center justify-between">
+      <div className="md:hidden px-4 py-2 border-b border-gray-100 dark:border-gray-700 flex items-center justify-between">
         <CreditConsumptionBar 
           directCredits={{ used: 1250, total: 4000 }}
           backgroundCredits={{ used: 350, total: 1000 }}
@@ -62,37 +64,37 @@ const ProfileDropdown = memo(({
       </div>
 
       {/* Navigation items */}
-      <div className="py-2 border-b border-gray-100">
-        <button 
+      <div className="py-2 border-b border-gray-100 dark:border-gray-700">
+        <button
           onClick={() => {
             onNavigate('usage');
             onClose();
           }}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
           <span className="flex items-center gap-3">
             <BarChart3 className="h-5 w-5 text-gray-400" />
             Usage
           </span>
         </button>
-        <button 
+        <button
           onClick={() => {
             onNavigate('paramètres');
             onClose();
           }}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
           <span className="flex items-center gap-3">
             <Settings className="h-5 w-5 text-gray-400" />
             {t('navbar.settings')}
           </span>
         </button>
-        <button 
+        <button
           onClick={() => {
             onNavigate('onboarding');
             onClose();
           }}
-          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+          className="w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
           <span className="flex items-center gap-3">
             <BookOpen className="h-5 w-5 text-gray-400" />
@@ -104,10 +106,10 @@ const ProfileDropdown = memo(({
 
 
       {/* Workspaces section */}
-      <div className="pt-2 pb-1 border-b border-gray-100">
-        <p className="px-4 py-1 text-xs font-medium text-gray-500 uppercase">Your workspace</p>
-        <button 
-          className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+      <div className="pt-2 pb-1 border-b border-gray-100 dark:border-gray-700">
+        <p className="px-4 py-1 text-xs font-medium text-gray-500 dark:text-gray-400 uppercase">Your workspace</p>
+        <button
+          className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
           onClick={onOpenWorkspaceModal}
         >
           <span className="flex items-center gap-3">
@@ -120,9 +122,9 @@ const ProfileDropdown = memo(({
 
       {/* Sign out button */}
       <div className="py-2">
-        <button 
+        <button
           onClick={onClose}
-          className="w-full flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100"
+          className="w-full flex items-center px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
         >
           <span className="flex items-center gap-3">
             <LogOut className="h-5 w-5" />
@@ -137,20 +139,20 @@ const ProfileDropdown = memo(({
 // Notification Panel Component
 const NotificationPanel = ({ notifications, onClose, onMarkAsRead, onClearAll }) => {
   return (
-    <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-lg border border-gray-200 z-50 overflow-hidden">
+    <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden transition-colors">
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-200 flex justify-between items-center bg-gray-50">
-        <h3 className="font-medium text-gray-700">Notifications</h3>
+      <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900">
+        <h3 className="font-medium text-gray-700 dark:text-gray-300">Notifications</h3>
         <div className="flex items-center gap-2">
-          <button 
+          <button
             onClick={onClearAll}
-            className="text-xs text-gray-500 hover:text-gray-700"
+            className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
           >
             Clear all
           </button>
-          <button 
+          <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
           >
             <X className="h-4 w-4" />
           </button>
@@ -161,25 +163,25 @@ const NotificationPanel = ({ notifications, onClose, onMarkAsRead, onClearAll })
       <div className="max-h-[400px] overflow-y-auto">
         {notifications.length === 0 ? (
           <div className="py-8 text-center">
-            <Bell className="h-8 w-8 text-gray-300 mx-auto mb-2" />
-            <p className="text-gray-500 text-sm">No notifications yet</p>
+            <Bell className="h-8 w-8 text-gray-300 dark:text-gray-600 mx-auto mb-2" />
+            <p className="text-gray-500 dark:text-gray-400 text-sm">No notifications yet</p>
           </div>
         ) : (
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y divide-gray-100 dark:divide-gray-700">
             {notifications.map((notification) => (
-              <NotificationItem 
-                key={notification.id} 
-                notification={notification} 
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
                 onMarkAsRead={() => onMarkAsRead(notification.id)}
               />
             ))}
           </div>
         )}
       </div>
-      
+
       {/* Footer */}
-      <div className="px-4 py-2 border-t border-gray-200 bg-gray-50 text-center">
-        <button className="text-sm text-indigo-600 hover:text-indigo-800">
+      <div className="px-4 py-2 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-center">
+        <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 transition-colors">
           View all notifications
         </button>
       </div>
@@ -227,8 +229,8 @@ const NotificationItem = ({ notification, onMarkAsRead }) => {
   };
   
   return (
-    <div 
-      className={`px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer ${!notification.read ? 'bg-blue-50' : ''}`}
+    <div
+      className={`px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors cursor-pointer ${!notification.read ? 'bg-blue-50 dark:bg-gray-900' : ''}`}
       onClick={onMarkAsRead}
     >
       <div className="flex items-start">
@@ -237,29 +239,29 @@ const NotificationItem = ({ notification, onMarkAsRead }) => {
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start">
-            <p className={`text-sm font-medium ${!notification.read ? 'text-gray-900' : 'text-gray-600'}`}>
+            <p className={`text-sm font-medium ${!notification.read ? 'text-gray-900 dark:text-gray-100' : 'text-gray-600 dark:text-gray-400'}`}>
               {notification.title}
             </p>
-            <span className="text-xs text-gray-500 whitespace-nowrap ml-2 flex items-center">
+            <span className="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap ml-2 flex items-center">
               <Clock className="h-3 w-3 mr-1" />
               {formatTime(notification.timestamp)}
             </span>
           </div>
-          <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
             {notification.message}
           </p>
         </div>
         {!notification.read && (
-          <span className="h-2 w-2 bg-blue-500 rounded-full flex-shrink-0 ml-2 mt-1"></span>
+          <span className="h-2 w-2 bg-blue-500 dark:bg-blue-400 rounded-full flex-shrink-0 ml-2 mt-1"></span>
         )}
       </div>
     </div>
   );
 };
 
-const Navbar = ({ 
-  onNavigate, 
-  onMenuClick, 
+const Navbar = ({
+  onNavigate,
+  onMenuClick,
   currentPage,
   navigationItems,
   isSidebarExpanded = true,
@@ -267,6 +269,7 @@ const Navbar = ({
 }: NavbarProps) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { t } = useContext(LanguageContext);
+  const { theme, toggleTheme } = useTheme();
   const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const notificationPanelRef = useRef<HTMLDivElement>(null);
@@ -412,34 +415,34 @@ const Navbar = ({
   }, [isNotificationsOpen]);
 
   return (
-    <nav className="bg-white border-b border-gray-200 fixed w-full z-40 top-0">
+    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 fixed w-full z-40 top-0 transition-colors">
       <div className="px-4 py-3 lg:px-6 flex justify-between items-center">
         {/* Left section */}
         <div className="flex items-center gap-4">
-          <button 
+          <button
             onClick={onMenuClick}
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+            className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
-            <Menu className="h-6 w-6 text-gray-600" />
+            <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300" />
           </button>
 
           {/* Sidebar toggle button - only visible on desktop */}
           {onToggleSidebar && (
             <button
               onClick={onToggleSidebar}
-              className="hidden lg:flex p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="hidden lg:flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
               aria-label={isSidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
             >
               {isSidebarExpanded ? (
-                <ChevronLeft className="h-5 w-5 text-gray-600" />
+                <ChevronLeft className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               ) : (
-                <ChevronRight className="h-5 w-5 text-gray-600" />
+                <ChevronRight className="h-5 w-5 text-gray-600 dark:text-gray-300" />
               )}
             </button>
           )}
 
-          <button 
+          <button
             onClick={() => onNavigate('dashboard')}
             className="text-xl lg:text-2xl font-bold text-[#10B981] cursor-pointer hover:opacity-80 transition-opacity"
           >
@@ -458,20 +461,20 @@ const Navbar = ({
         <div className="flex items-center gap-2 lg:gap-4">
           {/* Notifications */}
           <div className="relative">
-            <button 
+            <button
               ref={notificationButtonRef}
               onClick={toggleNotifications}
-              className="relative p-2 hover:bg-gray-100 rounded-full"
+              className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
               aria-label="Notifications"
             >
-              <Bell className="h-5 w-5 lg:h-6 lg:w-6 text-gray-600" />
+              <Bell className="h-5 w-5 lg:h-6 lg:w-6 text-gray-600 dark:text-gray-300" />
               {unreadCount > 0 && (
                 <span className="absolute top-0 right-0 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
                   {unreadCount > 9 ? '9+' : unreadCount}
                 </span>
               )}
             </button>
-            
+
             {/* Notification Panel */}
             <AnimatePresence>
               {isNotificationsOpen && (
@@ -482,7 +485,7 @@ const Navbar = ({
                   exit={{ opacity: 0, y: -10 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <NotificationPanel 
+                  <NotificationPanel
                     notifications={notifications}
                     onClose={() => setIsNotificationsOpen(false)}
                     onMarkAsRead={markAsRead}
@@ -492,7 +495,20 @@ const Navbar = ({
               )}
             </AnimatePresence>
           </div>
-          
+
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
+            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          >
+            {theme === 'light' ? (
+              <Moon className="h-5 w-5 lg:h-6 lg:w-6 text-gray-600 dark:text-gray-300" />
+            ) : (
+              <Sun className="h-5 w-5 lg:h-6 lg:w-6 text-gray-300" />
+            )}
+          </button>
+
           {/* Language Switcher */}
           <div className="hidden md:block">
             <LanguageSwitcher />
@@ -500,13 +516,13 @@ const Navbar = ({
           
           {/* Profile section */}
           <div className="relative">
-            <button 
+            <button
               onClick={handleProfileToggle}
-              className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gray-200 flex items-center justify-center hover:bg-gray-300"
+              className="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
               aria-label="Profile menu"
               aria-expanded={isProfileOpen}
             >
-              <User className="h-5 w-5 lg:h-6 lg:w-6 text-gray-600" />
+              <User className="h-5 w-5 lg:h-6 lg:w-6 text-gray-600 dark:text-gray-300" />
             </button>
 
             {/* Dropdown menu as separate component */}

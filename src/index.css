@@ -8,11 +8,14 @@ html, body, #root {
   height: 100%;
 }
 
-/* Remove the overflow: hidden or change it to auto */
 body {
   overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .react-flow__node {

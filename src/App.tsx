@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import DashboardPage from './pages/DashboardPage';
@@ -158,10 +159,10 @@ function AppContent() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       {/* Add Toaster component here */}
-      <Toaster 
-        position="top-right" 
+      <Toaster
+        position="top-right"
         toastOptions={{
           duration: 3000,
           style: {
@@ -232,9 +233,11 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <LanguageProvider>
-        <AppContent />
-      </LanguageProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <AppContent />
+        </LanguageProvider>
+      </ThemeProvider>
     </Router>
   );
 }
