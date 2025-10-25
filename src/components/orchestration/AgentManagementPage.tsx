@@ -198,7 +198,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header with breadcrumb */}
         <div className="mb-6">
@@ -206,15 +206,15 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
           
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">Agent Management</h1>
-              <p className="text-gray-600">Comprehensive agent lifecycle and configuration management</p>
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">Agent Management</h1>
+              <p className="text-gray-600 dark:text-gray-400">Comprehensive agent lifecycle and configuration management</p>
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
+              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
                 <Upload className="w-4 h-4" />
                 Import Agent
               </button>
-              <button className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+              <button className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600">
                 <Plus className="w-4 h-4" />
                 New Agent
               </button>
@@ -224,29 +224,29 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
 
         {/* Overview metrics */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg p-4 border shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Total Agents</p>
-                <p className="text-2xl font-bold text-indigo-600">{agents.length}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Total Agents</p>
+                <p className="text-2xl font-bold text-teal-600 dark:text-teal-400">{agents.length}</p>
               </div>
               <Bot className="w-8 h-8 text-indigo-500" />
             </div>
-            <div className="mt-2 text-xs text-green-600">
+            <div className="mt-2 text-xs text-green-600 dark:text-green-400">
               {agents.filter(a => a.status === 'active').length} active
             </div>
           </div>
-          <div className="bg-white rounded-lg p-4 border shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500">Avg Response Time</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">Avg Response Time</p>
                 <p className="text-2xl font-bold text-green-600">1.5s</p>
               </div>
               <Clock className="w-8 h-8 text-green-500" />
             </div>
-            <div className="mt-2 text-xs text-green-600">-0.3s improvement</div>
+            <div className="mt-2 text-xs text-green-600 dark:text-green-400">-0.3s improvement</div>
           </div>
-          <div className="bg-white rounded-lg p-4 border shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500">System Health</p>
@@ -254,9 +254,9 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
               </div>
               <Activity className="w-8 h-8 text-green-500" />
             </div>
-            <div className="mt-2 text-xs text-green-600">All systems operational</div>
+            <div className="mt-2 text-xs text-green-600 dark:text-green-400">All systems operational</div>
           </div>
-          <div className="bg-white rounded-lg p-4 border shadow-sm">
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 shadow-sm">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-500">Resource Usage</p>
@@ -269,7 +269,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
         </div>
 
         {/* Main content */}
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900">
           {/* Tabs */}
           <div className="border-b border-gray-200">
             <nav className="flex -mb-px">

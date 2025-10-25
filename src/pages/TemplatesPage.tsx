@@ -14,7 +14,7 @@ export default function TemplatesPage() {
 
   return (
     // Conteneur principal avec une hauteur minimale écran
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Container principal avec padding responsive */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* En-tête de la page */}
@@ -24,7 +24,7 @@ export default function TemplatesPage() {
         <div className="mb-4 lg:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="w-full px-4 py-2 text-left bg-white rounded-lg border"
+            className="w-full px-4 py-2 text-left bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-700"
           >
             {t('templates.categories.title')} {isMobileMenuOpen ? '▼' : '▶'}
           </button>

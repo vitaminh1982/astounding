@@ -12,7 +12,7 @@ export default function ClientsPage() {
   const { t } = useContext(LanguageContext);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <ClientsHeader className="mb-8" />
@@ -22,7 +22,7 @@ export default function ClientsPage() {
           {/* Main Column */}
           <div className="w-full lg:flex-1 min-w-0">
             {/* Filters */}
-            <div className="bg-white rounded-xl shadow-sm mb-6 p-4">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm mb-6 p-4">
               <div className="overflow-x-auto">
                 <div className="min-w-[600px] lg:min-w-0">
                   <ClientsFilters />
