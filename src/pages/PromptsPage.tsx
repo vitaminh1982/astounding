@@ -175,7 +175,7 @@ export default function PromptsPage() {
 
   return (
     // Main container for the page
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Content container with responsive padding */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
 
@@ -192,14 +192,14 @@ export default function PromptsPage() {
         {/* View Toggle */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-500">View:</span>
-            <div className="flex border rounded-md overflow-hidden">
+            <span className="text-sm text-gray-500 dark:text-gray-400">View:</span>
+            <div className="flex border border-gray-300 dark:border-gray-600 rounded-md overflow-hidden">
               <button
                 onClick={() => setViewType('card')}
                 className={`flex items-center px-3 py-1.5 text-sm ${
-                  viewType === 'card' 
-                    ? 'bg-indigo-600 text-white' 
-                    : 'bg-white text-gray-700 hover:bg-gray-50'
+                  viewType === 'card'
+                    ? 'bg-teal-600 dark:bg-teal-500 text-white'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
                 aria-label="Card View"
               >
