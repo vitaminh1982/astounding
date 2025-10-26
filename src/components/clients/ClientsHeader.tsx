@@ -16,6 +16,7 @@ export default function ClientsHeader() {
         </p>
       </div>
       <div className="w-full lg:w-1/2 xl:w-2/3 flex justify-end gap-3">
+        {/* Mobile-first Export/Import Buttons */}
         <div className="lg:hidden flex flex-col gap-2">
           <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <Download className="w-4 h-4 text-gray-700 dark:text-gray-300" />
@@ -26,11 +27,15 @@ export default function ClientsHeader() {
             <span className="text-gray-700 dark:text-gray-300">{t('clients.page.header.import')}</span>
           </button>
         </div>
+
+        {/* Add Customer Button with Color Switch */}
         <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
           <UserPlus className="w-4 h-4" />
           {t('clients.page.header.addCustomer')}
         </button>
+
+        {/* Desktop Export/Import Buttons */}
         <div className="hidden lg:flex gap-3">
           <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <Download className="w-4 h-4 text-gray-700 dark:text-gray-300" />
