@@ -24,12 +24,12 @@ export default function ConversationSummary({ usageData }: ConversationSummaryPr
     : sampleData;
 
   return (
-    <div className="bg-white rounded-lg shadow p-5">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-5 transition-colors">
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-base font-semibold text-gray-900">Conversation Summary</h3>
+        <h3 className="text-base font-semibold text-gray-900 dark:text-gray-100">Conversation Summary</h3>
         <div className="flex items-center">
-          <span className="text-sm text-gray-500">Total: </span>
-          <span className="font-bold text-gray-800 ml-1">{conversations?.total || 70}</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">Total: </span>
+          <span className="font-bold text-gray-800 dark:text-gray-100 ml-1">{conversations?.total || 70}</span>
         </div>
       </div>
 
@@ -39,7 +39,7 @@ export default function ConversationSummary({ usageData }: ConversationSummaryPr
         <div className="flex justify-between mb-1 px-2">
           {recentDailyUsage.map((day, index) => (
             <div key={`count-${index}`} className="text-center" style={{width: '50px'}}>
-              <span className="text-xs font-medium text-gray-700">{day.count}</span>
+              <span className="text-xs font-medium text-gray-700 dark:text-gray-200">{day.count}</span>
             </div>
           ))}
         </div>
@@ -57,7 +57,11 @@ export default function ConversationSummary({ usageData }: ConversationSummaryPr
             return (
               <div 
                 key={`bar-${index}`}
-                className={`absolute bottom-0 ${isToday ? 'bg-indigo-500' : 'bg-indigo-300'} rounded-t-sm`}
+                className={`absolute bottom-0 rounded-t-sm transition-colors ${
+                  isToday 
+                    ? 'bg-indigo-500 dark:bg-teal-500' 
+                    : 'bg-indigo-300 dark:bg-teal-300'
+                }`}
                 style={{
                   left: `${(index * 20) + 7.5}%`, // Position bars evenly
                   width: '16px',
@@ -78,31 +82,31 @@ export default function ConversationSummary({ usageData }: ConversationSummaryPr
             
             return (
               <div key={`day-${index}`} className="text-center" style={{width: '50px'}}>
-                <div className="text-xs text-gray-500">{dayName}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">{dayName}</div>
               </div>
             );
           })}
         </div>
       </div>
       
-      <div className="mt-4 pt-3 border-t border-gray-100 grid grid-cols-2 gap-4">
+      <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 grid grid-cols-2 gap-4">
         <div className="flex items-center">
-          <div className="p-2 bg-blue-50 rounded-lg mr-2.5">
-            <MessageSquare className="w-3.5 h-3.5 text-blue-600" />
+          <div className="p-2 bg-blue-50 dark:bg-teal-900 rounded-lg mr-2.5 transition-colors">
+            <MessageSquare className="w-3.5 h-3.5 text-blue-600 dark:text-teal-300" />
           </div>
           <div>
-            <p className="text-xs text-gray-500">Avg/Conv</p>
-            <p className="text-sm font-semibold">{conversations?.averageMessagesPerConversation || "12"}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Avg/Conv</p>
+            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{conversations?.averageMessagesPerConversation || "12"}</p>
           </div>
         </div>
         
         <div className="flex items-center">
-          <div className="p-2 bg-purple-50 rounded-lg mr-2.5">
-            <MessageSquare className="w-3.5 h-3.5 text-purple-600" />
+          <div className="p-2 bg-purple-50 dark:bg-purple-900 rounded-lg mr-2.5 transition-colors">
+            <MessageSquare className="w-3.5 h-3.5 text-purple-600 dark:text-purple-300" />
           </div>
           <div>
-            <p className="text-xs text-gray-500">Today</p>
-            <p className="text-sm font-semibold">{recentDailyUsage[recentDailyUsage.length-1]?.count || 22}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Today</p>
+            <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{recentDailyUsage[recentDailyUsage.length-1]?.count || 22}</p>
           </div>
         </div>
       </div>
