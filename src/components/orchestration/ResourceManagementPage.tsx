@@ -220,7 +220,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                 <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
-              <button className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Settings className="w-4 h-4" />
                 Configure
               </button>
