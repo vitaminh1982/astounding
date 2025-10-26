@@ -45,7 +45,7 @@ export const useWorkflowState = (
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   // Panel state
-  const [isComponentsPanelMinimized, setIsComponentsPanelMinimized] = useState(false);
+  const [isComponentsPanelMinimized, setIsComponentsPanelMinimized] = useState(true);
 
   // Workflow change handler
   const handleWorkflowChange = useCallback(
