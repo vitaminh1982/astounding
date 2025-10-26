@@ -112,8 +112,8 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
           </div>
           <button
             onClick={handleAddRule}
-            className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors"
-          >
+            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
             <Plus className="w-4 h-4 mr-2" />
             Add Rule
           </button>
