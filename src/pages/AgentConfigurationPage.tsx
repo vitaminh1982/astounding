@@ -317,7 +317,7 @@ When responding to customers:
                     <div className="space-y-6">
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Knowledge Sources</h3>
-                        <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-white bg-teal-600 dark:bg-teal-500 hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                        <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
                           <Plus className="h-4 w-4 mr-2" />
                           Add Source
                         </button>
