@@ -83,7 +83,7 @@ const ToolsSidebar: React.FC<ToolsSidebarProps> = ({ tools, onToggleTool }) => {
       <div className="mt-6 pt-6 border-t border-gray-200">
         <button 
           type="button"
-          className="flex items-center justify-center w-full gap-2 py-2.5 px-4 bg-green-50 text-green-600 rounded-lg hover:bg-green-100 transition-colors"
+          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
           <Plus className="w-4 h-4" />
           <span>Add Custom Tool</span>
