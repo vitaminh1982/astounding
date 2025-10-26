@@ -52,13 +52,14 @@ const NotificationButton: React.FC<NotificationButtonProps> = ({
       whileTap={{ scale: 0.95 }}
       className={`
         relative p-2 
-        hover:bg-gray-100 
+        hover:bg-gray-100 dark:hover:bg-gray-700
         rounded-full 
         transition-colors
         focus:outline-none 
         focus:ring-2 
         focus:ring-offset-2 
-        focus:ring-${variant === 'warning' ? 'amber' : 'blue'}-500
+        dark:focus:ring-offset-gray-800
+        focus:ring-${variant === 'warning' ? 'amber' : 'teal'}-500
       `}
       onClick={onClick}
     >
@@ -82,12 +83,12 @@ export default function ConversationsHeader() {
   return (
     <div className="flex justify-between items-center mb-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-800">Discussions</h1>
-        <p className="text-sm sm:text-base text-gray-600">Managed discussions that require attention</p>
+        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">Discussions</h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">Managed discussions that require attention</p>
       </div>
       <div className="flex gap-3 items-center">
         <NotificationButton
-          icon={<AlertTriangle className="h-5 w-5 text-amber-500" />}
+          icon={<AlertTriangle className="h-5 w-5 text-amber-500 dark:text-amber-400" />}
           count={2}
           tooltip="Conversations urgentes"
           variant="warning"
@@ -95,7 +96,7 @@ export default function ConversationsHeader() {
         />
         
         <NotificationButton
-          icon={<Bell className="h-5 w-5 text-gray-600" />}
+          icon={<Bell className="h-5 w-5 text-gray-600 dark:text-gray-400" />}
           count={8}
           tooltip="Notifications"
           onClick={handleNotifications}
