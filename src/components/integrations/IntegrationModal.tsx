@@ -50,28 +50,28 @@ export default function IntegrationModal({
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div 
-          className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+          className="fixed inset-0 bg-gray-500 bg-opacity-75 dark:bg-opacity-80 transition-opacity" 
           aria-hidden="true"
           onClick={onClose}
         ></div>
 
-        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">​</span>
 
-        <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl dark:shadow-gray-900 transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full border border-gray-200 dark:border-gray-600">
           <div className="absolute top-0 right-0 pt-4 pr-4">
             <button
               type="button"
               onClick={onClose}
-              className="bg-white rounded-md text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              className="bg-white dark:bg-gray-800 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-teal-500 dark:focus:ring-offset-gray-800 transition-colors p-2"
               aria-label={t('integrations.aria.closeModal')}
             >
               <X className="h-6 w-6" />
             </button>
           </div>
 
-          <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4 transition-colors">
             <div className="sm:flex sm:items-start mb-4">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
+              <h3 className="text-lg font-medium leading-6 text-gray-900 dark:text-gray-100 transition-colors">
                 {integration.isConnected 
                   ? `${t('integrations.configure')} ${integration.name}` 
                   : `${t('integrations.connect')} ${integration.name}`}
@@ -81,10 +81,10 @@ export default function IntegrationModal({
             <form onSubmit={handleFormSubmit}>
               {!integration.isConnected && (
                 <div className="mb-4">
-                  <label htmlFor="api-key" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="api-key" className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
                     API Key {integration.name}
                   </label>
-                  <p className="text-sm text-gray-500 mb-2">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2 transition-colors">
                     {t('integrations.authDescription', { name: integration.name })}
                   </p>
                   <input
@@ -92,21 +92,21 @@ export default function IntegrationModal({
                     id="api-key"
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
-                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    className="mt-1 block w-full border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-gray-900 py-2 px-3 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 focus:border-blue-500 dark:focus:border-teal-500 sm:text-sm transition-colors"
                     required={!integration.isConnected}
                   />
                 </div>
               )}
 
               <div className="mb-4">
-                <label htmlFor="sync-frequency" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="sync-frequency" className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
                   {t('integrations.syncFrequency')}
                 </label>
                 <select
                   id="sync-frequency"
                   value={syncFrequency}
                   onChange={(e) => setSyncFrequency(e.target.value)}
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 focus:border-blue-500 dark:focus:border-teal-500 sm:text-sm rounded-md transition-colors"
                 >
                   <option value="realtime">{t('integrations.realtime')}</option>
                   <option value="hourly">{t('integrations.hourly')}</option>
@@ -116,14 +116,14 @@ export default function IntegrationModal({
               </div>
 
               <div className="mb-4">
-                <label htmlFor="access-level" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="access-level" className="block text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
                   {t('integrations.accessLevel')}
                 </label>
                 <select
                   id="access-level"
                   value={accessLevel}
                   onChange={(e) => setAccessLevel(e.target.value)}
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 focus:border-blue-500 dark:focus:border-teal-500 sm:text-sm rounded-md transition-colors"
                 >
                   <option value="readOnly">{t('integrations.readOnly')}</option>
                   <option value="readWrite">{t('integrations.readWrite')}</option>
@@ -139,11 +139,11 @@ export default function IntegrationModal({
                     type="checkbox"
                     checked={notifications}
                     onChange={(e) => setNotifications(e.target.checked)}
-                    className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                    className="focus:ring-blue-500 dark:focus:ring-teal-500 h-4 w-4 text-blue-600 dark:text-teal-600 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 rounded transition-colors"
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label htmlFor="notifications" className="font-medium text-gray-700">
+                  <label htmlFor="notifications" className="font-medium text-gray-700 dark:text-gray-300 transition-colors">
                     {t('integrations.enableNotifications')}
                   </label>
                 </div>
@@ -152,10 +152,10 @@ export default function IntegrationModal({
               <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                 <button
                   type="submit"
-                  className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm
+                  className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm dark:shadow-gray-900 px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 sm:ml-3 sm:w-auto sm:text-sm transition-colors
                   ${integration.isConnected 
-                    ? 'bg-indigo-600 hover:bg-indigo-700 focus:ring-blue-500'
-                    : 'bg-indigo-600 hover:bg-indigo-700 focus:ring-blue-500'}`}
+                    ? 'bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-blue-500 dark:focus:ring-teal-500'
+                    : 'bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-blue-500 dark:focus:ring-teal-500'}`}
                 >
                   {integration.isConnected 
                     ? t('integrations.saveSuccess')
@@ -166,7 +166,7 @@ export default function IntegrationModal({
                   <button
                     type="button"
                     onClick={handleDisconnect}
-                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-red-600 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:mt-0 sm:w-auto sm:text-sm"
+                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-900 px-4 py-2 bg-white dark:bg-gray-700 text-base font-medium text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-red-500 dark:focus:ring-red-400 sm:mt-0 sm:w-auto sm:text-sm transition-colors"
                   >
                     {t('integrations.disconnect')}
                   </button>
@@ -175,7 +175,7 @@ export default function IntegrationModal({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm dark:shadow-gray-900 px-4 py-2 bg-white dark:bg-gray-700 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-blue-500 dark:focus:ring-teal-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm transition-colors"
                 >
                   {integration.isConnected ? t('integrations.cancel') : t('integrations.cancel')}
                 </button>
