@@ -22,7 +22,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
   if (!documents || documents.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500">No available document</p>
+        <p className="text-gray-500 dark:text-gray-400 transition-colors">No available document</p>
       </div>
     );
   }
@@ -32,23 +32,23 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
       {documents.map((document) => (
         <div
           key={document.id}
-          className="bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"
+          className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all border border-gray-200 dark:border-gray-600"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gray-100 rounded-lg">
-                <File className="h-6 w-6 text-gray-600" />
+              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg transition-colors">
+                <File className="h-6 w-6 text-gray-600 dark:text-gray-400 transition-colors" />
               </div>
               <div>
-                <h3 className="font-medium text-gray-900 truncate max-w-[200px]">
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 truncate max-w-[200px] transition-colors">
                   {document.name}
                 </h3>
-                <p className="text-sm text-gray-500">{document.size}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{document.size}</p>
               </div>
             </div>
             <button
               onClick={() => onDelete?.(document.id)}
-              className="text-gray-400 hover:text-red-500 transition-colors"
+              className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
               title="Supprimer"
             >
               <Trash2 className="h-5 w-5" />
@@ -56,14 +56,14 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
           </div>
 
           <div className="mt-4">
-            <p className="text-sm text-gray-500">
-              Last update : {document.lastModified}
+            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+              Last update: {document.lastModified}
             </p>
           </div>
 
           <div className="mt-4">
-            <p className="text-sm font-medium text-gray-700 mb-2">
-              Assigned Agents :
+            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+              Assigned Agents:
             </p>
             <div className="flex flex-wrap gap-2">
               {document.assignedAgents.map((agentId) => {
@@ -71,7 +71,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
                 return agentDetails ? (
                   <span
                     key={agentId}
-                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${agentDetails.color}`}
+                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${agentDetails.color} transition-colors`}
                   >
                     <Bot className="h-3 w-3 mr-1" />
                     {agentDetails.name}
@@ -84,7 +84,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
           <div className="mt-4">
             <select
               onChange={(e) => onAssignAgent?.(document.id, e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
             >
               <option value="">Assign a new agent...</option>
               {availableAgents
