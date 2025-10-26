@@ -1,7 +1,7 @@
 import React from 'react';
 import { PenTool as Tool, Plus, X } from 'lucide-react';
 import { WorkflowComponentsPanelProps } from '../types/workflowTypes';
-import { nodeTypes } from '../constants/workflowConstants.tsx';
+import { nodeTypes } from '../constants/workflowConstants.tsx'; // Assuming this path is correct
 
 /**
  * Draggable components panel for workflow designer
