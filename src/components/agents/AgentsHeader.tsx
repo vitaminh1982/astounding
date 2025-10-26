@@ -136,7 +136,7 @@ export default function AgentsHeader() {
           {/* New Agent Button - Indigo in light mode, Green/Teal in dark mode */}
           <button 
             onClick={handleNewAgent}
-            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
             aria-label={t('agents.page.header.newAgent')}
           >
             <Plus className="w-4 h-4" />
