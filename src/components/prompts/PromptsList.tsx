@@ -347,13 +347,6 @@ The template should include:
   }
 ];
 
-import React, { useContext } from 'react';
-import { SearchX } from 'lucide-react';
-import { LanguageContext } from '../../context/LanguageContext';
-import PromptCard from './PromptCard';
-import { Prompt } from '../../types/prompt';
-
-
 interface PromptsListProps {
   prompts?: Prompt[];
   onUsePrompt?: (promptId: string) => void;
