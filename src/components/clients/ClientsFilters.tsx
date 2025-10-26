@@ -37,7 +37,7 @@ export default function ClientsFilters() {
       
       {/* Deuxième ligne : Boutons de filtrage */}
       <div className="flex flex-wrap gap-2 justify-start">
-        <button className="px-4 py-1.5 bg-teal-600 dark:bg-teal-500 text-white rounded-full text-sm hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+        <button className="px-4 py-1.5 bg-indigo-600 dark:bg-teal-600 text-white rounded-full text-sm hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors">
           {t('clients.filters.all')}
         </button>
         <button className="px-4 py-1.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
