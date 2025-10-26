@@ -139,7 +139,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
   const getVoiceButtonStyles = () => {
     if (isLoading) {
-      return 'bg-gray-200 text-gray-400 cursor-not-allowed';
+      return 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed';
     }
     
     if (isRecording) {
@@ -150,7 +150,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
       return 'bg-blue-500 text-white animate-pulse';
     }
     
-    return 'text-gray-500 hover:text-gray-700 hover:bg-gray-100';
+    return 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700';
   };
 
   const handleVoiceRecording = async () => {
@@ -162,24 +162,24 @@ const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className="p-6 bg-white border-t border-gray-200">
+    <div className="p-6 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-600 transition-colors">
       {/* Attachments Preview */}
       {attachments.length > 0 && (
         <div className="mb-4 flex flex-wrap gap-2">
           {attachments.map(attachment => (
-            <div key={attachment.id} className="relative bg-gray-50 border rounded-lg p-2 flex items-center gap-2 max-w-xs">
+            <div key={attachment.id} className="relative bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-2 flex items-center gap-2 max-w-xs transition-colors">
               {attachment.type === 'image' && attachment.preview ? (
                 <img src={attachment.preview} alt="Preview" className="w-8 h-8 rounded object-cover" />
               ) : (
-                <FileText className="w-5 h-5 text-gray-500" />
+                <FileText className="w-5 h-5 text-gray-500 dark:text-gray-400" />
               )}
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">{attachment.file.name}</p>
-                <p className="text-xs text-gray-500">{formatFileSize(attachment.file.size)}</p>
+                <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate transition-colors">{attachment.file.name}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">{formatFileSize(attachment.file.size)}</p>
               </div>
               <button
                 onClick={() => onRemoveAttachment(attachment.id)}
-                className="text-gray-400 hover:text-red-500 transition-colors"
+                className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -190,12 +190,12 @@ const MessageInput: React.FC<MessageInputProps> = ({
       
       {/* Model Selection Panel */}
       {showModelOptions && (
-        <div className="mb-4 p-4 bg-gray-50 border rounded-lg">
+        <div className="mb-4 p-4 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors">
           <div className="flex justify-between items-center mb-3">
-            <h4 className="text-sm font-medium text-gray-700">AI Model Selection</h4>
+            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">AI Model Selection</h4>
             <button
               onClick={onClearAllModelSelections}
-              className="text-xs text-gray-500 hover:text-gray-700"
+              className="text-xs text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
             >
               Clear All
             </button>
@@ -207,8 +207,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 onClick={() => onToggleModelSelection(key)}
                 className={`flex items-center gap-2 p-2 rounded-lg border transition-colors ${
                   modelSelection[key]
-                    ? `bg-${color}-50 border-${color}-200 text-${color}-700`
-                    : 'bg-white border-gray-200 text-gray-600 hover:bg-gray-50'
+                    ? `bg-${color}-50 dark:bg-${color}-900/30 border-${color}-200 dark:border-${color}-600 text-${color}-700 dark:text-${color}-300`
+                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
                 <Icon className="w-4 h-4" />
@@ -221,11 +221,11 @@ const MessageInput: React.FC<MessageInputProps> = ({
       )}
       
       {/* Main Input Area */}
-      <div className="flex items-center gap-3 bg-gray-50 rounded-xl p-3 border border-gray-300 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-200">
-        <Search className="w-5 h-5 text-gray-500 flex-shrink-0" />
+      <div className="flex items-center gap-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl p-3 border border-gray-300 dark:border-gray-600 focus-within:border-teal-500 dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-200 dark:focus-within:ring-teal-800 transition-colors">
+        <Search className="w-5 h-5 text-gray-500 dark:text-gray-400 flex-shrink-0" />
         
         <textarea
-          className="flex-1 resize-none bg-transparent py-2 focus:outline-none text-gray-900 placeholder-gray-600 text-sm font-medium"
+          className="flex-1 resize-none bg-transparent py-2 focus:outline-none text-gray-900 dark:text-gray-100 placeholder-gray-600 dark:placeholder-gray-400 text-sm font-medium transition-colors"
           rows={1}
           placeholder={
             isDictationMode 
@@ -257,7 +257,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           <button
             onClick={() => fileInputRef.current?.click()}
             disabled={isLoading || isRecording || isTranscribing}
-            className="p-2 text-gray-500 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             title="Attach files"
           >
             <Paperclip className="w-4 h-4" />
@@ -269,8 +269,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
             disabled={isRecording || isTranscribing}
             className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               showModelOptions || getActiveModelCount() > 0
-                ? 'bg-indigo-100 text-indigo-600'
-                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
             title="Select AI models"
           >
@@ -283,8 +283,8 @@ const MessageInput: React.FC<MessageInputProps> = ({
             disabled={isLoading || isRecording || isTranscribing}
             className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               isDictationMode
-                ? 'bg-purple-100 text-purple-600'
-                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
             title={isDictationMode ? 'Disable dictation mode' : 'Enable dictation mode'}
           >
@@ -297,10 +297,10 @@ const MessageInput: React.FC<MessageInputProps> = ({
             disabled={isLoading || isRecording || isTranscribing}
             className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               isSpeaking
-                ? 'bg-red-100 text-red-600 hover:bg-red-200'
+                ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50'
                 : ttsState.isEnabled
-                ? 'bg-green-100 text-green-600'
-                : 'text-gray-500 hover:text-gray-700 hover:bg-gray-100'
+                ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
+                : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
             }`}
             title={
               isSpeaking 
@@ -342,7 +342,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               exit={{ scale: 0, opacity: 0 }}
               onClick={onSendMessage}
               disabled={isLoading || isRecording || isTranscribing}
-              className="p-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 bg-teal-600 dark:bg-teal-500 text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 shadow-sm dark:shadow-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               title="Send message"
             >
               <Send className="w-4 h-4" />
@@ -352,12 +352,12 @@ const MessageInput: React.FC<MessageInputProps> = ({
       </div>
       
       {/* Status Indicators */}
-      <div className="flex justify-between items-center mt-2 text-xs text-gray-500">
+      <div className="flex justify-between items-center mt-2 text-xs text-gray-500 dark:text-gray-400 transition-colors">
         <div className="flex items-center gap-4">
           {/* Recording Status - Single, Clear Indicator */}
           {(isRecording || isTranscribing) && (
             <span className={`flex items-center gap-1 ${
-              isRecording ? 'text-red-600' : 'text-blue-600'
+              isRecording ? 'text-red-600 dark:text-red-400' : 'text-blue-600 dark:text-blue-400'
             }`}>
               {isRecording ? (
                 <>
@@ -374,21 +374,21 @@ const MessageInput: React.FC<MessageInputProps> = ({
           )}
           
           {isDictationMode && !isRecording && !isTranscribing && (
-            <span className="flex items-center gap-1 text-purple-600">
+            <span className="flex items-center gap-1 text-purple-600 dark:text-purple-400">
               <Mic className="w-3 h-3" />
               Dictation mode
             </span>
           )}
           
           {ttsState.isEnabled && (
-            <span className="flex items-center gap-1 text-green-600">
+            <span className="flex items-center gap-1 text-green-600 dark:text-green-400">
               <Speaker className="w-3 h-3" />
               {isSpeaking ? 'Speaking...' : 'TTS enabled'}
             </span>
           )}
           
           {attachments.length > 0 && (
-            <span className="flex items-center gap-1 text-blue-600">
+            <span className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
               <Paperclip className="w-3 h-3" />
               {attachments.length} file{attachments.length > 1 ? 's' : ''} attached
             </span>
@@ -397,11 +397,11 @@ const MessageInput: React.FC<MessageInputProps> = ({
         
         <div className="flex items-center gap-2">
           {getActiveModelCount() > 0 && (
-            <span className="text-indigo-600">
+            <span className="text-teal-600 dark:text-teal-400">
               {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
             </span>
           )}
-          <span className="text-gray-400">
+          <span className="text-gray-400 dark:text-gray-500">
             {promptInput.length}/1000
           </span>
         </div>
