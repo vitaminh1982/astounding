@@ -16,34 +16,34 @@ const SystemMetricsGrid: React.FC<SystemMetricsGridProps> = ({ metrics }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 hover:shadow-md transition-all duration-200"
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 p-4 sm:p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200"
         >
           <div className="flex items-center justify-between mb-4">
             <div className={`${metric.bgColor} p-3 rounded-xl`}>
               <metric.icon className={`h-6 w-6 ${metric.color}`} />
             </div>
-            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 border border-green-200">
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700">
               {metric.trend === 'up' ? (
-                <TrendingUp className="h-4 w-4 text-green-600" />
+                <TrendingUp className="h-4 w-4 text-green-600 dark:text-green-400" />
               ) : (
-                <TrendingDown className="h-4 w-4 text-green-600" />
+                <TrendingDown className="h-4 w-4 text-green-600 dark:text-green-400" />
               )}
-              <span className="text-sm font-semibold text-green-700">
+              <span className="text-sm font-semibold text-green-700 dark:text-green-300">
                 {metric.change}
               </span>
             </div>
           </div>
           <div className="mb-2">
-            <h3 className="text-sm font-semibold text-gray-700 mb-1">
+            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">
               {metric.title}
             </h3>
             <div className="mt-2">
-              <span className="text-3xl font-bold text-gray-900">
+              <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
                 {metric.value}
               </span>
             </div>
           </div>
-          <p className="text-sm text-gray-600 font-medium">{metric.changeLabel}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">{metric.changeLabel}</p>
         </motion.div>
       ))}
     </section>
