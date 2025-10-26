@@ -1,6 +1,6 @@
 import React, { useState, useContext, memo, useEffect } from 'react';
-import {
-  LayoutDashboard,
+import { 
+  LayoutDashboard, 
   Bot,
   ShieldAlert,
   FileText,
@@ -8,12 +8,12 @@ import {
   AlertTriangle,
   BarChart2,
   Settings2,
-  MessageSquare,
-  Users,
-  Settings,
-  Mail,
-  PlayCircle,
-  X,
+  MessageSquare, 
+  Users, 
+  Settings, 
+  Mail, 
+  PlayCircle, 
+  X, 
   FolderOpen,
   GitBranch,
   Sparkles,
@@ -41,33 +41,23 @@ interface SidebarProps {
 }
 
 // Create a memoized menu item component to prevent unnecessary re-renders
-const MenuItem = memo(({
-  icon: Icon,
-  label,
-  page,
-  currentPage,
-  onClick,
-  isExpanded,
-  hasNotification
-}: {
-  icon: React.ElementType;
-  label: string;
-  page: Page;
-  currentPage: Page;
-  onClick: (page: Page) => void;
-  isExpanded: boolean;
-  hasNotification?: boolean;
+const MenuItem = memo(({ 
+  icon: Icon, 
+  label, 
+  page, 
+  currentPage, 
+  onClick, 
+  isExpanded, 
+  hasNotification 
 }) => (
   <button
     onClick={() => onClick(page)}
     className={`
-      flex w-full items-center gap-3 px-4 py-3
-      text-sm rounded-lg
+      flex w-full items-center gap-3 px-4 py-3 
+      text-sm rounded-lg 
+      hover:bg-gray-800 
       transition-colors
-      hover:bg-gray-700 dark:hover:bg-gray-700 /* Dark mode hover */
-      ${page && currentPage === page
-        ? 'bg-blue-600 dark:bg-blue-700 text-white' /* Active item */
-        : 'bg-transparent text-gray-300 dark:text-gray-300'} /* Inactive item */
+      ${page && currentPage === page ? 'bg-gray-800' : ''}
       ${!isExpanded && 'justify-center'}
     `}
   >
@@ -84,31 +74,22 @@ const MenuItem = memo(({
 ));
 
 // Create a memoized submenu item component
-const SubMenuItem = memo(({
-  icon: Icon,
-  label,
-  page,
-  currentPage,
-  onClick,
-  isExpanded
-}: {
-  icon: React.ElementType;
-  label: string;
-  page: Page;
-  currentPage: Page;
-  onClick: (page: Page) => void;
-  isExpanded: boolean;
+const SubMenuItem = memo(({ 
+  icon: Icon, 
+  label, 
+  page, 
+  currentPage, 
+  onClick, 
+  isExpanded 
 }) => (
   <button
     onClick={() => onClick(page)}
     className={`
       flex w-full items-center gap-3 px-4 py-2.5
-      text-sm rounded-lg
+      text-sm rounded-lg 
+      hover:bg-gray-800 
       transition-colors
-      hover:bg-gray-700 dark:hover:bg-gray-700 /* Dark mode hover */
-      ${page && currentPage === page
-        ? 'bg-blue-600 dark:bg-blue-700 text-white' /* Active item */
-        : 'bg-transparent text-gray-300 dark:text-gray-300'} /* Inactive item */
+      ${page && currentPage === page ? 'bg-gray-800' : ''}
       ${!isExpanded && 'justify-center'}
     `}
   >
@@ -117,11 +98,11 @@ const SubMenuItem = memo(({
   </button>
 ));
 
-const Sidebar = ({
-  currentPage,
-  onNavigate,
-  isOpen,
-  onClose,
+const Sidebar = ({ 
+  currentPage, 
+  onNavigate, 
+  isOpen, 
+  onClose, 
   navigationItems,
   isExpanded = true,
   onToggleExpand
@@ -166,9 +147,9 @@ const Sidebar = ({
   // Main menu items - defined with direct icon references
   const mainMenuItems = [
     { icon: LayoutDashboard, label: t('sidebar.dashboard'), page: 'dashboard' as const },
-    {
-      icon: MessageSquare,
-      label: t('sidebar.discussions'),
+    { 
+      icon: MessageSquare, 
+      label: t('sidebar.discussions'), 
       page: 'conversations' as const,
       hasNotification: true
     },
@@ -181,10 +162,10 @@ const Sidebar = ({
     setIsAgentsMenuOpen(!isAgentsMenuOpen);
   };
 
-  const isAnyAgentsSubmenuActive = () => {
+ const isAnyAgentsSubmenuActive = () => {
     return aiAgentsSubmenu.some(item => item.page === currentPage) || currentPage === 'agents';
   };
-
+  
   const isAnyGovernanceSubmenuActive = () => {
     return governanceSubmenu.some(item => item.page === currentPage);
   };
@@ -198,12 +179,12 @@ const Sidebar = ({
     if (isAnyAgentsSubmenuActive()) {
       setIsAgentsMenuOpen(true);
     }
-
+    
     // Auto-open Governance submenu if on any of its sub-pages
     if (isAnyGovernanceSubmenuActive()) {
       setIsGovernanceMenuOpen(true);
     }
-
+    
     // Auto-open Orchestration submenu if on any of its sub-pages
     if (isAnyOrchestrationSubmenuActive()) {
       setIsOrchestrationMenuOpen(true);
@@ -264,24 +245,23 @@ const Sidebar = ({
   };
 
   return (
-    // Base background and text colors for the sidebar
     <aside className={`
-      fixed left-0 top-0 lg:top-16
-      h-full lg:h-[calc(100vh-4rem)]
-      ${isExpanded ? 'w-64' : 'w-20'}
-      bg-gray-900 dark:bg-gray-900 /* Dark mode background */
-      text-gray-300 dark:text-gray-300 /* Dark mode text */
+      fixed left-0 top-0 lg:top-16 
+      h-full lg:h-[calc(100vh-4rem)] 
+      ${isExpanded ? 'w-64' : 'w-20'} 
+      bg-gray-900 
+      text-white 
       flex flex-col
       z-30
       transition-all duration-300 ease-in-out
       ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
     `}>
-
+      
       {/* Mobile close button */}
       <div className="lg:hidden flex justify-end p-4">
         <button
           onClick={onClose}
-          className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+          className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800 transition-colors"
           aria-label="Close menu"
         >
           <X size={20} />
@@ -289,7 +269,7 @@ const Sidebar = ({
       </div>
 
       {/* Main menu */}
-      <div className="p-4 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800 dark:scrollbar-thumb-gray-700">
+      <div className="p-4 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800">
         <nav className="space-y-1">
           {/* Dashboard */}
           <MenuItem
@@ -306,31 +286,29 @@ const Sidebar = ({
             <button
               onClick={handleAgentsClick}
               className={`
-                flex w-full items-center justify-between px-4 py-3
-                text-sm rounded-lg
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
                 transition-colors
-                hover:bg-gray-700 dark:hover:bg-gray-700 /* Dark mode hover */
-                ${currentPage === 'ai-agents' || isAnyAgentsSubmenuActive()
-                  ? 'bg-blue-600 dark:bg-blue-700 text-white' /* Active parent */
-                  : 'bg-transparent text-gray-300 dark:text-gray-300'} /* Inactive parent */
+                ${currentPage === 'ai-agents' || isAnyAgentsSubmenuActive() ? 'bg-gray-800' : ''}
                 ${!isExpanded && 'justify-center'}
               `}
               aria-expanded={isAgentsMenuOpen}
             >
               <div className="flex items-center gap-3">
-                <Bot size={20} className="text-blue-400 dark:text-blue-300" /> {/* Icon color */}
+                <Bot size={20} />
                 {isExpanded && <span>{t('sidebar.aiAgents')}</span>}
               </div>
               {isExpanded && (
-                <span className="text-gray-400 dark:text-gray-400">
-                  {isAgentsMenuOpen ?
-                    <ChevronDown size={16} /> :
+                <span className="text-gray-400">
+                  {isAgentsMenuOpen ? 
+                    <ChevronDown size={16} /> : 
                     <ChevronRight size={16} />
                   }
                 </span>
               )}
             </button>
-
+            
             {/* Nested menu items for AI Agents */}
             {isAgentsMenuOpen && (
               <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
@@ -348,37 +326,35 @@ const Sidebar = ({
               </div>
             )}
           </div>
-
+          
           {/* Governance with collapsible submenu */}
           <div className="space-y-1">
             <button
               onClick={handleGovernanceClick}
               className={`
-                flex w-full items-center justify-between px-4 py-3
-                text-sm rounded-lg
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
                 transition-colors
-                hover:bg-gray-700 dark:hover:bg-gray-700 /* Dark mode hover */
-                ${currentPage === 'governance' || isAnyGovernanceSubmenuActive()
-                  ? 'bg-blue-600 dark:bg-blue-700 text-white' /* Active parent */
-                  : 'bg-transparent text-gray-300 dark:text-gray-300'} /* Inactive parent */
+                ${currentPage === 'governance' || isAnyGovernanceSubmenuActive() ? 'bg-gray-800' : ''}
                 ${!isExpanded && 'justify-center'}
               `}
               aria-expanded={isGovernanceMenuOpen}
             >
               <div className="flex items-center gap-3">
-                <ShieldAlert size={20} className="text-purple-400 dark:text-purple-300" /> {/* Icon color */}
+                <ShieldAlert size={20} />
                 {isExpanded && <span>{t('sidebar.governance')}</span>}
               </div>
               {isExpanded && (
-                <span className="text-gray-400 dark:text-gray-400">
-                  {isGovernanceMenuOpen ?
-                    <ChevronDown size={16} /> :
+                <span className="text-gray-400">
+                  {isGovernanceMenuOpen ? 
+                    <ChevronDown size={16} /> : 
                     <ChevronRight size={16} />
                   }
                 </span>
               )}
             </button>
-
+            
             {/* Nested menu items for Governance */}
             {isGovernanceMenuOpen && (
               <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
@@ -402,31 +378,29 @@ const Sidebar = ({
             <button
               onClick={handleOrchestrationClick}
               className={`
-                flex w-full items-center justify-between px-4 py-3
-                text-sm rounded-lg
+                flex w-full items-center justify-between px-4 py-3 
+                text-sm rounded-lg 
+                hover:bg-gray-800 
                 transition-colors
-                hover:bg-gray-700 dark:hover:bg-gray-700 /* Dark mode hover */
-                ${currentPage === 'orchestration' || isAnyOrchestrationSubmenuActive()
-                  ? 'bg-blue-600 dark:bg-blue-700 text-white' /* Active parent */
-                  : 'bg-transparent text-gray-300 dark:text-gray-300'} /* Inactive parent */
+                ${currentPage === 'orchestration' || isAnyOrchestrationSubmenuActive() ? 'bg-gray-800' : ''}
                 ${!isExpanded && 'justify-center'}
               `}
               aria-expanded={isOrchestrationMenuOpen}
             >
               <div className="flex items-center gap-3">
-                <Network size={20} className="text-teal-400 dark:text-teal-300" /> {/* Icon color */}
+                <Network size={20} />
                 {isExpanded && <span>Orchestration</span>}
               </div>
               {isExpanded && (
-                <span className="text-gray-400 dark:text-gray-400">
-                  {isOrchestrationMenuOpen ?
-                    <ChevronDown size={16} /> :
+                <span className="text-gray-400">
+                  {isOrchestrationMenuOpen ? 
+                    <ChevronDown size={16} /> : 
                     <ChevronRight size={16} />
                   }
                 </span>
               )}
             </button>
-
+            
             {/* Nested menu items for Orchestration */}
             {isOrchestrationMenuOpen && (
               <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
@@ -457,7 +431,7 @@ const Sidebar = ({
               hasNotification={item.hasNotification}
             />
           ))}
-
+          
           {/* Projects menu item */}
           <MenuItem
             icon={Briefcase}
@@ -469,31 +443,31 @@ const Sidebar = ({
           />
         </nav>
       </div>
-
-
+        
+      
       {/* Contact and demo buttons */}
-      <div className="p-4 border-t border-gray-800 dark:border-gray-700 space-y-2">
+      <div className="p-4 border-t border-gray-800 space-y-2">
         <button
           onClick={() => handleExternalLink('https://n8n-b2xt.onrender.com/form/359cc987-10e4-47a2-93fd-376eb9c8b271')}
-          className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-700 dark:hover:bg-gray-700 transition-colors ${!isExpanded && 'justify-center'}`}
+          className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-800 transition-colors ${!isExpanded && 'justify-center'}`}
           aria-label="Contact us"
         >
-          <Mail size={20} className="text-gray-400 dark:text-gray-400" />
-          {isExpanded && <span className="text-gray-300 dark:text-gray-300">{t('sidebar.contact')}</span>}
+          <Mail size={20} />
+          {isExpanded && <span>{t('sidebar.contact')}</span>}
         </button>
         <button
           onClick={() => handleExternalLink('https://meetings-eu1.hubspot.com/minh-hoang')}
-          className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-700 dark:hover:bg-gray-700 transition-colors ${!isExpanded && 'justify-center'}`}
+          className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-800 transition-colors ${!isExpanded && 'justify-center'}`}
           aria-label="Request demo"
         >
-          <PlayCircle size={20} className="text-gray-400 dark:text-gray-400" />
-          {isExpanded && <span className="text-gray-300 dark:text-gray-300">{t('sidebar.askDemo')}</span>}
+          <PlayCircle size={20} />
+          {isExpanded && <span>{t('sidebar.askDemo')}</span>}
         </button>
       </div>
-
+      
       {/* Footer */}
       {isExpanded && (
-        <div className="p-4 text-xs text-gray-500 dark:text-gray-400 text-center border-t border-gray-800 dark:border-gray-700">
+        <div className="p-4 text-xs text-gray-500 text-center border-t border-gray-800">
           {t('sidebar.developedBy')}
         </div>
       )}
@@ -502,3 +476,5 @@ const Sidebar = ({
 };
 
 export default memo(Sidebar);
+
+fef
