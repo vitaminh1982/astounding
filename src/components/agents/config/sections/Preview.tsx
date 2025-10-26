@@ -161,11 +161,10 @@ export default function Preview({ agent }: PreviewProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold">Chat with {agent?.name || 'Agent'}</h3>
-
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Chat with {agent?.name || 'Agent'}</h3>
       </div>
 
-      <div className="border rounded-lg p-4 space-y-4">
+      <div className="border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg p-4 space-y-4 transition-colors">
         <div className="space-y-4 h-[350px] overflow-y-auto">
           {messages.map((message, index) => (
             <div
@@ -180,12 +179,12 @@ export default function Preview({ agent }: PreviewProps) {
               <div
                 className={`rounded-lg p-3 max-w-[70%] ${
                   message.sender === 'user'
-                    ? 'bg-indigo-100'
-                    : 'bg-gray-100'
+                    ? 'bg-indigo-100 dark:bg-teal-900 text-gray-900 dark:text-gray-100'
+                    : 'bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-gray-100'
                 }`}
               >
                 <p className="whitespace-pre-wrap break-words">{message.content}</p>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   {new Date(message.timestamp).toLocaleTimeString()}
                 </div>
               </div>
@@ -199,13 +198,13 @@ export default function Preview({ agent }: PreviewProps) {
           {isThinking && (
             <div className="flex items-start gap-3">
               <span className="text-2xl">{agent?.avatar || '👩‍💼'}</span>
-              <div className="bg-gray-100 rounded-lg p-3 max-w-[70%]">
+              <div className="bg-gray-100 dark:bg-gray-600 rounded-lg p-3 max-w-[70%]">
                 <div className="flex items-center">
-                  <span className="text-gray-600 mr-2">Thinking</span>
+                  <span className="text-gray-600 dark:text-gray-200 mr-2">Thinking</span>
                   <span className="inline-flex gap-1">
-                    <span className="animate-pulse h-1 w-1 bg-gray-600 rounded-full"></span>
-                    <span className="animate-pulse h-1 w-1 bg-gray-600 rounded-full" style={{ animationDelay: '0.2s' }}></span>
-                    <span className="animate-pulse h-1 w-1 bg-gray-600 rounded-full" style={{ animationDelay: '0.4s' }}></span>
+                    <span className="animate-pulse h-1 w-1 bg-gray-600 dark:bg-gray-300 rounded-full"></span>
+                    <span className="animate-pulse h-1 w-1 bg-gray-600 dark:bg-gray-300 rounded-full" style={{ animationDelay: '0.2s' }}></span>
+                    <span className="animate-pulse h-1 w-1 bg-gray-600 dark:bg-gray-300 rounded-full" style={{ animationDelay: '0.4s' }}></span>
                   </span>
                 </div>
               </div>
@@ -216,12 +215,12 @@ export default function Preview({ agent }: PreviewProps) {
           {isTyping && (
             <div className="flex items-start gap-3">
               <span className="text-2xl">{agent?.avatar || '👩‍💼'}</span>
-              <div className="bg-gray-100 rounded-lg p-3 max-w-[70%]">
-                <p className="whitespace-pre-wrap break-words">{displayText}</p>
+              <div className="bg-gray-100 dark:bg-gray-600 rounded-lg p-3 max-w-[70%]">
+                <p className="whitespace-pre-wrap break-words text-gray-900 dark:text-gray-100">{displayText}</p>
                 <span className="inline-flex gap-1 ml-1">
-                  <span className="animate-bounce">.</span>
-                  <span className="animate-bounce" style={{ animationDelay: '0.2s' }}>.</span>
-                  <span className="animate-bounce" style={{ animationDelay: '0.4s' }}>.</span>
+                  <span className="animate-bounce text-gray-900 dark:text-gray-100">.</span>
+                  <span className="animate-bounce text-gray-900 dark:text-gray-100" style={{ animationDelay: '0.2s' }}>.</span>
+                  <span className="animate-bounce text-gray-900 dark:text-gray-100" style={{ animationDelay: '0.4s' }}>.</span>
                 </span>
               </div>
             </div>
@@ -236,15 +235,15 @@ export default function Preview({ agent }: PreviewProps) {
               value={newMessage}
               onChange={(e) => setNewMessage(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1 p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500 dark:placeholder:text-gray-400"
               disabled={isLoading || isTyping}
             />
             <button
               type="submit"
-              className={`bg-indigo-600 text-white px-3 py-1 rounded-lg transition-colors ${
+              className={`bg-indigo-600 dark:bg-teal-600 text-white px-3 py-1 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700 ${
                 isLoading || isTyping || !newMessage.trim() 
                   ? 'opacity-50 cursor-not-allowed' 
-                  : 'hover:bg-indigo-700'
+                  : 'hover:bg-indigo-700 dark:hover:bg-teal-700'
               }`}
               disabled={isLoading || isTyping || !newMessage.trim()}
             >
