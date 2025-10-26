@@ -79,15 +79,15 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
       >
         {/* Main Configuration Panel */}
         <div 
-          className={`bg-white dark:bg-gray-800 rounded-lg md:rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ease-in-out border border-gray-200 dark:border-gray-700
+          className={`bg-white dark:bg-gray-800 rounded-lg md:rounded-xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 ease-in-out border border-gray-200 dark:border-gray-600
             ${showPreview && !isMobile ? 'md:w-1/2' : 'w-full'} 
             ${showPreview && isMobile ? 'hidden' : 'flex flex-col'}
             ${isFullscreen ? 'h-full' : 'max-h-[90vh]'}`}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
+          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600 p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
             <div className="flex items-center gap-3 min-w-0 flex-1">
-              <div className="w-2 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full" />
+              <div className="w-2 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-cyan-500 rounded-full transition-colors" />
               <div className="min-w-0 flex-1">
                 <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 truncate transition-colors">
                   {localAgent.name || 'New Agent'}
@@ -117,7 +117,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               {/* Preview toggle */}
               <button 
                 onClick={togglePreview} 
-                className="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 hover:bg-indigo-100 dark:hover:bg-indigo-900/30 rounded-lg transition-colors text-sm font-medium border border-indigo-200 dark:border-indigo-800"
+                className="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-teal-900/20 text-indigo-600 dark:text-teal-400 hover:bg-indigo-100 dark:hover:bg-teal-900/30 rounded-lg transition-colors text-sm font-medium border border-indigo-200 dark:border-teal-700"
                 aria-label={showPreview ? "Hide preview" : "Show preview"}
               >
                 {showPreview ? (
@@ -179,7 +179,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
           </div>
 
           {/* Footer with action buttons */}
-          <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 p-4 md:p-5 transition-colors">
+          <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-600 p-4 md:p-5 transition-colors">
             <ActionButtons onSave={handleSave} onCancel={onClose} />
           </div>
         </div>
@@ -187,13 +187,13 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
         {/* Preview Panel */}
         {showPreview && (
           <div 
-            className={`bg-white dark:bg-gray-800 rounded-lg md:rounded-xl shadow-2xl overflow-hidden transition-all duration-300 ease-in-out border border-gray-200 dark:border-gray-700
+            className={`bg-white dark:bg-gray-800 rounded-lg md:rounded-xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 ease-in-out border border-gray-200 dark:border-gray-600
               ${isMobile ? 'w-full' : 'md:w-1/2 md:ml-4'} 
               ${isFullscreen ? 'h-full' : 'max-h-[90vh]'}
               flex flex-col`}
           >
             {/* Preview Header */}
-            <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
+            <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600 p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
               {/* Back button on mobile */}
               {isMobile && (
                 <button 
@@ -206,7 +206,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               )}
               
               <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 rounded-full" />
+                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 rounded-full transition-colors" />
                 <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 truncate transition-colors">
                   Live Preview
                 </h2>
