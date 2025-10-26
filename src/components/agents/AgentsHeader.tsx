@@ -1,137 +1,172 @@
-import React, { useState, useContext } from 'react';
-import { Plus, Upload, Link, ExternalLink } from 'lucide-react';
+import React, { useState, useContext, useCallback } from 'react';
+import { Plus, Upload, Link } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 import AgentConfigModal from './config/AgentConfigModal';
 import ImportAgentModal from './config/ImportAgentModal'; 
 import ConnectAgentModal from './config/ConnectAgentModal';
 import { AgentConfig } from '../../../types/agent-config';
 
+const initialAgentConfig: AgentConfig = {
+  id: '',
+  name: '',
+  status: 'inactive',
+  lastUpdate: '',
+  communication: {
+    style: [],
+    language: [],
+    customTone: ''
+  },
+  knowledge: {
+    bases: [],
+    languages: []
+  },
+  rules: {
+    availability: '',
+    thresholds: {
+      maxResponseTime: 0,
+      maxSessionDuration: 0,
+      maxAttempts: 0,
+      confidenceScore: 0
+    },
+    escalationConditions: []
+  },
+  learning: {
+    sources: [],
+    updateFrequency: ''
+  },
+  integrations: [],
+  metrics: {
+    resolutionRate: 0,
+    responseTime: '',
+    csatScore: 0
+  }
+};
+
 export default function AgentsHeader() {
   const { t } = useContext(LanguageContext);
+  
+  // State management
   const [showConfigModal, setShowConfigModal] = useState(false);
-  const [showImportModal, setShowImportModal] = useState(false); // Add state for import modal
-  const [showConnectModal, setShowConnectModal] = useState(false); // Add state for connect modal
-  const [newAgentConfig, setNewAgentConfig] = useState<AgentConfig>({
-    id: '',
-    name: '',
-    status: 'inactive',
-    lastUpdate: '',
-    communication: {
-      style: [],
-      language: [],
-      customTone: ''
-    },
-    knowledge: {
-      bases: [],
-      languages: []
-    },
-    rules: {
-      availability: '',
-      thresholds: {
-        maxResponseTime: 0,
-        maxSessionDuration: 0,
-        maxAttempts: 0,
-        confidenceScore: 0
-      },
-      escalationConditions: []
-    },
-    learning: {
-      sources: [],
-      updateFrequency: ''
-    },
-    integrations: [],
-    metrics: {
-      resolutionRate: 0,
-      responseTime: '',
-      csatScore: 0
-    }
-  });
+  const [showImportModal, setShowImportModal] = useState(false);
+  const [showConnectModal, setShowConnectModal] = useState(false);
+  const [newAgentConfig] = useState<AgentConfig>(initialAgentConfig);
 
-  const handleSave = (config: AgentConfig) => {
+  // Memoized handlers
+  const handleSave = useCallback((config: AgentConfig) => {
     console.log('Saving new agent config:', config);
     setShowConfigModal(false);
-    // Here you would typically call an API to save the new agent
-  };
+    // TODO: Call API to save the new agent
+  }, []);
 
-  const handleConnect = () => {
+  const handleConnect = useCallback(() => {
     setShowConnectModal(true);
-  };
+  }, []);
 
-  const handleImport = () => {
-    // Implement import functionality
+  const handleImport = useCallback(() => {
     setShowImportModal(true);
-    // You'll need to create an import modal component or use a file input
-  };
+  }, []);
+
+  const handleNewAgent = useCallback(() => {
+    setShowConfigModal(true);
+  }, []);
+
+  const handleCloseConfigModal = useCallback(() => {
+    setShowConfigModal(false);
+  }, []);
+
+  const handleCloseImportModal = useCallback(() => {
+    setShowImportModal(false);
+  }, []);
+
+  const handleCloseConnectModal = useCallback(() => {
+    setShowConnectModal(false);
+  }, []);
+
+  const handleConnectComplete = useCallback((provider: string, config: any) => {
+    console.log('Connected to provider:', provider, 'with config:', config);
+    setShowConnectModal(false);
+    // TODO: Handle the connection logic
+  }, []);
+
+  const handleImportComplete = useCallback((importedAgent: AgentConfig) => {
+    console.log('Agent imported:', importedAgent);
+    setShowImportModal(false);
+    // TODO: Handle the actual agent import logic
+  }, []);
 
   return (
-    <div className="flex justify-between items-center mb-6">
-      <div>
-        <h1 className="text-2xl font-bold text-gray-800">
-          {t('agents.page.header.title')}
-        </h1>
-        <p className="text-sm sm:text-base text-gray-600">
-          {t('agents.page.header.subtitle')}
-        </p>
-      </div>
-      
-      <div className="flex gap-2">
-        {/* Connect Agent button */}
-        <button 
-          className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50"
-          onClick={handleConnect}
-        >
-          <Link className="w-4 h-4" />
-          {t('agents.page.header.connectAgent')}
-        </button>
+    <>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+        {/* Header Text */}
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">
+            {t('agents.page.header.title')}
+          </h1>
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">
+            {t('agents.page.header.subtitle')}
+          </p>
+        </div>
         
-        {/* Import Agent button */}
-        <button 
-          className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50"
-          onClick={handleImport}
-        >
-          <Upload className="w-4 h-4" />
-          {t('agents.page.header.importAgent')}
-        </button>
-        
-        {/* New Agent button */}
-        <button 
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
-          onClick={() => setShowConfigModal(true)}
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          {t('agents.page.header.newAgent')}
-        </button>
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-2">
+          {/* Connect Agent Button */}
+          <button 
+            onClick={handleConnect}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-sm"
+            aria-label={t('agents.page.header.connectAgent')}
+          >
+            <Link className="w-4 h-4" />
+            <span className="hidden sm:inline">
+              {t('agents.page.header.connectAgent')}
+            </span>
+          </button>
+          
+          {/* Import Agent Button */}
+          <button 
+            onClick={handleImport}
+            className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-sm"
+            aria-label={t('agents.page.header.importAgent')}
+          >
+            <Upload className="w-4 h-4" />
+            <span className="hidden sm:inline">
+              {t('agents.page.header.importAgent')}
+            </span>
+          </button>
+          
+          {/* New Agent Button - Indigo in light mode, Green/Teal in dark mode */}
+          <button 
+            onClick={handleNewAgent}
+            className="flex items-center gap-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors duration-200 shadow-sm hover:shadow-md"
+            aria-label={t('agents.page.header.newAgent')}
+          >
+            <Plus className="w-4 h-4" />
+            <span>{t('agents.page.header.newAgent')}</span>
+          </button>
+        </div>
       </div>
 
+      {/* Modals */}
       {showConfigModal && (
         <AgentConfigModal
           agent={newAgentConfig}
-          onClose={() => setShowConfigModal(false)}
+          onClose={handleCloseConfigModal}
           onSave={handleSave}
         />
       )}
 
-      {/* Connect Agent Modal */}
       {showConnectModal && (
         <ConnectAgentModal
-          onClose={() => setShowConnectModal(false)}
-          onConnect={(provider, config) => {
-            console.log('Connected to provider:', provider, 'with config:', config);
-            setShowConnectModal(false);
-          }}
+          onClose={handleCloseConnectModal}
+          onConnect={handleConnectComplete}
         />
       )}
       
       {showImportModal && (
         <ImportAgentModal 
-          onClose={() => setShowImportModal(false)} 
-          onImportComplete={(importedAgent) => {
-            console.log('Agent imported:', importedAgent);
-            setShowImportModal(false);
-            // Here you would handle the actual agent import logic
-          }}
+          onClose={handleCloseImportModal} 
+          onImportComplete={handleImportComplete}
         />
       )}
-    </div>
+    </>
   );
 }
