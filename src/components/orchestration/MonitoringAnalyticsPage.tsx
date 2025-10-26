@@ -151,29 +151,29 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
 
   const getAlertIcon = (type: string) => {
     switch (type) {
-      case 'error': return <AlertTriangle className="w-5 h-5 text-red-500" />;
-      case 'warning': return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
-      case 'info': return <CheckCircle className="w-5 h-5 text-blue-500" />;
-      case 'success': return <CheckCircle className="w-5 h-5 text-green-500" />;
-      default: return <Bell className="w-5 h-5 text-gray-500" />;
+      case 'error': return <AlertTriangle className="w-5 h-5 text-red-500 dark:text-red-400" />;
+      case 'warning': return <AlertTriangle className="w-5 h-5 text-yellow-500 dark:text-yellow-400" />;
+      case 'info': return <CheckCircle className="w-5 h-5 text-blue-500 dark:text-blue-400" />;
+      case 'success': return <CheckCircle className="w-5 h-5 text-green-500 dark:text-green-400" />;
+      default: return <Bell className="w-5 h-5 text-gray-500 dark:text-gray-400" />;
     }
   };
 
   const getLogLevelColor = (level: string) => {
     switch (level) {
-      case 'error': return 'bg-red-100 text-red-800';
-      case 'warning': return 'bg-yellow-100 text-yellow-800';
-      case 'info': return 'bg-blue-100 text-blue-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'error': return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
+      case 'warning': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300';
+      case 'info': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300';
+      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
     }
   };
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
-      case 'high': return 'bg-red-100 text-red-800';
-      case 'medium': return 'bg-yellow-100 text-yellow-800';
-      case 'low': return 'bg-blue-100 text-blue-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'high': return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
+      case 'medium': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300';
+      case 'low': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300';
+      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
     }
   };
 
@@ -188,33 +188,31 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header with breadcrumb */}
         <div className="mb-6">
-        
-          
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">Monitoring & Analytics</h1>
-              <p className="text-gray-600">Real-time insights and performance tracking</p>
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">Monitoring & Analytics</h1>
+              <p className="text-gray-600 dark:text-gray-400 transition-colors">Real-time insights and performance tracking</p>
             </div>
             <div className="flex gap-3">
               <select
                 value={timeRange}
                 onChange={(e) => setTimeRange(e.target.value)}
-                className="px-3 py-2 border rounded-lg bg-white"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 transition-colors"
               >
                 <option value="1h">Last Hour</option>
                 <option value="24h">Last 24 Hours</option>
                 <option value="7d">Last 7 Days</option>
                 <option value="30d">Last 30 Days</option>
               </select>
-              <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
+              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors">
                 <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
-              <button className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">
+              <button className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors shadow-sm dark:shadow-gray-900">
                 <Download className="w-4 h-4" />
                 Export Report
               </button>
@@ -225,29 +223,29 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
         {/* System health overview */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
           {systemMetrics.map((metric) => (
-            <div key={metric.id} className="bg-white rounded-lg border p-6">
+            <div key={metric.id} className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 p-6 shadow-sm dark:shadow-gray-900 transition-colors">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-sm font-medium text-gray-500">{metric.name}</h3>
+                <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 transition-colors">{metric.name}</h3>
                 <div className="flex items-center text-sm">
                   {metric.trend === 'up' ? (
-                    <TrendingUp className="w-4 h-4 text-green-500 mr-1" />
+                    <TrendingUp className="w-4 h-4 text-green-500 dark:text-green-400 mr-1" />
                   ) : (
-                    <TrendingDown className="w-4 h-4 text-red-500 mr-1" />
+                    <TrendingDown className="w-4 h-4 text-red-500 dark:text-red-400 mr-1" />
                   )}
-                  <span className={metric.trend === 'up' ? 'text-green-600' : 'text-red-600'}>
+                  <span className={metric.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
                     {metric.change}
                   </span>
                 </div>
               </div>
-              <div className="text-3xl font-bold">{metric.value}</div>
+              <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{metric.value}</div>
             </div>
           ))}
         </div>
 
         {/* Main content */}
-        <div className="bg-white rounded-lg shadow">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
           {/* Tabs */}
-          <div className="border-b border-gray-200">
+          <div className="border-b border-gray-200 dark:border-gray-600 transition-colors">
             <nav className="flex -mb-px">
               {[
                 { key: 'dashboard', label: 'Real-time Dashboard', icon: Monitor },
@@ -258,10 +256,10 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                 <button
                   key={key}
                   onClick={() => setActiveTab(key as any)}
-                  className={`py-4 px-6 text-sm font-medium flex items-center gap-2 ${
+                  className={`py-4 px-6 text-sm font-medium flex items-center gap-2 transition-colors ${
                     activeTab === key
-                      ? 'border-b-2 border-indigo-500 text-indigo-600'
-                      : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                      ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -276,8 +274,8 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
             {activeTab === 'dashboard' && (
               <div className="space-y-6">
                 {/* Live activity feed */}
-                <div className="bg-gray-50 rounded-lg p-6">
-                  <h3 className="text-lg font-medium text-gray-900 mb-4">Live Activity Feed</h3>
+                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6 transition-colors">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 transition-colors">Live Activity Feed</h3>
                   <div className="space-y-3">
                     {[
                       { time: '15:32', event: 'Customer Support Agent processed inquiry #CS-2024-001', status: 'success', agent: 'Customer Support' },
@@ -286,15 +284,15 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                       { time: '15:29', event: 'E-commerce Assistant completed order processing', status: 'success', agent: 'E-commerce Assistant' },
                       { time: '15:28', event: 'Billing Service processed refund request', status: 'success', agent: 'Billing Service' }
                     ].map((activity, index) => (
-                      <div key={index} className="flex items-center p-3 bg-white rounded-lg border">
+                      <div key={index} className="flex items-center p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
                         <div className="flex items-center gap-3 flex-1">
-                          <span className="text-xs text-gray-500 font-mono w-12">{activity.time}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400 font-mono w-12 transition-colors">{activity.time}</span>
                           <div className={`w-2 h-2 rounded-full ${
                             activity.status === 'success' ? 'bg-green-500' :
                             activity.status === 'warning' ? 'bg-yellow-500' : 'bg-red-500'
                           }`}></div>
-                          <span className="text-sm flex-1">{activity.event}</span>
-                          <span className="text-xs text-gray-500 px-2 py-1 bg-gray-100 rounded-full">
+                          <span className="text-sm flex-1 text-gray-900 dark:text-gray-100 transition-colors">{activity.event}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-full transition-colors">
                             {activity.agent}
                           </span>
                         </div>
@@ -305,29 +303,29 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
 
                 {/* Real-time metrics grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="bg-blue-50 rounded-lg p-6 border">
+                  <div className="bg-blue-50 dark:bg-blue-900/30 rounded-lg p-6 border border-blue-200 dark:border-blue-600 transition-colors">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-medium text-blue-900">Active Conversations</h4>
-                      <MessageSquare className="w-5 h-5 text-blue-600" />
+                      <h4 className="font-medium text-blue-900 dark:text-blue-300 transition-colors">Active Conversations</h4>
+                      <MessageSquare className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <p className="text-3xl font-bold text-blue-600">89</p>
-                    <p className="text-sm text-blue-700 mt-2">Across all agents</p>
+                    <p className="text-3xl font-bold text-blue-600 dark:text-blue-400 transition-colors">89</p>
+                    <p className="text-sm text-blue-700 dark:text-blue-300 mt-2 transition-colors">Across all agents</p>
                   </div>
-                  <div className="bg-green-50 rounded-lg p-6 border">
+                  <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-6 border border-green-200 dark:border-green-600 transition-colors">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-medium text-green-900">Requests/Min</h4>
-                      <Zap className="w-5 h-5 text-green-600" />
+                      <h4 className="font-medium text-green-900 dark:text-green-300 transition-colors">Requests/Min</h4>
+                      <Zap className="w-5 h-5 text-green-600 dark:text-green-400" />
                     </div>
-                    <p className="text-3xl font-bold text-green-600">247</p>
-                    <p className="text-sm text-green-700 mt-2">Peak: 312/min</p>
+                    <p className="text-3xl font-bold text-green-600 dark:text-green-400 transition-colors">247</p>
+                    <p className="text-sm text-green-700 dark:text-green-300 mt-2 transition-colors">Peak: 312/min</p>
                   </div>
-                  <div className="bg-purple-50 rounded-lg p-6 border">
+                  <div className="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-6 border border-purple-200 dark:border-purple-600 transition-colors">
                     <div className="flex items-center justify-between mb-4">
-                      <h4 className="font-medium text-purple-900">Data Processed</h4>
-                      <Database className="w-5 h-5 text-purple-600" />
+                      <h4 className="font-medium text-purple-900 dark:text-purple-300 transition-colors">Data Processed</h4>
+                      <Database className="w-5 h-5 text-purple-600 dark:text-purple-400" />
                     </div>
-                    <p className="text-3xl font-bold text-purple-600">2.4GB</p>
-                    <p className="text-sm text-purple-700 mt-2">Today</p>
+                    <p className="text-3xl font-bold text-purple-600 dark:text-purple-400 transition-colors">2.4GB</p>
+                    <p className="text-sm text-purple-700 dark:text-purple-300 mt-2 transition-colors">Today</p>
                   </div>
                 </div>
               </div>
@@ -336,10 +334,10 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
             {activeTab === 'metrics' && (
               <div className="space-y-6">
                 <div className="text-center py-8">
-                  <BarChart3 className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">Performance Metrics</h3>
-                  <p className="text-gray-500 mb-4">Detailed KPIs, execution times, and success rates</p>
-                  <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+                  <BarChart3 className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4 transition-colors" />
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">Performance Metrics</h3>
+                  <p className="text-gray-500 dark:text-gray-400 mb-4 transition-colors">Detailed KPIs, execution times, and success rates</p>
+                  <button className="px-4 py-2 bg-teal-600 dark:bg-teal-500 text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                     View Detailed Analytics
                   </button>
                 </div>
@@ -352,11 +350,11 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                     { label: 'Error Rate', value: '0.8%', change: '-0.3%', trend: 'down' },
                     { label: 'Throughput', value: '245/min', change: '+12/min', trend: 'up' }
                   ].map((metric, index) => (
-                    <div key={index} className="bg-white rounded-lg border p-4">
-                      <p className="text-sm text-gray-500">{metric.label}</p>
-                      <p className="text-xl font-bold text-gray-900">{metric.value}</p>
-                      <div className={`flex items-center text-xs mt-1 ${
-                        metric.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                    <div key={index} className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-4 transition-colors">
+                      <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{metric.label}</p>
+                      <p className="text-xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{metric.value}</p>
+                      <div className={`flex items-center text-xs mt-1 transition-colors ${
+                        metric.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                       }`}>
                         {metric.trend === 'up' ? (
                           <TrendingUp className="w-3 h-3 mr-1" />
@@ -376,48 +374,48 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                 {/* Search for logs */}
                 <div className="flex gap-4">
                   <div className="relative flex-grow">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
                     <input
                       type="text"
                       placeholder="Search logs by source, message, or request ID..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                     />
                   </div>
-                  <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
+                  <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors">
                     <Filter className="w-4 h-4" />
                     Filter
                   </button>
                 </div>
 
                 <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
+                  <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                    <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Timestamp</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Level</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Request ID</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Timestamp</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Level</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Source</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Message</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Duration</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Request ID</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
+                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                       {filteredLogs.map((log) => (
-                        <tr key={log.id} className="hover:bg-gray-50">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">
+                        <tr key={log.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 font-mono transition-colors">
                             {log.timestamp}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getLogLevelColor(log.level)}`}>
+                            <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full transition-colors ${getLogLevelColor(log.level)}`}>
                               {log.level.charAt(0).toUpperCase() + log.level.slice(1)}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{log.source}</td>
-                          <td className="px-6 py-4 text-sm text-gray-500 max-w-md truncate">{log.message}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">{log.duration}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 font-mono">{log.requestId}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-gray-100 transition-colors">{log.source}</td>
+                          <td className="px-6 py-4 text-sm text-gray-500 dark:text-gray-400 max-w-md truncate transition-colors">{log.message}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 font-mono transition-colors">{log.duration}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 font-mono transition-colors">{log.requestId}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -431,16 +429,16 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                 {/* Search for alerts */}
                 <div className="flex gap-4">
                   <div className="relative flex-grow">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
                     <input
                       type="text"
                       placeholder="Search alerts by message or agent..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                     />
                   </div>
-                  <button className="flex items-center gap-2 px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">
+                  <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors">
                     <Filter className="w-4 h-4" />
                     Filter
                   </button>
@@ -448,13 +446,13 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
 
                 <div className="space-y-4">
                   {filteredAlerts.map((alert) => (
-                    <div key={alert.id} className="border rounded-lg p-4">
+                    <div key={alert.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 bg-white dark:bg-gray-800 transition-colors">
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3">
                           {getAlertIcon(alert.type)}
                           <div className="flex-1">
-                            <h3 className="font-medium text-gray-900">{alert.message}</h3>
-                            <div className="flex items-center gap-4 mt-2 text-sm text-gray-500">
+                            <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{alert.message}</h3>
+                            <div className="flex items-center gap-4 mt-2 text-sm text-gray-500 dark:text-gray-400 transition-colors">
                               <span className="flex items-center gap-1">
                                 <Clock className="w-4 h-4" />
                                 {alert.timestamp}
@@ -463,7 +461,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                                 <Users className="w-4 h-4" />
                                 {alert.agent}
                               </span>
-                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(alert.severity)}`}>
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${getSeverityColor(alert.severity)}`}>
                                 {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)} Priority
                               </span>
                             </div>
@@ -471,15 +469,15 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                         </div>
                         <div className="flex items-center gap-2">
                           {alert.resolved && (
-                            <span className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 text-xs rounded-full transition-colors">
                               Resolved
                             </span>
                           )}
-                          <button className="text-gray-400 hover:text-gray-600">
+                          <button className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 transition-colors">
                             <Eye className="w-4 h-4" />
                           </button>
                           {!alert.resolved && (
-                            <button className="text-gray-400 hover:text-indigo-600">
+                            <button className="text-gray-400 dark:text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
                               <Settings className="w-4 h-4" />
                             </button>
                           )}
