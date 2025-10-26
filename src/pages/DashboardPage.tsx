@@ -1,7 +1,7 @@
 // pages/DashboardPage.tsx
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useContext } from 'react';
 import { Plus, Download } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import { LanguageContext } from '../context/LanguageContext';
 import MetricsCards from '../components/dashboard/MetricsCards';
 import AgentsList from '../components/dashboard/AgentsList';
 import AgentConfigModal from '../components/agents/config/AgentConfigModal';
@@ -22,7 +22,7 @@ interface ReportConfig {
 }
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
-  const { t } = useLanguage();
+  const { t } = useContext(LanguageContext);
   
   // State management
   const [selectedAgent, setSelectedAgent] = useState<AgentConfig | null>(null);
@@ -198,6 +198,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           onClick={onExport}
           disabled={isExporting}
           className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label={exportLabel}
         >
           <Download className={`w-4 h-4 ${isExporting ? 'animate-bounce' : ''}`} />
           <span className="hidden sm:inline">{exportLabel}</span>
@@ -205,6 +206,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <button
           onClick={onNewReport}
           className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors duration-200 shadow-sm hover:shadow-md"
+          aria-label={newReportLabel}
         >
           <Plus className="w-4 h-4" />
           <span className="hidden sm:inline">{newReportLabel}</span>
