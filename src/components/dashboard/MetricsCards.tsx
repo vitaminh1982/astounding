@@ -50,10 +50,10 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
       changeType: 'increase' as const,
       changeLabel: t('metrics.cards.messages.changeLabel') || 'since yesterday',
       icon: MessageSquare,
-      color: 'text-blue-600 dark:text-blue-400',
-      bgColor: 'bg-blue-100 dark:bg-blue-900/20',
-      hoverBgColor: 'group-hover:bg-blue-200 dark:group-hover:bg-blue-900/30',
-      borderColor: 'border-blue-200 dark:border-blue-800',
+      color: 'text-teal-600 dark:text-teal-400',
+      bgColor: 'bg-teal-100 dark:bg-teal-900/20',
+      hoverBgColor: 'group-hover:bg-teal-200 dark:group-hover:bg-teal-900/30',
+      borderColor: 'border-teal-200 dark:border-teal-800',
       page: 'conversations' as Page
     },
   ], [t]);
@@ -123,7 +123,7 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {[1, 2, 3].map((index) => (
           <div key={index} className="animate-pulse">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors">
               <div className="flex justify-between items-center">
                 <div className="h-12 w-12 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors"/>
                 <div className="h-6 w-20 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors"/>
@@ -157,7 +157,16 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
             }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onNavigate(metric.page)}
-            className="group bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-200 cursor-pointer overflow-hidden"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onNavigate(metric.page);
+              }
+            }}
+            tabIndex={0}
+            role="button"
+            aria-label={`Navigate to ${metric.title} page. Current value: ${metric.value}, Change: ${metric.change} ${metric.changeLabel}`}
+            className="group bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg dark:shadow-gray-900 dark:hover:shadow-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-200 cursor-pointer overflow-hidden focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
           >
             {/* Card Content */}
             <div className="p-4 sm:p-6">
@@ -171,11 +180,11 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
                 {/* Change Badge */}
                 <Tooltip content={metric.changeLabel}>
                   <div className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg ${changeIndicator.bgColor} ${changeIndicator.hoverBgColor} border ${changeIndicator.borderColor} transition-all duration-200`}>
-                    <ChangeIcon className={`h-3 w-3 sm:h-4 sm:w-4 ${changeIndicator.iconColor}`} />
+                    <ChangeIcon className={`h-3 w-3 sm:h-4 sm:w-4 ${changeIndicator.iconColor} transition-colors`} />
                     <span className={`text-xs sm:text-sm font-semibold ${changeIndicator.textColor} transition-colors`}>
                       {metric.change}
                     </span>
-                    <Info className={`h-3 w-3 ${changeIndicator.iconColor} ml-0.5 opacity-60`} />
+                    <Info className={`h-3 w-3 ${changeIndicator.iconColor} ml-0.5 opacity-60 transition-colors`} />
                   </div>
                 </Tooltip>
               </div>
