@@ -23,8 +23,11 @@ const CustomEdge: React.FC<EdgeProps> = ({
   return (
     <path
       id={id}
-      style={style}
-      className="react-flow__edge-path"
+      style={{
+        ...style,
+        strokeWidth: 2,
+      }}
+      className="react-flow__edge-path stroke-teal-500 dark:stroke-teal-400 transition-colors"
       d={edgePath}
     />
   );
