@@ -53,12 +53,12 @@ export default function AgentConfigurationPage() {
     switch (status) {
       case 'active':
       case 'connected':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
       case 'inactive':
       case 'disconnected':
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
     }
   };
 
@@ -69,16 +69,16 @@ export default function AgentConfigurationPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">
                 Agent Configuration
               </h1>
-              <p className="text-sm sm:text-base text-gray-600">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
                 Configure behavior parameters, operating boundaries, and integration settings
               </p>
             </div>
@@ -89,16 +89,16 @@ export default function AgentConfigurationPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Agent list sidebar */}
           <div className="lg:col-span-3">
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-4 border-b">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
+              <div className="p-4 border-b border-gray-200 dark:border-gray-600 transition-colors">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
                   <input
                     type="text"
                     placeholder="Search agents..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 pr-4 py-2 w-full border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                   />
                 </div>
               </div>
@@ -110,20 +110,20 @@ export default function AgentConfigurationPage() {
                       onClick={() => setSelectedAgent(agent.id)}
                       className={`w-full flex items-center p-3 rounded-lg text-left transition-colors ${
                         selectedAgent === agent.id
-                          ? 'bg-indigo-50 border-indigo-500 border'
-                          : 'hover:bg-gray-50 border border-transparent'
+                          ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-500 dark:border-teal-400 border'
+                          : 'hover:bg-gray-50 dark:hover:bg-gray-700 border border-transparent'
                       }`}
                     >
-                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                        <Bot className="h-5 w-5 text-indigo-600" />
+                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center mr-3 transition-colors">
+                        <Bot className="h-5 w-5 text-indigo-600 dark:text-teal-400" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-gray-900 truncate">{agent.name}</p>
+                        <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate transition-colors">{agent.name}</p>
                         <div className="flex items-center mt-1">
-                          <span className={`px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(agent.status)}`}>
+                          <span className={`px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full transition-colors ${getStatusColor(agent.status)}`}>
                             {agent.status.charAt(0).toUpperCase() + agent.status.slice(1)}
                           </span>
-                          <span className="ml-2 text-xs text-gray-500">Updated: {agent.lastUpdated}</span>
+                          <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 transition-colors">Updated: {agent.lastUpdated}</span>
                         </div>
                       </div>
                     </button>
@@ -136,30 +136,30 @@ export default function AgentConfigurationPage() {
           {/* Configuration panel */}
           <div className="lg:col-span-9">
             {selectedAgent ? (
-              <div className="bg-white rounded-lg shadow">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
                 {/* Agent header */}
-                <div className="p-6 border-b border-gray-200">
+                <div className="p-6 border-b border-gray-200 dark:border-gray-600 transition-colors">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
-                        <Bot className="h-6 w-6 text-indigo-600" />
+                      <div className="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center mr-4 transition-colors">
+                        <Bot className="h-6 w-6 text-indigo-600 dark:text-teal-400" />
                       </div>
                       <div>
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">
                           {agents.find(a => a.id === selectedAgent)?.name}
                         </h2>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
                           Type: {agents.find(a => a.id === selectedAgent)?.type.charAt(0).toUpperCase() + agents.find(a => a.id === selectedAgent)?.type.slice(1)} • 
                           Last Updated: {agents.find(a => a.id === selectedAgent)?.lastUpdated}
                         </p>
                       </div>
                     </div>
                     <div className="flex space-x-3">
-                      <button className="flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                      <button className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
                         <RotateCcw className="h-4 w-4 mr-2" />
                         Reset
                       </button>
-                      <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                      <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-white bg-teal-600 dark:bg-teal-500 hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                         <Save className="h-4 w-4 mr-2" />
                         Save Changes
                       </button>
@@ -167,14 +167,14 @@ export default function AgentConfigurationPage() {
                   </div>
 
                   {/* Configuration tabs */}
-                  <div className="mt-6 border-b border-gray-200">
+                  <div className="mt-6 border-b border-gray-200 dark:border-gray-600 transition-colors">
                     <nav className="flex -mb-px">
                       <button
                         onClick={() => setActiveTab('behavior')}
-                        className={`py-4 px-6 text-sm font-medium ${
+                        className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'behavior'
-                            ? 'border-b-2 border-indigo-500 text-indigo-600'
-                            : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
                         }`}
                       >
                         <div className="flex items-center">
@@ -184,10 +184,10 @@ export default function AgentConfigurationPage() {
                       </button>
                       <button
                         onClick={() => setActiveTab('knowledge')}
-                        className={`py-4 px-6 text-sm font-medium ${
+                        className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'knowledge'
-                            ? 'border-b-2 border-indigo-500 text-indigo-600'
-                            : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
                         }`}
                       >
                         <div className="flex items-center">
@@ -197,10 +197,10 @@ export default function AgentConfigurationPage() {
                       </button>
                       <button
                         onClick={() => setActiveTab('integration')}
-                        className={`py-4 px-6 text-sm font-medium ${
+                        className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'integration'
-                            ? 'border-b-2 border-indigo-500 text-indigo-600'
-                            : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
                         }`}
                       >
                         <div className="flex items-center">
@@ -210,10 +210,10 @@ export default function AgentConfigurationPage() {
                       </button>
                       <button
                         onClick={() => setActiveTab('safety')}
-                        className={`py-4 px-6 text-sm font-medium ${
+                        className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'safety'
-                            ? 'border-b-2 border-indigo-500 text-indigo-600'
-                            : 'text-gray-500 hover:text-gray-700 hover:border-gray-300'
+                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
                         }`}
                       >
                         <div className="flex items-center">
@@ -231,10 +231,10 @@ export default function AgentConfigurationPage() {
                     <div className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {behaviorParameters.map((param) => (
-                          <div key={param.id} className="border rounded-lg p-4">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">{param.name}</label>
+                          <div key={param.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">{param.name}</label>
                             <select
-                              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                               defaultValue={param.value}
                             >
                               {param.options.map((option) => (
@@ -245,10 +245,10 @@ export default function AgentConfigurationPage() {
                         ))}
                       </div>
 
-                      <div className="border rounded-lg p-4">
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Custom Prompt Template</label>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Custom Prompt Template</label>
                         <textarea
-                          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm font-mono"
+                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm font-mono bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                           rows={8}
                           defaultValue={`You are a ${agents.find(a => a.id === selectedAgent)?.name}, a helpful AI assistant designed to provide excellent customer service.
 
@@ -266,11 +266,11 @@ When responding to customers:
                         ></textarea>
                       </div>
 
-                      <div className="border rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-4">Operating Boundaries</h3>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors">Operating Boundaries</h3>
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Maximum Response Time</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Maximum Response Time</label>
                             <div className="flex items-center">
                               <input
                                 type="range"
@@ -279,11 +279,11 @@ When responding to customers:
                                 defaultValue="10"
                                 className="flex-1 mr-4"
                               />
-                              <span className="text-sm text-gray-700">10 seconds</span>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 transition-colors">10 seconds</span>
                             </div>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Maximum Conversation Duration</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Maximum Conversation Duration</label>
                             <div className="flex items-center">
                               <input
                                 type="range"
@@ -292,11 +292,11 @@ When responding to customers:
                                 defaultValue="30"
                                 className="flex-1 mr-4"
                               />
-                              <span className="text-sm text-gray-700">30 minutes</span>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 transition-colors">30 minutes</span>
                             </div>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Maximum Consecutive Responses</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Maximum Consecutive Responses</label>
                             <div className="flex items-center">
                               <input
                                 type="range"
@@ -305,7 +305,7 @@ When responding to customers:
                                 defaultValue="5"
                                 className="flex-1 mr-4"
                               />
-                              <span className="text-sm text-gray-700">5 responses</span>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 transition-colors">5 responses</span>
                             </div>
                           </div>
                         </div>
@@ -316,39 +316,39 @@ When responding to customers:
                   {activeTab === 'knowledge' && (
                     <div className="space-y-6">
                       <div className="flex justify-between items-center">
-                        <h3 className="text-lg font-medium text-gray-900">Knowledge Sources</h3>
-                        <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Knowledge Sources</h3>
+                        <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-white bg-teal-600 dark:bg-teal-500 hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                           <Plus className="h-4 w-4 mr-2" />
                           Add Source
                         </button>
                       </div>
 
                       <div className="overflow-x-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-gray-50">
+                        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
+                          <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
                             <tr>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Source Name</th>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th>
-                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Source Name</th>
+                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Type</th>
+                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Status</th>
+                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Last Updated</th>
+                              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Actions</th>
                             </tr>
                           </thead>
-                          <tbody className="bg-white divide-y divide-gray-200">
+                          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                             {knowledgeSources.map((source) => (
-                              <tr key={source.id} className="hover:bg-gray-50">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{source.name}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{source.type.charAt(0).toUpperCase() + source.type.slice(1)}</td>
+                              <tr key={source.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{source.name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{source.type.charAt(0).toUpperCase() + source.type.slice(1)}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                  <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(source.status)}`}>
+                                  <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full transition-colors ${getStatusColor(source.status)}`}>
                                     {source.status.charAt(0).toUpperCase() + source.status.slice(1)}
                                   </span>
                                 </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{source.lastUpdated}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{source.lastUpdated}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                   <div className="flex space-x-3">
-                                    <button className="text-indigo-600 hover:text-indigo-900">Edit</button>
-                                    <button className="text-red-600 hover:text-red-900">Remove</button>
+                                    <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">Edit</button>
+                                    <button className="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 transition-colors">Remove</button>
                                   </div>
                                 </td>
                               </tr>
@@ -357,12 +357,12 @@ When responding to customers:
                         </table>
                       </div>
 
-                      <div className="border rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-4">Knowledge Base Settings</h3>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors">Knowledge Base Settings</h3>
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Update Frequency</label>
-                            <select className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Update Frequency</label>
+                            <select className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors">
                               <option>Real-time</option>
                               <option>Hourly</option>
                               <option selected>Daily</option>
@@ -370,7 +370,7 @@ When responding to customers:
                             </select>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Relevance Threshold</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Relevance Threshold</label>
                             <div className="flex items-center">
                               <input
                                 type="range"
@@ -379,17 +379,17 @@ When responding to customers:
                                 defaultValue="75"
                                 className="flex-1 mr-4"
                               />
-                              <span className="text-sm text-gray-700">75%</span>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 transition-colors">75%</span>
                             </div>
                           </div>
                           <div className="flex items-center">
                             <input
                               id="enable-learning"
                               type="checkbox"
-                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                               defaultChecked
                             />
-                            <label htmlFor="enable-learning" className="ml-2 block text-sm text-gray-700">
+                            <label htmlFor="enable-learning" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                               Enable continuous learning from conversations
                             </label>
                           </div>
@@ -401,8 +401,8 @@ When responding to customers:
                   {activeTab === 'integration' && (
                     <div className="space-y-6">
                       <div className="flex justify-between items-center">
-                        <h3 className="text-lg font-medium text-gray-900">Integrations</h3>
-                        <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700">
+                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Integrations</h3>
+                        <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-white bg-teal-600 dark:bg-teal-500 hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                           <Plus className="h-4 w-4 mr-2" />
                           Add Integration
                         </button>
@@ -410,24 +410,24 @@ When responding to customers:
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {integrations.map((integration) => (
-                          <div key={integration.id} className="border rounded-lg p-4">
+                          <div key={integration.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
                             <div className="flex justify-between items-start">
                               <div className="flex items-start space-x-4">
-                                <div className="p-2 bg-indigo-100 rounded-lg">
-                                  <Link className="h-6 w-6 text-indigo-600" />
+                                <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
+                                  <Link className="h-6 w-6 text-indigo-600 dark:text-teal-400" />
                                 </div>
                                 <div>
-                                  <h3 className="text-lg font-medium text-gray-900">{integration.name}</h3>
-                                  <p className="text-sm text-gray-500 mt-1">Type: {integration.type.charAt(0).toUpperCase() + integration.type.slice(1)}</p>
+                                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">{integration.name}</h3>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors">Type: {integration.type.charAt(0).toUpperCase() + integration.type.slice(1)}</p>
                                   <div className="mt-2">
-                                    <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(integration.status)}`}>
+                                    <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full transition-colors ${getStatusColor(integration.status)}`}>
                                       {integration.status.charAt(0).toUpperCase() + integration.status.slice(1)}
                                     </span>
                                   </div>
                                 </div>
                               </div>
                               <div>
-                                <button className="text-sm text-indigo-600 hover:text-indigo-900">Configure</button>
+                                <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">Configure</button>
                               </div>
                             </div>
                             <div className="mt-4">
@@ -435,10 +435,10 @@ When responding to customers:
                                 <input
                                   id={`enable-${integration.id}`}
                                   type="checkbox"
-                                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                                  className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                                   defaultChecked={integration.status === 'connected'}
                                 />
-                                <label htmlFor={`enable-${integration.id}`} className="ml-2 block text-sm text-gray-700">
+                                <label htmlFor={`enable-${integration.id}`} className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                                   Enable for this agent
                                 </label>
                               </div>
@@ -447,39 +447,39 @@ When responding to customers:
                         ))}
                       </div>
 
-                      <div className="border rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-4">API Access Settings</h3>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors">API Access Settings</h3>
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">API Rate Limit</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">API Rate Limit</label>
                             <div className="flex items-center">
                               <input
                                 type="number"
-                                className="w-24 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                className="w-24 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                                 defaultValue="100"
                               />
-                              <span className="ml-2 text-sm text-gray-500">requests per minute</span>
+                              <span className="ml-2 text-sm text-gray-500 dark:text-gray-400 transition-colors">requests per minute</span>
                             </div>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Timeout</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Timeout</label>
                             <div className="flex items-center">
                               <input
                                 type="number"
-                                className="w-24 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                className="w-24 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                                 defaultValue="30"
                               />
-                              <span className="ml-2 text-sm text-gray-500">seconds</span>
+                              <span className="ml-2 text-sm text-gray-500 dark:text-gray-400 transition-colors">seconds</span>
                             </div>
                           </div>
                           <div className="flex items-center">
                             <input
                               id="enable-retry"
                               type="checkbox"
-                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                               defaultChecked
                             />
-                            <label htmlFor="enable-retry" className="ml-2 block text-sm text-gray-700">
+                            <label htmlFor="enable-retry" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                               Enable automatic retry on failure
                             </label>
                           </div>
@@ -490,14 +490,14 @@ When responding to customers:
 
                   {activeTab === 'safety' && (
                     <div className="space-y-6">
-                      <div className="border rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-4">Safety Settings</h3>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors">Safety Settings</h3>
                         <div className="space-y-4">
                           {safetySettings.map((setting) => (
                             <div key={setting.id}>
-                              <label className="block text-sm font-medium text-gray-700 mb-2">{setting.name}</label>
+                              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">{setting.name}</label>
                               <select
-                                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                                 defaultValue={setting.level}
                               >
                                 {setting.options.map((option) => (
@@ -509,11 +509,11 @@ When responding to customers:
                         </div>
                       </div>
 
-                      <div className="border rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-4">Escalation Settings</h3>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors">Escalation Settings</h3>
                         <div className="space-y-4">
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Escalation Threshold</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Escalation Threshold</label>
                             <div className="flex items-center">
                               <input
                                 type="range"
@@ -522,46 +522,46 @@ When responding to customers:
                                 defaultValue="80"
                                 className="flex-1 mr-4"
                               />
-                              <span className="text-sm text-gray-700">80%</span>
+                              <span className="text-sm text-gray-700 dark:text-gray-300 transition-colors">80%</span>
                             </div>
-                            <p className="mt-1 text-xs text-gray-500">Escalate to human when confidence falls below this threshold</p>
+                            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">Escalate to human when confidence falls below this threshold</p>
                           </div>
                           <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Maximum Retry Attempts</label>
+                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Maximum Retry Attempts</label>
                             <div className="flex items-center">
                               <input
                                 type="number"
-                                className="w-24 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                className="w-24 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                                 defaultValue="3"
                               />
-                              <span className="ml-2 text-sm text-gray-500">attempts</span>
+                              <span className="ml-2 text-sm text-gray-500 dark:text-gray-400 transition-colors">attempts</span>
                             </div>
                           </div>
                           <div className="flex items-center">
                             <input
                               id="enable-explicit-escalation"
                               type="checkbox"
-                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                               defaultChecked
                             />
-                            <label htmlFor="enable-explicit-escalation" className="ml-2 block text-sm text-gray-700">
+                            <label htmlFor="enable-explicit-escalation" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                               Allow users to explicitly request human assistance
                             </label>
                           </div>
                         </div>
                       </div>
 
-                      <div className="border rounded-lg p-4">
-                        <h3 className="text-sm font-medium text-gray-700 mb-4">Compliance Settings</h3>
+                      <div className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+                        <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 transition-colors">Compliance Settings</h3>
                         <div className="space-y-4">
                           <div className="flex items-center">
                             <input
                               id="enable-gdpr"
                               type="checkbox"
-                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                               defaultChecked
                             />
-                            <label htmlFor="enable-gdpr" className="ml-2 block text-sm text-gray-700">
+                            <label htmlFor="enable-gdpr" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                               Enable GDPR compliance mode
                             </label>
                           </div>
@@ -569,10 +569,10 @@ When responding to customers:
                             <input
                               id="enable-logging"
                               type="checkbox"
-                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                               defaultChecked
                             />
-                            <label htmlFor="enable-logging" className="ml-2 block text-sm text-gray-700">
+                            <label htmlFor="enable-logging" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                               Enable comprehensive activity logging
                             </label>
                           </div>
@@ -580,10 +580,10 @@ When responding to customers:
                             <input
                               id="enable-pii-detection"
                               type="checkbox"
-                              className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-teal-500 dark:focus:ring-teal-400 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
                               defaultChecked
                             />
-                            <label htmlFor="enable-pii-detection" className="ml-2 block text-sm text-gray-700">
+                            <label htmlFor="enable-pii-detection" className="ml-2 block text-sm text-gray-700 dark:text-gray-300 transition-colors">
                               Enable PII detection and redaction
                             </label>
                           </div>
@@ -594,10 +594,10 @@ When responding to customers:
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-lg shadow p-6 text-center">
-                <Bot className="mx-auto h-12 w-12 text-gray-400" />
-                <h3 className="mt-2 text-lg font-medium text-gray-900">No Agent Selected</h3>
-                <p className="mt-1 text-sm text-gray-500">
+              <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 p-6 text-center border border-gray-200 dark:border-gray-600 transition-colors">
+                <Bot className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 transition-colors" />
+                <h3 className="mt-2 text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">No Agent Selected</h3>
+                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 transition-colors">
                   Select an agent from the list to view and edit its configuration.
                 </p>
               </div>
