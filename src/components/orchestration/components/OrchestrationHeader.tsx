@@ -16,18 +16,18 @@ const OrchestrationHeader: React.FC<OrchestrationHeaderProps> = ({
     <header className="mb-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
             Orchestration Hub
           </h1>
-          <p className="text-sm sm:text-base text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
             Central command center for multi-agent AI ecosystem management
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-          <div className="flex items-center bg-white border border-gray-300 rounded-lg overflow-hidden shadow-sm">
-            <Calendar className="ml-3 w-4 h-4 text-gray-600" />
+          <div className="flex items-center bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm dark:shadow-gray-900">
+            <Calendar className="ml-3 w-4 h-4 text-gray-600 dark:text-gray-400" />
             <select
-              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-800 font-medium"
+              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-800 dark:text-gray-200 font-medium"
               value={selectedTimeRange}
               onChange={(e) => onTimeRangeChange(e.target.value)}
             >
@@ -39,7 +39,7 @@ const OrchestrationHeader: React.FC<OrchestrationHeaderProps> = ({
           </div>
           <button 
             onClick={onRefresh}
-            className="flex items-center justify-center gap-2 bg-white border border-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors shadow-sm font-medium"
+            className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900 font-medium"
           >
             <RefreshCw className="w-4 h-4" />
             <span>Refresh</span>
