@@ -43,10 +43,10 @@ const WorkflowEdge: React.FC<EdgeProps> = ({
         className="react-flow__edge-button"
         style={{ cursor: 'pointer' }}
       >
-        ircle
+        <circle
           r="12"
           className="fill-white dark:fill-gray-700 transition-colors"
-          style={{ filter: 'drop-shadow(0 2px 4px rgb(0 0 0 / 0.1))))' }}
+          style={{ filter: 'drop-shadow(0 2px 4px rgb(0 0 0 / 0.1))' }}
         />
         <Trash2
           className="w-4 h-4 text-red-500 dark:text-red-400"
@@ -59,3 +59,4 @@ const WorkflowEdge: React.FC<EdgeProps> = ({
 };
 
 export default WorkflowEdge;
+
