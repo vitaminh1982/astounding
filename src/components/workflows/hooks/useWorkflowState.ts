@@ -44,7 +44,7 @@ export const useWorkflowState = (
   // Selected node state
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
-  // Panel state
+  // Panel state - minimized by default
   const [isComponentsPanelMinimized, setIsComponentsPanelMinimized] = useState(true);
 
   // Workflow change handler
