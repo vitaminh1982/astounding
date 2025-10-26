@@ -159,7 +159,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         setIsChatMaximized={setIsChatMaximized}
       />
 
-      <div className={`overflow-y-auto p-6 bg-gray-50 ${isModal ? 'flex-1' : 'h-96'}`}>
+      <div className={`overflow-y-auto p-6 bg-gray-50 dark:bg-gray-900 transition-colors ${isModal ? 'flex-1' : 'h-96'}`}>
         <MessageList 
           conversationHistory={conversationHistory}
           isLoading={isLoading}
