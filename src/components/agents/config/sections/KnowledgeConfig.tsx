@@ -140,8 +140,8 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
             <p className="text-sm text-gray-400 mt-1 mb-4">Add documents that your agent can learn from.</p>
             <button 
               onClick={() => setIsAddModalOpen(true)}
-              className="inline-flex items-center gap-1 px-4 py-2 text-sm bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-            >
+              className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
               <Plus className="w-4 h-4" />
               Add Document
             </button>
