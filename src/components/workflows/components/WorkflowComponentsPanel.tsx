@@ -17,21 +17,21 @@ const WorkflowComponentsPanel: React.FC<WorkflowComponentsPanelProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden transition-colors">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-xl dark:shadow-gray-900 overflow-hidden transition-colors">
       <div className="w-64">
         {/* Panel Header */}
         <div
-          className="p-4 bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-gray-800 dark:to-gray-750 flex items-center justify-between cursor-pointer border-b border-indigo-200 dark:border-gray-700 transition-colors"
+          className="p-4 bg-gradient-to-r from-teal-50 to-teal-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-between cursor-pointer border-b border-teal-200 dark:border-gray-600 transition-colors"
           onClick={onToggleMinimize}
           role="button"
           tabIndex={0}
           aria-expanded={!isMinimized}
         >
-          <h3 className="text-base font-semibold flex items-center gap-2 text-gray-900 dark:text-gray-100">
-            <Tool className="w-4 h-4 text-indigo-600 dark:text-teal-400" strokeWidth={2.5} />
+          <h3 className="text-base font-semibold flex items-center gap-2 text-gray-900 dark:text-gray-100 transition-colors">
+            <Tool className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" strokeWidth={2.5} />
             Components
           </h3>
-          <button className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors rounded-lg p-1 hover:bg-white/50 dark:hover:bg-gray-700">
+          <button className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors rounded-lg p-1 hover:bg-white/50 dark:hover:bg-gray-600">
             {isMinimized ? (
               <Plus className="w-5 h-5" strokeWidth={2.5} />
             ) : (
@@ -54,11 +54,11 @@ const WorkflowComponentsPanel: React.FC<WorkflowComponentsPanelProps> = ({
                 key={key}
                 draggable
                 onDragStart={(event) => handleDragStart(event, key)}
-                className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-700 rounded-lg cursor-move hover:bg-gray-50 dark:hover:bg-gray-750 hover:border-indigo-300 dark:hover:border-teal-600 transition-all duration-200 active:scale-95 group bg-white dark:bg-gray-800"
+                className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-600 rounded-lg cursor-move hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-teal-300 dark:hover:border-teal-500 transition-all duration-200 active:scale-95 group bg-white dark:bg-gray-800"
                 role="button"
                 tabIndex={0}
               >
-                <div className="p-1.5 rounded-md bg-indigo-50 dark:bg-indigo-900/30 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 transition-colors">
+                <div className="p-1.5 rounded-md bg-teal-50 dark:bg-teal-900/30 group-hover:bg-teal-100 dark:group-hover:bg-teal-900/50 transition-colors">
                   {config.icon}
                 </div>
                 <div className="flex flex-col flex-1 min-w-0">
