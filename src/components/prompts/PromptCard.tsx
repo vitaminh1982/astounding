@@ -78,18 +78,21 @@ export default function PromptCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={`
-        bg-white border rounded-xl shadow-sm overflow-hidden flex flex-col
+        bg-white dark:bg-gray-800 border rounded-xl shadow-sm dark:shadow-gray-900 overflow-hidden flex flex-col
         transition-all duration-200 ease-in-out
-        ${isSelected ? 'border-indigo-500 ring-2 ring-indigo-500' : 'border-gray-200'}
-        ${isHovered ? 'shadow-md transform scale-[1.01]' : ''}
+        ${isSelected 
+          ? 'border-indigo-500 dark:border-teal-500 ring-2 ring-indigo-500 dark:ring-teal-500' 
+          : 'border-gray-200 dark:border-gray-600'
+        }
+        ${isHovered ? 'shadow-md dark:shadow-gray-800 transform scale-[1.01]' : ''}
         ${className}
         h-[220px]
       `}
       aria-labelledby={`prompt-title-${prompt.id}`}
     >
       {/* Category badge */}
-      <div className="bg-indigo-50 px-4 py-1.5 border-b border-indigo-100 flex justify-between items-center">
-        <span className="text-xs font-semibold text-indigo-700 uppercase tracking-wider">
+      <div className="bg-indigo-50 dark:bg-teal-900/20 px-4 py-1.5 border-b border-indigo-100 dark:border-teal-700 flex justify-between items-center transition-colors">
+        <span className="text-xs font-semibold text-indigo-700 dark:text-teal-300 uppercase tracking-wider">
           {prompt.category.replace('_', ' ')}
         </span>
         
@@ -98,7 +101,9 @@ export default function PromptCard({
           <button
             onClick={handleFavoriteClick}
             className={`p-1 rounded-full transition-colors ${
-              prompt.isFavorite ? 'text-yellow-500' : 'text-gray-400 hover:text-yellow-400'
+              prompt.isFavorite 
+                ? 'text-yellow-500 dark:text-yellow-400' 
+                : 'text-gray-400 dark:text-gray-500 hover:text-yellow-400 dark:hover:text-yellow-400'
             }`}
             aria-label={prompt.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
@@ -110,21 +115,21 @@ export default function PromptCard({
       {/* Main Content Area */}
       <div className="p-4 flex-grow flex flex-col">
         {/* Usage Count Badge */}
-        <div className="inline-block px-2 py-1 rounded-full bg-gray-100 text-xs text-gray-600 mb-2 self-start">
+        <div className="inline-block px-2 py-1 rounded-full bg-gray-100 dark:bg-gray-700 text-xs text-gray-600 dark:text-gray-300 mb-2 self-start transition-colors">
           {`Used ${prompt.usageCount} times`}
         </div>
 
         {/* Prompt Title */}
         <h3
           id={`prompt-title-${prompt.id}`}
-          className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2"
+          className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2 transition-colors"
           title={prompt.title}
         >
           {prompt.title}
         </h3>
 
         {/* Prompt Description - Truncated */}
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2" title={prompt.description}>
+        <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2 transition-colors" title={prompt.description}>
           {prompt.description || 'No description provided.'}
         </p>
         
@@ -133,13 +138,13 @@ export default function PromptCard({
           {prompt.tags && prompt.tags.slice(0, 2).map((tag, index) => (
             <span 
               key={index} 
-              className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-700"
+              className="px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-300 transition-colors"
             >
               {tag}
             </span>
           ))}
           {prompt.tags && prompt.tags.length > 2 && (
-            <span className="px-2 py-1 rounded-md bg-gray-100 text-xs text-gray-700">
+            <span className="px-2 py-1 rounded-md bg-gray-100 dark:bg-gray-700 text-xs text-gray-700 dark:text-gray-300 transition-colors">
               +{prompt.tags.length - 2}
             </span>
           )}
@@ -147,14 +152,14 @@ export default function PromptCard({
       </div>
 
       {/* Action Buttons Footer */}
-      <div className="px-4 py-3 bg-gray-50 border-t border-gray-200 flex justify-end items-center">
+      <div className="px-4 py-3 bg-gray-50 dark:bg-gray-700/50 border-t border-gray-200 dark:border-gray-600 flex justify-end items-center transition-colors">
         {/* Action Buttons */}
         <div className="flex items-center space-x-3">
           {/* Use Prompt Button */}
           {onUsePrompt && (
             <button
               onClick={handleUseClick}
-              className="flex items-center gap-1 px-3 py-1.5 bg-indigo-600 text-white text-sm rounded-md hover:bg-indigo-700 transition-colors"
+              className="flex items-center gap-1 px-3 py-1.5 bg-indigo-600 dark:bg-teal-600 text-white text-sm rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
               title="Use Prompt"
             >
               <PlayCircle className="h-4 w-4" />
@@ -166,7 +171,7 @@ export default function PromptCard({
           {onEditPrompt && (
             <button
               onClick={handleEditClick}
-              className="p-1.5 text-gray-500 hover:text-blue-600 rounded-full hover:bg-blue-100 transition-colors"
+              className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/20 transition-colors"
               title="Edit Prompt"
             >
               <Pencil className="h-4 w-4" />
@@ -177,7 +182,7 @@ export default function PromptCard({
           {onDeletePrompt && (
             <button
               onClick={handleDeleteClick}
-              className="p-1.5 text-gray-500 hover:text-red-600 rounded-full hover:bg-red-100 transition-colors"
+              className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 rounded-full hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors"
               title="Delete Prompt"
             >
               <Trash2 className="h-4 w-4" />
