@@ -11,15 +11,15 @@ export default function ConversationsList({ onSelect, selectedId }) {
     <div className="space-y-4 mt-4">
       {/* Loading indicator */}
       {loading && (
-        <div className="flex items-center justify-center py-2 mb-4 bg-indigo-50 rounded-lg">
-          <Loader className="w-4 h-4 text-indigo-500 animate-spin mr-2" />
-          <span className="text-sm text-indigo-600">Loading active conversations...</span>
+        <div className="flex items-center justify-center py-2 mb-4 bg-teal-50 dark:bg-teal-900/30 border border-teal-200 dark:border-teal-600 rounded-lg transition-colors">
+          <Loader className="w-4 h-4 text-teal-500 dark:text-teal-400 animate-spin mr-2" />
+          <span className="text-sm text-teal-600 dark:text-teal-400 transition-colors">Loading active conversations...</span>
         </div>
       )}
       
       {/* Error message */}
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm">
+        <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-600 text-red-600 dark:text-red-400 rounded-lg text-sm transition-colors">
           <p className="font-medium mb-1">Error loading active conversations</p>
           <p>{error}</p>
         </div>
@@ -34,8 +34,8 @@ export default function ConversationsList({ onSelect, selectedId }) {
           className={`
             relative w-full p-4 rounded-lg border transition-all duration-200
             ${selectedId === conversation.id 
-              ? 'bg-indigo-50 border-indigo-200' 
-              : 'bg-white border-gray-200 hover:border-indigo-200'
+              ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-200 dark:border-teal-600' 
+              : 'bg-white dark:bg-gray-700 border-gray-200 dark:border-gray-600 hover:border-teal-200 dark:hover:border-teal-500'
             }
           `}
         >
@@ -49,7 +49,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
             <div className="flex items-center gap-3">
               <div className={`
                 w-10 h-10 rounded-full flex items-center justify-center text-white font-medium
-                ${conversation.client.avatar ? '' : 'bg-gradient-to-br from-indigo-500 to-purple-500'}
+                ${conversation.client.avatar ? '' : 'bg-gradient-to-br from-teal-500 to-blue-500'}
               `}>
                 {conversation.client.avatar ? (
                   <img 
@@ -60,8 +60,8 @@ export default function ConversationsList({ onSelect, selectedId }) {
                 ) : conversation.client.initials}
               </div>
               <div className="text-left">
-                <h3 className="font-medium text-gray-900">{conversation.client.name}</h3>
-                <p className="text-sm text-gray-500 line-clamp-1">{conversation.lastMessage}</p>
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{conversation.client.name}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1 transition-colors">{conversation.lastMessage}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -69,28 +69,28 @@ export default function ConversationsList({ onSelect, selectedId }) {
                 <Star className="w-4 h-4 text-amber-400" />
               )}
               {conversation.needsAttention && (
-                <AlertTriangle className="w-4 h-4 text-amber-500" />
+                <AlertTriangle className="w-4 h-4 text-amber-500 dark:text-amber-400" />
               )}
               {conversation.initiatedByAI && (
-                <User className="w-4 h-4 text-blue-500" title="Initiated by AI" />
+                <User className="w-4 h-4 text-blue-500 dark:text-blue-400" title="Initiated by AI" />
               )}
               {conversation.isAIConversation && (
-                <Bot className="w-4 h-4 text-green-500" title="AI-to-AI Conversation" />
+                <Bot className="w-4 h-4 text-green-500 dark:text-green-400" title="AI-to-AI Conversation" />
               )}
               
               {/* Badge for webhook conversations */}
               {typeof conversation.id === 'string' && conversation.id.startsWith('session-') && (
-                <span className="text-xs px-1.5 py-0.5 bg-green-100 text-green-800 rounded-full">
+                <span className="text-xs px-1.5 py-0.5 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full transition-colors">
                   Live
                 </span>
               )}
             </div>
           </div>
           
-          <div className="flex items-center justify-between text-sm text-gray-500">
+          <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 transition-colors">
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${
-                conversation.status === 'active' ? 'bg-green-500' : 'bg-gray-400'
+                conversation.status === 'active' ? 'bg-green-500' : 'bg-gray-400 dark:bg-gray-500'
               }`}></span>
               {conversation.agent}
             </div>
@@ -103,7 +103,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
       ))}
 
       {conversations.length === 0 && !loading && (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-gray-500 dark:text-gray-400 transition-colors">
           No available discussions
         </div>
       )}
