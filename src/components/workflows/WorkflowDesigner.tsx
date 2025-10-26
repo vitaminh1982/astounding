@@ -602,7 +602,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
             {/* Panel Header */}
             <div 
               className="p-4 bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-gray-800 dark:to-gray-750 flex items-center justify-between cursor-pointer border-b border-indigo-200 dark:border-gray-700 transition-colors"
-              onClick={() => setIsComponentsPanelMinimized(!isComponentsPanelMinimized)}
+              onClick={() => setIsComponentsPanelMinimized(isComponentsPanelMinimized)}
               role="button"
               tabIndex={0}
               aria-expanded={!isComponentsPanelMinimized}
