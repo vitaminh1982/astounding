@@ -90,12 +90,19 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
         />
         <Controls className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors [&_button]:text-gray-700 dark:[&_button]:text-gray-200 [&_button:hover]:bg-gray-100 dark:[&_button:hover]:bg-gray-700 [&_button]:transition-colors" />
         <MiniMap
-          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors"
-          maskColor="rgb(0, 0, 0, 0.1)"
+          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+          maskColor="rgb(0, 0, 0, 0.05)"
           nodeColor={(node) => {
             const isDark = document.documentElement.classList.contains('dark');
-            return isDark ? '#1f2937' : '#ffffff'; // Dark: slate-800, Light: white
+            // Use contrasting colors: dark nodes on light bg, light nodes on dark bg
+            return isDark ? '#60a5fa' : '#3b82f6'; // Blue shades for visibility
           }}
+          nodeStrokeColor={(node) => {
+            const isDark = document.documentElement.classList.contains('dark');
+            return isDark ? '#93c5fd' : '#2563eb'; // Lighter/darker stroke for contrast
+          }}
+          nodeStrokeWidth={2}
+          nodeBorderRadius={4}
           zoomable
           pannable
         />

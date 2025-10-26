@@ -45,6 +45,47 @@ body {
   border-color: #f59e0b;
 }
 
+/* React Flow Minimap Enhancements */
+.react-flow__minimap {
+  background-color: var(--minimap-bg);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.react-flow__minimap-node {
+  fill: var(--minimap-node-color);
+  stroke: var(--minimap-node-stroke);
+  stroke-width: 2px;
+  opacity: 0.9;
+}
+
+.react-flow__minimap-mask {
+  fill: var(--minimap-mask-color);
+}
+
+/* Ensure minimap is always visible */
+.react-flow__minimap svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark mode minimap variables */
+.dark .react-flow__minimap {
+  --minimap-bg: rgb(31 41 55);
+  --minimap-node-color: rgb(96 165 250);
+  --minimap-node-stroke: rgb(147 197 253);
+  --minimap-mask-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Light mode minimap variables */
+.react-flow__minimap {
+  --minimap-bg: rgb(255 255 255);
+  --minimap-node-color: rgb(59 130 246);
+  --minimap-node-stroke: rgb(37 99 235);
+  --minimap-mask-color: rgba(0, 0, 0, 0.05);
+}
+
 .react-flow__handle {
   width: 8px;
   height: 8px;
