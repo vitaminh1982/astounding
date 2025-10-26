@@ -106,7 +106,7 @@ export default function PerformanceAnalyticsPage() {
                   <option value="1y">Last Year</option>
                 </select>
               </div>
-              <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button  className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Download className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   Export Report
