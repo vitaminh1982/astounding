@@ -26,7 +26,8 @@ export default function ClientsHeader() {
             <span className="text-gray-700 dark:text-gray-300">{t('clients.page.header.import')}</span>
           </button>
         </div>
-        <button className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-800">
+        <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
           <UserPlus className="w-4 h-4" />
           {t('clients.page.header.addCustomer')}
         </button>
