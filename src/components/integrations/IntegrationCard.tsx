@@ -51,7 +51,7 @@ export default function IntegrationCard({ integration, onOpenModal }: Integratio
   const IconComponent = iconMapping[integration.iconType] || iconMapping['default'];
 
   return (
-    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow dark:shadow-gray-900 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md dark:hover:shadow-gray-800 transition-all">
+    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow dark:shadow-gray-900 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
       <div className="p-5">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -64,10 +64,10 @@ export default function IntegrationCard({ integration, onOpenModal }: Integratio
           </div>
           
           <span 
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border transition-colors
             ${integration.isConnected 
-              ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' 
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'}`}
+              ? 'bg-green-100 dark:bg-green-900/30 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300' 
+              : 'bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-300'}`}
           >
             {integration.isConnected 
               ? t('integrations.connected') 
@@ -90,8 +90,8 @@ export default function IntegrationCard({ integration, onOpenModal }: Integratio
           className={`w-full inline-flex justify-center items-center px-4 py-2 border rounded-md 
                     shadow-sm dark:shadow-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors
                     ${integration.isConnected
-                      ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:ring-blue-500 dark:focus:ring-teal-500'
-                      : 'border-transparent bg-indigo-700 dark:bg-teal-600 text-white hover:bg-indigo-600 dark:hover:bg-teal-700 focus:ring-blue-500 dark:focus:ring-teal-500'}`}
+                      ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                      : 'border-transparent bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-indigo-500 dark:focus:ring-teal-500'}`}
         >
           {integration.isConnected
             ? t('integrations.configure')
