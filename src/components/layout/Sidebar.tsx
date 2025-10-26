@@ -476,5 +476,3 @@ const Sidebar = ({
 };
 
 export default memo(Sidebar);
-
-fef
