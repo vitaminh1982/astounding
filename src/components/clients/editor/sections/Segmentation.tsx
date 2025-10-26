@@ -38,15 +38,15 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
 
   return (
     <div className="space-y-4 sm:space-y-2 md:space-y-4">
-      <h3 className="font-semibold text-lg sm:text-sm md:text-lg">Customer segment</h3>
+      <h3 className="font-semibold text-lg sm:text-sm md:text-lg text-gray-900 dark:text-gray-200">Customer segment</h3>
       
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Engagement level</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Engagement level</label>
           <select
             value={segment}
             onChange={handleSegmentChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300"
+            className="mt-1 p-2 block w-full rounded-md border-gray-300 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200"
           >
             <option value="Premium">Premium</option>
             <option value="Standard">Standard</option>
@@ -55,7 +55,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-gray-700">Engagement score</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Engagement score</label>
           <div className="mt-1 p-2 flex items-center gap-2">
             <input
               type="range"
@@ -63,20 +63,20 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
               onChange={handleEngagementScoreChange}
               min="0"
               max="100"
-              className="flex-1"
+              className="flex-1 accent-indigo-600 dark:accent-teal-400" // Added accent color for range
             />
-            <span className="w-12 text-center">{engagementScore}</span>
+            <span className="w-12 text-center text-gray-700 dark:text-gray-300">{engagementScore}</span>
           </div>
         </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700">Tags</label>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-400">Tags</label>
         <div className="mt-2 flex flex-wrap gap-2">
           {tags.map(tag => (
-            <span key={tag} className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-700">
+            <span key={tag} className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
               {tag}
-              <button onClick={() => removeTag(tag)} className="hover:text-indigo-900">
+              <button onClick={() => removeTag(tag)} className="hover:text-indigo-900 dark:hover:text-indigo-100">
                 <X className="w-4 h-4" />
               </button>
             </span>
@@ -86,13 +86,13 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
               type="text"
               value={newTag}
               onChange={(e) => setNewTag(e.target.value)}
-              placeholder="Nouveau tag"
-              className="px-3 py-1 rounded-md border-gray-300 text-sm"
+              placeholder="New tag"
+              className="px-3 py-1 rounded-md border-gray-300 text-sm dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200"
             />
             <button
               onClick={addTag}
               className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
-        >
+            >
               <Plus className="w-4 h-4" />
               Add
             </button>
