@@ -313,8 +313,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
     if (!feedbackError) return null;
 
     return (
-      <div className="mx-4 mt-4 mb-2 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center justify-between animate-slide-down">
-        <div className="flex items-center gap-2 text-sm text-red-800">
+      <div className="mx-4 mt-4 mb-2 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg flex items-center justify-between animate-slide-down">
+        <div className="flex items-center gap-2 text-sm text-red-800 dark:text-red-300">
           <svg 
             className="w-4 h-4 flex-shrink-0" 
             fill="currentColor" 
@@ -331,7 +331,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         </div>
         <button
           onClick={clearFeedbackError}
-          className="text-red-600 hover:text-red-800 transition-colors p-1 rounded hover:bg-red-100"
+          className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition-colors p-1 rounded hover:bg-red-100 dark:hover:bg-red-800/30"
           aria-label="Dismiss error"
           type="button"
         >
@@ -432,7 +432,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   // ============================================================================
   
   return (
-    <div className="bg-white rounded-lg shadow border h-[calc(100vh-14rem)] flex flex-col overflow-hidden">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 h-[calc(100vh-14rem)] flex flex-col overflow-hidden transition-colors">
       <ChatHeader 
         activeTab={activeTab} 
         onTabChange={setActiveTab} 
