@@ -29,7 +29,7 @@ const ChatArea: React.FC<ChatAreaProps> = ({
   }, [messages, displayText, isThinking]);
 
   return (
-    <div className="flex-1 overflow-y-auto bg-white rounded-lg shadow-md p-4 mb-4">
+    <div className="flex-1 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md dark:shadow-gray-900 p-4 mb-4 transition-colors">
       <div className="space-y-4">
         {messages.map((message, index) => (
           <MessageBubble
