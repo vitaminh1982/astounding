@@ -51,9 +51,9 @@ export default function PromptsCategories({
 
     return (
         // Sidebar container with styling similar to the template categories
-        <div className={`bg-white p-4 rounded-lg shadow-sm ${className}`}>
+        <div className={`bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors ${className}`}>
             {/* Category section title */}
-            <h2 className="text-lg font-semibold text-gray-700 mb-4">
+            <h2 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4 transition-colors">
                 {t('prompts.categories.title', 'Roles')} {/* Changed title to Roles */}
             </h2>
 
@@ -67,12 +67,12 @@ export default function PromptsCategories({
                         flex items-center justify-between p-2 rounded-md cursor-pointer
                         transition-colors duration-150 ease-in-out
                         ${isSelected
-                            ? 'bg-indigo-100 text-indigo-700 font-medium' // Selected state style
-                            : 'text-gray-600 hover:bg-gray-100 hover:text-gray-800' // Default state style
+                            ? 'bg-indigo-100 dark:bg-teal-900/20 text-indigo-700 dark:text-teal-300 font-medium' // Selected state style
+                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-gray-300' // Default state style
                         }
                     `;
                     // Dynamically set icon classes based on selection state
-                    const iconClasses = `w-5 h-5 mr-3 ${isSelected ? 'text-indigo-600' : 'text-gray-400'}`;
+                    const iconClasses = `w-5 h-5 mr-3 ${isSelected ? 'text-indigo-600 dark:text-teal-400' : 'text-gray-400 dark:text-gray-500'}`;
 
                     return (
                         <li key={category.id}>
@@ -88,7 +88,7 @@ export default function PromptsCategories({
                                     <span>{t(category.labelKey, category.defaultLabel)}</span>
                                 </div>
                                 {/* Prompt Count Badge */}
-                                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${isSelected ? 'bg-indigo-200 text-indigo-800' : 'bg-gray-200 text-gray-700'}`}>
+                                <span className={`text-xs font-medium px-2 py-0.5 rounded-full transition-colors ${isSelected ? 'bg-indigo-200 dark:bg-teal-900/30 text-indigo-800 dark:text-teal-300' : 'bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300'}`}>
                                     {category.count}
                                 </span>
                             </button>
