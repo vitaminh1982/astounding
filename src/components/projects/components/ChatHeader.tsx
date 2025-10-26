@@ -240,11 +240,11 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         className={`
           group relative flex items-center gap-2 px-6 py-4 text-sm font-medium 
           border-b-2 transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500
+          focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:focus:ring-teal-500
           disabled:opacity-50 disabled:cursor-not-allowed
           ${isActive 
-            ? 'border-indigo-500 text-indigo-600' 
-            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+            ? 'border-indigo-500 dark:border-teal-500 text-indigo-600 dark:text-teal-400' 
+            : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
           }
         `}
       >
@@ -265,7 +265,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         {/* Active indicator (animated underline) */}
         {isActive && (
           <span 
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-500 animate-slide-in"
+            className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-500 dark:bg-teal-500 animate-slide-in"
             aria-hidden="true"
           />
         )}
@@ -273,11 +273,11 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         {/* Loading indicator */}
         {loading && isActive && (
           <span 
-            className="absolute inset-0 bg-white/50 flex items-center justify-center"
+            className="absolute inset-0 bg-white/50 dark:bg-gray-800/50 flex items-center justify-center"
             aria-label="Loading"
           >
             <svg 
-              className="animate-spin h-4 w-4 text-indigo-600" 
+              className="animate-spin h-4 w-4 text-indigo-600 dark:text-teal-400" 
               xmlns="http://www.w3.org/2000/svg" 
               fill="none" 
               viewBox="0 0 24 24"
@@ -307,7 +307,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   // ============================================================================
   
   return (
-    <div className="border-b bg-white">
+    <div className="border-b border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 transition-colors">
       <nav 
         role="tablist" 
         aria-label="Chat navigation"
@@ -318,8 +318,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
       
       {/* Loading bar */}
       {loading && (
-        <div className="h-0.5 w-full bg-gray-200 overflow-hidden">
-          <div className="h-full bg-indigo-500 animate-progress" />
+        <div className="h-0.5 w-full bg-gray-200 dark:bg-gray-700 overflow-hidden">
+          <div className="h-full bg-indigo-500 dark:bg-teal-500 animate-progress" />
         </div>
       )}
     </div>
