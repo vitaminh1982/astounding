@@ -14,7 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
  */
 export const nodeTypes = {
   trigger: {
-    icon: <Mail className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
+    icon: <Mail className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" />,
     label: 'Email Trigger',
     description: 'Triggers on new email',
     handles: [
@@ -22,7 +22,7 @@ export const nodeTypes = {
     ],
   },
   agent: {
-    icon: <Bot className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
+    icon: <Bot className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" />,
     label: 'AI Agent',
     description: 'Process with AI',
     handles: [
@@ -32,7 +32,7 @@ export const nodeTypes = {
     ],
   },
   action: {
-    icon: <Tool className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
+    icon: <Tool className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" />,
     label: 'Action',
     description: 'Perform an action',
     handles: [
@@ -41,7 +41,7 @@ export const nodeTypes = {
     ],
   },
   notification: {
-    icon: <Slack className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
+    icon: <Slack className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" />,
     label: 'Notification',
     description: 'Send notification',
     handles: [
@@ -49,7 +49,7 @@ export const nodeTypes = {
     ],
   },
   database: {
-    icon: <Database className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
+    icon: <Database className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" />,
     label: 'Vector Database',
     description: 'Search vector database',
     handles: [
@@ -58,7 +58,7 @@ export const nodeTypes = {
     ],
   },
   output: {
-    icon: <FileOutput className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
+    icon: <FileOutput className="w-4 h-4 text-teal-600 dark:text-teal-400 transition-colors" />,
     label: 'Email Output',
     description: 'Process output',
     handles: [
