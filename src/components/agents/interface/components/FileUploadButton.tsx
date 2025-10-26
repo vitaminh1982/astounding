@@ -49,18 +49,30 @@ const FileUploadButton: React.FC<FileUploadButtonProps> = ({
 
   const getButtonStyles = () => {
     if (disabled) {
-      return 'bg-gray-200 text-gray-400 cursor-not-allowed';
+      return 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed';
     }
     
     if (uploadState.isUploading) {
-      return 'bg-blue-500 text-white';
+      return 'bg-blue-500 dark:bg-teal-600 text-white';
     }
     
     if (uploadState.selectedFile) {
-      return 'bg-green-500 text-white hover:bg-green-600';
+      return 'bg-green-500 dark:bg-green-600 text-white hover:bg-green-600 dark:hover:bg-green-700';
     }
     
-    return 'bg-gray-100 text-gray-600 hover:bg-gray-200';
+    return 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600';
+  };
+
+  const getFocusStyles = () => {
+    if (uploadState.isUploading) {
+      return 'focus:ring-blue-500 dark:focus:ring-teal-500';
+    }
+    
+    if (uploadState.selectedFile) {
+      return 'focus:ring-green-500 dark:focus:ring-green-400';
+    }
+    
+    return 'focus:ring-gray-500 dark:focus:ring-gray-400';
   };
 
   return (
@@ -80,7 +92,9 @@ const FileUploadButton: React.FC<FileUploadButtonProps> = ({
         className={`
           flex flex-col items-center justify-center p-2 rounded-lg transition-all duration-200
           min-w-[60px] h-12
+          focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800
           ${getButtonStyles()}
+          ${getFocusStyles()}
         `}
         aria-label={
           uploadState.selectedFile 
