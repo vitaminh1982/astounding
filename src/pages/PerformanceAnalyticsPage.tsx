@@ -51,19 +51,19 @@ export default function PerformanceAnalyticsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'excellent': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
-      case 'good': return 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300';
-      case 'average': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300';
-      case 'poor': return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
-      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
+      case 'excellent': return 'bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300';
+      case 'good': return 'bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300';
+      case 'average': return 'bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-300';
+      case 'poor': return 'bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300';
+      default: return 'bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-300';
     }
   };
 
   const getTrendIcon = (trend: string) => {
     if (trend.startsWith('+')) {
-      return <TrendingUp className="w-4 h-4 text-green-500 dark:text-green-400" />;
+      return <TrendingUp className="w-4 h-4 text-green-500 dark:text-green-400 transition-colors" />;
     } else if (trend.startsWith('-')) {
-      return <TrendingDown className="w-4 h-4 text-red-500 dark:text-red-400" />;
+      return <TrendingDown className="w-4 h-4 text-red-500 dark:text-red-400 transition-colors" />;
     }
     return null;
   };
@@ -94,19 +94,19 @@ export default function PerformanceAnalyticsPage() {
             </div>
             <div className="flex gap-3">
               <div className="flex items-center bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden transition-colors">
-                <Calendar className="ml-3 w-4 h-4 text-gray-500 dark:text-gray-400" />
+                <Calendar className="ml-3 w-4 h-4 text-gray-500 dark:text-gray-400 transition-colors" />
                 <select
-                  className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300 transition-colors"
+                  className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300 transition-colors focus:outline-none"
                   value={timeRange}
                   onChange={(e) => setTimeRange(e.target.value)}
                 >
-                  <option value="7d">Last 7 Days</option>
-                  <option value="30d">Last 30 Days</option>
-                  <option value="90d">Last 90 Days</option>
-                  <option value="1y">Last Year</option>
+                  <option value="7d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 7 Days</option>
+                  <option value="30d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 30 Days</option>
+                  <option value="90d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 90 Days</option>
+                  <option value="1y" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last Year</option>
                 </select>
               </div>
-              <button  className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
                 <Download className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   Export Report
@@ -123,7 +123,7 @@ export default function PerformanceAnalyticsPage() {
             <nav className="flex -mb-px">
               <button
                 onClick={() => setActiveTab('overview')}
-                className={`py-4 px-6 text-sm font-medium transition-colors ${
+                className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'overview'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
@@ -133,7 +133,7 @@ export default function PerformanceAnalyticsPage() {
               </button>
               <button
                 onClick={() => setActiveTab('agents')}
-                className={`py-4 px-6 text-sm font-medium transition-colors ${
+                className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'agents'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
@@ -143,7 +143,7 @@ export default function PerformanceAnalyticsPage() {
               </button>
               <button
                 onClick={() => setActiveTab('conversations')}
-                className={`py-4 px-6 text-sm font-medium transition-colors ${
+                className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'conversations'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
@@ -153,7 +153,7 @@ export default function PerformanceAnalyticsPage() {
               </button>
               <button
                 onClick={() => setActiveTab('efficiency')}
-                className={`py-4 px-6 text-sm font-medium transition-colors ${
+                className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'efficiency'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
                     : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
@@ -227,7 +227,7 @@ export default function PerformanceAnalyticsPage() {
                 <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Top Performing Agents</h3>
-                    <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">View All</button>
+                    <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1">View All</button>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
@@ -293,7 +293,7 @@ export default function PerformanceAnalyticsPage() {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">View Details</button>
+                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1">View Details</button>
                           </td>
                         </tr>
                       ))}
@@ -354,7 +354,7 @@ export default function PerformanceAnalyticsPage() {
                       <div className="mt-4">
                         <div className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
                           <div 
-                            className="h-full bg-teal-500"
+                            className="h-full bg-teal-500 transition-all duration-300"
                             style={{ width: `${(metric.count / performanceMetrics.overview.totalConversations) * 100}%` }}
                           ></div>
                         </div>
@@ -390,7 +390,7 @@ export default function PerformanceAnalyticsPage() {
                     <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.resourceEfficiency.cpuUsage}%</div>
                     <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
                       <div 
-                        className="h-full bg-blue-500"
+                        className="h-full bg-blue-500 transition-all duration-300"
                         style={{ width: `${performanceMetrics.resourceEfficiency.cpuUsage}%` }}
                       ></div>
                     </div>
@@ -407,7 +407,7 @@ export default function PerformanceAnalyticsPage() {
                     <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.resourceEfficiency.memoryUsage}%</div>
                     <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
                       <div 
-                        className="h-full bg-purple-500"
+                        className="h-full bg-purple-500 transition-all duration-300"
                         style={{ width: `${performanceMetrics.resourceEfficiency.memoryUsage}%` }}
                       ></div>
                     </div>
@@ -452,7 +452,7 @@ export default function PerformanceAnalyticsPage() {
                   <div className="space-y-4">
                     <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg bg-green-50 dark:bg-green-900/20 transition-colors">
                       <div className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 mr-3" />
+                        <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 mr-3 flex-shrink-0 transition-colors" />
                         <div>
                           <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">Implement Response Caching</h4>
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors">Cache common responses to reduce API calls and improve response times.</p>
@@ -464,7 +464,7 @@ export default function PerformanceAnalyticsPage() {
                     </div>
                     <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors">
                       <div className="flex items-start">
-                        <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mt-0.5 mr-3" />
+                        <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mt-0.5 mr-3 flex-shrink-0 transition-colors" />
                         <div>
                           <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">Optimize Knowledge Base Queries</h4>
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors">Refine knowledge base search algorithms to reduce query complexity.</p>
@@ -476,7 +476,7 @@ export default function PerformanceAnalyticsPage() {
                     </div>
                     <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors">
                       <div className="flex items-start">
-                        <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mt-0.5 mr-3" />
+                        <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mt-0.5 mr-3 flex-shrink-0 transition-colors" />
                         <div>
                           <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">Implement Batch Processing</h4>
                           <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors">Process non-time-sensitive tasks in batches to reduce resource overhead.</p>
