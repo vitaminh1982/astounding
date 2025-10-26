@@ -222,7 +222,7 @@ Remember that your main goal is customer satisfaction while respecting company p
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
       <AgentHeader
         agentConfig={agentConfig}
         isAgentActive={isAgentActive}
@@ -234,7 +234,7 @@ Remember that your main goal is customer satisfaction while respecting company p
       <div className="flex flex-1 overflow-hidden">
         <main className="flex-1 flex flex-col p-4">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-semibold">Chat with {agentConfig.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Chat with {agentConfig.name}</h3>
           </div>
           
           <ChatArea
