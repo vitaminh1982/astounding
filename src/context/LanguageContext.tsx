@@ -30,16 +30,17 @@ const translations = {
       profile: 'Profile'
     },
     dashboard: {
-      title: 'Dashboard',
-      overview: 'Overview on activities',
-      export: 'Export',
-      newReport: 'New Report',
-      keyMetrics: 'Key metrics',
-      latestAgents: 'List of latest AI agents updated',
-      // New translations
-      reports: 'Reports',
-      addReport: 'Add Report',
-      noReports: 'No reports available. Create your first report by clicking the "Add Report" button.',
+    "title": "Dashboard",
+    "overview": "Overview of your AI agents and activities",
+    "keyMetrics": "Key Metrics",
+    "latestAgents": "Latest Agents",
+    "reports": "Reports",
+    "export": "Export",
+    "newReport": "New Report",
+    "addReport": "Add Report",
+    "noReports": "No reports yet",
+    "noReportsDescription": "Create your first report to track important metrics",
+    "createFirstReport": "Create First Report",
       // Modal translations
       reportConfig: {
         title: 'Report Configuration',
