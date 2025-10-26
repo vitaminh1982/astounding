@@ -353,8 +353,6 @@ import { LanguageContext } from '../../context/LanguageContext';
 import PromptCard from './PromptCard';
 import { Prompt } from '../../types/prompt';
 
-// Mock prompts data - replace with actual data source
-const mockPrompts: Prompt[] = []; // Replace with your actual mock data
 
 interface PromptsListProps {
   prompts?: Prompt[];
