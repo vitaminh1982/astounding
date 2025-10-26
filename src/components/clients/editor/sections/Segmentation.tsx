@@ -91,8 +91,8 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
             />
             <button
               onClick={addTag}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-indigo-600 text-white text-sm hover:bg-indigo-700"
-            >
+              className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
               <Plus className="w-4 h-4" />
               Add
             </button>
