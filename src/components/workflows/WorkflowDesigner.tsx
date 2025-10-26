@@ -22,7 +22,7 @@ import WorkflowToolbar from './components/WorkflowToolbar';
  *
  * @component
  * @example
- * ```tsx
+ * ```
  * <WorkflowDesigner
  *   workflow={myWorkflow}
  *   onWorkflowUpdate={(updated) => handleUpdate(updated)}
@@ -78,16 +78,19 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
         onDragOver={onDragOver}
         onDrop={onDrop}
         fitView
-        className="bg-gray-50 dark:bg-gray-900"
+        className="bg-gray-50 dark:bg-gray-900 transition-colors"
       >
         <Background
-          className="bg-gray-50 dark:bg-gray-900"
+          className="bg-gray-50 dark:bg-gray-900 transition-colors"
           gap={16}
-          color="#9ca3af"
+          color="var(--grid-color)"
+          style={{
+            '--grid-color': 'rgb(156 163 175)', // gray-400
+          } as React.CSSProperties & { '--grid-color': string }}
         />
-        <Controls className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg [&_button]:text-gray-700 dark:[&_button]:text-gray-200 [&_button:hover]:bg-gray-100 dark:[&_button:hover]:bg-gray-700" />
+        <Controls className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors [&_button]:text-gray-700 dark:[&_button]:text-gray-200 [&_button:hover]:bg-gray-100 dark:[&_button:hover]:bg-gray-700 [&_button]:transition-colors" />
         <MiniMap
-          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors"
           maskColor="rgb(0, 0, 0, 0.1)"
           nodeColor={(node) => {
             const isDark = document.documentElement.classList.contains('dark');
