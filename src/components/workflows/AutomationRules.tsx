@@ -151,8 +151,8 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
             {!searchQuery && (
               <button
                 onClick={handleAddRule}
-                className="mt-4 inline-flex items-center px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-100 rounded-md hover:bg-indigo-200"
-              >
+                className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Rule
               </button>
