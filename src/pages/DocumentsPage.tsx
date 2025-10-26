@@ -131,29 +131,29 @@ const DocumentsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       {/* Container principal avec padding responsive */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* En-tête */}
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">{t('documents.title')}</h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">{t('documents.title')}</h1>
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
                 {t('documents.subtitle')}
               </p>
             </div>
             {/* Actions rapides */}
             <div className="flex gap-3">
               <button
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700"
+                className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900"
                 onClick={handleExport}
               >
                 <Download className="w-4 h-4" />
                 {t('documents.actions.export')}
               </button>
               <button
-                className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600"
+                className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors shadow-sm dark:shadow-gray-900"
                 onClick={() => setIsUploadModalOpen(true)}
               >
                 <Plus className="w-4 h-4" />
@@ -164,7 +164,7 @@ const DocumentsPage: React.FC = () => {
         </div>
 
         {/* Section principale */}
-        <section className="rounded-lg bg-white shadow">
+        <section className="rounded-lg bg-white dark:bg-gray-800 shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
           <div className="p-4 sm:p-6">
             {/* Barre de recherche */}
             <div className="mb-6">
