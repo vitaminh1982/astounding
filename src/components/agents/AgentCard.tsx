@@ -124,25 +124,25 @@ Remember that your main goal is customer satisfaction while respecting company p
         aria-label={`Open ${agent.name} agent interface`}
       >
         {/* Header */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700 transition-colors">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
               {agent.name}
             </h3>
             <div className="flex items-center gap-2">
               {/* Status Badge */}
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+              <span className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${
                 isActive 
-                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
-                  : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
+                  ? 'bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400' 
+                  : 'bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400'
               }`}>
                 {isActive ? 'Active' : 'Paused'}
               </span>
               {/* Status Icon */}
               {isActive ? (
-                <Play className="w-4 h-4 text-green-600 dark:text-green-400" />
+                <Play className="w-4 h-4 text-green-600 dark:text-green-400 transition-colors" />
               ) : (
-                <Pause className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
+                <Pause className="w-4 h-4 text-yellow-600 dark:text-yellow-400 transition-colors" />
               )}
             </div>
           </div>
@@ -151,21 +151,21 @@ Remember that your main goal is customer satisfaction while respecting company p
         {/* Body */}
         <div className="p-4 space-y-4">
           {/* Metrics */}
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 transition-colors">
             <agent.icon className="w-4 h-4" />
             <span>{agent.metrics}</span>
           </div>
           
           {/* Skills */}
           <div className="space-y-2">
-            <h4 className="font-medium text-gray-900 dark:text-gray-100">
+            <h4 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
               Skills
             </h4>
             <div className="flex flex-wrap gap-2">
               {agent.skills.map((skill, index) => (
                 <span 
                   key={index}
-                  className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-xs font-medium transition-colors"
+                  className="bg-indigo-50 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 text-indigo-600 dark:text-teal-400 px-3 py-1 rounded-full text-xs font-medium transition-colors"
                 >
                   {skill}
                 </span>
@@ -177,7 +177,7 @@ Remember that your main goal is customer satisfaction while respecting company p
 
       {/* Full Screen AI Agent Interface Modal */}
       {showInterface && (
-        <div className="fixed inset-0 z-50 bg-white dark:bg-gray-900">
+        <div className="fixed inset-0 z-50 bg-white dark:bg-gray-900 transition-colors">
           <AIAgentInterface onClose={handleCloseInterface} />
         </div>
       )}
