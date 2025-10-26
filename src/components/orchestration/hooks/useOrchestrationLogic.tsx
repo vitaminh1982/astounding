@@ -8,14 +8,14 @@ export const useOrchestrationLogic = () => {
       type: 'ai',
       content: {
         finalResponse: (
-          <div className="text-gray-800">
+          <div className="text-gray-800 dark:text-gray-100 transition-colors">
             <p className="mb-3 font-medium">
               Hello! I'm your Multi-Agent Orchestration AI. I can help you manage and understand your AI ecosystem.
             </p>
-            <p className="mb-3 text-gray-700">
+            <p className="mb-3 text-gray-700 dark:text-gray-300 transition-colors">
               You can ask me anything, like:
             </p>
-            <ul className="list-disc list-inside space-y-1 text-gray-700 bg-gray-50 p-3 rounded-lg">
+            <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 bg-gray-50 dark:bg-gray-700/50 p-3 rounded-lg transition-colors">
               <li>"Show active agents"</li>
               <li>"Create a new customer onboarding workflow"</li>
               <li>"Analyze sales performance"</li>
@@ -53,11 +53,11 @@ export const useOrchestrationLogic = () => {
           { agentName: 'Agent Management System', purpose: 'Retrieve active agent list and status' }
         ],
         finalResponse: (
-          <div className="text-gray-800">
+          <div className="text-gray-800 dark:text-gray-100 transition-colors">
             <p className="mb-3 font-medium">
-              Currently, there are <strong className="text-blue-700">24 active agents</strong> in your ecosystem:
+              Currently, there are <strong className="text-blue-700 dark:text-blue-400 transition-colors">24 active agents</strong> in your ecosystem:
             </p>
-            <div className="bg-gray-800 rounded-lg p-4 max-h-80 overflow-y-auto">
+            <div className="bg-gray-800 dark:bg-gray-900 rounded-lg p-4 max-h-80 overflow-y-auto border border-gray-700 dark:border-gray-600 transition-colors">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                 {[
                   'Customer Support', 'Sales Assistant', 'Technical Support', 'E-commerce',
@@ -68,13 +68,13 @@ export const useOrchestrationLogic = () => {
                   'Backup Manager', 'Performance Monitor', 'API Gateway', 'Report Generator'
                 ].map((agent, index) => {
                   const statuses = ['Active', 'High Load', 'Processing', 'Maintenance'];
-                  const colors = ['text-green-400', 'text-yellow-400', 'text-blue-400', 'text-orange-400'];
+                  const colors = ['text-green-400 dark:text-green-300', 'text-yellow-400 dark:text-yellow-300', 'text-blue-400 dark:text-blue-300', 'text-orange-400 dark:text-orange-300'];
                   const statusIndex = index % statuses.length;
                   
                   return (
-                    <div key={agent} className="flex justify-between items-center p-2 bg-gray-700 rounded">
-                      <span className="text-gray-200">{agent}:</span>
-                      <span className={`font-medium ${colors[statusIndex]}`}>
+                    <div key={agent} className="flex justify-between items-center p-2 bg-gray-700 dark:bg-gray-800 rounded border border-gray-600 dark:border-gray-700 transition-colors">
+                      <span className="text-gray-200 dark:text-gray-300 transition-colors">{agent}:</span>
+                      <span className={`font-medium transition-colors ${colors[statusIndex]}`}>
                         {statuses[statusIndex]}
                       </span>
                     </div>
@@ -82,8 +82,8 @@ export const useOrchestrationLogic = () => {
                 })}
               </div>
             </div>
-            <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
-              <p className="text-sm text-blue-800 font-medium">
+            <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-600 transition-colors">
+              <p className="text-sm text-blue-800 dark:text-blue-300 font-medium transition-colors">
                 📊 Status Summary: 19 Active • 3 High Load • 1 Processing • 1 Maintenance
               </p>
             </div>
@@ -103,23 +103,23 @@ export const useOrchestrationLogic = () => {
           { agentName: 'System Monitor', purpose: 'Retrieve system health metrics' }
         ],
         finalResponse: (
-          <div className="text-gray-800">
+          <div className="text-gray-800 dark:text-gray-100 transition-colors">
             <p className="mb-3 font-medium">System Health Report:</p>
             <div className="grid grid-cols-2 gap-4 mb-4">
-              <div className="p-4 bg-green-50 rounded-lg border border-green-200">
+              <div className="p-4 bg-green-50 dark:bg-green-900/30 rounded-lg border border-green-200 dark:border-green-600 transition-colors">
                 <div className="flex items-center gap-2">
-                  <span className="text-green-600">✓</span>
-                  <span className="font-bold text-green-800">Overall: 99.8%</span>
+                  <span className="text-green-600 dark:text-green-400 transition-colors">✓</span>
+                  <span className="font-bold text-green-800 dark:text-green-300 transition-colors">Overall: 99.8%</span>
                 </div>
               </div>
-              <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-600 transition-colors">
                 <div className="flex items-center gap-2">
-                  <span className="text-blue-600">📊</span>
-                  <span className="font-bold text-blue-800">Uptime: 99.97%</span>
+                  <span className="text-blue-600 dark:text-blue-400 transition-colors">📊</span>
+                  <span className="font-bold text-blue-800 dark:text-blue-300 transition-colors">Uptime: 99.97%</span>
                 </div>
               </div>
             </div>
-            <ul className="list-disc list-inside space-y-1 text-gray-700">
+            <ul className="list-disc list-inside space-y-1 text-gray-700 dark:text-gray-300 transition-colors">
               <li>All critical systems operational</li>
               <li>Resource utilization within normal limits</li>
               <li>No security alerts detected</li>
@@ -140,18 +140,18 @@ export const useOrchestrationLogic = () => {
           { agentName: 'Workflow Manager', purpose: 'Initialize workflow creation process' }
         ],
         finalResponse: (
-          <div className="text-gray-800">
+          <div className="text-gray-800 dark:text-gray-100 transition-colors">
             <p className="mb-3 font-medium">I can help you create a new workflow!</p>
-            <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-              <p className="text-purple-800 font-medium mb-2">Available Templates:</p>
-              <ul className="list-disc list-inside space-y-1 text-purple-700">
+            <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-lg border border-purple-200 dark:border-purple-600 transition-colors">
+              <p className="text-purple-800 dark:text-purple-300 font-medium mb-2 transition-colors">Available Templates:</p>
+              <ul className="list-disc list-inside space-y-1 text-purple-700 dark:text-purple-300 transition-colors">
                 <li>Customer Onboarding</li>
                 <li>Data Processing Pipeline</li>
                 <li>Content Generation</li>
                 <li>Quality Assurance</li>
               </ul>
             </div>
-            <p className="mt-3 text-gray-700">Would you like me to navigate you to the Workflow Designer?</p>
+            <p className="mt-3 text-gray-700 dark:text-gray-300 transition-colors">Would you like me to navigate you to the Workflow Designer?</p>
           </div>
         )
       };
