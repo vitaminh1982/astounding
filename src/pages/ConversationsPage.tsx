@@ -63,23 +63,23 @@ export default function ConversationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">
                 {t('conversations.title')}
               </h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
                 {t('conversations.subtitle')}
               </p>
             </div>
             <div className="flex gap-3">
               <button
                 onClick={() => setIsNewMessageModalOpen(true)}
-                          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
-        >
+                className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors shadow-sm dark:shadow-gray-900"
+              >
                 <Plus className="w-4 h-4" />
                 {t('conversations.newMessage')}
               </button>
@@ -93,9 +93,10 @@ export default function ConversationsPage() {
               className={`
                 ${isMobileViewingDetails ? 'hidden md:block' : 'w-full'}
                 md:w-1/2
-                border-r border-gray-200
+                border-r border-gray-200 dark:border-gray-600
                 overflow-y-auto
-                bg-white
+                bg-white dark:bg-gray-800
+                transition-colors
               `}
               initial={{ x: -20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -116,7 +117,8 @@ export default function ConversationsPage() {
               className={`
                 ${!isMobileViewingDetails ? 'hidden md:block' : 'w-full absolute md:relative top-0 left-0 h-full'}
                 md:w-1/2
-                bg-gray-50
+                bg-gray-50 dark:bg-gray-900
+                transition-colors
               `}
               initial={{ x: 20, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
@@ -125,10 +127,10 @@ export default function ConversationsPage() {
             >
               {selectedConversation ? (
                 <>
-                  <div className="md:hidden p-4 bg-white border-b border-gray-200">
+                  <div className="md:hidden p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600 transition-colors">
                     <button
                       onClick={handleBackToList}
-                      className="flex items-center text-gray-600 hover:text-gray-900"
+                      className="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
                     >
                       <ArrowLeft className="h-5 w-5 mr-2" />
                       {t('conversations.backToDiscussions')}
@@ -143,9 +145,9 @@ export default function ConversationsPage() {
                 </>
               ) : (
                 <div className="h-full flex flex-col items-center justify-center p-6 text-center">
-                  <div className="rounded-full bg-gray-100 p-4 mb-4">
+                  <div className="rounded-full bg-gray-100 dark:bg-gray-700 p-4 mb-4 transition-colors">
                     <svg
-                      className="h-8 w-8 text-gray-400"
+                      className="h-8 w-8 text-gray-400 dark:text-gray-500"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -158,10 +160,10 @@ export default function ConversationsPage() {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">
                     {t('conversations.noDiscussionSelected')}
                   </h3>
-                  <p className="text-gray-500 max-w-sm">
+                  <p className="text-gray-500 dark:text-gray-400 max-w-sm transition-colors">
                     {t('conversations.selectDiscussionPrompt')}
                   </p>
                 </div>
