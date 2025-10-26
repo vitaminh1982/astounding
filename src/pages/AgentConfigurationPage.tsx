@@ -159,7 +159,7 @@ export default function AgentConfigurationPage() {
                         <RotateCcw className="h-4 w-4 mr-2" />
                         Reset
                       </button>
-                      <button className="flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-white bg-teal-600 dark:bg-teal-500 hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                      <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
                         <Save className="h-4 w-4 mr-2" />
                         Save Changes
                       </button>
