@@ -59,4 +59,3 @@ const WorkflowEdge: React.FC<EdgeProps> = ({
 };
 
 export default WorkflowEdge;
-
