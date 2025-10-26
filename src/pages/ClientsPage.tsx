@@ -4,7 +4,7 @@ import ClientsFilters from '../components/clients/ClientsFilters';
 import ClientsList from '../components/clients/ClientsList';
 import ClientSegmentation from '../components/clients/ClientSegmentation';
 import ClientAnalytics from '../components/clients/ClientAnalytics';
-import { ChevronRightIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon } from '@heroicons/react/24/outline'; // Assuming this icon is still used
 import { LanguageContext } from '../context/LanguageContext';
 
 export default function ClientsPage() {
@@ -31,14 +31,14 @@ export default function ClientsPage() {
             </div>
 
             {/* Clients List */}
-            <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
               <ClientsList />
             </div>
           </div>
 
           {/* Scroll Indicator (desktop only) */}
           {showIndicator && (
-            <div className="hidden lg:block fixed right-0 top-1/2 -translate-y-1/2 bg-primary-500 text-white rounded-l-lg shadow-lg z-50 transition-transform hover:translate-x-0 translate-x-[calc(100%-8px)] group">
+            <div className="hidden lg:block fixed right-0 top-1/2 -translate-y-1/2 bg-primary-500 dark:bg-teal-600 text-white rounded-l-lg shadow-lg z-50 transition-transform hover:translate-x-0 translate-x-[calc(100%-8px)] group">
               <div className="flex items-center p-3 cursor-pointer" onClick={() => setShowIndicator(false)}>
                 <ChevronRightIcon className="h-5 w-5 mr-2" />
                 <span className="whitespace-nowrap group-hover:block hidden">
@@ -51,10 +51,10 @@ export default function ClientsPage() {
           {/* Sidebar */}
           <div className="w-full lg:w-[380px] lg:flex-shrink-0">
             <div className="space-y-6">
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
                 <ClientSegmentation />
               </div>
-              <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
                 <ClientAnalytics />
               </div>
             </div>
