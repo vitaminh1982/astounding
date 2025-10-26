@@ -1259,6 +1259,9 @@ prompts: {
     newRole: 'Nouveau Rôle',
     generatePrompt: 'Générer un Nouveau Prompt'
   },
+    view: {
+    label: 'Libellé'
+      },
   categories: {
     title: 'Rôles',
     all: 'Tous',
