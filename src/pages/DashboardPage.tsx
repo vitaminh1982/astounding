@@ -172,6 +172,8 @@ interface DashboardHeaderProps {
   newReportLabel: string;
 }
 
+// In the DashboardHeader component, update the "New Report" button:
+
 const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   title,
   subtitle,
@@ -205,7 +207,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </button>
         <button
           onClick={onNewReport}
-          className="flex items-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors duration-200 shadow-sm hover:shadow-md"
+          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors duration-200 shadow-sm hover:shadow-md"
           aria-label={newReportLabel}
         >
           <Plus className="w-4 h-4" />
@@ -215,6 +217,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     </div>
   </div>
 );
+
 
 interface DashboardSectionProps {
   title: string;
