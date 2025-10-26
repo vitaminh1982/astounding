@@ -49,3 +49,5 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
 };
 
 export default React.memo(ChatHeader);
+
+
