@@ -411,3 +411,4 @@ const MessageInput: React.FC<MessageInputProps> = ({
 };
 
 export default React.memo(MessageInput);
+
