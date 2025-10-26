@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { AgentType } from '../../types/agent';
-// Import AIAgentInterface instead of AgentConfigModal
 import AIAgentInterface from './AIAgentInterface';
 import { AgentConfig } from '../../types/agent-config';
 
@@ -12,6 +11,14 @@ interface AgentCardProps {
 export default function AgentCard({ agent }: AgentCardProps) {
   const [showInterface, setShowInterface] = useState(false);
   const isActive = agent.status === 'active';
+
+  const handleOpenInterface = useCallback(() => {
+    setShowInterface(true);
+  }, []);
+
+  const handleCloseInterface = useCallback(() => {
+    setShowInterface(false);
+  }, []);
 
   const mockConfig: AgentConfig = {
     id: 'AI_SC247_01',
@@ -104,40 +111,61 @@ Remember that your main goal is customer satisfaction while respecting company p
   return (
     <>
       <div
-        className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer"
-        onClick={() => setShowInterface(true)} // Changed to show AIAgentInterface
+        className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-200 cursor-pointer border border-transparent dark:border-gray-700 hover:border-indigo-200 dark:hover:border-teal-600"
+        onClick={handleOpenInterface}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleOpenInterface();
+          }
+        }}
+        aria-label={`Open ${agent.name} agent interface`}
       >
-        <div className="p-4 border-b border-gray-200">
+        {/* Header */}
+        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold">{agent.name}</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              {agent.name}
+            </h3>
             <div className="flex items-center gap-2">
-              <span className={`px-2 py-1 rounded text-sm ${
-                isActive ? 'bg-green-100 text-green-600' : 'bg-yellow-100 text-yellow-600'
+              {/* Status Badge */}
+              <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                isActive 
+                  ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
+                  : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
               }`}>
                 {isActive ? 'Active' : 'Paused'}
               </span>
+              {/* Status Icon */}
               {isActive ? (
-                <Play className="w-4 h-4 text-gray-600" />
+                <Play className="w-4 h-4 text-green-600 dark:text-green-400" />
               ) : (
-                <Pause className="w-4 h-4 text-gray-600" />
+                <Pause className="w-4 h-4 text-yellow-600 dark:text-yellow-400" />
               )}
             </div>
           </div>
         </div>
         
+        {/* Body */}
         <div className="p-4 space-y-4">
-          <div className="flex items-center gap-2 text-sm text-gray-600">
+          {/* Metrics */}
+          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
             <agent.icon className="w-4 h-4" />
             <span>{agent.metrics}</span>
           </div>
           
+          {/* Skills */}
           <div className="space-y-2">
-            <h4 className="font-medium">Skills</h4>
+            <h4 className="font-medium text-gray-900 dark:text-gray-100">
+              Skills
+            </h4>
             <div className="flex flex-wrap gap-2">
               {agent.skills.map((skill, index) => (
                 <span 
                   key={index}
-                  className="bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full text-sm"
+                  className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-3 py-1 rounded-full text-xs font-medium transition-colors"
                 >
                   {skill}
                 </span>
@@ -147,10 +175,10 @@ Remember that your main goal is customer satisfaction while respecting company p
         </div>
       </div>
 
-      {/* Use fixed positioning to make the AIAgentInterface take up the full screen */}
+      {/* Full Screen AI Agent Interface Modal */}
       {showInterface && (
-        <div className="fixed inset-0 z-50">
-          <AIAgentInterface onClose={() => setShowInterface(false)} />
+        <div className="fixed inset-0 z-50 bg-white dark:bg-gray-900">
+          <AIAgentInterface onClose={handleCloseInterface} />
         </div>
       )}
     </>
