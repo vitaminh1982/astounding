@@ -33,7 +33,7 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
   const handleBeforeUnload = (e: BeforeUnloadEvent) => {
     if (isDirty) {
       e.preventDefault();
-      e.returnValue = '';
+      e.returnValue = ''; // This empty string is what triggers the confirmation dialog
     }
   };
 
@@ -42,7 +42,7 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
-  }, [isDirty]);
+  }, [isDirty]); // Dependency array includes isDirty
 
   return (
     <AnimatePresence>
@@ -58,34 +58,34 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="w-full h-full flex flex-col bg-white sm:h-[90vh] sm:max-w-[1200px] md:max-w-[1400px] lg:max-w-[1600px] xl:max-w-[1800px] sm:rounded-xl shadow-xl"
+            className="w-full h-full flex flex-col bg-white sm:h-[90vh] sm:max-w-[1200px] md:max-w-[1400px] lg:max-w-[1600px] xl:max-w-[1800px] sm:rounded-xl shadow-xl dark:bg-gray-800 dark:shadow-2xl"
           >
             {/* Header */}
-            <div className="border-b p-3 sm:p-6 md:p-8 lg:p-10 sticky top-0 bg-white z-10">
+            <div className="border-b p-3 sm:p-6 md:p-8 lg:p-10 sticky top-0 bg-white dark:bg-gray-800 z-10 dark:border-gray-700">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
                   <button
                     onClick={onClose}
-                    className="sm:hidden p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="sm:hidden p-1.5 hover:bg-gray-100 rounded-lg transition-colors dark:hover:bg-gray-700 dark:text-gray-300"
                     aria-label="Back"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
-                  <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold text-gray-900">
+                  <h2 className="text-lg sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-gray-200">
                     Client Configuration
                   </h2>
                 </div>
                 <div className="flex items-center gap-2 sm:gap-3 md:gap-4 lg:gap-5">
                   <button
                     onClick={() => setShowMobileMenu(!showMobileMenu)}
-                    className="sm:hidden p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="sm:hidden p-1.5 hover:bg-gray-100 rounded-lg transition-colors dark:hover:bg-gray-700 dark:text-gray-300"
                     aria-label="Menu"
                   >
                     <Menu className="w-5 h-5" />
                   </button>
                   <button
                     onClick={onClose}
-                    className="hidden sm:block p-1.5 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="hidden sm:block p-1.5 hover:bg-gray-100 rounded-lg transition-colors dark:hover:bg-gray-700 dark:text-gray-300"
                     aria-label="Close"
                   >
                     <X className="w-5 h-5" />
@@ -101,7 +101,7 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  className="sm:hidden border-b overflow-hidden bg-white"
+                  className="sm:hidden border-b overflow-hidden bg-white dark:bg-gray-800 dark:border-gray-700"
                 >
                   {sections.map((section) => (
                     <button
@@ -112,13 +112,13 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                       }}
                       className={`w-full px-4 py-3 text-left text-sm font-medium flex items-center justify-between ${
                         activeSection === section.id
-                          ? 'bg-indigo-50 text-indigo-600'
-                          : 'text-gray-700 hover:bg-gray-50'
+                          ? 'bg-indigo-50 text-indigo-600 dark:bg-teal-700 dark:text-teal-200'
+                          : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'
                       }`}
                     >
                       {section.label}
                       {activeSection === section.id && (
-                        <span className="w-2 h-2 rounded-full bg-indigo-600" />
+                        <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400" />
                       )}
                     </button>
                   ))}
@@ -137,8 +137,8 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                       onClick={() => setActiveSection(section.id)}
                       className={`w-full px-4 py-2.5 rounded-lg text-left transition-colors text-sm font-medium ${
                         activeSection === section.id
-                          ? 'bg-indigo-50 text-indigo-600'
-                          : 'text-gray-700 hover:bg-gray-50'
+                          ? 'bg-indigo-50 text-indigo-600 dark:bg-teal-700 dark:text-teal-200'
+                          : 'text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700'
                       }`}
                     >
                       {section.label}
@@ -173,7 +173,7 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
             </div>
 
             {/* Footer */}
-            <div className="border-t p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-50 sticky bottom-0">
+            <div className="border-t p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-50 sticky bottom-0 dark:bg-gray-700 dark:border-gray-700">
               <ActionButtons
                 client={client}
                 onSave={onSave}
