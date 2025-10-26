@@ -48,7 +48,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
             </div>
             <button
               onClick={() => onDelete?.(document.id)}
-              className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
+              className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               title="Supprimer"
             >
               <Trash2 className="h-5 w-5" />
@@ -71,7 +71,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
                 return agentDetails ? (
                   <span
                     key={agentId}
-                    className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${agentDetails.color} transition-colors`}
+                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-indigo-50 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 text-indigo-600 dark:text-teal-400 transition-colors"
                   >
                     <Bot className="h-3 w-3 mr-1" />
                     {agentDetails.name}
@@ -84,7 +84,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
           <div className="mt-4">
             <select
               onChange={(e) => onAssignAgent?.(document.id, e.target.value)}
-              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 sm:text-sm rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <option value="">Assign a new agent...</option>
               {availableAgents
@@ -92,7 +92,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
                   (agent) => !document.assignedAgents.includes(agent.id)
                 )
                 .map((agent) => (
-                  <option key={agent.id} value={agent.id}>
+                  <option key={agent.id} value={agent.id} className="text-gray-900 dark:text-gray-100">
                     {agent.name}
                   </option>
                 ))}
