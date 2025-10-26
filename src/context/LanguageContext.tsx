@@ -888,6 +888,8 @@ saveError: 'Failed to save configuration',
       reports: 'Rapports',
       addReport: 'Ajouter un rapport',
       noReports: 'Aucun rapport disponible. Créez votre premier rapport en cliquant sur le bouton "Ajouter un rapport".',
+          "noReportsDescription": "Créez votre premier rapport pour suivre les métriques importantes",
+    "createFirstReport": "Créer votre premier rapport",
       // Traductions du modal
       reportConfig: {
         title: 'Configuration du rapport',
