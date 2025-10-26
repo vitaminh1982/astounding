@@ -10,15 +10,15 @@ export default function ConversationsList({ onSelect, selectedId }) {
     <div className="space-y-4 mt-4">
       {/* Loading indicator */}
       {loading && (
-        <div className="flex items-center justify-center py-2 mb-4 bg-indigo-50 rounded-lg">
+        <div className="flex items-center justify-center py-2 mb-4 bg-indigo-50 rounded-lg dark:bg-indigo-900 dark:border dark:border-indigo-700">
           <Loader className="w-4 h-4 text-indigo-500 animate-spin mr-2" />
-          <span className="text-sm text-indigo-600">Loading active conversations...</span>
+          <span className="text-sm text-indigo-600 dark:text-indigo-300">Loading active conversations...</span>
         </div>
       )}
       
       {/* Error message */}
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm">
+        <div className="mb-4 p-3 bg-red-50 border border-red-100 text-red-600 rounded-lg text-sm dark:bg-red-900 dark:border-red-800 dark:text-red-300">
           <p className="font-medium mb-1">Error loading active conversations</p>
           <p>{error}</p>
         </div>
@@ -36,6 +36,11 @@ export default function ConversationsList({ onSelect, selectedId }) {
               ? 'bg-indigo-50 border-indigo-200' 
               : 'bg-white border-gray-200 hover:border-indigo-200'
             }
+            dark:border-gray-700 dark:hover:border-indigo-600
+            ${selectedId === conversation.id 
+              ? 'dark:bg-indigo-900 dark:border-indigo-600' 
+              : 'dark:bg-gray-800 dark:hover:bg-gray-700'
+            }
           `}
         >
           {conversation.needsAttention && (
@@ -49,6 +54,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
               <div className={`
                 w-10 h-10 rounded-full flex items-center justify-center text-white font-medium
                 ${conversation.client.avatar ? '' : 'bg-gradient-to-br from-indigo-500 to-purple-500'}
+                dark:bg-gradient-to-br dark:from-indigo-500 dark:to-purple-500
               `}>
                 {conversation.client.avatar ? (
                   <img 
@@ -56,11 +62,13 @@ export default function ConversationsList({ onSelect, selectedId }) {
                     alt={conversation.client.name}
                     className="w-full h-full rounded-full object-cover"
                   />
-                ) : conversation.client.initials}
+                ) : (
+                  <span className="dark:text-gray-200">{conversation.client.initials}</span>
+                )}
               </div>
               <div className="text-left">
-                <h3 className="font-medium text-gray-900">{conversation.client.name}</h3>
-                <p className="text-sm text-gray-500 line-clamp-1">{conversation.lastMessage}</p>
+                <h3 className="font-medium text-gray-900 dark:text-gray-200">{conversation.client.name}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1">{conversation.lastMessage}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -79,14 +87,14 @@ export default function ConversationsList({ onSelect, selectedId }) {
               
               {/* Badge for webhook conversations */}
               {typeof conversation.id === 'string' && conversation.id.startsWith('session-') && (
-                <span className="text-xs px-1.5 py-0.5 bg-green-100 text-green-800 rounded-full">
+                <span className="text-xs px-1.5 py-0.5 bg-green-100 text-green-800 rounded-full dark:bg-green-900 dark:text-green-300">
                   Live
                 </span>
               )}
             </div>
           </div>
           
-          <div className="flex items-center justify-between text-sm text-gray-500">
+          <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full ${
                 conversation.status === 'active' ? 'bg-green-500' : 'bg-gray-400'
@@ -94,7 +102,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
               {conversation.agent}
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4" />
+              <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400" />
               {conversation.lastActivity}
             </div>
           </div>
@@ -102,7 +110,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
       ))}
 
       {conversations.length === 0 && !loading && (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-gray-500 dark:text-gray-400">
           No available discussions
         </div>
       )}
