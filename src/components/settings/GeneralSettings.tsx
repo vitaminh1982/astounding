@@ -41,13 +41,15 @@ export default function GeneralSettings() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
         {fields.map((field) => (
           <div key={field.name} className="space-y-4">
-            <label className="block text-sm font-medium text-gray-700">{field.label}</label>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+              {field.label}
+            </label>
             <input
               type={field.type}
               name={field.name}
               value={formData[field.name]}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+              className="mt-1 p-2 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
             />
           </div>
         ))}
