@@ -94,7 +94,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
           maskColor="rgb(0, 0, 0, 0.1)"
           nodeColor={(node) => {
             const isDark = document.documentElement.classList.contains('dark');
-            return isDark ? '#1f2937' : '#ffffff';
+            return isDark ? '#1f2937' : '#ffffff'; // Dark: slate-800, Light: white
           }}
           zoomable
           pannable
