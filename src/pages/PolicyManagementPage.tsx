@@ -61,7 +61,8 @@ export default function PolicyManagementPage() {
               </p>
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center justify-center gap-2 bg-teal-600 dark:bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors text-sm sm:text-base shadow-sm dark:shadow-gray-900">
+              <button           className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
                 <Plus className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   Create Policy
