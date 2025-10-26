@@ -38,7 +38,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
   const [isAddingIntegration, setIsAddingIntegration] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState<string | null>(null);
 
-  // Memoized integration type configuration
+  // Memoized integration type configuration with dark mode variants
   const integrationTypeConfig = useMemo(() => ({
     api: {
       icon: Zap,
@@ -122,7 +122,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
     return (
       <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 transition-colors">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-400 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-500 mx-auto"></div>
           <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 transition-colors">
             Loading integrations...
           </p>
@@ -359,13 +359,13 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
             <div className="flex justify-end gap-3 p-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700 rounded-b-xl transition-colors">
               <button
                 onClick={handleCancelDelete}
-                className="px-4 py-2 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
+                className="px-4 py-2.5 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDeleteIntegration(deleteConfirmation)}
-                className="px-4 py-2 bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 shadow-sm hover:shadow-md transition-all duration-200"
+                className="px-4 py-2.5 bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 shadow-sm hover:shadow-md transition-all duration-200"
               >
                 Delete Integration
               </button>
@@ -382,7 +382,7 @@ interface IntegrationEditorProps {
   integration: Integration;
   onSave: (integration: Integration) => void;
   onCancel: () => void;
-  integrationTypeConfig: any;
+  integrationTypeConfig: any; // Consider refining this type
 }
 
 const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
@@ -398,7 +398,7 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
     onSave(editedIntegration);
   };
 
-  const TypeIcon = integrationTypeConfig[editedIntegration.type].icon;
+  const TypeIcon = integrationTypeConfig[editedIntegration.type]?.icon || Zap; // Fallback icon
 
   return (
     <div 
@@ -410,10 +410,10 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between transition-colors">
+        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between transition-colors z-10">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-lg ${integrationTypeConfig[editedIntegration.type].bgColor} flex items-center justify-center transition-colors`}>
-              <TypeIcon className={`w-5 h-5 ${integrationTypeConfig[editedIntegration.type].color}`} />
+            <div className={`w-10 h-10 rounded-lg ${integrationTypeConfig[editedIntegration.type]?.bgColor || 'bg-blue-50 dark:bg-blue-900/20'} flex items-center justify-center transition-colors`}>
+              <TypeIcon className={`w-5 h-5 ${integrationTypeConfig[editedIntegration.type]?.color || 'text-blue-600 dark:text-blue-400'}`} />
             </div>
             <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">
               {integration.id ? 'Edit Integration' : 'Create Integration'}
@@ -466,12 +466,16 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
             </label>
             <select
               value={editedIntegration.type}
-              onChange={(e) => setEditedIntegration({
-                ...editedIntegration,
-                type: e.target.value as Integration['type'],
-                config: {}
-              })}
-              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+              onChange={(e) => {
+                const newType = e.target.value as Integration['type'];
+                setEditedIntegration({
+                  ...editedIntegration,
+                  type: newType,
+                  // Reset config for relevant fields or clear all for simplicity
+                  config: newType === 'api' ? { endpoint: '', method: 'GET' } : {} 
+                });
+              }}
+              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors appearance-none"
             >
               <option value="api">API</option>
               <option value="database">Database</option>
@@ -520,7 +524,7 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
                       method: e.target.value as 'GET' | 'POST' | 'PUT' | 'DELETE'
                     }
                   })}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors appearance-none"
                 >
                   <option value="GET">GET</option>
                   <option value="POST">POST</option>
@@ -530,6 +534,7 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
               </div>
             </div>
           )}
+          {/* Add other type specific configurations here if needed */}
 
           {/* Action Buttons */}
           <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700 transition-colors">
