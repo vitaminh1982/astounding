@@ -535,7 +535,7 @@ const Navbar = ({
               className="flex items-center gap-2 group"
             >
               <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-br from-teal-400 to-teal-500 flex items-center justify-center shadow-md group-hover:shadow-lg transition-shadow">
-                <span className="text-white font-bold text-lg lg:text-xl">S</span>
+ 
               </div>
               <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-600 dark:from-teal-400 dark:to-teal-500 bg-clip-text text-transparent">
                 Sendplex
