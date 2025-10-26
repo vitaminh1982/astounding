@@ -437,6 +437,9 @@ prompts: {
     newRole: 'New Role', // Updated from newRole to newCategory based on the UI
     generatePrompt: 'Generate New Prompt'
   },
+  view: {
+    label: 'Label'
+      },
   categories: {
     title: 'Roles',
     all: 'All',  // Added based on UI showing "prompts.categories.all"
