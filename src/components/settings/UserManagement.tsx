@@ -86,7 +86,8 @@ export default function UserManagement() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-gray-900 sm:text-sm md:text-base">Teams</h3>
-            <button className="flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-700">
+            <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
               <UserPlus className="w-4 h-4" />
               New team
             </button>
