@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Search, Filter, Tags } from 'lucide-react';
 import { LanguageContext } from '../../context/LanguageContext';
 
+
 export default function ClientsFilters() {
   const { t } = useContext(LanguageContext);
 
@@ -36,8 +37,7 @@ export default function ClientsFilters() {
       
       {/* Deuxième ligne : Boutons de filtrage */}
       <div className="flex flex-wrap gap-2 justify-start">
-        <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
-        >
+        <button className="px-4 py-1.5 bg-teal-600 dark:bg-teal-500 text-white rounded-full text-sm hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
           {t('clients.filters.all')}
         </button>
         <button className="px-4 py-1.5 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
