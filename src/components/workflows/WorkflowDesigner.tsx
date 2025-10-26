@@ -44,7 +44,6 @@ import {
   GripHorizontal
 } from 'lucide-react';
 import { Workflow } from '../../types/workflow';
-import { useWorkflowStore } from '/stores/workflowStore';
 import { v4 as uuidv4 } from 'uuid';
 
 // Types
@@ -98,9 +97,8 @@ const CustomEdge = ({
         style={{ 
           ...style, 
           strokeWidth: 2,
-          stroke: '#2563eb',
         }}
-        className="react-flow__edge-path"
+        className="react-flow__edge-path stroke-indigo-500 dark:stroke-teal-400"
         d={edgePath}
         markerEnd={markerEnd}
       />
@@ -111,12 +109,11 @@ const CustomEdge = ({
       >
         <circle 
           r="12" 
-          fill="#fff" 
-          className="edge-button-circle"
-          style={{ filter: 'drop-shadow(0 2px 2px rgb(0 0 0 / 0.1))' }}
+          className="fill-white dark:fill-gray-700 transition-colors"
+          style={{ filter: 'drop-shadow(0 2px 4px rgb(0 0 0 / 0.1))' }}
         />
         <Trash2 
-          className="w-4 h-4 text-red-500" 
+          className="w-4 h-4 text-red-500 dark:text-red-400" 
           style={{ transform: 'translate(-8px, -8px)' }}
           data-edge-id={id}
         />
@@ -125,30 +122,37 @@ const CustomEdge = ({
   );
 };
 
-// Enhanced Custom Node Component with delete button
+// Enhanced Custom Node Component with delete button and dark mode
 const CustomNode = ({ data, id }: { data: NodeData; id: string }) => {
   return (
-    <div className="relative px-4 py-2 shadow-lg rounded-lg bg-white border-2 border-gray-200 group">
-      <div className="absolute top-0 right-0 mt-1 mr-1 opacity-0 group-hover:opacity-100 transition-opacity">
+    <div className="relative px-4 py-2 shadow-lg rounded-lg bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 group transition-colors">
+      {/* Delete Button */}
+      <div className="absolute top-0 right-0 mt-1 mr-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <button 
-          className="p-1 rounded-full hover:bg-red-100"
+          className="p-1 rounded-full hover:bg-red-100 dark:hover:bg-red-900/30 transition-colors"
           data-node-id={id}
+          aria-label="Delete node"
         >
-          <Trash2 className="w-4 h-4 text-red-500" />
+          <Trash2 className="w-4 h-4 text-red-500 dark:text-red-400" />
         </button>
       </div>
-      <div className="absolute top-0 left-0 mt-1 ml-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab">
-        <GripHorizontal className="w-4 h-4 text-gray-400" />
+      
+      {/* Drag Handle */}
+      <div className="absolute top-0 left-0 mt-1 ml-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing">
+        <GripHorizontal className="w-4 h-4 text-gray-400 dark:text-gray-500" />
       </div>
+      
+      {/* Content */}
       <div className="flex items-center mt-4">
+        {/* React Flow Handles */}
         {data.handles.map((handle) => (
           <Handle
             key={handle.id}
             type={handle.type}
             position={handle.position}
             id={handle.id}
+            className="!bg-indigo-500 dark:!bg-teal-400"
             style={{ 
-              background: '#2563eb',
               width: 8,
               height: 8,
               [handle.position === Position.Top ? 'top' : 
@@ -157,14 +161,20 @@ const CustomNode = ({ data, id }: { data: NodeData; id: string }) => {
             }}
           />
         ))}
+        
+        {/* Node Content */}
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-indigo-50">
+          <div className="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 transition-colors">
             {data.icon}
           </div>
           <div className="flex flex-col">
-            <span className="font-medium text-sm">{data.label}</span>
+            <span className="font-medium text-sm text-gray-900 dark:text-gray-100 transition-colors">
+              {data.label}
+            </span>
             {data.description && (
-              <span className="text-xs text-gray-500">{data.description}</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                {data.description}
+              </span>
             )}
           </div>
         </div>
@@ -173,58 +183,58 @@ const CustomNode = ({ data, id }: { data: NodeData; id: string }) => {
   );
 };
 
-// Node Types
+// Node Types with dark mode icons
 export const nodeTypes = {
   trigger: {
-    icon: <Mail className="w-4 h-4 text-indigo-600" />,
+    icon: <Mail className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
     label: 'Email Trigger',
     description: 'Triggers on new email',
     handles: [
-      { type: 'source', position: Position.Bottom, id: 'email' }
+      { type: 'source' as const, position: Position.Bottom, id: 'email' }
     ],
   },
   agent: {
-    icon: <Bot className="w-4 h-4 text-indigo-600" />,
+    icon: <Bot className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
     label: 'AI Agent',
     description: 'Process with AI',
     handles: [
-      { type: 'target', position: Position.Top, id: 'in' },
-      { type: 'source', position: Position.Bottom, id: 'out' },
-      { type: 'source', position: Position.Right, id: 'tools' }
+      { type: 'target' as const, position: Position.Top, id: 'in' },
+      { type: 'source' as const, position: Position.Bottom, id: 'out' },
+      { type: 'source' as const, position: Position.Right, id: 'tools' }
     ],
   },
   action: {
-    icon: <Tool className="w-4 h-4 text-indigo-600" />,
+    icon: <Tool className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
     label: 'Action',
     description: 'Perform an action',
     handles: [
-      { type: 'target', position: Position.Top, id: 'in' },
-      { type: 'source', position: Position.Bottom, id: 'out' },
+      { type: 'target' as const, position: Position.Top, id: 'in' },
+      { type: 'source' as const, position: Position.Bottom, id: 'out' },
     ],
   },
   notification: {
-    icon: <Slack className="w-4 h-4 text-indigo-600" />,
+    icon: <Slack className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
     label: 'Notification',
     description: 'Send notification',
     handles: [
-      { type: 'target', position: Position.Top, id: 'message' }
+      { type: 'target' as const, position: Position.Top, id: 'message' }
     ],
   },
   database: {
-    icon: <Database className="w-4 h-4 text-indigo-600" />,
+    icon: <Database className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
     label: 'Vector Database',
     description: 'Search vector database',
     handles: [
-      { type: 'target', position: Position.Top, id: 'in' },
-      { type: 'source', position: Position.Bottom, id: 'out' },
+      { type: 'target' as const, position: Position.Top, id: 'in' },
+      { type: 'source' as const, position: Position.Bottom, id: 'out' },
     ],
   },
   output: {
-    icon: <FileOutput className="w-4 h-4 text-indigo-600" />,
+    icon: <FileOutput className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />,
     label: 'Email Output',
     description: 'Process output',
     handles: [
-      { type: 'target', position: Position.Top, id: 'in' },
+      { type: 'target' as const, position: Position.Top, id: 'in' },
     ],
   },
 };
@@ -370,16 +380,16 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
 }) => {
   // Node state
   const [nodes, setNodes] = useState<Node[]>(() => {
-    if (workflow?.nodes?.length > 0) {
-      return workflow.nodes;
+    if (workflow?.design?.nodes?.length > 0) {
+      return workflow.design.nodes;
     }
     return initialNodes;
   });
   
   // Edge state
   const [edges, setEdges] = useState<Edge[]>(() => {
-    if (workflow?.edges?.length > 0) {
-      return workflow.edges;
+    if (workflow?.design?.edges?.length > 0) {
+      return workflow.design.edges;
     }
     return initialEdges;
   });
@@ -388,7 +398,20 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
   
   // Panel state
-  const [isComponentsPanelMinimized, setIsComponentsPanelMinimized] = useState(true);
+  const [isComponentsPanelMinimized, setIsComponentsPanelMinimized] = useState(false);
+
+  // Workflow change handler
+  const handleWorkflowChange = useCallback((changes: Partial<{ nodes: Node[]; edges: Edge[] }>) => {
+    if (onWorkflowUpdate) {
+      onWorkflowUpdate({
+        ...workflow,
+        design: {
+          nodes: changes.nodes || nodes,
+          edges: changes.edges || edges,
+        },
+      });
+    }
+  }, [workflow, nodes, edges, onWorkflowUpdate]);
 
   // Node changes handler
   const onNodesChange: OnNodesChange = useCallback(
@@ -397,7 +420,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
       setNodes(updatedNodes);
       handleWorkflowChange({ nodes: updatedNodes });
     },
-    [nodes]
+    [nodes, handleWorkflowChange]
   );
 
   // Edge changes handler
@@ -407,7 +430,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
       setEdges(updatedEdges);
       handleWorkflowChange({ edges: updatedEdges });
     },
-    [edges]
+    [edges, handleWorkflowChange]
   );
 
   // Connection handler
@@ -424,19 +447,8 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
       setEdges(updatedEdges);
       handleWorkflowChange({ edges: updatedEdges });
     },
-    [edges]
+    [edges, handleWorkflowChange]
   );
-
-  // Workflow change handler
-  const handleWorkflowChange = (changes: Partial<Workflow>) => {
-    if (onWorkflowUpdate) {
-      onWorkflowUpdate({
-        ...workflow,
-        nodes: changes.nodes || nodes,
-        edges: changes.edges || edges,
-      });
-    }
-  };
 
   // Node click handler
   const onNodeClick: NodeMouseHandler = useCallback((event, node) => {
@@ -454,7 +466,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
       // Select node for editing
       setSelectedNode(node);
     }
-  }, [nodes, edges]);
+  }, [nodes, edges, handleWorkflowChange]);
 
   // Edge click handler
   const onEdgeClick: EdgeMouseHandler = useCallback((event, edge) => {
@@ -463,7 +475,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
       setEdges(updatedEdges);
       handleWorkflowChange({ edges: updatedEdges });
     }
-  }, [edges]);
+  }, [edges, handleWorkflowChange]);
 
   // Custom node types
   const customNodeTypes: NodeTypes = {
@@ -505,7 +517,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
         type: 'custom',
         position,
         data: {
-          ...nodeTypes[type],
+          ...nodeTypes[type as keyof typeof nodeTypes],
           type,
           dbId: uuidv4(),
         },
@@ -516,11 +528,24 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
       setNodes(updatedNodes);
       handleWorkflowChange({ nodes: updatedNodes });
     },
-    [nodes]
+    [nodes, handleWorkflowChange]
   );
 
+  // Handle save workflow
+  const handleSave = useCallback(() => {
+    handleWorkflowChange({ nodes, edges });
+    // Add notification/toast here
+    console.log('Workflow saved!');
+  }, [nodes, edges, handleWorkflowChange]);
+
+  // Handle load workflow
+  const handleLoad = useCallback(() => {
+    // Implement load logic here
+    console.log('Load workflow');
+  }, []);
+
   return (
-    <div className="h-full">
+    <div className="h-full bg-white dark:bg-gray-900 transition-colors">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -533,57 +558,100 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
         edgeTypes={customEdgeTypes}
         onDragOver={onDragOver}
         onDrop={onDrop}
-        direction="TB" // Top-to-Bottom direction
         fitView
+        className="bg-gray-50 dark:bg-gray-900"
       >
-        <Background />
-        <Controls />
-        <MiniMap zoomable pannable />
+        <Background 
+          className="bg-gray-50 dark:bg-gray-900"
+          gap={16}
+          color="#9ca3af"
+        />
+        <Controls className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg [&_button]:text-gray-700 dark:[&_button]:text-gray-200 [&_button:hover]:bg-gray-100 dark:[&_button:hover]:bg-gray-700" />
+        <MiniMap 
+          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+          maskColor="rgb(0, 0, 0, 0.1)"
+          nodeColor={(node) => {
+            const isDark = document.documentElement.classList.contains('dark');
+            return isDark ? '#1f2937' : '#ffffff';
+          }}
+          zoomable 
+          pannable 
+        />
 
+        {/* Top Right Actions */}
         <Panel position="top-right" className="flex gap-2">
-          <button className="p-2 bg-white rounded-md shadow-md hover:bg-gray-50">
-            <Save className="w-4 h-4" />
+          <button 
+            onClick={handleSave}
+            className="p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
+            aria-label="Save workflow"
+          >
+            <Save className="w-5 h-5 text-gray-700 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-teal-400 transition-colors" />
           </button>
-          <button className="p-2 bg-white rounded-md shadow-md hover:bg-gray-50">
-            <FolderOpen className="w-4 h-4" />
+          <button 
+            onClick={handleLoad}
+            className="p-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group"
+            aria-label="Load workflow"
+          >
+            <FolderOpen className="w-5 h-5 text-gray-700 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-teal-400 transition-colors" />
           </button>
         </Panel>
 
-        <Panel position="top-left" className="bg-white rounded-lg shadow-lg overflow-hidden">
+        {/* Components Panel - Top Left */}
+        <Panel position="top-left" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl overflow-hidden transition-colors">
           <div className="w-64">
-            <div className="p-3 bg-indigo-50 flex items-center justify-between cursor-pointer"
-                 onClick={() => setIsComponentsPanelMinimized(!isComponentsPanelMinimized)}>
-              <h3 className="text-lg font-semibold flex items-center gap-2">
-                <Tool className="w-4 h-4" />
+            {/* Panel Header */}
+            <div 
+              className="p-4 bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-gray-800 dark:to-gray-750 flex items-center justify-between cursor-pointer border-b border-indigo-200 dark:border-gray-700 transition-colors"
+              onClick={() => setIsComponentsPanelMinimized(!isComponentsPanelMinimized)}
+              role="button"
+              tabIndex={0}
+              aria-expanded={!isComponentsPanelMinimized}
+            >
+              <h3 className="text-base font-semibold flex items-center gap-2 text-gray-900 dark:text-gray-100">
+                <Tool className="w-4 h-4 text-indigo-600 dark:text-teal-400" strokeWidth={2.5} />
                 Components
               </h3>
-              <button className="text-gray-500 hover:text-gray-700 transition-colors">
+              <button className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors rounded-lg p-1 hover:bg-white/50 dark:hover:bg-gray-700">
                 {isComponentsPanelMinimized ? (
-                  <Plus className="w-4 h-4" />
+                  <Plus className="w-5 h-5" strokeWidth={2.5} />
                 ) : (
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" strokeWidth={2.5} />
                 )}
               </button>
             </div>
             
-            {/* Components list with transition */}
-            <div className={`transition-all duration-300 ease-in-out ${
+            {/* Components List */}
+            <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
               isComponentsPanelMinimized 
                 ? 'max-h-0 opacity-0' 
-                : 'max-h-[500px] opacity-100'
+                : 'max-h-[600px] opacity-100'
             }`}>
-              <div className="p-4 space-y-2">
+              <div className="p-4 space-y-2 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
                 {Object.entries(nodeTypes).map(([key, config]) => (
                   <div
                     key={key}
                     draggable
                     onDragStart={(event) => {
                       event.dataTransfer.setData('application/reactflow', key);
+                      event.dataTransfer.effectAllowed = 'move';
                     }}
-                    className="flex items-center gap-2 p-2 border rounded-md cursor-move hover:bg-gray-50 transition-colors"
+                    className="flex items-center gap-3 p-3 border border-gray-200 dark:border-gray-700 rounded-lg cursor-move hover:bg-gray-50 dark:hover:bg-gray-750 hover:border-indigo-300 dark:hover:border-teal-600 transition-all duration-200 active:scale-95 group bg-white dark:bg-gray-800"
+                    role="button"
+                    tabIndex={0}
                   >
-                    {config.icon}
-                    <span className="text-sm">{config.label}</span>
+                    <div className="p-1.5 rounded-md bg-indigo-50 dark:bg-indigo-900/30 group-hover:bg-indigo-100 dark:group-hover:bg-indigo-900/50 transition-colors">
+                      {config.icon}
+                    </div>
+                    <div className="flex flex-col flex-1 min-w-0">
+                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                        {config.label}
+                      </span>
+                      {config.description && (
+                        <span className="text-xs text-gray-500 dark:text-gray-400 truncate transition-colors">
+                          {config.description}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -591,24 +659,31 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
           </div>
         </Panel>
 
+        {/* Node Settings Panel - Bottom Right */}
         {selectedNode && (
-          <Panel position="bottom-right" className="bg-white p-4 rounded-lg shadow-lg">
+          <Panel position="bottom-right" className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-5 rounded-xl shadow-xl w-80 transition-colors">
             <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold flex items-center gap-2">
-                  <Settings className="w-4 h-4" />
+              {/* Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-gray-200 dark:border-gray-700">
+                <h3 className="text-lg font-semibold flex items-center gap-2 text-gray-900 dark:text-gray-100 transition-colors">
+                  <Settings className="w-5 h-5 text-indigo-600 dark:text-teal-400" strokeWidth={2.5} />
                   Node Settings
                 </h3>
                 <button
                   onClick={() => setSelectedNode(null)}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors rounded-lg p-1 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  aria-label="Close settings"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
-              <div className="space-y-2">
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-gray-700">Name</label>
+              
+              {/* Form Fields */}
+              <div className="space-y-4">
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
+                    Name
+                  </label>
                   <input
                     type="text"
                     value={selectedNode.data.label}
@@ -619,16 +694,20 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
                           : n
                       );
                       setNodes(updatedNodes);
+                      setSelectedNode({ ...selectedNode, data: { ...selectedNode.data, label: e.target.value } });
                       handleWorkflowChange({ nodes: updatedNodes });
                     }}
-                    className="border rounded-md px-2 py-1 text-sm"
+                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent transition-all"
+                    placeholder="Enter node name"
                   />
                 </div>
-                <div className="flex flex-col gap-1">
-                  <label className="text-sm font-medium text-gray-700">Description</label>
-                  <input
-                    type="text"
-                    value={selectedNode.data.description}
+                
+                <div className="flex flex-col gap-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
+                    Description
+                  </label>
+                  <textarea
+                    value={selectedNode.data.description || ''}
                     onChange={(e) => {
                       const updatedNodes = nodes.map((n) =>
                         n.id === selectedNode.id
@@ -636,10 +715,21 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
                           : n
                       );
                       setNodes(updatedNodes);
+                      setSelectedNode({ ...selectedNode, data: { ...selectedNode.data, description: e.target.value } });
                       handleWorkflowChange({ nodes: updatedNodes });
                     }}
-                    className="border rounded-md px-2 py-1 text-sm"
+                    className="border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent transition-all resize-none"
+                    rows={3}
+                    placeholder="Enter description"
                   />
+                </div>
+
+                {/* Node Type Badge */}
+                <div className="flex items-center gap-2 pt-2">
+                  <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Type:</span>
+                  <span className="px-2 py-1 text-xs font-medium rounded-full bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 transition-colors">
+                    {selectedNode.data.type}
+                  </span>
                 </div>
               </div>
             </div>
