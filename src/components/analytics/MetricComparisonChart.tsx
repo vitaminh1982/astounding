@@ -235,8 +235,8 @@ const MetricComparisonChart: React.FC<MetricComparisonChartProps> = ({
           {/* Export button */}
           <button 
             onClick={handleExport}
-            className="flex items-center gap-2 px-3 py-2 border rounded-lg bg-white hover:bg-gray-50 text-sm"
-          >
+                      className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+        >
             <Download className="w-4 h-4" />
             <span>Export</span>
           </button>
