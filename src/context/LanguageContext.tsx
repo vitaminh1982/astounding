@@ -1152,23 +1152,23 @@ saveError: 'Failed to save configuration',
           metrics: '56 conversations initiées'
         },
   projectManager: {
-    name: 'Chef de projet IA',
+    name: 'Chef de projet',
     metrics: '23 jalons livrés'
   },
   businessAnalyst: {
-    name: 'Analyste métier IA',
+    name: 'Analyste métier',
     metrics: '68 exigences clarifiées'
   },
   dataAnalyst: {
-    name: 'Analyste données IA',
+    name: 'Analyste données',
     metrics: '34 analyses produites'
   },
   industryExpert: {
-    name: 'Expert IA (Finance & Paiements)',
+    name: 'Expert Industrie',
     metrics: '26 avis de conformité'
   },
   pmoAnalyst: {
-    name: 'Analyste PMO IA',
+    name: 'Analyste PMO',
     metrics: '9 rapports de portefeuille publiés'
   },
         
