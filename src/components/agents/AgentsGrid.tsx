@@ -22,7 +22,7 @@ export default function AgentsGrid() {
       ],
     },
     {
-      id: 2,
+      id: 7,
       name: t('agents.list.salesAssistant.name'),
       status: 'active',
       icon: Users,
@@ -35,7 +35,7 @@ export default function AgentsGrid() {
       ],
     },
     {
-      id: 3,
+      id: 8,
       name: t('agents.list.ecommerceAssistant.name'),
       status: 'active',
       icon: ShoppingCart,
@@ -48,7 +48,7 @@ export default function AgentsGrid() {
       ],
     },
     {
-      id: 4,
+      id: 9,
       name: t('agents.list.billingService.name'),
       status: 'active',
       icon: CreditCard,
@@ -61,7 +61,7 @@ export default function AgentsGrid() {
       ],
     },
     {
-      id: 5,
+      id: 10,
       name: t('agents.list.technicalSupport.name'),
       status: 'active',
       icon: HelpCircle,
@@ -73,7 +73,7 @@ export default function AgentsGrid() {
       ],
     },
           {
-      id: 6,
+      id: 11,
       name: t('agents.list.hrAssistant.name'),
       status: 'inactive',
       icon: Brain,
@@ -87,7 +87,7 @@ export default function AgentsGrid() {
       ],
     },
       {
-        id: 7,
+        id: 2,
         name: t('agents.list.projectManager.name'),
         status: 'active',
         icon: ClipboardCheck,
@@ -100,7 +100,7 @@ export default function AgentsGrid() {
         ],
       },
       {
-        id: 8,
+        id: 3,
         name: t('agents.list.businessAnalyst.name'),
         status: 'active',
         icon: BarChart,
