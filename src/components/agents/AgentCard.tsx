@@ -1,20 +1,46 @@
 import React, { useState, useCallback } from 'react';
-import { Play, Pause, Stop } from 'lucide-react';
+import { Play, Pause, Square } from 'lucide-react';
 import { AgentType } from '../../types/agent';
 import AIAgentInterface from './AIAgentInterface';
 import { AgentConfig } from '../../types/agent-config';
 
-interface AgentCardProps { 
+interface AgentCardProps {
   agent: AgentType;
 }
 
+// Status configuration mapping
+const STATUS_CONFIG = {
+  active: {
+    label: 'Active',
+    icon: Play,
+    badgeClasses: 'bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400',
+    iconClasses: 'text-green-600 dark:text-green-400',
+  },
+  suspended: {
+    label: 'Suspended',
+    icon: Pause,
+    badgeClasses: 'bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400',
+    iconClasses: 'text-yellow-600 dark:text-yellow-400',
+  },
+  inactive: {
+    label: 'Inactive',
+    icon: Square,
+    badgeClasses: 'bg-gray-100 dark:bg-gray-700/50 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-400',
+    iconClasses: 'text-gray-600 dark:text-gray-500',
+  },
+} as const;
+
 export default function AgentCard({ agent }: AgentCardProps) {
   const [showInterface, setShowInterface] = useState(false);
-  const isActive = agent.status === 'active';
+  const statusConfig = STATUS_CONFIG[agent.status] || STATUS_CONFIG.inactive;
+  const StatusIcon = statusConfig.icon;
 
   const handleOpenInterface = useCallback(() => {
-    setShowInterface(true);
-  }, []);
+    // Only allow opening if agent is active or suspended (not fully inactive)
+    if (agent.status !== 'inactive') {
+      setShowInterface(true);
+    }
+  }, [agent.status]);
 
   const handleCloseInterface = useCallback(() => {
     setShowInterface(false);
@@ -23,7 +49,7 @@ export default function AgentCard({ agent }: AgentCardProps) {
   const mockConfig: AgentConfig = {
     id: 'AI_SC247_01',
     name: agent.name,
-    status: isActive ? 'active' : 'inactive',
+    status: agent.status,
     lastUpdate: '15/03/2024 14:30',
     communication: {
       style: ['professional', 'empathetic', 'solution-oriented'],
@@ -108,20 +134,27 @@ Remember that your main goal is customer satisfaction while respecting company p
     }
   };
 
+  const isClickable = agent.status !== 'inactive';
+
   return (
     <>
       <div
-        className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-all duration-200 cursor-pointer border border-transparent dark:border-gray-700 hover:border-indigo-200 dark:hover:border-teal-600"
-        onClick={handleOpenInterface}
+        className={`bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 transition-all duration-200 border border-transparent dark:border-gray-700 ${
+          isClickable
+            ? 'hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-indigo-200 dark:hover:border-teal-600 cursor-pointer'
+            : 'opacity-60 cursor-not-allowed'
+        }`}
+        onClick={isClickable ? handleOpenInterface : undefined}
         role="button"
-        tabIndex={0}
+        tabIndex={isClickable ? 0 : -1}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (isClickable && (e.key === 'Enter' || e.key === ' ')) {
             e.preventDefault();
             handleOpenInterface();
           }
         }}
-        aria-label={`Open ${agent.name} agent interface`}
+        aria-label={`${isClickable ? 'Open' : 'View'} ${agent.name} agent interface`}
+        aria-disabled={!isClickable}
       >
         {/* Header */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 transition-colors">
@@ -131,19 +164,11 @@ Remember that your main goal is customer satisfaction while respecting company p
             </h3>
             <div className="flex items-center gap-2">
               {/* Status Badge */}
-              <span className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${
-                isActive 
-                  ? 'bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-400' 
-                  : 'bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400'
-              }`}>
-                {isActive ? 'Active' : 'Paused'}
+              <span className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${statusConfig.badgeClasses}`}>
+                {statusConfig.label}
               </span>
               {/* Status Icon */}
-              {isActive ? (
-                <Play className="w-4 h-4 text-green-600 dark:text-green-400 transition-colors" />
-              ) : (
-                <Pause className="w-4 h-4 text-yellow-600 dark:text-yellow-400 transition-colors" />
-              )}
+              <StatusIcon className={`w-4 h-4 transition-colors ${statusConfig.iconClasses}`} />
             </div>
           </div>
         </div>
@@ -172,6 +197,15 @@ Remember that your main goal is customer satisfaction while respecting company p
               ))}
             </div>
           </div>
+
+          {/* Inactive message */}
+          {agent.status === 'inactive' && (
+            <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-xs text-gray-500 dark:text-gray-500 italic">
+                This agent is currently inactive and cannot be accessed.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
