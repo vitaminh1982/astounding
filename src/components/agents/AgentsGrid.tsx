@@ -86,6 +86,19 @@ export default function AgentsGrid() {
         t('agents.skills.timeTracking')
       ],
     },
+        {
+      id: 7,
+      name: t('agents.list.projectManager.name'),          // "AI Project Manager"
+      status: 'active',
+      icon: ClipboardCheck,
+      metrics: t('agents.list.projectManager.metrics'),    // e.g., "23 milestones delivered"
+      skills: [
+        t('agents.skills.roadmapping'),
+        t('agents.skills.riskManagement'),
+        t('agents.skills.stakeholderComms'),
+        t('agents.skills.agileScrum'),
+      ],
+    },
  
   ];
 
