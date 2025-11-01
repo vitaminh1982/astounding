@@ -73,19 +73,7 @@ export default function AgentsGrid() {
           t('agents.skills.resourcePlanning'),
         ],
       },
-          {
-        id: 6,
-        name: t('agents.list.dataAnalyst.name'),
-        status: 'active',
-        icon: ChartLine,
-        metrics: t('agents.list.dataAnalyst.metrics'),
-        skills: [
-          t('agents.skills.dataPrep'),
-          t('agents.skills.sql'),
-          t('agents.skills.dashboarding'),
-          t('agents.skills.anomalyDetection'),
-        ],
-      },
+
     {
       id: 7,
       name: t('agents.list.salesAssistant.name'),
@@ -137,7 +125,20 @@ export default function AgentsGrid() {
         t('agents.skills.maintenance')
       ],
     },
-
+          {
+      id: 11,
+      name: t('agents.list.hrAssistant.name'),
+      status: 'inactive',
+      icon: Brain,
+      metrics: t('agents.list.hrAssistant.metrics'),
+      skills: [
+        t('agents.skills.hr'),
+        t('agents.skills.leave'),
+        t('agents.skills.procedures'),
+        t('agents.skills.training'),
+        t('agents.skills.timeTracking')
+      ],
+    },
     
 
 
