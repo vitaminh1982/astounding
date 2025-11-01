@@ -259,26 +259,6 @@ const translations = {
           name: 'Proactive Chatbot',
           metrics: '456 conversations initiated'
         },
-          projectManager: {
-    name: 'AI Project Manager',
-    metrics: '23 milestones delivered'
-  },
-  businessAnalyst: {
-    name: 'AI Business Analyst',
-    metrics: '68 requirements clarified'
-  },
-  dataAnalyst: {
-    name: 'AI Data Analyst',
-    metrics: '34 insights generated'
-  },
-  industryExpert: {
-    name: 'AI Industry Expert (Finance & Payments)',
-    metrics: '26 compliance advisories'
-  },
-  pmoAnalyst: {
-    name: 'AI PMO Analyst',
-    metrics: '9 portfolio reports published'
-  },
         gdpr: {
           name: 'GDPR & Compliance Agent',
           metrics: '244 requests processed',
