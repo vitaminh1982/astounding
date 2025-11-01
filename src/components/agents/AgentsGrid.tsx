@@ -73,6 +73,19 @@ export default function AgentsGrid() {
           t('agents.skills.resourcePlanning'),
         ],
       },
+          {
+        id: 6,
+        name: t('agents.list.dataAnalyst.name'),
+        status: 'active',
+        icon: ChartLine,
+        metrics: t('agents.list.dataAnalyst.metrics'),
+        skills: [
+          t('agents.skills.dataPrep'),
+          t('agents.skills.sql'),
+          t('agents.skills.dashboarding'),
+          t('agents.skills.anomalyDetection'),
+        ],
+      },
     {
       id: 7,
       name: t('agents.list.salesAssistant.name'),
