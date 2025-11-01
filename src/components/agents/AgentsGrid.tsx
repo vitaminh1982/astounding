@@ -89,7 +89,7 @@ export default function AgentsGrid() {
     {
       id: 7,
       name: t('agents.list.salesAssistant.name'),
-      status: 'suspended'',
+      status: 'suspended',
       icon: Users,
       metrics: t('agents.list.salesAssistant.metrics'),
       skills: [
