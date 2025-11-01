@@ -260,23 +260,23 @@ const translations = {
           metrics: '456 conversations initiated'
         },
          projectManager: {
-    name: 'AI Project Manager',
+    name: 'Project Manager',
     metrics: '23 milestones delivered'
   },
   businessAnalyst: {
-    name: 'AI Business Analyst',
+    name: 'Business Analyst',
     metrics: '68 requirements clarified'
   },
   dataAnalyst: {
-    name: 'AI Data Analyst',
+    name: 'Data Analyst',
     metrics: '34 insights generated'
   },
   industryExpert: {
-    name: 'AI Industry Expert (Finance & Payments)',
+    name: 'Industry Expert (Finance)',
     metrics: '26 compliance advisories'
   },
   pmoAnalyst: {
-    name: 'AI PMO Analyst',
+    name: 'PMO Analyst',
     metrics: '9 portfolio reports published'
   },
         gdpr: {
