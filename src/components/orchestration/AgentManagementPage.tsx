@@ -53,14 +53,21 @@ const agents = [
       requests: 1247
     }
   },
-  {
+    {
     id: 'agent-002',
-    name: 'Sales Assistant',
-    type: 'Sales',
+    name: 'AI Project Manager',
+    type: 'Project Management',
     status: 'active',
     version: 'v1.8.2',
-    purpose: 'Qualify leads and assist with sales processes',
-    capabilities: ['Lead Qualification', 'CRM Integration', 'Product Recommendations', 'Pipeline Management'],
+    purpose: 'Plan, coordinate, and deliver projects on scope, time, and budget while managing risks and stakeholders.',
+    capabilities: [
+      'Roadmapping & Milestone Planning',
+      'Scope Definition & WBS',
+      'Resource Allocation',
+      'Risk & Issue Management',
+      'Agile/Scrum Facilitation',
+      'Stakeholder Communication'
+    ],
     lastDeployed: '2025-03-12',
     performance: { 
       uptime: '99.7%', 
@@ -77,12 +84,19 @@ const agents = [
   },
   {
     id: 'agent-003',
-    name: 'Technical Assistant',
-    type: 'Technical',
+    name: 'AI Business Analyst',
+    type: 'Business Analysis',
     status: 'active',
     version: 'v2.0.1',
-    purpose: 'Provide technical support and troubleshooting assistance',
-    capabilities: ['Technical Diagnostics', 'Documentation Search', 'Issue Resolution', 'Code Analysis'],
+    purpose: 'Elicit requirements, model processes, and translate business needs into clear, testable specifications.',
+    capabilities: [
+      'Requirements Elicitation & Workshops',
+      'Process Modeling (BPMN)',
+      'User Stories & Acceptance Criteria',
+      'Gap & Impact Analysis',
+      'Value Stream Mapping',
+      'Traceability Matrix Management'
+    ],
     lastDeployed: '2025-03-10',
     performance: { 
       uptime: '99.5%', 
@@ -99,12 +113,19 @@ const agents = [
   },
   {
     id: 'agent-004',
-    name: 'E-commerce Assistant',
-    type: 'E-commerce',
+    name: 'AI Data Analyst',
+    type: 'Data Analytics',
     status: 'active',
     version: 'v1.9.0',
-    purpose: 'Manage product inquiries and order processing',
-    capabilities: ['Product Search', 'Order Management', 'Inventory Tracking', 'Payment Processing'],
+    purpose: 'Explore, analyze, and visualize data to produce actionable insights and forecasts.',
+    capabilities: [
+      'SQL & Data Wrangling',
+      'Exploratory Data Analysis (EDA)',
+      'Dashboarding (Power BI/Tableau)',
+      'A/B Testing & Experiment Design',
+      'Time-Series Forecasting',
+      'Anomaly Detection'
+    ],
     lastDeployed: '2025-03-14',
     performance: { 
       uptime: '99.8%', 
@@ -121,12 +142,19 @@ const agents = [
   },
   {
     id: 'agent-005',
-    name: 'Billing Service',
-    type: 'Finance',
+    name: 'AI Industry Expert (Finance & Payments)',
+    type: 'Industry Expertise',
     status: 'active',
     version: 'v1.6.1',
-    purpose: 'Handle billing inquiries and payment processing',
-    capabilities: ['Payment Processing', 'Invoice Management', 'Refund Processing', 'Account Management'],
+    purpose: 'Provide financial services and payments domain guidance, best practices, and regulatory context.',
+    capabilities: [
+      'Regulatory Insights (PSD2, SEPA)',
+      'Payment Flows & Reconciliation',
+      'Risk & Compliance Advisory',
+      'Benchmarking & Best Practices',
+      'Product/Market Fit Guidance',
+      'Customer Journey Optimization'
+    ],
     lastDeployed: '2025-03-11',
     performance: { 
       uptime: '99.6%', 
@@ -143,12 +171,19 @@ const agents = [
   },
   {
     id: 'agent-006',
-    name: 'HR Assistant',
-    type: 'HR',
+    name: 'AI PMO Analyst',
+    type: 'PMO',
     status: 'paused',
     version: 'v1.5.0',
-    purpose: 'Manage HR inquiries and employee support',
-    capabilities: ['Policy Information', 'Leave Management', 'Employee Onboarding', 'Benefits Administration'],
+    purpose: 'Standardize delivery, ensure governance, and provide portfolio-level reporting and insights.',
+    capabilities: [
+      'Portfolio & Program Reporting',
+      'RAID & Change Control Governance',
+      'Resource & Capacity Planning',
+      'Budget Tracking & Earned Value',
+      'Methodology Governance (Agile/PRINCE2)',
+      'OKR/KPI Frameworks'
+    ],
     lastDeployed: '2025-03-08',
     performance: { 
       uptime: '98.2%', 
