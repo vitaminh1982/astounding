@@ -89,7 +89,7 @@ export default function OnboardingPage({ onNavigate }: OnboardingPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <OnboardingHeader 
@@ -111,7 +111,10 @@ export default function OnboardingPage({ onNavigate }: OnboardingPageProps) {
           
           {/* Main content area */}
           <div className="lg:col-span-9">
-            <div ref={contentRef} className="bg-white rounded-xl shadow-sm p-6 md:p-8">
+            <div 
+              ref={contentRef} 
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-6 md:p-8 transition-colors"
+            >
               {renderActiveSection()}
             </div>
           </div>
