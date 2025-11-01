@@ -138,19 +138,6 @@ export default function AgentsGrid() {
           t('agents.skills.bestPractices'),
         ],
       },
-      {
-        id: 11,
-        name: t('agents.list.pmoAnalyst.name'),
-        status: 'active',
-        icon: Compass,
-        metrics: t('agents.list.pmoAnalyst.metrics'),
-        skills: [
-          t('agents.skills.portfolioHealth'),
-          t('agents.skills.governance'),
-          t('agents.skills.reporting'),
-          t('agents.skills.resourcePlanning'),
-        ],
-      },
  
   ];
 
