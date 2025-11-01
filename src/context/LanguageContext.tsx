@@ -361,7 +361,7 @@ const translations = {
 
   // Business Analyst (BA)
   requirements: 'Requirements Elicitation',
-  processModeling: 'Process Modeling (BPMN)',
+  processModeling: 'Process Modeling',
   userStories: 'User Stories',
   acceptanceCriteria: 'Acceptance Criteria',
   gapAnalysis: 'Gap Analysis',
@@ -1254,7 +1254,7 @@ saveError: 'Failed to save configuration',
 
   // Analyste métier (BA)
   requirements: 'Recueil des exigences',
-  processModeling: 'Modélisation des processus (BPMN)',
+  processModeling: 'Modélisation des processus',
   userStories: 'User stories',
   acceptanceCriteria: 'Critères d\'acceptation',
   gapAnalysis: 'Analyse des écarts',
