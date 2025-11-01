@@ -23,67 +23,67 @@ export default function AgentsGrid() {
     },
     {
       id: 2,
-      name: t('agents.list.salesAssistant.name'),
+      name: t('agents.list.projectManager.name'),          // "AI Project Manager"
       status: 'active',
-      icon: Users,
-      metrics: t('agents.list.salesAssistant.metrics'),
+      icon: ClipboardCheck,
+      metrics: t('agents.list.projectManager.metrics'),    // e.g., "23 milestones delivered"
       skills: [
-        t('agents.skills.sales'),
-        t('agents.skills.quotes'),
-        t('agents.skills.qualification'),
-        t('agents.skills.crm')
+        t('agents.skills.roadmapping'),
+        t('agents.skills.riskManagement'),
+        t('agents.skills.stakeholderComms'),
+        t('agents.skills.agileScrum'),
       ],
     },
     {
       id: 3,
-      name: t('agents.list.ecommerceAssistant.name'),
+      name: t('agents.list.businessAnalyst.name'),         // "AI Business Analyst"
       status: 'active',
-      icon: ShoppingCart,
-      metrics: t('agents.list.ecommerceAssistant.metrics'),
+      icon: BarChart,
+      metrics: t('agents.list.businessAnalyst.metrics'),   // e.g., "68 requirements clarified"
       skills: [
-        t('agents.skills.ecommerce'),
-        t('agents.skills.recommendations'),
-        t('agents.skills.stock'),
-        t('agents.skills.promotions')
+        t('agents.skills.requirements'),
+        t('agents.skills.processModeling'),
+        t('agents.skills.userStories'),
+        t('agents.skills.acceptanceCriteria'),
       ],
     },
     {
       id: 4,
-      name: t('agents.list.billingService.name'),
+      name: t('agents.list.dataAnalyst.name'),             // "AI Data Analyst"
       status: 'active',
-      icon: CreditCard,
-      metrics: t('agents.list.billingService.metrics'),
+      icon: ChartLine,
+      metrics: t('agents.list.dataAnalyst.metrics'),       // e.g., "34 insights generated"
       skills: [
-        t('agents.skills.billing'),
-        t('agents.skills.payments'),
-        t('agents.skills.refunds'),
-        t('agents.skills.disputes')
+        t('agents.skills.dataPrep'),
+        t('agents.skills.sql'),
+        t('agents.skills.dashboarding'),
+        t('agents.skills.anomalyDetection'),
       ],
     },
     {
       id: 5,
-      name: t('agents.list.technicalSupport.name'),
+      name: t('agents.list.industryExpert.name'),          // "AI Industry Expert (Finance & Payments)"
       status: 'active',
-      icon: HelpCircle,
-      metrics: t('agents.list.technicalSupport.metrics'),
+      icon: Shield,
+      metrics: t('agents.list.industryExpert.metrics'),    // e.g., "26 compliance advisories"
       skills: [
-        t('agents.skills.troubleshooting'),
-        t('agents.skills.documentation'),
-        t('agents.skills.maintenance')
+        t('agents.skills.compliance'),
+        t('agents.skills.payments'),
+        t('agents.skills.riskControls'),
+        t('agents.skills.bestPractices'),
       ],
     },
-          {
+    {
       id: 6,
-      name: t('agents.list.hrAssistant.name'),
-      status: 'inactive',
-      icon: Brain,
-      metrics: t('agents.list.hrAssistant.metrics'),
+      name: t('agents.list.pmoAnalyst.name'),              // "AI PMO Analyst"
+      status: 'active',
+      icon: Compass,
+      metrics: t('agents.list.pmoAnalyst.metrics'),        // e.g., "9 portfolio reports published"
       skills: [
-        t('agents.skills.hr'),
-        t('agents.skills.leave'),
-        t('agents.skills.procedures'),
-        t('agents.skills.training'),
-        t('agents.skills.timeTracking')
+        t('agents.skills.portfolioHealth'),
+        t('agents.skills.governance'),
+        t('agents.skills.reporting'),
+        t('agents.skills.resourcePlanning'),
       ],
     },
  
