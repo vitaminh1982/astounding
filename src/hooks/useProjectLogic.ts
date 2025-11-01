@@ -62,7 +62,7 @@ export const useProjectLogic = (
   const [messages, setMessages] = useState<Message[]>(() => [
     {
       id: `sys-${Date.now()}`,
-      content: `Welcome to your AI Project Workspace! 🚀\n\nYour specialized team of 5 AI agents is ready to assist:\n• Seiya (PM) - Project management & timelines\n• Ikki (BA) - Requirements & user stories\n• Shiryu (DA) - Data analysis & insights\n• Hyôga (SC) - Strategy & market analysis\n• Shun (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.`,
+      content: `Welcome to your AI Project Workspace! 🚀\n\nYour specialized team of 5 AI agents is ready to assist:\n• Seiya (PM) - Project management & timelines\n• Ikki (BA) - Requirements & user stories\n• Shiryu (DA) - Data analysis & insights\n• Hyôga (IE) - Strategy & market analysis\n• Shun (PMO) - Governance & compliance\n\nUse @mentions to direct questions to specific agents, or ask general questions for collaborative responses.`,
       sender: 'agent',
       agentId: 'collaborative',
       timestamp: new Date(),
