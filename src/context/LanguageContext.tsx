@@ -1197,7 +1197,57 @@ saveError: 'Failed to save configuration',
         protection: 'Protection',
         monitoring: 'Surveillance',
         contracts: 'Contrats',
-        legalAdvice: 'Conseil juridique'
+        legalAdvice: 'Conseil juridique',
+          // ajoutées pour les agents de conseil
+  // Chef de projet (PM)
+  roadmapping: 'Feuille de route',
+  riskManagement: 'Gestion des risques',
+  stakeholderComms: 'Communication avec les parties prenantes',
+  agileScrum: 'Agile & Scrum',
+  sprintPlanning: 'Planification des sprints',
+  backlogManagement: 'Gestion du backlog',
+  changeManagement: 'Gestion du changement',
+  kpisOkrs: 'Indicateurs (KPI) & OKR',
+  vendorManagement: 'Gestion des fournisseurs',
+  slaManagement: 'Gestion des SLA',
+
+  // Analyste métier (BA)
+  requirements: 'Recueil des exigences',
+  processModeling: 'Modélisation des processus (BPMN)',
+  userStories: 'User stories',
+  acceptanceCriteria: 'Critères d\'acceptation',
+  gapAnalysis: 'Analyse des écarts',
+  stakeholderMapping: 'Cartographie des parties prenantes',
+  uat: 'Tests d\'acceptation utilisateur (UAT)',
+  testManagement: 'Gestion des tests',
+
+  // Analyste données (DA)
+  dataPrep: 'Préparation des données',
+  sql: 'SQL',
+  dataVisualization: 'Visualisation des données',
+  dashboarding: 'Tableaux de bord',
+  anomalyDetection: 'Détection d\'anomalies',
+  forecasting: 'Prévision',
+  experimentation: 'Expérimentation (A/B)',
+  dataQuality: 'Qualité des données',
+  dataGovernance: 'Gouvernance des données',
+  dataLineage: 'Traçabilité des données',
+
+  // Expert sectoriel (Finance & Paiements)
+  regulatoryInsights: 'Veille réglementaire',
+  riskControls: 'Contrôles des risques',
+  bestPractices: 'Bonnes pratiques sectorielles',
+  reconciliation: 'Rapprochement des paiements',
+  fraudPrevention: 'Prévention de la fraude',
+  kycAml: 'KYC / LBC-FT',
+
+  // Analyste PMO
+  portfolioHealth: 'Santé du portefeuille',
+  governance: 'Gouvernance',
+  reporting: 'Reporting',
+  resourcePlanning: 'Planification des ressources',
+  benefitsRealization: 'Réalisation des bénéfices',
+  capacityPlanning: 'Planification de capacité'
       },
       status: {
         active: 'Actif',
