@@ -1095,27 +1095,7 @@ saveError: 'Failed to save configuration',
           name: 'Assistant Juridique',
           metrics: '67 consultations effectuées',
           description: 'Fournit des informations juridiques de base et aide à la compréhension des documents légaux.'
-        },
-          projectManager: {
-    name: 'Chef de projet IA',
-    metrics: '23 jalons livrés'
-  },
-  businessAnalyst: {
-    name: 'Analyste métier IA',
-    metrics: '68 exigences clarifiées'
-  },
-  dataAnalyst: {
-    name: 'Analyste données IA',
-    metrics: '34 analyses produites'
-  },
-  industryExpert: {
-    name: 'Expert IA (Finance & Paiements)',
-    metrics: '26 avis de conformité'
-  },
-  pmoAnalyst: {
-    name: 'Analyste PMO IA',
-    metrics: '9 rapports de portefeuille publiés'
-  }
+        }
       },
       skills: {
         support: 'Support',
