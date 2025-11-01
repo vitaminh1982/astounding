@@ -64,7 +64,7 @@ export default function AgentsGrid() {
         id: 5,
         name: t('agents.list.pmoAnalyst.name'),
         status: 'active',
-        icon: Compass,
+        icon: ClipboardCheck,
         metrics: t('agents.list.pmoAnalyst.metrics'),
         skills: [
           t('agents.skills.portfolioHealth'),
