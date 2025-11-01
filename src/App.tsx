@@ -19,6 +19,7 @@ const SettingsPage = lazy(() => import('./pages/SettingsPage'));
 const DocumentsPage = lazy(() => import('./pages/DocumentsPage'));
 const WorkflowsPage = lazy(() => import('./pages/WorkflowsPage'));
 const IntegrationsPage = lazy(() => import('./pages/IntegrationsPage'));
+const NewIntegrationsPage = lazy(() => import('./pages/NewIntegrationsPage'));
 const PromptsPage = lazy(() => import('./pages/PromptsPage'));
 const UsagePage = lazy(() => import('./pages/UsagePage'));
 const GovernancePage = lazy(() => import('./pages/GovernancePage'));
@@ -132,7 +133,7 @@ const PAGE_CONFIG: Record<Page, PageConfig> = {
   conversations: { component: ConversationsPage },
   clients: { component: ClientsPage },
   documents: { component: DocumentsPage },
-  integrations: { component: IntegrationsPage },
+  integrations: { component: NewIntegrationsPage },
   usage: { component: UsagePage },
   orchestration: { component: OrchestrationPage, requiresNavigation: true },
   'agent-management': { component: AgentManagementPage, requiresNavigation: true },
