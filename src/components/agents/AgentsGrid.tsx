@@ -21,6 +21,32 @@ export default function AgentsGrid() {
         t('agents.skills.problemSolving')
       ],
     },
+          {
+        id: 2,
+        name: t('agents.list.projectManager.name'),
+        status: 'active',
+        icon: ClipboardCheck,
+        metrics: t('agents.list.projectManager.metrics'),
+        skills: [
+          t('agents.skills.roadmapping'),
+          t('agents.skills.riskManagement'),
+          t('agents.skills.stakeholderComms'),
+          t('agents.skills.agileScrum'),
+        ],
+      },
+      {
+        id: 3,
+        name: t('agents.list.businessAnalyst.name'),
+        status: 'active',
+        icon: BarChart,
+        metrics: t('agents.list.businessAnalyst.metrics'),
+        skills: [
+          t('agents.skills.requirements'),
+          t('agents.skills.processModeling'),
+          t('agents.skills.userStories'),
+          t('agents.skills.acceptanceCriteria'),
+        ],
+      },
     {
       id: 7,
       name: t('agents.list.salesAssistant.name'),
@@ -86,32 +112,7 @@ export default function AgentsGrid() {
         t('agents.skills.timeTracking')
       ],
     },
-      {
-        id: 2,
-        name: t('agents.list.projectManager.name'),
-        status: 'active',
-        icon: ClipboardCheck,
-        metrics: t('agents.list.projectManager.metrics'),
-        skills: [
-          t('agents.skills.roadmapping'),
-          t('agents.skills.riskManagement'),
-          t('agents.skills.stakeholderComms'),
-          t('agents.skills.agileScrum'),
-        ],
-      },
-      {
-        id: 3,
-        name: t('agents.list.businessAnalyst.name'),
-        status: 'active',
-        icon: BarChart,
-        metrics: t('agents.list.businessAnalyst.metrics'),
-        skills: [
-          t('agents.skills.requirements'),
-          t('agents.skills.processModeling'),
-          t('agents.skills.userStories'),
-          t('agents.skills.acceptanceCriteria'),
-        ],
-      },
+
 
  
   ];
