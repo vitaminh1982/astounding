@@ -216,7 +216,7 @@ const translations = {
           metrics: '156 conversations today'
         },
         salesAssistant: {
-          name: 'Sales Assistant',
+          name: 'Sales fefe Assistant',
           metrics: '145 qualified leads'
         },
         hrAssistant: {
