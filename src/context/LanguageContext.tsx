@@ -1131,25 +1131,25 @@ saveError: 'Failed to save configuration',
           name: 'Chatbot Proactif',
           metrics: '56 conversations initiées'
         },
-          projectManager: {
-    name: 'AI Project Manager',
-    metrics: '23 milestones delivered'
+  projectManager: {
+    name: 'Chef de projet IA',
+    metrics: '23 jalons livrés'
   },
   businessAnalyst: {
-    name: 'AI Business Analyst',
-    metrics: '68 requirements clarified'
+    name: 'Analyste métier IA',
+    metrics: '68 exigences clarifiées'
   },
   dataAnalyst: {
-    name: 'AI Data Analyst',
-    metrics: '34 insights generated'
+    name: 'Analyste données IA',
+    metrics: '34 analyses produites'
   },
   industryExpert: {
-    name: 'AI Industry Expert (Finance & Payments)',
-    metrics: '26 compliance advisories'
+    name: 'Expert IA (Finance & Paiements)',
+    metrics: '26 avis de conformité'
   },
   pmoAnalyst: {
-    name: 'AI PMO Analyst',
-    metrics: '9 portfolio reports published'
+    name: 'Analyste PMO IA',
+    metrics: '9 rapports de portefeuille publiés'
   },
         
         gdpr: {
