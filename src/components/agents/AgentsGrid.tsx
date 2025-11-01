@@ -125,19 +125,7 @@ export default function AgentsGrid() {
           t('agents.skills.anomalyDetection'),
         ],
       },
-      {
-        id: 10,
-        name: t('agents.list.industryExpert.name'),
-        status: 'active',
-        icon: Shield,
-        metrics: t('agents.list.industryExpert.metrics'),
-        skills: [
-          t('agents.skills.compliance'),
-          t('agents.skills.payments'),
-          t('agents.skills.riskControls'),
-          t('agents.skills.bestPractices'),
-        ],
-      },
+
  
   ];
 
