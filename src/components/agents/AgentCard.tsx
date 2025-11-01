@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Play, Pause } from 'lucide-react';
+import { Play, Pause, Stop } from 'lucide-react';
 import { AgentType } from '../../types/agent';
 import AIAgentInterface from './AIAgentInterface';
 import { AgentConfig } from '../../types/agent-config';
