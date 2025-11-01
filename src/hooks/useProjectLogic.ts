@@ -93,7 +93,7 @@ export const useProjectLogic = (
         'I\'ve identified 3 data patterns that warrant investigation. Shall I deep-dive into each?',
         'Based on historical trends, I project a 15% improvement if we implement this change. Here\'s the data:',
       ],
-      'Strategy Consultant': [
+      'Industry Expert': [
         'Market trend analysis indicates a significant shift towards digital transformation in this sector.',
         'From a strategic standpoint, I recommend pursuing a pilot program in this segment first.',
         'Competitive landscape assessment: 2 key players are vulnerable. Here\'s our opportunity window.',
