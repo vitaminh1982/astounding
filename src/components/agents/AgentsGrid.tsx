@@ -137,20 +137,7 @@ export default function AgentsGrid() {
         t('agents.skills.maintenance')
       ],
     },
-          {
-      id: 11,
-      name: t('agents.list.hrAssistant.name'),
-      status: 'inactive',
-      icon: Brain,
-      metrics: t('agents.list.hrAssistant.metrics'),
-      skills: [
-        t('agents.skills.hr'),
-        t('agents.skills.leave'),
-        t('agents.skills.procedures'),
-        t('agents.skills.training'),
-        t('agents.skills.timeTracking')
-      ],
-    },
+
     
 
 
