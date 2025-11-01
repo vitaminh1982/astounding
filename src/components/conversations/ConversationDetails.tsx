@@ -28,14 +28,14 @@ export default function ConversationDetails({ conversation }) {
 
   if (!conversation) {
     return (
-      <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400">
-        Select a discussion to start
+      <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 transition-colors">
+        <div className="text-center">
+          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">No Conversation Selected</h3>
+          <p className="transition-colors">Select a discussion to start</p>
+        </div>
       </div>
     );
   }
-
-  // Removed `displayText` and `simulateTyping` as they were not fully implemented
-  // and not directly related to the core message sending functionality.
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -173,35 +173,37 @@ export default function ConversationDetails({ conversation }) {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900"> {/* Dark mode background */}
+    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
       {/* Header */}
-      <div className="p-4 border-b bg-white shadow-sm dark:bg-gray-800 dark:border-gray-700"> {/* Dark mode header */}
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-900 transition-colors">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full flex items-center justify-center text-white">
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-teal-600 rounded-full flex items-center justify-center text-white transition-colors">
                 {conversation.client.avatar ? (
                   <img
                     src={conversation.client.avatar}
                     alt={conversation.client.name}
                     className="w-full h-full rounded-full object-cover"
                   />
-                ) : conversation.client.initials}
+                ) : (
+                  <span className="transition-colors">{conversation.client.initials}</span>
+                )}
               </div>
               {/* Status indicator */}
-              <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-gray-800
-                ${conversation.status === 'active' ? 'bg-green-500' : 'bg-gray-400 dark:bg-gray-500'}`}
+              <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-gray-800 transition-colors
+                ${conversation.status === 'active' ? 'bg-green-500 dark:bg-green-400' : 'bg-gray-400 dark:bg-gray-500'}`}
               />
             </div>
             <div>
               {/* Client name and email */}
-              <h2 className="font-medium dark:text-gray-200">{conversation.client.name}</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400">{conversation.client.email}</p>
+              <h2 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{conversation.client.name}</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{conversation.client.email}</p>
 
               {/* Show webhook indicator for live conversations */}
               {typeof conversation.id === 'string' && conversation.id.startsWith('session-') && (
-                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                  <span className="w-1 h-1 bg-green-500 rounded-full mr-1.5 animate-pulse"></span>
+                <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-300 transition-colors">
+                  <span className="w-1 h-1 bg-green-500 dark:bg-green-400 rounded-full mr-1.5 animate-pulse"></span>
                   Live Conversation
                 </span>
               )}
@@ -210,9 +212,10 @@ export default function ConversationDetails({ conversation }) {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="p-2 hover:bg-gray-100 rounded-full dark:text-gray-400 dark:hover:bg-gray-700"
+            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            aria-label="More options"
           >
-            <MoreVertical className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+            <MoreVertical className="w-5 h-5" />
           </motion.button>
         </div>
       </div>
@@ -231,25 +234,25 @@ export default function ConversationDetails({ conversation }) {
               }`}
             >
               {msg.sender !== 'agent' && (
-                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-700">
-                  <User className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 transition-colors">
+                  <User className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
                 </div>
               )}
               <div
-                className={`max-w-[70%] p-3 rounded-lg ${
+                className={`max-w-[70%] p-3 rounded-lg transition-colors ${
                   msg.sender === 'agent'
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-white shadow-sm dark:bg-gray-800 dark:shadow-md'
+                    ? 'bg-indigo-600 dark:bg-teal-600 text-white shadow-sm dark:shadow-gray-900'
+                    : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700'
                 }`}
               >
-                <div className="whitespace-pre-wrap dark:text-gray-200">{msg.content}</div>
-                <div className="text-xs mt-1 opacity-70 dark:opacity-60">
+                <div className="whitespace-pre-wrap">{msg.content}</div>
+                <div className="text-xs mt-1 opacity-70 transition-opacity">
                   {formatTime(msg.time)}
                 </div>
               </div>
               {msg.sender === 'agent' && (
-                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-indigo-700">
-                  <Bot className="w-4 h-4 text-indigo-600 dark:text-indigo-300" />
+                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-teal-900/30 transition-colors">
+                  <Bot className="w-4 h-4 text-indigo-600 dark:text-teal-400 transition-colors" />
                 </div>
               )}
             </motion.div>
@@ -262,18 +265,18 @@ export default function ConversationDetails({ conversation }) {
               animate={{ opacity: 1, y: 0 }}
               className="flex gap-3 justify-end"
             >
-              <div className="max-w-[70%] p-3 rounded-lg bg-indigo-100 dark:bg-indigo-900">
+              <div className="max-w-[70%] p-3 rounded-lg bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 transition-colors">
                 <div className="flex items-center">
-                  <span className="text-indigo-600 dark:text-indigo-300 text-sm mr-2">Typing</span>
+                  <span className="text-indigo-600 dark:text-teal-300 text-sm mr-2 transition-colors">Typing</span>
                   <span className="flex space-x-1">
-                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-bounce" style={{ animationDelay: '200ms' }}></span>
-                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400 animate-bounce" style={{ animationDelay: '400ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '200ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '400ms' }}></span>
                   </span>
                 </div>
               </div>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-indigo-700">
-                <Bot className="w-4 h-4 text-indigo-600 dark:text-indigo-300" />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-teal-900/30 transition-colors">
+                <Bot className="w-4 h-4 text-indigo-600 dark:text-teal-400 transition-colors" />
               </div>
             </motion.div>
           )}
@@ -282,32 +285,35 @@ export default function ConversationDetails({ conversation }) {
       </div>
 
       {/* Input */}
-      <div className="p-4 bg-white border-t dark:bg-gray-800 dark:border-gray-700"> {/* Dark mode input area */}
+      <div className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900 transition-colors">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <div className="flex gap-2">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              className="p-2 hover:bg-gray-100 rounded-full dark:hover:bg-gray-700 dark:text-gray-400"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              aria-label="Attach file"
             >
-              <Paperclip className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              <Paperclip className="w-5 h-5" />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              className="p-2 hover:bg-gray-100 rounded-full dark:hover:bg-gray-700 dark:text-gray-400"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              aria-label="Add image"
             >
-              <Image className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              <Image className="w-5 h-5" />
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              className="p-2 hover:bg-gray-100 rounded-full dark:hover:bg-gray-700 dark:text-gray-400"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              aria-label="Add emoji"
             >
-              <Smile className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+              <Smile className="w-5 h-5" />
             </motion.button>
           </div>
 
@@ -316,8 +322,9 @@ export default function ConversationDetails({ conversation }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-indigo-600 dark:text-gray-200"
+            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent shadow-sm dark:shadow-gray-900 transition-colors"
             disabled={isSending || isTyping}
+            aria-label="Type your message"
           />
 
           <motion.button
@@ -325,14 +332,13 @@ export default function ConversationDetails({ conversation }) {
             whileTap={message.trim() && !isSending && !isTyping ? { scale: 0.95 } : {}}
             type="submit"
             disabled={!message.trim() || isSending || isTyping}
-            className={`p-2 rounded-full transition-colors
+            className={`p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm
               ${message.trim() && !isSending && !isTyping
-                ? 'bg-indigo-600 hover:bg-indigo-700 text-white'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                ? 'bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white focus:ring-indigo-500 dark:focus:ring-teal-500 dark:focus:ring-offset-gray-800 dark:shadow-gray-900'
+                : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed focus:ring-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800'
               }
-              dark:disabled:bg-gray-700 dark:disabled:text-gray-500
-              ${message.trim() && !isSending && !isTyping ? '' : 'dark:bg-gray-700 dark:text-gray-400'}
             `}
+            aria-label={isSending ? "Sending message" : "Send message"}
           >
             {isSending ?
               <Loader className="w-5 h-5 animate-spin" /> :
