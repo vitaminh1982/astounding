@@ -325,7 +325,57 @@ const translations = {
         protection: 'Protection',
         monitoring: 'Monitoring',
         contracts: 'Contracts',
-        legalAdvice: 'Legal Advice'
+        legalAdvice: 'Legal Advice',
+          // added for consulting agents
+  // Project Manager (PM)
+  roadmapping: 'Roadmapping',
+  riskManagement: 'Risk Management',
+  stakeholderComms: 'Stakeholder Communication',
+  agileScrum: 'Agile & Scrum',
+  sprintPlanning: 'Sprint Planning',
+  backlogManagement: 'Backlog Management',
+  changeManagement: 'Change Management',
+  kpisOkrs: 'KPIs & OKRs',
+  vendorManagement: 'Vendor Management',
+  slaManagement: 'SLA Management',
+
+  // Business Analyst (BA)
+  requirements: 'Requirements Elicitation',
+  processModeling: 'Process Modeling (BPMN)',
+  userStories: 'User Stories',
+  acceptanceCriteria: 'Acceptance Criteria',
+  gapAnalysis: 'Gap Analysis',
+  stakeholderMapping: 'Stakeholder Mapping',
+  uat: 'User Acceptance Testing (UAT)',
+  testManagement: 'Test Management',
+
+  // Data Analyst (DA)
+  dataPrep: 'Data Preparation',
+  sql: 'SQL',
+  dataVisualization: 'Data Visualization',
+  dashboarding: 'Dashboarding',
+  anomalyDetection: 'Anomaly Detection',
+  forecasting: 'Forecasting',
+  experimentation: 'Experimentation (A/B)',
+  dataQuality: 'Data Quality',
+  dataGovernance: 'Data Governance',
+  dataLineage: 'Data Lineage',
+
+  // Industry Expert (Finance & Payments)
+  regulatoryInsights: 'Regulatory Insights',
+  riskControls: 'Risk Controls',
+  bestPractices: 'Industry Best Practices',
+  reconciliation: 'Payment Reconciliation',
+  fraudPrevention: 'Fraud Prevention',
+  kycAml: 'KYC/AML',
+
+  // PMO Analyst
+  portfolioHealth: 'Portfolio Health',
+  governance: 'Governance',
+  reporting: 'Reporting',
+  resourcePlanning: 'Resource Planning',
+  benefitsRealization: 'Benefits Realization',
+  capacityPlanning: 'Capacity Planning'
       },
       status: {
         active: 'Active',
