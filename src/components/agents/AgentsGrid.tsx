@@ -89,7 +89,7 @@ export default function AgentsGrid() {
     {
       id: 7,
       name: t('agents.list.salesAssistant.name'),
-      status: 'active',
+      status: 'suspended'',
       icon: Users,
       metrics: t('agents.list.salesAssistant.metrics'),
       skills: [
@@ -102,7 +102,7 @@ export default function AgentsGrid() {
     {
       id: 8,
       name: t('agents.list.ecommerceAssistant.name'),
-      status: 'active',
+      status: 'suspended',
       icon: ShoppingCart,
       metrics: t('agents.list.ecommerceAssistant.metrics'),
       skills: [
@@ -115,7 +115,7 @@ export default function AgentsGrid() {
     {
       id: 9,
       name: t('agents.list.billingService.name'),
-      status: 'active',
+      status: 'suspended',
       icon: CreditCard,
       metrics: t('agents.list.billingService.metrics'),
       skills: [
@@ -128,7 +128,7 @@ export default function AgentsGrid() {
     {
       id: 10,
       name: t('agents.list.technicalSupport.name'),
-      status: 'active',
+      status: 'suspended',
       icon: HelpCircle,
       metrics: t('agents.list.technicalSupport.metrics'),
       skills: [
