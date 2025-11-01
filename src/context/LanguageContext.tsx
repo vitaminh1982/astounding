@@ -1164,7 +1164,7 @@ saveError: 'Failed to save configuration',
     metrics: '34 analyses produites'
   },
   industryExpert: {
-    name: 'Expert Industrie',
+    name: 'Expert Finance',
     metrics: '26 avis de conformité'
   },
   pmoAnalyst: {
