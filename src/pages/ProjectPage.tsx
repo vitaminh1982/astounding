@@ -109,7 +109,7 @@ const PROJECT_AGENTS: Agent[] = [
   {
     id: 'sc-001',
     name: 'Hyôga',
-    role: 'Strategy Consultant',
+    role: 'Industry Expert',
     status: 'active',
     avatar: '🎯',
     description: 'Market analysis, strategic recommendations',
