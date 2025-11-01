@@ -4,4 +4,9 @@ export const availableAgents = [
   { id: 'assistant-technique', name: 'Technical Assistant', color: 'bg-purple-100 text-purple-800' },
   { id: 'service-facturation', name: 'Billing Service', color: 'bg-yellow-100 text-yellow-800' },
   { id: 'assistant-ecommerce', name: 'E-commerce Assistant', color: 'bg-pink-100 text-pink-800' },
+    { id: 'chef-de-projet-ia',  name: 'AI Project Manager',                    color: 'bg-indigo-100 text-indigo-800' },
+  { id: 'analyste-metier-ia', name: 'AI Business Analyst',                   color: 'bg-emerald-100 text-emerald-800' },
+  { id: 'analyste-donnees-ia',name: 'AI Data Analyst',                       color: 'bg-cyan-100 text-cyan-800' },
+  { id: 'expert-metier-ia',   name: 'AI Industry Expert (Finance & Payments)',color: 'bg-amber-100 text-amber-800' },
+  { id: 'analyste-pmo-ia',    name: 'AI PMO Analyst',                         color: 'bg-rose-100 text-rose-800' },
 ];
