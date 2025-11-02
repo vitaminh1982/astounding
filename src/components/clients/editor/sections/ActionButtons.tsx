@@ -19,9 +19,9 @@ export default function ActionButtons({
   onArchive,
   onDelete,
   onReset,
-  isSaving = true,
-  isArchiving = true,
-  isDeleting = true
+  isSaving = false,
+  isArchiving = false,
+  isDeleting = false
 }: ActionButtonsProps) {
   return (
     <div className="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200 dark:border-gray-700 transition-colors">
