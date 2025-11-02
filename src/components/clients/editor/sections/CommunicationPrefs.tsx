@@ -1,127 +1,418 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Client } from '../../../../types/client';
+import { Bell, Mail, MessageSquare, Phone, Globe, Clock, Gift, Newspaper, Check, Settings } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface CommunicationPrefsProps {
   client: Client;
-  onChange: () => void;
+  onChange: (updates: Partial<Client>) => void;
 }
+
+const CHANNEL_CONFIG = {
+  email: {
+    icon: Mail,
+    label: 'Email',
+    description: 'Receive communications via email',
+    color: 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30'
+  },
+  sms: {
+    icon: MessageSquare,
+    label: 'SMS',
+    description: 'Receive text messages on mobile phone',
+    color: 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30'
+  },
+  phone: {
+    icon: Phone,
+    label: 'Phone',
+    description: 'Receive calls for important communications',
+    color: 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/30'
+  }
+};
+
+const LANGUAGE_CONFIG = {
+  en: { label: 'English', flag: '🇺🇸' },
+  fr: { label: 'Français', flag: '🇫🇷' },
+  es: { label: 'Español', flag: '🇪🇸' },
+  de: { label: 'Deutsch', flag: '🇩🇪' },
+  it: { label: 'Italiano', flag: '🇮🇹' }
+};
+
+const FREQUENCY_CONFIG = {
+  daily: { 
+    label: 'Daily', 
+    description: 'Receive communications every day',
+    color: 'text-red-600 dark:text-red-400'
+  },
+  weekly: { 
+    label: 'Weekly', 
+    description: 'Receive communications once a week',
+    color: 'text-amber-600 dark:text-amber-400'
+  },
+  monthly: { 
+    label: 'Monthly', 
+    description: 'Receive communications once a month',
+    color: 'text-green-600 dark:text-green-400'
+  },
+  never: {
+    label: 'Never',
+    description: 'No regular communications',
+    color: 'text-gray-600 dark:text-gray-400'
+  }
+};
 
 export default function CommunicationPrefs({ client, onChange }: CommunicationPrefsProps) {
   const [preferences, setPreferences] = useState(client.preferences);
+  const [hasChanges, setHasChanges] = useState(false);
+
+  // Track changes
+  useEffect(() => {
+    const hasChanged = JSON.stringify(preferences) !== JSON.stringify(client.preferences);
+    setHasChanges(hasChanged);
+  }, [preferences, client.preferences]);
+
+  const updatePreferences = (updates: Partial<typeof preferences>) => {
+    const updatedPreferences = { ...preferences, ...updates };
+    setPreferences(updatedPreferences);
+    onChange({ preferences: updatedPreferences });
+  };
 
   const toggleChannel = (channel: 'email' | 'sms' | 'phone') => {
-    setPreferences(prev => ({
-      ...prev,
-      channels: prev.channels.includes(channel)
-        ? prev.channels.filter(c => c !== channel)
-        : [...prev.channels, channel]
-    }));
-    onChange();
+    const newChannels = preferences.channels.includes(channel)
+      ? preferences.channels.filter(c => c !== channel)
+      : [...preferences.channels, channel];
+    
+    updatePreferences({ channels: newChannels });
   };
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPreferences(prev => ({ 
-      ...prev, 
-      language: e.target.value 
-    }));
-    onChange();
+    updatePreferences({ language: e.target.value });
   };
 
   const handleFrequencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPreferences(prev => ({ 
-      ...prev, 
-      contactFrequency: e.target.value as any 
-    }));
-    onChange();
+    updatePreferences({ contactFrequency: e.target.value as any });
   };
 
   const handleNewsletterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPreferences(prev => ({ 
-      ...prev, 
-      newsletter: e.target.checked 
-    }));
-    onChange();
+    updatePreferences({ newsletter: e.target.checked });
   };
 
   const handleSpecialOffersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPreferences(prev => ({ 
-      ...prev, 
-      specialOffers: e.target.checked 
-    }));
-    onChange();
+    updatePreferences({ specialOffers: e.target.checked });
   };
 
   return (
-    <div className="space-y-4 sm:space-y-2 md:space-y-4">
-      <h3 className="font-semibold text-lg sm:text-sm md:text-lg">Communication Preferences</h3>
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="p-2 bg-blue-100 dark:bg-teal-900/30 border border-blue-200 dark:border-teal-800 rounded-lg transition-colors">
+            <Bell className="w-5 h-5 text-blue-600 dark:text-teal-400 transition-colors" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+              Communication Preferences
+            </h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+              Configure how and when to contact this client
+            </p>
+          </div>
+        </div>
+        
+        {hasChanges && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 text-xs rounded-full border border-amber-200 dark:border-amber-800 transition-colors"
+          >
+            Unsaved changes
+          </motion.div>
+        )}
+      </div>
       
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+      {/* Communication Channels */}
+      <div>
+        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2 transition-colors">
+          <Settings className="w-4 h-4" />
+          Preferred Channels ({preferences.channels.length} selected)
+        </h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {Object.entries(CHANNEL_CONFIG).map(([channelId, config]) => {
+            const isSelected = preferences.channels.includes(channelId as any);
+            const IconComponent = config.icon;
+            
+            return (
+              <motion.div
+                key={channelId}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                  isSelected
+                    ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
+                    : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600'
+                } shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800`}
+                onClick={() => toggleChannel(channelId as any)}
+              >
+                <label className="cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={isSelected}
+                    onChange={() => toggleChannel(channelId as any)}
+                    className="sr-only"
+                  />
+                  
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className={`p-2 rounded-lg transition-colors ${config.color}`}>
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                        {config.label}
+                      </p>
+                    </div>
+                    {isSelected && (
+                      <div className="p-1 bg-indigo-600 dark:bg-teal-600 rounded-full">
+                        <Check className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+                    {config.description}
+                  </p>
+                </label>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Language and Frequency Settings */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Language Selection */}
         <div>
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Prefered channels</h4>
-          <div className="space-y-2">
-            {[
-              { id: 'email', label: 'Email' },
-              { id: 'sms', label: 'SMS' },
-              { id: 'phone', label: 'Phone' }
-            ].map(channel => (
-              <label key={channel.id} className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={preferences.channels.includes(channel.id as any)}
-                  onChange={() => toggleChannel(channel.id as any)}
-                  className="rounded border-gray-300 text-indigo-600"
-                />
-                <span>{channel.label}</span>
-              </label>
-            ))}
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 transition-colors">
+            <div className="flex items-center gap-2">
+              <Globe className="w-4 h-4" />
+              Preferred Language
+            </div>
+          </label>
+          
+          <div className="relative">
+            <select
+              value={preferences.language}
+              onChange={handleLanguageChange}
+              className="w-full pl-4 pr-10 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+            >
+              {Object.entries(LANGUAGE_CONFIG).map(([code, config]) => (
+                <option key={code} value={code}>
+                  {config.flag} {config.label}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+          
+          <div className="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
+            <p className="text-sm text-blue-700 dark:text-blue-300 transition-colors">
+              Selected: {LANGUAGE_CONFIG[preferences.language as keyof typeof LANGUAGE_CONFIG]?.flag} {LANGUAGE_CONFIG[preferences.language as keyof typeof LANGUAGE_CONFIG]?.label}
+            </p>
           </div>
         </div>
 
+        {/* Contact Frequency */}
         <div>
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Prefered Language</h4>
-          <select
-            value={preferences.language}
-            onChange={handleLanguageChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300"
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 transition-colors">
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              Contact Frequency
+            </div>
+          </label>
+          
+          <div className="relative">
+            <select
+              value={preferences.contactFrequency}
+              onChange={handleFrequencyChange}
+              className="w-full pl-4 pr-10 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+            >
+              {Object.entries(FREQUENCY_CONFIG).map(([freq, config]) => (
+                <option key={freq} value={freq}>
+                  {config.label}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <svg className="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </div>
+          </div>
+          
+          <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+            <p className={`text-sm font-medium transition-colors ${FREQUENCY_CONFIG[preferences.contactFrequency as keyof typeof FREQUENCY_CONFIG]?.color}`}>
+              {FREQUENCY_CONFIG[preferences.contactFrequency as keyof typeof FREQUENCY_CONFIG]?.description}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Marketing Preferences */}
+      <div>
+        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2 transition-colors">
+          <Gift className="w-4 h-4" />
+          Marketing Preferences
+        </h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Newsletter */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className={`p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+              preferences.newsletter
+                ? 'border-green-300 dark:border-green-600 bg-green-50 dark:bg-green-900/20'
+                : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600'
+            } shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800`}
+            onClick={() => handleNewsletterChange({ target: { checked: !preferences.newsletter } } as any)}
           >
-            <option value="fr">French</option>
-            <option value="en">English</option>
-            <option value="es">Spanish</option>
-          </select>
+            <label className="cursor-pointer">
+              <input
+                type="checkbox"
+                checked={preferences.newsletter}
+                onChange={handleNewsletterChange}
+                className="sr-only"
+              />
+              
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg transition-colors">
+                  <Newspaper className="w-5 h-5 text-blue-600 dark:text-blue-400 transition-colors" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                    Newsletter Subscription
+                  </p>
+                </div>
+                {preferences.newsletter && (
+                  <div className="p-1 bg-green-600 dark:bg-green-500 rounded-full">
+                    <Check className="w-3 h-3 text-white" />
+                  </div>
+                )}
+              </div>
+              
+              <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+                Receive our regular newsletter with updates and insights
+              </p>
+            </label>
+          </motion.div>
+
+          {/* Special Offers */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className={`p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+              preferences.specialOffers
+                ? 'border-purple-300 dark:border-purple-600 bg-purple-50 dark:bg-purple-900/20'
+                : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600'
+            } shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800`}
+            onClick={() => handleSpecialOffersChange({ target: { checked: !preferences.specialOffers } } as any)}
+          >
+            <label className="cursor-pointer">
+              <input
+                type="checkbox"
+                checked={preferences.specialOffers}
+                onChange={handleSpecialOffersChange}
+                className="sr-only"
+              />
+              
+              <div className="flex items-center gap-3 mb-2">
+                <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg transition-colors">
+                  <Gift className="w-5 h-5 text-purple-600 dark:text-purple-400 transition-colors" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                    Special Offers
+                  </p>
+                </div>
+                {preferences.specialOffers && (
+                  <div className="p-1 bg-purple-600 dark:bg-purple-500 rounded-full">
+                    <Check className="w-3 h-3 text-white" />
+                  </div>
+                )}
+              </div>
+              
+              <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+                Get notified about exclusive offers and promotions
+              </p>
+            </label>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="p-4 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+        <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-3 transition-colors">
+          Preferences Summary
+        </h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-gray-600 dark:text-gray-400 transition-colors">Active Channels:</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                {preferences.channels.length}
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-gray-600 dark:text-gray-400 transition-colors">Language:</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                {LANGUAGE_CONFIG[preferences.language as keyof typeof LANGUAGE_CONFIG]?.label}
+              </span>
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-gray-600 dark:text-gray-400 transition-colors">Contact Frequency:</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                {FREQUENCY_CONFIG[preferences.contactFrequency as keyof typeof FREQUENCY_CONFIG]?.label}
+              </span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-gray-600 dark:text-gray-400 transition-colors">Marketing Opt-ins:</span>
+              <span className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                {(preferences.newsletter ? 1 : 0) + (preferences.specialOffers ? 1 : 0)}/2
+              </span>
+            </div>
+          </div>
         </div>
 
-        <div>
-          <h4 className="text-sm font-medium text-gray-700 mb-2">Contact frequency</h4>
-          <select
-            value={preferences.contactFrequency}
-            onChange={handleFrequencyChange}
-            className="mt-1 p-2 block w-full rounded-md border-gray-300"
-          >
-            <option value="daily">Daily</option>
-            <option value="weekly">Weekly</option>
-            <option value="monthly">Monthly</option>
-          </select>
-        </div>
-
-        <div className="space-y-2">
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={preferences.newsletter}
-              onChange={handleNewsletterChange}
-              className="rounded border-gray-300 text-indigo-600"
-            />
-            <span>Newsletter</span>
-          </label>
-          <label className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              checked={preferences.specialOffers}
-              onChange={handleSpecialOffersChange}
-              className="rounded border-gray-300 text-indigo-600"
-            />
-            <span>Special offers</span>
-          </label>
+        {/* Channel Pills */}
+        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2 transition-colors">
+            Active communication channels:
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {preferences.channels.map((channel) => {
+              const config = CHANNEL_CONFIG[channel as keyof typeof CHANNEL_CONFIG];
+              const IconComponent = config.icon;
+              return (
+                <span
+                  key={channel}
+                  className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium border transition-colors ${config.color}`}
+                >
+                  <IconComponent className="w-3 h-3" />
+                  {config.label}
+                </span>
+              );
+            })}
+            {preferences.channels.length === 0 && (
+              <span className="text-xs text-gray-500 dark:text-gray-400 italic transition-colors">
+                No channels selected
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </div>
