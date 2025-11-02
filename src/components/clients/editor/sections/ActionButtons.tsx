@@ -46,7 +46,7 @@ export default function ActionButtons({
           )}
         </button>
 
-        {/* Reset Button (when enabled)
+        {/* Reset Button (when enabled) */}
         {onReset && (
           <button
             onClick={onReset}
@@ -57,7 +57,6 @@ export default function ActionButtons({
             <span className="text-sm sm:text-xs md:text-sm">Reset</span>
           </button>
         )}
-        */}
         
         {/* Archive Button */}
         {onArchive && (
