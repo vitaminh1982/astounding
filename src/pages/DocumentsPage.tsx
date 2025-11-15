@@ -9,6 +9,8 @@ import UploadModal from '../components/documents/UploadModal';
 import { useContext } from 'react';
 import { LanguageContext } from '../context/LanguageContext';
 
+const getAgentById = (id: string) => availableAgents.find(a => a.id === id);
+
 const initialDocuments: Document[] = [
   {
     id: '1',
@@ -16,7 +18,7 @@ const initialDocuments: Document[] = [
     type: 'pdf',
     size: '2.5 Mo',
     lastModified: '2023-06-15',
-    assignedAgents: ['assistant-commercial']
+    assignedAgents: [getAgentById('assistant-commercial')].filter(Boolean) as any[]
   },
   {
     id: '2',
@@ -24,7 +26,7 @@ const initialDocuments: Document[] = [
     type: 'docx',
     size: '1.8 Mo',
     lastModified: '2023-06-16',
-    assignedAgents: ['assistant-technique']
+    assignedAgents: [getAgentById('assistant-technique')].filter(Boolean) as any[]
   },
   {
     id: '3',
@@ -32,7 +34,7 @@ const initialDocuments: Document[] = [
     type: 'pdf',
     size: '3.2 Mo',
     lastModified: '2023-06-17',
-    assignedAgents: ['service-client-24-7']
+    assignedAgents: [getAgentById('service-client-24-7')].filter(Boolean) as any[]
   },
   {
     id: '4',
@@ -40,7 +42,7 @@ const initialDocuments: Document[] = [
     type: 'pdf',
     size: '5.1 Mo',
     lastModified: '2023-06-18',
-    assignedAgents: ['assistant-commercial', 'service-client-24-7']
+    assignedAgents: [getAgentById('assistant-commercial'), getAgentById('service-client-24-7')].filter(Boolean) as any[]
   },
   {
     id: '5',
@@ -48,7 +50,7 @@ const initialDocuments: Document[] = [
     type: 'docx',
     size: '1.5 Mo',
     lastModified: '2023-06-19',
-    assignedAgents: ['assistant-technique', 'service-client-24-7']
+    assignedAgents: [getAgentById('assistant-technique'), getAgentById('service-client-24-7')].filter(Boolean) as any[]
   },
   {
     id: '6',
@@ -56,7 +58,7 @@ const initialDocuments: Document[] = [
     type: 'pdf',
     size: '4.3 Mo',
     lastModified: '2023-06-20',
-    assignedAgents: ['assistant-technique', 'assistant-commercial']
+    assignedAgents: [getAgentById('assistant-technique'), getAgentById('assistant-commercial')].filter(Boolean) as any[]
   },
   {
     id: '7',
@@ -64,7 +66,7 @@ const initialDocuments: Document[] = [
     type: 'docx',
     size: '2.1 Mo',
     lastModified: '2023-06-21',
-    assignedAgents: ['service-client-24-7']
+    assignedAgents: [getAgentById('service-client-24-7')].filter(Boolean) as any[]
   }
 ];
 
@@ -80,7 +82,7 @@ const DocumentsPage: React.FC = () => {
     return documents.filter(doc =>
       doc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       doc.assignedAgents.some(agent =>
-        agent.name.toLowerCase().includes(searchQuery.toLowerCase())
+        agent?.name?.toLowerCase().includes(searchQuery.toLowerCase())
       )
     );
   }, [documents, searchQuery]);
@@ -94,12 +96,24 @@ const DocumentsPage: React.FC = () => {
     setDocuments(documents.map(doc => {
       if (doc.id === documentId) {
         const newAgent = availableAgents.find(agent => agent.id === agentId);
-        if (newAgent && !doc.assignedAgents.some(a => a.id === agentId)) {
+        if (newAgent && !doc.assignedAgents.some(a => a?.id === agentId)) {
           return {
             ...doc,
             assignedAgents: [...doc.assignedAgents, newAgent]
           };
         }
+      }
+      return doc;
+    }));
+  };
+
+  const handleUnassignAgent = (documentId: string, agentId: string) => {
+    setDocuments(documents.map(doc => {
+      if (doc.id === documentId) {
+        return {
+          ...doc,
+          assignedAgents: doc.assignedAgents.filter(agent => agent?.id !== agentId)
+        };
       }
       return doc;
     }));
@@ -181,6 +195,7 @@ const DocumentsPage: React.FC = () => {
                 documents={filteredDocuments}
                 onDelete={handleDelete}
                 onAssignAgent={handleAssignAgent}
+                onUnassignAgent={handleUnassignAgent}
               />
             </div>
           </div>
