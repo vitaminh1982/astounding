@@ -66,7 +66,7 @@ export const useChatLogic = (agentConfig: AgentConfig, tools: Tool[]) => {
         };
 
         const response = await axios.post(
-          'https://n8n-b2xt.onrender.com/webhook/invoke_agent',
+          'https://miranki.app.n8n.cloud/webhook/invoke_agent',
           payload,
           {
             headers: {
