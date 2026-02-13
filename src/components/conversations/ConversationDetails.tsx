@@ -77,7 +77,7 @@ export default function ConversationDetails({ conversation }) {
         try {
           // Send POST request to webhook
           const response = await axios.post(
-            'https://n8n-b2xt.onrender.com/webhook/scrape_lead',
+            'https://miranki.app.n8n.cloud/webhook/scrape_lead',
             {
               chatInput: userMessageContent,
               sessionId: conversation.sessionId,
