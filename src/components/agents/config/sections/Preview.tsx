@@ -97,7 +97,6 @@ export default function Preview({ agent }: PreviewProps) {
         agentConfig: agent
       };
 
-      
       const response = await axios.post(
         'https://miranki.app.n8n.cloud/webhook/invoke_agent',
         payload,
