@@ -448,7 +448,7 @@ const Sidebar = ({
       {/* Contact and demo buttons */}
       <div className="p-4 border-t border-gray-800 space-y-2">
         <button
-          onClick={() => handleExternalLink('https://n8n-b2xt.onrender.com/form/359cc987-10e4-47a2-93fd-376eb9c8b271')}
+          onClick={() => handleExternalLink('https://miranki.app.n8n.cloud/form/c9ebaa6b-9dfd-4473-91a8-e536c587a2e6')}
           className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-800 transition-colors ${!isExpanded && 'justify-center'}`}
           aria-label="Contact us"
         >
