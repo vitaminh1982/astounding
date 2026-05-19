@@ -1,0 +1,3 @@
+[submodule ".agent/skills/sendplex-design-system"]
+	path = .agent/skills/sendplex-design-system
+	url = https://github.com/oppiepi/sendplex-design-system.git
