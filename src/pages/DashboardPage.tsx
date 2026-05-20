@@ -197,7 +197,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <button
           onClick={onExport}
           disabled={isExporting}
-          className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm dark:shadow-gray-900"
+          className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm dark:shadow-gray-900"
           aria-label={exportLabel}
         >
           <Download className={`w-4 h-4 ${isExporting ? 'animate-bounce' : ''}`} />
@@ -249,7 +249,7 @@ const ReportsList: React.FC<ReportsListProps> = ({ reports }) => (
     {reports.map((report) => (
       <div
         key={report.id}
-        className="p-4 border border-gray-200 dark:border-gray-700 dark:bg-gray-700/50 rounded-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+        className="p-4 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         tabIndex={0}
         role="button"
         onKeyDown={(e) => {
