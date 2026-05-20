@@ -107,7 +107,7 @@ export default function RiskManagementPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
@@ -192,7 +192,7 @@ export default function RiskManagementPage() {
                   className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
-              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover: dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
                 <Filter className="w-4 h-4" />
                 <span>Filters</span>
               </button>
@@ -204,7 +204,7 @@ export default function RiskManagementPage() {
             {activeTab === 'assessment' && (
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                  <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+                  <thead className="dark:bg-gray-700 transition-colors">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Risk Name</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Category</th>
@@ -217,7 +217,7 @@ export default function RiskManagementPage() {
                   </thead>
                   <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                     {filteredRiskAssessments.map((risk) => (
-                      <tr key={risk.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <tr key={risk.id} className="hover: dark:hover:bg-gray-700 transition-colors">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{risk.name}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{risk.category}</td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -314,7 +314,7 @@ export default function RiskManagementPage() {
                         </button>
                       </div>
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors">
+                    <div className="mt-4 p-4 dark:bg-gray-700/50 rounded-lg transition-colors">
                       <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Description:</h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">{incident.description}</p>
                     </div>
@@ -348,7 +348,7 @@ export default function RiskManagementPage() {
                         </button>
                       </div>
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors">
+                    <div className="mt-4 p-4 dark:bg-gray-700/50 rounded-lg transition-colors">
                       <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Description:</h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">{strategy.description}</p>
                     </div>

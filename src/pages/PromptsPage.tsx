@@ -168,7 +168,7 @@ export default function PromptsPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div className="min-h-screen transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
 
         {/* Header */}
@@ -189,7 +189,7 @@ export default function PromptsPage() {
                 className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   viewType === 'card'
                     ? 'bg-indigo-600 dark:bg-teal-600 text-white shadow-inner'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700'
                 }`}
                 aria-label="Card View"
                 aria-pressed={viewType === 'card'}
@@ -202,7 +202,7 @@ export default function PromptsPage() {
                 className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 border-l border-gray-300 dark:border-gray-600 ${
                   viewType === 'list' 
                     ? 'bg-indigo-600 dark:bg-teal-600 text-white shadow-inner' 
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700'
                 }`}
                 aria-label="List View"
                 aria-pressed={viewType === 'list'}
@@ -218,7 +218,7 @@ export default function PromptsPage() {
         <div className="mb-4 lg:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="w-full px-4 py-3 text-left bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-all duration-200"
+            className="w-full px-4 py-3 text-left bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm hover: dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-all duration-200"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-categories-menu"
           >

@@ -75,7 +75,7 @@ export default function AuditCompliancePage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
@@ -165,7 +165,7 @@ export default function AuditCompliancePage() {
                     <option value="90d">Last 90 Days</option>
                   </select>
                 </div>
-                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
+                <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover: dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
                   <Filter className="w-4 h-4" />
                   <span>Filters</span>
                 </button>
@@ -178,7 +178,7 @@ export default function AuditCompliancePage() {
             {activeTab === 'audit' && (
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                  <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+                  <thead className="dark:bg-gray-700 transition-colors">
                     <tr>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Agent</th>
                       <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Action</th>
@@ -190,7 +190,7 @@ export default function AuditCompliancePage() {
                   </thead>
                   <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                     {filteredAuditLogs.map((log) => (
-                      <tr key={log.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                      <tr key={log.id} className="hover: dark:hover:bg-gray-700 transition-colors">
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{log.agent}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{log.action}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{log.timestamp}</td>
@@ -285,7 +285,7 @@ export default function AuditCompliancePage() {
                         </button>
                       </div>
                     </div>
-                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors">
+                    <div className="mt-4 p-4 dark:bg-gray-700/50 rounded-lg transition-colors">
                       <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Explanation:</h4>
                       <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">{log.explanation}</p>
                     </div>
@@ -331,13 +331,13 @@ export default function AuditCompliancePage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 transition-colors">Details</p>
-                    <div className="p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg transition-colors">
+                    <div className="p-4 dark:bg-gray-700/50 rounded-lg transition-colors">
                       <p className="text-sm text-gray-900 dark:text-gray-100 transition-colors">{auditLogs.find(log => log.id === selectedAudit)?.details}</p>
                     </div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2 transition-colors">Raw Log</p>
-                    <pre className="p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg overflow-x-auto text-xs font-mono text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-600 transition-colors">
+                    <pre className="p-4 /50 rounded-lg overflow-x-auto text-xs font-mono text-gray-900 dark:text-gray-100 border border-gray-200 dark:border-gray-600 transition-colors">
                       {JSON.stringify({
                         id: auditLogs.find(log => log.id === selectedAudit)?.id,
                         timestamp: auditLogs.find(log => log.id === selectedAudit)?.timestamp,

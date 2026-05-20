@@ -47,7 +47,7 @@ export default function PolicyManagementPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
@@ -132,7 +132,7 @@ export default function PolicyManagementPage() {
                   className="pl-10 pr-4 py-2 w-full border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
-              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover: dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
                 <Filter className="w-4 h-4" />
                 <span>Filters</span>
               </button>
@@ -279,7 +279,7 @@ export default function PolicyManagementPage() {
             <div className="mt-6 flex justify-end space-x-3">
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 bg-white dark:bg-gray-700 transition-colors"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover: dark:hover:bg-gray-700 bg-white dark:bg-gray-700 transition-colors"
               >
                 Cancel
               </button>
@@ -308,7 +308,7 @@ export default function PolicyManagementPage() {
             <div className="flex justify-center space-x-3">
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 bg-white dark:bg-gray-700 transition-colors"
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-300 hover: dark:hover:bg-gray-700 bg-white dark:bg-gray-700 transition-colors"
               >
                 Cancel
               </button>

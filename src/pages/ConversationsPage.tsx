@@ -63,7 +63,7 @@ export default function ConversationsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         <div className="mb-6">
           <div className="flex justify-between items-center">
@@ -117,7 +117,7 @@ export default function ConversationsPage() {
               className={`
                 ${!isMobileViewingDetails ? 'hidden md:block' : 'w-full absolute md:relative top-0 left-0 h-full'}
                 md:w-1/2
-                bg-gray-50 dark:bg-gray-900
+                
                 transition-colors
               `}
               initial={{ x: 20, opacity: 0 }}

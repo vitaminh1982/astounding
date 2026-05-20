@@ -69,7 +69,7 @@ export default function AgentConfigurationPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
@@ -111,7 +111,7 @@ export default function AgentConfigurationPage() {
                       className={`w-full flex items-center p-3 rounded-lg text-left transition-colors ${
                         selectedAgent === agent.id
                           ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-500 dark:border-teal-400 border'
-                          : 'hover:bg-gray-50 dark:hover:bg-gray-700 border border-transparent'
+                          : 'hover: dark:hover:bg-gray-700 border border-transparent'
                       }`}
                     >
                       <div className="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center mr-3 transition-colors">
@@ -155,7 +155,7 @@ export default function AgentConfigurationPage() {
                       </div>
                     </div>
                     <div className="flex space-x-3">
-                      <button className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors">
+                      <button className="flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm dark:shadow-gray-900 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover: dark:hover:bg-gray-600 transition-colors">
                         <RotateCcw className="h-4 w-4 mr-2" />
                         Reset
                       </button>
@@ -325,7 +325,7 @@ When responding to customers:
 
                       <div className="overflow-x-auto">
                         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                          <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+                          <thead className="dark:bg-gray-700 transition-colors">
                             <tr>
                               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Source Name</th>
                               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Type</th>
@@ -336,7 +336,7 @@ When responding to customers:
                           </thead>
                           <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                             {knowledgeSources.map((source) => (
-                              <tr key={source.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                              <tr key={source.id} className="hover: dark:hover:bg-gray-700 transition-colors">
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{source.name}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{source.type.charAt(0).toUpperCase() + source.type.slice(1)}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">

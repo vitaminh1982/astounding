@@ -91,7 +91,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
@@ -121,7 +121,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
               <button 
                 onClick={handleRefresh}
                 disabled={isLoading}
-                className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors text-sm sm:text-base disabled:opacity-50 shadow-sm dark:shadow-gray-900"
+                className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg hover: dark:hover:bg-gray-700 transition-colors text-sm sm:text-base disabled:opacity-50 shadow-sm dark:shadow-gray-900"
               >
                 <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
                 <span className="whitespace-nowrap">
@@ -213,7 +213,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
               <div className="flex justify-between items-center">
                 <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Agent Status</h3>
                 <div className="flex items-center gap-2">
-                  <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 text-sm transition-colors">
+                  <button className="flex items-center gap-2 px-3 py-1.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 hover: dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 text-sm transition-colors">
                     <Filter className="w-4 h-4" />
                     <span>Filter</span>
                   </button>
@@ -222,7 +222,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
             </div>
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+                <thead className="dark:bg-gray-700 transition-colors">
                   <tr>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Agent</th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Status</th>
@@ -234,7 +234,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
                 </thead>
                 <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                   {agentStatuses.map((agent) => (
-                    <tr key={agent.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                    <tr key={agent.id} className="hover: dark:hover:bg-gray-700 transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center transition-colors">

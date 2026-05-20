@@ -145,7 +145,7 @@ const DocumentsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       {/* Container principal avec padding responsive */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* En-tête */}
@@ -160,7 +160,7 @@ const DocumentsPage: React.FC = () => {
             {/* Actions rapides */}
             <div className="flex gap-3">
               <button
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900"
+                className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900"
                 onClick={handleExport}
               >
                 <Download className="w-4 h-4" />

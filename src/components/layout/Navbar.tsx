@@ -38,13 +38,21 @@ const ProfileDropdown = memo(({
   onClose,
   onNavigate,
   t,
-  onOpenWorkspaceModal
+  onOpenWorkspaceModal,
+  theme,
+  toggleTheme,
+  language,
+  toggleLanguage,
 }: {
   isOpen: boolean;
   onClose: () => void;
   onNavigate: (page: Page) => void;
   t: any;
   onOpenWorkspaceModal: () => void;
+  theme: string;
+  toggleTheme: () => void;
+  language: string;
+  toggleLanguage: () => void;
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -128,6 +136,44 @@ const ProfileDropdown = memo(({
               onClose();
             }}
           />
+        </div>
+
+        {/* Préférences : thème + langue */}
+        <div className="border-t border-gray-200 dark:border-gray-700 py-2 transition-colors">
+          {/* Dark mode toggle */}
+          <button
+            onClick={toggleTheme}
+            className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none"
+            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          >
+            <span className="flex items-center gap-3">
+              {theme === 'light' ? (
+                <Moon className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+              ) : (
+                <Sun className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+              )}
+              <span className="font-medium">
+                {theme === 'light' ? 'Dark mode' : 'Light mode'}
+              </span>
+            </span>
+          </button>
+
+          {/* Language toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none"
+            aria-label={language === 'en' ? 'Switch to French' : 'Passer en anglais'}
+          >
+            <span className="flex items-center gap-3">
+              <Globe className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+              <span className="font-medium">
+                {language === 'fr' ? 'Français' : 'English'}
+              </span>
+            </span>
+            <span className="text-lg">
+              {language === 'fr' ? '🇫🇷' : '🇬🇧'}
+            </span>
+          </button>
         </div>
 
         {/* Workspaces section */}
@@ -398,7 +444,7 @@ const Navbar = ({
   onToggleSidebar
 }: NavbarProps) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const { t } = useContext(LanguageContext);
+  const { t, language, toggleLanguage } = useContext(LanguageContext);
   const { theme, toggleTheme } = useTheme();
   const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
@@ -513,79 +559,38 @@ const Navbar = ({
   }, [isNotificationsOpen]);
 
   return (
-    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 fixed w-full z-40 top-0 transition-colors shadow-sm dark:shadow-gray-900">
-      <div className="px-4 py-3 lg:px-6">
+    <nav className="bg-transparent sticky top-0 w-full z-20 transition-colors">
+      <div className="px-4 py-2 lg:px-6">
         <div className="flex justify-between items-center">
-          {/* Left section */}
-          <div className="flex items-center gap-3 lg:gap-4">
-            {/* Mobile menu button */}
+          {/* Left section — mobile menu only */}
+          <div className="flex items-center">
             <button
               onClick={onMenuClick}
-              className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="lg:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none"
               aria-label="Toggle menu"
             >
-              <Menu className="h-6 w-6 text-gray-600 dark:text-gray-300 transition-colors" />
+              <Menu className="h-5 w-5 text-gray-500 dark:text-gray-400 transition-colors" />
             </button>
-
-            {/* Sidebar toggle - desktop only */}
-            {onToggleSidebar && (
-              <button
-                onClick={onToggleSidebar}
-                className="hidden lg:flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-                aria-label={isSidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
-              >
-                {isSidebarExpanded ? (
-                  <ChevronLeft className="h-5 w-5 text-gray-600 dark:text-gray-300 group-hover:-translate-x-0.5 transition-all" />
-                ) : (
-                  <ChevronRight className="h-5 w-5 text-gray-600 dark:text-gray-300 group-hover:translate-x-0.5 transition-all" />
-                )}
-              </button>
-            )}
-
-            {/* Logo */}
-            <button
-              onClick={() => onNavigate('dashboard')}
-              className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
-              aria-label="Go to dashboard"
-            >
-              <span className="text-xl lg:text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-600 dark:from-teal-400 dark:to-teal-500 bg-clip-text text-transparent transition-colors">
-                Sendplex
-              </span>
-            </button>
-
-            {/* Credits - desktop only */}
-            <div className="hidden md:block">
-              <CreditConsumptionBar 
-                directCredits={{ used: 1250, total: 4000 }}
-                backgroundCredits={{ used: 350, total: 1000 }}
-              />
-            </div>
           </div>
           
           {/* Right section */}
-          <div className="flex items-center gap-2 lg:gap-3">
+          <div className="flex items-center gap-2">
             {/* Notifications */}
             <div className="relative" ref={notificationPanelRef}>
               <button
                 ref={notificationButtonRef}
                 onClick={toggleNotifications}
-                className="relative p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="relative w-9 h-9 rounded-full flex items-center justify-center
+                  bg-gray-100 dark:bg-gray-700
+                  border border-gray-200 dark:border-gray-600
+                  hover:bg-gray-200 dark:hover:bg-gray-600
+                  transition-colors focus:outline-none"
                 aria-label="Notifications"
                 aria-expanded={isNotificationsOpen}
               >
-                <Bell className={`h-5 w-5 lg:h-6 lg:w-6 transition-colors ${
-                  unreadCount > 0 
-                    ? 'text-indigo-600 dark:text-teal-400' 
-                    : 'text-gray-600 dark:text-gray-300'
-                }`} />
+                <Bell className="h-4 w-4 text-gray-500 dark:text-gray-400" strokeWidth={1.75} />
                 {unreadCount > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-red-500 to-red-600 text-[10px] font-bold text-white shadow-lg ring-2 ring-white dark:ring-gray-800 transition-colors"
-                  >
-                    {unreadCount > 9 ? '9+' : unreadCount}
-                  </motion.span>
+                  <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-gray-800" />
                 )}
               </button>
 
@@ -602,59 +607,27 @@ const Navbar = ({
               </AnimatePresence>
             </div>
 
-            {/* Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors group focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-              aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
-            >
-              <AnimatePresence mode="wait">
-                {theme === 'light' ? (
-                  <motion.div
-                    key="moon"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Moon className="h-5 w-5 lg:h-6 lg:w-6 text-gray-600 group-hover:text-indigo-600 dark:group-hover:text-teal-400 transition-colors" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="sun"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Sun className="h-5 w-5 lg:h-6 lg:w-6 text-gray-300 group-hover:text-yellow-400 transition-colors" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </button>
-
-            {/* Language Switcher - desktop only */}
+            {/* Credits — entre notifications et avatar */}
             <div className="hidden md:block">
-              <LanguageSwitcher />
+              <CreditConsumptionBar
+                directCredits={{ used: 1250, total: 4000 }}
+                backgroundCredits={{ used: 350, total: 1000 }}
+              />
             </div>
-            
-            {/* Mobile language switcher */}
-            <button
-              className="md:hidden p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
-              aria-label="Change language"
-            >
-              <Globe className="h-5 w-5 text-gray-600 dark:text-gray-300 transition-colors" />
-            </button>
 
             {/* Profile */}
             <div className="relative">
               <button
                 onClick={handleProfileToggle}
-                className="w-9 h-9 lg:w-10 lg:h-10 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-teal-500 dark:to-teal-600 flex items-center justify-center hover:shadow-lg dark:hover:shadow-gray-900 transition-all ring-2 ring-white dark:ring-gray-800 focus:outline-none focus:ring-4 focus:ring-indigo-500/50 dark:focus:ring-teal-500/50"
+                className="w-9 h-9 rounded-full flex items-center justify-center
+                  bg-gray-100 dark:bg-gray-700
+                  border border-gray-200 dark:border-gray-600
+                  hover:bg-gray-200 dark:hover:bg-gray-600
+                  transition-colors focus:outline-none"
                 aria-label="Profile menu"
                 aria-expanded={isProfileOpen}
               >
-                <User className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
+                <User className="h-4 w-4 text-gray-500 dark:text-gray-400" strokeWidth={1.75} />
               </button>
 
               <ProfileDropdown 
@@ -663,6 +636,10 @@ const Navbar = ({
                 onNavigate={onNavigate}
                 t={t}
                 onOpenWorkspaceModal={handleOpenWorkspaceModal}
+                theme={theme}
+                toggleTheme={toggleTheme}
+                language={language}
+                toggleLanguage={toggleLanguage}
               />
             </div>
           </div>

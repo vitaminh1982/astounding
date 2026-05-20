@@ -199,29 +199,12 @@ function AppContent() {
   }, [currentPage, handleNavigation]);
 
   return (
-    <div className="flex h-screen bg-gray-100 dark:bg-gray-900 transition-colors">
+    <div className="flex h-screen overflow-hidden app-bg transition-colors">
       <Toaster {...TOAST_OPTIONS} />
 
-      <Navbar 
-        onNavigate={handleNavigation} 
-        onMenuClick={openSidebar}
-        navigationItems={NAVIGATION_ITEMS}
+      {/* Sidebar — full height, fixed left */}
+      <Sidebar
         currentPage={currentPage}
-        isSidebarExpanded={isSidebarExpanded}
-        onToggleSidebar={toggleSidebarExpand}
-      />
-
-      {/* Mobile overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
-          onClick={closeSidebar}
-          aria-hidden="true"
-        />
-      )}
-
-      <Sidebar 
-        currentPage={currentPage} 
         onNavigate={handleNavigation}
         isOpen={isSidebarOpen}
         onClose={closeSidebar}
@@ -230,24 +213,38 @@ function AppContent() {
         onToggleExpand={toggleSidebarExpand}
       />
 
-      <main 
-        className={`
-          flex-1
-          overflow-y-auto
-          pt-16 
-          px-4
-          transition-all 
-          duration-300 
-          ease-in-out
-          ${isSidebarExpanded ? 'lg:ml-64' : 'lg:ml-20'}
-        `}
-      >
-        <div className="max-w-7xl mx-auto py-6">
-          <Suspense fallback={<PageLoader />}>
-            {CurrentPageComponent}
-          </Suspense>
-        </div>
-      </main>
+      {/* Mobile overlay */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={closeSidebar}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Main wrapper — contient navbar sticky + contenu */}
+      <div className={`
+        flex flex-col flex-1 min-h-0
+        transition-all duration-300 ease-in-out
+        ${isSidebarExpanded ? 'lg:ml-64' : 'lg:ml-20'}
+      `}>
+        <Navbar
+          onNavigate={handleNavigation}
+          onMenuClick={openSidebar}
+          navigationItems={NAVIGATION_ITEMS}
+          currentPage={currentPage}
+          isSidebarExpanded={isSidebarExpanded}
+          onToggleSidebar={toggleSidebarExpand}
+        />
+
+        <main className="flex-1 overflow-y-auto px-4">
+          <div className="max-w-7xl mx-auto py-6">
+            <Suspense fallback={<PageLoader />}>
+              {CurrentPageComponent}
+            </Suspense>
+          </div>
+        </main>
+      </div>
 
       <div className="fixed bottom-4 right-4 z-40">
         <FloatingAssistant />

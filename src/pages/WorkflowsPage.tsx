@@ -178,7 +178,7 @@ const WorkflowsPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header */}
         <div className="mb-6">
@@ -286,7 +286,7 @@ const WorkflowsPage: React.FC = () => {
                             whitespace-nowrap
                             ${activeTab === key
                               ? 'bg-indigo-50 dark:bg-teal-900/30 text-indigo-600 dark:text-teal-400 shadow-sm'
-                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover: dark:hover:bg-gray-700/50'
                             }
                           `}
                           aria-pressed={activeTab === key}
@@ -299,7 +299,7 @@ const WorkflowsPage: React.FC = () => {
                   </div>
 
                   {/* Tab Content */}
-                  <div className="flex-1 overflow-y-auto bg-gray-50 dark:bg-gray-900 transition-colors">
+                  <div className="flex-1 overflow-y-auto transition-colors">
                     <AnimatePresence mode="wait">
                       <motion.div
                         key={activeTab}

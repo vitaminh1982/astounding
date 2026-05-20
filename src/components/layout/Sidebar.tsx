@@ -1,6 +1,6 @@
 import React, { useState, useContext, memo, useEffect } from 'react';
-import { 
-  LayoutDashboard, 
+import {
+  LayoutDashboard,
   Bot,
   ShieldAlert,
   FileText,
@@ -8,12 +8,11 @@ import {
   AlertTriangle,
   BarChart2,
   Settings2,
-  MessageSquare, 
-  Users, 
-  Settings, 
-  Mail, 
-  PlayCircle, 
-  X, 
+  MessageSquare,
+  Users,
+  Mail,
+  PlayCircle,
+  X,
   FolderOpen,
   GitBranch,
   Sparkles,
@@ -23,9 +22,8 @@ import {
   Network,
   Server,
   Share2,
-  TrendingUp,
-  Bell,
-  Briefcase
+  Briefcase,
+  PanelLeft,
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -40,102 +38,152 @@ interface SidebarProps {
   onToggleExpand?: () => void;
 }
 
-// Create a memoized menu item component to prevent unnecessary re-renders
-const MenuItem = memo(({ 
-  icon: Icon, 
-  label, 
-  page, 
-  currentPage, 
-  onClick, 
-  isExpanded, 
-  hasNotification 
+// ─── MenuItem ─────────────────────────────────────────────────────────────────
+
+const MenuItem = memo(({
+  icon: Icon,
+  label,
+  page,
+  currentPage,
+  onClick,
+  isExpanded,
+  hasNotification,
+}: {
+  icon: React.ElementType;
+  label: string;
+  page: Page;
+  currentPage: Page;
+  onClick: (page: Page) => void;
+  isExpanded: boolean;
+  hasNotification?: boolean;
+}) => {
+  const isActive = page && currentPage === page;
+  return (
+    <button
+      onClick={() => onClick(page)}
+      className={[
+        'flex w-full items-center gap-3 px-3 py-2',
+        'text-sm rounded-lg transition-all duration-150',
+        isActive
+          ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
+          : 'text-[#444444] dark:text-[#bbbbbb] hover:bg-white/40 hover:text-black dark:hover:bg-white/10 dark:hover:text-white',
+        !isExpanded && 'justify-center',
+      ].join(' ')}
+    >
+      <div className="relative flex-shrink-0">
+        <Icon size={18} strokeWidth={1.75} />
+        {hasNotification && (
+          <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#888888]" />
+        )}
+      </div>
+      {isExpanded && <span className="truncate">{label}</span>}
+    </button>
+  );
+});
+
+// ─── SubMenuItem ──────────────────────────────────────────────────────────────
+
+const SubMenuItem = memo(({
+  icon: Icon,
+  label,
+  page,
+  currentPage,
+  onClick,
+  isExpanded,
+}: {
+  icon: React.ElementType;
+  label: string;
+  page: Page;
+  currentPage: Page;
+  onClick: (page: Page) => void;
+  isExpanded: boolean;
+}) => {
+  const isActive = page && currentPage === page;
+  return (
+    <button
+      onClick={() => onClick(page)}
+      className={[
+        'flex w-full items-center gap-3 px-3 py-1.5',
+        'text-sm rounded-lg transition-all duration-150',
+        isActive
+          ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
+          : 'text-[#666666] dark:text-[#999999] hover:bg-white/40 hover:text-black dark:hover:bg-white/10 dark:hover:text-white',
+        !isExpanded && 'justify-center',
+      ].join(' ')}
+    >
+      <Icon size={16} strokeWidth={1.75} className="flex-shrink-0" />
+      {isExpanded && <span className="truncate">{label}</span>}
+    </button>
+  );
+});
+
+// ─── CollapsibleSection ───────────────────────────────────────────────────────
+
+const CollapsibleSection = memo(({
+  icon: Icon,
+  label,
+  isOpen,
+  isActive,
+  isExpanded,
+  onToggle,
+  children,
+}: {
+  icon: React.ElementType;
+  label: string;
+  isOpen: boolean;
+  isActive: boolean;
+  isExpanded: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
 }) => (
-  <button
-    onClick={() => onClick(page)}
-    className={`
-      flex w-full items-center gap-3 px-4 py-3 
-      text-sm rounded-lg 
-      hover:bg-gray-800 
-      transition-colors
-      ${page && currentPage === page ? 'bg-gray-800' : ''}
-      ${!isExpanded && 'justify-center'}
-    `}
-  >
-    <div className="relative flex-shrink-0">
-      <Icon size={20} />
-      {hasNotification && (
-        <span className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-red-500">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+  <div className="space-y-0.5">
+    <button
+      onClick={onToggle}
+      aria-expanded={isOpen}
+      className={[
+        'flex w-full items-center px-3 py-2',
+        'text-sm rounded-lg transition-all duration-150',
+        isActive
+          ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
+          : 'text-[#444444] dark:text-[#bbbbbb] hover:bg-white/40 hover:text-black dark:hover:bg-white/10 dark:hover:text-white',
+        isExpanded ? 'justify-between' : 'justify-center',
+      ].join(' ')}
+    >
+      <div className="flex items-center gap-3">
+        <Icon size={18} strokeWidth={1.75} />
+        {isExpanded && <span>{label}</span>}
+      </div>
+      {isExpanded && (
+        <span className="text-[#aaaaaa]">
+          {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
         </span>
       )}
-    </div>
-    {isExpanded && <span className="truncate">{label}</span>}
-  </button>
+    </button>
+
+    {isOpen && (
+      <div className={`space-y-0.5 ${isExpanded ? 'pl-4' : ''}`}>
+        {children}
+      </div>
+    )}
+  </div>
 ));
 
-// Create a memoized submenu item component
-const SubMenuItem = memo(({ 
-  icon: Icon, 
-  label, 
-  page, 
-  currentPage, 
-  onClick, 
-  isExpanded 
-}) => (
-  <button
-    onClick={() => onClick(page)}
-    className={`
-      flex w-full items-center gap-3 px-4 py-2.5
-      text-sm rounded-lg 
-      hover:bg-gray-800 
-      transition-colors
-      ${page && currentPage === page ? 'bg-gray-800' : ''}
-      ${!isExpanded && 'justify-center'}
-    `}
-  >
-    <Icon size={20} className="flex-shrink-0" />
-    {isExpanded && <span className="truncate">{label}</span>}
-  </button>
-));
+// ─── Sidebar ──────────────────────────────────────────────────────────────────
 
-const Sidebar = ({ 
-  currentPage, 
-  onNavigate, 
-  isOpen, 
-  onClose, 
-  navigationItems,
+const Sidebar = ({
+  currentPage,
+  onNavigate,
+  isOpen,
+  onClose,
   isExpanded = true,
-  onToggleExpand
+  onToggleExpand,
 }: SidebarProps) => {
   const { t } = useContext(LanguageContext);
+
   const [isAgentsMenuOpen, setIsAgentsMenuOpen] = useState(false);
   const [isGovernanceMenuOpen, setIsGovernanceMenuOpen] = useState(false);
   const [isOrchestrationMenuOpen, setIsOrchestrationMenuOpen] = useState(false);
-  const [isOnboardingMenuOpen, setIsOnboardingMenuOpen] = useState(false);
 
-  // Onboarding submenu items
-  const onboardingSubmenu = [
-    { icon: ShieldAlert, label: 'AI Governance', page: 'onboarding' as const },
-  ];
-
-  // Governance submenu items
-  const governanceSubmenu = [
-    { icon: FileText, label: t('sidebar.policyManagement'), page: 'policy-management' as const },
-    { icon: ClipboardCheck, label: t('sidebar.auditCompliance'), page: 'audit-compliance' as const },
-    { icon: AlertTriangle, label: t('sidebar.riskManagement'), page: 'risk-management' as const },
-    { icon: BarChart2, label: t('sidebar.performanceAnalytics'), page: 'performance-analytics' as const },
-    { icon: Settings2, label: t('sidebar.agentConfiguration'), page: 'agent-configuration' as const },
-  ];
-
-  // Orchestration submenu items
-  const orchestrationSubmenu = [
-    { icon: Bot, label: t('sidebar.agentManagement'), page: 'agent-management' as const },
-    { icon: GitBranch, label: t('sidebar.workflowManagement'), page: 'workflow-management' as const },
-    { icon: BarChart2, label: t('sidebar.monitoringAnalytics'), page: 'monitoring-analytics' as const },
-    { icon: Server, label: t('sidebar.resourceManagement'), page: 'resource-management' as const },
-    { icon: Share2, label: t('sidebar.collaboration'), page: 'collaboration' as const },
-  ];
-  // AI Agents submenu items - defined with direct icon references
   const aiAgentsSubmenu = [
     { icon: Sparkles, label: t('sidebar.prompts'), page: 'prompts' as const },
     { icon: FileText, label: t('sidebar.templates'), page: 'templates' as const },
@@ -144,333 +192,278 @@ const Sidebar = ({
     { icon: GitBranch, label: t('sidebar.workflows'), page: 'workflows' as const },
   ];
 
-  // Main menu items - defined with direct icon references
-  const mainMenuItems = [
-    { icon: LayoutDashboard, label: t('sidebar.dashboard'), page: 'dashboard' as const },
-    { 
-      icon: MessageSquare, 
-      label: t('sidebar.discussions'), 
-      page: 'conversations' as const,
-      hasNotification: true
-    },
-    { icon: Users, label: t('sidebar.customers'), page: 'clients' as const }
-    //{ icon: BarChart2, label: 'Usage', page: 'usage' as const },
-    //{ icon: Settings, label: t('sidebar.settings'), page: 'paramètres' as const },
+  const governanceSubmenu = [
+    { icon: FileText, label: t('sidebar.policyManagement'), page: 'policy-management' as const },
+    { icon: ClipboardCheck, label: t('sidebar.auditCompliance'), page: 'audit-compliance' as const },
+    { icon: AlertTriangle, label: t('sidebar.riskManagement'), page: 'risk-management' as const },
+    { icon: BarChart2, label: t('sidebar.performanceAnalytics'), page: 'performance-analytics' as const },
+    { icon: Settings2, label: t('sidebar.agentConfiguration'), page: 'agent-configuration' as const },
   ];
 
-  const toggleAgentsMenu = () => {
-    setIsAgentsMenuOpen(!isAgentsMenuOpen);
-  };
+  const orchestrationSubmenu = [
+    { icon: Bot, label: t('sidebar.agentManagement'), page: 'agent-management' as const },
+    { icon: GitBranch, label: t('sidebar.workflowManagement'), page: 'workflow-management' as const },
+    { icon: BarChart2, label: t('sidebar.monitoringAnalytics'), page: 'monitoring-analytics' as const },
+    { icon: Server, label: t('sidebar.resourceManagement'), page: 'resource-management' as const },
+    { icon: Share2, label: t('sidebar.collaboration'), page: 'collaboration' as const },
+  ];
 
- const isAnyAgentsSubmenuActive = () => {
-    return aiAgentsSubmenu.some(item => item.page === currentPage) || currentPage === 'agents';
-  };
-  
-  const isAnyGovernanceSubmenuActive = () => {
-    return governanceSubmenu.some(item => item.page === currentPage);
-  };
+  const isAnyAgentsActive = () =>
+    aiAgentsSubmenu.some(i => i.page === currentPage) || currentPage === 'agents';
+  const isAnyGovernanceActive = () =>
+    governanceSubmenu.some(i => i.page === currentPage) || currentPage === 'governance';
+  const isAnyOrchestrationActive = () =>
+    orchestrationSubmenu.some(i => i.page === currentPage) || currentPage === 'orchestration';
 
-  const isAnyOrchestrationSubmenuActive = () => {
-    return orchestrationSubmenu.some(item => item.page === currentPage) || currentPage === 'orchestration';
-  };
-  // Add useEffect to automatically open/close submenus based on current page
   useEffect(() => {
-    // Auto-open AI Agents submenu if on any of its sub-pages
-    if (isAnyAgentsSubmenuActive()) {
-      setIsAgentsMenuOpen(true);
-    }
-    
-    // Auto-open Governance submenu if on any of its sub-pages
-    if (isAnyGovernanceSubmenuActive()) {
-      setIsGovernanceMenuOpen(true);
-    }
-    
-    // Auto-open Orchestration submenu if on any of its sub-pages
-    if (isAnyOrchestrationSubmenuActive()) {
-      setIsOrchestrationMenuOpen(true);
-    }
-  }, [currentPage]); // Re-run when currentPage changes
+    if (isAnyAgentsActive()) setIsAgentsMenuOpen(true);
+    if (isAnyGovernanceActive()) setIsGovernanceMenuOpen(true);
+    if (isAnyOrchestrationActive()) setIsOrchestrationMenuOpen(true);
+  }, [currentPage]);
 
-  const handleMenuItemClick = (page: Page) => {
+  const handleNav = (page: Page) => {
     onNavigate(page);
     onClose?.();
+  };
+
+  const handleAgentsToggle = () => {
+    if (isAnyAgentsActive() || currentPage === 'agents') {
+      setIsAgentsMenuOpen(prev => !prev);
+    } else {
+      handleNav('agents');
+      setIsAgentsMenuOpen(true);
+    }
+  };
+
+  const handleGovernanceToggle = () => {
+    if (isAnyGovernanceActive() || currentPage === 'governance') {
+      setIsGovernanceMenuOpen(prev => !prev);
+    } else {
+      handleNav('governance');
+      setIsGovernanceMenuOpen(true);
+    }
+  };
+
+  const handleOrchestrationToggle = () => {
+    if (isAnyOrchestrationActive() || currentPage === 'orchestration') {
+      setIsOrchestrationMenuOpen(prev => !prev);
+    } else {
+      handleNav('orchestration');
+      setIsOrchestrationMenuOpen(true);
+    }
   };
 
   const handleExternalLink = (url: string) => {
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
-  // Improved governance button click handler
-  const handleGovernanceClick = () => {
-    if (isAnyGovernanceSubmenuActive()) {
-      // If we're already on a governance sub-page, toggle the menu
-      setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
-    } else if (currentPage === 'governance') {
-      // If we're on the main governance page, toggle the menu
-      setIsGovernanceMenuOpen(!isGovernanceMenuOpen);
-    } else {
-      // If we're on a different page, navigate to governance and open the menu
-      handleMenuItemClick('governance');
-      setIsGovernanceMenuOpen(true);
-    }
-  };
-
-  // Orchestration button click handler
-  const handleOrchestrationClick = () => {
-    if (isAnyOrchestrationSubmenuActive()) {
-      // If we're already on an orchestration sub-page, toggle the menu
-      setIsOrchestrationMenuOpen(!isOrchestrationMenuOpen);
-    } else if (currentPage === 'orchestration') {
-      // If we're on the main orchestration page, toggle the menu
-      setIsOrchestrationMenuOpen(!isOrchestrationMenuOpen);
-    } else {
-      // If we're on a different page, navigate to orchestration and open the menu
-      handleMenuItemClick('orchestration');
-      setIsOrchestrationMenuOpen(true);
-    }
-  };
-  // Improved AI Agents button click handler
-  const handleAgentsClick = () => {
-    if (isAnyAgentsSubmenuActive()) {
-      // If we're already on an agents sub-page, toggle the menu
-      setIsAgentsMenuOpen(!isAgentsMenuOpen);
-    } else if (currentPage === 'agents') {
-      // If we're on the main agents page, toggle the menu
-      setIsAgentsMenuOpen(!isAgentsMenuOpen);
-    } else {
-      // If we're on a different page, navigate to agents and open the menu
-      handleMenuItemClick('agents');
-      setIsAgentsMenuOpen(true);
-    }
-  };
-
   return (
-    <aside className={`
-      fixed left-0 top-0 lg:top-16 
-      h-full lg:h-[calc(100vh-4rem)] 
-      ${isExpanded ? 'w-64' : 'w-20'} 
-      bg-gray-900 
-      text-white 
-      flex flex-col
-      z-30
-      transition-all duration-300 ease-in-out
-      ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-    `}>
-      
-      {/* Mobile close button */}
-      <div className="lg:hidden flex justify-end p-4">
-        <button
-          onClick={onClose}
-          className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800 transition-colors"
-          aria-label="Close menu"
-        >
-          <X size={20} />
-        </button>
+    <aside
+      className={[
+        'fixed left-[10px] top-[10px] h-[calc(100vh-20px)]',
+        isExpanded ? 'w-64' : 'w-16',
+        'flex flex-col z-40',
+        'transition-all duration-300 ease-in-out',
+        // Flottant : fond effet de glace dépoli ultra-premium
+        'glass-sidebar',
+        'rounded-2xl',
+        isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0',
+      ].join(' ')}
+    >
+      {/* ── Header : logo + toggle ──────────────────────────────── */}
+      <div className={[
+        'flex items-center h-14 px-3 flex-shrink-0',
+        isExpanded ? 'justify-between' : 'justify-center',
+      ].join(' ')}>
+        {isExpanded ? (
+          <>
+            <button
+              onClick={() => handleNav('dashboard')}
+              className="flex items-center focus:outline-none hover:opacity-80 transition-opacity"
+              aria-label="Go to dashboard"
+            >
+              <img
+                src="/assets/images/logo/sendplex-logo.svg"
+                alt="Sendplex Logo"
+                className="h-6 w-auto"
+              />
+            </button>
+            <button
+              onClick={onToggleExpand}
+              className="p-1.5 rounded-md text-[#888888] dark:text-[#bbbbbb] hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors"
+              aria-label="Collapse sidebar"
+            >
+              <PanelLeft size={18} strokeWidth={1.75} />
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={onToggleExpand}
+            className="group relative w-9 h-9 flex items-center justify-center rounded-md hover:bg-white/40 dark:hover:bg-white/10 transition-all duration-200 focus:outline-none"
+            aria-label="Expand sidebar"
+          >
+            {/* Logo par défaut */}
+            <img
+              src="/assets/images/logo/sendplex-logo.svg"
+              alt="Sendplex Logo"
+              className="h-6 w-auto transition-transform duration-200 group-hover:scale-0 group-hover:opacity-0 absolute"
+            />
+            {/* PanelLeft icon au survol */}
+            <PanelLeft
+              size={18}
+              strokeWidth={1.75}
+              className="text-[#888888] dark:text-[#bbbbbb] scale-0 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-hover:text-black dark:group-hover:text-white transition-all duration-200 absolute"
+            />
+          </button>
+        )}
       </div>
 
-      {/* Main menu */}
-      <div className="p-4 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800">
-        <nav className="space-y-1">
-          {/* Dashboard */}
+      {/* ── Navigation ───────────────────────────────────────────── */}
+      <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
+        <nav className="space-y-0.5">
+
           <MenuItem
-            icon={mainMenuItems[0].icon}
-            label={mainMenuItems[0].label}
-            page={mainMenuItems[0].page}
+            icon={LayoutDashboard}
+            label={t('sidebar.dashboard')}
+            page="dashboard"
             currentPage={currentPage}
-            onClick={handleMenuItemClick}
+            onClick={handleNav}
             isExpanded={isExpanded}
           />
 
-          {/* AI Agents with collapsible submenu */}
-          <div className="space-y-1">
-            <button
-              onClick={handleAgentsClick}
-              className={`
-                flex w-full items-center justify-between px-4 py-3 
-                text-sm rounded-lg 
-                hover:bg-gray-800 
-                transition-colors
-                ${currentPage === 'ai-agents' || isAnyAgentsSubmenuActive() ? 'bg-gray-800' : ''}
-                ${!isExpanded && 'justify-center'}
-              `}
-              aria-expanded={isAgentsMenuOpen}
-            >
-              <div className="flex items-center gap-3">
-                <Bot size={20} />
-                {isExpanded && <span>{t('sidebar.aiAgents')}</span>}
-              </div>
-              {isExpanded && (
-                <span className="text-gray-400">
-                  {isAgentsMenuOpen ? 
-                    <ChevronDown size={16} /> : 
-                    <ChevronRight size={16} />
-                  }
-                </span>
-              )}
-            </button>
-            
-            {/* Nested menu items for AI Agents */}
-            {isAgentsMenuOpen && (
-              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
-                {aiAgentsSubmenu.map((subItem) => (
-                  <SubMenuItem
-                    key={subItem.page}
-                    icon={subItem.icon}
-                    label={subItem.label}
-                    page={subItem.page}
-                    currentPage={currentPage}
-                    onClick={handleMenuItemClick}
-                    isExpanded={isExpanded}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-          
-          {/* Governance with collapsible submenu */}
-          <div className="space-y-1">
-            <button
-              onClick={handleGovernanceClick}
-              className={`
-                flex w-full items-center justify-between px-4 py-3 
-                text-sm rounded-lg 
-                hover:bg-gray-800 
-                transition-colors
-                ${currentPage === 'governance' || isAnyGovernanceSubmenuActive() ? 'bg-gray-800' : ''}
-                ${!isExpanded && 'justify-center'}
-              `}
-              aria-expanded={isGovernanceMenuOpen}
-            >
-              <div className="flex items-center gap-3">
-                <ShieldAlert size={20} />
-                {isExpanded && <span>{t('sidebar.governance')}</span>}
-              </div>
-              {isExpanded && (
-                <span className="text-gray-400">
-                  {isGovernanceMenuOpen ? 
-                    <ChevronDown size={16} /> : 
-                    <ChevronRight size={16} />
-                  }
-                </span>
-              )}
-            </button>
-            
-            {/* Nested menu items for Governance */}
-            {isGovernanceMenuOpen && (
-              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
-                {governanceSubmenu.map((subItem) => (
-                  <SubMenuItem
-                    key={subItem.page}
-                    icon={subItem.icon}
-                    label={subItem.label}
-                    page={subItem.page}
-                    currentPage={currentPage}
-                    onClick={handleMenuItemClick}
-                    isExpanded={isExpanded}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          <CollapsibleSection
+            icon={Bot}
+            label={t('sidebar.aiAgents')}
+            isOpen={isAgentsMenuOpen}
+            isActive={isAnyAgentsActive()}
+            isExpanded={isExpanded}
+            onToggle={handleAgentsToggle}
+          >
+            {aiAgentsSubmenu.map(item => (
+              <SubMenuItem
+                key={item.page}
+                icon={item.icon}
+                label={item.label}
+                page={item.page}
+                currentPage={currentPage}
+                onClick={handleNav}
+                isExpanded={isExpanded}
+              />
+            ))}
+          </CollapsibleSection>
 
-          {/* Orchestration with collapsible submenu */}
-          <div className="space-y-1">
-            <button
-              onClick={handleOrchestrationClick}
-              className={`
-                flex w-full items-center justify-between px-4 py-3 
-                text-sm rounded-lg 
-                hover:bg-gray-800 
-                transition-colors
-                ${currentPage === 'orchestration' || isAnyOrchestrationSubmenuActive() ? 'bg-gray-800' : ''}
-                ${!isExpanded && 'justify-center'}
-              `}
-              aria-expanded={isOrchestrationMenuOpen}
-            >
-              <div className="flex items-center gap-3">
-                <Network size={20} />
-                {isExpanded && <span>Orchestration</span>}
-              </div>
-              {isExpanded && (
-                <span className="text-gray-400">
-                  {isOrchestrationMenuOpen ? 
-                    <ChevronDown size={16} /> : 
-                    <ChevronRight size={16} />
-                  }
-                </span>
-              )}
-            </button>
-            
-            {/* Nested menu items for Orchestration */}
-            {isOrchestrationMenuOpen && (
-              <div className={`space-y-1 ${isExpanded ? 'pl-6' : ''}`}>
-                {orchestrationSubmenu.map((subItem) => (
-                  <SubMenuItem
-                    key={subItem.page}
-                    icon={subItem.icon}
-                    label={subItem.label}
-                    page={subItem.page}
-                    currentPage={currentPage}
-                    onClick={handleMenuItemClick}
-                    isExpanded={isExpanded}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-          {/* Regular menu items after AI Agents */}
-          {mainMenuItems.slice(1).map((item) => (
-            <MenuItem
-              key={item.page}
-              icon={item.icon}
-              label={item.label}
-              page={item.page}
-              currentPage={currentPage}
-              onClick={handleMenuItemClick}
-              isExpanded={isExpanded}
-              hasNotification={item.hasNotification}
-            />
-          ))}
-          
-          {/* Projects menu item */}
+          <CollapsibleSection
+            icon={ShieldAlert}
+            label={t('sidebar.governance')}
+            isOpen={isGovernanceMenuOpen}
+            isActive={isAnyGovernanceActive()}
+            isExpanded={isExpanded}
+            onToggle={handleGovernanceToggle}
+          >
+            {governanceSubmenu.map(item => (
+              <SubMenuItem
+                key={item.page}
+                icon={item.icon}
+                label={item.label}
+                page={item.page}
+                currentPage={currentPage}
+                onClick={handleNav}
+                isExpanded={isExpanded}
+              />
+            ))}
+          </CollapsibleSection>
+
+          <CollapsibleSection
+            icon={Network}
+            label="Orchestration"
+            isOpen={isOrchestrationMenuOpen}
+            isActive={isAnyOrchestrationActive()}
+            isExpanded={isExpanded}
+            onToggle={handleOrchestrationToggle}
+          >
+            {orchestrationSubmenu.map(item => (
+              <SubMenuItem
+                key={item.page}
+                icon={item.icon}
+                label={item.label}
+                page={item.page}
+                currentPage={currentPage}
+                onClick={handleNav}
+                isExpanded={isExpanded}
+              />
+            ))}
+          </CollapsibleSection>
+
+
+
+          <MenuItem
+            icon={MessageSquare}
+            label={t('sidebar.discussions')}
+            page="conversations"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+            hasNotification
+          />
+
+          <MenuItem
+            icon={Users}
+            label={t('sidebar.customers')}
+            page="clients"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
+
           <MenuItem
             icon={Briefcase}
             label={t('sidebar.projects')}
             page="projects"
             currentPage={currentPage}
-            onClick={handleMenuItemClick}
+            onClick={handleNav}
             isExpanded={isExpanded}
           />
         </nav>
       </div>
-        
-      
-      {/* Contact and demo buttons */}
-      <div className="p-4 border-t border-gray-800 space-y-2">
+
+      {/* ── Footer ────────────────────────────────────────────────── */}
+      <div className="p-2 space-y-0.5 flex-shrink-0">
         <button
           onClick={() => handleExternalLink('https://miranki.app.n8n.cloud/form/c9ebaa6b-9dfd-4473-91a8-e536c587a2e6')}
-          className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-800 transition-colors ${!isExpanded && 'justify-center'}`}
+          className={[
+            'flex w-full items-center gap-3 px-3 py-2',
+            'text-sm rounded-lg text-[#666666]',
+            'hover:bg-[#efefef] hover:text-[#111111]',
+            'transition-colors duration-150',
+            !isExpanded && 'justify-center',
+          ].join(' ')}
           aria-label="Contact us"
         >
-          <Mail size={20} />
+          <Mail size={18} strokeWidth={1.75} />
           {isExpanded && <span>{t('sidebar.contact')}</span>}
         </button>
+
         <button
           onClick={() => handleExternalLink('https://meetings-eu1.hubspot.com/minh-hoang')}
-          className={`flex w-full items-center gap-3 px-4 py-3 text-sm rounded-lg hover:bg-gray-800 transition-colors ${!isExpanded && 'justify-center'}`}
+          className={[
+            'flex w-full items-center gap-3 px-3 py-2',
+            'text-sm rounded-lg text-[#666666]',
+            'hover:bg-[#efefef] hover:text-[#111111]',
+            'transition-colors duration-150',
+            !isExpanded && 'justify-center',
+          ].join(' ')}
           aria-label="Request demo"
         >
-          <PlayCircle size={20} />
+          <PlayCircle size={18} strokeWidth={1.75} />
           {isExpanded && <span>{t('sidebar.askDemo')}</span>}
         </button>
+
+        {isExpanded && (
+          <p className="px-3 pt-1 pb-0.5 text-xs text-[#aaaaaa] text-center">
+            {t('sidebar.developedBy')}
+          </p>
+        )}
       </div>
-      
-      {/* Footer */}
-      {isExpanded && (
-        <div className="p-4 text-xs text-gray-500 text-center border-t border-gray-800">
-          {t('sidebar.developedBy')}
-        </div>
-      )}
     </aside>
   );
 };
