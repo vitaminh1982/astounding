@@ -19,6 +19,7 @@ interface ReportConfig {
   name: string;
   type: string;
   schedule?: string;
+  description?: string;
 }
 
 const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
@@ -53,10 +54,10 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
     setShowReportModal(false);
   }, []);
 
-  const handleSaveReport = useCallback((config: ReportConfig) => {
+  const handleSaveReport = useCallback((config: Omit<ReportConfig, 'id'>) => {
     console.log('Report configuration saved:', config);
     // TODO: Implement API call to save report
-    setReports((prev) => [...prev, { ...config, id: Date.now().toString() }]);
+    setReports((prev) => [...prev, { ...config, id: Date.now().toString() } as ReportConfig]);
     setShowReportModal(false);
   }, []);
 
