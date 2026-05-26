@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { VoiceRecordingState } from '../types';
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY;
 
 export const useVoiceRecording = () => {
   const [voiceState, setVoiceState] = useState<VoiceRecordingState>({
