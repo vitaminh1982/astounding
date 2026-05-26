@@ -9,7 +9,7 @@ import {
   TextToSpeechState
 } from '../types';
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY;
 
 export const useChatLogic = (
   conversationHistory: Message[],
