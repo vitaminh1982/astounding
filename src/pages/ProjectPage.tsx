@@ -8,6 +8,7 @@ import ProjectSwitchModal, { Project } from '../components/projects/ProjectSwitc
 import AgentSelectionModal, { ProjectContext } from '../components/projects/AgentSelectionModal';
 import { ProjectConfiguration } from '../components/projects/ProjectManagementModal';
 import { useProjectLogic } from '../hooks/useProjectLogic';
+import ProjectCreationPage from '../components/project-creation/ProjectCreationPage';
 
 // ============================================================================
 // TYPES
@@ -199,6 +200,11 @@ const validateFile = (file: File): { valid: boolean; error?: string } => {
 // ============================================================================
 
 export default function ProjectPage(): JSX.Element {
+  return <ProjectCreationPage />;
+}
+
+// Legacy Project Workspace (accessed from within workspace later)
+export function LegacyProjectWorkspace(): JSX.Element {
   // Scroll to top on component mount
   useEffect(() => {
     window.scrollTo(0, 0);
