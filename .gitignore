@@ -7,10 +7,17 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+.env*
+!.env.example
+
 node_modules
 dist
 dist-ssr
 *.local
+
+# Hidden/dot directories (agent config, IDE tools, etc.)
+.agent/
+.gemini/
 
 # Editor directories and files
 .vscode/*
