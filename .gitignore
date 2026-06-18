@@ -15,6 +15,10 @@ dist
 dist-ssr
 *.local
 
+# Hidden/dot directories (agent config, IDE tools, etc.)
+.agent/
+.gemini/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
