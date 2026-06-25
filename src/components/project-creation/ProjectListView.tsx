@@ -36,7 +36,7 @@ export default function ProjectListView() {
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={handleNewProject}
-          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-xl font-medium hover:from-blue-700 hover:to-teal-700 transition-all shadow-lg shadow-blue-500/20"
+          className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-400 text-[#0d2b1a] rounded-xl font-semibold hover:from-green-400 hover:to-emerald-300 transition-all shadow-md shadow-green-500/25"
         >
           <Plus className="w-4 h-4" />
           Create Project
@@ -59,7 +59,7 @@ export default function ProjectListView() {
           </p>
           <button
             onClick={handleNewProject}
-            className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 dark:bg-teal-600 text-white rounded-xl font-medium hover:bg-blue-700 dark:hover:bg-teal-700 transition-colors"
+            className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-green-500 to-emerald-400 text-[#0d2b1a] rounded-xl font-semibold hover:from-green-400 hover:to-emerald-300 transition-all shadow-md shadow-green-500/25"
           >
             <Plus className="w-4 h-4" />
             Create Your First Project

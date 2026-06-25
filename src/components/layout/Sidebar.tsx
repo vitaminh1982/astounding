@@ -1,5 +1,5 @@
 import React, { useState, useContext, memo, useEffect, useRef } from 'react';
-import WorkspaceSwitcher from '../workspace/WorkspaceSwitcher';
+import ProjectSwitcher from '../workspace/ProjectSwitcher';
 import {
   LayoutDashboard,
   Bot,
@@ -413,16 +413,14 @@ const Sidebar = ({
       </div>
 
       {/* ── Toggle (Work / Studio / Govern) ─────────────────────── */}
-      <div className={`p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative ${
-        isExpanded ? 'flex' : 'flex lg:hidden'
-      }`}>
+      <div className={`p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative ${isExpanded ? 'flex' : 'flex lg:hidden'
+        }`}>
         <button
           onClick={() => handleWorkspaceModeChange('work')}
-          className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${
-            workspaceMode === 'work'
+          className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work'
               ? 'text-black dark:text-white font-semibold'
               : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'
-          }`}
+            }`}
           title={t('sidebar.work')}
         >
           <Briefcase size={14} strokeWidth={1.75} />
@@ -437,11 +435,10 @@ const Sidebar = ({
         </button>
         <button
           onClick={() => handleWorkspaceModeChange('studio')}
-          className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${
-            workspaceMode === 'studio'
+          className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio'
               ? 'text-black dark:text-white font-semibold'
               : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'
-          }`}
+            }`}
           title={t('sidebar.studio')}
         >
           <Cpu size={14} strokeWidth={1.75} />
@@ -456,11 +453,10 @@ const Sidebar = ({
         </button>
         <button
           onClick={() => handleWorkspaceModeChange('govern')}
-          className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${
-            workspaceMode === 'govern'
+          className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern'
               ? 'text-black dark:text-white font-semibold'
               : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'
-          }`}
+            }`}
           title={t('sidebar.govern')}
         >
           <Shield size={14} strokeWidth={1.75} />
@@ -475,16 +471,14 @@ const Sidebar = ({
         </button>
       </div>
 
-      <div className={`flex-col gap-1.5 p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl items-center flex-shrink-0 relative ${
-        isExpanded ? 'hidden' : 'hidden lg:flex'
-      }`}>
+      <div className={`flex-col gap-1.5 p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl items-center flex-shrink-0 relative ${isExpanded ? 'hidden' : 'hidden lg:flex'
+        }`}>
         <button
           onClick={() => handleWorkspaceModeChange('work')}
-          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${
-            workspaceMode === 'work'
+          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${workspaceMode === 'work'
               ? 'text-black dark:text-white'
               : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'
-          }`}
+            }`}
           title={t('sidebar.work')}
         >
           <Briefcase size={16} strokeWidth={1.75} />
@@ -498,11 +492,10 @@ const Sidebar = ({
         </button>
         <button
           onClick={() => handleWorkspaceModeChange('studio')}
-          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${
-            workspaceMode === 'studio'
+          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${workspaceMode === 'studio'
               ? 'text-black dark:text-white'
               : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'
-          }`}
+            }`}
           title={t('sidebar.studio')}
         >
           <Cpu size={16} strokeWidth={1.75} />
@@ -516,11 +509,10 @@ const Sidebar = ({
         </button>
         <button
           onClick={() => handleWorkspaceModeChange('govern')}
-          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${
-            workspaceMode === 'govern'
+          className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${workspaceMode === 'govern'
               ? 'text-black dark:text-white'
               : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'
-          }`}
+            }`}
           title={t('sidebar.govern')}
         >
           <Shield size={16} strokeWidth={1.75} />
@@ -534,9 +526,9 @@ const Sidebar = ({
         </button>
       </div>
 
-      {/* ── Workspace Switcher ───────────────────────────────────── */}
+      {/* ── Project Switcher ─────────────────────────────────────── */}
       <div className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
-        <WorkspaceSwitcher collapsed={false} />
+        <ProjectSwitcher onNavigate={handleNav} />
       </div>
 
       {/* ── Navigation ───────────────────────────────────────────── */}
@@ -659,15 +651,14 @@ const Sidebar = ({
           <div
             ref={popoverRef}
             onMouseLeave={() => setPopoverView('main')}
-            className={`absolute bottom-14 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 ${
-              isExpanded 
-                ? 'left-2 right-2 lg:left-2 lg:right-auto lg:w-[320px]' 
+            className={`absolute bottom-14 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 ${isExpanded
+                ? 'left-2 right-2 lg:left-2 lg:right-auto lg:w-[320px]'
                 : 'left-2 right-2 lg:right-auto lg:w-[320px]'
-            }`}
+              }`}
           >
             <div className="space-y-3">
               {/* 1. User Header Section */}
-              <div 
+              <div
                 className="flex items-center gap-3 pb-1"
                 onMouseEnter={() => setPopoverView('main')}
               >
@@ -700,9 +691,8 @@ const Sidebar = ({
                 >
                   <button
                     onClick={() => setPopoverView(popoverView === 'accounts' ? 'main' : 'accounts')}
-                    className={`w-full text-left p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between gap-3 border border-transparent ${
-                      popoverView === 'accounts' ? 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/5' : 'hover:border-black/5 dark:hover:border-white/5'
-                    }`}
+                    className={`w-full text-left p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between gap-3 border border-transparent ${popoverView === 'accounts' ? 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/5' : 'hover:border-black/5 dark:hover:border-white/5'
+                      }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-9 h-9 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center text-sm flex-shrink-0">
@@ -760,11 +750,10 @@ const Sidebar = ({
                                           setPopoverView('main');
                                           setIsProfileMenuOpen(false);
                                         }}
-                                        className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg transition-colors text-left ${
-                                          isActive
+                                        className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg transition-colors text-left ${isActive
                                             ? 'bg-black/5 dark:bg-white/5 text-gray-900 dark:text-gray-100 font-medium'
                                             : 'text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5 font-normal'
-                                        }`}
+                                          }`}
                                       >
                                         <span className="flex items-center gap-2 truncate">
                                           <span className="text-xs">{ws.icon === 'briefcase' ? '💼' : ws.icon === 'user' ? '👤' : '🏢'}</span>
@@ -851,12 +840,12 @@ const Sidebar = ({
                 </div>
 
                 {/* Token Usage metrics */}
-                <div 
+                <div
                   className="px-1 space-y-2.5"
                   onMouseEnter={() => setPopoverView('main')}
                 >
                   <p className="text-xs font-medium text-gray-900 dark:text-gray-100">Token Usage</p>
-                  
+
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs font-normal text-gray-500 dark:text-gray-400">
                       <span>Active conversations</span>
@@ -930,9 +919,8 @@ const Sidebar = ({
                 >
                   <button
                     onClick={() => setPopoverView(popoverView === 'appearance' ? 'main' : 'appearance')}
-                    className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left ${
-                      popoverView === 'appearance' ? 'bg-black/5 dark:bg-white/5' : ''
-                    }`}
+                    className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left ${popoverView === 'appearance' ? 'bg-black/5 dark:bg-white/5' : ''
+                      }`}
                   >
                     <span className="flex items-center gap-2.5">
                       {resolvedTheme === 'dark' ? <Moon size={16} className="text-gray-400" /> : <Sun size={16} className="text-gray-400" />}
@@ -993,9 +981,8 @@ const Sidebar = ({
                 >
                   <button
                     onClick={() => setPopoverView(popoverView === 'help' ? 'main' : 'help')}
-                    className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left ${
-                      popoverView === 'help' ? 'bg-black/5 dark:bg-white/5' : ''
-                    }`}
+                    className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left ${popoverView === 'help' ? 'bg-black/5 dark:bg-white/5' : ''
+                      }`}
                   >
                     <span className="flex items-center gap-2.5">
                       <HelpCircle size={16} className="text-gray-400" />
@@ -1052,9 +1039,8 @@ const Sidebar = ({
             setIsProfileMenuOpen(!isProfileMenuOpen);
             setPopoverView('main');
           }}
-          className={`flex items-center gap-3 w-full p-2 rounded-xl text-left hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none ${
-            isExpanded ? '' : 'lg:justify-center'
-          }`}
+          className={`flex items-center gap-3 w-full p-2 rounded-xl text-left hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none ${isExpanded ? '' : 'lg:justify-center'
+            }`}
         >
           <div className="relative flex-shrink-0 flex items-center justify-center">
             <div className="w-8 h-8 rounded-full bg-black/10 dark:bg-white/10 text-gray-800 dark:text-gray-200 font-medium flex items-center justify-center text-xs border border-black/5 dark:border-white/5">
