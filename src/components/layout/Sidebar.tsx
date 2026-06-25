@@ -309,6 +309,13 @@ const Sidebar = ({
   
   const unreadCount = notifications.filter(n => !n.read).length;
 
+  const handleHoverReset = useCallback(() => {
+    setPopoverView(prev => {
+      if (prev === 'accounts' || prev === 'notifications') return prev;
+      return 'main';
+    });
+  }, []);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -735,7 +742,7 @@ const Sidebar = ({
         {isProfileMenuOpen && (
           <div
             ref={popoverRef}
-            onMouseLeave={() => setPopoverView('main')}
+            onMouseLeave={handleHoverReset}
             className={`absolute bottom-14 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 ${isExpanded
                 ? 'left-2 right-2 lg:left-2 lg:right-auto lg:w-[320px]'
                 : 'left-2 right-2 lg:right-auto lg:w-[320px]'
@@ -745,7 +752,7 @@ const Sidebar = ({
               {/* 1. User Header Section */}
               <div
                 className="flex items-center gap-3 pb-1"
-                onMouseEnter={() => setPopoverView('main')}
+                onMouseEnter={handleHoverReset}
               >
                 <div className="relative flex-shrink-0">
                   <div className="w-11 h-11 rounded-full bg-black/10 dark:bg-white/10 text-gray-800 dark:text-gray-200 font-medium flex items-center justify-center text-xs border border-black/5 dark:border-white/5 shadow-inner">
@@ -927,7 +934,7 @@ const Sidebar = ({
                 {/* Token Usage metrics */}
                 <div
                   className="px-1 space-y-2.5"
-                  onMouseEnter={() => setPopoverView('main')}
+                  onMouseEnter={handleHoverReset}
                 >
                   <p className="text-xs font-medium text-gray-900 dark:text-gray-100">Token Usage</p>
 
@@ -957,7 +964,7 @@ const Sidebar = ({
                 </div>
 
                 {/* Upgrade Plan row */}
-                <div onMouseEnter={() => setPopoverView('main')}>
+                <div onMouseEnter={handleHoverReset}>
                   <button
                     onClick={() => {
                       handleNav('usage');
@@ -983,7 +990,7 @@ const Sidebar = ({
               {/* 3. Settings, Appearance, Help Section */}
               <div className="space-y-0.5">
                 <button
-                  onMouseEnter={() => setPopoverView('main')}
+                  onMouseEnter={handleHoverReset}
                   onClick={() => {
                     handleNav('paramètres');
                     setIsProfileMenuOpen(false);
@@ -1102,7 +1109,7 @@ const Sidebar = ({
               <div className="border-t border-black/10 dark:border-white/10" />
 
               {/* 4. Sign out & Notifications Section */}
-              <div className="flex items-center gap-2" onMouseEnter={() => setPopoverView('main')}>
+              <div className="flex items-center gap-2" onMouseEnter={handleHoverReset}>
                 <button
                   onClick={() => {
                     setIsProfileMenuOpen(false);
