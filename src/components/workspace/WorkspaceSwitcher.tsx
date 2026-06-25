@@ -181,7 +181,7 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
                           <span className="text-xs leading-none">{wsEmoji(ws.icon)}</span>
                           <span className="text-xs truncate">{ws.name}</span>
                           {pillText && (
-                            <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal uppercase flex-shrink-0">
+                            <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">
                               {pillText}
                             </span>
                           )}

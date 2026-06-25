@@ -678,7 +678,7 @@ const Sidebar = ({
                   {(() => {
                     const pill = getPlanPillText(activeWorkspace.plan);
                     return pill ? (
-                      <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 text-[10px] font-normal px-1.5 py-0.2 rounded border border-black/10 dark:border-white/10 shadow whitespace-nowrap uppercase tracking-wider scale-90">
+                      <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 text-[10px] font-normal px-1.5 py-0.2 rounded border border-black/10 dark:border-white/10 shadow whitespace-nowrap scale-90">
                         {pill}
                       </span>
                     ) : null;
@@ -770,7 +770,7 @@ const Sidebar = ({
                                           <span className="text-xs">{ws.icon === 'briefcase' ? '💼' : ws.icon === 'user' ? '👤' : '🏢'}</span>
                                           <span className="text-xs truncate">{ws.name}</span>
                                           {pill && (
-                                            <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal uppercase flex-shrink-0">
+                                            <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">
                                               {pill}
                                             </span>
                                           )}
@@ -1063,7 +1063,7 @@ const Sidebar = ({
             {(() => {
               const pill = getPlanPillText(activeWorkspace.plan);
               return pill ? (
-                <div className="absolute -bottom-1 -right-1 bg-gray-900 border border-white dark:border-gray-800 text-[8px] text-white px-1 rounded-full font-medium uppercase scale-90">
+                <div className="absolute -bottom-1 -right-1 bg-gray-900 border border-white dark:border-gray-800 text-[8px] text-white px-1 rounded-full font-medium scale-90">
                   {pill === 'Enterprise' ? 'Ent' : pill}
                 </div>
               ) : null;
@@ -1072,8 +1072,8 @@ const Sidebar = ({
 
           <div className={`${isExpanded ? 'flex' : 'flex lg:hidden'} flex-1 min-w-0 items-center justify-between`}>
             <div className="min-w-0">
-              <p className="text-xs font-semibold text-gray-900 dark:text-gray-100 truncate">Oppie Adirono</p>
-              <p className="text-[10px] text-gray-500 dark:text-gray-400 truncate">{activeWorkspace.name}</p>
+              <p className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate">Oppie Adirono</p>
+              <p className="text-[10px] font-normal text-gray-500 dark:text-gray-400 truncate">{activeWorkspace.name}</p>
             </div>
             <ChevronUp size={16} className="text-gray-400" />
           </div>
