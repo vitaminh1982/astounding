@@ -40,7 +40,70 @@
   --primitive-color-alpha-white-5:  rgba(255, 255, 255, 0.05);
   --primitive-color-alpha-white-10: rgba(255, 255, 255, 0.10);
 
-  /* ── Sémantiques ─────────────────────────────────────────── */
+  /* ── Sémantiques (Light Theme - Default) ─────────────────── */
+  --background:          #f2f2f2;
+  --foreground:          #0d0d0d;
+
+  --card:                #ffffff;
+  --card-foreground:     #0d0d0d;
+
+  --popover:             #ffffff;
+  --popover-foreground:  #0d0d0d;
+
+  --primary:             #0d0d0d;
+  --primary-foreground:  #ffffff;
+
+  --secondary:           #d4d4d4;
+  --secondary-foreground:#0d0d0d;
+
+  --muted:               #f2f2f2;
+  --muted-foreground:    #888888;
+
+  --accent:              #e6e6e6;
+  --accent-foreground:   #0d0d0d;
+
+  --destructive:         #888888;
+
+  --border:              #d4d4d4;
+  --input:               #ffffff;
+  --ring:                #888888;
+
+  /* ── Surfaces ────────────────────────────────────────────── */
+  --color-surface:                    #ffffff;
+  --color-surface-container-low:      #fafafa;
+  --color-surface-container:          #f2f2f2;
+  --color-surface-container-high:     #e6e6e6;
+  --color-surface-container-highest:  #d4d4d4;
+  --color-surface-bright:             #ffffff;
+
+  --color-on-surface:                 #0d0d0d;
+  --color-on-surface-variant:         #888888;
+
+  --color-outline:                    #888888;
+  --color-outline-variant:            #d4d4d4;
+
+  /* ── Couleurs thématiques → thèmes neutres ───────────────── */
+  --color-primary-green:              #0d0d0d;
+  --color-primary-container:          #d4d4d4;
+  --color-secondary-green:            #888888;
+  --color-secondary-container:        #f2f2f2;
+  --color-on-primary:                 #ffffff;
+  --color-tertiary:                   #888888;
+  --color-error:                      #888888;
+
+  /* ── Composants ──────────────────────────────────────────── */
+  --button-primary-bg:    #0d0d0d;
+  --button-primary-fg:    #ffffff;
+  --button-secondary-bg:  #d4d4d4;
+  --button-secondary-fg:  #0d0d0d;
+  --button-destructive-bg:#888888;
+  --button-destructive-fg:#ffffff;
+  --card-bg:              #ffffff;
+  --card-fg:              #0d0d0d;
+}
+
+.dark {
+  /* ── Sémantiques (Dark Theme) ────────────────────────────── */
   --background:          #0d0d0d;
   --foreground:          #f2f2f2;
 
@@ -82,7 +145,7 @@
   --color-outline:                    #888888;
   --color-outline-variant:            #2a2a2a;
 
-  /* ── Couleurs thématiques → neutralisées ─────────────────── */
+  /* ── Couleurs thématiques → thèmes neutres ───────────────── */
   --color-primary-green:              #f2f2f2;
   --color-primary-container:          #2a2a2a;
   --color-secondary-green:            #d4d4d4;

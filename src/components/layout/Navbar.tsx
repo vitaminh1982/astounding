@@ -10,6 +10,7 @@ import LanguageSwitcher from "../LanguageSwitcher";
 import { LanguageContext } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import WorkspaceModal from '../workspace/WorkspaceModal';
+import { useWorkspace } from '../../context/WorkspaceContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface NavbarProps {
@@ -39,7 +40,7 @@ const ProfileDropdown = memo(({
   onNavigate,
   t,
   onOpenWorkspaceModal,
-  theme,
+  resolvedTheme,
   toggleTheme,
   language,
   toggleLanguage,
@@ -49,12 +50,13 @@ const ProfileDropdown = memo(({
   onNavigate: (page: Page) => void;
   t: any;
   onOpenWorkspaceModal: () => void;
-  theme: string;
+  resolvedTheme: string;
   toggleTheme: () => void;
   language: string;
   toggleLanguage: () => void;
 }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { activeWorkspace } = useWorkspace();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -144,16 +146,16 @@ const ProfileDropdown = memo(({
           <button
             onClick={toggleTheme}
             className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none"
-            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            aria-label={resolvedTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
           >
             <span className="flex items-center gap-3">
-              {theme === 'light' ? (
+              {resolvedTheme === 'light' ? (
                 <Moon className="h-5 w-5 text-gray-400 dark:text-gray-500" />
               ) : (
                 <Sun className="h-5 w-5 text-gray-400 dark:text-gray-500" />
               )}
               <span className="font-medium">
-                {theme === 'light' ? 'Dark mode' : 'Light mode'}
+                {resolvedTheme === 'light' ? 'Dark mode' : 'Light mode'}
               </span>
             </span>
           </button>
@@ -192,8 +194,10 @@ const ProfileDropdown = memo(({
             aria-label="Open workspace settings"
           >
             <span className="flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-400 to-teal-500 flex-shrink-0 shadow-sm transition-colors" />
-              <span className="font-medium transition-colors">Miranki</span>
+              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-400 to-teal-500 flex-shrink-0 shadow-sm transition-colors flex items-center justify-center text-white text-xs font-semibold">
+                {activeWorkspace.name.charAt(0)}
+              </span>
+              <span className="font-medium transition-colors">{activeWorkspace.name}</span>
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse transition-colors" />
@@ -445,7 +449,7 @@ const Navbar = ({
 }: NavbarProps) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { t, language, toggleLanguage } = useContext(LanguageContext);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, resolvedTheme, toggleTheme } = useTheme();
   const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const notificationPanelRef = useRef<HTMLDivElement>(null);
@@ -636,7 +640,7 @@ const Navbar = ({
                 onNavigate={onNavigate}
                 t={t}
                 onOpenWorkspaceModal={handleOpenWorkspaceModal}
-                theme={theme}
+                resolvedTheme={resolvedTheme}
                 toggleTheme={toggleTheme}
                 language={language}
                 toggleLanguage={toggleLanguage}

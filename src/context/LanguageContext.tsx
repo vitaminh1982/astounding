@@ -1,14 +1,15 @@
 import { createContext, useState, ReactNode } from 'react'
 
-type Language = 'en' | 'fr'
+type Language = 'en' | 'fr' | 'nl'
 
 interface LanguageContextType {
   language: Language
   toggleLanguage: () => void
+  setLanguage: (lang: Language) => void
   t: (key: string) => string
 }
 
-const translations = {
+const translations: Record<string, any> = {
   en: {
     // start here
     navbar: {
@@ -30,17 +31,17 @@ const translations = {
       profile: 'Profile'
     },
     dashboard: {
-    "title": "Dashboard",
-    "overview": "Overview of your AI agents and activities",
-    "keyMetrics": "Key Metrics",
-    "latestAgents": "Latest Agents",
-    "reports": "Reports",
-    "export": "Export",
-    "newReport": "New Report",
-    "addReport": "Add Report",
-    "noReports": "No reports yet",
-    "noReportsDescription": "Create your first report to track important metrics",
-    "createFirstReport": "Create First Report",
+      "title": "Dashboard",
+      "overview": "Overview of your AI agents and activities",
+      "keyMetrics": "Key Metrics",
+      "latestAgents": "Latest Agents",
+      "reports": "Reports",
+      "export": "Export",
+      "newReport": "New Report",
+      "addReport": "Add Report",
+      "noReports": "No reports yet",
+      "noReportsDescription": "Create your first report to track important metrics",
+      "createFirstReport": "Create First Report",
       // Modal translations
       reportConfig: {
         title: 'Report Configuration',
@@ -56,6 +57,9 @@ const translations = {
     },
     sidebar: {
       menu: 'Menu',
+      work: 'Work',
+      studio: 'Studio',
+      govern: 'Govern',
       dashboard: 'Dashboard',
       aiAgents: 'AI Agents',
       governance: 'AI Governance',
@@ -195,8 +199,8 @@ const translations = {
         nameAZ: "Name A-Z",
         nameZA: "Name Z-A"
       }
-      },
-      agents: {
+    },
+    agents: {
       page: {
         header: {
           title: 'AI Agents',
@@ -259,26 +263,26 @@ const translations = {
           name: 'Proactive Chatbot',
           metrics: '456 conversations initiated'
         },
-         projectManager: {
-    name: 'Project Manager',
-    metrics: '23 milestones delivered'
-  },
-  businessAnalyst: {
-    name: 'Business Analyst',
-    metrics: '68 requirements clarified'
-  },
-  dataAnalyst: {
-    name: 'Data Analyst',
-    metrics: '34 insights generated'
-  },
-  industryExpert: {
-    name: 'Industry Expert (Finance)',
-    metrics: '26 compliance advisories'
-  },
-  pmoAnalyst: {
-    name: 'PMO Analyst',
-    metrics: '9 portfolio reports published'
-  },
+        projectManager: {
+          name: 'Project Manager',
+          metrics: '23 milestones delivered'
+        },
+        businessAnalyst: {
+          name: 'Business Analyst',
+          metrics: '68 requirements clarified'
+        },
+        dataAnalyst: {
+          name: 'Data Analyst',
+          metrics: '34 insights generated'
+        },
+        industryExpert: {
+          name: 'Industry Expert (Finance)',
+          metrics: '26 compliance advisories'
+        },
+        pmoAnalyst: {
+          name: 'PMO Analyst',
+          metrics: '9 portfolio reports published'
+        },
         gdpr: {
           name: 'GDPR & Compliance Agent',
           metrics: '244 requests processed',
@@ -346,56 +350,56 @@ const translations = {
         monitoring: 'Monitoring',
         contracts: 'Contracts',
         legalAdvice: 'Legal Advice',
-          // added for consulting agents
-  // Project Manager (PM)
-  roadmapping: 'Roadmapping',
-  riskManagement: 'Risk Management',
-  stakeholderComms: 'Stakeholder Communication',
-  agileScrum: 'Agile & Scrum',
-  sprintPlanning: 'Sprint Planning',
-  backlogManagement: 'Backlog Management',
-  changeManagement: 'Change Management',
-  kpisOkrs: 'KPIs & OKRs',
-  vendorManagement: 'Vendor Management',
-  slaManagement: 'SLA Management',
+        // added for consulting agents
+        // Project Manager (PM)
+        roadmapping: 'Roadmapping',
+        riskManagement: 'Risk Management',
+        stakeholderComms: 'Stakeholder Communication',
+        agileScrum: 'Agile & Scrum',
+        sprintPlanning: 'Sprint Planning',
+        backlogManagement: 'Backlog Management',
+        changeManagement: 'Change Management',
+        kpisOkrs: 'KPIs & OKRs',
+        vendorManagement: 'Vendor Management',
+        slaManagement: 'SLA Management',
 
-  // Business Analyst (BA)
-  requirements: 'Requirements Elicitation',
-  processModeling: 'Process Modeling',
-  userStories: 'User Stories',
-  acceptanceCriteria: 'Acceptance Criteria',
-  gapAnalysis: 'Gap Analysis',
-  stakeholderMapping: 'Stakeholder Mapping',
-  uat: 'User Acceptance Testing (UAT)',
-  testManagement: 'Test Management',
+        // Business Analyst (BA)
+        requirements: 'Requirements Elicitation',
+        processModeling: 'Process Modeling',
+        userStories: 'User Stories',
+        acceptanceCriteria: 'Acceptance Criteria',
+        gapAnalysis: 'Gap Analysis',
+        stakeholderMapping: 'Stakeholder Mapping',
+        uat: 'User Acceptance Testing (UAT)',
+        testManagement: 'Test Management',
 
-  // Data Analyst (DA)
-  dataPrep: 'Data Preparation',
-  sql: 'SQL',
-  dataVisualization: 'Data Visualization',
-  dashboarding: 'Dashboarding',
-  anomalyDetection: 'Anomaly Detection',
-  forecasting: 'Forecasting',
-  experimentation: 'Experimentation (A/B)',
-  dataQuality: 'Data Quality',
-  dataGovernance: 'Data Governance',
-  dataLineage: 'Data Lineage',
+        // Data Analyst (DA)
+        dataPrep: 'Data Preparation',
+        sql: 'SQL',
+        dataVisualization: 'Data Visualization',
+        dashboarding: 'Dashboarding',
+        anomalyDetection: 'Anomaly Detection',
+        forecasting: 'Forecasting',
+        experimentation: 'Experimentation (A/B)',
+        dataQuality: 'Data Quality',
+        dataGovernance: 'Data Governance',
+        dataLineage: 'Data Lineage',
 
-  // Industry Expert (Finance & Payments)
-  regulatoryInsights: 'Regulatory Insights',
-  riskControls: 'Risk Controls',
-  bestPractices: 'Industry Best Practices',
-  reconciliation: 'Payment Reconciliation',
-  fraudPrevention: 'Fraud Prevention',
-  kycAml: 'KYC/AML',
+        // Industry Expert (Finance & Payments)
+        regulatoryInsights: 'Regulatory Insights',
+        riskControls: 'Risk Controls',
+        bestPractices: 'Industry Best Practices',
+        reconciliation: 'Payment Reconciliation',
+        fraudPrevention: 'Fraud Prevention',
+        kycAml: 'KYC/AML',
 
-  // PMO Analyst
-  portfolioHealth: 'Portfolio Health',
-  governance: 'Governance',
-  reporting: 'Reporting',
-  resourcePlanning: 'Resource Planning',
-  benefitsRealization: 'Benefits Realization',
-  capacityPlanning: 'Capacity Planning'
+        // PMO Analyst
+        portfolioHealth: 'Portfolio Health',
+        governance: 'Governance',
+        reporting: 'Reporting',
+        resourcePlanning: 'Resource Planning',
+        benefitsRealization: 'Benefits Realization',
+        capacityPlanning: 'Capacity Planning'
       },
       status: {
         active: 'Active',
@@ -403,27 +407,27 @@ const translations = {
       }
     },
     usage: {
-    header: {
-      title: 'Usage & Analytics',
-      subtitle: 'Monitor your usage and optimize your resources',
-      refresh: 'Refresh',
-      export: 'Export Report'
-    },
-    periods: {
-      day: 'Day',
-      week: 'Week',
-      month: 'Month',
-      year: 'Year'
-    },
-    advancedOptions: {
-    show: 'Show Advanced Analytics',
-    hide: 'Hide Advanced Analytics'
-  },
-  error: {
-    title: 'Error Loading Usage Data',
-    retry: 'Try Again'
-  }
-  }
+      header: {
+        title: 'Usage & Analytics',
+        subtitle: 'Monitor your usage and optimize your resources',
+        refresh: 'Refresh',
+        export: 'Export Report'
+      },
+      periods: {
+        day: 'Day',
+        week: 'Week',
+        month: 'Month',
+        year: 'Year'
+      },
+      advancedOptions: {
+        show: 'Show Advanced Analytics',
+        hide: 'Hide Advanced Analytics'
+      },
+      error: {
+        title: 'Error Loading Usage Data',
+        retry: 'Try Again'
+      }
+    }
     ,
     templates: {
       page: {
@@ -475,7 +479,7 @@ const translations = {
         newCategory: 'New Category',
         newTemplate: 'New Template'
       },
-        categories: {
+      categories: {
         title: 'Categories',
         email: 'Email',
         whatsapp: 'WhatsApp',
@@ -499,74 +503,74 @@ const translations = {
         }
       }
     },
-// Updated translations for Prompts
-prompts: {
-  header: {
-    title: 'Prompts',
-    subtitle: 'Manage and discover AI prompts',
-    newRole: 'New Role', // Updated from newRole to newCategory based on the UI
-    generatePrompt: 'Generate New Prompt'
-  },
-  view: {
-    label: 'Label'
+    // Updated translations for Prompts
+    prompts: {
+      header: {
+        title: 'Prompts',
+        subtitle: 'Manage and discover AI prompts',
+        newRole: 'New Role', // Updated from newRole to newCategory based on the UI
+        generatePrompt: 'Generate New Prompt'
       },
-  categories: {
-    title: 'Roles',
-    all: 'All',  // Added based on UI showing "prompts.categories.all"
-    marketing: 'Marketing', // Updated from marketer to marketing based on UI
-    content_creation: 'Content Creation', // Added based on UI showing "prompts.categories.content_creation"
-    development: 'Development', // Changed from developer to development based on UI
-    support: 'Support',
-    sales: 'Sales',
-    hr: 'HR',
-    custom: 'Custom'
-  },
-  search: {
-    placeholder: 'Search for a prompt',
-    filtersButton: 'Filters', // Added based on UI showing "prompts.search.filtersButton"
-    filters: 'Filters',
-    filterOptions: {
-      sortBy: 'Sort by',
-      dateCreated: 'Date Created',
-      lastModified: 'Last Modified',
-      alphabetical: 'Alphabetical',
-      role: 'Role',
-      popularity: 'Popularity',
-      author: 'Author'
+      view: {
+        label: 'Label'
+      },
+      categories: {
+        title: 'Roles',
+        all: 'All',  // Added based on UI showing "prompts.categories.all"
+        marketing: 'Marketing', // Updated from marketer to marketing based on UI
+        content_creation: 'Content Creation', // Added based on UI showing "prompts.categories.content_creation"
+        development: 'Development', // Changed from developer to development based on UI
+        support: 'Support',
+        sales: 'Sales',
+        hr: 'HR',
+        custom: 'Custom'
+      },
+      search: {
+        placeholder: 'Search for a prompt',
+        filtersButton: 'Filters', // Added based on UI showing "prompts.search.filtersButton"
+        filters: 'Filters',
+        filterOptions: {
+          sortBy: 'Sort by',
+          dateCreated: 'Date Created',
+          lastModified: 'Last Modified',
+          alphabetical: 'Alphabetical',
+          role: 'Role',
+          popularity: 'Popularity',
+          author: 'Author'
+        }
+      },
+      list: {
+        noResultsTitle: 'No prompts found', // Added based on UI showing "prompts.list.noResultsTitle"
+        noResultsDescription: "Try changing your search or filters to find what you're looking for." // Added based on UI
+      },
+      generator: {
+        title: 'Generate AI Prompt', // Shown as "promptGenerator.title" in UI
+        subtitle: 'Create a structured prompt using the ROCKSTAR method',
+        describePrompt: 'Describe what you want the AI to do:', // Added based on UI showing "promptGenerator.describePrompt"
+        placeholder: 'E.g., Create a marketing email for a new product launch', // Shown as "promptGenerator.placeholder" in UI
+        generate: 'Generate', // Added based on UI showing "promptGenerator.generate"
+        generating: 'Generating',
+        inputLabel: 'What do you want the AI to do?',
+        inputPlaceholder: 'E.g., Create a marketing email for a new product launch',
+        generateButton: 'Generate Prompt',
+        regenerateButton: 'Regenerate',
+        saveButton: 'Save to Library',
+        editButton: 'Edit Prompt',
+        useButton: 'Use Prompt',
+        savePrompt: 'Save Prompt', // Added for the save button in the modal
+        rockstar: {
+          role: 'Role',
+          objective: 'Objective',
+          context: 'Context',
+          keywords: 'Keywords',
+          specificity: 'Specificity',
+          tone: 'Tone',
+          action: 'Action',
+          results: 'Results'
+        }
+      }
     }
-  },
-  list: {
-    noResultsTitle: 'No prompts found', // Added based on UI showing "prompts.list.noResultsTitle"
-    noResultsDescription: "Try changing your search or filters to find what you're looking for." // Added based on UI
-  },
-  generator: {
-    title: 'Generate AI Prompt', // Shown as "promptGenerator.title" in UI
-    subtitle: 'Create a structured prompt using the ROCKSTAR method',
-    describePrompt: 'Describe what you want the AI to do:', // Added based on UI showing "promptGenerator.describePrompt"
-    placeholder: 'E.g., Create a marketing email for a new product launch', // Shown as "promptGenerator.placeholder" in UI
-    generate: 'Generate', // Added based on UI showing "promptGenerator.generate"
-    generating: 'Generating',
-    inputLabel: 'What do you want the AI to do?',
-    inputPlaceholder: 'E.g., Create a marketing email for a new product launch',
-    generateButton: 'Generate Prompt',
-    regenerateButton: 'Regenerate',
-    saveButton: 'Save to Library',
-    editButton: 'Edit Prompt',
-    useButton: 'Use Prompt',
-    savePrompt: 'Save Prompt', // Added for the save button in the modal
-    rockstar: {
-      role: 'Role',
-      objective: 'Objective',
-      context: 'Context',
-      keywords: 'Keywords',
-      specificity: 'Specificity',
-      tone: 'Tone',
-      action: 'Action',
-      results: 'Results'
-    }
-  }
-}
-   ,
+    ,
     conversations: {
       title: 'Discussions',
       subtitle: 'Manage your discussions easily',
@@ -602,7 +606,7 @@ prompts: {
         resolved: "Resolved"
       }
     },
-     documents: {
+    documents: {
       title: 'Knowledge Base',
       subtitle: 'Manage your documents and assign them to agents',
       actions: {
@@ -654,141 +658,141 @@ prompts: {
       }
     },
     integrations: {
-title: 'Tools',
-subtitle: 'Connect and manage external services and data sources',
-learnMore: 'Learn More',
-searchPlaceholder: 'Search for tools',
-status: 'Status',
-connected: 'Connected',
-disconnected: 'Disconnected',
-add: 'Add',
-addTool: 'Add Tool',
-disconnect: 'Disconnect',
-configure: 'Configure',
-connect: 'Connect',
-connectedSince: 'Connected since',
-syncFrequency: 'Sync Frequency',
-realtime: 'Real-time',
-hourly: 'Hourly',
-daily: 'Daily',
-manual: 'Manual',
-accessLevel: 'Access Level',
-readOnly: 'Read Only',
-readWrite: 'Read & Write',
-fullAccess: 'Full Access',
-enableNotifications: 'Enable notifications for this integration',
-connectedTools: 'Connected Tools',
-noConnectedTools: 'No Connected Tools',
-connectedToolsDescription: 'These tools are currently connected to your workspace',
-noToolsConnected: 'No tools connected',
-noToolsConnectedDescription: 'Get started by adding your first integration',
-availableTools: 'Available Tools',
-availableToolsDescription: 'Browse and connect to available integrations',
-noToolsFound: 'No tools found',
-noToolsFoundDescription: 'Try adjusting your search or filters',
-category: 'Category',
-allCategories: 'All Categories',
-messaging: 'Messaging',
-calendar: 'Calendar',
-storage: 'Storage',
-analytics: 'Analytics',
-productivity: 'Productivity',
-crm: 'CRM',
-other: 'Other',
-integrationDetails: 'Integration Details',
-cancel: 'Cancel',
-confirmDisconnect: 'Yes, disconnect',
+      title: 'Tools',
+      subtitle: 'Connect and manage external services and data sources',
+      learnMore: 'Learn More',
+      searchPlaceholder: 'Search for tools',
+      status: 'Status',
+      connected: 'Connected',
+      disconnected: 'Disconnected',
+      add: 'Add',
+      addTool: 'Add Tool',
+      disconnect: 'Disconnect',
+      configure: 'Configure',
+      connect: 'Connect',
+      connectedSince: 'Connected since',
+      syncFrequency: 'Sync Frequency',
+      realtime: 'Real-time',
+      hourly: 'Hourly',
+      daily: 'Daily',
+      manual: 'Manual',
+      accessLevel: 'Access Level',
+      readOnly: 'Read Only',
+      readWrite: 'Read & Write',
+      fullAccess: 'Full Access',
+      enableNotifications: 'Enable notifications for this integration',
+      connectedTools: 'Connected Tools',
+      noConnectedTools: 'No Connected Tools',
+      connectedToolsDescription: 'These tools are currently connected to your workspace',
+      noToolsConnected: 'No tools connected',
+      noToolsConnectedDescription: 'Get started by adding your first integration',
+      availableTools: 'Available Tools',
+      availableToolsDescription: 'Browse and connect to available integrations',
+      noToolsFound: 'No tools found',
+      noToolsFoundDescription: 'Try adjusting your search or filters',
+      category: 'Category',
+      allCategories: 'All Categories',
+      messaging: 'Messaging',
+      calendar: 'Calendar',
+      storage: 'Storage',
+      analytics: 'Analytics',
+      productivity: 'Productivity',
+      crm: 'CRM',
+      other: 'Other',
+      integrationDetails: 'Integration Details',
+      cancel: 'Cancel',
+      confirmDisconnect: 'Yes, disconnect',
       saveSuccess: 'Save',
-saveError: 'Failed to save configuration',
-"authDescription": "Provide your credentials to connect",
-  filters: {
-    category: 'Category',
-    categories: {
-    category: 'Category',
-    all: 'All Categories',
-    messaging: 'Messaging',
-    calendar: 'Calendar',
-    storage: 'Storage',
-    analytics: 'Analytics',
-    productivity: 'Productivity',
-    crm: 'CRM',
-    other: 'Other',
-    status: 'Status',
-    connected: 'Connected',
-    disconnected: 'Disconnected',
-      email: "Email",
-        automation: "Automation",
-        ecommerce: "E-commerce",
-        payment: "Payment",
-        project: "Project Management"
+      saveError: 'Failed to save configuration',
+      "authDescription": "Provide your credentials to connect",
+      filters: {
+        category: 'Category',
+        categories: {
+          category: 'Category',
+          all: 'All Categories',
+          messaging: 'Messaging',
+          calendar: 'Calendar',
+          storage: 'Storage',
+          analytics: 'Analytics',
+          productivity: 'Productivity',
+          crm: 'CRM',
+          other: 'Other',
+          status: 'Status',
+          connected: 'Connected',
+          disconnected: 'Disconnected',
+          email: "Email",
+          automation: "Automation",
+          ecommerce: "E-commerce",
+          payment: "Payment",
+          project: "Project Management"
+        }
+      },
+      configuration: {
+        authDescription: 'Provide your credentials to connect to {name}',
+        realtime: 'Real-time',
+        hourly: 'Hourly',
+        daily: 'Daily',
+        manual: 'Manual',
+        accessLevel: 'Access Level',
+        readOnly: 'Read Only',
+        readWrite: 'Read & Write',
+        fullAccess: 'Full Access',
+        enableNotifications: 'Enable notifications for this integration',
+        integrationDetails: 'Integration Details'
+      },
+      actions: {
+        learnMore: 'Learn More',
+        add: 'Add',
+        addTool: 'Add Tool',
+        disconnect: 'Disconnect',
+        configure: 'Configure',
+        connect: 'Connect',
+        cancel: 'Cancel',
+        confirmDisconnect: 'Yes, disconnect'
+      },
+      search: {
+        placeholder: 'Search for tools',
+        ariaLabel: 'Search tools',
+        filters: 'Filters',
+        noResults: 'No tools found',
+        clearSearch: 'Clear search'
+      },
+      grid: {
+        emptyState: 'No tools found',
+        connectedTools: 'Connected Tools',
+        noConnectedTools: 'No Connected Tools',
+        availableTools: 'Available Tools',
+        connectedSince: 'Connected since',
+        syncFrequency: 'Sync Frequency'
+      },
+      descriptions: {
+        connectedToolsDescription: 'These tools are currently connected to your workspace',
+        noToolsConnectedDescription: 'Get started by adding your first integration',
+        availableToolsDescription: 'Browse and connect to available integrations',
+        noToolsFoundDescription: 'Try adjusting your search or filters',
+        disconnectConfirm: 'Are you sure you want to disconnect {name}?',
+        disconnectDescription: 'This will remove all access and data sync will stop. This won\'t delete any data that has already been synced.'
+      },
+      messages: {
+        connectSuccess: 'Successfully connected to {name}',
+        connectError: 'Failed to connect to {name}',
+        disconnectSuccess: 'Successfully disconnected from {name}',
+        disconnectError: 'Failed to disconnect from {name}',
+        saveSuccess: 'Save',
+        saveError: 'Failed to save configuration'
+      },
+      aria: {
+        searchTools: 'Search tools',
+        filterByCategory: 'Filter by category',
+        filterByType: 'Filter by type',
+        filterByStatus: 'Filter by status',
+        configureButton: 'Configure integration',
+        connectButton: 'Connect integration',
+        disconnectButton: 'Disconnect integration',
+        closeModal: 'Close modal'
       }
-  },
-  configuration: {
-    authDescription: 'Provide your credentials to connect to {name}',
-    realtime: 'Real-time',
-    hourly: 'Hourly',
-    daily: 'Daily',
-    manual: 'Manual',
-    accessLevel: 'Access Level',
-    readOnly: 'Read Only',
-    readWrite: 'Read & Write',
-    fullAccess: 'Full Access',
-    enableNotifications: 'Enable notifications for this integration',
-    integrationDetails: 'Integration Details'
-  },
-  actions: {
-    learnMore: 'Learn More',
-    add: 'Add',
-    addTool: 'Add Tool',
-    disconnect: 'Disconnect',
-    configure: 'Configure',
-    connect: 'Connect',
-    cancel: 'Cancel',
-    confirmDisconnect: 'Yes, disconnect'
-  },
-  search: {
-    placeholder: 'Search for tools',
-    ariaLabel: 'Search tools',
-    filters: 'Filters',
-    noResults: 'No tools found',
-    clearSearch: 'Clear search'
-  },
-  grid: {
-    emptyState: 'No tools found',
-    connectedTools: 'Connected Tools',
-    noConnectedTools: 'No Connected Tools',
-    availableTools: 'Available Tools',
-    connectedSince: 'Connected since',
-    syncFrequency: 'Sync Frequency'
-  },
-  descriptions: {
-    connectedToolsDescription: 'These tools are currently connected to your workspace',
-    noToolsConnectedDescription: 'Get started by adding your first integration',
-    availableToolsDescription: 'Browse and connect to available integrations',
-    noToolsFoundDescription: 'Try adjusting your search or filters',
-    disconnectConfirm: 'Are you sure you want to disconnect {name}?',
-    disconnectDescription: 'This will remove all access and data sync will stop. This won\'t delete any data that has already been synced.'
-  },
-  messages: {
-    connectSuccess: 'Successfully connected to {name}',
-    connectError: 'Failed to connect to {name}',
-    disconnectSuccess: 'Successfully disconnected from {name}',
-    disconnectError: 'Failed to disconnect from {name}',
-    saveSuccess: 'Save',
-    saveError: 'Failed to save configuration'
-  },
-  aria: {
-    searchTools: 'Search tools',
-    filterByCategory: 'Filter by category',
-    filterByType: 'Filter by type',
-    filterByStatus: 'Filter by status',
-    configureButton: 'Configure integration',
-    connectButton: 'Connect integration',
-    disconnectButton: 'Disconnect integration',
-    closeModal: 'Close modal'
-  }
-}
-,
+    }
+    ,
     settings: {
       title: "Settings",
       subtitle: "Manage your settings here",
@@ -870,8 +874,8 @@ saveError: 'Failed to save configuration',
           name: "HR Assistant",
           description: "Assists human resources in managing administrative tasks"
         }
-      },  
-    
+      },
+
       // Tabs
       tabs: {
         design: "Designer",
@@ -882,7 +886,7 @@ saveError: 'Failed to save configuration',
         rules: "Rules",
         errorHandling: "Error Handling"
       },
-    
+
       // Status (used in getStatusColor)
       status: {
         active: "Active",
@@ -890,18 +894,18 @@ saveError: 'Failed to save configuration',
         paused: "Paused",
         error: "Error"
       },
-    
+
       // Empty state messages
       noWorkflowSelected: "No Workflow Selected",
       selectWorkflowPrompt: "Select a workflow from the list or create a new one to get started"
     }
 
-    
+
     // end here
   },
   fr: {
     // démarre ici
-    
+
     navbar: {
       administrator: 'Admin',
       profile: 'Profil',
@@ -922,6 +926,9 @@ saveError: 'Failed to save configuration',
     },
     sidebar: {
       menu: 'Menu',
+      work: 'Work',
+      studio: 'Studio',
+      govern: 'Govern',
       dashboard: 'Tableau de bord',
       aiAgents: 'Agents IA',
       governance: 'Gouvernance IA',
@@ -961,8 +968,8 @@ saveError: 'Failed to save configuration',
       reports: 'Rapports',
       addReport: 'Ajouter un rapport',
       noReports: 'Aucun rapport disponible. Créez votre premier rapport en cliquant sur le bouton "Ajouter un rapport".',
-          "noReportsDescription": "Créez votre premier rapport pour suivre les métriques importantes",
-    "createFirstReport": "Créer votre premier rapport",
+      "noReportsDescription": "Créez votre premier rapport pour suivre les métriques importantes",
+      "createFirstReport": "Créer votre premier rapport",
       // Traductions du modal
       reportConfig: {
         title: 'Configuration du rapport',
@@ -1151,27 +1158,27 @@ saveError: 'Failed to save configuration',
           name: 'Chatbot Proactif',
           metrics: '56 conversations initiées'
         },
-  projectManager: {
-    name: 'Chef de projet',
-    metrics: '23 jalons livrés'
-  },
-  businessAnalyst: {
-    name: 'Analyste métier',
-    metrics: '68 exigences clarifiées'
-  },
-  dataAnalyst: {
-    name: 'Analyste données',
-    metrics: '34 analyses produites'
-  },
-  industryExpert: {
-    name: 'Expert Finance',
-    metrics: '26 avis de conformité'
-  },
-  pmoAnalyst: {
-    name: 'Analyste PMO',
-    metrics: '9 rapports de portefeuille publiés'
-  },
-        
+        projectManager: {
+          name: 'Chef de projet',
+          metrics: '23 jalons livrés'
+        },
+        businessAnalyst: {
+          name: 'Analyste métier',
+          metrics: '68 exigences clarifiées'
+        },
+        dataAnalyst: {
+          name: 'Analyste données',
+          metrics: '34 analyses produites'
+        },
+        industryExpert: {
+          name: 'Expert Finance',
+          metrics: '26 avis de conformité'
+        },
+        pmoAnalyst: {
+          name: 'Analyste PMO',
+          metrics: '9 rapports de portefeuille publiés'
+        },
+
         gdpr: {
           name: 'Agent RGPD & Conformité',
           metrics: '44 demandes traitées',
@@ -1239,56 +1246,56 @@ saveError: 'Failed to save configuration',
         monitoring: 'Surveillance',
         contracts: 'Contrats',
         legalAdvice: 'Conseil juridique',
-          // ajoutées pour les agents de conseil
-  // Chef de projet (PM)
-  roadmapping: 'Feuille de route',
-  riskManagement: 'Gestion des risques',
-  stakeholderComms: 'Communication avec les parties prenantes',
-  agileScrum: 'Agile & Scrum',
-  sprintPlanning: 'Planification des sprints',
-  backlogManagement: 'Gestion du backlog',
-  changeManagement: 'Gestion du changement',
-  kpisOkrs: 'Indicateurs (KPI) & OKR',
-  vendorManagement: 'Gestion des fournisseurs',
-  slaManagement: 'Gestion des SLA',
+        // ajoutées pour les agents de conseil
+        // Chef de projet (PM)
+        roadmapping: 'Feuille de route',
+        riskManagement: 'Gestion des risques',
+        stakeholderComms: 'Communication avec les parties prenantes',
+        agileScrum: 'Agile & Scrum',
+        sprintPlanning: 'Planification des sprints',
+        backlogManagement: 'Gestion du backlog',
+        changeManagement: 'Gestion du changement',
+        kpisOkrs: 'Indicateurs (KPI) & OKR',
+        vendorManagement: 'Gestion des fournisseurs',
+        slaManagement: 'Gestion des SLA',
 
-  // Analyste métier (BA)
-  requirements: 'Recueil des exigences',
-  processModeling: 'Modélisation des processus',
-  userStories: 'User stories',
-  acceptanceCriteria: 'Critères d\'acceptation',
-  gapAnalysis: 'Analyse des écarts',
-  stakeholderMapping: 'Cartographie des parties prenantes',
-  uat: 'Tests d\'acceptation utilisateur (UAT)',
-  testManagement: 'Gestion des tests',
+        // Analyste métier (BA)
+        requirements: 'Recueil des exigences',
+        processModeling: 'Modélisation des processus',
+        userStories: 'User stories',
+        acceptanceCriteria: 'Critères d\'acceptation',
+        gapAnalysis: 'Analyse des écarts',
+        stakeholderMapping: 'Cartographie des parties prenantes',
+        uat: 'Tests d\'acceptation utilisateur (UAT)',
+        testManagement: 'Gestion des tests',
 
-  // Analyste données (DA)
-  dataPrep: 'Préparation des données',
-  sql: 'SQL',
-  dataVisualization: 'Visualisation des données',
-  dashboarding: 'Tableaux de bord',
-  anomalyDetection: 'Détection d\'anomalies',
-  forecasting: 'Prévision',
-  experimentation: 'Expérimentation (A/B)',
-  dataQuality: 'Qualité des données',
-  dataGovernance: 'Gouvernance des données',
-  dataLineage: 'Traçabilité des données',
+        // Analyste données (DA)
+        dataPrep: 'Préparation des données',
+        sql: 'SQL',
+        dataVisualization: 'Visualisation des données',
+        dashboarding: 'Tableaux de bord',
+        anomalyDetection: 'Détection d\'anomalies',
+        forecasting: 'Prévision',
+        experimentation: 'Expérimentation (A/B)',
+        dataQuality: 'Qualité des données',
+        dataGovernance: 'Gouvernance des données',
+        dataLineage: 'Traçabilité des données',
 
-  // Expert sectoriel (Finance & Paiements)
-  regulatoryInsights: 'Veille réglementaire',
-  riskControls: 'Contrôles des risques',
-  bestPractices: 'Bonnes pratiques sectorielles',
-  reconciliation: 'Rapprochement des paiements',
-  fraudPrevention: 'Prévention de la fraude',
-  kycAml: 'KYC / LBC-FT',
+        // Expert sectoriel (Finance & Paiements)
+        regulatoryInsights: 'Veille réglementaire',
+        riskControls: 'Contrôles des risques',
+        bestPractices: 'Bonnes pratiques sectorielles',
+        reconciliation: 'Rapprochement des paiements',
+        fraudPrevention: 'Prévention de la fraude',
+        kycAml: 'KYC / LBC-FT',
 
-  // Analyste PMO
-  portfolioHealth: 'Santé du portefeuille',
-  governance: 'Gouvernance',
-  reporting: 'Reporting',
-  resourcePlanning: 'Planification des ressources',
-  benefitsRealization: 'Réalisation des bénéfices',
-  capacityPlanning: 'Planification de capacité'
+        // Analyste PMO
+        portfolioHealth: 'Santé du portefeuille',
+        governance: 'Gouvernance',
+        reporting: 'Reporting',
+        resourcePlanning: 'Planification des ressources',
+        benefitsRealization: 'Réalisation des bénéfices',
+        capacityPlanning: 'Planification de capacité'
       },
       status: {
         active: 'Actif',
@@ -1296,27 +1303,27 @@ saveError: 'Failed to save configuration',
       }
     },
     usage: {
-    header: {
-      title: 'Utilisation & Analytiques',
-      subtitle: 'Surveillez votre utilisation et optimisez vos ressources',
-      refresh: 'Actualiser',
-      export: 'Exporter le Rapport'
-    },
-    periods: {
-      day: 'Jour',
-      week: 'Semaine',
-      month: 'Mois',
-      year: 'Année'
-    },
+      header: {
+        title: 'Utilisation & Analytiques',
+        subtitle: 'Surveillez votre utilisation et optimisez vos ressources',
+        refresh: 'Actualiser',
+        export: 'Exporter le Rapport'
+      },
+      periods: {
+        day: 'Jour',
+        week: 'Semaine',
+        month: 'Mois',
+        year: 'Année'
+      },
       advancedOptions: {
-    show: 'Afficher les Analytiques Avancées',
-    hide: 'Masquer les Analytiques Avancées'
-  },
-  error: {
-    title: 'Erreur de Chargement des Données d\'Utilisation',
-    retry: 'Réessayer'
-  }
-  }
+        show: 'Afficher les Analytiques Avancées',
+        hide: 'Masquer les Analytiques Avancées'
+      },
+      error: {
+        title: 'Erreur de Chargement des Données d\'Utilisation',
+        retry: 'Réessayer'
+      }
+    }
     ,
     templates: {
       page: {
@@ -1392,75 +1399,75 @@ saveError: 'Failed to save configuration',
         }
       }
     },
-// Traductions en français pour les Prompts
-prompts: {
-  header: {
-    title: 'Prompts',
-    subtitle: 'Gérer et découvrir des prompts IA',
-    newRole: 'Nouveau Rôle',
-    generatePrompt: 'Générer un Nouveau Prompt'
-  },
-    view: {
-    label: 'Libellé'
+    // Traductions en français pour les Prompts
+    prompts: {
+      header: {
+        title: 'Prompts',
+        subtitle: 'Gérer et découvrir des prompts IA',
+        newRole: 'Nouveau Rôle',
+        generatePrompt: 'Générer un Nouveau Prompt'
       },
-  categories: {
-    title: 'Rôles',
-    all: 'Tous',
-    marketing: 'Marketing',
-    content_creation: 'Création de Contenu',
-    development: 'Développement',
-    support: 'Support',
-    sales: 'Ventes',
-    hr: 'RH',
-    custom: 'Personnalisé'
-  },
-  search: {
-    placeholder: 'Rechercher un prompt',
-    filtersButton: 'Filtres',
-    filters: 'Filtres',
-    filterOptions: {
-      sortBy: 'Trier par',
-      dateCreated: 'Date de création',
-      lastModified: 'Dernière modification',
-      alphabetical: 'Ordre alphabétique',
-      role: 'Rôle',
-      popularity: 'Popularité',
-      author: 'Auteur'
+      view: {
+        label: 'Libellé'
+      },
+      categories: {
+        title: 'Rôles',
+        all: 'Tous',
+        marketing: 'Marketing',
+        content_creation: 'Création de Contenu',
+        development: 'Développement',
+        support: 'Support',
+        sales: 'Ventes',
+        hr: 'RH',
+        custom: 'Personnalisé'
+      },
+      search: {
+        placeholder: 'Rechercher un prompt',
+        filtersButton: 'Filtres',
+        filters: 'Filtres',
+        filterOptions: {
+          sortBy: 'Trier par',
+          dateCreated: 'Date de création',
+          lastModified: 'Dernière modification',
+          alphabetical: 'Ordre alphabétique',
+          role: 'Rôle',
+          popularity: 'Popularité',
+          author: 'Auteur'
+        }
+      },
+      list: {
+        noResultsTitle: 'Aucun prompt trouvé',
+        noResultsDescription: 'Essayez de modifier votre recherche ou vos filtres pour trouver ce que vous cherchez.'
+      },
+      generator: {
+        title: 'Générer un Prompt IA',
+        subtitle: 'Créer un prompt structuré en utilisant la méthode ROCKSTAR',
+        describePrompt: 'Décrivez ce que vous voulez que l\'IA fasse:',
+        placeholder: 'Ex., Créer un e-mail marketing pour le lancement d\'un nouveau produit',
+        generate: 'Générer',
+        generating: 'En cours de génération',
+        inputLabel: 'Que souhaitez-vous que l\'IA fasse?',
+        inputPlaceholder: 'Ex., Créer un e-mail marketing pour le lancement d\'un nouveau produit',
+        generateButton: 'Générer le Prompt',
+        regenerateButton: 'Régénérer',
+        saveButton: 'Enregistrer dans la Bibliothèque',
+        editButton: 'Modifier le Prompt',
+        useButton: 'Utiliser le Prompt',
+        savePrompt: 'Enregistrer le Prompt',
+        rockstar: {
+          role: 'Rôle',
+          objective: 'Objectif',
+          context: 'Contexte',
+          keywords: 'Mots-clés',
+          specificity: 'Spécificité',
+          tone: 'Ton',
+          action: 'Action',
+          results: 'Résultats'
+        }
+      }
     }
-  },
-  list: {
-    noResultsTitle: 'Aucun prompt trouvé',
-    noResultsDescription: 'Essayez de modifier votre recherche ou vos filtres pour trouver ce que vous cherchez.'
-  },
-  generator: {
-    title: 'Générer un Prompt IA',
-    subtitle: 'Créer un prompt structuré en utilisant la méthode ROCKSTAR',
-    describePrompt: 'Décrivez ce que vous voulez que l\'IA fasse:',
-    placeholder: 'Ex., Créer un e-mail marketing pour le lancement d\'un nouveau produit',
-    generate: 'Générer',
-    generating: 'En cours de génération',
-    inputLabel: 'Que souhaitez-vous que l\'IA fasse?',
-    inputPlaceholder: 'Ex., Créer un e-mail marketing pour le lancement d\'un nouveau produit',
-    generateButton: 'Générer le Prompt',
-    regenerateButton: 'Régénérer',
-    saveButton: 'Enregistrer dans la Bibliothèque',
-    editButton: 'Modifier le Prompt',
-    useButton: 'Utiliser le Prompt',
-    savePrompt: 'Enregistrer le Prompt',
-    rockstar: {
-      role: 'Rôle',
-      objective: 'Objectif',
-      context: 'Contexte',
-      keywords: 'Mots-clés',
-      specificity: 'Spécificité',
-      tone: 'Ton',
-      action: 'Action',
-      results: 'Résultats'
-    }
-  }
-}
 
-    
+
     ,
     conversations: {
       title: 'Discussions',
@@ -1497,7 +1504,7 @@ prompts: {
         resolved: "Résolu"
       }
     },
-     documents: {
+    documents: {
       title: 'Base de Connaissances',
       subtitle: 'Gérez vos documents et assignez-les aux agents',
       actions: {
@@ -1549,144 +1556,144 @@ prompts: {
       }
     },
     integrations: {
-title: 'Outils',
-subtitle: 'Connecter et gérer les services et les sources de données externes',
-learnMore: 'En savoir plus',
-searchPlaceholder: 'Rechercher des outils',
-status: 'État',
-connected: 'Connecté',
-disconnected: 'Déconnecté',
-add: 'Ajouter',
-addTool: 'Ajouter un outil',
-disconnect: 'Déconnecter',
-configure: 'Configurer',
-connect: 'Se connecter',
-connectedSince: 'Connecté depuis',
-syncFrequency: 'Fréquence de synchronisation',
-realtime: 'Temps réel',
-hourly: 'Toutes les heures',
-daily: 'Quotidien',
-manual: 'Manuel',
-accessLevel: "Niveau d'accès",
-readOnly: 'Lecture seule',
-readWrite: 'Lecture et écriture',
-fullAccess: 'Accès complet',
-enableNotifications: 'Activer les notifications pour cette intégration',
-connectedTools: 'Outils connectés',
-noConnectedTools: 'Aucun outil connecté',
-connectedToolsDescription: 'Ces outils sont actuellement connectés à votre espace de travail',
-noToolsConnected: 'Aucun outil connecté',
-noToolsConnectedDescription: 'Commencez par ajouter votre première intégration',
-availableTools: 'Outils disponibles',
-availableToolsDescription: 'Parcourir et connecter les intégrations disponibles',
-noToolsFound: 'Aucun outil trouvé',
-noToolsFoundDescription: "Essayez d'ajuster votre recherche ou vos filtres",
-category: 'Catégorie',
-allCategories: 'Toutes les catégories',
-messaging: 'Messagerie',
-calendar: 'Calendrier',
-storage: 'Stockage',
-analytics: 'Analytiques',
-productivity: 'Productivité',
-crm: 'Gestion de la relation client',
-other: 'Autre',
-integrationDetails: "Détails de l'intégration",
-cancel: 'Annuler',
-confirmDisconnect: 'Oui, déconnecter',
-saveSuccess: 'Enregistrer',
-saveError: "Échec de l'enregistrement de la configuration",
-"authDescription": "Fournir vos informations d'identification pour vous connecter",
-filters: {
-  category: 'Catégorie',
-categories: {
-category: 'Catégorie',
-all: 'Toutes les catégories',
-messaging: 'Messagerie',
-calendar: 'Calendrier',
-storage: 'Stockage',
-analytics: 'Analytiques',
-productivity: 'Productivité',
-crm: 'Gestion de la relation client',
-other: 'Autre',
-status: 'État',
-connected: 'Connecté',
-disconnected: 'Déconnecté',
-  email: 'Email',
-  automation: "Automatisation",
-  ecommerce: "E-commerce",
-  payment: "Paiement",
-  project: "Gestion de project"
-}
-},
+      title: 'Outils',
+      subtitle: 'Connecter et gérer les services et les sources de données externes',
+      learnMore: 'En savoir plus',
+      searchPlaceholder: 'Rechercher des outils',
+      status: 'État',
+      connected: 'Connecté',
+      disconnected: 'Déconnecté',
+      add: 'Ajouter',
+      addTool: 'Ajouter un outil',
+      disconnect: 'Déconnecter',
+      configure: 'Configurer',
+      connect: 'Se connecter',
+      connectedSince: 'Connecté depuis',
+      syncFrequency: 'Fréquence de synchronisation',
+      realtime: 'Temps réel',
+      hourly: 'Toutes les heures',
+      daily: 'Quotidien',
+      manual: 'Manuel',
+      accessLevel: "Niveau d'accès",
+      readOnly: 'Lecture seule',
+      readWrite: 'Lecture et écriture',
+      fullAccess: 'Accès complet',
+      enableNotifications: 'Activer les notifications pour cette intégration',
+      connectedTools: 'Outils connectés',
+      noConnectedTools: 'Aucun outil connecté',
+      connectedToolsDescription: 'Ces outils sont actuellement connectés à votre espace de travail',
+      noToolsConnected: 'Aucun outil connecté',
+      noToolsConnectedDescription: 'Commencez par ajouter votre première intégration',
+      availableTools: 'Outils disponibles',
+      availableToolsDescription: 'Parcourir et connecter les intégrations disponibles',
+      noToolsFound: 'Aucun outil trouvé',
+      noToolsFoundDescription: "Essayez d'ajuster votre recherche ou vos filtres",
+      category: 'Catégorie',
+      allCategories: 'Toutes les catégories',
+      messaging: 'Messagerie',
+      calendar: 'Calendrier',
+      storage: 'Stockage',
+      analytics: 'Analytiques',
+      productivity: 'Productivité',
+      crm: 'Gestion de la relation client',
+      other: 'Autre',
+      integrationDetails: "Détails de l'intégration",
+      cancel: 'Annuler',
+      confirmDisconnect: 'Oui, déconnecter',
+      saveSuccess: 'Enregistrer',
+      saveError: "Échec de l'enregistrement de la configuration",
+      "authDescription": "Fournir vos informations d'identification pour vous connecter",
+      filters: {
+        category: 'Catégorie',
+        categories: {
+          category: 'Catégorie',
+          all: 'Toutes les catégories',
+          messaging: 'Messagerie',
+          calendar: 'Calendrier',
+          storage: 'Stockage',
+          analytics: 'Analytiques',
+          productivity: 'Productivité',
+          crm: 'Gestion de la relation client',
+          other: 'Autre',
+          status: 'État',
+          connected: 'Connecté',
+          disconnected: 'Déconnecté',
+          email: 'Email',
+          automation: "Automatisation",
+          ecommerce: "E-commerce",
+          payment: "Paiement",
+          project: "Gestion de project"
+        }
+      },
 
-actions: {
-learnMore: 'En savoir plus',
-add: 'Ajouter',
-addTool: 'Ajouter un outil',
-disconnect: 'Déconnecter',
-configure: 'Configurer',
-connect: "Se connecter",
-cancel: 'Annuler',
-confirmDisconnect: 'Oui, déconnecter'
-},
-search: {
-placeholder: 'Rechercher des outils',
-ariaLabel: "Rechercher des outils",
-filters: 'Filtres',
-noResults: 'Aucun outil trouvé',
-clearSearch: 'Effacer la recherche'
-},
-grid: {
-emptyState: 'Aucun outil trouvé',
-connectedTools: 'Outils connectés',
-noConnectedTools: 'Aucun outil connecté',
-availableTools: 'Outils disponibles',
-connectedSince: 'Connecté depuis',
-syncFrequency: 'Fréquence de synchronisation'
-},
-configuration: {
-authDescription: "Fournir vos informations d'identification pour vous connecter à {name}",
-realtime: 'Temps réel',
-hourly: 'Toutes les heures',
-daily: 'Quotidien',
-manual: 'Manuel',
-accessLevel: "Niveau d'accès",
-readOnly: 'Lecture seule',
-readWrite: 'Lecture et écriture',
-fullAccess: 'Accès complet',
-enableNotifications: 'Activer les notifications pour cette intégration',
-integrationDetails: "Détails de l'intégration"
-},
-descriptions: {
-connectedToolsDescription: 'Ces outils sont actuellement connectés à votre espace de travail',
-noToolsConnectedDescription: 'Commencez par ajouter votre première intégration',
-availableToolsDescription: 'Parcourir et connecter les intégrations disponibles',
-noToolsFoundDescription: "Essayez d'ajuster votre recherche ou vos filtres",
-disconnectConfirm: "Êtes-vous sûr de vouloir déconnecter {name}?",
-disconnectDescription: "Cela supprimera toutes les connexions et l'arrêt de la synchronisation des données. Cela ne supprimera pas les données qui ont déjà été synchronisées."
-},
-messages: {
-connectSuccess: 'Connecté avec succès à {name}',
-connectError: 'Échec de la connexion à {name}',
-disconnectSuccess: 'Déconnecté avec succès de {name}',
-disconnectError: 'Échec de la déconnexion de {name}',
-saveSuccess: 'Enregistrer',
-saveError: "Échec de l'enregistrement de la configuration"
-},
-aria: {
-searchTools: 'Rechercher des outils',
-filterByCategory: 'Filtrer par catégorie',
-filterByType: 'Filtrer par type',
-filterByStatus: 'Filtrer par état',
-configureButton: "Configurer l'intégration",
-connectButton: "Se connecter à l'intégration",
-disconnectButton: "Déconnecter l'intégration",
-closeModal: 'Fermer la modale'
-}
-}
+      actions: {
+        learnMore: 'En savoir plus',
+        add: 'Ajouter',
+        addTool: 'Ajouter un outil',
+        disconnect: 'Déconnecter',
+        configure: 'Configurer',
+        connect: "Se connecter",
+        cancel: 'Annuler',
+        confirmDisconnect: 'Oui, déconnecter'
+      },
+      search: {
+        placeholder: 'Rechercher des outils',
+        ariaLabel: "Rechercher des outils",
+        filters: 'Filtres',
+        noResults: 'Aucun outil trouvé',
+        clearSearch: 'Effacer la recherche'
+      },
+      grid: {
+        emptyState: 'Aucun outil trouvé',
+        connectedTools: 'Outils connectés',
+        noConnectedTools: 'Aucun outil connecté',
+        availableTools: 'Outils disponibles',
+        connectedSince: 'Connecté depuis',
+        syncFrequency: 'Fréquence de synchronisation'
+      },
+      configuration: {
+        authDescription: "Fournir vos informations d'identification pour vous connecter à {name}",
+        realtime: 'Temps réel',
+        hourly: 'Toutes les heures',
+        daily: 'Quotidien',
+        manual: 'Manuel',
+        accessLevel: "Niveau d'accès",
+        readOnly: 'Lecture seule',
+        readWrite: 'Lecture et écriture',
+        fullAccess: 'Accès complet',
+        enableNotifications: 'Activer les notifications pour cette intégration',
+        integrationDetails: "Détails de l'intégration"
+      },
+      descriptions: {
+        connectedToolsDescription: 'Ces outils sont actuellement connectés à votre espace de travail',
+        noToolsConnectedDescription: 'Commencez par ajouter votre première intégration',
+        availableToolsDescription: 'Parcourir et connecter les intégrations disponibles',
+        noToolsFoundDescription: "Essayez d'ajuster votre recherche ou vos filtres",
+        disconnectConfirm: "Êtes-vous sûr de vouloir déconnecter {name}?",
+        disconnectDescription: "Cela supprimera toutes les connexions et l'arrêt de la synchronisation des données. Cela ne supprimera pas les données qui ont déjà été synchronisées."
+      },
+      messages: {
+        connectSuccess: 'Connecté avec succès à {name}',
+        connectError: 'Échec de la connexion à {name}',
+        disconnectSuccess: 'Déconnecté avec succès de {name}',
+        disconnectError: 'Échec de la déconnexion de {name}',
+        saveSuccess: 'Enregistrer',
+        saveError: "Échec de l'enregistrement de la configuration"
+      },
+      aria: {
+        searchTools: 'Rechercher des outils',
+        filterByCategory: 'Filtrer par catégorie',
+        filterByType: 'Filtrer par type',
+        filterByStatus: 'Filtrer par état',
+        configureButton: "Configurer l'intégration",
+        connectButton: "Se connecter à l'intégration",
+        disconnectButton: "Déconnecter l'intégration",
+        closeModal: 'Fermer la modale'
+      }
+    }
 
     ,
-     settings: {
+    settings: {
       title: "Paramètres",
       subtitle: "Gérez vos paramètres ici",
       sections: {
@@ -1776,15 +1783,15 @@ closeModal: 'Fermer la modale'
           name: "Assistant RH",
           description: "Assiste les RH dans la gestion des tâches administratives"
         }
-      },  
-    
+      },
+
       status: {
         active: "Actif",
         draft: "Brouillon",
         paused: "En pause",
         error: "Erreur"
       },
-    
+
       noWorkflowSelected: "Aucun flux sélectionné",
       selectWorkflowPrompt: "Sélectionnez un flux dans la liste ou créez-en un nouveau pour commencer"
     }
@@ -1793,9 +1800,21 @@ closeModal: 'Fermer la modale'
   }
 }
 
+translations.nl = {
+  ...translations.en,
+  sidebar: {
+    ...translations.en.sidebar,
+    work: 'Work',
+    studio: 'Studio',
+    govern: 'Govern',
+    dashboard: 'Dashboard',
+  }
+}
+
 export const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
-  toggleLanguage: () => {},
+  toggleLanguage: () => { },
+  setLanguage: () => { },
   t: (key: string) => key
 })
 
@@ -1803,14 +1822,14 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguage] = useState<Language>('en')
 
   const toggleLanguage = () => {
-    setLanguage(prev => (prev === 'en' ? 'fr' : 'en'))
+    setLanguage(prev => (prev === 'en' ? 'fr' : prev === 'fr' ? 'nl' : 'en'))
   }
 
   const t = (key: string) => {
     // Split the key by dots to access nested properties
     const keys = key.split('.')
     let value = translations[language]
-    
+
     // Traverse the nested object
     for (const k of keys) {
       value = value?.[k]
@@ -1819,12 +1838,12 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
         return key // Return the key if translation is not found
       }
     }
-    
+
     return value as string
   }
 
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, t }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   )

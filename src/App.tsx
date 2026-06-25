@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { WorkspaceProvider } from './context/WorkspaceContext';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
@@ -257,10 +258,12 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <ThemeProvider defaultTheme="light" storageKey="app-theme">
-        <LanguageProvider>
-          <AppContent />
-        </LanguageProvider>
+      <ThemeProvider defaultTheme="system" storageKey="app-theme">
+        <WorkspaceProvider>
+          <LanguageProvider>
+            <AppContent />
+          </LanguageProvider>
+        </WorkspaceProvider>
       </ThemeProvider>
     </Router>
   );

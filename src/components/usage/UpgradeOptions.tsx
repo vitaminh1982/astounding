@@ -38,8 +38,21 @@ export default function UpgradeOptions() {
   
   const plans: Plan[] = [
     {
-      name: 'Starter',
-      description: 'Collaborate across 10 users at one time',
+      name: 'Free',
+      description: 'Get started for free, best for personal use',
+      price: '0€',
+      conversations: 1000,
+      isAvailable: true,
+      features: [
+        '1,000 Conversations Per Month',
+        'Chat with 3 Documents',
+        'Deploy 2 Pre-Built Agents',
+        'Integrate 1 Custom Tool'
+      ]
+    },
+    {
+      name: 'Pro',
+      description: 'Collaborate with your team members',
       price: '49€',
       conversations: 5000,
       isAvailable: true,
@@ -53,41 +66,24 @@ export default function UpgradeOptions() {
         'Chat with 10 Documents',
         'Deploy 10 Pre-Built Agents',
         'Integrate 10 Custom Tools',
-        'Limited Automated Workflows',
+        'Automated Workflows',
         'Shared Prompt Libraries'
       ]
     },
     {
-      name: 'Professional',
-      description: 'Collaborate across 50 users at one time',
-      price: '316€',
-      conversations: 20000,
-      isAvailable: false,
-      features: [
-        '20,000 Conversations Per Month Using Multiple LLMs',
-        'Chat with 25 Documents',
-        'Deploy 25 Pre-Built Agents',
-        'Integrate 25 Custom Tools',
-        'Up to 10 Automated Workflows',
-        'Shared Prompt Libraries'
-      ]
-    },
-    {
-      name: 'Enterprise Solutions',
-      description: 'Collaborate across 1000 users at one time',
-      price: '849€',
+      name: 'Enterprise',
+      description: 'For organizations needing security and scale',
+      price: 'Custom',
       conversations: 200000,
-      isAvailable: false,
+      isAvailable: true,
       features: [
-        '200,000 Conversations Per Month Using Multiple LLMs',
-        '10 Workspaces (Up to 1000 Team Members)',
+        'Unlimited Conversations Per Month',
         'Unlimited Documents and Resource Library',
         'Unlimited Pre-Built Agents',
         'Unlimited Custom Tools',
         'Unlimited Automated Workflows',
-        'Limited Autonomous Agentic AI',
         'Priority Support Calls',
-        'SAML SSO',
+        'SAML SSO & Advanced Permissions',
         'Advanced permissions and security controls'
       ]
     }
@@ -124,7 +120,7 @@ export default function UpgradeOptions() {
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{plan.description}</p>
             
             <div className="flex items-end mb-5">
-              {plan.name === 'Starter' && additionalPacks > 0 ? (
+              {plan.name === 'Pro' && additionalPacks > 0 ? (
                 <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">{calculateStarterTotal()}€</span>
               ) : (
                 <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">{plan.price}</span>
@@ -154,14 +150,14 @@ export default function UpgradeOptions() {
             </button>
             
             <div className="text-sm text-gray-600 dark:text-gray-400 mb-3">
-              {plan.name === 'Starter' && additionalPacks > 0 ? (
+              {plan.name === 'Pro' && additionalPacks > 0 ? (
                 <p>{calculateTotalConversations(plan.conversations, plan.additionalCost!.conversations).toLocaleString()} conversations per month</p>
               ) : (
                 <p>{plan.conversations.toLocaleString()} conversations per month</p>
               )}
             </div>
             
-            {plan.name === 'Starter' && plan.additionalCost && (
+            {plan.name === 'Pro' && plan.additionalCost && (
               <div className="mb-5">
                 <div className="flex justify-between text-sm mb-2">
                   <p className="text-gray-700 dark:text-gray-200">Additional Credits</p>

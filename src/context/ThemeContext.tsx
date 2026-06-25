@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react';
 
-type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark' | 'system';
 
 interface ThemeContextType {
   theme: Theme;
+  resolvedTheme: 'light' | 'dark';
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
 }
@@ -35,16 +36,11 @@ const getInitialTheme = (defaultTheme: Theme, storageKey: string): Theme => {
 
   try {
     const savedTheme = localStorage.getItem(storageKey) as Theme | null;
-    if (savedTheme === 'light' || savedTheme === 'dark') {
+    if (savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system') {
       return savedTheme;
     }
   } catch (error) {
     console.warn('Failed to read theme from localStorage:', error);
-  }
-
-  // Check system preference
-  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    return 'dark';
   }
 
   return defaultTheme;
@@ -52,12 +48,21 @@ const getInitialTheme = (defaultTheme: Theme, storageKey: string): Theme => {
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ 
   children, 
-  defaultTheme = 'light',
+  defaultTheme = 'system',
   storageKey = STORAGE_KEY 
 }) => {
   const [theme, setThemeState] = useState<Theme>(() => 
     getInitialTheme(defaultTheme, storageKey)
   );
+
+  const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window === 'undefined') return 'light';
+    const initial = getInitialTheme(defaultTheme, storageKey);
+    if (initial === 'system') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return initial as 'light' | 'dark';
+  });
 
   // Memoize the theme setter to prevent unnecessary re-renders
   const setTheme = useCallback((newTheme: Theme) => {
@@ -66,7 +71,11 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
 
   // Memoize toggle function
   const toggleTheme = useCallback(() => {
-    setThemeState((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+    setThemeState((prevTheme) => {
+      if (prevTheme === 'light') return 'dark';
+      if (prevTheme === 'dark') return 'system';
+      return 'light';
+    });
   }, []);
 
   // Apply theme changes to DOM and localStorage
@@ -75,10 +84,16 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     
     // Remove both classes first to avoid conflicts
     root.classList.remove('light', 'dark');
-    root.classList.add(theme);
+    
+    const resolved = theme === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : theme;
+
+    root.classList.add(resolved);
     
     // Update color-scheme for better browser support
-    root.style.colorScheme = theme;
+    root.style.colorScheme = resolved;
+    setResolvedTheme(resolved);
 
     try {
       localStorage.setItem(storageKey, theme);
@@ -94,14 +109,13 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     
     const handleChange = (e: MediaQueryListEvent) => {
-      // Only auto-update if user hasn't manually set a preference
-      try {
-        const savedTheme = localStorage.getItem(storageKey);
-        if (!savedTheme) {
-          setThemeState(e.matches ? 'dark' : 'light');
-        }
-      } catch (error) {
-        console.warn('Failed to read theme preference:', error);
+      if (theme === 'system') {
+        const root = document.documentElement;
+        root.classList.remove('light', 'dark');
+        const resolved = e.matches ? 'dark' : 'light';
+        root.classList.add(resolved);
+        root.style.colorScheme = resolved;
+        setResolvedTheme(resolved);
       }
     };
 
@@ -111,12 +125,12 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({
     return () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
-  }, [storageKey]);
+  }, [theme]);
 
   // Memoize context value to prevent unnecessary re-renders
   const contextValue = useMemo(
-    () => ({ theme, toggleTheme, setTheme }),
-    [theme, toggleTheme, setTheme]
+    () => ({ theme, resolvedTheme, toggleTheme, setTheme }),
+    [theme, resolvedTheme, toggleTheme, setTheme]
   );
 
   return (
