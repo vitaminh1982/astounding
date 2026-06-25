@@ -771,13 +771,13 @@ const Sidebar = ({
               {/* 2. Workspace & Token Usage Section */}
               <div className="space-y-3">
                 {/* Clickable Workspace Details Card with hover submenu */}
-                <div
-                  onMouseEnter={() => setPopoverView('accounts')}
-                >
+                <div>
                   <button
-                    onClick={() => setPopoverView(popoverView === 'accounts' ? 'main' : 'accounts')}
-                    className={`w-full text-left p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between gap-3 border border-transparent ${popoverView === 'accounts' ? 'bg-black/5 dark:bg-white/5 border-black/5 dark:border-white/5' : 'hover:border-black/5 dark:hover:border-white/5'
-                      }`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPopoverView(popoverView === 'accounts' ? 'main' : 'accounts');
+                    }}
+                    className={`w-full text-left p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors flex items-center justify-between gap-3 border ${popoverView === 'accounts' ? 'bg-black/5 dark:bg-white/5 border-black/20 dark:border-white/20' : 'border-black/10 dark:border-white/10'}`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div className="w-9 h-9 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center text-sm flex-shrink-0">
