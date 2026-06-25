@@ -70,7 +70,11 @@ export default function ProjectSwitcher({ onNavigate }: ProjectSwitcherProps) {
       {/* ── Trigger ──────────────────────────────────────────────────────────── */}
       <button
         onClick={() => setIsOpen(v => !v)}
-        className="w-full flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none"
+        className={`w-full flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors focus:outline-none border ${
+          isOpen
+            ? 'border-black/20 dark:border-white/20 bg-black/5 dark:bg-white/5'
+            : 'border-black/10 dark:border-white/10'
+        }`}
         aria-expanded={isOpen}
       >
         <ProjectAvatar project={displayed} size="sm" />

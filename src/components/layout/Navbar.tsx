@@ -1,8 +1,7 @@
 import React, { useState, useContext, memo, useRef, useEffect, useCallback } from 'react';
 import {
-  Bell, Settings, LogOut, User, Menu, ChevronLeft, ChevronRight,
-  Check, Clock, X, AlertCircle, MessageSquare, FileText, Mail, BarChart3, BookOpen,
-  Sun, Moon, Trash2, CheckCheck, Globe
+  Settings, LogOut, User, Menu, ChevronRight, BarChart3, BookOpen,
+  Sun, Moon, Globe
 } from 'lucide-react';
 import CreditConsumptionBar from './CreditConsumptionBar';
 import { Page } from '../../App';
@@ -22,16 +21,7 @@ interface NavbarProps {
   onToggleSidebar?: () => void;
 }
 
-interface Notification {
-  id: string;
-  title: string;
-  message: string;
-  timestamp: Date;
-  read: boolean;
-  type: 'info' | 'success' | 'warning' | 'error';
-  link?: string;
-  avatar?: string;
-}
+
 
 // Memoized Profile Dropdown Component
 const ProfileDropdown = memo(({
@@ -245,199 +235,7 @@ const MenuItem = ({ icon: Icon, label, onClick, badge }: {
   </button>
 );
 
-// Notification Panel Component
-const NotificationPanel = memo(({ 
-  notifications, 
-  onClose, 
-  onMarkAsRead, 
-  onMarkAllAsRead,
-  onClearAll 
-}: {
-  notifications: Notification[];
-  onClose: () => void;
-  onMarkAsRead: (id: string) => void;
-  onMarkAllAsRead: () => void;
-  onClearAll: () => void;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95, y: -10 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95, y: -10 }}
-      transition={{ duration: 0.15 }}
-      className="absolute right-0 mt-3 w-80 sm:w-96 bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden z-50 transition-colors"
-    >
-      {/* Header with gradient */}
-      <div className="relative bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-teal-500 dark:to-teal-600 px-4 py-3 transition-colors">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center gap-2">
-            <Bell className="w-5 h-5 text-white" />
-            <h3 className="font-semibold text-white transition-colors">Notifications</h3>
-            {notifications.filter(n => !n.read).length > 0 && (
-              <span className="px-2 py-0.5 bg-white/20 backdrop-blur-sm text-white text-xs font-semibold rounded-full transition-colors">
-                {notifications.filter(n => !n.read).length}
-              </span>
-            )}
-          </div>
-          <button
-            onClick={onClose}
-            className="p-1 hover:bg-white/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
-            aria-label="Close notifications"
-          >
-            <X className="h-5 w-5 text-white" />
-          </button>
-        </div>
-        
-        {/* Action buttons */}
-        {notifications.length > 0 && (
-          <div className="flex items-center gap-2 mt-2">
-            <button
-              onClick={onMarkAllAsRead}
-              className="flex items-center gap-1 px-2 py-1 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-xs font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-              aria-label="Mark all notifications as read"
-            >
-              <CheckCheck className="w-3 h-3" />
-              Mark all read
-            </button>
-            <button
-              onClick={onClearAll}
-              className="flex items-center gap-1 px-2 py-1 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-xs font-medium rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-              aria-label="Clear all notifications"
-            >
-              <Trash2 className="w-3 h-3" />
-              Clear all
-            </button>
-          </div>
-        )}
-        
-        {/* Decorative gradient orbs */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
-      </div>
-      
-      {/* Notification List */}
-      <div className="max-h-[420px] overflow-y-auto overscroll-contain">
-        {notifications.length === 0 ? (
-          <div className="py-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center transition-colors">
-              <Bell className="h-8 w-8 text-gray-400 dark:text-gray-500 transition-colors" />
-            </div>
-            <p className="text-gray-500 dark:text-gray-400 font-medium mb-1 transition-colors">No notifications</p>
-            <p className="text-gray-400 dark:text-gray-500 text-sm transition-colors">You're all caught up!</p>
-          </div>
-        ) : (
-          <div className="divide-y divide-gray-100 dark:divide-gray-700">
-            {notifications.map((notification, index) => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-                onMarkAsRead={() => onMarkAsRead(notification.id)}
-                index={index}
-              />
-            ))}
-          </div>
-        )}
-      </div>
 
-      {/* Footer */}
-      {notifications.length > 0 && (
-        <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50 text-center transition-colors">
-          <button className="text-sm font-medium text-indigo-600 dark:text-teal-400 hover:text-indigo-700 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 rounded-sm px-1">
-            View all notifications
-          </button>
-        </div>
-      )}
-    </motion.div>
-  );
-});
-
-// Individual Notification Item
-const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
-  notification: Notification;
-  onMarkAsRead: () => void;
-  index: number;
-}) => {
-  const getIcon = () => {
-    const iconClass = "h-5 w-5";
-    const iconMap = {
-      success: <Check className={`${iconClass} text-green-500 dark:text-green-400 transition-colors`} />,
-      warning: <AlertCircle className={`${iconClass} text-amber-500 dark:text-amber-400 transition-colors`} />,
-      error: <AlertCircle className={`${iconClass} text-red-500 dark:text-red-400 transition-colors`} />,
-      info: <Bell className={`${iconClass} text-blue-500 dark:text-blue-400 transition-colors`} />
-    };
-    return iconMap[notification.type] || iconMap.info;
-  };
-
-  const getIconBg = () => {
-    const bgMap = {
-      success: 'bg-green-100 dark:bg-green-900/30 border border-green-200 dark:border-green-800',
-      warning: 'bg-amber-100 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800',
-      error: 'bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800',
-      info: 'bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800'
-    };
-    return bgMap[notification.type] || bgMap.info;
-  };
-  
-  const formatTime = (date: Date) => {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffMins = Math.round(diffMs / 60000);
-    const diffHours = Math.round(diffMs / 3600000);
-    const diffDays = Math.round(diffMs / 86400000);
-    
-    if (diffMins < 1) return 'Just now';
-    if (diffMins < 60) return `${diffMins}m ago`;
-    if (diffHours < 24) return `${diffHours}h ago`;
-    return `${diffDays}d ago`;
-  };
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className={`px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all cursor-pointer group focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
-        !notification.read ? 'bg-indigo-50/50 dark:bg-teal-900/10' : ''
-      }`}
-      onClick={onMarkAsRead}
-      tabIndex={0}
-      role="button"
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onMarkAsRead();
-        }
-      }}
-      aria-label={`${notification.read ? 'Read' : 'Unread'} notification: ${notification.title}`}
-    >
-      <div className="flex items-start gap-3">
-        <div className={`flex-shrink-0 w-10 h-10 rounded-lg ${getIconBg()} flex items-center justify-center transition-colors`}>
-          {getIcon()}
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex justify-between items-start gap-2">
-            <p className={`text-sm font-medium leading-snug transition-colors ${
-              !notification.read 
-                ? 'text-gray-900 dark:text-gray-100' 
-                : 'text-gray-600 dark:text-gray-400'
-            }`}>
-              {notification.title}
-            </p>
-            {!notification.read && (
-              <span className="h-2 w-2 bg-indigo-500 dark:bg-teal-500 rounded-full flex-shrink-0 mt-1.5 animate-pulse transition-colors" />
-            )}
-          </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2 leading-relaxed transition-colors">
-            {notification.message}
-          </p>
-          <div className="flex items-center gap-1 mt-2 text-xs text-gray-400 dark:text-gray-500 transition-colors">
-            <Clock className="h-3 w-3" />
-            <span>{formatTime(notification.timestamp)}</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-});
 
 const Navbar = ({
   onNavigate,
@@ -451,61 +249,9 @@ const Navbar = ({
   const { t, language, toggleLanguage } = useContext(LanguageContext);
   const { theme, resolvedTheme, toggleTheme } = useTheme();
   const [isWorkspaceModalOpen, setIsWorkspaceModalOpen] = useState(false);
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const notificationPanelRef = useRef<HTMLDivElement>(null);
-  const notificationButtonRef = useRef<HTMLButtonElement>(null);
-  
-  const [notifications, setNotifications] = useState<Notification[]>([
-    {
-      id: '1',
-      title: 'New message received',
-      message: 'You have received a new message from Sophie Martin regarding her account issue.',
-      timestamp: new Date(Date.now() - 15 * 60000),
-      read: false,
-      type: 'info',
-      link: '/conversations'
-    },
-    {
-      id: '2',
-      title: 'Task completed',
-      message: 'The document processing task has been completed successfully.',
-      timestamp: new Date(Date.now() - 2 * 3600000),
-      read: false,
-      type: 'success',
-      link: '/documents'
-    },
-    {
-      id: '3',
-      title: 'System update',
-      message: 'The system will undergo maintenance tonight at 2 AM UTC. Please save your work.',
-      timestamp: new Date(Date.now() - 5 * 3600000),
-      read: true,
-      type: 'warning'
-    },
-    {
-      id: '4',
-      title: 'Payment failed',
-      message: 'Your monthly subscription payment has failed. Please update your payment method.',
-      timestamp: new Date(Date.now() - 24 * 3600000),
-      read: true,
-      type: 'error',
-      link: '/settings'
-    },
-    {
-      id: '5',
-      title: 'New template available',
-      message: 'A new email template "Customer Feedback" has been added to your collection.',
-      timestamp: new Date(Date.now() - 2 * 24 * 3600000),
-      read: true,
-      type: 'info',
-      link: '/templates'
-    }
-  ]);
-
   const handleProfileToggle = useCallback(() => {
     setIsProfileOpen(prev => !prev);
-    if (isNotificationsOpen) setIsNotificationsOpen(false);
-  }, [isNotificationsOpen]);
+  }, []);
 
   const closeProfile = useCallback(() => {
     setIsProfileOpen(false);
@@ -515,52 +261,6 @@ const Navbar = ({
     setIsWorkspaceModalOpen(true);
     setIsProfileOpen(false);
   }, []);
-  
-  const toggleNotifications = useCallback(() => {
-    setIsNotificationsOpen(prev => !prev);
-    if (isProfileOpen) setIsProfileOpen(false);
-  }, [isProfileOpen]);
-  
-  const markAsRead = useCallback((notificationId: string) => {
-    setNotifications(prev => 
-      prev.map(notification => 
-        notification.id === notificationId 
-          ? { ...notification, read: true } 
-          : notification
-      )
-    );
-  }, []);
-  
-  const markAllAsRead = useCallback(() => {
-    setNotifications(prev => 
-      prev.map(notification => ({ ...notification, read: true }))
-    );
-  }, []);
-  
-  const clearAllNotifications = useCallback(() => {
-    setNotifications([]);
-  }, []);
-  
-  const unreadCount = notifications.filter(n => !n.read).length;
-  
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        isNotificationsOpen && 
-        notificationPanelRef.current && 
-        notificationButtonRef.current && 
-        !notificationPanelRef.current.contains(event.target as Node) &&
-        !notificationButtonRef.current.contains(event.target as Node)
-      ) {
-        setIsNotificationsOpen(false);
-      }
-    };
-    
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isNotificationsOpen]);
 
   return (
     <nav className="bg-transparent sticky top-0 w-full z-20 transition-colors">
@@ -579,39 +279,6 @@ const Navbar = ({
           
           {/* Right section */}
           <div className="flex items-center gap-2">
-            {/* Notifications */}
-            <div className="relative" ref={notificationPanelRef}>
-              <button
-                ref={notificationButtonRef}
-                onClick={toggleNotifications}
-                className="relative w-9 h-9 rounded-full flex items-center justify-center
-                  bg-gray-100 dark:bg-gray-700
-                  border border-gray-200 dark:border-gray-600
-                  hover:bg-gray-200 dark:hover:bg-gray-600
-                  transition-colors focus:outline-none"
-                aria-label="Notifications"
-                aria-expanded={isNotificationsOpen}
-              >
-                <Bell className="h-4 w-4 text-gray-500 dark:text-gray-400" strokeWidth={1.75} />
-                {unreadCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white dark:ring-gray-800" />
-                )}
-              </button>
-
-              <AnimatePresence>
-                {isNotificationsOpen && (
-                  <NotificationPanel
-                    notifications={notifications}
-                    onClose={() => setIsNotificationsOpen(false)}
-                    onMarkAsRead={markAsRead}
-                    onMarkAllAsRead={markAllAsRead}
-                    onClearAll={clearAllNotifications}
-                  />
-                )}
-              </AnimatePresence>
-            </div>
-
-
           </div>
         </div>
       </div>

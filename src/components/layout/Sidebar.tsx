@@ -1,4 +1,4 @@
-import React, { useState, useContext, memo, useEffect, useRef } from 'react';
+import React, { useState, useContext, memo, useEffect, useRef, useCallback } from 'react';
 import ProjectSwitcher from '../workspace/ProjectSwitcher';
 import {
   LayoutDashboard,
@@ -42,6 +42,11 @@ import {
   Plus,
   MoreHorizontal,
   ArrowUpCircle,
+  Clock,
+  Trash2,
+  CheckCheck,
+  AlertCircle,
+  Inbox,
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -57,6 +62,17 @@ interface SidebarProps {
   navigationItems?: { id: Page; label: string; icon: string }[];
   isExpanded?: boolean;
   onToggleExpand?: () => void;
+}
+
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  timestamp: Date;
+  read: boolean;
+  type: 'info' | 'success' | 'warning' | 'error';
+  link?: string;
+  avatar?: string;
 }
 
 // ─── MenuItem ─────────────────────────────────────────────────────────────────
@@ -216,13 +232,82 @@ const Sidebar = ({
   const [isOrchestrationMenuOpen, setIsOrchestrationMenuOpen] = useState(false);
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const [popoverView, setPopoverView] = useState<'main' | 'appearance' | 'help' | 'accounts'>('main');
+  const [popoverView, setPopoverView] = useState<'main' | 'appearance' | 'help' | 'accounts' | 'notifications'>('main');
   const [addingWorkspaceToAccount, setAddingWorkspaceToAccount] = useState<string | null>(null);
   const [newWorkspaceName, setNewWorkspaceName] = useState('');
   const [isAddingAccount, setIsAddingAccount] = useState(false);
   const [newAccountEmail, setNewAccountEmail] = useState('');
   const popoverRef = useRef<HTMLDivElement>(null);
   const profileButtonRef = useRef<HTMLButtonElement>(null);
+
+  const [notifications, setNotifications] = useState<Notification[]>([
+    {
+      id: '1',
+      title: 'New message received',
+      message: 'You have received a new message from Sophie Martin regarding her account issue.',
+      timestamp: new Date(Date.now() - 15 * 60000),
+      read: false,
+      type: 'info',
+      link: '/conversations'
+    },
+    {
+      id: '2',
+      title: 'Task completed',
+      message: 'The document processing task has been completed successfully.',
+      timestamp: new Date(Date.now() - 2 * 3600000),
+      read: false,
+      type: 'success',
+      link: '/documents'
+    },
+    {
+      id: '3',
+      title: 'System update',
+      message: 'The system will undergo maintenance tonight at 2 AM UTC. Please save your work.',
+      timestamp: new Date(Date.now() - 5 * 3600000),
+      read: true,
+      type: 'warning'
+    },
+    {
+      id: '4',
+      title: 'Payment failed',
+      message: 'Your monthly subscription payment has failed. Please update your payment method.',
+      timestamp: new Date(Date.now() - 24 * 3600000),
+      read: true,
+      type: 'error',
+      link: '/settings'
+    },
+    {
+      id: '5',
+      title: 'New template available',
+      message: 'A new email template "Customer Feedback" has been added to your collection.',
+      timestamp: new Date(Date.now() - 2 * 24 * 3600000),
+      read: true,
+      type: 'info',
+      link: '/templates'
+    }
+  ]);
+
+  const markAsRead = useCallback((notificationId: string) => {
+    setNotifications(prev => 
+      prev.map(notification => 
+        notification.id === notificationId 
+          ? { ...notification, read: true } 
+          : notification
+      )
+    );
+  }, []);
+  
+  const markAllAsRead = useCallback(() => {
+    setNotifications(prev => 
+      prev.map(notification => ({ ...notification, read: true }))
+    );
+  }, []);
+  
+  const clearAllNotifications = useCallback(() => {
+    setNotifications([]);
+  }, []);
+  
+  const unreadCount = notifications.filter(n => !n.read).length;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -1016,18 +1101,50 @@ const Sidebar = ({
 
               <div className="border-t border-black/10 dark:border-white/10" />
 
-              {/* 4. Sign out Section */}
-              <button
-                onMouseEnter={() => setPopoverView('main')}
-                onClick={() => {
-                  setIsProfileMenuOpen(false);
-                  setPopoverView('main');
-                }}
-                className="w-full px-2 py-2 flex items-center gap-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left"
-              >
-                <LogOut size={16} className="text-gray-400" />
-                <span className="text-xs font-medium">Sign out</span>
-              </button>
+              {/* 4. Sign out & Notifications Section */}
+              <div className="flex items-center gap-2" onMouseEnter={() => setPopoverView('main')}>
+                <button
+                  onClick={() => {
+                    setIsProfileMenuOpen(false);
+                    setPopoverView('main');
+                  }}
+                  className="flex-grow px-2 py-2 flex items-center gap-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left font-medium text-xs"
+                >
+                  <LogOut size={16} className="text-gray-400" />
+                  <span>Sign out</span>
+                </button>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setPopoverView(popoverView === 'notifications' ? 'main' : 'notifications');
+                  }}
+                  className={`p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors border ${
+                    popoverView === 'notifications'
+                      ? 'bg-black/5 dark:bg-white/5 border-black/20 dark:border-white/20'
+                      : 'border-black/10 dark:border-white/10'
+                  } relative flex-shrink-0`}
+                  title="Notifications"
+                >
+                  <Inbox size={16} className="text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors" />
+                  {unreadCount > 0 && (
+                    <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 ring-1 ring-white dark:ring-[#1a1a1a]" />
+                  )}
+                </button>
+              </div>
+
+              {/* Notifications submenu nested next to its parent */}
+              {popoverView === 'notifications' && (
+                <div className="absolute z-50 bottom-[calc(100%+8px)] left-0 right-0 lg:bottom-0 lg:top-auto lg:left-full lg:right-auto lg:pl-2">
+                  <NotificationPanel
+                    notifications={notifications}
+                    onClose={() => setPopoverView('main')}
+                    onMarkAsRead={markAsRead}
+                    onMarkAllAsRead={markAllAsRead}
+                    onClearAll={clearAllNotifications}
+                  />
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -1068,5 +1185,169 @@ const Sidebar = ({
     </aside>
   );
 };
+
+// Notification Panel Component for Sidebar Popover
+const NotificationPanel = memo(({ 
+  notifications, 
+  onClose, 
+  onMarkAsRead, 
+  onMarkAllAsRead,
+  onClearAll 
+}: {
+  notifications: Notification[];
+  onClose: () => void;
+  onMarkAsRead: (id: string) => void;
+  onMarkAllAsRead: () => void;
+  onClearAll: () => void;
+}) => {
+  return (
+    <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-[360px] overflow-hidden">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-3">
+        <div className="flex items-center gap-2">
+          <Inbox size={16} className="text-gray-500 dark:text-gray-400" />
+          <span className="font-semibold text-gray-900 dark:text-gray-100">Notifications</span>
+          {notifications.filter(n => !n.read).length > 0 && (
+            <span className="px-1.5 py-0.5 bg-black/5 dark:bg-white/10 text-gray-700 dark:text-gray-300 text-[10px] font-semibold rounded-full">
+              {notifications.filter(n => !n.read).length}
+            </span>
+          )}
+        </div>
+        <button
+          onClick={onClose}
+          className="p-1 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          aria-label="Close notifications"
+        >
+          <X size={16} />
+        </button>
+      </div>
+
+      {/* Action buttons */}
+      {notifications.length > 0 && (
+        <div className="flex items-center gap-2 mb-3 border-b border-black/5 dark:border-white/5 pb-2">
+          <button
+            onClick={onMarkAllAsRead}
+            className="flex items-center gap-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-md transition-colors px-2 py-1"
+          >
+            <CheckCheck size={12} />
+            Mark all read
+          </button>
+          <button
+            onClick={onClearAll}
+            className="flex items-center gap-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-md transition-colors px-2 py-1"
+          >
+            <Trash2 size={12} />
+            Clear all
+          </button>
+        </div>
+      )}
+
+      {/* Notification List */}
+      <div className="max-h-[300px] overflow-y-auto space-y-1.5 pr-0.5">
+        {notifications.length === 0 ? (
+          <div className="py-8 text-center">
+            <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-gray-400 dark:text-gray-500">
+              <Inbox size={24} />
+            </div>
+            <p className="text-gray-500 dark:text-gray-400 font-medium mb-0.5">No notifications</p>
+            <p className="text-gray-400 dark:text-gray-500 text-xs">You're all caught up!</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-black/5 dark:divide-white/5">
+            {notifications.map((notification, index) => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+                onMarkAsRead={() => onMarkAsRead(notification.id)}
+                index={index}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+// Individual Notification Item for Sidebar Popover
+const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
+  notification: Notification;
+  onMarkAsRead: () => void;
+  index: number;
+}) => {
+  const getIcon = () => {
+    const iconClass = "h-4 w-4";
+    const iconMap = {
+      success: <Check className={`${iconClass} text-green-500 dark:text-green-400`} />,
+      warning: <AlertCircle className={`${iconClass} text-amber-500 dark:text-amber-400`} />,
+      error: <AlertCircle className={`${iconClass} text-red-500 dark:text-red-400`} />,
+      info: <Inbox className={`${iconClass} text-blue-500 dark:text-blue-400`} />
+    };
+    return iconMap[notification.type] || iconMap.info;
+  };
+
+  const getIconBg = () => {
+    const bgMap = {
+      success: 'bg-green-500/10 border border-green-500/20',
+      warning: 'bg-amber-500/10 border border-amber-500/20',
+      error: 'bg-red-500/10 border border-red-500/20',
+      info: 'bg-blue-500/10 border border-blue-500/20'
+    };
+    return bgMap[notification.type] || bgMap.info;
+  };
+  
+  const formatTime = (date: Date) => {
+    const now = new Date();
+    const diffMs = now.getTime() - date.getTime();
+    const diffMins = Math.round(diffMs / 60000);
+    const diffHours = Math.round(diffMs / 3600000);
+    const diffDays = Math.round(diffMs / 86400000);
+    
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    return `${diffDays}d ago`;
+  };
+  
+  return (
+    <div
+      className={`py-2 hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer group flex items-start gap-2.5 ${
+        !notification.read ? 'font-medium' : ''
+      }`}
+      onClick={onMarkAsRead}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onMarkAsRead();
+        }
+      }}
+    >
+      <div className={`flex-shrink-0 w-8 h-8 rounded-lg ${getIconBg()} flex items-center justify-center`}>
+        {getIcon()}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex justify-between items-start gap-2">
+          <p className={`text-xs text-gray-900 dark:text-gray-100 truncate ${
+            !notification.read ? 'font-semibold' : 'text-gray-500 dark:text-gray-400'
+          }`}>
+            {notification.title}
+          </p>
+          {!notification.read && (
+            <span className="h-1.5 w-1.5 bg-red-500 rounded-full flex-shrink-0 mt-1" />
+          )}
+        </div>
+        <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 mt-0.5 leading-normal">
+          {notification.message}
+        </p>
+        <div className="flex items-center gap-1 mt-1 text-[10px] text-gray-400">
+          <Clock size={10} />
+          <span>{formatTime(notification.timestamp)}</span>
+        </div>
+      </div>
+    </div>
+  );
+});
 
 export default memo(Sidebar);
