@@ -611,41 +611,7 @@ const Navbar = ({
               </AnimatePresence>
             </div>
 
-            {/* Credits — entre notifications et avatar */}
-            <div className="hidden md:block">
-              <CreditConsumptionBar
-                directCredits={{ used: 1250, total: 4000 }}
-                backgroundCredits={{ used: 350, total: 1000 }}
-              />
-            </div>
 
-            {/* Profile */}
-            <div className="relative">
-              <button
-                onClick={handleProfileToggle}
-                className="w-9 h-9 rounded-full flex items-center justify-center
-                  bg-gray-100 dark:bg-gray-700
-                  border border-gray-200 dark:border-gray-600
-                  hover:bg-gray-200 dark:hover:bg-gray-600
-                  transition-colors focus:outline-none"
-                aria-label="Profile menu"
-                aria-expanded={isProfileOpen}
-              >
-                <User className="h-4 w-4 text-gray-500 dark:text-gray-400" strokeWidth={1.75} />
-              </button>
-
-              <ProfileDropdown 
-                isOpen={isProfileOpen}
-                onClose={closeProfile}
-                onNavigate={onNavigate}
-                t={t}
-                onOpenWorkspaceModal={handleOpenWorkspaceModal}
-                resolvedTheme={resolvedTheme}
-                toggleTheme={toggleTheme}
-                language={language}
-                toggleLanguage={toggleLanguage}
-              />
-            </div>
           </div>
         </div>
       </div>
