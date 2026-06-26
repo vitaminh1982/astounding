@@ -319,6 +319,13 @@ body,
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--border);
   }
+
+  /* CTA principal avec dégradé vert */
+  .cta-btn {
+    @apply flex items-center justify-center gap-2 rounded-xl font-semibold transition-all shadow-md focus:outline-none;
+    @apply bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-400 hover:to-emerald-300 text-white shadow-green-500/25;
+    @apply dark:text-[#0d2b1a];
+  }
 }
 
 .react-flow__node {

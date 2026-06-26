@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sendplex — Design System Reference</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
+    rel="stylesheet" />
   <style>
     /* =========================================================
        TOKENS — DARK THEME (default, from tokens.css :root)
@@ -14,63 +17,86 @@
        ========================================================= */
     :root,
     [data-theme="dark"] {
-      --t-bg-page:              #060e20;  /* navy-950 */
-      --t-bg-sidebar:           rgba(10, 12, 16, 0.65);
-      --t-sidebar-border:       rgba(255,255,255,0.06);
-      --t-sidebar-shadow:       0 10px 40px -10px rgba(0,0,0,0.5), inset 0 1px 1px 0 rgba(255,255,255,0.1);
+      --t-bg-page: #060e20;
+      /* navy-950 */
+      --t-bg-sidebar: rgba(10, 12, 16, 0.65);
+      --t-sidebar-border: rgba(255, 255, 255, 0.06);
+      --t-sidebar-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
 
-      --t-surface:              #060e20;  /* navy-950 */
-      --t-surface-low:          #091328;  /* navy-900 */
-      --t-surface-container:    #0f1930;  /* navy-800 */
-      --t-surface-high:         #141f38;  /* navy-700 */
-      --t-surface-highest:      #192540;  /* navy-600 */
-      --t-surface-bright:       #1f2b49;  /* navy-500 */
+      --t-surface: #060e20;
+      /* navy-950 */
+      --t-surface-low: #091328;
+      /* navy-900 */
+      --t-surface-container: #0f1930;
+      /* navy-800 */
+      --t-surface-high: #141f38;
+      /* navy-700 */
+      --t-surface-highest: #192540;
+      /* navy-600 */
+      --t-surface-bright: #1f2b49;
+      /* navy-500 */
 
-      --t-popover:              #0f1930;  /* navy-800 */
-      --t-card:                 #192540;  /* navy-600 */
+      --t-popover: #0f1930;
+      /* navy-800 */
+      --t-card: #192540;
+      /* navy-600 */
 
-      --t-foreground:           #dee5ff;  /* navy-100 */
-      --t-muted-fg:             #a3aac4;  /* navy-200 */
-      --t-outline:              #6d758c;  /* navy-300 */
-      --t-outline-variant:      #40485d;  /* navy-400 */
+      --t-foreground: #dee5ff;
+      /* navy-100 */
+      --t-muted-fg: #a3aac4;
+      /* navy-200 */
+      --t-outline: #6d758c;
+      /* navy-300 */
+      --t-outline-variant: #40485d;
+      /* navy-400 */
 
-      --t-border:               rgba(255,255,255,0.05);
-      --t-border-strong:        rgba(255,255,255,0.10);
-      --t-border-stronger:      rgba(255,255,255,0.20);
-      --t-input:                rgba(255,255,255,0.10);
+      --t-border: rgba(255, 255, 255, 0.05);
+      --t-border-strong: rgba(255, 255, 255, 0.10);
+      --t-border-stronger: rgba(255, 255, 255, 0.20);
+      --t-input: rgba(255, 255, 255, 0.10);
 
-      --t-primary:              #4ade80;  /* green-400 */
-      --t-primary-fg:           #003910;  /* green-950 */
-      --t-secondary:            #22c55e;  /* green-500 */
-      --t-primary-container:    #166534;  /* green-800 */
-      --t-secondary-container:  #005322;  /* green-900 */
-      --t-on-primary:           #003910;  /* green-950 */
-      --t-tertiary:             #b4c1ff;  /* blue-300 */
-      --t-error:                #ff6e84;  /* red-400 */
-      --t-ring:                 #4ade80;
+      --t-primary: #4ade80;
+      /* green-400 */
+      --t-primary-fg: #003910;
+      /* green-950 */
+      --t-secondary: #22c55e;
+      /* green-500 */
+      --t-primary-container: #166534;
+      /* green-800 */
+      --t-secondary-container: #005322;
+      /* green-900 */
+      --t-on-primary: #003910;
+      /* green-950 */
+      --t-tertiary: #b4c1ff;
+      /* blue-300 */
+      --t-error: #ff6e84;
+      /* red-400 */
+      --t-ring: #4ade80;
 
-      --t-item-default:         #bbbbbb;  /* dark:text-[#bbbbbb] */
-      --t-item-hover-bg:        rgba(255,255,255,0.10);
-      --t-item-active-bg:       rgba(255,255,255,0.15);
-      --t-item-active-fg:       #ffffff;
-      --t-item-sub-fg:          #999999;  /* dark:text-[#999999] */
+      --t-item-default: #bbbbbb;
+      /* dark:text-[#bbbbbb] */
+      --t-item-hover-bg: rgba(255, 255, 255, 0.10);
+      --t-item-active-bg: rgba(255, 255, 255, 0.15);
+      --t-item-active-fg: #ffffff;
+      --t-item-sub-fg: #999999;
+      /* dark:text-[#999999] */
 
-      --t-switch-bg:            rgba(255,255,255,0.05);
-      --t-switch-border:        rgba(255,255,255,0.10);
-      --t-switch-active-bg:     rgba(255,255,255,0.15);
-      --t-switch-active-shadow: 0 1px 3px rgba(0,0,0,0.15);
-      --t-switch-active-border: rgba(255,255,255,0.05);
+      --t-switch-bg: rgba(255, 255, 255, 0.05);
+      --t-switch-border: rgba(255, 255, 255, 0.10);
+      --t-switch-active-bg: rgba(255, 255, 255, 0.15);
+      --t-switch-active-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      --t-switch-active-border: rgba(255, 255, 255, 0.05);
 
-      --t-page-chrome:          #0f1930;
+      --t-page-chrome: #0f1930;
 
-      --radius-sm:  calc(0.75rem * 0.6);
-      --radius-md:  calc(0.75rem * 0.8);
-      --radius-lg:  0.75rem;
-      --radius-xl:  calc(0.75rem * 1.4);
+      --radius-sm: calc(0.75rem * 0.6);
+      --radius-md: calc(0.75rem * 0.8);
+      --radius-lg: 0.75rem;
+      --radius-xl: calc(0.75rem * 1.4);
       --radius-2xl: calc(0.75rem * 1.8);
       --radius-3xl: calc(0.75rem * 2.2);
       --radius-4xl: calc(0.75rem * 2.6);
-      --font-body:    'Inter', sans-serif;
+      --font-body: 'Inter', sans-serif;
       --font-heading: 'Manrope', sans-serif;
     }
 
@@ -81,62 +107,81 @@
        Menu items: text-[#444444] default, text-black active, bg-white/15 active
        ========================================================= */
     [data-theme="light"] {
-      --t-bg-page:              #f4f8f7;
-      --t-bg-sidebar:           rgba(255, 255, 255, 0.6);
-      --t-sidebar-border:       rgba(255,255,255,0.5);
-      --t-sidebar-shadow:       0 8px 32px 0 rgba(31,38,135,0.04), inset 0 1px 1px 0 rgba(255,255,255,0.6);
+      --t-bg-page: #f4f8f7;
+      --t-bg-sidebar: rgba(255, 255, 255, 0.6);
+      --t-sidebar-border: rgba(255, 255, 255, 0.5);
+      --t-sidebar-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.04), inset 0 1px 1px 0 rgba(255, 255, 255, 0.6);
 
-      --t-surface:              #ffffff;
-      --t-surface-low:          #fafafa;
-      --t-surface-container:    #f2f2f4;
-      --t-surface-high:         #e8e9ef;
-      --t-surface-highest:      #dde0e9;
-      --t-surface-bright:       #ffffff;
+      --t-surface: #ffffff;
+      --t-surface-low: #fafafa;
+      --t-surface-container: #f2f2f4;
+      --t-surface-high: #e8e9ef;
+      --t-surface-highest: #dde0e9;
+      --t-surface-bright: #ffffff;
 
-      --t-popover:              #ffffff;
-      --t-card:                 #ffffff;
+      --t-popover: #ffffff;
+      --t-card: #ffffff;
 
-      --t-foreground:           #0d1117;
-      --t-muted-fg:             #6b7280;
-      --t-outline:              #9ca3af;
-      --t-outline-variant:      #d1d5db;
+      --t-foreground: #0d1117;
+      --t-muted-fg: #6b7280;
+      --t-outline: #9ca3af;
+      --t-outline-variant: #d1d5db;
 
-      --t-border:               rgba(0,0,0,0.07);
-      --t-border-strong:        rgba(0,0,0,0.10);
-      --t-border-stronger:      rgba(0,0,0,0.20);
-      --t-input:                #ffffff;
+      --t-border: rgba(0, 0, 0, 0.07);
+      --t-border-strong: rgba(0, 0, 0, 0.10);
+      --t-border-stronger: rgba(0, 0, 0, 0.20);
+      --t-input: #ffffff;
 
-      --t-primary:              #22c55e;  /* green-500 — more contrast on white */
-      --t-primary-fg:           #ffffff;
-      --t-secondary:            #16a34a;  /* green-600 */
-      --t-primary-container:    #dcfce7;
-      --t-secondary-container:  #bbf7d0;
-      --t-on-primary:           #ffffff;
-      --t-tertiary:             #6366f1;
-      --t-error:                #ef4444;
-      --t-ring:                 #22c55e;
+      --t-primary: #22c55e;
+      /* green-500 — more contrast on white */
+      --t-primary-fg: #ffffff;
+      --t-secondary: #16a34a;
+      /* green-600 */
+      --t-primary-container: #dcfce7;
+      --t-secondary-container: #bbf7d0;
+      --t-on-primary: #ffffff;
+      --t-tertiary: #6366f1;
+      --t-error: #ef4444;
+      --t-ring: #22c55e;
 
-      --t-item-default:         #444444;  /* text-[#444444] from Sidebar.tsx */
-      --t-item-hover-bg:        rgba(255,255,255,0.40); /* hover:bg-white/40 */
-      --t-item-active-bg:       rgba(255,255,255,1);    /* bg-white */
-      --t-item-active-fg:       #000000;                /* text-black */
-      --t-item-sub-fg:          #666666;                /* text-[#666666] */
+      --t-item-default: #444444;
+      /* text-[#444444] from Sidebar.tsx */
+      --t-item-hover-bg: rgba(255, 255, 255, 0.40);
+      /* hover:bg-white/40 */
+      --t-item-active-bg: rgba(255, 255, 255, 1);
+      /* bg-white */
+      --t-item-active-fg: #000000;
+      /* text-black */
+      --t-item-sub-fg: #666666;
+      /* text-[#666666] */
 
-      --t-switch-bg:            rgba(0,0,0,0.05);       /* bg-black/5 */
-      --t-switch-border:        rgba(0,0,0,0.10);       /* border-black/10 */
-      --t-switch-active-bg:     rgba(255,255,255,1);    /* bg-white */
-      --t-switch-active-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      --t-switch-active-border: rgba(0,0,0,0.05);       /* border-black/5 */
+      --t-switch-bg: rgba(0, 0, 0, 0.05);
+      /* bg-black/5 */
+      --t-switch-border: rgba(0, 0, 0, 0.10);
+      /* border-black/10 */
+      --t-switch-active-bg: rgba(255, 255, 255, 1);
+      /* bg-white */
+      --t-switch-active-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      --t-switch-active-border: rgba(0, 0, 0, 0.05);
+      /* border-black/5 */
 
-      --t-page-chrome:          #f0f2f8;
+      --t-page-chrome: #f0f2f8;
     }
 
     /* =========================================================
        PAGE BASE
        ========================================================= */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--t-bg-page);
@@ -148,7 +193,15 @@
       transition: background 0.25s ease, color 0.25s ease;
     }
 
-    h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+    }
 
     /* =========================================================
        STICKY TOGGLE BAR
@@ -179,7 +232,8 @@
     }
 
     .ds-toggle-bar .brand-dot {
-      width: 8px; height: 8px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: var(--t-primary);
     }
@@ -244,18 +298,22 @@
     .theme-toggle-track button.active {
       background: var(--t-surface-bright);
       color: var(--t-foreground);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
     }
 
     [data-theme="light"] .theme-toggle-track button.active {
       background: #ffffff;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
     }
 
     /* =========================================================
        PAGE LAYOUT
        ========================================================= */
-    .ds-page { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+    .ds-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
 
     .ds-header {
       text-align: center;
@@ -288,7 +346,9 @@
       border-radius: var(--radius-4xl);
     }
 
-    .ds-section { margin-bottom: 4rem; }
+    .ds-section {
+      margin-bottom: 4rem;
+    }
 
     .ds-section-title {
       font-size: 1.75rem;
@@ -297,9 +357,15 @@
       color: var(--t-foreground);
     }
 
-    .ds-section-desc { color: var(--t-muted-fg); font-size: 0.875rem; margin-bottom: 2rem; }
+    .ds-section-desc {
+      color: var(--t-muted-fg);
+      font-size: 0.875rem;
+      margin-bottom: 2rem;
+    }
 
-    .ds-subsection { margin-bottom: 3rem; }
+    .ds-subsection {
+      margin-bottom: 3rem;
+    }
 
     .ds-subsection-title {
       font-size: 1.125rem;
@@ -327,32 +393,43 @@
     }
 
     .theme-band.dark-band {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       color: #a3aac4;
     }
 
     .theme-band.light-band {
-      background: rgba(0,0,0,0.04);
-      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.08);
       color: #6b7280;
     }
 
     .theme-band .band-dot {
-      width: 6px; height: 6px;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
     }
 
-    .dark-band .band-dot { background: #4ade80; }
-    .light-band .band-dot { background: #22c55e; }
+    .dark-band .band-dot {
+      background: #4ade80;
+    }
+
+    .light-band .band-dot {
+      background: #22c55e;
+    }
 
     /* =========================================================
        COMPONENT VISIBILITY — Pure CSS theme switch
        .ds-components[data-active="dark"] → show dark, hide light
        .ds-components[data-active="light"] → show light, hide dark
        ========================================================= */
-    .ds-components[data-active="dark"]  .light-only { display: none !important; }
-    .ds-components[data-active="light"] .dark-only  { display: none !important; }
+    .ds-components[data-active="dark"] .light-only {
+      display: none !important;
+    }
+
+    .ds-components[data-active="light"] .dark-only {
+      display: none !important;
+    }
 
     /* =========================================================
        TOKEN SPLIT TABLE (always visible, not affected by toggle)
@@ -416,16 +493,22 @@
     }
 
     .swatch {
-      width: 28px; height: 28px;
+      width: 28px;
+      height: 28px;
       border-radius: var(--radius-md);
       flex-shrink: 0;
-      border: 1px solid rgba(128,128,128,0.2);
+      border: 1px solid rgba(128, 128, 128, 0.2);
     }
 
     /* Dark column bg */
-    .token-split-table .col-dark { background: rgba(6,14,32,0.6); }
+    .token-split-table .col-dark {
+      background: rgba(6, 14, 32, 0.6);
+    }
+
     /* Light column bg */
-    .token-split-table .col-light { background: rgba(244,248,247,0.6); }
+    .token-split-table .col-light {
+      background: rgba(244, 248, 247, 0.6);
+    }
 
     /* =========================================================
        COMPONENT DEMO WRAPPERS
@@ -454,14 +537,16 @@
     }
 
     /* Light theme label uses a darker green for contrast */
-    [data-theme="light"] .state-label { color: var(--t-secondary); }
+    [data-theme="light"] .state-label {
+      color: var(--t-secondary);
+    }
 
     /* =========================================================
        DARK COMPONENT STYLES — Sidebar/Dark glass shell
        ========================================================= */
     .demo-shell-dark {
       background: rgba(10, 12, 16, 0.85);
-      border: 1px solid rgba(255,255,255,0.06);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: var(--radius-xl);
       padding: 0.75rem;
       backdrop-filter: blur(20px);
@@ -470,269 +555,1198 @@
     /* ── Dark Dropdown Trigger ─────────────────────────── */
     .dt-dark {
       width: 244px;
-      display: flex; align-items: center; gap: 0.625rem;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
       padding: 0.5rem;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       background: transparent;
-      cursor: pointer; font-family: var(--font-body);
+      cursor: pointer;
+      font-family: var(--font-body);
     }
-    .dt-dark.hover  { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.15); }
-    .dt-dark.active { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.20); }
-    .dt-dark.focus  { border-color: #4ade80; box-shadow: 0 0 0 3px rgba(74,222,128,0.45); }
-    .dt-dark.disabled { opacity: 0.4; }
+
+    .dt-dark.hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .dt-dark.active {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.20);
+    }
+
+    .dt-dark.focus {
+      border-color: #4ade80;
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.45);
+    }
+
+    .dt-dark.disabled {
+      opacity: 0.4;
+    }
 
     .dt-dark .av {
-      width: 28px; height: 28px; border-radius: var(--radius-md);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.875rem; flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      flex-shrink: 0;
     }
-    .dt-dark .tx { flex: 1; min-width: 0; text-align: left; }
-    .dt-dark .tn { font-size: 0.75rem; font-weight: 500; color: #dee5ff; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .dt-dark .ts { font-size: 0.625rem; color: #6d758c; line-height: 1.2; }
-    .dt-dark .ch { flex-shrink: 0; color: #40485d; font-size: 0.875rem; }
+
+    .dt-dark .tx {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .dt-dark .tn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dt-dark .ts {
+      font-size: 0.625rem;
+      color: #6d758c;
+      line-height: 1.2;
+    }
+
+    .dt-dark .ch {
+      flex-shrink: 0;
+      color: #40485d;
+      font-size: 0.875rem;
+    }
 
     /* ── Dark Dropdown Panel ──────────────────────────── */
     .dp-dark {
-      width: 244px; margin-top: 0.25rem;
+      width: 244px;
+      margin-top: 0.25rem;
       background: #0f1930;
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius-xl);
-      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.5);
+      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
       overflow: hidden;
     }
-    .dp-dark .ph { padding: 0.75rem 0.75rem 0.25rem; font-size: 0.625rem; font-weight: 500; color: #6d758c; text-transform: uppercase; letter-spacing: 0.06em; }
-    .dp-dark .pl { padding: 0.25rem 0.5rem 0.5rem; }
-    .dp-dark .pi { display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem; border-radius: var(--radius-lg); color: #dee5ff; }
-    .dp-dark .pi.pi-sel { background: rgba(255,255,255,0.05); }
-    .dp-dark .pi.pi-hov { background: rgba(255,255,255,0.04); }
-    .dp-dark .pi .ia { width: 32px; height: 32px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .dp-dark .pi .it { flex: 1; min-width: 0; }
-    .dp-dark .pi .in { font-size: 0.75rem; font-weight: 500; color: #dee5ff; line-height: 1.2; }
-    .dp-dark .pi.pi-sel .in { font-weight: 600; }
-    .dp-dark .pi .is { font-size: 0.625rem; color: #6d758c; line-height: 1.2; margin-top: 2px; }
-    .dp-dark .pi .ic { flex-shrink: 0; color: #a3aac4; font-size: 0.875rem; }
-    .dp-dark .pdiv { height: 1px; background: rgba(255,255,255,0.05); margin: 0 0.5rem; }
-    .dp-dark .pa { padding: 0.5rem; text-align: center; }
-    .dp-dark .pa button { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; font-weight: 600; color: #4ade80; background: none; border: none; cursor: pointer; font-family: var(--font-body); }
+
+    .dp-dark .ph {
+      padding: 0.75rem 0.75rem 0.25rem;
+      font-size: 0.625rem;
+      font-weight: 500;
+      color: #6d758c;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .dp-dark .pl {
+      padding: 0.25rem 0.5rem 0.5rem;
+    }
+
+    .dp-dark .pi {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem;
+      border-radius: var(--radius-lg);
+      color: #dee5ff;
+    }
+
+    .dp-dark .pi.pi-sel {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .dp-dark .pi.pi-hov {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .dp-dark .pi .ia {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .dp-dark .pi .it {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .dp-dark .pi .in {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      line-height: 1.2;
+    }
+
+    .dp-dark .pi.pi-sel .in {
+      font-weight: 600;
+    }
+
+    .dp-dark .pi .is {
+      font-size: 0.625rem;
+      color: #6d758c;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .dp-dark .pi .ic {
+      flex-shrink: 0;
+      color: #a3aac4;
+      font-size: 0.875rem;
+    }
+
+    .dp-dark .pdiv {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 0 0.5rem;
+    }
+
+    .dp-dark .pa {
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .dp-dark .pa button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #4ade80;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
 
     /* ── Dark Profile Pill ────────────────────────────── */
     .pp-dark {
-      width: 244px; display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.5rem; border-radius: var(--radius-xl);
-      background: none; border: none; font-family: var(--font-body); cursor: pointer;
+      width: 244px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-xl);
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      cursor: pointer;
     }
-    .pp-dark.hover  { background: rgba(255,255,255,0.05); }
-    .pp-dark.active { background: rgba(255,255,255,0.05); }
-    .pp-dark.focus  { box-shadow: 0 0 0 3px rgba(74,222,128,0.45); border-radius: var(--radius-xl); }
-    .pp-dark.disabled { opacity: 0.4; }
-    .pp-dark .pav { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.10); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; color: #dee5ff; border: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
-    .pp-dark .pin { flex: 1; min-width: 0; }
-    .pp-dark .pn  { font-size: 0.75rem; font-weight: 500; color: #dee5ff; line-height: 1.2; }
-    .pp-dark .ps  { font-size: 0.625rem; color: #6d758c; line-height: 1.2; margin-top: 1px; }
-    .pp-dark .pch { flex-shrink: 0; color: #40485d; font-size: 0.875rem; }
+
+    .pp-dark.hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .pp-dark.active {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .pp-dark.focus {
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.45);
+      border-radius: var(--radius-xl);
+    }
+
+    .pp-dark.disabled {
+      opacity: 0.4;
+    }
+
+    .pp-dark .pav {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+    }
+
+    .pp-dark .pin {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pp-dark .pn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      line-height: 1.2;
+    }
+
+    .pp-dark .ps {
+      font-size: 0.625rem;
+      color: #6d758c;
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+
+    .pp-dark .pch {
+      flex-shrink: 0;
+      color: #40485d;
+      font-size: 0.875rem;
+    }
 
     /* ── Dark Popup Menu ──────────────────────────────── */
     .pm-dark {
-      width: 320px; background: #0f1930;
-      border: 1px solid rgba(255,255,255,0.10);
+      width: 320px;
+      background: #0f1930;
+      border: 1px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius-2xl);
-      box-shadow: 0 20px 60px -15px rgba(0,0,0,0.5);
-      padding: 1rem; font-family: var(--font-body);
+      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+      padding: 1rem;
+      font-family: var(--font-body);
     }
-    .pm-dark .pu { display: flex; align-items: center; gap: 0.75rem; padding-bottom: 0.5rem; }
-    .pm-dark .pua { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.10); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; color: #dee5ff; border: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; position: relative; }
-    .pm-dark .pun { font-size: 0.75rem; font-weight: 500; color: #dee5ff; line-height: 1.2; }
-    .pm-dark .pue { font-size: 0.625rem; color: #6d758c; line-height: 1.2; margin-top: 2px; }
-    .pm-dark .pdiv { height: 1px; background: rgba(255,255,255,0.05); margin: 0.75rem 0; }
-    .pm-dark .pwc { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.5rem; border-radius: var(--radius-xl); border: 1px solid rgba(255,255,255,0.10); cursor: pointer; }
-    .pm-dark .pwi { width: 36px; height: 36px; border-radius: var(--radius-md); background: rgba(255,255,255,0.10); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.875rem; }
-    .pm-dark .pwn { font-size: 0.75rem; font-weight: 500; color: #dee5ff; line-height: 1.2; }
-    .pm-dark .pwm { font-size: 0.625rem; color: #6d758c; line-height: 1.2; margin-top: 2px; }
-    .pm-dark .pmi { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; border-radius: var(--radius-lg); cursor: pointer; color: #a3aac4; }
-    .pm-dark .pmi.hov { background: rgba(255,255,255,0.05); color: #dee5ff; }
-    .pm-dark .pmi .ml { display: flex; align-items: center; gap: 0.625rem; font-size: 0.75rem; font-weight: 500; }
-    .pm-dark .pmi .mr { font-size: 0.75rem; color: #6d758c; }
-    .pm-dark .pft { display: flex; align-items: center; gap: 0.5rem; }
-    .pm-dark .sob { flex: 1; display: flex; align-items: center; gap: 0.625rem; padding: 0.5rem; border-radius: var(--radius-lg); font-size: 0.75rem; font-weight: 500; color: #a3aac4; background: none; border: none; font-family: var(--font-body); cursor: pointer; }
-    .pm-dark .nfb { padding: 0.5rem; border-radius: var(--radius-lg); border: 1px solid rgba(255,255,255,0.10); background: none; cursor: pointer; color: #6d758c; display: flex; align-items: center; justify-content: center; position: relative; }
-    .pm-dark .nd  { position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; border-radius: 50%; background: #ff6e84; }
+
+    .pm-dark .pu {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .pm-dark .pua {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .pm-dark .pun {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      line-height: 1.2;
+    }
+
+    .pm-dark .pue {
+      font-size: 0.625rem;
+      color: #6d758c;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .pm-dark .pdiv {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.05);
+      margin: 0.75rem 0;
+    }
+
+    .pm-dark .pwc {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      cursor: pointer;
+    }
+
+    .pm-dark .pwi {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.875rem;
+    }
+
+    .pm-dark .pwn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #dee5ff;
+      line-height: 1.2;
+    }
+
+    .pm-dark .pwm {
+      font-size: 0.625rem;
+      color: #6d758c;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .pm-dark .pmi {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      color: #a3aac4;
+    }
+
+    .pm-dark .pmi.hov {
+      background: rgba(255, 255, 255, 0.05);
+      color: #dee5ff;
+    }
+
+    .pm-dark .pmi .ml {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .pm-dark .pmi .mr {
+      font-size: 0.75rem;
+      color: #6d758c;
+    }
+
+    .pm-dark .pft {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pm-dark .sob {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #a3aac4;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+
+    .pm-dark .nfb {
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: none;
+      cursor: pointer;
+      color: #6d758c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .pm-dark .nd {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff6e84;
+    }
 
     /* ── Dark Mode Switch ─────────────────────────────── */
     .ms-dark {
-      display: flex; padding: 0.25rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      padding: 0.25rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       border-radius: var(--radius-xl);
       width: 244px;
     }
-    .ms-dark.focus { box-shadow: 0 0 0 3px rgba(74,222,128,0.45); }
-    .ms-dark.disabled { opacity: 0.4; pointer-events: none; }
-    .ms-dark .mb { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.375rem; padding: 0.375rem 0.5rem; border-radius: var(--radius-lg); font-size: 0.75rem; font-weight: 500; border: none; background: none; font-family: var(--font-body); cursor: pointer; color: #6d758c; }
-    .ms-dark .mb.act { background: rgba(255,255,255,0.15); color: #ffffff; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.15); border: 1px solid rgba(255,255,255,0.05); }
-    .ms-dark .mb.hov { color: #dee5ff; }
 
-    /* ── Dark CTA Button ─────────────────────────────── */
-    .cta-dark { width: 244px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.625rem 1rem; border-radius: var(--radius-xl); border: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; cursor: pointer; background: linear-gradient(to right, #22c55e, #4ade80); color: #003910; box-shadow: 0 4px 14px -3px rgba(34,197,94,0.25); }
-    .cta-dark.hover   { background: linear-gradient(to right, #4ade80, #86efac); box-shadow: 0 6px 20px -3px rgba(34,197,94,0.35); }
-    .cta-dark.active  { transform: scale(0.98); box-shadow: 0 2px 8px -2px rgba(34,197,94,0.3); }
-    .cta-dark.focus   { box-shadow: 0 0 0 3px rgba(74,222,128,0.5), 0 4px 14px -3px rgba(34,197,94,0.25); }
-    .cta-dark.disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .ms-dark.focus {
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.45);
+    }
+
+    .ms-dark.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .ms-dark .mb {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.5rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: none;
+      background: none;
+      font-family: var(--font-body);
+      cursor: pointer;
+      color: #6d758c;
+    }
+
+    .ms-dark .mb.act {
+      background: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .ms-dark .mb.hov {
+      color: #dee5ff;
+    }
+
+    /* ── CTA Button ──────────────────────────────────── */
+    .cta-btn {
+      width: 244px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.625rem 1rem;
+      border-radius: var(--radius-xl);
+      border: none;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.333;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: linear-gradient(to right, #22c55e, #34d399);
+      color: #0d2b1a;
+      box-shadow: 0 4px 14px -3px rgba(34, 197, 94, 0.25);
+    }
+
+    .cta-btn.hover,
+    .cta-btn:hover {
+      background: linear-gradient(to right, #4ade80, #6ee7b7);
+      box-shadow: 0 6px 20px -3px rgba(34, 197, 94, 0.35);
+    }
+
+    .cta-btn.active,
+    .cta-btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.3);
+    }
+
+    .cta-btn.focus,
+    .cta-btn:focus {
+      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.5), 0 4px 14px -3px rgba(34, 197, 94, 0.25);
+      outline: none;
+    }
+
+    .cta-btn.disabled,
+    .cta-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Light Theme Override */
+    [data-theme="light"] .cta-btn {
+      color: #ffffff;
+      box-shadow: 0 4px 14px -3px rgba(34, 197, 94, 0.25);
+    }
 
     /* =========================================================
        LIGHT COMPONENT STYLES — Glass sidebar light mode
        ========================================================= */
     .demo-shell-light {
       background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255,255,255,0.5);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: var(--radius-xl);
       padding: 0.75rem;
       backdrop-filter: blur(20px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     }
 
     /* ── Light Dropdown Trigger ──────────────────────── */
     .dt-light {
-      width: 244px; display: flex; align-items: center; gap: 0.625rem;
-      padding: 0.5rem; border-radius: var(--radius-lg);
-      border: 1px solid rgba(0,0,0,0.10); background: transparent;
-      cursor: pointer; font-family: var(--font-body);
+      width: 244px;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--font-body);
     }
-    .dt-light.hover   { background: rgba(255,255,255,0.40); border-color: rgba(0,0,0,0.15); }
-    .dt-light.active  { background: rgba(255,255,255,0.40); border-color: rgba(0,0,0,0.20); }
-    .dt-light.focus   { border-color: #22c55e; box-shadow: 0 0 0 3px rgba(34,197,94,0.30); }
-    .dt-light.disabled { opacity: 0.4; }
-    .dt-light .av { width: 28px; height: 28px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; flex-shrink: 0; }
-    .dt-light .tx { flex: 1; min-width: 0; text-align: left; }
-    .dt-light .tn { font-size: 0.75rem; font-weight: 500; color: #111827; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .dt-light .ts { font-size: 0.625rem; color: #6b7280; line-height: 1.2; }
-    .dt-light .ch { flex-shrink: 0; color: #9ca3af; font-size: 0.875rem; }
+
+    .dt-light.hover {
+      background: rgba(255, 255, 255, 0.40);
+      border-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .dt-light.active {
+      background: rgba(255, 255, 255, 0.40);
+      border-color: rgba(0, 0, 0, 0.20);
+    }
+
+    .dt-light.focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.30);
+    }
+
+    .dt-light.disabled {
+      opacity: 0.4;
+    }
+
+    .dt-light .av {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .dt-light .tx {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .dt-light .tn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #111827;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dt-light .ts {
+      font-size: 0.625rem;
+      color: #6b7280;
+      line-height: 1.2;
+    }
+
+    .dt-light .ch {
+      flex-shrink: 0;
+      color: #9ca3af;
+      font-size: 0.875rem;
+    }
 
     /* ── Light Dropdown Panel ─────────────────────────── */
     .dp-light {
-      width: 244px; margin-top: 0.25rem; background: #ffffff;
-      border: 1px solid rgba(0,0,0,0.10);
-      border-radius: var(--radius-xl); box-shadow: 0 8px 24px rgba(0,0,0,0.10); overflow: hidden;
+      width: 244px;
+      margin-top: 0.25rem;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      border-radius: var(--radius-xl);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+      overflow: hidden;
     }
-    .dp-light .ph { padding: 0.75rem 0.75rem 0.25rem; font-size: 0.625rem; font-weight: 500; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.06em; }
-    .dp-light .pl { padding: 0.25rem 0.5rem 0.5rem; }
-    .dp-light .pi { display: flex; align-items: center; gap: 0.75rem; padding: 0.625rem; border-radius: var(--radius-lg); color: #111827; }
-    .dp-light .pi.pi-sel { background: rgba(0,0,0,0.05); }
-    .dp-light .pi.pi-hov { background: rgba(0,0,0,0.04); }
-    .dp-light .pi .ia { width: 32px; height: 32px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .dp-light .pi .it { flex: 1; min-width: 0; }
-    .dp-light .pi .in { font-size: 0.75rem; font-weight: 500; color: #111827; line-height: 1.2; }
-    .dp-light .pi.pi-sel .in { font-weight: 600; }
-    .dp-light .pi .is { font-size: 0.625rem; color: #9ca3af; line-height: 1.2; margin-top: 2px; }
-    .dp-light .pi .ic { flex-shrink: 0; color: #6b7280; font-size: 0.875rem; }
-    .dp-light .pdiv { height: 1px; background: rgba(0,0,0,0.06); margin: 0 0.5rem; }
-    .dp-light .pa { padding: 0.5rem; text-align: center; }
-    .dp-light .pa button { display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; font-weight: 600; color: #16a34a; background: none; border: none; cursor: pointer; font-family: var(--font-body); }
+
+    .dp-light .ph {
+      padding: 0.75rem 0.75rem 0.25rem;
+      font-size: 0.625rem;
+      font-weight: 500;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .dp-light .pl {
+      padding: 0.25rem 0.5rem 0.5rem;
+    }
+
+    .dp-light .pi {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.625rem;
+      border-radius: var(--radius-lg);
+      color: #111827;
+    }
+
+    .dp-light .pi.pi-sel {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .dp-light .pi.pi-hov {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .dp-light .pi .ia {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .dp-light .pi .it {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .dp-light .pi .in {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #111827;
+      line-height: 1.2;
+    }
+
+    .dp-light .pi.pi-sel .in {
+      font-weight: 600;
+    }
+
+    .dp-light .pi .is {
+      font-size: 0.625rem;
+      color: #9ca3af;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .dp-light .pi .ic {
+      flex-shrink: 0;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+
+    .dp-light .pdiv {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.06);
+      margin: 0 0.5rem;
+    }
+
+    .dp-light .pa {
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .dp-light .pa button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #16a34a;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-body);
+    }
 
     /* ── Light Profile Pill ───────────────────────────── */
     .pp-light {
-      width: 244px; display: flex; align-items: center; gap: 0.75rem;
-      padding: 0.5rem; border-radius: var(--radius-xl);
-      background: none; border: none; font-family: var(--font-body); cursor: pointer;
+      width: 244px;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-xl);
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      cursor: pointer;
     }
-    .pp-light.hover   { background: rgba(255,255,255,0.40); }
-    .pp-light.active  { background: rgba(255,255,255,0.40); }
-    .pp-light.focus   { box-shadow: 0 0 0 3px rgba(34,197,94,0.30); border-radius: var(--radius-xl); }
-    .pp-light.disabled { opacity: 0.4; }
-    .pp-light .pav { width: 32px; height: 32px; border-radius: 50%; background: rgba(0,0,0,0.10); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; color: #374151; border: 1px solid rgba(0,0,0,0.05); flex-shrink: 0; }
-    .pp-light .pin { flex: 1; min-width: 0; }
-    .pp-light .pn  { font-size: 0.75rem; font-weight: 500; color: #111827; line-height: 1.2; }
-    .pp-light .ps  { font-size: 0.625rem; color: #9ca3af; line-height: 1.2; margin-top: 1px; }
-    .pp-light .pch { flex-shrink: 0; color: #d1d5db; font-size: 0.875rem; }
+
+    .pp-light.hover {
+      background: rgba(255, 255, 255, 0.40);
+    }
+
+    .pp-light.active {
+      background: rgba(255, 255, 255, 0.40);
+    }
+
+    .pp-light.focus {
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.30);
+      border-radius: var(--radius-xl);
+    }
+
+    .pp-light.disabled {
+      opacity: 0.4;
+    }
+
+    .pp-light .pav {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #374151;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+    }
+
+    .pp-light .pin {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .pp-light .pn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #111827;
+      line-height: 1.2;
+    }
+
+    .pp-light .ps {
+      font-size: 0.625rem;
+      color: #9ca3af;
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+
+    .pp-light .pch {
+      flex-shrink: 0;
+      color: #d1d5db;
+      font-size: 0.875rem;
+    }
 
     /* ── Light Popup Menu ─────────────────────────────── */
     .pm-light {
-      width: 320px; background: #ffffff;
-      border: 1px solid rgba(0,0,0,0.10);
-      border-radius: var(--radius-2xl); box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-      padding: 1rem; font-family: var(--font-body);
+      width: 320px;
+      background: #ffffff;
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      border-radius: var(--radius-2xl);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
+      padding: 1rem;
+      font-family: var(--font-body);
     }
-    .pm-light .pu { display: flex; align-items: center; gap: 0.75rem; padding-bottom: 0.5rem; }
-    .pm-light .pua { width: 44px; height: 44px; border-radius: 50%; background: rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; color: #374151; border: 1px solid rgba(0,0,0,0.05); flex-shrink: 0; }
-    .pm-light .pun { font-size: 0.75rem; font-weight: 500; color: #111827; line-height: 1.2; }
-    .pm-light .pue { font-size: 0.625rem; color: #9ca3af; line-height: 1.2; margin-top: 2px; }
-    .pm-light .pdiv { height: 1px; background: rgba(0,0,0,0.07); margin: 0.75rem 0; }
-    .pm-light .pwc { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.5rem; border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.10); cursor: pointer; }
-    .pm-light .pwi { width: 36px; height: 36px; border-radius: var(--radius-md); background: rgba(0,0,0,0.07); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.875rem; }
-    .pm-light .pwn { font-size: 0.75rem; font-weight: 500; color: #111827; line-height: 1.2; }
-    .pm-light .pwm { font-size: 0.625rem; color: #9ca3af; line-height: 1.2; margin-top: 2px; }
-    .pm-light .pmi { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem; border-radius: var(--radius-lg); cursor: pointer; color: #374151; }
-    .pm-light .pmi.hov { background: rgba(0,0,0,0.04); }
-    .pm-light .pmi .ml { display: flex; align-items: center; gap: 0.625rem; font-size: 0.75rem; font-weight: 500; }
-    .pm-light .pmi .mr { font-size: 0.75rem; color: #9ca3af; }
-    .pm-light .pft { display: flex; align-items: center; gap: 0.5rem; }
-    .pm-light .sob { flex: 1; display: flex; align-items: center; gap: 0.625rem; padding: 0.5rem; border-radius: var(--radius-lg); font-size: 0.75rem; font-weight: 500; color: #374151; background: none; border: none; font-family: var(--font-body); cursor: pointer; }
-    .pm-light .nfb { padding: 0.5rem; border-radius: var(--radius-lg); border: 1px solid rgba(0,0,0,0.10); background: none; cursor: pointer; color: #9ca3af; display: flex; align-items: center; justify-content: center; position: relative; }
-    .pm-light .nd  { position: absolute; top: 6px; right: 6px; width: 6px; height: 6px; border-radius: 50%; background: #ef4444; }
+
+    .pm-light .pu {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .pm-light .pua {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #374151;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      flex-shrink: 0;
+    }
+
+    .pm-light .pun {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #111827;
+      line-height: 1.2;
+    }
+
+    .pm-light .pue {
+      font-size: 0.625rem;
+      color: #9ca3af;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .pm-light .pdiv {
+      height: 1px;
+      background: rgba(0, 0, 0, 0.07);
+      margin: 0.75rem 0;
+    }
+
+    .pm-light .pwc {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      cursor: pointer;
+    }
+
+    .pm-light .pwi {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: rgba(0, 0, 0, 0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.875rem;
+    }
+
+    .pm-light .pwn {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #111827;
+      line-height: 1.2;
+    }
+
+    .pm-light .pwm {
+      font-size: 0.625rem;
+      color: #9ca3af;
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .pm-light .pmi {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      color: #374151;
+    }
+
+    .pm-light .pmi.hov {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .pm-light .pmi .ml {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .pm-light .pmi .mr {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .pm-light .pft {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .pm-light .sob {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #374151;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+
+    .pm-light .nfb {
+      padding: 0.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      background: none;
+      cursor: pointer;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .pm-light .nd {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
 
     /* ── Light Mode Switch ────────────────────────────── */
     .ms-light {
-      display: flex; padding: 0.25rem;
-      background: rgba(0,0,0,0.05);
-      border: 1px solid rgba(0,0,0,0.10);
-      border-radius: var(--radius-xl); width: 244px;
+      display: flex;
+      padding: 0.25rem;
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.10);
+      border-radius: var(--radius-xl);
+      width: 244px;
     }
-    .ms-light.focus   { box-shadow: 0 0 0 3px rgba(34,197,94,0.30); }
-    .ms-light.disabled { opacity: 0.4; pointer-events: none; }
-    .ms-light .mb { flex: 1; display: flex; align-items: center; justify-content: center; gap: 0.375rem; padding: 0.375rem 0.5rem; border-radius: var(--radius-lg); font-size: 0.75rem; font-weight: 500; border: none; background: none; font-family: var(--font-body); cursor: pointer; color: #666666; }
-    .ms-light .mb.act { background: #ffffff; color: #000000; font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.05); }
-    .ms-light .mb.hov { color: #111827; }
 
-    /* ── Light CTA Button ────────────────────────────── */
-    .cta-light { width: 244px; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.625rem 1rem; border-radius: var(--radius-xl); border: none; font-family: var(--font-body); font-size: 0.75rem; font-weight: 600; cursor: pointer; background: linear-gradient(to right, #16a34a, #22c55e); color: #ffffff; box-shadow: 0 4px 14px -3px rgba(22,163,74,0.30); }
-    .cta-light.hover   { background: linear-gradient(to right, #22c55e, #4ade80); box-shadow: 0 6px 20px -3px rgba(22,163,74,0.40); }
-    .cta-light.active  { transform: scale(0.98); box-shadow: 0 2px 8px -2px rgba(22,163,74,0.25); }
-    .cta-light.focus   { box-shadow: 0 0 0 3px rgba(34,197,94,0.35), 0 4px 14px -3px rgba(22,163,74,0.30); }
-    .cta-light.disabled { opacity: 0.4; cursor: not-allowed; box-shadow: none; }
+    .ms-light.focus {
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.30);
+    }
+
+    .ms-light.disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .ms-light .mb {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.5rem;
+      border-radius: var(--radius-lg);
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: none;
+      background: none;
+      font-family: var(--font-body);
+      cursor: pointer;
+      color: #666666;
+    }
+
+    .ms-light .mb.act {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .ms-light .mb.hov {
+      color: #111827;
+    }
+
+
 
     /* =========================================================
        USAGE TABLE
        ========================================================= */
-    .usage-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
-    .usage-table th { text-align: left; padding: 0.625rem 1rem; font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid var(--t-border-strong); }
-    .usage-table th.do-col   { color: #4ade80; }
-    .usage-table th.dont-col { color: #ff6e84; }
-    [data-theme="light"] .usage-table th.do-col   { color: #16a34a; }
-    [data-theme="light"] .usage-table th.dont-col { color: #ef4444; }
-    .usage-table td { padding: 0.625rem 1rem; vertical-align: top; border-bottom: 1px solid var(--t-border); color: var(--t-muted-fg); line-height: 1.5; }
-    .usage-table td code { font-family: 'Inter', monospace; font-size: 0.6875rem; padding: 0.125rem 0.375rem; background: var(--t-surface-container); border-radius: var(--radius-sm); color: var(--t-foreground); }
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8125rem;
+    }
+
+    .usage-table th {
+      text-align: left;
+      padding: 0.625rem 1rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--t-border-strong);
+    }
+
+    .usage-table th.do-col {
+      color: #4ade80;
+    }
+
+    .usage-table th.dont-col {
+      color: #ff6e84;
+    }
+
+    [data-theme="light"] .usage-table th.do-col {
+      color: #16a34a;
+    }
+
+    [data-theme="light"] .usage-table th.dont-col {
+      color: #ef4444;
+    }
+
+    .usage-table td {
+      padding: 0.625rem 1rem;
+      vertical-align: top;
+      border-bottom: 1px solid var(--t-border);
+      color: var(--t-muted-fg);
+      line-height: 1.5;
+    }
+
+    .usage-table td code {
+      font-family: 'Inter', monospace;
+      font-size: 0.6875rem;
+      padding: 0.125rem 0.375rem;
+      background: var(--t-surface-container);
+      border-radius: var(--radius-sm);
+      color: var(--t-foreground);
+    }
 
     /* =========================================================
        MISC SHARED
        ========================================================= */
-    .token-card { background: var(--t-surface-container); border: 1px solid var(--t-border-strong); border-radius: var(--radius-lg); padding: 0.75rem; display: flex; align-items: center; gap: 0.75rem; }
-    .token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
-    .token-name { font-family: 'Inter', monospace; font-size: 0.6875rem; font-weight: 600; color: var(--t-foreground); word-break: break-all; line-height: 1.3; }
-    .token-value { font-family: 'Inter', monospace; font-size: 0.625rem; color: var(--t-muted-fg); word-break: break-all; line-height: 1.3; }
+    .token-card {
+      background: var(--t-surface-container);
+      border: 1px solid var(--t-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
 
-    .spacing-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem; }
-    .spacing-bar { height: 20px; background: var(--t-primary); border-radius: var(--radius-sm); opacity: 0.45; }
-    .spacing-meta { font-family: 'Inter', monospace; font-size: 0.625rem; color: var(--t-muted-fg); white-space: nowrap; min-width: 160px; }
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+    }
 
-    .radius-grid { display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end; }
-    .radius-demo { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
-    .radius-box { width: 56px; height: 56px; background: var(--t-surface-high); border: 2px solid var(--t-primary); }
-    .radius-label { font-family: 'Inter', monospace; font-size: 0.625rem; color: var(--t-muted-fg); text-align: center; }
+    .token-name {
+      font-family: 'Inter', monospace;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--t-foreground);
+      word-break: break-all;
+      line-height: 1.3;
+    }
 
-    .shadow-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-    .shadow-card { background: var(--t-surface-container); border: 1px solid var(--t-border-strong); border-radius: var(--radius-lg); padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
-    .shadow-demo { width: 80px; height: 56px; background: var(--t-surface-high); border-radius: var(--radius-md); }
+    .token-value {
+      font-family: 'Inter', monospace;
+      font-size: 0.625rem;
+      color: var(--t-muted-fg);
+      word-break: break-all;
+      line-height: 1.3;
+    }
 
-    .motion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.75rem; }
-    .motion-card { background: var(--t-surface-container); border: 1px solid var(--t-border-strong); border-radius: var(--radius-lg); padding: 1rem; }
-    .motion-bar-track { height: 4px; background: var(--t-surface-high); border-radius: 2px; overflow: hidden; margin-top: 0.5rem; }
-    .motion-bar-fill { height: 100%; background: var(--t-primary); border-radius: 2px; }
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
 
-    .typo-row { display: flex; align-items: baseline; gap: 1.5rem; padding: 0.75rem 1rem; background: var(--t-surface-container); border: 1px solid var(--t-border-strong); border-radius: var(--radius-lg); margin-bottom: 0.5rem; }
-    .typo-sample { flex-shrink: 0; min-width: 200px; }
-    .typo-meta { font-family: 'Inter', monospace; font-size: 0.625rem; color: var(--t-muted-fg); }
+    .spacing-bar {
+      height: 20px;
+      background: var(--t-primary);
+      border-radius: var(--radius-sm);
+      opacity: 0.45;
+    }
+
+    .spacing-meta {
+      font-family: 'Inter', monospace;
+      font-size: 0.625rem;
+      color: var(--t-muted-fg);
+      white-space: nowrap;
+      min-width: 160px;
+    }
+
+    .radius-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .radius-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .radius-box {
+      width: 56px;
+      height: 56px;
+      background: var(--t-surface-high);
+      border: 2px solid var(--t-primary);
+    }
+
+    .radius-label {
+      font-family: 'Inter', monospace;
+      font-size: 0.625rem;
+      color: var(--t-muted-fg);
+      text-align: center;
+    }
+
+    .shadow-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .shadow-card {
+      background: var(--t-surface-container);
+      border: 1px solid var(--t-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .shadow-demo {
+      width: 80px;
+      height: 56px;
+      background: var(--t-surface-high);
+      border-radius: var(--radius-md);
+    }
+
+    .motion-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .motion-card {
+      background: var(--t-surface-container);
+      border: 1px solid var(--t-border-strong);
+      border-radius: var(--radius-lg);
+      padding: 1rem;
+    }
+
+    .motion-bar-track {
+      height: 4px;
+      background: var(--t-surface-high);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 0.5rem;
+    }
+
+    .motion-bar-fill {
+      height: 100%;
+      background: var(--t-primary);
+      border-radius: 2px;
+    }
+
+    .typo-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 0.75rem 1rem;
+      background: var(--t-surface-container);
+      border: 1px solid var(--t-border-strong);
+      border-radius: var(--radius-lg);
+      margin-bottom: 0.5rem;
+    }
+
+    .typo-sample {
+      flex-shrink: 0;
+      min-width: 200px;
+    }
+
+    .typo-meta {
+      font-family: 'Inter', monospace;
+      font-size: 0.625rem;
+      color: var(--t-muted-fg);
+    }
   </style>
 </head>
+
 <body>
 
   <!-- ═══════════════════════════════════════════════════════════
@@ -750,7 +1764,7 @@
     </nav>
     <div class="theme-toggle">
       <div class="theme-toggle-track" role="group" aria-label="Theme switch">
-        <button id="btn-dark"  class="active"  onclick="setTheme('dark')">
+        <button id="btn-dark" class="active" onclick="setTheme('dark')">
           ◐ Dark
         </button>
         <button id="btn-light" onclick="setTheme('light')">
@@ -776,7 +1790,9 @@
          ═══════════════════════════════════════════════════════════ -->
     <section id="tokens" class="ds-section">
       <h2 class="ds-section-title">1 — Tokens</h2>
-      <p class="ds-section-desc">Both themes shown simultaneously. Left = Dark (from <code style="font-size:0.75rem">tokens.css :root</code>). Right = Light (from <code style="font-size:0.75rem">Tailwind dark: patterns</code>). This section is not affected by the toggle.</p>
+      <p class="ds-section-desc">Both themes shown simultaneously. Left = Dark (from <code
+          style="font-size:0.75rem">tokens.css :root</code>). Right = Light (from <code
+          style="font-size:0.75rem">Tailwind dark: patterns</code>). This section is not affected by the toggle.</p>
 
       <!-- 1.1 Semantic Colors -->
       <div class="ds-subsection">
@@ -791,84 +1807,363 @@
           </thead>
           <tbody>
             <tr>
-              <td><div class="tok-name">--background / page</div><div class="tok-val">bg-background</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#060e20"></div><div><div class="tok-val">#060e20 (navy-950)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#f4f8f7"></div><div><div class="tok-val">#f4f8f7 (app-bg)</div></div></div></td>
+              <td>
+                <div class="tok-name">--background / page</div>
+                <div class="tok-val">bg-background</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#060e20"></div>
+                  <div>
+                    <div class="tok-val">#060e20 (navy-950)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#f4f8f7"></div>
+                  <div>
+                    <div class="tok-val">#f4f8f7 (app-bg)</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--foreground</div><div class="tok-val">text-foreground</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#dee5ff"></div><div><div class="tok-val">#dee5ff (navy-100)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#0d1117"></div><div><div class="tok-val">#0d1117</div></div></div></td>
+              <td>
+                <div class="tok-name">--foreground</div>
+                <div class="tok-val">text-foreground</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#dee5ff"></div>
+                  <div>
+                    <div class="tok-val">#dee5ff (navy-100)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#0d1117"></div>
+                  <div>
+                    <div class="tok-val">#0d1117</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Sidebar glass</div><div class="tok-val">.glass-sidebar</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:rgba(10,12,16,0.65);border:1px solid rgba(255,255,255,0.06)"></div><div><div class="tok-val">rgba(10,12,16,0.65) + blur</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.5)"></div><div><div class="tok-val">rgba(255,255,255,0.6) + blur</div></div></div></td>
+              <td>
+                <div class="tok-name">Sidebar glass</div>
+                <div class="tok-val">.glass-sidebar</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(10,12,16,0.65);border:1px solid rgba(255,255,255,0.06)">
+                  </div>
+                  <div>
+                    <div class="tok-val">rgba(10,12,16,0.65) + blur</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.5)">
+                  </div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.6) + blur</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--surface-container</div><div class="tok-val">bg-surface-container</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#0f1930"></div><div><div class="tok-val">#0f1930 (navy-800)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#f2f2f4"></div><div><div class="tok-val">#f2f2f4</div></div></div></td>
+              <td>
+                <div class="tok-name">--surface-container</div>
+                <div class="tok-val">bg-surface-container</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#0f1930"></div>
+                  <div>
+                    <div class="tok-val">#0f1930 (navy-800)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#f2f2f4"></div>
+                  <div>
+                    <div class="tok-val">#f2f2f4</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--popover</div><div class="tok-val">bg-popover</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#0f1930"></div><div><div class="tok-val">#0f1930 (navy-800)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#ffffff"></div><div><div class="tok-val">#ffffff</div></div></div></td>
+              <td>
+                <div class="tok-name">--popover</div>
+                <div class="tok-val">bg-popover</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#0f1930"></div>
+                  <div>
+                    <div class="tok-val">#0f1930 (navy-800)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ffffff"></div>
+                  <div>
+                    <div class="tok-val">#ffffff</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--primary-green</div><div class="tok-val">text-primary-green</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#4ade80"></div><div><div class="tok-val">#4ade80 (green-400)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#22c55e"></div><div><div class="tok-val">#22c55e (green-500, contrast)</div></div></div></td>
+              <td>
+                <div class="tok-name">--primary-green</div>
+                <div class="tok-val">text-primary-green</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#4ade80"></div>
+                  <div>
+                    <div class="tok-val">#4ade80 (green-400)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#22c55e"></div>
+                  <div>
+                    <div class="tok-val">#22c55e (green-500, contrast)</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--primary-container</div><div class="tok-val">CTA gradient from</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#22c55e"></div><div><div class="tok-val">#22c55e → #4ade80</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:linear-gradient(to right,#16a34a,#22c55e)"></div><div><div class="tok-val">#16a34a → #22c55e</div></div></div></td>
+              <td>
+                <div class="tok-name">--primary-container</div>
+                <div class="tok-val">CTA gradient from</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:linear-gradient(to right, #22c55e, #34d399)"></div>
+                  <div>
+                    <div class="tok-val">#22c55e → #34d399</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:linear-gradient(to right, #22c55e, #34d399)"></div>
+                  <div>
+                    <div class="tok-val">#22c55e → #34d399</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--muted-foreground</div><div class="tok-val">text-muted-foreground</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#a3aac4"></div><div><div class="tok-val">#a3aac4 (navy-200)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#6b7280"></div><div><div class="tok-val">#6b7280</div></div></div></td>
+              <td>
+                <div class="tok-name">--muted-foreground</div>
+                <div class="tok-val">text-muted-foreground</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#a3aac4"></div>
+                  <div>
+                    <div class="tok-val">#a3aac4 (navy-200)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#6b7280"></div>
+                  <div>
+                    <div class="tok-val">#6b7280</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--border</div><div class="tok-val">border-border</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2)"></div><div><div class="tok-val">rgba(255,255,255,0.05)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:rgba(0,0,0,0.07);border:2px dashed rgba(0,0,0,0.2)"></div><div><div class="tok-val">rgba(0,0,0,0.07)</div></div></div></td>
+              <td>
+                <div class="tok-name">--border</div>
+                <div class="tok-val">border-border</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2)">
+                  </div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.05)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(0,0,0,0.07);border:2px dashed rgba(0,0,0,0.2)"></div>
+                  <div>
+                    <div class="tok-val">rgba(0,0,0,0.07)</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">--destructive / error</div><div class="tok-val">text-error</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#ff6e84"></div><div><div class="tok-val">#ff6e84 (red-400)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#ef4444"></div><div><div class="tok-val">#ef4444</div></div></div></td>
+              <td>
+                <div class="tok-name">--destructive / error</div>
+                <div class="tok-val">text-error</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ff6e84"></div>
+                  <div>
+                    <div class="tok-val">#ff6e84 (red-400)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ef4444"></div>
+                  <div>
+                    <div class="tok-val">#ef4444</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Nav item — default</div><div class="tok-val">text-[#bbbbbb] / text-[#444444]</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:#bbbbbb"></div><div><div class="tok-val">#bbbbbb · dark:text-[#bbbbbb]</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#444444"></div><div><div class="tok-val">#444444 · text-[#444444]</div></div></div></td>
+              <td>
+                <div class="tok-name">Nav item — default</div>
+                <div class="tok-val">text-[#bbbbbb] / text-[#444444]</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#bbbbbb"></div>
+                  <div>
+                    <div class="tok-val">#bbbbbb · dark:text-[#bbbbbb]</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#444444"></div>
+                  <div>
+                    <div class="tok-val">#444444 · text-[#444444]</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Nav item — active bg</div><div class="tok-val">dark:bg-white/15 / bg-white</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.15)"></div><div><div class="tok-val">rgba(255,255,255,0.15)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#ffffff;border:1px solid #e5e7eb"></div><div><div class="tok-val">#ffffff</div></div></div></td>
+              <td>
+                <div class="tok-name">Nav item — active bg</div>
+                <div class="tok-val">dark:bg-white/15 / bg-white</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.15)"></div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.15)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ffffff;border:1px solid #e5e7eb"></div>
+                  <div>
+                    <div class="tok-val">#ffffff</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Nav item — hover bg</div><div class="tok-val">dark:hover:bg-white/10 / hover:bg-white/40</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.10)"></div><div><div class="tok-val">rgba(255,255,255,0.10)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.40);border:1px solid rgba(0,0,0,0.08)"></div><div><div class="tok-val">rgba(255,255,255,0.40)</div></div></div></td>
+              <td>
+                <div class="tok-name">Nav item — hover bg</div>
+                <div class="tok-val">dark:hover:bg-white/10 / hover:bg-white/40</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.10)"></div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.10)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.40);border:1px solid rgba(0,0,0,0.08)"></div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.40)</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Switch container</div><div class="tok-val">dark:bg-white/5 / bg-black/5</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.05)"></div><div><div class="tok-val">rgba(255,255,255,0.05)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.08)"></div><div><div class="tok-val">rgba(0,0,0,0.05)</div></div></div></td>
+              <td>
+                <div class="tok-name">Switch container</div>
+                <div class="tok-val">dark:bg-white/5 / bg-black/5</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.05)"></div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.05)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.08)"></div>
+                  <div>
+                    <div class="tok-val">rgba(0,0,0,0.05)</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Switch active pill</div><div class="tok-val">dark:bg-white/15 / bg-white</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="background:rgba(255,255,255,0.15)"></div><div><div class="tok-val">rgba(255,255,255,0.15) + shadow</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="background:#ffffff;border:1px solid rgba(0,0,0,0.05)"></div><div><div class="tok-val">#ffffff + subtle shadow</div></div></div></td>
+              <td>
+                <div class="tok-name">Switch active pill</div>
+                <div class="tok-val">dark:bg-white/15 / bg-white</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:rgba(255,255,255,0.15)"></div>
+                  <div>
+                    <div class="tok-val">rgba(255,255,255,0.15) + shadow</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ffffff;border:1px solid rgba(0,0,0,0.05)"></div>
+                  <div>
+                    <div class="tok-val">#ffffff + subtle shadow</div>
+                  </div>
+                </div>
+              </td>
             </tr>
             <tr>
-              <td><div class="tok-name">Focus ring</div><div class="tok-val">ring-ring / ring-ring</div></td>
-              <td class="col-dark"><div class="swatch-pair"><div class="swatch" style="box-shadow:0 0 0 3px rgba(74,222,128,0.5);background:transparent;border:1px solid rgba(255,255,255,0.1)"></div><div><div class="tok-val">rgba(74,222,128,0.5)</div></div></div></td>
-              <td class="col-light"><div class="swatch-pair"><div class="swatch" style="box-shadow:0 0 0 3px rgba(34,197,94,0.35);background:transparent;border:1px solid rgba(0,0,0,0.1)"></div><div><div class="tok-val">rgba(34,197,94,0.35)</div></div></div></td>
+              <td>
+                <div class="tok-name">Focus ring</div>
+                <div class="tok-val">ring-ring / ring-ring</div>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch"
+                    style="box-shadow:0 0 0 3px rgba(74,222,128,0.5);background:transparent;border:1px solid rgba(255,255,255,0.1)">
+                  </div>
+                  <div>
+                    <div class="tok-val">rgba(74,222,128,0.5)</div>
+                  </div>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch"
+                    style="box-shadow:0 0 0 3px rgba(34,197,94,0.35);background:transparent;border:1px solid rgba(0,0,0,0.1)">
+                  </div>
+                  <div>
+                    <div class="tok-val">rgba(34,197,94,0.35)</div>
+                  </div>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -876,46 +2171,177 @@
 
       <!-- 1.2 Spacing -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.2 · Spacing <span style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
-        <div class="spacing-row"><div class="spacing-meta"><span class="token-name">1</span> <span class="token-value">· 0.25rem / 4px</span></div><div class="spacing-bar" style="width:4px"></div></div>
-        <div class="spacing-row"><div class="spacing-meta"><span class="token-name">2</span> <span class="token-value">· 0.5rem / 8px</span></div><div class="spacing-bar" style="width:8px"></div></div>
-        <div class="spacing-row"><div class="spacing-meta"><span class="token-name">4</span> <span class="token-value">· 1rem / 16px</span></div><div class="spacing-bar" style="width:16px"></div></div>
-        <div class="spacing-row"><div class="spacing-meta"><span class="token-name">8</span> <span class="token-value">· 2rem / 32px</span></div><div class="spacing-bar" style="width:32px"></div></div>
-        <div class="spacing-row"><div class="spacing-meta"><span class="token-name">16</span> <span class="token-value">· 4rem / 64px</span></div><div class="spacing-bar" style="width:64px"></div></div>
+        <h3 class="ds-subsection-title">1.2 · Spacing <span
+            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
+        <div class="spacing-row">
+          <div class="spacing-meta"><span class="token-name">1</span> <span class="token-value">· 0.25rem / 4px</span>
+          </div>
+          <div class="spacing-bar" style="width:4px"></div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-meta"><span class="token-name">2</span> <span class="token-value">· 0.5rem / 8px</span>
+          </div>
+          <div class="spacing-bar" style="width:8px"></div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-meta"><span class="token-name">4</span> <span class="token-value">· 1rem / 16px</span>
+          </div>
+          <div class="spacing-bar" style="width:16px"></div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-meta"><span class="token-name">8</span> <span class="token-value">· 2rem / 32px</span>
+          </div>
+          <div class="spacing-bar" style="width:32px"></div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-meta"><span class="token-name">16</span> <span class="token-value">· 4rem / 64px</span>
+          </div>
+          <div class="spacing-bar" style="width:64px"></div>
+        </div>
       </div>
 
       <!-- 1.3 Border Radius -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.3 · Border Radius <span style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant — base 0.75rem)</span></h3>
+        <h3 class="ds-subsection-title">1.3 · Border Radius <span
+            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant — base 0.75rem)</span>
+        </h3>
         <div class="radius-grid">
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-sm)"></div><div class="radius-label"><div class="token-name">--radius-sm</div><div class="token-value">base × 0.6</div></div></div>
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-md)"></div><div class="radius-label"><div class="token-name">--radius-md</div><div class="token-value">base × 0.8</div></div></div>
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-lg)"></div><div class="radius-label"><div class="token-name">--radius-lg</div><div class="token-value">12px (base)</div></div></div>
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-xl)"></div><div class="radius-label"><div class="token-name">--radius-xl</div><div class="token-value">base × 1.4</div></div></div>
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-2xl)"></div><div class="radius-label"><div class="token-name">--radius-2xl</div><div class="token-value">base × 1.8</div></div></div>
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-3xl)"></div><div class="radius-label"><div class="token-name">--radius-3xl</div><div class="token-value">base × 2.2</div></div></div>
-          <div class="radius-demo"><div class="radius-box" style="border-radius:var(--radius-4xl)"></div><div class="radius-label"><div class="token-name">--radius-4xl</div><div class="token-value">base × 2.6</div></div></div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-sm)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-sm</div>
+              <div class="token-value">base × 0.6</div>
+            </div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-md)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-md</div>
+              <div class="token-value">base × 0.8</div>
+            </div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-lg)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-lg</div>
+              <div class="token-value">12px (base)</div>
+            </div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-xl)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-xl</div>
+              <div class="token-value">base × 1.4</div>
+            </div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-2xl)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-2xl</div>
+              <div class="token-value">base × 1.8</div>
+            </div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-3xl)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-3xl</div>
+              <div class="token-value">base × 2.2</div>
+            </div>
+          </div>
+          <div class="radius-demo">
+            <div class="radius-box" style="border-radius:var(--radius-4xl)"></div>
+            <div class="radius-label">
+              <div class="token-name">--radius-4xl</div>
+              <div class="token-value">base × 2.6</div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- 1.4 Typography -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.4 · Typography <span style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
-        <div class="typo-row"><div class="typo-sample" style="font-family:var(--font-heading);font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;color:var(--t-foreground)">Heading h1</div><div class="typo-meta"><div class="token-name">--font-heading · Manrope</div><div class="token-value">2.25rem / 700 / -0.03em</div></div></div>
-        <div class="typo-row"><div class="typo-sample" style="font-family:var(--font-heading);font-size:1.75rem;font-weight:700;letter-spacing:-0.02em;color:var(--t-foreground)">Heading h2</div><div class="typo-meta"><div class="token-name">--font-heading · Manrope</div><div class="token-value">1.75rem / 700 / -0.02em</div></div></div>
-        <div class="typo-row"><div class="typo-sample" style="font-family:var(--font-body);font-size:0.875rem;font-weight:400;color:var(--t-foreground)">Body text — The quick brown fox jumps over the lazy dog.</div><div class="typo-meta"><div class="token-name">--font-body · Inter</div><div class="token-value">0.875rem / 400 / 1.6 lh</div></div></div>
-        <div class="typo-row"><div class="typo-sample" style="font-family:var(--font-body);font-size:0.75rem;font-weight:400;color:var(--t-muted-fg)">Small / caption / metadata</div><div class="typo-meta"><div class="token-name">--font-body · Inter</div><div class="token-value">0.75rem / 400 / muted-fg</div></div></div>
-        <div class="typo-row"><div class="typo-sample" style="font-family:'Inter',monospace;font-size:0.6875rem;font-weight:600;color:var(--t-foreground)">--token-name · mono label</div><div class="typo-meta"><div class="token-name">Monospace labels</div><div class="token-value">0.6875rem / 600 / Inter</div></div></div>
+        <h3 class="ds-subsection-title">1.4 · Typography <span
+            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
+        <div class="typo-row">
+          <div class="typo-sample"
+            style="font-family:var(--font-heading);font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;color:var(--t-foreground)">
+            Heading h1</div>
+          <div class="typo-meta">
+            <div class="token-name">--font-heading · Manrope</div>
+            <div class="token-value">2.25rem / 700 / -0.03em</div>
+          </div>
+        </div>
+        <div class="typo-row">
+          <div class="typo-sample"
+            style="font-family:var(--font-heading);font-size:1.75rem;font-weight:700;letter-spacing:-0.02em;color:var(--t-foreground)">
+            Heading h2</div>
+          <div class="typo-meta">
+            <div class="token-name">--font-heading · Manrope</div>
+            <div class="token-value">1.75rem / 700 / -0.02em</div>
+          </div>
+        </div>
+        <div class="typo-row">
+          <div class="typo-sample"
+            style="font-family:var(--font-body);font-size:0.875rem;font-weight:400;color:var(--t-foreground)">Body text
+            — The quick brown fox jumps over the lazy dog.</div>
+          <div class="typo-meta">
+            <div class="token-name">--font-body · Inter</div>
+            <div class="token-value">0.875rem / 400 / 1.6 lh</div>
+          </div>
+        </div>
+        <div class="typo-row">
+          <div class="typo-sample"
+            style="font-family:var(--font-body);font-size:0.75rem;font-weight:400;color:var(--t-muted-fg)">Small /
+            caption / metadata</div>
+          <div class="typo-meta">
+            <div class="token-name">--font-body · Inter</div>
+            <div class="token-value">0.75rem / 400 / muted-fg</div>
+          </div>
+        </div>
+        <div class="typo-row">
+          <div class="typo-sample"
+            style="font-family:'Inter',monospace;font-size:0.6875rem;font-weight:600;color:var(--t-foreground)">
+            --token-name · mono label</div>
+          <div class="typo-meta">
+            <div class="token-name">Monospace labels</div>
+            <div class="token-value">0.6875rem / 600 / Inter</div>
+          </div>
+        </div>
       </div>
 
       <!-- 1.5 Motion -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.5 · Motion <span style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
+        <h3 class="ds-subsection-title">1.5 · Motion <span
+            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
         <div class="motion-grid">
-          <div class="motion-card"><div class="token-name">duration-150</div><div class="token-value">150ms · hover / focus transitions</div><div class="motion-bar-track"><div class="motion-bar-fill" style="width:25%"></div></div></div>
-          <div class="motion-card"><div class="token-name">duration-200</div><div class="token-value">200ms · mode-switch color transitions</div><div class="motion-bar-track"><div class="motion-bar-fill" style="width:33%"></div></div></div>
-          <div class="motion-card"><div class="token-name">duration-300</div><div class="token-value">300ms · sidebar expand / panel appear</div><div class="motion-bar-track"><div class="motion-bar-fill" style="width:50%"></div></div></div>
-          <div class="motion-card"><div class="token-name">spring(380, 30)</div><div class="token-value">Framer Motion — mode indicator slide</div><div class="motion-bar-track"><div class="motion-bar-fill" style="width:80%"></div></div></div>
+          <div class="motion-card">
+            <div class="token-name">duration-150</div>
+            <div class="token-value">150ms · hover / focus transitions</div>
+            <div class="motion-bar-track">
+              <div class="motion-bar-fill" style="width:25%"></div>
+            </div>
+          </div>
+          <div class="motion-card">
+            <div class="token-name">duration-200</div>
+            <div class="token-value">200ms · mode-switch color transitions</div>
+            <div class="motion-bar-track">
+              <div class="motion-bar-fill" style="width:33%"></div>
+            </div>
+          </div>
+          <div class="motion-card">
+            <div class="token-name">duration-300</div>
+            <div class="token-value">300ms · sidebar expand / panel appear</div>
+            <div class="motion-bar-track">
+              <div class="motion-bar-fill" style="width:50%"></div>
+            </div>
+          </div>
+          <div class="motion-card">
+            <div class="token-name">spring(380, 30)</div>
+            <div class="token-value">Framer Motion — mode indicator slide</div>
+            <div class="motion-bar-track">
+              <div class="motion-bar-fill" style="width:80%"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -925,7 +2351,8 @@
          ═══════════════════════════════════════════════════════════ -->
     <section id="components" class="ds-section">
       <h2 class="ds-section-title">2 — Components</h2>
-      <p class="ds-section-desc">Use the ◐ / ○ toggle above to switch between Dark and Light. All states rendered in HTML simultaneously — only one set is visible at a time via CSS.</p>
+      <p class="ds-section-desc">Use the ◐ / ○ toggle above to switch between Dark and Light. All states rendered in
+        HTML simultaneously — only one set is visible at a time via CSS.</p>
 
       <!-- Wrapper that JS will set data-active on -->
       <div class="ds-components" id="ds-components" data-active="dark">
@@ -934,41 +2361,101 @@
              2.1 Dropdown Select  (ProjectSwitcher)
              ───────────────────────────────────────────────────── -->
         <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.1 · Dropdown Select — <code style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">ProjectSwitcher</code></h3>
+          <h3 class="ds-subsection-title">2.1 · Dropdown Select — <code
+              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">ProjectSwitcher</code>
+          </h3>
 
           <!-- DARK -->
           <div class="dark-only">
             <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode</div>
 
-            <h4 style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">Trigger States</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
+              Trigger States</h4>
             <div class="states-row" style="margin-bottom:2rem">
               <div class="state-demo"><span class="state-label">Default</span>
-                <div class="dt-dark"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-dark">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Hover</span>
-                <div class="dt-dark hover"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-dark hover">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Active / Open</span>
-                <div class="dt-dark active"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▴</span></div>
+                <div class="dt-dark active">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▴</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="dt-dark focus"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-dark focus">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="dt-dark disabled"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-dark disabled">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
             </div>
 
-            <h4 style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">Open Panel</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
+              Open Panel</h4>
             <div class="states-row">
               <div class="state-demo"><span class="state-label">Open — selected item</span>
-                <div class="dt-dark active"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▴</span></div>
+                <div class="dt-dark active">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▴</span>
+                </div>
                 <div class="dp-dark">
                   <div class="ph">Projects in this workspace</div>
                   <div class="pl">
-                    <div class="pi pi-sel"><div class="ia" style="background:#c4b5fd">🚀</div><div class="it"><div class="in">AI Integration Roadmap</div><div class="is">Sprint Track</div></div><span class="ic">✓</span></div>
-                    <div class="pi"><div class="ia" style="background:#fde68a">📊</div><div class="it"><div class="in">Q4 Marketing Campaign</div><div class="is">Campaign Track</div></div></div>
-                    <div class="pi pi-hov"><div class="ia" style="background:#a7f3d0">🎯</div><div class="it"><div class="in">Product Launch v2.0</div><div class="is">Release Track</div></div></div>
+                    <div class="pi pi-sel">
+                      <div class="ia" style="background:#c4b5fd">🚀</div>
+                      <div class="it">
+                        <div class="in">AI Integration Roadmap</div>
+                        <div class="is">Sprint Track</div>
+                      </div><span class="ic">✓</span>
+                    </div>
+                    <div class="pi">
+                      <div class="ia" style="background:#fde68a">📊</div>
+                      <div class="it">
+                        <div class="in">Q4 Marketing Campaign</div>
+                        <div class="is">Campaign Track</div>
+                      </div>
+                    </div>
+                    <div class="pi pi-hov">
+                      <div class="ia" style="background:#a7f3d0">🎯</div>
+                      <div class="it">
+                        <div class="in">Product Launch v2.0</div>
+                        <div class="is">Release Track</div>
+                      </div>
+                    </div>
                   </div>
                   <div class="pdiv"></div>
                   <div class="pa"><button>+ Create new project</button></div>
@@ -981,35 +2468,93 @@
           <div class="light-only">
             <div class="theme-band light-band"><span class="band-dot"></span>Light mode</div>
 
-            <h4 style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">Trigger States</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
+              Trigger States</h4>
             <div class="states-row" style="margin-bottom:2rem">
               <div class="state-demo"><span class="state-label">Default</span>
-                <div class="dt-light"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-light">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Hover</span>
-                <div class="dt-light hover"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-light hover">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Active / Open</span>
-                <div class="dt-light active"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▴</span></div>
+                <div class="dt-light active">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▴</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="dt-light focus"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-light focus">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
               <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="dt-light disabled"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▾</span></div>
+                <div class="dt-light disabled">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▾</span>
+                </div>
               </div>
             </div>
 
-            <h4 style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">Open Panel</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
+              Open Panel</h4>
             <div class="states-row">
               <div class="state-demo"><span class="state-label">Open — selected item</span>
-                <div class="dt-light active"><div class="av" style="background:#c4b5fd">🚀</div><div class="tx"><div class="tn">AI Integration Roadmap</div><div class="ts">Sprint Track</div></div><span class="ch">▴</span></div>
+                <div class="dt-light active">
+                  <div class="av" style="background:#c4b5fd">🚀</div>
+                  <div class="tx">
+                    <div class="tn">AI Integration Roadmap</div>
+                    <div class="ts">Sprint Track</div>
+                  </div><span class="ch">▴</span>
+                </div>
                 <div class="dp-light">
                   <div class="ph">Projects in this workspace</div>
                   <div class="pl">
-                    <div class="pi pi-sel"><div class="ia" style="background:#c4b5fd">🚀</div><div class="it"><div class="in">AI Integration Roadmap</div><div class="is">Sprint Track</div></div><span class="ic">✓</span></div>
-                    <div class="pi"><div class="ia" style="background:#fde68a">📊</div><div class="it"><div class="in">Q4 Marketing Campaign</div><div class="is">Campaign Track</div></div></div>
-                    <div class="pi pi-hov"><div class="ia" style="background:#a7f3d0">🎯</div><div class="it"><div class="in">Product Launch v2.0</div><div class="is">Release Track</div></div></div>
+                    <div class="pi pi-sel">
+                      <div class="ia" style="background:#c4b5fd">🚀</div>
+                      <div class="it">
+                        <div class="in">AI Integration Roadmap</div>
+                        <div class="is">Sprint Track</div>
+                      </div><span class="ic">✓</span>
+                    </div>
+                    <div class="pi">
+                      <div class="ia" style="background:#fde68a">📊</div>
+                      <div class="it">
+                        <div class="in">Q4 Marketing Campaign</div>
+                        <div class="is">Campaign Track</div>
+                      </div>
+                    </div>
+                    <div class="pi pi-hov">
+                      <div class="ia" style="background:#a7f3d0">🎯</div>
+                      <div class="it">
+                        <div class="in">Product Launch v2.0</div>
+                        <div class="is">Release Track</div>
+                      </div>
+                    </div>
                   </div>
                   <div class="pdiv"></div>
                   <div class="pa"><button>+ Create new project</button></div>
@@ -1023,35 +2568,110 @@
              2.2 Popup Menu  (Profile Popover)
              ───────────────────────────────────────────────────── -->
         <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.2 · Popup Menu — <code style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Profile Popover</code></h3>
+          <h3 class="ds-subsection-title">2.2 · Popup Menu — <code
+              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Profile Popover</code>
+          </h3>
 
           <!-- DARK -->
           <div class="dark-only">
             <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode</div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">Profile Pill States</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
+              Profile Pill States</h4>
             <div class="states-row" style="margin-bottom:2rem">
-              <div class="state-demo"><span class="state-label">Default</span><div class="pp-dark"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
-              <div class="state-demo"><span class="state-label">Hover</span><div class="pp-dark hover"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
-              <div class="state-demo"><span class="state-label">Active / Open</span><div class="pp-dark active"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▾</span></div></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><div class="pp-dark focus"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><div class="pp-dark disabled"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
+              <div class="state-demo"><span class="state-label">Default</span>
+                <div class="pp-dark">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Hover</span>
+                <div class="pp-dark hover">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Active / Open</span>
+                <div class="pp-dark active">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▾</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
+                <div class="pp-dark focus">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Disabled</span>
+                <div class="pp-dark disabled">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
             </div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">Open Panel</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
+              Open Panel</h4>
             <div class="states-row">
               <div class="state-demo"><span class="state-label">Open — full popover</span>
                 <div class="pm-dark">
-                  <div class="pu"><div class="pua">OA</div><div><div class="pun">Oppie Adirono</div><div class="pue">oppie@sendplex.com</div></div></div>
-                  <div class="pdiv"></div>
-                  <div class="pwc"><div style="display:flex;align-items:center;gap:0.75rem"><div class="pwi">💼</div><div><div class="pwn">My Workspace</div><div class="pwm">Starter plan · 3 members</div></div></div><span style="color:#40485d">›</span></div>
-                  <div style="padding:0.5rem 0;margin-top:0.75rem">
-                    <div style="font-size:0.75rem;font-weight:500;color:#dee5ff;margin-bottom:0.5rem">Token Usage</div>
-                    <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:#6d758c;margin-bottom:0.25rem"><span>Active conversations</span><span style="color:#a3aac4">1,250 / 4,000</span></div>
-                    <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden"><div style="width:31.25%;height:100%;background:#40485d;border-radius:3px"></div></div>
+                  <div class="pu">
+                    <div class="pua">OA</div>
+                    <div>
+                      <div class="pun">Oppie Adirono</div>
+                      <div class="pue">oppie@sendplex.com</div>
+                    </div>
                   </div>
                   <div class="pdiv"></div>
-                  <div><div class="pmi"><div class="ml"><span>⚙</span><span>Settings</span></div></div><div class="pmi hov"><div class="ml"><span>☀</span><span>Appearance</span></div><span class="mr">Light ›</span></div><div class="pmi"><div class="ml"><span>?</span><span>Help</span></div><span class="mr">›</span></div></div>
+                  <div class="pwc">
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                      <div class="pwi">💼</div>
+                      <div>
+                        <div class="pwn">My Workspace</div>
+                        <div class="pwm">Starter plan · 3 members</div>
+                      </div>
+                    </div><span style="color:#40485d">›</span>
+                  </div>
+                  <div style="padding:0.5rem 0;margin-top:0.75rem">
+                    <div style="font-size:0.75rem;font-weight:500;color:#dee5ff;margin-bottom:0.5rem">Token Usage</div>
+                    <div
+                      style="display:flex;justify-content:space-between;font-size:0.7rem;color:#6d758c;margin-bottom:0.25rem">
+                      <span>Active conversations</span><span style="color:#a3aac4">1,250 / 4,000</span></div>
+                    <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden">
+                      <div style="width:31.25%;height:100%;background:#40485d;border-radius:3px"></div>
+                    </div>
+                  </div>
                   <div class="pdiv"></div>
-                  <div class="pft"><button class="sob"><span>⎋</span><span>Sign out</span></button><button class="nfb"><span>🔔</span><span class="nd"></span></button></div>
+                  <div>
+                    <div class="pmi">
+                      <div class="ml"><span>⚙</span><span>Settings</span></div>
+                    </div>
+                    <div class="pmi hov">
+                      <div class="ml"><span>☀</span><span>Appearance</span></div><span class="mr">Light ›</span>
+                    </div>
+                    <div class="pmi">
+                      <div class="ml"><span>?</span><span>Help</span></div><span class="mr">›</span>
+                    </div>
+                  </div>
+                  <div class="pdiv"></div>
+                  <div class="pft"><button class="sob"><span>⎋</span><span>Sign out</span></button><button
+                      class="nfb"><span>🔔</span><span class="nd"></span></button></div>
                 </div>
               </div>
             </div>
@@ -1060,30 +2680,103 @@
           <!-- LIGHT -->
           <div class="light-only">
             <div class="theme-band light-band"><span class="band-dot"></span>Light mode</div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">Profile Pill States</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
+              Profile Pill States</h4>
             <div class="states-row" style="margin-bottom:2rem">
-              <div class="state-demo"><span class="state-label">Default</span><div class="pp-light"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
-              <div class="state-demo"><span class="state-label">Hover</span><div class="pp-light hover"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
-              <div class="state-demo"><span class="state-label">Active / Open</span><div class="pp-light active"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▾</span></div></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><div class="pp-light focus"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><div class="pp-light disabled"><div class="pav">OA</div><div class="pin"><div class="pn">Oppie Adirono</div><div class="ps">My Workspace</div></div><span class="pch">▴</span></div></div>
+              <div class="state-demo"><span class="state-label">Default</span>
+                <div class="pp-light">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Hover</span>
+                <div class="pp-light hover">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Active / Open</span>
+                <div class="pp-light active">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▾</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
+                <div class="pp-light focus">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
+              <div class="state-demo"><span class="state-label">Disabled</span>
+                <div class="pp-light disabled">
+                  <div class="pav">OA</div>
+                  <div class="pin">
+                    <div class="pn">Oppie Adirono</div>
+                    <div class="ps">My Workspace</div>
+                  </div><span class="pch">▴</span>
+                </div>
+              </div>
             </div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">Open Panel</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
+              Open Panel</h4>
             <div class="states-row">
               <div class="state-demo"><span class="state-label">Open — full popover</span>
                 <div class="pm-light">
-                  <div class="pu"><div class="pua">OA</div><div><div class="pun">Oppie Adirono</div><div class="pue">oppie@sendplex.com</div></div></div>
-                  <div class="pdiv"></div>
-                  <div class="pwc"><div style="display:flex;align-items:center;gap:0.75rem"><div class="pwi">💼</div><div><div class="pwn">My Workspace</div><div class="pwm">Starter plan · 3 members</div></div></div><span style="color:#d1d5db">›</span></div>
-                  <div style="padding:0.5rem 0;margin-top:0.75rem">
-                    <div style="font-size:0.75rem;font-weight:500;color:#111827;margin-bottom:0.5rem">Token Usage</div>
-                    <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:#9ca3af;margin-bottom:0.25rem"><span>Active conversations</span><span style="color:#6b7280">1,250 / 4,000</span></div>
-                    <div style="height:6px;background:rgba(0,0,0,0.07);border-radius:3px;overflow:hidden"><div style="width:31.25%;height:100%;background:#9ca3af;border-radius:3px"></div></div>
+                  <div class="pu">
+                    <div class="pua">OA</div>
+                    <div>
+                      <div class="pun">Oppie Adirono</div>
+                      <div class="pue">oppie@sendplex.com</div>
+                    </div>
                   </div>
                   <div class="pdiv"></div>
-                  <div><div class="pmi"><div class="ml"><span>⚙</span><span>Settings</span></div></div><div class="pmi hov"><div class="ml"><span>☀</span><span>Appearance</span></div><span class="mr">Light ›</span></div><div class="pmi"><div class="ml"><span>?</span><span>Help</span></div><span class="mr">›</span></div></div>
+                  <div class="pwc">
+                    <div style="display:flex;align-items:center;gap:0.75rem">
+                      <div class="pwi">💼</div>
+                      <div>
+                        <div class="pwn">My Workspace</div>
+                        <div class="pwm">Starter plan · 3 members</div>
+                      </div>
+                    </div><span style="color:#d1d5db">›</span>
+                  </div>
+                  <div style="padding:0.5rem 0;margin-top:0.75rem">
+                    <div style="font-size:0.75rem;font-weight:500;color:#111827;margin-bottom:0.5rem">Token Usage</div>
+                    <div
+                      style="display:flex;justify-content:space-between;font-size:0.7rem;color:#9ca3af;margin-bottom:0.25rem">
+                      <span>Active conversations</span><span style="color:#6b7280">1,250 / 4,000</span></div>
+                    <div style="height:6px;background:rgba(0,0,0,0.07);border-radius:3px;overflow:hidden">
+                      <div style="width:31.25%;height:100%;background:#9ca3af;border-radius:3px"></div>
+                    </div>
+                  </div>
                   <div class="pdiv"></div>
-                  <div class="pft"><button class="sob"><span>⎋</span><span>Sign out</span></button><button class="nfb"><span>🔔</span><span class="nd"></span></button></div>
+                  <div>
+                    <div class="pmi">
+                      <div class="ml"><span>⚙</span><span>Settings</span></div>
+                    </div>
+                    <div class="pmi hov">
+                      <div class="ml"><span>☀</span><span>Appearance</span></div><span class="mr">Light ›</span>
+                    </div>
+                    <div class="pmi">
+                      <div class="ml"><span>?</span><span>Help</span></div><span class="mr">›</span>
+                    </div>
+                  </div>
+                  <div class="pdiv"></div>
+                  <div class="pft"><button class="sob"><span>⎋</span><span>Sign out</span></button><button
+                      class="nfb"><span>🔔</span><span class="nd"></span></button></div>
                 </div>
               </div>
             </div>
@@ -1094,39 +2787,85 @@
              2.3 Mode Switch  (Work / Studio / Govern)
              ───────────────────────────────────────────────────── -->
         <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.3 · 3-Way Switch — <code style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Work / Studio / Govern</code></h3>
+          <h3 class="ds-subsection-title">2.3 · 3-Way Switch — <code
+              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Work / Studio / Govern</code>
+          </h3>
 
           <!-- DARK -->
           <div class="dark-only">
             <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode</div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">Active Segments</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
+              Active Segments</h4>
             <div class="states-row" style="margin-bottom:1.5rem">
-              <div class="state-demo"><span class="state-label">"Work" selected</span><div class="ms-dark"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">"Studio" selected</span><div class="ms-dark"><button class="mb">💼 Work</button><button class="mb act">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">"Govern" selected</span><div class="ms-dark"><button class="mb">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb act">🛡 Govern</button></div></div>
+              <div class="state-demo"><span class="state-label">"Work" selected</span>
+                <div class="ms-dark"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button
+                    class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">"Studio" selected</span>
+                <div class="ms-dark"><button class="mb">💼 Work</button><button class="mb act">🖥 Studio</button><button
+                    class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">"Govern" selected</span>
+                <div class="ms-dark"><button class="mb">💼 Work</button><button class="mb">🖥 Studio</button><button
+                    class="mb act">🛡 Govern</button></div>
+              </div>
             </div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">Interaction States</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
+              Interaction States</h4>
             <div class="states-row">
-              <div class="state-demo"><span class="state-label">Hover on inactive</span><div class="ms-dark"><button class="mb act">💼 Work</button><button class="mb hov">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><div class="ms-dark focus"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><div class="ms-dark disabled"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
+              <div class="state-demo"><span class="state-label">Hover on inactive</span>
+                <div class="ms-dark"><button class="mb act">💼 Work</button><button class="mb hov">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
+                <div class="ms-dark focus"><button class="mb act">💼 Work</button><button class="mb">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">Disabled</span>
+                <div class="ms-dark disabled"><button class="mb act">💼 Work</button><button class="mb">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
             </div>
           </div><!-- /dark-only -->
 
           <!-- LIGHT -->
           <div class="light-only">
             <div class="theme-band light-band"><span class="band-dot"></span>Light mode</div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">Active Segments</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
+              Active Segments</h4>
             <div class="states-row" style="margin-bottom:1.5rem">
-              <div class="state-demo"><span class="state-label">"Work" selected</span><div class="ms-light"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">"Studio" selected</span><div class="ms-light"><button class="mb">💼 Work</button><button class="mb act">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">"Govern" selected</span><div class="ms-light"><button class="mb">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb act">🛡 Govern</button></div></div>
+              <div class="state-demo"><span class="state-label">"Work" selected</span>
+                <div class="ms-light"><button class="mb act">💼 Work</button><button class="mb">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">"Studio" selected</span>
+                <div class="ms-light"><button class="mb">💼 Work</button><button class="mb act">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">"Govern" selected</span>
+                <div class="ms-light"><button class="mb">💼 Work</button><button class="mb">🖥 Studio</button><button
+                    class="mb act">🛡 Govern</button></div>
+              </div>
             </div>
-            <h4 style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">Interaction States</h4>
+            <h4
+              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
+              Interaction States</h4>
             <div class="states-row">
-              <div class="state-demo"><span class="state-label">Hover on inactive</span><div class="ms-light"><button class="mb act">💼 Work</button><button class="mb hov">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><div class="ms-light focus"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><div class="ms-light disabled"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button class="mb">🛡 Govern</button></div></div>
+              <div class="state-demo"><span class="state-label">Hover on inactive</span>
+                <div class="ms-light"><button class="mb act">💼 Work</button><button class="mb hov">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
+                <div class="ms-light focus"><button class="mb act">💼 Work</button><button class="mb">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
+              <div class="state-demo"><span class="state-label">Disabled</span>
+                <div class="ms-light disabled"><button class="mb act">💼 Work</button><button class="mb">🖥
+                    Studio</button><button class="mb">🛡 Govern</button></div>
+              </div>
             </div>
           </div><!-- /light-only -->
         </div><!-- /2.3 -->
@@ -1135,30 +2874,45 @@
              2.4 CTA Button  (Start new project)
              ───────────────────────────────────────────────────── -->
         <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.4 · CTA Button — <code style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Start new project</code></h3>
-          <p style="font-size:0.8125rem;color:var(--t-muted-fg);margin-bottom:1.5rem">Shown when workspace has zero projects. Gradient shifts between themes for contrast.</p>
+          <h3 class="ds-subsection-title">2.4 · CTA Button — <code
+              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Start new project</code>
+          </h3>
+          <p style="font-size:0.8125rem;color:var(--t-muted-fg);margin-bottom:1.5rem">Shown when workspace has zero
+            projects. Gradient shifts between themes for contrast.</p>
 
           <!-- DARK -->
           <div class="dark-only">
-            <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode · gradient: #22c55e → #4ade80</div>
+            <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode · gradient: #22c55e → #34d399
+            </div>
             <div class="states-row">
-              <div class="state-demo"><span class="state-label">Default</span><button class="cta-dark">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Hover</span><button class="cta-dark hover">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Active / Pressed</span><button class="cta-dark active">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><button class="cta-dark focus">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><button class="cta-dark disabled">+ Start new project</button></div>
+              <div class="state-demo"><span class="state-label">Default</span><button class="cta-btn">+ Start new
+                  project</button></div>
+              <div class="state-demo"><span class="state-label">Hover</span><button class="cta-btn hover">+ Start new
+                  project</button></div>
+              <div class="state-demo"><span class="state-label">Active / Pressed</span><button class="cta-btn active">+
+                  Start new project</button></div>
+              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><button class="cta-btn focus">+
+                  Start new project</button></div>
+              <div class="state-demo"><span class="state-label">Disabled</span><button class="cta-btn disabled">+ Start
+                  new project</button></div>
             </div>
           </div><!-- /dark-only -->
 
           <!-- LIGHT -->
           <div class="light-only">
-            <div class="theme-band light-band"><span class="band-dot"></span>Light mode · gradient: #16a34a → #22c55e</div>
+            <div class="theme-band light-band"><span class="band-dot"></span>Light mode · gradient: #22c55e → #34d399
+            </div>
             <div class="states-row">
-              <div class="state-demo"><span class="state-label">Default</span><button class="cta-light">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Hover</span><button class="cta-light hover">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Active / Pressed</span><button class="cta-light active">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><button class="cta-light focus">+ Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><button class="cta-light disabled">+ Start new project</button></div>
+              <div class="state-demo"><span class="state-label">Default</span><button class="cta-btn">+ Start new
+                  project</button></div>
+              <div class="state-demo"><span class="state-label">Hover</span><button class="cta-btn hover">+ Start new
+                  project</button></div>
+              <div class="state-demo"><span class="state-label">Active / Pressed</span><button class="cta-btn active">+
+                  Start new project</button></div>
+              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><button class="cta-btn focus">+
+                  Start new project</button></div>
+              <div class="state-demo"><span class="state-label">Disabled</span><button class="cta-btn disabled">+ Start
+                  new project</button></div>
             </div>
           </div><!-- /light-only -->
         </div><!-- /2.4 -->
@@ -1177,11 +2931,30 @@
       <div class="ds-subsection">
         <h3 class="ds-subsection-title">3.1 · Dropdown Select</h3>
         <table class="usage-table">
-          <thead><tr><th class="do-col" style="width:50%">✓ Do</th><th class="dont-col" style="width:50%">✗ Don't</th></tr></thead>
+          <thead>
+            <tr>
+              <th class="do-col" style="width:50%">✓ Do</th>
+              <th class="dont-col" style="width:50%">✗ Don't</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Use <code>rgba(255,255,255,0.05)</code> (dark) or <code>rgba(0,0,0,0.10)</code> (light) for the default trigger border. These match the <code>--border</code> / <code>--border-strong</code> tokens.</td><td>Hardcode a solid gray border — it will look wrong on the glass sidebar in both themes.</td></tr>
-            <tr><td>Show a <code>✓</code> checkmark on the selected item. Make the row background <code>rgba(255,255,255,0.05)</code> (dark) or <code>rgba(0,0,0,0.05)</code> (light).</td><td>Rely on bold font alone to indicate selection — it reduces clarity for colorblind users.</td></tr>
-            <tr><td>Always include the green "+ Create new project" CTA link at the panel bottom using the themed primary green.</td><td>Use a full-width solid button inside the panel — it visually competes with the main CTA in the sidebar.</td></tr>
+            <tr>
+              <td>Use <code>rgba(255,255,255,0.05)</code> (dark) or <code>rgba(0,0,0,0.10)</code> (light) for the
+                default trigger border. These match the <code>--border</code> / <code>--border-strong</code> tokens.
+              </td>
+              <td>Hardcode a solid gray border — it will look wrong on the glass sidebar in both themes.</td>
+            </tr>
+            <tr>
+              <td>Show a <code>✓</code> checkmark on the selected item. Make the row background
+                <code>rgba(255,255,255,0.05)</code> (dark) or <code>rgba(0,0,0,0.05)</code> (light).</td>
+              <td>Rely on bold font alone to indicate selection — it reduces clarity for colorblind users.</td>
+            </tr>
+            <tr>
+              <td>Always include the green "+ Create new project" CTA link at the panel bottom using the themed primary
+                green.</td>
+              <td>Use a full-width solid button inside the panel — it visually competes with the main CTA in the
+                sidebar.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1190,11 +2963,31 @@
       <div class="ds-subsection">
         <h3 class="ds-subsection-title">3.2 · Popup Menu</h3>
         <table class="usage-table">
-          <thead><tr><th class="do-col" style="width:50%">✓ Do</th><th class="dont-col" style="width:50%">✗ Don't</th></tr></thead>
+          <thead>
+            <tr>
+              <th class="do-col" style="width:50%">✓ Do</th>
+              <th class="dont-col" style="width:50%">✗ Don't</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Use <code>--popover</code> as the panel background: <code>#0f1930</code> (dark) or <code>#ffffff</code> (light) — distinct from the sidebar glass.</td><td>Use the sidebar glass background for the popup — it merges visually into the sidebar and loses depth.</td></tr>
-            <tr><td>Menu items: 12px / 500-weight text. Default: <code>#a3aac4</code> (dark) or <code>#374151</code> (light). Hover: <code>#dee5ff</code> / <code>#111827</code>.</td><td>Use bright white text at rest in dark mode — it creates no hierarchy between default and active states.</td></tr>
-            <tr><td>Separate sections (User · Workspace · Settings · Actions) with 1px dividers using <code>rgba(255,255,255,0.05)</code> / <code>rgba(0,0,0,0.07)</code>.</td><td>Use opaque dividers or padding-only gaps — the subtle transparency keeps the glass aesthetic intact.</td></tr>
+            <tr>
+              <td>Use <code>--popover</code> as the panel background: <code>#0f1930</code> (dark) or
+                <code>#ffffff</code> (light) — distinct from the sidebar glass.</td>
+              <td>Use the sidebar glass background for the popup — it merges visually into the sidebar and loses depth.
+              </td>
+            </tr>
+            <tr>
+              <td>Menu items: 12px / 500-weight text. Default: <code>#a3aac4</code> (dark) or <code>#374151</code>
+                (light). Hover: <code>#dee5ff</code> / <code>#111827</code>.</td>
+              <td>Use bright white text at rest in dark mode — it creates no hierarchy between default and active
+                states.</td>
+            </tr>
+            <tr>
+              <td>Separate sections (User · Workspace · Settings · Actions) with 1px dividers using
+                <code>rgba(255,255,255,0.05)</code> / <code>rgba(0,0,0,0.07)</code>.</td>
+              <td>Use opaque dividers or padding-only gaps — the subtle transparency keeps the glass aesthetic intact.
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1203,11 +2996,29 @@
       <div class="ds-subsection">
         <h3 class="ds-subsection-title">3.3 · Work / Studio / Govern Switch</h3>
         <table class="usage-table">
-          <thead><tr><th class="do-col" style="width:50%">✓ Do</th><th class="dont-col" style="width:50%">✗ Don't</th></tr></thead>
+          <thead>
+            <tr>
+              <th class="do-col" style="width:50%">✓ Do</th>
+              <th class="dont-col" style="width:50%">✗ Don't</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Active pill: <code>rgba(255,255,255,0.15)</code> (dark) or <code>#ffffff</code> (light), always with a subtle shadow. The floating pill is the Sendplex IA navigation signature.</td><td>Use a colored (green/brand) background for the active pill — it's too loud for a mode selector.</td></tr>
-            <tr><td>Container track: <code>rgba(255,255,255,0.05)</code> / <code>rgba(0,0,0,0.05)</code> + matching border. Keep the track visible but subtle.</td><td>Remove the container track — the three segments need a visual anchor to read as a group.</td></tr>
-            <tr><td>Animate the active pill indicator with Framer Motion <code>layoutId</code> + <code>spring(380, 30)</code> for a fluid slide between segments.</td><td>Use CSS transitions alone for the indicator — instant snap or simple fade breaks the physicality of the component.</td></tr>
+            <tr>
+              <td>Active pill: <code>rgba(255,255,255,0.15)</code> (dark) or <code>#ffffff</code> (light), always with a
+                subtle shadow. The floating pill is the Sendplex IA navigation signature.</td>
+              <td>Use a colored (green/brand) background for the active pill — it's too loud for a mode selector.</td>
+            </tr>
+            <tr>
+              <td>Container track: <code>rgba(255,255,255,0.05)</code> / <code>rgba(0,0,0,0.05)</code> + matching
+                border. Keep the track visible but subtle.</td>
+              <td>Remove the container track — the three segments need a visual anchor to read as a group.</td>
+            </tr>
+            <tr>
+              <td>Animate the active pill indicator with Framer Motion <code>layoutId</code> +
+                <code>spring(380, 30)</code> for a fluid slide between segments.</td>
+              <td>Use CSS transitions alone for the indicator — instant snap or simple fade breaks the physicality of
+                the component.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1216,11 +3027,29 @@
       <div class="ds-subsection">
         <h3 class="ds-subsection-title">3.4 · CTA Button</h3>
         <table class="usage-table">
-          <thead><tr><th class="do-col" style="width:50%">✓ Do</th><th class="dont-col" style="width:50%">✗ Don't</th></tr></thead>
+          <thead>
+            <tr>
+              <th class="do-col" style="width:50%">✓ Do</th>
+              <th class="dont-col" style="width:50%">✗ Don't</th>
+            </tr>
+          </thead>
           <tbody>
-            <tr><td>Dark: use <code>#22c55e → #4ade80</code> gradient + <code>color: #003910</code>. Light: shift to <code>#16a34a → #22c55e</code> + <code>color: #ffffff</code> for WCAG contrast.</td><td>Use the same gradient on both themes — <code>#4ade80</code> on white is low contrast and fails WCAG AA.</td></tr>
-            <tr><td>Show this button <strong>only</strong> when <code>workspace.projects.length === 0</code>. Replace with the dropdown trigger once projects exist.</td><td>Show both CTA and dropdown simultaneously — they represent mutually exclusive workspace states.</td></tr>
-            <tr><td>Text: 12px / 600-weight / <code>font-family: var(--font-body)</code> with a <code>+</code> icon at 13px. Radius: <code>--radius-xl</code>.</td><td>Use <code>#ffffff</code> or <code>#000000</code> hardcoded as text color — always reference <code>--color-on-primary</code> or the themed token.</td></tr>
+            <tr>
+              <td>Both modes: use <code>#22c55e → #34d399</code> gradient. Text: dark green (<code>#0d2b1a</code>) in
+                dark mode, white (<code>#ffffff</code>) in light mode.</td>
+              <td>Use different gradients or hardcoded text colors outside of the design system specs.</td>
+            </tr>
+            <tr>
+              <td>Show this button <strong>only</strong> when <code>workspace.projects.length === 0</code>. Replace with
+                the dropdown trigger once projects exist.</td>
+              <td>Show both CTA and dropdown simultaneously — they represent mutually exclusive workspace states.</td>
+            </tr>
+            <tr>
+              <td>Text: 12px / 600-weight / <code>font-family: var(--font-body)</code> with a <code>+</code> icon at
+                13px. Radius: <code>--radius-xl</code>.</td>
+              <td>Use <code>#ffffff</code> or <code>#000000</code> hardcoded as text color — always reference
+                <code>--color-on-primary</code> or the themed token.</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -1229,7 +3058,10 @@
     <!-- Footer -->
     <footer style="text-align:center;padding:2rem 0;border-top:1px solid var(--t-border-strong);margin-top:2rem">
       <p style="font-size:0.75rem;color:var(--t-outline)">
-        Sendplex Design System · Dark theme from <code style="font-size:0.6875rem;padding:0.125rem 0.375rem;background:var(--t-surface-container);border-radius:var(--radius-sm);color:var(--t-foreground)">tokens.css :root</code> · Light theme from <code style="font-size:0.6875rem;padding:0.125rem 0.375rem;background:var(--t-surface-container);border-radius:var(--radius-sm);color:var(--t-foreground)">Tailwind dark: patterns</code>
+        Sendplex Design System · Dark theme from <code
+          style="font-size:0.6875rem;padding:0.125rem 0.375rem;background:var(--t-surface-container);border-radius:var(--radius-sm);color:var(--t-foreground)">tokens.css :root</code>
+        · Light theme from <code
+          style="font-size:0.6875rem;padding:0.125rem 0.375rem;background:var(--t-surface-container);border-radius:var(--radius-sm);color:var(--t-foreground)">Tailwind dark: patterns</code>
       </p>
     </footer>
 
@@ -1252,4 +3084,5 @@
   </script>
 
 </body>
+
 </html>

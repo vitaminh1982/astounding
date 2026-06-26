@@ -53,7 +53,7 @@ export default function ProjectSwitcher({ onNavigate }: ProjectSwitcherProps) {
     return (
       <button
         onClick={() => onNavigate('projects')}
-        className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-400 hover:to-emerald-300 text-[#0d2b1a] text-xs font-semibold transition-all shadow-md shadow-green-500/25 focus:outline-none"
+        className="cta-btn w-full px-4 py-2.5 text-xs"
       >
         <Plus size={13} strokeWidth={2.5} />
         Start new project
