@@ -87,7 +87,7 @@ const NAVIGATION_ITEMS: NavItem[] = [
   { id: 'documents', label: 'Documents', icon: 'document' },
   { id: 'integrations', label: 'Integrations', icon: 'link' }, 
   { id: 'workflows', label: 'Workflows', icon: 'workflow' },
-  { id: 'projects', label: 'Projects', icon: 'project' },
+  { id: 'projects', label: 'All projects', icon: 'project' },
   { id: 'conversations', label: 'Conversations', icon: 'chat' },
   { id: 'clients', label: 'Clients', icon: 'users' },
   { id: 'usage', label: 'Usage', icon: 'chart' },
