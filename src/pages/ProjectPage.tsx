@@ -1,6 +1,7 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dialog, Transition } from '@headlessui/react';
+import ProjectChatAssistant from '../components/project-creation/ProjectChatAssistant';
+import type { CollectedProjectData } from '../components/project-creation/useProjectAgent';
 import {
   LayoutDashboard,
   MessageSquare,
@@ -648,94 +649,6 @@ function ProjectDetailView({ project, onBack }: { project: ProjectCard; onBack: 
   );
 }
 
-// ─── New Project Modal ────────────────────────────────────────────────────────
-
-interface ProjectForm { name: string; type: string; vision: string; industry: string; duration: string; teamSize: string; }
-
-function NewProjectModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
-  const [form, setForm] = useState<ProjectForm>({ name: '', type: 'AI Startup', vision: '', industry: '', duration: '1 year', teamSize: '1' });
-
-  function handleSubmit() {
-    toast.success('Project created successfully! 🚀');
-    setForm({ name: '', type: 'AI Startup', vision: '', industry: '', duration: '1 year', teamSize: '1' });
-    onClose();
-  }
-
-  const inputClass = 'bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white text-sm w-full focus:outline-none focus:border-indigo-500 placeholder-slate-500';
-  const labelClass = 'text-xs font-medium text-slate-400 mb-1 block';
-
-  return (
-    <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-50" onClose={onClose}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-200" enterFrom="opacity-0" enterTo="opacity-100"
-          leave="ease-in duration-150" leaveFrom="opacity-100" leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100"
-              leave="ease-in duration-150" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95"
-            >
-              <Dialog.Panel className="bg-slate-900 border border-slate-700 rounded-2xl p-6 max-w-md w-full shadow-2xl">
-                <div className="flex items-center justify-between mb-5">
-                  <Dialog.Title className="text-lg font-bold text-white">Create New Project</Dialog.Title>
-                  <button onClick={onClose} className="text-slate-400 hover:text-white transition-colors"><X size={20} /></button>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <label className={labelClass}>Project Name</label>
-                    <input className={inputClass} placeholder="e.g. My AI Startup" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Project Type</label>
-                    <select className={inputClass} value={form.type} onChange={(e) => setForm({ ...form, type: e.target.value })}>
-                      {['AI Startup', 'SaaS Product', 'Research Project', 'Consulting Engagement', 'Other'].map((o) => (
-                        <option key={o} value={o}>{o}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label className={labelClass}>Vision Statement</label>
-                    <textarea className={inputClass} rows={3} placeholder="Describe your project's vision..." value={form.vision} onChange={(e) => setForm({ ...form, vision: e.target.value })} />
-                  </div>
-                  <div>
-                    <label className={labelClass}>Industry Focus</label>
-                    <input className={inputClass} placeholder="e.g. Healthcare, Finance, Education" value={form.industry} onChange={(e) => setForm({ ...form, industry: e.target.value })} />
-                  </div>
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className={labelClass}>Duration</label>
-                      <select className={inputClass} value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })}>
-                        {['3 months', '6 months', '1 year', '2 years', '5 years'].map((o) => <option key={o} value={o}>{o}</option>)}
-                      </select>
-                    </div>
-                    <div>
-                      <label className={labelClass}>Team Size</label>
-                      <input type="number" min={1} max={100} className={inputClass} value={form.teamSize} onChange={(e) => setForm({ ...form, teamSize: e.target.value })} />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex gap-3 mt-6">
-                  <button onClick={onClose} className="flex-1 bg-slate-700 hover:bg-slate-600 text-white rounded-xl px-4 py-2.5 text-sm font-medium transition-colors">Cancel</button>
-                  <button onClick={handleSubmit} className="flex-1 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl px-4 py-2.5 text-sm font-medium transition-colors">Create Project</button>
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition>
-  );
-}
-
 // ─── Project Status Badge ─────────────────────────────────────────────────────
 
 const projectStatusMap: Record<string, string> = {
@@ -848,9 +761,26 @@ function ProjectGridView({ projects, onSelectProject, onNewProject }: {
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function ProjectPage() {
-  const [projects] = useState<ProjectCard[]>(INITIAL_PROJECTS);
+  const [projects, setProjects] = useState<ProjectCard[]>(INITIAL_PROJECTS);
   const [selectedProject, setSelectedProject] = useState<ProjectCard | null>(null);
-  const [showNewProjectModal, setShowNewProjectModal] = useState(false);
+  const [showChatAssistant, setShowChatAssistant] = useState(false);
+
+  function handleProjectCreated(data: CollectedProjectData) {
+    const newProject: ProjectCard = {
+      id: `project-${Date.now()}`,
+      name: data.projectName ?? 'Untitled Project',
+      subtitle: data.goal ?? '',
+      status: 'Active',
+      progress: 0,
+      agentCount: 0,
+      teamSize: parseInt(data.teamSize ?? '1', 10) || 1,
+      industry: data.projectType ?? 'General',
+      phase: 'Getting Started',
+      lastActivity: 'Just now',
+    };
+    setProjects((prev) => [...prev, newProject]);
+    toast.success(`Project "${newProject.name}" created successfully!`);
+  }
 
   return (
     <div className="min-h-full bg-slate-900 text-white">
@@ -866,13 +796,17 @@ export default function ProjectPage() {
             <ProjectGridView
               projects={projects}
               onSelectProject={setSelectedProject}
-              onNewProject={() => setShowNewProjectModal(true)}
+              onNewProject={() => setShowChatAssistant(true)}
             />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <NewProjectModal isOpen={showNewProjectModal} onClose={() => setShowNewProjectModal(false)} />
+      <ProjectChatAssistant
+        isOpen={showChatAssistant}
+        onClose={() => setShowChatAssistant(false)}
+        onProjectCreated={handleProjectCreated}
+      />
     </div>
   );
 }
