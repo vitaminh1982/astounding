@@ -8,6 +8,7 @@ export interface WorkspaceProject {
   deliveryTrackLabel: string;
   emoji: string;
   color: string; // tailwind bg color token e.g. 'violet', 'amber', 'sky'
+  image: string;
 }
 
 // ─── Workspace / Account types ────────────────────────────────────────────────
@@ -71,7 +72,7 @@ const DEFAULT_ACCOUNTS: Account[] = [
         plan: 'Free',
         members: '1 member',
         projects: [
-          { id: 'oppie-proj-1', name: 'Personal Portfolio', deliveryTrackLabel: 'Kanban Flow', emoji: '🎨', color: 'violet' },
+          { id: 'oppie-proj-1', name: 'Personal Portfolio', deliveryTrackLabel: 'Kanban Flow', emoji: '🎨', color: 'violet', image: '/assets/images/projects/project-portfolio.jpg' },
         ],
       },
       {
@@ -81,8 +82,8 @@ const DEFAULT_ACCOUNTS: Account[] = [
         plan: 'Pro',
         members: '4 members',
         projects: [
-          { id: 'fam-proj-1', name: 'Family Photo Archive', deliveryTrackLabel: 'Milestone Track', emoji: '📸', color: 'amber' },
-          { id: 'fam-proj-2', name: 'Budget Tracking', deliveryTrackLabel: 'Kanban Flow', emoji: '💰', color: 'emerald' },
+          { id: 'fam-proj-1', name: 'Family Photo Archive', deliveryTrackLabel: 'Milestone Track', emoji: '📸', color: 'amber', image: '/assets/images/projects/project-family-photos.jpg' },
+          { id: 'fam-proj-2', name: 'Budget Tracking', deliveryTrackLabel: 'Kanban Flow', emoji: '💰', color: 'emerald', image: '/assets/images/projects/project-budget.jpg' },
         ],
       },
     ],
@@ -100,8 +101,8 @@ const DEFAULT_ACCOUNTS: Account[] = [
         plan: 'Starter plan',
         members: '3 members',
         projects: [
-          { id: 'mir-proj-1', name: 'AI Integration Roadmap', deliveryTrackLabel: 'Sprint Track', emoji: '🤖', color: 'sky' },
-          { id: 'mir-proj-2', name: 'Market Analysis', deliveryTrackLabel: 'Kanban Flow', emoji: '📊', color: 'indigo' },
+          { id: 'mir-proj-1', name: 'AI Integration Roadmap', deliveryTrackLabel: 'Sprint Track', emoji: '🤖', color: 'sky', image: '/assets/images/projects/project-roadmap.jpg' },
+          { id: 'mir-proj-2', name: 'Market Analysis', deliveryTrackLabel: 'Kanban Flow', emoji: '📊', color: 'indigo', image: '/assets/images/projects/project- marketanalysis.jpg' },
         ],
       },
       {
@@ -127,8 +128,8 @@ const DEFAULT_ACCOUNTS: Account[] = [
         plan: 'Enterprise plan',
         members: '12 members',
         projects: [
-          { id: 'acme-proj-1', name: 'SSO Security Configuration', deliveryTrackLabel: 'Milestone Track', emoji: '🔐', color: 'rose' },
-          { id: 'acme-proj-2', name: 'SOC2 Audit Preparation', deliveryTrackLabel: 'Sprint Track', emoji: '📋', color: 'teal' },
+          { id: 'acme-proj-1', name: 'SSO Security Configuration', deliveryTrackLabel: 'Milestone Track', emoji: '🔐', color: 'rose', image: '/assets/images/projects/project-sso-security.jpg' },
+          { id: 'acme-proj-2', name: 'SOC2 Audit Preparation', deliveryTrackLabel: 'Sprint Track', emoji: '📋', color: 'teal', image: '/assets/images/projects/project-soc2-audit.jpg' },
         ],
       },
     ],

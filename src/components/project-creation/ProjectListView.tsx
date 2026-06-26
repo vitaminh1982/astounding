@@ -27,6 +27,7 @@ interface ProjectTemplate {
   rating: number;
   featured?: boolean;
   previewText?: string;
+  image: string;
 }
 
 const TEMPLATES: ProjectTemplate[] = [
@@ -41,6 +42,7 @@ const TEMPLATES: ProjectTemplate[] = [
     rating: 4.9,
     featured: true,
     previewText: 'roadmap preview',
+    image: '/assets/images/projects/project-plan-quarter.jpg',
   },
   {
     id: 'tpl-track-dollar',
@@ -53,6 +55,7 @@ const TEMPLATES: ProjectTemplate[] = [
     rating: 4.8,
     featured: true,
     previewText: 'budget preview',
+    image: '/assets/images/projects/project-budget.jpg',
   },
   {
     id: 'tpl-product-roadmap',
@@ -63,6 +66,7 @@ const TEMPLATES: ProjectTemplate[] = [
     emoji: '🗺️',
     color: 'indigo',
     rating: 4.9,
+    image: '/assets/images/projects/project-product-roadmap.jpg',
   },
   {
     id: 'tpl-crm-pipeline',
@@ -73,6 +77,7 @@ const TEMPLATES: ProjectTemplate[] = [
     emoji: '📈',
     color: 'sky',
     rating: 4.8,
+    image: '/assets/images/projects/project-crm-pipeline.jpg',
   },
   {
     id: 'tpl-content-calendar',
@@ -83,6 +88,7 @@ const TEMPLATES: ProjectTemplate[] = [
     emoji: '📅',
     color: 'rose',
     rating: 4.7,
+    image: '/assets/images/projects/project-content-calendar.jpg',
   },
   {
     id: 'tpl-onboarding-plan',
@@ -93,6 +99,7 @@ const TEMPLATES: ProjectTemplate[] = [
     emoji: '👋',
     color: 'amber',
     rating: 4.6,
+    image: '/assets/images/projects/project-onboarding.jpg',
   },
   {
     id: 'tpl-personal-goals',
@@ -103,6 +110,7 @@ const TEMPLATES: ProjectTemplate[] = [
     emoji: '🏆',
     color: 'teal',
     rating: 4.7,
+    image: '/assets/images/projects/project-goals.jpg',
   }
 ];
 
@@ -132,6 +140,7 @@ export default function ProjectListView() {
       deliveryTrackLabel: template.deliveryTrackLabel,
       emoji: template.emoji,
       color: template.color,
+      image: template.image,
     };
     addProjectToWorkspace(newProject);
     toast.success(`Project created: ${template.name}`);
@@ -218,16 +227,25 @@ export default function ProjectListView() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleOpenProject(project.id)}
-                    className={`bg-white dark:bg-gray-800 rounded-xl border p-4 cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group ${isActive
+                    className={`bg-white dark:bg-gray-800 rounded-xl border overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group ${isActive
                         ? 'border-blue-500 dark:border-teal-500 ring-1 ring-blue-500 dark:ring-teal-500'
                         : 'border-gray-200 dark:border-gray-700'
                       }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <span className={`w-10 h-10 rounded-lg ${colors.bg} flex items-center justify-center text-lg leading-none flex-shrink-0`}>
-                          {project.emoji}
-                        </span>
+                    {/* Project Image */}
+                    <div className="h-32 w-full overflow-hidden bg-gray-100 dark:bg-gray-900 relative">
+                      <img
+                        src={project.image}
+                        alt={project.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <span className={`absolute bottom-3 left-3 w-8 h-8 rounded-lg ${colors.bg} flex items-center justify-center text-lg leading-none shadow-md backdrop-blur-sm`}>
+                        {project.emoji}
+                      </span>
+                    </div>
+
+                    <div className="p-4">
+                      <div className="flex items-center justify-between">
                         <div>
                           <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
                             {project.name}
@@ -238,8 +256,8 @@ export default function ProjectListView() {
                             </span>
                           </div>
                         </div>
+                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors ml-1 flex-shrink-0" />
                       </div>
-                      <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors ml-1 flex-shrink-0" />
                     </div>
                   </motion.div>
                 );
@@ -251,10 +269,10 @@ export default function ProjectListView() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: workspaceProjects.length * 0.05 }}
                 onClick={() => setIsCreateModalOpen(true)}
-                className="border-2 border-dashed border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-teal-500 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl p-4 flex items-center justify-center cursor-pointer hover:shadow-md transition-all group"
+                className="border-2 border-dashed border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-teal-500 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl flex flex-col items-center justify-center min-h-[180px] cursor-pointer hover:shadow-md transition-all group"
               >
-                <div className="flex items-center gap-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors font-medium text-sm">
-                  <Plus className="w-4 h-4" />
+                <div className="flex flex-col items-center gap-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors font-medium text-sm">
+                  <Plus className="w-6 h-6" />
                   <span>New blank project</span>
                 </div>
               </motion.div>
@@ -340,11 +358,12 @@ export default function ProjectListView() {
                           {template.description}
                         </p>
                       </div>
-                      <div className={`w-32 h-24 rounded-xl ${colors.bg} bg-opacity-35 flex items-center justify-center border border-dashed border-gray-300 dark:border-gray-600 relative overflow-hidden select-none flex-shrink-0`}>
-                        <div className="absolute inset-0 opacity-10 bg-repeat bg-[length:10px_10px]" style={{ backgroundImage: 'linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 50%, currentColor 50%, currentColor 75%, transparent 75%, transparent)' }}></div>
-                        <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider relative z-10 text-center px-2">
-                          {template.previewText}
-                        </span>
+                      <div className="w-32 h-24 rounded-xl overflow-hidden relative border border-gray-100 dark:border-gray-700 flex-shrink-0">
+                        <img
+                          src={template.image}
+                          alt={template.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
                     </div>
                   );
@@ -363,11 +382,12 @@ export default function ProjectListView() {
                       onClick={() => handleCreateFromTemplate(template)}
                       className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all cursor-pointer overflow-hidden flex flex-col group"
                     >
-                      <div className={`h-24 w-full ${colors.bg} bg-opacity-40 flex items-center justify-center relative overflow-hidden select-none border-b border-gray-100 dark:border-gray-700`}>
-                        <div className="absolute inset-0 opacity-10 bg-repeat bg-[length:8px_8px]" style={{ backgroundImage: 'linear-gradient(45deg, currentColor 25%, transparent 25%, transparent 50%, currentColor 50%, currentColor 75%, transparent 75%, transparent)' }}></div>
-                        <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${colors.bg} ${colors.text} relative z-10`}>
-                          {template.name.toLowerCase()}
-                        </span>
+                      <div className="h-28 w-full relative overflow-hidden border-b border-gray-100 dark:border-gray-700">
+                        <img
+                          src={template.image}
+                          alt={template.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
                       </div>
                       <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                         <div>
