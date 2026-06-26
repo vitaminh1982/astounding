@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -11,44 +11,31 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
     rel="stylesheet" />
   <style>
-    /* =========================================================
-       TOKENS — DARK THEME (default, from tokens.css :root)
-       Source: .agent/skills/sendplex-design-system/output/tokens.css
-       ========================================================= */
+    /* =====================================================
+       TOKENS — DARK (default)
+       ===================================================== */
     :root,
     [data-theme="dark"] {
       --t-bg-page: #060e20;
-      /* navy-950 */
       --t-bg-sidebar: rgba(10, 12, 16, 0.65);
       --t-sidebar-border: rgba(255, 255, 255, 0.06);
       --t-sidebar-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
 
       --t-surface: #060e20;
-      /* navy-950 */
       --t-surface-low: #091328;
-      /* navy-900 */
       --t-surface-container: #0f1930;
-      /* navy-800 */
       --t-surface-high: #141f38;
-      /* navy-700 */
       --t-surface-highest: #192540;
-      /* navy-600 */
       --t-surface-bright: #1f2b49;
-      /* navy-500 */
 
       --t-popover: #0f1930;
-      /* navy-800 */
       --t-card: #192540;
-      /* navy-600 */
 
       --t-foreground: #dee5ff;
-      /* navy-100 */
+      --t-foreground-strong: #ffffff;
       --t-muted-fg: #a3aac4;
-      /* navy-200 */
       --t-outline: #6d758c;
-      /* navy-300 */
       --t-outline-variant: #40485d;
-      /* navy-400 */
 
       --t-border: rgba(255, 255, 255, 0.05);
       --t-border-strong: rgba(255, 255, 255, 0.10);
@@ -56,30 +43,20 @@
       --t-input: rgba(255, 255, 255, 0.10);
 
       --t-primary: #4ade80;
-      /* green-400 */
       --t-primary-fg: #003910;
-      /* green-950 */
       --t-secondary: #22c55e;
-      /* green-500 */
       --t-primary-container: #166534;
-      /* green-800 */
       --t-secondary-container: #005322;
-      /* green-900 */
       --t-on-primary: #003910;
-      /* green-950 */
       --t-tertiary: #b4c1ff;
-      /* blue-300 */
       --t-error: #ff6e84;
-      /* red-400 */
-      --t-ring: #4ade80;
+      --t-ring: rgba(74, 222, 128, 0.45);
 
       --t-item-default: #bbbbbb;
-      /* dark:text-[#bbbbbb] */
       --t-item-hover-bg: rgba(255, 255, 255, 0.10);
       --t-item-active-bg: rgba(255, 255, 255, 0.15);
       --t-item-active-fg: #ffffff;
       --t-item-sub-fg: #999999;
-      /* dark:text-[#999999] */
 
       --t-switch-bg: rgba(255, 255, 255, 0.05);
       --t-switch-border: rgba(255, 255, 255, 0.10);
@@ -87,25 +64,24 @@
       --t-switch-active-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
       --t-switch-active-border: rgba(255, 255, 255, 0.05);
 
+      --t-demo-shell-bg: rgba(10, 12, 16, 0.85);
+      --t-demo-shell-border: rgba(255, 255, 255, 0.06);
+
+      --t-progress-track: rgba(255, 255, 255, 0.08);
+      --t-progress-fill: #40485d;
+
       --t-page-chrome: #0f1930;
 
-      --radius-sm: calc(0.75rem * 0.6);
-      --radius-md: calc(0.75rem * 0.8);
-      --radius-lg: 0.75rem;
-      --radius-xl: calc(0.75rem * 1.4);
-      --radius-2xl: calc(0.75rem * 1.8);
-      --radius-3xl: calc(0.75rem * 2.2);
-      --radius-4xl: calc(0.75rem * 2.6);
-      --font-body: 'Inter', sans-serif;
-      --font-heading: 'Manrope', sans-serif;
+      --t-cta-text: #003910;
+      --t-band-bg: rgba(255, 255, 255, 0.04);
+      --t-band-border: rgba(255, 255, 255, 0.08);
+      --t-band-fg: #a3aac4;
+      --t-band-dot: #4ade80;
     }
 
-    /* =========================================================
-       TOKENS — LIGHT THEME
-       Source: Sidebar.tsx dark: prefix patterns + glass-sidebar CSS
-       Light sidebar: rgba(255,255,255,0.6) bg, border rgba(255,255,255,0.5)
-       Menu items: text-[#444444] default, text-black active, bg-white/15 active
-       ========================================================= */
+    /* =====================================================
+       TOKENS — LIGHT
+       ===================================================== */
     [data-theme="light"] {
       --t-bg-page: #f4f8f7;
       --t-bg-sidebar: rgba(255, 255, 255, 0.6);
@@ -123,6 +99,7 @@
       --t-card: #ffffff;
 
       --t-foreground: #0d1117;
+      --t-foreground-strong: #000000;
       --t-muted-fg: #6b7280;
       --t-outline: #9ca3af;
       --t-outline-variant: #d1d5db;
@@ -133,44 +110,61 @@
       --t-input: #ffffff;
 
       --t-primary: #22c55e;
-      /* green-500 — more contrast on white */
       --t-primary-fg: #ffffff;
       --t-secondary: #16a34a;
-      /* green-600 */
       --t-primary-container: #dcfce7;
       --t-secondary-container: #bbf7d0;
       --t-on-primary: #ffffff;
       --t-tertiary: #6366f1;
       --t-error: #ef4444;
-      --t-ring: #22c55e;
+      --t-ring: rgba(34, 197, 94, 0.30);
 
       --t-item-default: #444444;
-      /* text-[#444444] from Sidebar.tsx */
       --t-item-hover-bg: rgba(255, 255, 255, 0.40);
-      /* hover:bg-white/40 */
       --t-item-active-bg: rgba(255, 255, 255, 1);
-      /* bg-white */
       --t-item-active-fg: #000000;
-      /* text-black */
       --t-item-sub-fg: #666666;
-      /* text-[#666666] */
 
       --t-switch-bg: rgba(0, 0, 0, 0.05);
-      /* bg-black/5 */
       --t-switch-border: rgba(0, 0, 0, 0.10);
-      /* border-black/10 */
-      --t-switch-active-bg: rgba(255, 255, 255, 1);
-      /* bg-white */
+      --t-switch-active-bg: #ffffff;
       --t-switch-active-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
       --t-switch-active-border: rgba(0, 0, 0, 0.05);
-      /* border-black/5 */
+
+      --t-demo-shell-bg: rgba(255, 255, 255, 0.7);
+      --t-demo-shell-border: rgba(255, 255, 255, 0.5);
+
+      --t-progress-track: rgba(0, 0, 0, 0.07);
+      --t-progress-fill: #9ca3af;
 
       --t-page-chrome: #f0f2f8;
+
+      --t-cta-text: #ffffff;
+      --t-band-bg: rgba(0, 0, 0, 0.04);
+      --t-band-border: rgba(0, 0, 0, 0.08);
+      --t-band-fg: #6b7280;
+      --t-band-dot: #22c55e;
     }
 
-    /* =========================================================
-       PAGE BASE
-       ========================================================= */
+    /* =====================================================
+       RADIUS + FONT (theme-invariant)
+       ===================================================== */
+    :root {
+      --radius-sm: calc(0.75rem * 0.6);
+      --radius-md: calc(0.75rem * 0.8);
+      --radius-lg: 0.75rem;
+      --radius-xl: calc(0.75rem * 1.4);
+      --radius-2xl: calc(0.75rem * 1.8);
+      --radius-3xl: calc(0.75rem * 2.2);
+      --radius-4xl: calc(0.75rem * 2.6);
+      --font-body: 'Inter', sans-serif;
+      --font-heading: 'Manrope', sans-serif;
+      --font-mono: 'Inter', monospace;
+    }
+
+    /* =====================================================
+       RESET + BASE
+       ===================================================== */
     *,
     *::before,
     *::after {
@@ -183,14 +177,28 @@
       scroll-behavior: smooth;
     }
 
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+
+      html {
+        scroll-behavior: auto;
+      }
+    }
+
     body {
-      background: var(--t-bg-page);
+      background-color: var(--t-bg-page);
       color: var(--t-foreground);
       font-family: var(--font-body);
       font-size: 0.875rem;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.25s ease, color 0.25s ease;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     h1,
@@ -201,11 +209,21 @@
     h6 {
       font-family: var(--font-heading);
       font-weight: 700;
+      color: var(--t-foreground);
     }
 
-    /* =========================================================
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      padding: 0.125rem 0.375rem;
+      background: var(--t-surface-container);
+      border-radius: var(--radius-sm);
+      color: var(--t-foreground);
+    }
+
+    /* =====================================================
        STICKY TOGGLE BAR
-       ========================================================= */
+       ===================================================== */
     .ds-toggle-bar {
       position: sticky;
       top: 0;
@@ -218,10 +236,10 @@
       justify-content: space-between;
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      transition: background 0.25s ease, border-color 0.25s ease;
+      transition: background-color 0.25s ease, border-color 0.25s ease;
     }
 
-    .ds-toggle-bar .brand {
+    .ds-brand {
       display: flex;
       align-items: center;
       gap: 0.625rem;
@@ -231,41 +249,47 @@
       color: var(--t-foreground);
     }
 
-    .ds-toggle-bar .brand-dot {
+    .ds-brand__dot {
       width: 8px;
       height: 8px;
       border-radius: 50%;
       background: var(--t-primary);
+      flex-shrink: 0;
     }
 
-    .ds-toggle-bar nav {
+    .ds-topnav {
       display: flex;
       align-items: center;
       gap: 0.25rem;
     }
 
-    .ds-toggle-bar nav a {
+    .ds-topnav__link {
       font-size: 0.75rem;
       font-weight: 500;
       color: var(--t-muted-fg);
       text-decoration: none;
       padding: 0.25rem 0.625rem;
       border-radius: var(--radius-md);
-      transition: color 0.15s, background 0.15s;
+      transition: color 0.15s, background-color 0.15s;
     }
 
-    .ds-toggle-bar nav a:hover {
+    .ds-topnav__link:hover,
+    .ds-topnav__link:focus-visible {
       color: var(--t-foreground);
-      background: var(--t-border);
+      background-color: var(--t-border);
+      outline: none;
     }
 
+    /* =====================================================
+       THEME TOGGLE
+       ===================================================== */
     .theme-toggle {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .theme-toggle-track {
+    .theme-toggle__track {
       position: relative;
       display: flex;
       align-items: center;
@@ -274,12 +298,9 @@
       border-radius: var(--radius-4xl);
       padding: 3px;
       gap: 2px;
-      cursor: pointer;
     }
 
-    .theme-toggle-track button {
-      position: relative;
-      z-index: 1;
+    .theme-toggle__btn {
       display: flex;
       align-items: center;
       gap: 0.3125rem;
@@ -292,50 +313,51 @@
       color: var(--t-muted-fg);
       border-radius: var(--radius-4xl);
       cursor: pointer;
-      transition: color 0.2s;
+      transition: color 0.2s, background-color 0.2s, box-shadow 0.2s;
     }
 
-    .theme-toggle-track button.active {
+    .theme-toggle__btn[aria-pressed="true"] {
       background: var(--t-surface-bright);
       color: var(--t-foreground);
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
     }
 
-    [data-theme="light"] .theme-toggle-track button.active {
-      background: #ffffff;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+    .theme-toggle__btn:focus-visible {
+      outline: 2px solid var(--t-ring);
+      outline-offset: 2px;
     }
 
-    /* =========================================================
+    /* =====================================================
        PAGE LAYOUT
-       ========================================================= */
+       ===================================================== */
     .ds-page {
       max-width: 1200px;
       margin: 0 auto;
       padding: 3rem 2rem 5rem;
     }
 
-    .ds-header {
+    .ds-page-header {
       text-align: center;
       margin-bottom: 4rem;
       padding-bottom: 2rem;
       border-bottom: 1px solid var(--t-border-strong);
     }
 
-    .ds-header h1 {
+    .ds-page-header__title {
       font-size: 2.25rem;
       letter-spacing: -0.03em;
       line-height: 1.15;
-      color: var(--t-foreground);
     }
 
-    .ds-header .ds-subtitle {
+    .ds-page-header__subtitle {
       color: var(--t-muted-fg);
       font-size: 1rem;
       margin-top: 0.5rem;
+      font-family: var(--font-body);
+      font-weight: 400;
     }
 
-    .ds-header .ds-badge {
+    .ds-page-header__badge {
       display: inline-block;
       margin-top: 1rem;
       padding: 0.25rem 0.75rem;
@@ -350,35 +372,42 @@
       margin-bottom: 4rem;
     }
 
-    .ds-section-title {
+    .ds-section__title {
       font-size: 1.75rem;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
-      color: var(--t-foreground);
     }
 
-    .ds-section-desc {
+    .ds-section__desc {
       color: var(--t-muted-fg);
       font-size: 0.875rem;
       margin-bottom: 2rem;
+      font-family: var(--font-body);
+      font-weight: 400;
     }
 
     .ds-subsection {
       margin-bottom: 3rem;
     }
 
-    .ds-subsection-title {
+    .ds-subsection__title {
       font-size: 1.125rem;
       letter-spacing: -0.01em;
       margin-bottom: 1rem;
-      color: var(--t-foreground);
       padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--t-border-strong);
     }
 
-    /* =========================================================
-       THEME INDICATOR BAND
-       ========================================================= */
+    .ds-subsection__subtitle {
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      font-family: var(--font-heading);
+    }
+
+    /* =====================================================
+       THEME BAND
+       ===================================================== */
     .theme-band {
       display: flex;
       align-items: center;
@@ -390,50 +419,33 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       margin-bottom: 1.25rem;
+      background: var(--t-band-bg);
+      border: 1px solid var(--t-band-border);
+      color: var(--t-band-fg);
     }
 
-    .theme-band.dark-band {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #a3aac4;
-    }
-
-    .theme-band.light-band {
-      background: rgba(0, 0, 0, 0.04);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      color: #6b7280;
-    }
-
-    .theme-band .band-dot {
+    .theme-band__dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
+      background: var(--t-band-dot);
+      flex-shrink: 0;
     }
 
-    .dark-band .band-dot {
-      background: #4ade80;
-    }
-
-    .light-band .band-dot {
-      background: #22c55e;
-    }
-
-    /* =========================================================
-       COMPONENT VISIBILITY — Pure CSS theme switch
-       .ds-components[data-active="dark"] → show dark, hide light
-       .ds-components[data-active="light"] → show light, hide dark
-       ========================================================= */
-    .ds-components[data-active="dark"] .light-only {
+    /* =====================================================
+       COMPONENT VISIBILITY — pure CSS
+       ===================================================== */
+    [data-theme="dark"] .light-only {
       display: none !important;
     }
 
-    .ds-components[data-active="light"] .dark-only {
+    [data-theme="light"] .dark-only {
       display: none !important;
     }
 
-    /* =========================================================
-       TOKEN SPLIT TABLE (always visible, not affected by toggle)
-       ========================================================= */
+    /* =====================================================
+       TOKEN SPLIT TABLE
+       ===================================================== */
     .token-split-table {
       width: 100%;
       border-collapse: separate;
@@ -442,6 +454,16 @@
       border-radius: var(--radius-xl);
       overflow: hidden;
       font-size: 0.75rem;
+    }
+
+    .token-split-table caption {
+      caption-side: top;
+      text-align: left;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--t-muted-fg);
+      padding: 0 0 0.5rem;
+      font-family: var(--font-mono);
     }
 
     .token-split-table thead th {
@@ -459,6 +481,16 @@
       border-right: 1px solid var(--t-border-strong);
     }
 
+    .token-split-table thead th.col-dark {
+      background: #060e20;
+      color: #6d758c;
+    }
+
+    .token-split-table thead th.col-light {
+      background: #e8e9ef;
+      color: #6b7280;
+    }
+
     .token-split-table tbody tr:not(:last-child) td {
       border-bottom: 1px solid var(--t-border);
     }
@@ -472,16 +504,43 @@
       border-right: 1px solid var(--t-border);
     }
 
-    .token-split-table .tok-name {
-      font-family: 'Inter', monospace;
+    /* Fixed column colors — always absolute, never inherit the active theme */
+    .token-split-table .col-dark {
+      background: #0a0f1e;
+      color: #a3aac4;
+    }
+
+    .token-split-table .col-dark .tok-name {
+      color: #dee5ff;
+    }
+
+    .token-split-table .col-dark .tok-val {
+      color: #6d758c;
+    }
+
+    .token-split-table .col-light {
+      background: #f0f2f8;
+      color: #6b7280;
+    }
+
+    .token-split-table .col-light .tok-name {
+      color: #0d1117;
+    }
+
+    .token-split-table .col-light .tok-val {
+      color: #6b7280;
+    }
+
+    .tok-name {
+      font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 600;
       color: var(--t-foreground);
       white-space: nowrap;
     }
 
-    .token-split-table .tok-val {
-      font-family: 'Inter', monospace;
+    .tok-val {
+      font-family: var(--font-mono);
       font-size: 0.625rem;
       color: var(--t-muted-fg);
     }
@@ -500,19 +559,9 @@
       border: 1px solid rgba(128, 128, 128, 0.2);
     }
 
-    /* Dark column bg */
-    .token-split-table .col-dark {
-      background: rgba(6, 14, 32, 0.6);
-    }
-
-    /* Light column bg */
-    .token-split-table .col-light {
-      background: rgba(244, 248, 247, 0.6);
-    }
-
-    /* =========================================================
-       COMPONENT DEMO WRAPPERS
-       ========================================================= */
+    /* =====================================================
+       STATES GRID
+       ===================================================== */
     .states-row {
       display: flex;
       flex-wrap: wrap;
@@ -520,15 +569,19 @@
       align-items: flex-start;
     }
 
+    /* Each state-demo card constrains to 244px, simulating the sidebar
+       width context. In React, components use width: 100% and the
+       sidebar layout provides this constraint. */
     .state-demo {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 0.5rem;
+      width: 244px;
     }
 
     .state-label {
-      font-family: 'Inter', monospace;
+      font-family: var(--font-mono);
       font-size: 0.625rem;
       font-weight: 600;
       color: var(--t-primary);
@@ -536,56 +589,55 @@
       letter-spacing: 0.05em;
     }
 
-    /* Light theme label uses a darker green for contrast */
-    [data-theme="light"] .state-label {
-      color: var(--t-secondary);
-    }
-
-    /* =========================================================
-       DARK COMPONENT STYLES — Sidebar/Dark glass shell
-       ========================================================= */
-    .demo-shell-dark {
-      background: rgba(10, 12, 16, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+    /* =====================================================
+       DEMO SHELL — shared, themed via tokens
+       ===================================================== */
+    .demo-shell {
+      background: var(--t-demo-shell-bg);
+      border: 1px solid var(--t-demo-shell-border);
       border-radius: var(--radius-xl);
       padding: 0.75rem;
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
-    /* ── Dark Dropdown Trigger ─────────────────────────── */
-    .dt-dark {
-      width: 244px;
+    /* =====================================================
+       DROPDOWN TRIGGER — shared structure, themed via tokens
+       ===================================================== */
+    /* React: width driven by parent sidebar, not the component itself */
+    .c-dropdown-trigger {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 0.625rem;
       padding: 0.5rem;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      border: 1px solid var(--t-border-strong);
       background: transparent;
       cursor: pointer;
       font-family: var(--font-body);
     }
 
-    .dt-dark.hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.15);
+    .c-dropdown-trigger--hover {
+      background: var(--t-item-hover-bg);
+      border-color: var(--t-border-stronger);
     }
 
-    .dt-dark.active {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.20);
+    .c-dropdown-trigger--active {
+      background: var(--t-item-hover-bg);
+      border-color: var(--t-border-stronger);
     }
 
-    .dt-dark.focus {
-      border-color: #4ade80;
-      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.45);
+    .c-dropdown-trigger--focus {
+      border-color: var(--t-primary);
+      box-shadow: 0 0 0 3px var(--t-ring);
     }
 
-    .dt-dark.disabled {
+    .c-dropdown-trigger--disabled {
       opacity: 0.4;
     }
 
-    .dt-dark .av {
+    .c-dropdown-trigger__avatar {
       width: 28px;
       height: 28px;
       border-radius: var(--radius-md);
@@ -596,76 +648,79 @@
       flex-shrink: 0;
     }
 
-    .dt-dark .tx {
+    .c-dropdown-trigger__text {
       flex: 1;
       min-width: 0;
       text-align: left;
     }
 
-    .dt-dark .tn {
+    .c-dropdown-trigger__name {
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
+      color: var(--t-foreground);
       line-height: 1.2;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .dt-dark .ts {
+    .c-dropdown-trigger__sub {
       font-size: 0.625rem;
-      color: #6d758c;
+      color: var(--t-outline);
       line-height: 1.2;
     }
 
-    .dt-dark .ch {
+    .c-dropdown-trigger__chevron {
       flex-shrink: 0;
-      color: #40485d;
+      color: var(--t-outline-variant);
       font-size: 0.875rem;
     }
 
-    /* ── Dark Dropdown Panel ──────────────────────────── */
-    .dp-dark {
+    /* =====================================================
+       DROPDOWN PANEL
+       ===================================================== */
+    .c-dropdown-panel {
       width: 244px;
       margin-top: 0.25rem;
-      background: #0f1930;
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: var(--t-popover);
+      border: 1px solid var(--t-border-strong);
       border-radius: var(--radius-xl);
-      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.4);
       overflow: hidden;
     }
 
-    .dp-dark .ph {
+    .c-dropdown-panel__header {
       padding: 0.75rem 0.75rem 0.25rem;
       font-size: 0.625rem;
       font-weight: 500;
-      color: #6d758c;
+      color: var(--t-outline);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
 
-    .dp-dark .pl {
+    .c-dropdown-panel__list {
       padding: 0.25rem 0.5rem 0.5rem;
+      list-style: none;
     }
 
-    .dp-dark .pi {
+    .c-dropdown-panel__item {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       padding: 0.625rem;
       border-radius: var(--radius-lg);
-      color: #dee5ff;
+      color: var(--t-foreground);
     }
 
-    .dp-dark .pi.pi-sel {
-      background: rgba(255, 255, 255, 0.05);
+    .c-dropdown-panel__item--selected {
+      background: var(--t-item-hover-bg);
     }
 
-    .dp-dark .pi.pi-hov {
-      background: rgba(255, 255, 255, 0.04);
+    .c-dropdown-panel__item--hovered {
+      background: var(--t-border);
     }
 
-    .dp-dark .pi .ia {
+    .c-dropdown-panel__item-avatar {
       width: 32px;
       height: 32px;
       border-radius: var(--radius-md);
@@ -675,62 +730,67 @@
       flex-shrink: 0;
     }
 
-    .dp-dark .pi .it {
+    .c-dropdown-panel__item-text {
       flex: 1;
       min-width: 0;
     }
 
-    .dp-dark .pi .in {
+    .c-dropdown-panel__item-name {
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
+      color: var(--t-foreground);
       line-height: 1.2;
     }
 
-    .dp-dark .pi.pi-sel .in {
+    .c-dropdown-panel__item--selected .c-dropdown-panel__item-name {
       font-weight: 600;
     }
 
-    .dp-dark .pi .is {
+    .c-dropdown-panel__item-sub {
       font-size: 0.625rem;
-      color: #6d758c;
+      color: var(--t-outline);
       line-height: 1.2;
       margin-top: 2px;
     }
 
-    .dp-dark .pi .ic {
+    .c-dropdown-panel__item-check {
       flex-shrink: 0;
-      color: #a3aac4;
+      color: var(--t-muted-fg);
       font-size: 0.875rem;
     }
 
-    .dp-dark .pdiv {
+    /* React: rendered as <hr>, reset native border */
+    .c-dropdown-panel__divider {
       height: 1px;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--t-border);
+      border: none;
       margin: 0 0.5rem;
     }
 
-    .dp-dark .pa {
+    .c-dropdown-panel__footer {
       padding: 0.5rem;
       text-align: center;
     }
 
-    .dp-dark .pa button {
+    .c-dropdown-panel__cta {
       display: inline-flex;
       align-items: center;
       gap: 0.375rem;
       font-size: 0.75rem;
       font-weight: 600;
-      color: #4ade80;
+      color: var(--t-primary);
       background: none;
       border: none;
       cursor: pointer;
       font-family: var(--font-body);
     }
 
-    /* ── Dark Profile Pill ────────────────────────────── */
-    .pp-dark {
-      width: 244px;
+    /* =====================================================
+       PROFILE PILL
+       ===================================================== */
+    /* React: width driven by parent sidebar, not the component itself */
+    .c-profile-pill {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -740,135 +800,144 @@
       border: none;
       font-family: var(--font-body);
       cursor: pointer;
+      transition: background-color 0.15s;
     }
 
-    .pp-dark.hover {
-      background: rgba(255, 255, 255, 0.05);
+    .c-profile-pill--hover {
+      background: var(--t-item-hover-bg);
     }
 
-    .pp-dark.active {
-      background: rgba(255, 255, 255, 0.05);
+    .c-profile-pill--active {
+      background: var(--t-item-hover-bg);
     }
 
-    .pp-dark.focus {
-      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.45);
-      border-radius: var(--radius-xl);
+    .c-profile-pill--focus {
+      box-shadow: 0 0 0 3px var(--t-ring);
     }
 
-    .pp-dark.disabled {
+    .c-profile-pill--disabled {
       opacity: 0.4;
     }
 
-    .pp-dark .pav {
+    .c-profile-pill__avatar {
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.10);
+      background: var(--t-item-hover-bg);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--t-foreground);
+      border: 1px solid var(--t-border);
       flex-shrink: 0;
     }
 
-    .pp-dark .pin {
+    .c-profile-pill__text {
       flex: 1;
       min-width: 0;
     }
 
-    .pp-dark .pn {
+    .c-profile-pill__name {
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
+      color: var(--t-foreground);
       line-height: 1.2;
     }
 
-    .pp-dark .ps {
+    .c-profile-pill__sub {
       font-size: 0.625rem;
-      color: #6d758c;
+      color: var(--t-outline);
       line-height: 1.2;
       margin-top: 1px;
     }
 
-    .pp-dark .pch {
+    .c-profile-pill__chevron {
       flex-shrink: 0;
-      color: #40485d;
+      color: var(--t-outline-variant);
       font-size: 0.875rem;
     }
 
-    /* ── Dark Popup Menu ──────────────────────────────── */
-    .pm-dark {
+    /* =====================================================
+       POPUP MENU (Profile Popover)
+       ===================================================== */
+    .c-popup {
       width: 320px;
-      background: #0f1930;
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: var(--t-popover);
+      border: 1px solid var(--t-border-strong);
       border-radius: var(--radius-2xl);
-      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.4);
       padding: 1rem;
       font-family: var(--font-body);
     }
 
-    .pm-dark .pu {
+    .c-popup__user {
       display: flex;
       align-items: center;
       gap: 0.75rem;
       padding-bottom: 0.5rem;
     }
 
-    .pm-dark .pua {
+    .c-popup__avatar {
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.10);
+      background: var(--t-item-hover-bg);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--t-foreground);
+      border: 1px solid var(--t-border);
       flex-shrink: 0;
-      position: relative;
     }
 
-    .pm-dark .pun {
+    .c-popup__user-name {
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
+      color: var(--t-foreground);
       line-height: 1.2;
     }
 
-    .pm-dark .pue {
+    .c-popup__user-email {
       font-size: 0.625rem;
-      color: #6d758c;
+      color: var(--t-outline);
       line-height: 1.2;
       margin-top: 2px;
     }
 
-    .pm-dark .pdiv {
+    /* React: rendered as <hr>, reset native border */
+    .c-popup__divider {
       height: 1px;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--t-border);
+      border: none;
       margin: 0.75rem 0;
     }
 
-    .pm-dark .pwc {
+    .c-popup__workspace {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.75rem;
       padding: 0.5rem;
       border-radius: var(--radius-xl);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      border: 1px solid var(--t-border-strong);
       cursor: pointer;
     }
 
-    .pm-dark .pwi {
+    .c-popup__workspace-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .c-popup__workspace-icon {
       width: 36px;
       height: 36px;
       border-radius: var(--radius-md);
-      background: rgba(255, 255, 255, 0.10);
+      background: var(--t-item-hover-bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -876,36 +945,84 @@
       font-size: 0.875rem;
     }
 
-    .pm-dark .pwn {
+    .c-popup__workspace-name {
       font-size: 0.75rem;
       font-weight: 500;
-      color: #dee5ff;
+      color: var(--t-foreground);
       line-height: 1.2;
     }
 
-    .pm-dark .pwm {
+    .c-popup__workspace-meta {
       font-size: 0.625rem;
-      color: #6d758c;
+      color: var(--t-outline);
       line-height: 1.2;
       margin-top: 2px;
     }
 
-    .pm-dark .pmi {
+    .c-popup__workspace-arrow {
+      color: var(--t-outline-variant);
+    }
+
+    /* Token usage */
+    .c-popup__usage {
+      padding: 0.5rem 0;
+      margin-top: 0.75rem;
+    }
+
+    .c-popup__usage-title {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--t-foreground);
+      margin-bottom: 0.5rem;
+      font-family: var(--font-body);
+    }
+
+    .c-popup__usage-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--t-outline);
+      margin-bottom: 0.25rem;
+    }
+
+    .c-popup__usage-value {
+      color: var(--t-muted-fg);
+    }
+
+    .c-popup__progress {
+      height: 6px;
+      background: var(--t-progress-track);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .c-popup__progress-fill {
+      height: 100%;
+      background: var(--t-progress-fill);
+      border-radius: 3px;
+    }
+
+    /* Menu items */
+    .c-popup__menu {
+      list-style: none;
+    }
+
+    .c-popup__menu-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.5rem;
       border-radius: var(--radius-lg);
       cursor: pointer;
-      color: #a3aac4;
+      color: var(--t-muted-fg);
     }
 
-    .pm-dark .pmi.hov {
-      background: rgba(255, 255, 255, 0.05);
-      color: #dee5ff;
+    .c-popup__menu-item--hovered {
+      background: var(--t-item-hover-bg);
+      color: var(--t-foreground);
     }
 
-    .pm-dark .pmi .ml {
+    .c-popup__menu-item-left {
       display: flex;
       align-items: center;
       gap: 0.625rem;
@@ -913,18 +1030,19 @@
       font-weight: 500;
     }
 
-    .pm-dark .pmi .mr {
+    .c-popup__menu-item-right {
       font-size: 0.75rem;
-      color: #6d758c;
+      color: var(--t-outline);
     }
 
-    .pm-dark .pft {
+    /* Footer actions */
+    .c-popup__footer {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .pm-dark .sob {
+    .c-popup__signout-btn {
       flex: 1;
       display: flex;
       align-items: center;
@@ -933,56 +1051,59 @@
       border-radius: var(--radius-lg);
       font-size: 0.75rem;
       font-weight: 500;
-      color: #a3aac4;
+      color: var(--t-muted-fg);
       background: none;
       border: none;
       font-family: var(--font-body);
       cursor: pointer;
     }
 
-    .pm-dark .nfb {
+    .c-popup__notif-btn {
+      position: relative;
       padding: 0.5rem;
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      border: 1px solid var(--t-border-strong);
       background: none;
       cursor: pointer;
-      color: #6d758c;
+      color: var(--t-outline);
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
     }
 
-    .pm-dark .nd {
+    .c-popup__notif-dot {
       position: absolute;
       top: 6px;
       right: 6px;
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #ff6e84;
+      background: var(--t-error);
     }
 
-    /* ── Dark Mode Switch ─────────────────────────────── */
-    .ms-dark {
+    /* =====================================================
+       MODE SWITCH (Work / Studio / Govern)
+       ===================================================== */
+    /* React: width driven by parent sidebar, not the component itself */
+    .c-mode-switch {
       display: flex;
       padding: 0.25rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: var(--t-switch-bg);
+      border: 1px solid var(--t-switch-border);
       border-radius: var(--radius-xl);
-      width: 244px;
+      width: 100%;
     }
 
-    .ms-dark.focus {
-      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.45);
+    .c-mode-switch--focus {
+      box-shadow: 0 0 0 3px var(--t-ring);
     }
 
-    .ms-dark.disabled {
+    .c-mode-switch--disabled {
       opacity: 0.4;
       pointer-events: none;
     }
 
-    .ms-dark .mb {
+    .c-mode-switch__btn {
       flex: 1;
       display: flex;
       align-items: center;
@@ -992,28 +1113,32 @@
       border-radius: var(--radius-lg);
       font-size: 0.75rem;
       font-weight: 500;
-      border: none;
+      border: 1px solid transparent;
       background: none;
       font-family: var(--font-body);
       cursor: pointer;
-      color: #6d758c;
+      color: var(--t-outline);
+      transition: color 0.15s, background-color 0.15s;
     }
 
-    .ms-dark .mb.act {
-      background: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
+    .c-mode-switch__btn--active {
+      background: var(--t-switch-active-bg);
+      color: var(--t-item-active-fg);
       font-weight: 600;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: var(--t-switch-active-shadow);
+      border-color: var(--t-switch-active-border);
     }
 
-    .ms-dark .mb.hov {
-      color: #dee5ff;
+    .c-mode-switch__btn--hover {
+      color: var(--t-foreground);
     }
 
-    /* ── CTA Button ──────────────────────────────────── */
-    .cta-btn {
-      width: 244px;
+    /* =====================================================
+       CTA BUTTON
+       ===================================================== */
+    /* React: width driven by parent sidebar, not the component itself */
+    .c-cta-btn {
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1026,521 +1151,49 @@
       font-weight: 600;
       line-height: 1.333;
       cursor: pointer;
-      transition: all 0.2s ease;
       background: linear-gradient(to right, #22c55e, #34d399);
-      color: #0d2b1a;
+      color: var(--t-cta-text);
       box-shadow: 0 4px 14px -3px rgba(34, 197, 94, 0.25);
+      transition: box-shadow 0.2s, transform 0.2s;
     }
 
-    .cta-btn.hover,
-    .cta-btn:hover {
+    .c-cta-btn--hover {
       background: linear-gradient(to right, #4ade80, #6ee7b7);
       box-shadow: 0 6px 20px -3px rgba(34, 197, 94, 0.35);
     }
 
-    .cta-btn.active,
-    .cta-btn:active {
+    .c-cta-btn--active {
       transform: scale(0.98);
       box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.3);
     }
 
-    .cta-btn.focus,
-    .cta-btn:focus {
-      box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.5), 0 4px 14px -3px rgba(34, 197, 94, 0.25);
-      outline: none;
+    .c-cta-btn--focus {
+      box-shadow: 0 0 0 3px var(--t-ring), 0 4px 14px -3px rgba(34, 197, 94, 0.25);
     }
 
-    .cta-btn.disabled,
-    .cta-btn:disabled {
+    .c-cta-btn--disabled {
       opacity: 0.4;
       cursor: not-allowed;
       box-shadow: none;
     }
 
-    /* Light Theme Override */
-    [data-theme="light"] .cta-btn {
-      color: #ffffff;
-      box-shadow: 0 4px 14px -3px rgba(34, 197, 94, 0.25);
-    }
-
-    /* =========================================================
-       LIGHT COMPONENT STYLES — Glass sidebar light mode
-       ========================================================= */
-    .demo-shell-light {
-      background: rgba(255, 255, 255, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: var(--radius-xl);
-      padding: 0.75rem;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-    }
-
-    /* ── Light Dropdown Trigger ──────────────────────── */
-    .dt-light {
-      width: 244px;
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      padding: 0.5rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      background: transparent;
-      cursor: pointer;
-      font-family: var(--font-body);
-    }
-
-    .dt-light.hover {
-      background: rgba(255, 255, 255, 0.40);
-      border-color: rgba(0, 0, 0, 0.15);
-    }
-
-    .dt-light.active {
-      background: rgba(255, 255, 255, 0.40);
-      border-color: rgba(0, 0, 0, 0.20);
-    }
-
-    .dt-light.focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.30);
-    }
-
-    .dt-light.disabled {
-      opacity: 0.4;
-    }
-
-    .dt-light .av {
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.875rem;
-      flex-shrink: 0;
-    }
-
-    .dt-light .tx {
-      flex: 1;
-      min-width: 0;
-      text-align: left;
-    }
-
-    .dt-light .tn {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #111827;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .dt-light .ts {
-      font-size: 0.625rem;
-      color: #6b7280;
-      line-height: 1.2;
-    }
-
-    .dt-light .ch {
-      flex-shrink: 0;
-      color: #9ca3af;
-      font-size: 0.875rem;
-    }
-
-    /* ── Light Dropdown Panel ─────────────────────────── */
-    .dp-light {
-      width: 244px;
-      margin-top: 0.25rem;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      border-radius: var(--radius-xl);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
-      overflow: hidden;
-    }
-
-    .dp-light .ph {
-      padding: 0.75rem 0.75rem 0.25rem;
-      font-size: 0.625rem;
-      font-weight: 500;
-      color: #9ca3af;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .dp-light .pl {
-      padding: 0.25rem 0.5rem 0.5rem;
-    }
-
-    .dp-light .pi {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.625rem;
-      border-radius: var(--radius-lg);
-      color: #111827;
-    }
-
-    .dp-light .pi.pi-sel {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    .dp-light .pi.pi-hov {
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    .dp-light .pi .ia {
-      width: 32px;
-      height: 32px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .dp-light .pi .it {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .dp-light .pi .in {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #111827;
-      line-height: 1.2;
-    }
-
-    .dp-light .pi.pi-sel .in {
-      font-weight: 600;
-    }
-
-    .dp-light .pi .is {
-      font-size: 0.625rem;
-      color: #9ca3af;
-      line-height: 1.2;
-      margin-top: 2px;
-    }
-
-    .dp-light .pi .ic {
-      flex-shrink: 0;
-      color: #6b7280;
-      font-size: 0.875rem;
-    }
-
-    .dp-light .pdiv {
-      height: 1px;
-      background: rgba(0, 0, 0, 0.06);
-      margin: 0 0.5rem;
-    }
-
-    .dp-light .pa {
-      padding: 0.5rem;
-      text-align: center;
-    }
-
-    .dp-light .pa button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #16a34a;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: var(--font-body);
-    }
-
-    /* ── Light Profile Pill ───────────────────────────── */
-    .pp-light {
-      width: 244px;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.5rem;
-      border-radius: var(--radius-xl);
-      background: none;
-      border: none;
-      font-family: var(--font-body);
-      cursor: pointer;
-    }
-
-    .pp-light.hover {
-      background: rgba(255, 255, 255, 0.40);
-    }
-
-    .pp-light.active {
-      background: rgba(255, 255, 255, 0.40);
-    }
-
-    .pp-light.focus {
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.30);
-      border-radius: var(--radius-xl);
-    }
-
-    .pp-light.disabled {
-      opacity: 0.4;
-    }
-
-    .pp-light .pav {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.10);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #374151;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      flex-shrink: 0;
-    }
-
-    .pp-light .pin {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .pp-light .pn {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #111827;
-      line-height: 1.2;
-    }
-
-    .pp-light .ps {
-      font-size: 0.625rem;
-      color: #9ca3af;
-      line-height: 1.2;
-      margin-top: 1px;
-    }
-
-    .pp-light .pch {
-      flex-shrink: 0;
-      color: #d1d5db;
-      font-size: 0.875rem;
-    }
-
-    /* ── Light Popup Menu ─────────────────────────────── */
-    .pm-light {
-      width: 320px;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      border-radius: var(--radius-2xl);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.10);
-      padding: 1rem;
-      font-family: var(--font-body);
-    }
-
-    .pm-light .pu {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding-bottom: 0.5rem;
-    }
-
-    .pm-light .pua {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: rgba(0, 0, 0, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #374151;
-      border: 1px solid rgba(0, 0, 0, 0.05);
-      flex-shrink: 0;
-    }
-
-    .pm-light .pun {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #111827;
-      line-height: 1.2;
-    }
-
-    .pm-light .pue {
-      font-size: 0.625rem;
-      color: #9ca3af;
-      line-height: 1.2;
-      margin-top: 2px;
-    }
-
-    .pm-light .pdiv {
-      height: 1px;
-      background: rgba(0, 0, 0, 0.07);
-      margin: 0.75rem 0;
-    }
-
-    .pm-light .pwc {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.75rem;
-      padding: 0.5rem;
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      cursor: pointer;
-    }
-
-    .pm-light .pwi {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-md);
-      background: rgba(0, 0, 0, 0.07);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 0.875rem;
-    }
-
-    .pm-light .pwn {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #111827;
-      line-height: 1.2;
-    }
-
-    .pm-light .pwm {
-      font-size: 0.625rem;
-      color: #9ca3af;
-      line-height: 1.2;
-      margin-top: 2px;
-    }
-
-    .pm-light .pmi {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.5rem;
-      border-radius: var(--radius-lg);
-      cursor: pointer;
-      color: #374151;
-    }
-
-    .pm-light .pmi.hov {
-      background: rgba(0, 0, 0, 0.04);
-    }
-
-    .pm-light .pmi .ml {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    .pm-light .pmi .mr {
-      font-size: 0.75rem;
-      color: #9ca3af;
-    }
-
-    .pm-light .pft {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .pm-light .sob {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      padding: 0.5rem;
-      border-radius: var(--radius-lg);
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #374151;
-      background: none;
-      border: none;
-      font-family: var(--font-body);
-      cursor: pointer;
-    }
-
-    .pm-light .nfb {
-      padding: 0.5rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      background: none;
-      cursor: pointer;
-      color: #9ca3af;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    .pm-light .nd {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #ef4444;
-    }
-
-    /* ── Light Mode Switch ────────────────────────────── */
-    .ms-light {
-      display: flex;
-      padding: 0.25rem;
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid rgba(0, 0, 0, 0.10);
-      border-radius: var(--radius-xl);
-      width: 244px;
-    }
-
-    .ms-light.focus {
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.30);
-    }
-
-    .ms-light.disabled {
-      opacity: 0.4;
-      pointer-events: none;
-    }
-
-    .ms-light .mb {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.375rem;
-      padding: 0.375rem 0.5rem;
-      border-radius: var(--radius-lg);
-      font-size: 0.75rem;
-      font-weight: 500;
-      border: none;
-      background: none;
-      font-family: var(--font-body);
-      cursor: pointer;
-      color: #666666;
-    }
-
-    .ms-light .mb.act {
-      background: #ffffff;
-      color: #000000;
-      font-weight: 600;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .ms-light .mb.hov {
-      color: #111827;
-    }
-
-
-
-    /* =========================================================
-       USAGE TABLE
-       ========================================================= */
+    /* =====================================================
+       USAGE TABLE (Do / Don't)
+       ===================================================== */
     .usage-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 0.8125rem;
+    }
+
+    .usage-table caption {
+      caption-side: top;
+      text-align: left;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--t-muted-fg);
+      padding: 0 0 0.5rem;
+      font-family: var(--font-mono);
     }
 
     .usage-table th {
@@ -1554,19 +1207,11 @@
     }
 
     .usage-table th.do-col {
-      color: #4ade80;
+      color: var(--t-primary);
     }
 
     .usage-table th.dont-col {
-      color: #ff6e84;
-    }
-
-    [data-theme="light"] .usage-table th.do-col {
-      color: #16a34a;
-    }
-
-    [data-theme="light"] .usage-table th.dont-col {
-      color: #ef4444;
+      color: var(--t-error);
     }
 
     .usage-table td {
@@ -1577,18 +1222,15 @@
       line-height: 1.5;
     }
 
-    .usage-table td code {
-      font-family: 'Inter', monospace;
-      font-size: 0.6875rem;
-      padding: 0.125rem 0.375rem;
-      background: var(--t-surface-container);
-      border-radius: var(--radius-sm);
-      color: var(--t-foreground);
+    /* =====================================================
+       TOKEN DISPLAY — spacing / radius / typography / motion
+       ===================================================== */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
     }
 
-    /* =========================================================
-       MISC SHARED
-       ========================================================= */
     .token-card {
       background: var(--t-surface-container);
       border: 1px solid var(--t-border-strong);
@@ -1599,14 +1241,8 @@
       gap: 0.75rem;
     }
 
-    .token-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 0.75rem;
-    }
-
-    .token-name {
-      font-family: 'Inter', monospace;
+    .token-card__name {
+      font-family: var(--font-mono);
       font-size: 0.6875rem;
       font-weight: 600;
       color: var(--t-foreground);
@@ -1614,36 +1250,42 @@
       line-height: 1.3;
     }
 
-    .token-value {
-      font-family: 'Inter', monospace;
+    .token-card__value {
+      font-family: var(--font-mono);
       font-size: 0.625rem;
       color: var(--t-muted-fg);
       word-break: break-all;
       line-height: 1.3;
     }
 
-    .spacing-row {
+    /* Spacing */
+    .spacing-list {
+      list-style: none;
+    }
+
+    .spacing-list__item {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin-bottom: 0.5rem;
     }
 
-    .spacing-bar {
-      height: 20px;
-      background: var(--t-primary);
-      border-radius: var(--radius-sm);
-      opacity: 0.45;
-    }
-
-    .spacing-meta {
-      font-family: 'Inter', monospace;
+    .spacing-list__meta {
+      font-family: var(--font-mono);
       font-size: 0.625rem;
       color: var(--t-muted-fg);
       white-space: nowrap;
       min-width: 160px;
     }
 
+    .spacing-list__bar {
+      height: 20px;
+      background: var(--t-primary);
+      border-radius: var(--radius-sm);
+      opacity: 0.45;
+    }
+
+    /* Border radius */
     .radius-grid {
       display: flex;
       flex-wrap: wrap;
@@ -1658,44 +1300,48 @@
       gap: 0.5rem;
     }
 
-    .radius-box {
+    .radius-demo__box {
       width: 56px;
       height: 56px;
       background: var(--t-surface-high);
       border: 2px solid var(--t-primary);
     }
 
-    .radius-label {
-      font-family: 'Inter', monospace;
+    .radius-demo__label {
+      font-family: var(--font-mono);
       font-size: 0.625rem;
       color: var(--t-muted-fg);
       text-align: center;
     }
 
-    .shadow-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1rem;
+    /* Typography */
+    .typo-list {
+      list-style: none;
     }
 
-    .shadow-card {
+    .typo-list__item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      padding: 0.75rem 1rem;
       background: var(--t-surface-container);
       border: 1px solid var(--t-border-strong);
       border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
+      margin-bottom: 0.5rem;
     }
 
-    .shadow-demo {
-      width: 80px;
-      height: 56px;
-      background: var(--t-surface-high);
-      border-radius: var(--radius-md);
+    .typo-list__sample {
+      flex-shrink: 0;
+      min-width: 200px;
     }
 
+    .typo-list__meta {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      color: var(--t-muted-fg);
+    }
+
+    /* Motion */
     .motion-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -1709,7 +1355,20 @@
       padding: 1rem;
     }
 
-    .motion-bar-track {
+    .motion-card__name {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--t-foreground);
+    }
+
+    .motion-card__value {
+      font-family: var(--font-mono);
+      font-size: 0.625rem;
+      color: var(--t-muted-fg);
+    }
+
+    .motion-card__track {
       height: 4px;
       background: var(--t-surface-high);
       border-radius: 2px;
@@ -1717,451 +1376,740 @@
       margin-top: 0.5rem;
     }
 
-    .motion-bar-fill {
+    .motion-card__fill {
       height: 100%;
       background: var(--t-primary);
       border-radius: 2px;
     }
 
-    .typo-row {
-      display: flex;
-      align-items: baseline;
-      gap: 1.5rem;
-      padding: 0.75rem 1rem;
-      background: var(--t-surface-container);
-      border: 1px solid var(--t-border-strong);
-      border-radius: var(--radius-lg);
-      margin-bottom: 0.5rem;
+    /* =====================================================
+       TYPOGRAPHY DEMO SAMPLES
+       ===================================================== */
+    .typo-sample--h1 {
+      font-family: var(--font-heading);
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--t-foreground);
     }
 
-    .typo-sample {
-      flex-shrink: 0;
-      min-width: 200px;
+    .typo-sample--h2 {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--t-foreground);
     }
 
-    .typo-meta {
-      font-family: 'Inter', monospace;
-      font-size: 0.625rem;
+    .typo-sample--body {
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--t-foreground);
+    }
+
+    .typo-sample--small {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
       color: var(--t-muted-fg);
+    }
+
+    .typo-sample--mono {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--t-foreground);
+    }
+
+    .ds-subsection__qualifier {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 0.875rem;
+      color: var(--t-muted-fg);
+    }
+
+    .radius-demo__box--sm {
+      border-radius: var(--radius-sm);
+    }
+
+    .radius-demo__box--md {
+      border-radius: var(--radius-md);
+    }
+
+    .radius-demo__box--lg {
+      border-radius: var(--radius-lg);
+    }
+
+    .radius-demo__box--xl {
+      border-radius: var(--radius-xl);
+    }
+
+    .radius-demo__box--2xl {
+      border-radius: var(--radius-2xl);
+    }
+
+    .radius-demo__box--3xl {
+      border-radius: var(--radius-3xl);
+    }
+
+    .radius-demo__box--4xl {
+      border-radius: var(--radius-4xl);
+    }
+
+    .spacing-list__bar--1 {
+      width: 4px;
+    }
+
+    .spacing-list__bar--2 {
+      width: 8px;
+    }
+
+    .spacing-list__bar--4 {
+      width: 16px;
+    }
+
+    .spacing-list__bar--8 {
+      width: 32px;
+    }
+
+    .spacing-list__bar--16 {
+      width: 64px;
+    }
+
+    .motion-card__fill--25 {
+      width: 25%;
+    }
+
+    .motion-card__fill--33 {
+      width: 33%;
+    }
+
+    .motion-card__fill--50 {
+      width: 50%;
+    }
+
+    .motion-card__fill--80 {
+      width: 80%;
+    }
+
+    .c-popup__progress-fill--31 {
+      width: 31.25%;
+    }
+
+    .states-row--mb {
+      margin-bottom: 2rem;
+    }
+
+    .states-row--mb-sm {
+      margin-bottom: 1.5rem;
+    }
+
+    .col-token {
+      width: 28%;
+    }
+
+    .col-theme {
+      width: 36%;
+    }
+
+    .col-half {
+      width: 50%;
+    }
+
+    /* =====================================================
+       PROMPT BANNER
+       ===================================================== */
+    .ds-prompt-banner {
+      background: #0a0f1e;
+      border-bottom: 1px solid rgba(74, 222, 128, 0.20);
+      padding: 1.25rem 2rem;
+      font-family: var(--font-body);
+    }
+
+    .ds-prompt-banner__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .ds-prompt-banner__icon {
+      font-size: 1rem;
+      color: #4ade80;
+      flex-shrink: 0;
+    }
+
+    .ds-prompt-banner__title {
+      font-family: var(--font-heading);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: #dee5ff;
+      flex: 1;
+    }
+
+    .ds-prompt-banner__copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.875rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      background: rgba(74, 222, 128, 0.08);
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: #4ade80;
+      cursor: pointer;
+      transition: background-color 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+
+    .ds-prompt-banner__copy-btn:hover {
+      background: rgba(74, 222, 128, 0.15);
+      border-color: rgba(74, 222, 128, 0.5);
+    }
+
+    .ds-prompt-banner__copy-btn:focus-visible {
+      outline: 2px solid rgba(74, 222, 128, 0.5);
+      outline-offset: 2px;
+    }
+
+    .ds-prompt-banner__copy-btn--copied {
+      color: #a3aac4;
+      border-color: rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .ds-prompt-banner__code {
+      font-family: var(--font-mono);
+      font-size: 0.6875rem;
+      line-height: 1.7;
+      color: #a3aac4;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      max-height: 320px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+    }
+
+    /* Scrollbar webkit */
+    .ds-prompt-banner__code::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .ds-prompt-banner__code::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .ds-prompt-banner__code::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
+
+    .ds-footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid var(--t-border-strong);
+      margin-top: 2rem;
+    }
+
+    .ds-footer__text {
+      font-size: 0.75rem;
+      color: var(--t-outline);
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ═══════════════════════════════════════════════════════════
-       STICKY TOGGLE BAR
-       ═══════════════════════════════════════════════════════════ -->
-  <div class="ds-toggle-bar">
-    <div class="brand">
-      <div class="brand-dot"></div>
-      Sendplex Design System
+  <!-- ═══════════════════════════════════════════════════════════════════
+       PROMPT — Add a new component to this design system
+       Copy the block below and paste it into your AI assistant.
+       ═══════════════════════════════════════════════════════════════════ -->
+  <aside class="ds-prompt-banner" aria-label="Add component prompt">
+    <div class="ds-prompt-banner__header">
+      <span class="ds-prompt-banner__icon" aria-hidden="true">⬡</span>
+      <p class="ds-prompt-banner__title">Add a component to this design system</p>
+      <button class="ds-prompt-banner__copy-btn" type="button" onclick="copyPrompt()"
+        aria-label="Copy prompt to clipboard">Copy prompt</button>
     </div>
-    <nav>
-      <a href="#tokens">Tokens</a>
-      <a href="#components">Components</a>
-      <a href="#usage">Usage Rules</a>
+    <pre class="ds-prompt-banner__code" id="ds-add-prompt">You are a senior front-end developer and accessibility expert working on the Sendplex Design System reference page (design-system.html).
+
+## Your task
+Add the following component(s) to the existing design system page:
+
+[DESCRIBE THE COMPONENT(S) HERE — e.g. "Toast notification", "Sidebar nav item with icon and badge", "Input field with label and error state"]
+
+## Source of truth
+Read the existing component code from the Sendplex project (React + TypeScript + Vite + Tailwind CSS v3).
+Extract the exact token values, class names, and interaction states used in the real implementation.
+Do not invent values — derive everything from the source files (tokens.css, tailwind.config.js, the component file itself).
+
+## Structure rules — follow these exactly
+
+### Tokens section (Section 1)
+If the new component introduces new tokens not already in the split table:
+- Add rows to the correct category table (Colors, Spacing, Radius, etc.)
+- Each row must show: token name + Dark resolved value + Light resolved value side by side
+- Dark column: background #0a0f1e, text #dee5ff. Light column: background #f0f2f8, text #0d1117
+- This section is NOT affected by the theme toggle — always show both columns
+
+### Components section (Section 2)
+Add a new subsection following this exact pattern:
+
+  &lt;div class="ds-subsection"&gt;
+    &lt;h3 class="ds-subsection__title"&gt;2.X · [Component Name] — &lt;code&gt;[ReactComponentName]&lt;/code&gt;&lt;/h3&gt;
+
+    &lt;!-- DARK --&gt;
+    &lt;div class="dark-only"&gt;
+      &lt;p class="theme-band"&gt;&lt;span class="theme-band__dot" aria-hidden="true"&gt;&lt;/span&gt;Dark mode&lt;/p&gt;
+      &lt;h4 class="ds-subsection__subtitle"&gt;[State group label]&lt;/h4&gt;
+      &lt;div class="states-row states-row--mb"&gt;
+        &lt;!-- One .state-demo per state --&gt;
+        &lt;div class="state-demo"&gt;
+          &lt;p class="state-label"&gt;Default&lt;/p&gt;
+          &lt;!-- Component HTML here — use width: 100%, parent .state-demo is 244px --&gt;
+        &lt;/div&gt;
+        &lt;!-- States: Default / Hover / Active / Focus (keyboard) / Disabled / [component-specific] --&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;&lt;!-- /dark-only --&gt;
+
+    &lt;!-- LIGHT --&gt;
+    &lt;div class="light-only"&gt;
+      &lt;!-- Identical structure, same states --&gt;
+    &lt;/div&gt;&lt;!-- /light-only --&gt;
+  &lt;/div&gt;
+
+### Usage Rules section (Section 3)
+Add a subsection with a Do / Don't table:
+
+  &lt;div class="ds-subsection"&gt;
+    &lt;h3 class="ds-subsection__title"&gt;3.X · [Component Name]&lt;/h3&gt;
+    &lt;table class="usage-table"&gt;
+      &lt;caption&gt;[Component Name] — usage rules&lt;/caption&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th scope="col" class="do-col col-half"&gt;✓ Do&lt;/th&gt;
+          &lt;th scope="col" class="dont-col col-half"&gt;✗ Don't&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;...&lt;/td&gt;&lt;td&gt;...&lt;/td&gt;&lt;/tr&gt;
+        &lt;!-- 2–3 rows max --&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+## Semantic and accessibility rules
+
+### Element rules (non-negotiable)
+- A demo of a button → &lt;button type="button"&gt;, never &lt;div role="button"&gt;
+- A demo of a heading → correct &lt;h1&gt;–&lt;h6&gt; tag with aria-hidden="true" to avoid polluting document outline
+- A demo of a list → &lt;ul&gt;/&lt;li&gt;, never &lt;div&gt; stacks
+- A divider → &lt;hr&gt; with CSS border:none (no role="separator" needed)
+- A progress bar → &lt;div role="progressbar" aria-valuenow aria-valuemin aria-valuemax&gt;
+- Decorative icons, chevrons, emojis → aria-hidden="true"
+- Functional icons → role="img" aria-label="[description]"
+
+### Style rules (non-negotiable)
+- Zero inline style="" on structural or typographic properties
+- All visual properties go in named CSS classes in the &lt;style&gt; block
+- Only acceptable inline style: color swatches where the value IS the content (e.g. style="background:#4ade80")
+- Width: components use width: 100% — the .state-demo wrapper (244px) provides the constraint
+- All colors, spacing, radius and shadow values must reference CSS custom properties (--t-* tokens)
+- Never hardcode hex values in component styles — always use the token
+
+### Naming convention
+- CSS classes follow BEM: .c-[component]__[element]--[modifier]
+- State modifiers: --hover, --active, --focus, --disabled, --open, --selected
+- New token fill/width classes: .c-[component]__[element]--[value]
+
+### React notes to include as HTML comments
+- Dynamic values (widths, counts, labels) → add &lt;!-- React: [explanation] --&gt; comment
+- Interaction states → add comment mapping CSS modifier to React prop or CSS pseudo-class
+- Conditional rendering → add comment explaining the condition
+
+## CSS block placement
+Add new CSS rules at the end of the &lt;style&gt; block, before &lt;/style&gt;.
+Group rules with a section comment:
+  /* =====================================================
+     [COMPONENT NAME]
+     ===================================================== */
+
+## What NOT to do
+- Do not change existing tokens, class names, or component demos
+- Do not add animations or JavaScript interactions (static reference only)
+- Do not use Tailwind utility classes in the HTML — this file is plain HTML/CSS
+- Do not add lorem ipsum or placeholder content — use realistic Sendplex data
+- Do not skip the light-only / dark-only split for every component
+
+## Output
+Return the complete updated design-system.html file. No explanation, no markdown fences.</pre>
+  </aside>
+
+  <!-- STICKY TOGGLE BAR -->
+  <div class="ds-toggle-bar" role="banner">
+    <p class="ds-brand" aria-label="Sendplex Design System">
+      <span class="ds-brand__dot" aria-hidden="true"></span>
+      Sendplex Design System
+    </p>
+
+    <nav class="ds-topnav" aria-label="Page sections">
+      <a class="ds-topnav__link" href="#tokens">Tokens</a>
+      <a class="ds-topnav__link" href="#components">Components</a>
+      <a class="ds-topnav__link" href="#usage">Usage Rules</a>
     </nav>
-    <div class="theme-toggle">
-      <div class="theme-toggle-track" role="group" aria-label="Theme switch">
-        <button id="btn-dark" class="active" onclick="setTheme('dark')">
-          ◐ Dark
-        </button>
-        <button id="btn-light" onclick="setTheme('light')">
-          ○ Light
-        </button>
+
+    <div class="theme-toggle" role="group" aria-label="Theme switcher">
+      <div class="theme-toggle__track">
+        <button id="btn-dark" class="theme-toggle__btn" aria-pressed="true" onclick="setTheme('dark')">◐ Dark</button>
+        <button id="btn-light" class="theme-toggle__btn" aria-pressed="false" onclick="setTheme('light')">○
+          Light</button>
       </div>
     </div>
   </div>
 
   <div class="ds-page">
 
-    <!-- ─────────────────────────────────────────────────────────
-         HEADER
-         ───────────────────────────────────────────────────────── -->
-    <header class="ds-header">
-      <h1>Sendplex Design System</h1>
-      <p class="ds-subtitle">Visual Reference — Left Navigation Components · Light &amp; Dark</p>
-      <span class="ds-badge">W3C DTCG · v1.0 · darkMode: 'class'</span>
+    <!-- PAGE HEADER -->
+    <header class="ds-page-header">
+      <h1 class="ds-page-header__title">Sendplex Design System</h1>
+      <p class="ds-page-header__subtitle">Visual Reference — Left Navigation Components · Light &amp; Dark</p>
+      <p class="ds-page-header__badge" role="note">W3C DTCG · v1.0 · darkMode: 'class'</p>
     </header>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         SECTION 1 — TOKENS  (split table, always visible)
-         ═══════════════════════════════════════════════════════════ -->
-    <section id="tokens" class="ds-section">
-      <h2 class="ds-section-title">1 — Tokens</h2>
-      <p class="ds-section-desc">Both themes shown simultaneously. Left = Dark (from <code
-          style="font-size:0.75rem">tokens.css :root</code>). Right = Light (from <code
-          style="font-size:0.75rem">Tailwind dark: patterns</code>). This section is not affected by the toggle.</p>
+    <!-- ═══════════════════════════════════════════════
+         SECTION 1 — TOKENS (split view, always visible)
+         ═══════════════════════════════════════════════ -->
+    <section id="tokens" class="ds-section" aria-labelledby="tokens-title">
+      <h2 id="tokens-title" class="ds-section__title">1 — Tokens</h2>
+      <p class="ds-section__desc">Both themes displayed simultaneously. Left column = Dark (<code>:root</code>). Right
+        column = Light. This section is not affected by the theme toggle.</p>
 
       <!-- 1.1 Semantic Colors -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.1 · Semantic Colors — Dark vs Light</h3>
+        <h3 class="ds-subsection__title">1.1 · Semantic Colors — Dark vs Light</h3>
         <table class="token-split-table">
+          <caption>Semantic color tokens — resolved values per theme</caption>
           <thead>
             <tr>
-              <th style="width:28%">Token</th>
-              <th class="col-dark" style="width:36%">◐ Dark value</th>
-              <th class="col-light" style="width:36%">○ Light value</th>
+              <th scope="col" class="col-token">Token</th>
+              <th scope="col" class="col-dark col-theme">◐ Dark value</th>
+              <th scope="col" class="col-light col-theme">○ Light value</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <div class="tok-name">--background / page</div>
-                <div class="tok-val">bg-background</div>
+                <p class="tok-name">--t-bg-page</p>
+                <p class="tok-val">bg-background</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#060e20"></div>
-                  <div>
-                    <div class="tok-val">#060e20 (navy-950)</div>
-                  </div>
+                  <div class="swatch" style="background:#060e20" role="img" aria-label="Couleur #060e20"></div>
+                  <p class="tok-val">#060e20 (navy-950)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#f4f8f7"></div>
-                  <div>
-                    <div class="tok-val">#f4f8f7 (app-bg)</div>
-                  </div>
+                  <div class="swatch" style="background:#f4f8f7" role="img" aria-label="Couleur #f4f8f7"></div>
+                  <p class="tok-val">#f4f8f7</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--foreground</div>
-                <div class="tok-val">text-foreground</div>
+                <p class="tok-name">--t-foreground</p>
+                <p class="tok-val">text-foreground</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#dee5ff"></div>
-                  <div>
-                    <div class="tok-val">#dee5ff (navy-100)</div>
-                  </div>
+                  <div class="swatch" style="background:#dee5ff" role="img" aria-label="Couleur #dee5ff"></div>
+                  <p class="tok-val">#dee5ff (navy-100)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#0d1117"></div>
-                  <div>
-                    <div class="tok-val">#0d1117</div>
-                  </div>
+                  <div class="swatch" style="background:#0d1117" role="img" aria-label="Couleur #0d1117"></div>
+                  <p class="tok-val">#0d1117</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Sidebar glass</div>
-                <div class="tok-val">.glass-sidebar</div>
+                <p class="tok-name">Sidebar glass</p>
+                <p class="tok-val">.glass-sidebar</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(10,12,16,0.65);border:1px solid rgba(255,255,255,0.06)">
-                  </div>
-                  <div>
-                    <div class="tok-val">rgba(10,12,16,0.65) + blur</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(10,12,16,0.65)" role="img"
+                    aria-label="rgba(10,12,16,0.65)"></div>
+                  <p class="tok-val">rgba(10,12,16,0.65) + blur</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.5)">
-                  </div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.6) + blur</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.6)" role="img"
+                    aria-label="rgba(255,255,255,0.6)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.6) + blur</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--surface-container</div>
-                <div class="tok-val">bg-surface-container</div>
+                <p class="tok-name">--t-surface-container</p>
+                <p class="tok-val">bg-surface-container</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#0f1930"></div>
-                  <div>
-                    <div class="tok-val">#0f1930 (navy-800)</div>
-                  </div>
+                  <div class="swatch" style="background:#0f1930" role="img" aria-label="#0f1930"></div>
+                  <p class="tok-val">#0f1930 (navy-800)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#f2f2f4"></div>
-                  <div>
-                    <div class="tok-val">#f2f2f4</div>
-                  </div>
+                  <div class="swatch" style="background:#f2f2f4" role="img" aria-label="#f2f2f4"></div>
+                  <p class="tok-val">#f2f2f4</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--popover</div>
-                <div class="tok-val">bg-popover</div>
+                <p class="tok-name">--t-popover</p>
+                <p class="tok-val">bg-popover</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#0f1930"></div>
-                  <div>
-                    <div class="tok-val">#0f1930 (navy-800)</div>
-                  </div>
+                  <div class="swatch" style="background:#0f1930" role="img" aria-label="#0f1930"></div>
+                  <p class="tok-val">#0f1930 (navy-800)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#ffffff"></div>
-                  <div>
-                    <div class="tok-val">#ffffff</div>
+                  <div class="swatch" style="background:#ffffff;border:1px solid #eee" role="img" aria-label="#ffffff">
                   </div>
+                  <p class="tok-val">#ffffff</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--primary-green</div>
-                <div class="tok-val">text-primary-green</div>
+                <p class="tok-name">--t-primary</p>
+                <p class="tok-val">text-primary-green</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#4ade80"></div>
-                  <div>
-                    <div class="tok-val">#4ade80 (green-400)</div>
-                  </div>
+                  <div class="swatch" style="background:#4ade80" role="img" aria-label="#4ade80"></div>
+                  <p class="tok-val">#4ade80 (green-400)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#22c55e"></div>
-                  <div>
-                    <div class="tok-val">#22c55e (green-500, contrast)</div>
-                  </div>
+                  <div class="swatch" style="background:#22c55e" role="img" aria-label="#22c55e"></div>
+                  <p class="tok-val">#22c55e (green-500)</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--primary-container</div>
-                <div class="tok-val">CTA gradient from</div>
+                <p class="tok-name">CTA gradient</p>
+                <p class="tok-val">bg-gradient-cta</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:linear-gradient(to right, #22c55e, #34d399)"></div>
-                  <div>
-                    <div class="tok-val">#22c55e → #34d399</div>
-                  </div>
+                  <div class="swatch" style="background:linear-gradient(to right,#22c55e,#34d399)" role="img"
+                    aria-label="#22c55e → #34d399"></div>
+                  <p class="tok-val">#22c55e → #34d399</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:linear-gradient(to right, #22c55e, #34d399)"></div>
-                  <div>
-                    <div class="tok-val">#22c55e → #34d399</div>
-                  </div>
+                  <div class="swatch" style="background:linear-gradient(to right,#22c55e,#34d399)" role="img"
+                    aria-label="#22c55e → #34d399"></div>
+                  <p class="tok-val">#22c55e → #34d399</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--muted-foreground</div>
-                <div class="tok-val">text-muted-foreground</div>
+                <p class="tok-name">--t-muted-fg</p>
+                <p class="tok-val">text-muted-foreground</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#a3aac4"></div>
-                  <div>
-                    <div class="tok-val">#a3aac4 (navy-200)</div>
-                  </div>
+                  <div class="swatch" style="background:#a3aac4" role="img" aria-label="#a3aac4"></div>
+                  <p class="tok-val">#a3aac4 (navy-200)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#6b7280"></div>
-                  <div>
-                    <div class="tok-val">#6b7280</div>
-                  </div>
+                  <div class="swatch" style="background:#6b7280" role="img" aria-label="#6b7280"></div>
+                  <p class="tok-val">#6b7280</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--border</div>
-                <div class="tok-val">border-border</div>
+                <p class="tok-name">--t-border</p>
+                <p class="tok-val">border-border</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2)">
-                  </div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.05)</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2)"
+                    role="img" aria-label="rgba(255,255,255,0.05)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.05)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(0,0,0,0.07);border:2px dashed rgba(0,0,0,0.2)"></div>
-                  <div>
-                    <div class="tok-val">rgba(0,0,0,0.07)</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(0,0,0,0.07);border:2px dashed rgba(0,0,0,0.2)" role="img"
+                    aria-label="rgba(0,0,0,0.07)"></div>
+                  <p class="tok-val">rgba(0,0,0,0.07)</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">--destructive / error</div>
-                <div class="tok-val">text-error</div>
+                <p class="tok-name">--t-error</p>
+                <p class="tok-val">text-error</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#ff6e84"></div>
-                  <div>
-                    <div class="tok-val">#ff6e84 (red-400)</div>
-                  </div>
+                  <div class="swatch" style="background:#ff6e84" role="img" aria-label="#ff6e84"></div>
+                  <p class="tok-val">#ff6e84 (red-400)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#ef4444"></div>
-                  <div>
-                    <div class="tok-val">#ef4444</div>
-                  </div>
+                  <div class="swatch" style="background:#ef4444" role="img" aria-label="#ef4444"></div>
+                  <p class="tok-val">#ef4444</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Nav item — default</div>
-                <div class="tok-val">text-[#bbbbbb] / text-[#444444]</div>
+                <p class="tok-name">--t-item-default</p>
+                <p class="tok-val">Nav item — text</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#bbbbbb"></div>
-                  <div>
-                    <div class="tok-val">#bbbbbb · dark:text-[#bbbbbb]</div>
-                  </div>
+                  <div class="swatch" style="background:#bbbbbb" role="img" aria-label="#bbbbbb"></div>
+                  <p class="tok-val">#bbbbbb</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#444444"></div>
-                  <div>
-                    <div class="tok-val">#444444 · text-[#444444]</div>
-                  </div>
+                  <div class="swatch" style="background:#444444" role="img" aria-label="#444444"></div>
+                  <p class="tok-val">#444444</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Nav item — active bg</div>
-                <div class="tok-val">dark:bg-white/15 / bg-white</div>
+                <p class="tok-name">--t-item-active-bg</p>
+                <p class="tok-val">Nav item — active bg</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.15)"></div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.15)</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.15)" role="img"
+                    aria-label="rgba(255,255,255,0.15)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.15)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#ffffff;border:1px solid #e5e7eb"></div>
-                  <div>
-                    <div class="tok-val">#ffffff</div>
-                  </div>
+                  <div class="swatch" style="background:#ffffff;border:1px solid #e5e7eb" role="img"
+                    aria-label="#ffffff"></div>
+                  <p class="tok-val">#ffffff</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Nav item — hover bg</div>
-                <div class="tok-val">dark:hover:bg-white/10 / hover:bg-white/40</div>
+                <p class="tok-name">--t-item-hover-bg</p>
+                <p class="tok-val">Nav item — hover bg</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.10)"></div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.10)</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.10)" role="img"
+                    aria-label="rgba(255,255,255,0.10)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.10)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.40);border:1px solid rgba(0,0,0,0.08)"></div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.40)</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.40)" role="img"
+                    aria-label="rgba(255,255,255,0.40)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.40)</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Switch container</div>
-                <div class="tok-val">dark:bg-white/5 / bg-black/5</div>
+                <p class="tok-name">--t-switch-bg</p>
+                <p class="tok-val">Switch container</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.05)"></div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.05)</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.05)" role="img"
+                    aria-label="rgba(255,255,255,0.05)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.05)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.08)"></div>
-                  <div>
-                    <div class="tok-val">rgba(0,0,0,0.05)</div>
+                  <div class="swatch" style="background:rgba(0,0,0,0.05)" role="img" aria-label="rgba(0,0,0,0.05)">
                   </div>
+                  <p class="tok-val">rgba(0,0,0,0.05)</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Switch active pill</div>
-                <div class="tok-val">dark:bg-white/15 / bg-white</div>
+                <p class="tok-name">--t-switch-active-bg</p>
+                <p class="tok-val">Switch active pill</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:rgba(255,255,255,0.15)"></div>
-                  <div>
-                    <div class="tok-val">rgba(255,255,255,0.15) + shadow</div>
-                  </div>
+                  <div class="swatch" style="background:rgba(255,255,255,0.15)" role="img"
+                    aria-label="rgba(255,255,255,0.15)"></div>
+                  <p class="tok-val">rgba(255,255,255,0.15)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#ffffff;border:1px solid rgba(0,0,0,0.05)"></div>
-                  <div>
-                    <div class="tok-val">#ffffff + subtle shadow</div>
-                  </div>
+                  <div class="swatch" style="background:#ffffff;border:1px solid rgba(0,0,0,0.05)" role="img"
+                    aria-label="#ffffff"></div>
+                  <p class="tok-val">#ffffff + shadow</p>
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div class="tok-name">Focus ring</div>
-                <div class="tok-val">ring-ring / ring-ring</div>
+                <p class="tok-name">--t-ring</p>
+                <p class="tok-val">Focus ring</p>
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
                   <div class="swatch"
-                    style="box-shadow:0 0 0 3px rgba(74,222,128,0.5);background:transparent;border:1px solid rgba(255,255,255,0.1)">
-                  </div>
-                  <div>
-                    <div class="tok-val">rgba(74,222,128,0.5)</div>
-                  </div>
+                    style="box-shadow:0 0 0 3px rgba(74,222,128,0.45);background:transparent;border:1px solid rgba(255,255,255,0.1)"
+                    role="img" aria-label="rgba(74,222,128,0.45)"></div>
+                  <p class="tok-val">rgba(74,222,128,0.45)</p>
                 </div>
               </td>
               <td class="col-light">
                 <div class="swatch-pair">
                   <div class="swatch"
-                    style="box-shadow:0 0 0 3px rgba(34,197,94,0.35);background:transparent;border:1px solid rgba(0,0,0,0.1)">
-                  </div>
-                  <div>
-                    <div class="tok-val">rgba(34,197,94,0.35)</div>
-                  </div>
+                    style="box-shadow:0 0 0 3px rgba(34,197,94,0.30);background:transparent;border:1px solid rgba(0,0,0,0.1)"
+                    role="img" aria-label="rgba(34,197,94,0.30)"></div>
+                  <p class="tok-val">rgba(34,197,94,0.30)</p>
                 </div>
               </td>
             </tr>
@@ -2171,851 +2119,992 @@
 
       <!-- 1.2 Spacing -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.2 · Spacing <span
-            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
-        <div class="spacing-row">
-          <div class="spacing-meta"><span class="token-name">1</span> <span class="token-value">· 0.25rem / 4px</span>
-          </div>
-          <div class="spacing-bar" style="width:4px"></div>
-        </div>
-        <div class="spacing-row">
-          <div class="spacing-meta"><span class="token-name">2</span> <span class="token-value">· 0.5rem / 8px</span>
-          </div>
-          <div class="spacing-bar" style="width:8px"></div>
-        </div>
-        <div class="spacing-row">
-          <div class="spacing-meta"><span class="token-name">4</span> <span class="token-value">· 1rem / 16px</span>
-          </div>
-          <div class="spacing-bar" style="width:16px"></div>
-        </div>
-        <div class="spacing-row">
-          <div class="spacing-meta"><span class="token-name">8</span> <span class="token-value">· 2rem / 32px</span>
-          </div>
-          <div class="spacing-bar" style="width:32px"></div>
-        </div>
-        <div class="spacing-row">
-          <div class="spacing-meta"><span class="token-name">16</span> <span class="token-value">· 4rem / 64px</span>
-          </div>
-          <div class="spacing-bar" style="width:64px"></div>
-        </div>
+        <h3 class="ds-subsection__title">1.2 · Spacing <span class="ds-subsection__qualifier">(theme-invariant)</span>
+        </h3>
+        <ul class="spacing-list" aria-label="Spacing scale">
+          <li class="spacing-list__item">
+            <p class="spacing-list__meta"><span class="tok-name">1</span> <span class="tok-val">0.25rem / 4px</span></p>
+            <div class="spacing-list__bar spacing-list__bar--1" aria-hidden="true"></div>
+          </li>
+          <li class="spacing-list__item">
+            <p class="spacing-list__meta"><span class="tok-name">2</span> <span class="tok-val">0.5rem / 8px</span></p>
+            <div class="spacing-list__bar spacing-list__bar--2" aria-hidden="true"></div>
+          </li>
+          <li class="spacing-list__item">
+            <p class="spacing-list__meta"><span class="tok-name">4</span> <span class="tok-val">1rem / 16px</span></p>
+            <div class="spacing-list__bar spacing-list__bar--4" aria-hidden="true"></div>
+          </li>
+          <li class="spacing-list__item">
+            <p class="spacing-list__meta"><span class="tok-name">8</span> <span class="tok-val">2rem / 32px</span></p>
+            <div class="spacing-list__bar spacing-list__bar--8" aria-hidden="true"></div>
+          </li>
+          <li class="spacing-list__item">
+            <p class="spacing-list__meta"><span class="tok-name">16</span> <span class="tok-val">4rem / 64px</span></p>
+            <div class="spacing-list__bar spacing-list__bar--16" aria-hidden="true"></div>
+          </li>
+        </ul>
       </div>
 
       <!-- 1.3 Border Radius -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.3 · Border Radius <span
-            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant — base 0.75rem)</span>
-        </h3>
-        <div class="radius-grid">
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-sm)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-sm</div>
-              <div class="token-value">base × 0.6</div>
-            </div>
+        <h3 class="ds-subsection__title">1.3 · Border Radius <span class="ds-subsection__qualifier">(base:
+            0.75rem)</span></h3>
+        <div class="radius-grid" role="list" aria-label="Border radius scale">
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--sm" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-sm</span><br><span class="tok-val">base ×
+                0.6</span></p>
           </div>
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-md)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-md</div>
-              <div class="token-value">base × 0.8</div>
-            </div>
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--md" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-md</span><br><span class="tok-val">base ×
+                0.8</span></p>
           </div>
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-lg)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-lg</div>
-              <div class="token-value">12px (base)</div>
-            </div>
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--lg" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-lg</span><br><span class="tok-val">12px
+                (base)</span></p>
           </div>
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-xl)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-xl</div>
-              <div class="token-value">base × 1.4</div>
-            </div>
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--xl" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-xl</span><br><span class="tok-val">base ×
+                1.4</span></p>
           </div>
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-2xl)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-2xl</div>
-              <div class="token-value">base × 1.8</div>
-            </div>
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--2xl" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-2xl</span><br><span class="tok-val">base ×
+                1.8</span></p>
           </div>
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-3xl)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-3xl</div>
-              <div class="token-value">base × 2.2</div>
-            </div>
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--3xl" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-3xl</span><br><span class="tok-val">base ×
+                2.2</span></p>
           </div>
-          <div class="radius-demo">
-            <div class="radius-box" style="border-radius:var(--radius-4xl)"></div>
-            <div class="radius-label">
-              <div class="token-name">--radius-4xl</div>
-              <div class="token-value">base × 2.6</div>
-            </div>
+          <div class="radius-demo" role="listitem">
+            <div class="radius-demo__box radius-demo__box--4xl" aria-hidden="true"></div>
+            <p class="radius-demo__label"><span class="tok-name">--radius-4xl</span><br><span class="tok-val">base ×
+                2.6</span></p>
           </div>
         </div>
       </div>
 
       <!-- 1.4 Typography -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.4 · Typography <span
-            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
-        <div class="typo-row">
-          <div class="typo-sample"
-            style="font-family:var(--font-heading);font-size:2.25rem;font-weight:700;letter-spacing:-0.03em;line-height:1.15;color:var(--t-foreground)">
-            Heading h1</div>
-          <div class="typo-meta">
-            <div class="token-name">--font-heading · Manrope</div>
-            <div class="token-value">2.25rem / 700 / -0.03em</div>
-          </div>
-        </div>
-        <div class="typo-row">
-          <div class="typo-sample"
-            style="font-family:var(--font-heading);font-size:1.75rem;font-weight:700;letter-spacing:-0.02em;color:var(--t-foreground)">
-            Heading h2</div>
-          <div class="typo-meta">
-            <div class="token-name">--font-heading · Manrope</div>
-            <div class="token-value">1.75rem / 700 / -0.02em</div>
-          </div>
-        </div>
-        <div class="typo-row">
-          <div class="typo-sample"
-            style="font-family:var(--font-body);font-size:0.875rem;font-weight:400;color:var(--t-foreground)">Body text
-            — The quick brown fox jumps over the lazy dog.</div>
-          <div class="typo-meta">
-            <div class="token-name">--font-body · Inter</div>
-            <div class="token-value">0.875rem / 400 / 1.6 lh</div>
-          </div>
-        </div>
-        <div class="typo-row">
-          <div class="typo-sample"
-            style="font-family:var(--font-body);font-size:0.75rem;font-weight:400;color:var(--t-muted-fg)">Small /
-            caption / metadata</div>
-          <div class="typo-meta">
-            <div class="token-name">--font-body · Inter</div>
-            <div class="token-value">0.75rem / 400 / muted-fg</div>
-          </div>
-        </div>
-        <div class="typo-row">
-          <div class="typo-sample"
-            style="font-family:'Inter',monospace;font-size:0.6875rem;font-weight:600;color:var(--t-foreground)">
-            --token-name · mono label</div>
-          <div class="typo-meta">
-            <div class="token-name">Monospace labels</div>
-            <div class="token-value">0.6875rem / 600 / Inter</div>
-          </div>
-        </div>
+        <h3 class="ds-subsection__title">1.4 · Typography <span
+            class="ds-subsection__qualifier">(theme-invariant)</span></h3>
+        <ul class="typo-list" aria-label="Type scale">
+          <li class="typo-list__item">
+            <h1 class="typo-list__sample typo-sample--h1" aria-hidden="true">Heading h1</h1>
+            <p class="typo-list__meta"><span class="tok-name">--font-heading · Manrope</span><br><span
+                class="tok-val">2.25rem / 700 / -0.03em</span></p>
+          </li>
+          <li class="typo-list__item">
+            <h2 class="typo-list__sample typo-sample--h2" aria-hidden="true">Heading h2</h2>
+            <p class="typo-list__meta"><span class="tok-name">--font-heading · Manrope</span><br><span
+                class="tok-val">1.75rem / 700 / -0.02em</span></p>
+          </li>
+          <li class="typo-list__item">
+            <p class="typo-list__sample typo-sample--body">Body — The quick brown fox jumps over the lazy dog.</p>
+            <p class="typo-list__meta"><span class="tok-name">--font-body · Inter</span><br><span
+                class="tok-val">0.875rem / 400 / 1.6lh</span></p>
+          </li>
+          <li class="typo-list__item">
+            <small class="typo-list__sample typo-sample--small">Small / caption / metadata</small>
+            <p class="typo-list__meta"><span class="tok-name">--font-body · Inter</span><br><span
+                class="tok-val">0.75rem / 400 / muted-fg</span></p>
+          </li>
+          <li class="typo-list__item">
+            <p class="typo-list__sample typo-sample--mono">--token-name · mono label</p>
+            <p class="typo-list__meta"><span class="tok-name">--font-mono · Inter</span><br><span
+                class="tok-val">0.6875rem / 600</span></p>
+          </li>
+        </ul>
       </div>
 
       <!-- 1.5 Motion -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">1.5 · Motion <span
-            style="font-weight:400;font-size:0.875rem;color:var(--t-muted-fg)">(theme-invariant)</span></h3>
-        <div class="motion-grid">
-          <div class="motion-card">
-            <div class="token-name">duration-150</div>
-            <div class="token-value">150ms · hover / focus transitions</div>
-            <div class="motion-bar-track">
-              <div class="motion-bar-fill" style="width:25%"></div>
+        <h3 class="ds-subsection__title">1.5 · Motion <span class="ds-subsection__qualifier">(theme-invariant)</span>
+        </h3>
+        <div class="motion-grid" role="list" aria-label="Motion tokens">
+          <div class="motion-card" role="listitem">
+            <p class="motion-card__name">duration-150</p>
+            <p class="motion-card__value">150ms · hover / focus</p>
+            <div class="motion-card__track" aria-hidden="true">
+              <div class="motion-card__fill motion-card__fill--25"></div>
             </div>
           </div>
-          <div class="motion-card">
-            <div class="token-name">duration-200</div>
-            <div class="token-value">200ms · mode-switch color transitions</div>
-            <div class="motion-bar-track">
-              <div class="motion-bar-fill" style="width:33%"></div>
+          <div class="motion-card" role="listitem">
+            <p class="motion-card__name">duration-200</p>
+            <p class="motion-card__value">200ms · color theme transitions</p>
+            <div class="motion-card__track" aria-hidden="true">
+              <div class="motion-card__fill motion-card__fill--33"></div>
             </div>
           </div>
-          <div class="motion-card">
-            <div class="token-name">duration-300</div>
-            <div class="token-value">300ms · sidebar expand / panel appear</div>
-            <div class="motion-bar-track">
-              <div class="motion-bar-fill" style="width:50%"></div>
+          <div class="motion-card" role="listitem">
+            <p class="motion-card__name">duration-300</p>
+            <p class="motion-card__value">300ms · sidebar / panel appear</p>
+            <div class="motion-card__track" aria-hidden="true">
+              <div class="motion-card__fill motion-card__fill--50"></div>
             </div>
           </div>
-          <div class="motion-card">
-            <div class="token-name">spring(380, 30)</div>
-            <div class="token-value">Framer Motion — mode indicator slide</div>
-            <div class="motion-bar-track">
-              <div class="motion-bar-fill" style="width:80%"></div>
+          <div class="motion-card" role="listitem">
+            <p class="motion-card__name">spring(380, 30)</p>
+            <p class="motion-card__value">Framer Motion — mode indicator slide</p>
+            <div class="motion-card__track" aria-hidden="true">
+              <div class="motion-card__fill motion-card__fill--80"></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════════
-         SECTION 2 — COMPONENTS  (toggled by theme switch)
-         ═══════════════════════════════════════════════════════════ -->
-    <section id="components" class="ds-section">
-      <h2 class="ds-section-title">2 — Components</h2>
-      <p class="ds-section-desc">Use the ◐ / ○ toggle above to switch between Dark and Light. All states rendered in
-        HTML simultaneously — only one set is visible at a time via CSS.</p>
+    <!-- ═══════════════════════════════════════════════
+         SECTION 2 — COMPONENTS (toggled)
+         ═══════════════════════════════════════════════ -->
+    <section id="components" class="ds-section" aria-labelledby="components-title">
+      <h2 id="components-title" class="ds-section__title">2 — Components</h2>
+      <p class="ds-section__desc">Use the ◐ / ○ toggle above to switch themes. All states are rendered simultaneously in
+        HTML — visibility is controlled by CSS only.</p>
+      <!-- React note: hover/focus/active states below correspond to CSS pseudo-classes
+           (:hover, :focus-visible, :active) or React state props (isOpen, isDisabled).
+           The --modifier classes in this reference map 1:1 to those states. -->
 
-      <!-- Wrapper that JS will set data-active on -->
-      <div class="ds-components" id="ds-components" data-active="dark">
+      <!-- ─────────────────────────────────────────────
+           2.1 Dropdown Select
+           ───────────────────────────────────────────── -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection__title">2.1 · Dropdown Select — <code>ProjectSwitcher</code></h3>
 
-        <!-- ─────────────────────────────────────────────────────
-             2.1 Dropdown Select  (ProjectSwitcher)
-             ───────────────────────────────────────────────────── -->
-        <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.1 · Dropdown Select — <code
-              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">ProjectSwitcher</code>
-          </h3>
+        <!-- DARK -->
+        <div class="dark-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Dark mode</p>
+          <h4 class="ds-subsection__subtitle">Trigger States</h4>
+          <div class="states-row states-row--mb">
+            <div class="state-demo">
+              <p class="state-label">Default</p>
+              <button class="c-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false" tabindex="0"
+                type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Hover</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--hover" aria-haspopup="listbox" aria-expanded="false"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Active / Open</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--active" aria-haspopup="listbox" aria-expanded="true"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--focus" aria-haspopup="listbox" aria-expanded="false"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--disabled" aria-haspopup="listbox"
+                aria-expanded="false" aria-disabled="true" tabindex="-1" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+          </div>
 
-          <!-- DARK -->
-          <div class="dark-only">
-            <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode</div>
-
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
-              Trigger States</h4>
-            <div class="states-row" style="margin-bottom:2rem">
-              <div class="state-demo"><span class="state-label">Default</span>
-                <div class="dt-dark">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Hover</span>
-                <div class="dt-dark hover">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Active / Open</span>
-                <div class="dt-dark active">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="dt-dark focus">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="dt-dark disabled">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
+          <h4 class="ds-subsection__subtitle">Open Panel</h4>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Open — selected item</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--active" aria-haspopup="listbox" aria-expanded="true"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▴</span>
+              </button>
+              <div class="c-dropdown-panel" role="listbox" aria-label="Projects in this workspace">
+                <p class="c-dropdown-panel__header" aria-hidden="true">Projects in this workspace</p>
+                <ul class="c-dropdown-panel__list">
+                  <li class="c-dropdown-panel__item c-dropdown-panel__item--selected" role="option"
+                    aria-selected="true">
+                    <span class="c-dropdown-panel__item-avatar" style="background:#c4b5fd" role="img"
+                      aria-label="AI Integration Roadmap">🚀</span>
+                    <span class="c-dropdown-panel__item-text">
+                      <span class="c-dropdown-panel__item-name">AI Integration Roadmap</span>
+                      <span class="c-dropdown-panel__item-sub">Sprint Track</span>
+                    </span>
+                    <span class="c-dropdown-panel__item-check" aria-hidden="true">✓</span>
+                  </li>
+                  <li class="c-dropdown-panel__item" role="option" aria-selected="false">
+                    <span class="c-dropdown-panel__item-avatar" style="background:#fde68a" role="img"
+                      aria-label="Q4 Marketing Campaign">📊</span>
+                    <span class="c-dropdown-panel__item-text">
+                      <span class="c-dropdown-panel__item-name">Q4 Marketing Campaign</span>
+                      <span class="c-dropdown-panel__item-sub">Campaign Track</span>
+                    </span>
+                  </li>
+                  <li class="c-dropdown-panel__item c-dropdown-panel__item--hovered" role="option"
+                    aria-selected="false">
+                    <span class="c-dropdown-panel__item-avatar" style="background:#a7f3d0" role="img"
+                      aria-label="Product Launch v2.0">🎯</span>
+                    <span class="c-dropdown-panel__item-text">
+                      <span class="c-dropdown-panel__item-name">Product Launch v2.0</span>
+                      <span class="c-dropdown-panel__item-sub">Release Track</span>
+                    </span>
+                  </li>
+                </ul>
+                <hr class="c-dropdown-panel__divider">
+                <div class="c-dropdown-panel__footer">
+                  <button class="c-dropdown-panel__cta">+ Create new project</button>
                 </div>
               </div>
             </div>
+          </div>
+        </div><!-- /dark-only -->
 
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
-              Open Panel</h4>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Open — selected item</span>
-                <div class="dt-dark active">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▴</span>
-                </div>
-                <div class="dp-dark">
-                  <div class="ph">Projects in this workspace</div>
-                  <div class="pl">
-                    <div class="pi pi-sel">
-                      <div class="ia" style="background:#c4b5fd">🚀</div>
-                      <div class="it">
-                        <div class="in">AI Integration Roadmap</div>
-                        <div class="is">Sprint Track</div>
-                      </div><span class="ic">✓</span>
-                    </div>
-                    <div class="pi">
-                      <div class="ia" style="background:#fde68a">📊</div>
-                      <div class="it">
-                        <div class="in">Q4 Marketing Campaign</div>
-                        <div class="is">Campaign Track</div>
-                      </div>
-                    </div>
-                    <div class="pi pi-hov">
-                      <div class="ia" style="background:#a7f3d0">🎯</div>
-                      <div class="it">
-                        <div class="in">Product Launch v2.0</div>
-                        <div class="is">Release Track</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="pdiv"></div>
-                  <div class="pa"><button>+ Create new project</button></div>
+        <!-- LIGHT -->
+        <div class="light-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Light mode</p>
+          <h4 class="ds-subsection__subtitle">Trigger States</h4>
+          <div class="states-row states-row--mb">
+            <div class="state-demo">
+              <p class="state-label">Default</p>
+              <button class="c-dropdown-trigger" aria-haspopup="listbox" aria-expanded="false" tabindex="0"
+                type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Hover</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--hover" aria-haspopup="listbox" aria-expanded="false"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Active / Open</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--active" aria-haspopup="listbox" aria-expanded="true"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--focus" aria-haspopup="listbox" aria-expanded="false"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--disabled" aria-haspopup="listbox"
+                aria-expanded="false" aria-disabled="true" tabindex="-1" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+          </div>
+
+          <h4 class="ds-subsection__subtitle">Open Panel</h4>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Open — selected item</p>
+              <button class="c-dropdown-trigger c-dropdown-trigger--active" aria-haspopup="listbox" aria-expanded="true"
+                tabindex="0" type="button">
+                <span class="c-dropdown-trigger__avatar" style="background:#c4b5fd" role="img"
+                  aria-label="Project icon">🚀</span>
+                <span class="c-dropdown-trigger__text">
+                  <span class="c-dropdown-trigger__name">AI Integration Roadmap</span>
+                  <span class="c-dropdown-trigger__sub">Sprint Track</span>
+                </span>
+                <span class="c-dropdown-trigger__chevron" aria-hidden="true">▴</span>
+              </button>
+              <div class="c-dropdown-panel" role="listbox" aria-label="Projects in this workspace">
+                <p class="c-dropdown-panel__header" aria-hidden="true">Projects in this workspace</p>
+                <ul class="c-dropdown-panel__list">
+                  <li class="c-dropdown-panel__item c-dropdown-panel__item--selected" role="option"
+                    aria-selected="true">
+                    <span class="c-dropdown-panel__item-avatar" style="background:#c4b5fd" role="img"
+                      aria-label="AI Integration Roadmap">🚀</span>
+                    <span class="c-dropdown-panel__item-text">
+                      <span class="c-dropdown-panel__item-name">AI Integration Roadmap</span>
+                      <span class="c-dropdown-panel__item-sub">Sprint Track</span>
+                    </span>
+                    <span class="c-dropdown-panel__item-check" aria-hidden="true">✓</span>
+                  </li>
+                  <li class="c-dropdown-panel__item" role="option" aria-selected="false">
+                    <span class="c-dropdown-panel__item-avatar" style="background:#fde68a" role="img"
+                      aria-label="Q4 Marketing Campaign">📊</span>
+                    <span class="c-dropdown-panel__item-text">
+                      <span class="c-dropdown-panel__item-name">Q4 Marketing Campaign</span>
+                      <span class="c-dropdown-panel__item-sub">Campaign Track</span>
+                    </span>
+                  </li>
+                  <li class="c-dropdown-panel__item c-dropdown-panel__item--hovered" role="option"
+                    aria-selected="false">
+                    <span class="c-dropdown-panel__item-avatar" style="background:#a7f3d0" role="img"
+                      aria-label="Product Launch v2.0">🎯</span>
+                    <span class="c-dropdown-panel__item-text">
+                      <span class="c-dropdown-panel__item-name">Product Launch v2.0</span>
+                      <span class="c-dropdown-panel__item-sub">Release Track</span>
+                    </span>
+                  </li>
+                </ul>
+                <hr class="c-dropdown-panel__divider">
+                <div class="c-dropdown-panel__footer">
+                  <button class="c-dropdown-panel__cta">+ Create new project</button>
                 </div>
               </div>
             </div>
-          </div><!-- /dark-only -->
+          </div>
+        </div><!-- /light-only -->
+      </div><!-- /2.1 -->
 
-          <!-- LIGHT -->
-          <div class="light-only">
-            <div class="theme-band light-band"><span class="band-dot"></span>Light mode</div>
+      <!-- ─────────────────────────────────────────────
+           2.2 Popup Menu (Profile Popover)
+           ───────────────────────────────────────────── -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection__title">2.2 · Popup Menu — <code>Profile Popover</code></h3>
 
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
-              Trigger States</h4>
-            <div class="states-row" style="margin-bottom:2rem">
-              <div class="state-demo"><span class="state-label">Default</span>
-                <div class="dt-light">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Hover</span>
-                <div class="dt-light hover">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Active / Open</span>
-                <div class="dt-light active">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="dt-light focus">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="dt-light disabled">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▾</span>
-                </div>
-              </div>
+        <!-- DARK -->
+        <div class="dark-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Dark mode</p>
+          <h4 class="ds-subsection__subtitle">Profile Pill States</h4>
+          <div class="states-row states-row--mb">
+            <div class="state-demo">
+              <p class="state-label">Default</p>
+              <button class="c-profile-pill" aria-haspopup="dialog" aria-expanded="false">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
             </div>
-
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
-              Open Panel</h4>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Open — selected item</span>
-                <div class="dt-light active">
-                  <div class="av" style="background:#c4b5fd">🚀</div>
-                  <div class="tx">
-                    <div class="tn">AI Integration Roadmap</div>
-                    <div class="ts">Sprint Track</div>
-                  </div><span class="ch">▴</span>
-                </div>
-                <div class="dp-light">
-                  <div class="ph">Projects in this workspace</div>
-                  <div class="pl">
-                    <div class="pi pi-sel">
-                      <div class="ia" style="background:#c4b5fd">🚀</div>
-                      <div class="it">
-                        <div class="in">AI Integration Roadmap</div>
-                        <div class="is">Sprint Track</div>
-                      </div><span class="ic">✓</span>
-                    </div>
-                    <div class="pi">
-                      <div class="ia" style="background:#fde68a">📊</div>
-                      <div class="it">
-                        <div class="in">Q4 Marketing Campaign</div>
-                        <div class="is">Campaign Track</div>
-                      </div>
-                    </div>
-                    <div class="pi pi-hov">
-                      <div class="ia" style="background:#a7f3d0">🎯</div>
-                      <div class="it">
-                        <div class="in">Product Launch v2.0</div>
-                        <div class="is">Release Track</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="pdiv"></div>
-                  <div class="pa"><button>+ Create new project</button></div>
-                </div>
-              </div>
+            <div class="state-demo">
+              <p class="state-label">Hover</p>
+              <button class="c-profile-pill c-profile-pill--hover" aria-haspopup="dialog" aria-expanded="false">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
             </div>
-          </div><!-- /light-only -->
-        </div><!-- /2.1 -->
-
-        <!-- ─────────────────────────────────────────────────────
-             2.2 Popup Menu  (Profile Popover)
-             ───────────────────────────────────────────────────── -->
-        <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.2 · Popup Menu — <code
-              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Profile Popover</code>
-          </h3>
-
-          <!-- DARK -->
-          <div class="dark-only">
-            <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode</div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
-              Profile Pill States</h4>
-            <div class="states-row" style="margin-bottom:2rem">
-              <div class="state-demo"><span class="state-label">Default</span>
-                <div class="pp-dark">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Hover</span>
-                <div class="pp-dark hover">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Active / Open</span>
-                <div class="pp-dark active">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="pp-dark focus">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="pp-dark disabled">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
+            <div class="state-demo">
+              <p class="state-label">Active / Open</p>
+              <button class="c-profile-pill c-profile-pill--active" aria-haspopup="dialog" aria-expanded="true">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▾</span>
+              </button>
             </div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
-              Open Panel</h4>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Open — full popover</span>
-                <div class="pm-dark">
-                  <div class="pu">
-                    <div class="pua">OA</div>
-                    <div>
-                      <div class="pun">Oppie Adirono</div>
-                      <div class="pue">oppie@sendplex.com</div>
-                    </div>
-                  </div>
-                  <div class="pdiv"></div>
-                  <div class="pwc">
-                    <div style="display:flex;align-items:center;gap:0.75rem">
-                      <div class="pwi">💼</div>
-                      <div>
-                        <div class="pwn">My Workspace</div>
-                        <div class="pwm">Starter plan · 3 members</div>
-                      </div>
-                    </div><span style="color:#40485d">›</span>
-                  </div>
-                  <div style="padding:0.5rem 0;margin-top:0.75rem">
-                    <div style="font-size:0.75rem;font-weight:500;color:#dee5ff;margin-bottom:0.5rem">Token Usage</div>
-                    <div
-                      style="display:flex;justify-content:space-between;font-size:0.7rem;color:#6d758c;margin-bottom:0.25rem">
-                      <span>Active conversations</span><span style="color:#a3aac4">1,250 / 4,000</span></div>
-                    <div style="height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden">
-                      <div style="width:31.25%;height:100%;background:#40485d;border-radius:3px"></div>
-                    </div>
-                  </div>
-                  <div class="pdiv"></div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p>
+              <button class="c-profile-pill c-profile-pill--focus" aria-haspopup="dialog" aria-expanded="false">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p>
+              <button class="c-profile-pill c-profile-pill--disabled" aria-haspopup="dialog" aria-expanded="false"
+                disabled aria-disabled="true">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+          </div>
+
+          <h4 class="ds-subsection__subtitle">Open Panel</h4>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Open — full popover</p>
+              <div class="c-popup" role="dialog" aria-label="Profile menu" aria-modal="true">
+                <div class="c-popup__user">
+                  <span class="c-popup__avatar" aria-hidden="true">OA</span>
                   <div>
-                    <div class="pmi">
-                      <div class="ml"><span>⚙</span><span>Settings</span></div>
-                    </div>
-                    <div class="pmi hov">
-                      <div class="ml"><span>☀</span><span>Appearance</span></div><span class="mr">Light ›</span>
-                    </div>
-                    <div class="pmi">
-                      <div class="ml"><span>?</span><span>Help</span></div><span class="mr">›</span>
-                    </div>
+                    <p class="c-popup__user-name">Oppie Adirono</p>
+                    <p class="c-popup__user-email">oppie@sendplex.com</p>
                   </div>
-                  <div class="pdiv"></div>
-                  <div class="pft"><button class="sob"><span>⎋</span><span>Sign out</span></button><button
-                      class="nfb"><span>🔔</span><span class="nd"></span></button></div>
                 </div>
-              </div>
-            </div>
-          </div><!-- /dark-only -->
-
-          <!-- LIGHT -->
-          <div class="light-only">
-            <div class="theme-band light-band"><span class="band-dot"></span>Light mode</div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
-              Profile Pill States</h4>
-            <div class="states-row" style="margin-bottom:2rem">
-              <div class="state-demo"><span class="state-label">Default</span>
-                <div class="pp-light">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Hover</span>
-                <div class="pp-light hover">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Active / Open</span>
-                <div class="pp-light active">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▾</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="pp-light focus">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-              <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="pp-light disabled">
-                  <div class="pav">OA</div>
-                  <div class="pin">
-                    <div class="pn">Oppie Adirono</div>
-                    <div class="ps">My Workspace</div>
-                  </div><span class="pch">▴</span>
-                </div>
-              </div>
-            </div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
-              Open Panel</h4>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Open — full popover</span>
-                <div class="pm-light">
-                  <div class="pu">
-                    <div class="pua">OA</div>
+                <!-- React: <hr> — no role needed, border reset via CSS -->
+                <hr class="c-popup__divider">
+                <div class="c-popup__workspace" role="button" tabindex="0" aria-label="Switch workspace">
+                  <div class="c-popup__workspace-inner">
+                    <span class="c-popup__workspace-icon" role="img" aria-label="Workspace icon">💼</span>
                     <div>
-                      <div class="pun">Oppie Adirono</div>
-                      <div class="pue">oppie@sendplex.com</div>
+                      <p class="c-popup__workspace-name">My Workspace</p>
+                      <p class="c-popup__workspace-meta">Starter plan · 3 members</p>
                     </div>
                   </div>
-                  <div class="pdiv"></div>
-                  <div class="pwc">
-                    <div style="display:flex;align-items:center;gap:0.75rem">
-                      <div class="pwi">💼</div>
-                      <div>
-                        <div class="pwn">My Workspace</div>
-                        <div class="pwm">Starter plan · 3 members</div>
-                      </div>
-                    </div><span style="color:#d1d5db">›</span>
+                  <span class="c-popup__workspace-arrow" aria-hidden="true">›</span>
+                </div>
+                <div class="c-popup__usage" aria-label="Token usage">
+                  <p class="c-popup__usage-title">Token Usage</p>
+                  <div class="c-popup__usage-meta">
+                    <span>Active conversations</span>
+                    <span class="c-popup__usage-value">1,250 / 4,000</span>
                   </div>
-                  <div style="padding:0.5rem 0;margin-top:0.75rem">
-                    <div style="font-size:0.75rem;font-weight:500;color:#111827;margin-bottom:0.5rem">Token Usage</div>
-                    <div
-                      style="display:flex;justify-content:space-between;font-size:0.7rem;color:#9ca3af;margin-bottom:0.25rem">
-                      <span>Active conversations</span><span style="color:#6b7280">1,250 / 4,000</span></div>
-                    <div style="height:6px;background:rgba(0,0,0,0.07);border-radius:3px;overflow:hidden">
-                      <div style="width:31.25%;height:100%;background:#9ca3af;border-radius:3px"></div>
-                    </div>
+                  <div class="c-popup__progress" role="progressbar" aria-valuenow="31" aria-valuemin="0"
+                    aria-valuemax="100" aria-label="Token usage: 31%">
+                    <!-- React: width = (value / max) * 100 + "%" as inline style or CSS var -->
+                    <div class="c-popup__progress-fill c-popup__progress-fill--31"></div>
                   </div>
-                  <div class="pdiv"></div>
-                  <div>
-                    <div class="pmi">
-                      <div class="ml"><span>⚙</span><span>Settings</span></div>
-                    </div>
-                    <div class="pmi hov">
-                      <div class="ml"><span>☀</span><span>Appearance</span></div><span class="mr">Light ›</span>
-                    </div>
-                    <div class="pmi">
-                      <div class="ml"><span>?</span><span>Help</span></div><span class="mr">›</span>
-                    </div>
-                  </div>
-                  <div class="pdiv"></div>
-                  <div class="pft"><button class="sob"><span>⎋</span><span>Sign out</span></button><button
-                      class="nfb"><span>🔔</span><span class="nd"></span></button></div>
+                </div>
+                <hr class="c-popup__divider">
+                <ul class="c-popup__menu" role="menu" aria-label="Account actions">
+                  <li class="c-popup__menu-item" role="menuitem" tabindex="0">
+                    <span class="c-popup__menu-item-left"><span aria-hidden="true">⚙</span> Settings</span>
+                  </li>
+                  <li class="c-popup__menu-item c-popup__menu-item--hovered" role="menuitem" tabindex="0">
+                    <span class="c-popup__menu-item-left"><span aria-hidden="true">☀</span> Appearance</span>
+                    <span class="c-popup__menu-item-right">Light ›</span>
+                  </li>
+                  <li class="c-popup__menu-item" role="menuitem" tabindex="0">
+                    <span class="c-popup__menu-item-left"><span aria-hidden="true">?</span> Help</span>
+                    <span class="c-popup__menu-item-right">›</span>
+                  </li>
+                </ul>
+                <hr class="c-popup__divider">
+                <div class="c-popup__footer">
+                  <button class="c-popup__signout-btn" role="menuitem">
+                    <span aria-hidden="true">⎋</span> Sign out
+                  </button>
+                  <button class="c-popup__notif-btn" aria-label="Notifications (1 unread)">
+                    <span aria-hidden="true">🔔</span>
+                    <span class="c-popup__notif-dot" aria-hidden="true"></span>
+                  </button>
                 </div>
               </div>
             </div>
-          </div><!-- /light-only -->
-        </div><!-- /2.2 -->
+          </div>
+        </div><!-- /dark-only -->
 
-        <!-- ─────────────────────────────────────────────────────
-             2.3 Mode Switch  (Work / Studio / Govern)
-             ───────────────────────────────────────────────────── -->
-        <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.3 · 3-Way Switch — <code
-              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Work / Studio / Govern</code>
-          </h3>
+        <!-- LIGHT -->
+        <div class="light-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Light mode</p>
+          <h4 class="ds-subsection__subtitle">Profile Pill States</h4>
+          <div class="states-row states-row--mb">
+            <div class="state-demo">
+              <p class="state-label">Default</p>
+              <button class="c-profile-pill" aria-haspopup="dialog" aria-expanded="false">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Hover</p>
+              <button class="c-profile-pill c-profile-pill--hover" aria-haspopup="dialog" aria-expanded="false">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Active / Open</p>
+              <button class="c-profile-pill c-profile-pill--active" aria-haspopup="dialog" aria-expanded="true">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▾</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p>
+              <button class="c-profile-pill c-profile-pill--focus" aria-haspopup="dialog" aria-expanded="false">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p>
+              <button class="c-profile-pill c-profile-pill--disabled" aria-haspopup="dialog" aria-expanded="false"
+                disabled aria-disabled="true">
+                <span class="c-profile-pill__avatar" aria-hidden="true">OA</span>
+                <span class="c-profile-pill__text">
+                  <span class="c-profile-pill__name">Oppie Adirono</span>
+                  <span class="c-profile-pill__sub">My Workspace</span>
+                </span>
+                <span class="c-profile-pill__chevron" aria-hidden="true">▴</span>
+              </button>
+            </div>
+          </div>
 
-          <!-- DARK -->
-          <div class="dark-only">
-            <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode</div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
-              Active Segments</h4>
-            <div class="states-row" style="margin-bottom:1.5rem">
-              <div class="state-demo"><span class="state-label">"Work" selected</span>
-                <div class="ms-dark"><button class="mb act">💼 Work</button><button class="mb">🖥 Studio</button><button
-                    class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">"Studio" selected</span>
-                <div class="ms-dark"><button class="mb">💼 Work</button><button class="mb act">🖥 Studio</button><button
-                    class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">"Govern" selected</span>
-                <div class="ms-dark"><button class="mb">💼 Work</button><button class="mb">🖥 Studio</button><button
-                    class="mb act">🛡 Govern</button></div>
+          <h4 class="ds-subsection__subtitle">Open Panel</h4>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Open — full popover</p>
+              <div class="c-popup" role="dialog" aria-label="Profile menu" aria-modal="true">
+                <div class="c-popup__user">
+                  <span class="c-popup__avatar" aria-hidden="true">OA</span>
+                  <div>
+                    <p class="c-popup__user-name">Oppie Adirono</p>
+                    <p class="c-popup__user-email">oppie@sendplex.com</p>
+                  </div>
+                </div>
+                <hr class="c-popup__divider">
+                <div class="c-popup__workspace" role="button" tabindex="0" aria-label="Switch workspace">
+                  <div class="c-popup__workspace-inner">
+                    <span class="c-popup__workspace-icon" role="img" aria-label="Workspace icon">💼</span>
+                    <div>
+                      <p class="c-popup__workspace-name">My Workspace</p>
+                      <p class="c-popup__workspace-meta">Starter plan · 3 members</p>
+                    </div>
+                  </div>
+                  <span class="c-popup__workspace-arrow" aria-hidden="true">›</span>
+                </div>
+                <div class="c-popup__usage" aria-label="Token usage">
+                  <p class="c-popup__usage-title">Token Usage</p>
+                  <div class="c-popup__usage-meta">
+                    <span>Active conversations</span>
+                    <span class="c-popup__usage-value">1,250 / 4,000</span>
+                  </div>
+                  <div class="c-popup__progress" role="progressbar" aria-valuenow="31" aria-valuemin="0"
+                    aria-valuemax="100" aria-label="Token usage: 31%">
+                    <div class="c-popup__progress-fill c-popup__progress-fill--31"></div>
+                  </div>
+                </div>
+                <hr class="c-popup__divider">
+                <ul class="c-popup__menu" role="menu" aria-label="Account actions">
+                  <li class="c-popup__menu-item" role="menuitem" tabindex="0">
+                    <span class="c-popup__menu-item-left"><span aria-hidden="true">⚙</span> Settings</span>
+                  </li>
+                  <li class="c-popup__menu-item c-popup__menu-item--hovered" role="menuitem" tabindex="0">
+                    <span class="c-popup__menu-item-left"><span aria-hidden="true">☀</span> Appearance</span>
+                    <span class="c-popup__menu-item-right">Light ›</span>
+                  </li>
+                  <li class="c-popup__menu-item" role="menuitem" tabindex="0">
+                    <span class="c-popup__menu-item-left"><span aria-hidden="true">?</span> Help</span>
+                    <span class="c-popup__menu-item-right">›</span>
+                  </li>
+                </ul>
+                <hr class="c-popup__divider">
+                <div class="c-popup__footer">
+                  <button class="c-popup__signout-btn" role="menuitem">
+                    <span aria-hidden="true">⎋</span> Sign out
+                  </button>
+                  <button class="c-popup__notif-btn" aria-label="Notifications (1 unread)">
+                    <span aria-hidden="true">🔔</span>
+                    <span class="c-popup__notif-dot" aria-hidden="true"></span>
+                  </button>
+                </div>
               </div>
             </div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#dee5ff;margin-bottom:1rem;font-family:var(--font-heading)">
-              Interaction States</h4>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Hover on inactive</span>
-                <div class="ms-dark"><button class="mb act">💼 Work</button><button class="mb hov">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="ms-dark focus"><button class="mb act">💼 Work</button><button class="mb">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="ms-dark disabled"><button class="mb act">💼 Work</button><button class="mb">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-            </div>
-          </div><!-- /dark-only -->
+          </div>
+        </div><!-- /light-only -->
+      </div><!-- /2.2 -->
 
-          <!-- LIGHT -->
-          <div class="light-only">
-            <div class="theme-band light-band"><span class="band-dot"></span>Light mode</div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
-              Active Segments</h4>
-            <div class="states-row" style="margin-bottom:1.5rem">
-              <div class="state-demo"><span class="state-label">"Work" selected</span>
-                <div class="ms-light"><button class="mb act">💼 Work</button><button class="mb">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">"Studio" selected</span>
-                <div class="ms-light"><button class="mb">💼 Work</button><button class="mb act">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">"Govern" selected</span>
-                <div class="ms-light"><button class="mb">💼 Work</button><button class="mb">🖥 Studio</button><button
-                    class="mb act">🛡 Govern</button></div>
-              </div>
-            </div>
-            <h4
-              style="font-size:0.875rem;font-weight:600;color:#111827;margin-bottom:1rem;font-family:var(--font-heading)">
-              Interaction States</h4>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Hover on inactive</span>
-                <div class="ms-light"><button class="mb act">💼 Work</button><button class="mb hov">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span>
-                <div class="ms-light focus"><button class="mb act">💼 Work</button><button class="mb">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-              <div class="state-demo"><span class="state-label">Disabled</span>
-                <div class="ms-light disabled"><button class="mb act">💼 Work</button><button class="mb">🖥
-                    Studio</button><button class="mb">🛡 Govern</button></div>
-              </div>
-            </div>
-          </div><!-- /light-only -->
-        </div><!-- /2.3 -->
+      <!-- ─────────────────────────────────────────────
+           2.3 Mode Switch (Work / Studio / Govern)
+           ───────────────────────────────────────────── -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection__title">2.3 · 3-Way Switch — <code>Work / Studio / Govern</code></h3>
 
-        <!-- ─────────────────────────────────────────────────────
-             2.4 CTA Button  (Start new project)
-             ───────────────────────────────────────────────────── -->
-        <div class="ds-subsection">
-          <h3 class="ds-subsection-title">2.4 · CTA Button — <code
-              style="font-family:'Inter',monospace;font-size:0.8125rem;color:var(--t-primary)">Start new project</code>
-          </h3>
-          <p style="font-size:0.8125rem;color:var(--t-muted-fg);margin-bottom:1.5rem">Shown when workspace has zero
-            projects. Gradient shifts between themes for contrast.</p>
+        <!-- DARK -->
+        <div class="dark-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Dark mode</p>
+          <h4 class="ds-subsection__subtitle">Active Segments</h4>
+          <div class="states-row states-row--mb-sm">
+            <div class="state-demo">
+              <p class="state-label">"Work" selected</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🖥</span>
+                  Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">"Studio" selected</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">💼</span>
+                  Work</button>
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">🖥</span> Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">"Govern" selected</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">💼</span>
+                  Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🖥</span>
+                  Studio</button>
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">🛡</span> Govern</button>
+              </div>
+            </div>
+          </div>
+          <h4 class="ds-subsection__subtitle">Interaction States</h4>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Hover on inactive</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn c-mode-switch__btn--hover" role="tab" aria-selected="false"><span
+                    aria-hidden="true">🖥</span> Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p>
+              <div class="c-mode-switch c-mode-switch--focus" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🖥</span>
+                  Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p>
+              <div class="c-mode-switch c-mode-switch--disabled" role="tablist" aria-label="Mode selector"
+                aria-disabled="true">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"
+                  disabled><span aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false" disabled><span
+                    aria-hidden="true">🖥</span> Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false" disabled><span
+                    aria-hidden="true">🛡</span> Govern</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- /dark-only -->
 
-          <!-- DARK -->
-          <div class="dark-only">
-            <div class="theme-band dark-band"><span class="band-dot"></span>Dark mode · gradient: #22c55e → #34d399
+        <!-- LIGHT -->
+        <div class="light-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Light mode</p>
+          <h4 class="ds-subsection__subtitle">Active Segments</h4>
+          <div class="states-row states-row--mb-sm">
+            <div class="state-demo">
+              <p class="state-label">"Work" selected</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🖥</span>
+                  Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
             </div>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Default</span><button class="cta-btn">+ Start new
-                  project</button></div>
-              <div class="state-demo"><span class="state-label">Hover</span><button class="cta-btn hover">+ Start new
-                  project</button></div>
-              <div class="state-demo"><span class="state-label">Active / Pressed</span><button class="cta-btn active">+
-                  Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><button class="cta-btn focus">+
-                  Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><button class="cta-btn disabled">+ Start
-                  new project</button></div>
+            <div class="state-demo">
+              <p class="state-label">"Studio" selected</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">💼</span>
+                  Work</button>
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">🖥</span> Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
             </div>
-          </div><!-- /dark-only -->
+            <div class="state-demo">
+              <p class="state-label">"Govern" selected</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">💼</span>
+                  Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🖥</span>
+                  Studio</button>
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">🛡</span> Govern</button>
+              </div>
+            </div>
+          </div>
+          <h4 class="ds-subsection__subtitle">Interaction States</h4>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Hover on inactive</p>
+              <div class="c-mode-switch" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn c-mode-switch__btn--hover" role="tab" aria-selected="false"><span
+                    aria-hidden="true">🖥</span> Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p>
+              <div class="c-mode-switch c-mode-switch--focus" role="tablist" aria-label="Mode selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
+                    aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🖥</span>
+                  Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false"><span aria-hidden="true">🛡</span>
+                  Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p>
+              <div class="c-mode-switch c-mode-switch--disabled" role="tablist" aria-label="Mode selector"
+                aria-disabled="true">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"
+                  disabled><span aria-hidden="true">💼</span> Work</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false" disabled><span
+                    aria-hidden="true">🖥</span> Studio</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false" disabled><span
+                    aria-hidden="true">🛡</span> Govern</button>
+              </div>
+            </div>
+          </div>
+        </div><!-- /light-only -->
+      </div><!-- /2.3 -->
 
-          <!-- LIGHT -->
-          <div class="light-only">
-            <div class="theme-band light-band"><span class="band-dot"></span>Light mode · gradient: #22c55e → #34d399
-            </div>
-            <div class="states-row">
-              <div class="state-demo"><span class="state-label">Default</span><button class="cta-btn">+ Start new
-                  project</button></div>
-              <div class="state-demo"><span class="state-label">Hover</span><button class="cta-btn hover">+ Start new
-                  project</button></div>
-              <div class="state-demo"><span class="state-label">Active / Pressed</span><button class="cta-btn active">+
-                  Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Focus (keyboard)</span><button class="cta-btn focus">+
-                  Start new project</button></div>
-              <div class="state-demo"><span class="state-label">Disabled</span><button class="cta-btn disabled">+ Start
-                  new project</button></div>
-            </div>
-          </div><!-- /light-only -->
-        </div><!-- /2.4 -->
+      <!-- ─────────────────────────────────────────────
+           2.4 CTA Button
+           ───────────────────────────────────────────── -->
+      <div class="ds-subsection">
+        <h3 class="ds-subsection__title">2.4 · CTA Button — <code>Start new project</code></h3>
+        <p class="ds-section__desc">Displayed only when <code>workspace.projects.length === 0</code>. The gradient is
+          identical in both themes; only the text color changes.</p>
 
-      </div><!-- /ds-components -->
+        <!-- DARK -->
+        <div class="dark-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Dark mode · text:
+            <code>--t-cta-text</code> (#003910)</p>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Default</p><button class="c-cta-btn">+ Start new project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Hover</p><button class="c-cta-btn c-cta-btn--hover">+ Start new project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Active / Pressed</p><button class="c-cta-btn c-cta-btn--active">+ Start new
+                project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p><button class="c-cta-btn c-cta-btn--focus">+ Start new
+                project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p><button class="c-cta-btn c-cta-btn--disabled" disabled
+                aria-disabled="true">+ Start new project</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIGHT -->
+        <div class="light-only">
+          <p class="theme-band"><span class="theme-band__dot" aria-hidden="true"></span>Light mode · text:
+            <code>--t-cta-text</code> (#ffffff)</p>
+          <div class="states-row">
+            <div class="state-demo">
+              <p class="state-label">Default</p><button class="c-cta-btn">+ Start new project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Hover</p><button class="c-cta-btn c-cta-btn--hover">+ Start new project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Active / Pressed</p><button class="c-cta-btn c-cta-btn--active">+ Start new
+                project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Focus (keyboard)</p><button class="c-cta-btn c-cta-btn--focus">+ Start new
+                project</button>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Disabled</p><button class="c-cta-btn c-cta-btn--disabled" disabled
+                aria-disabled="true">+ Start new project</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- /2.4 -->
+
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════
          SECTION 3 — USAGE RULES
-         ═══════════════════════════════════════════════════════════ -->
-    <section id="usage" class="ds-section">
-      <h2 class="ds-section-title">3 — Usage Rules</h2>
-      <p class="ds-section-desc">Do / Don't — applies to both themes unless noted.</p>
+         ═══════════════════════════════════════════════ -->
+    <section id="usage" class="ds-section" aria-labelledby="usage-title">
+      <h2 id="usage-title" class="ds-section__title">3 — Usage Rules</h2>
+      <p class="ds-section__desc">Do / Don't — applies to both themes unless otherwise noted.</p>
 
-      <!-- 3.1 Dropdown -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">3.1 · Dropdown Select</h3>
+        <h3 class="ds-subsection__title">3.1 · Dropdown Select</h3>
         <table class="usage-table">
+          <caption>Dropdown Select — usage rules</caption>
           <thead>
             <tr>
-              <th class="do-col" style="width:50%">✓ Do</th>
-              <th class="dont-col" style="width:50%">✗ Don't</th>
+              <th scope="col" class="do-col col-half">✓ Do</th>
+              <th scope="col" class="dont-col col-half">✗ Don't</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Use <code>rgba(255,255,255,0.05)</code> (dark) or <code>rgba(0,0,0,0.10)</code> (light) for the
-                default trigger border. These match the <code>--border</code> / <code>--border-strong</code> tokens.
-              </td>
-              <td>Hardcode a solid gray border — it will look wrong on the glass sidebar in both themes.</td>
+              <td>Use <code>--t-border-strong</code> for the default trigger border. This token resolves correctly in
+                both themes automatically.</td>
+              <td>Hardcode a border color — it will look wrong against the glass sidebar background in both themes.</td>
             </tr>
             <tr>
-              <td>Show a <code>✓</code> checkmark on the selected item. Make the row background
-                <code>rgba(255,255,255,0.05)</code> (dark) or <code>rgba(0,0,0,0.05)</code> (light).</td>
-              <td>Rely on bold font alone to indicate selection — it reduces clarity for colorblind users.</td>
+              <td>Show a <code>✓</code> checkmark on the selected item with <code>--t-item-hover-bg</code> as the row
+                background.</td>
+              <td>Rely on font weight alone to indicate selection — insufficient for accessibility.</td>
             </tr>
             <tr>
-              <td>Always include the green "+ Create new project" CTA link at the panel bottom using the themed primary
-                green.</td>
-              <td>Use a full-width solid button inside the panel — it visually competes with the main CTA in the
-                sidebar.</td>
+              <td>Always include the "+ Create new project" link at the bottom of the panel, colored with
+                <code>--t-primary</code>.</td>
+              <td>Use a full-width solid button inside the panel — it visually competes with the main sidebar CTA.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- 3.2 Popup Menu -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">3.2 · Popup Menu</h3>
+        <h3 class="ds-subsection__title">3.2 · Popup Menu</h3>
         <table class="usage-table">
+          <caption>Popup Menu — usage rules</caption>
           <thead>
             <tr>
-              <th class="do-col" style="width:50%">✓ Do</th>
-              <th class="dont-col" style="width:50%">✗ Don't</th>
+              <th scope="col" class="do-col col-half">✓ Do</th>
+              <th scope="col" class="dont-col col-half">✗ Don't</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Use <code>--popover</code> as the panel background: <code>#0f1930</code> (dark) or
-                <code>#ffffff</code> (light) — distinct from the sidebar glass.</td>
-              <td>Use the sidebar glass background for the popup — it merges visually into the sidebar and loses depth.
-              </td>
+              <td>Use <code>--t-popover</code> as the panel background — it visually separates from the sidebar glass
+                and creates depth.</td>
+              <td>Use the sidebar glass background for the popup — it merges into the sidebar and loses layering.</td>
             </tr>
             <tr>
-              <td>Menu items: 12px / 500-weight text. Default: <code>#a3aac4</code> (dark) or <code>#374151</code>
-                (light). Hover: <code>#dee5ff</code> / <code>#111827</code>.</td>
-              <td>Use bright white text at rest in dark mode — it creates no hierarchy between default and active
-                states.</td>
+              <td>Item text: 12px / 500. Default: <code>--t-muted-fg</code>. On hover: <code>--t-foreground</code>.</td>
+              <td>Use pure white text at rest in dark mode — no hierarchy between default and active states.</td>
             </tr>
             <tr>
-              <td>Separate sections (User · Workspace · Settings · Actions) with 1px dividers using
-                <code>rgba(255,255,255,0.05)</code> / <code>rgba(0,0,0,0.07)</code>.</td>
-              <td>Use opaque dividers or padding-only gaps — the subtle transparency keeps the glass aesthetic intact.
-              </td>
+              <td>Separate sections with <code>--t-border</code> (1px). The token ensures the correct transparency in
+                both themes.</td>
+              <td>Use opaque dividers or padding alone — it breaks the glass aesthetic.</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- 3.3 Mode Switch -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">3.3 · Work / Studio / Govern Switch</h3>
+        <h3 class="ds-subsection__title">3.3 · Work / Studio / Govern Switch</h3>
         <table class="usage-table">
+          <caption>Mode Switch — usage rules</caption>
           <thead>
             <tr>
-              <th class="do-col" style="width:50%">✓ Do</th>
-              <th class="dont-col" style="width:50%">✗ Don't</th>
+              <th scope="col" class="do-col col-half">✓ Do</th>
+              <th scope="col" class="dont-col col-half">✗ Don't</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Active pill: <code>rgba(255,255,255,0.15)</code> (dark) or <code>#ffffff</code> (light), always with a
-                subtle shadow. The floating pill is the Sendplex IA navigation signature.</td>
-              <td>Use a colored (green/brand) background for the active pill — it's too loud for a mode selector.</td>
+              <td>Active pill: <code>--t-switch-active-bg</code> + <code>--t-switch-active-shadow</code>. The floating
+                pill is Sendplex's AI navigation signature.</td>
+              <td>Use a colored (green/brand) background for the active pill — too loud for a mode selector.</td>
             </tr>
             <tr>
-              <td>Container track: <code>rgba(255,255,255,0.05)</code> / <code>rgba(0,0,0,0.05)</code> + matching
-                border. Keep the track visible but subtle.</td>
-              <td>Remove the container track — the three segments need a visual anchor to read as a group.</td>
+              <td>Track container: <code>--t-switch-bg</code> + <code>--t-switch-border</code>. The track stays visible
+                but subtle.</td>
+              <td>Remove the track container — the three segments need a visual anchor to read as a group.</td>
             </tr>
             <tr>
               <td>Animate the active pill indicator with Framer Motion <code>layoutId</code> +
-                <code>spring(380, 30)</code> for a fluid slide between segments.</td>
+                <code>spring(380, 30)</code>.</td>
               <td>Use CSS transitions alone for the indicator — instant snap or simple fade breaks the physicality of
                 the component.</td>
             </tr>
@@ -3023,63 +3112,68 @@
         </table>
       </div>
 
-      <!-- 3.4 CTA Button -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection-title">3.4 · CTA Button</h3>
+        <h3 class="ds-subsection__title">3.4 · CTA Button</h3>
         <table class="usage-table">
+          <caption>CTA Button — usage rules</caption>
           <thead>
             <tr>
-              <th class="do-col" style="width:50%">✓ Do</th>
-              <th class="dont-col" style="width:50%">✗ Don't</th>
+              <th scope="col" class="do-col col-half">✓ Do</th>
+              <th scope="col" class="dont-col col-half">✗ Don't</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Both modes: use <code>#22c55e → #34d399</code> gradient. Text: dark green (<code>#0d2b1a</code>) in
-                dark mode, white (<code>#ffffff</code>) in light mode.</td>
-              <td>Use different gradients or hardcoded text colors outside of the design system specs.</td>
+              <td>Same gradient in both themes: <code>#22c55e → #34d399</code>. Text: <code>--t-cta-text</code>
+                (resolves to dark green or white depending on the theme).</td>
+              <td>Hardcode <code>#000000</code> or <code>#ffffff</code> as the text color — always reference
+                <code>--t-cta-text</code>.</td>
             </tr>
             <tr>
-              <td>Show this button <strong>only</strong> when <code>workspace.projects.length === 0</code>. Replace with
-                the dropdown trigger once projects exist.</td>
-              <td>Show both CTA and dropdown simultaneously — they represent mutually exclusive workspace states.</td>
+              <td>Show this button <strong>only</strong> when <code>workspace.projects.length === 0</code>. Replace it
+                with the dropdown as soon as a project exists.</td>
+              <td>Display CTA and dropdown simultaneously — they represent mutually exclusive workspace states.</td>
             </tr>
             <tr>
-              <td>Text: 12px / 600-weight / <code>font-family: var(--font-body)</code> with a <code>+</code> icon at
-                13px. Radius: <code>--radius-xl</code>.</td>
-              <td>Use <code>#ffffff</code> or <code>#000000</code> hardcoded as text color — always reference
-                <code>--color-on-primary</code> or the themed token.</td>
+              <td>Text: 12px / 600 / <code>--font-body</code> with a <code>+</code> icon. Radius:
+                <code>--radius-xl</code>.</td>
+              <td>Adjust the radius or typography to make the button "stand out more" — hierarchy comes from the
+                gradient, not the size.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-    <!-- Footer -->
-    <footer style="text-align:center;padding:2rem 0;border-top:1px solid var(--t-border-strong);margin-top:2rem">
-      <p style="font-size:0.75rem;color:var(--t-outline)">
-        Sendplex Design System · Dark theme from <code
-          style="font-size:0.6875rem;padding:0.125rem 0.375rem;background:var(--t-surface-container);border-radius:var(--radius-sm);color:var(--t-foreground)">tokens.css :root</code>
-        · Light theme from <code
-          style="font-size:0.6875rem;padding:0.125rem 0.375rem;background:var(--t-surface-container);border-radius:var(--radius-sm);color:var(--t-foreground)">Tailwind dark: patterns</code>
+    <footer class="ds-footer">
+      <p class="ds-footer__text">
+        Sendplex Design System · Dark: <code>:root</code> · Light: <code>[data-theme="light"]</code> · Tokens: W3C DTCG
       </p>
     </footer>
 
   </div><!-- /ds-page -->
 
-  <!-- ═══════════════════════════════════════════════════════════
-       MINIMAL JS — theme toggle only (class toggle on <html>)
-       ═══════════════════════════════════════════════════════════ -->
   <script>
+
+    function copyPrompt() {
+      const pre = document.getElementById('ds-add-prompt');
+      const btn = document.querySelector('.ds-prompt-banner__copy-btn');
+      navigator.clipboard.writeText(pre.textContent).then(() => {
+        btn.textContent = '✓ Copied';
+        btn.classList.add('ds-prompt-banner__copy-btn--copied');
+        setTimeout(() => {
+          btn.textContent = 'Copy prompt';
+          btn.classList.remove('ds-prompt-banner__copy-btn--copied');
+        }, 2000);
+      });
+    }
+
     function setTheme(mode) {
       document.documentElement.setAttribute('data-theme', mode);
-      document.getElementById('btn-dark').classList.toggle('active', mode === 'dark');
-      document.getElementById('btn-light').classList.toggle('active', mode === 'light');
-      document.getElementById('ds-components').setAttribute('data-active', mode);
-      // page bg transition
-      document.body.style.transition = 'background 0.25s ease, color 0.25s ease';
+      document.getElementById('btn-dark').setAttribute('aria-pressed', String(mode === 'dark'));
+      document.getElementById('btn-light').setAttribute('aria-pressed', String(mode === 'light'));
     }
-    // Init: default dark
+    // Init
     setTheme('dark');
   </script>
 
