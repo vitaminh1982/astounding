@@ -149,9 +149,8 @@ export default function ProjectSwitcher({ onNavigate }: ProjectSwitcherProps) {
                 setIsOpen(false);
                 onNavigate('projects');
               }}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-green-500 to-emerald-400 hover:from-green-400 hover:to-emerald-300 text-[#0d2b1a] text-xs font-semibold transition-all shadow-md shadow-green-500/25"
+              className="w-full flex items-center justify-center py-2 text-xs font-semibold text-primary-green hover:underline transition-colors focus:outline-none"
             >
-              <Plus size={13} strokeWidth={2.5} />
               Create new project
             </button>
           </div>
