@@ -58,83 +58,9 @@ export const useWorkspace = () => {
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
-const DEFAULT_ACCOUNTS: Account[] = [
-  {
-    id: 'personal',
-    email: 'oppieadirono@gmail.com',
-    orgName: 'Personal',
-    avatar: '👤',
-    workspaces: [
-      {
-        id: 'oppie-ws',
-        name: "Oppie's Workspace",
-        icon: 'user',
-        plan: 'Free',
-        members: '1 member',
-        projects: [
-          { id: 'oppie-proj-1', name: 'Personal Portfolio', deliveryTrackLabel: 'Kanban Flow', emoji: '🎨', color: 'violet', image: '/assets/images/projects/project-portfolio.jpg' },
-        ],
-      },
-      {
-        id: 'family-ws',
-        name: 'Family',
-        icon: 'briefcase',
-        plan: 'Pro',
-        members: '4 members',
-        projects: [
-          { id: 'fam-proj-1', name: 'Family Photo Archive', deliveryTrackLabel: 'Milestone Track', emoji: '📸', color: 'amber', image: '/assets/images/projects/project-family-photos.jpg' },
-          { id: 'fam-proj-2', name: 'Budget Tracking', deliveryTrackLabel: 'Kanban Flow', emoji: '💰', color: 'emerald', image: '/assets/images/projects/project-budget.jpg' },
-        ],
-      },
-    ],
-  },
-  {
-    id: 'miranki',
-    email: 'oppie.adirono@miranki.com',
-    orgName: 'Miranki',
-    avatar: '💼',
-    workspaces: [
-      {
-        id: 'miranki-ws',
-        name: 'Miranki workspace',
-        icon: 'briefcase',
-        plan: 'Starter plan',
-        members: '3 members',
-        projects: [
-          { id: 'mir-proj-1', name: 'AI Integration Roadmap', deliveryTrackLabel: 'Sprint Track', emoji: '🤖', color: 'sky', image: '/assets/images/projects/project-roadmap.jpg' },
-          { id: 'mir-proj-2', name: 'Market Analysis', deliveryTrackLabel: 'Kanban Flow', emoji: '📊', color: 'indigo', image: '/assets/images/projects/project- marketanalysis.jpg' },
-        ],
-      },
-      {
-        id: 'second-ws',
-        name: 'Second workspace',
-        icon: 'default',
-        plan: 'Free',
-        members: '1 member',
-        projects: [],
-      },
-    ],
-  },
-  {
-    id: 'acme',
-    email: 'oppie@acme.com',
-    orgName: 'Acme Corp',
-    avatar: '🏢',
-    workspaces: [
-      {
-        id: 'acme-ws',
-        name: 'Acme workspace',
-        icon: 'acme',
-        plan: 'Enterprise plan',
-        members: '12 members',
-        projects: [
-          { id: 'acme-proj-1', name: 'SSO Security Configuration', deliveryTrackLabel: 'Milestone Track', emoji: '🔐', color: 'rose', image: '/assets/images/projects/project-sso-security.jpg' },
-          { id: 'acme-proj-2', name: 'SOC2 Audit Preparation', deliveryTrackLabel: 'Sprint Track', emoji: '📋', color: 'teal', image: '/assets/images/projects/project-soc2-audit.jpg' },
-        ],
-      },
-    ],
-  },
-];
+import defaultAccountsRaw from '../data/default_accounts.json';
+const DEFAULT_ACCOUNTS = defaultAccountsRaw as Account[];
+
 
 // ─── Provider ─────────────────────────────────────────────────────────────────
 
