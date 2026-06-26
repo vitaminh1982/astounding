@@ -6,14 +6,14 @@ import { useWorkspace } from '../../context/WorkspaceContext';
 import { toast } from 'react-hot-toast';
 
 const COLOR_MAP: Record<string, { bg: string; text: string }> = {
-  violet:  { bg: 'bg-violet-100 dark:bg-violet-900/30',  text: 'text-violet-700 dark:text-violet-400'  },
-  amber:   { bg: 'bg-amber-100 dark:bg-amber-900/30',   text: 'text-amber-700 dark:text-amber-400'   },
+  violet: { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-700 dark:text-violet-400' },
+  amber: { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-400' },
   emerald: { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-700 dark:text-emerald-400' },
-  sky:     { bg: 'bg-sky-100 dark:bg-sky-900/30',     text: 'text-sky-700 dark:text-sky-400'     },
-  indigo:  { bg: 'bg-indigo-100 dark:bg-indigo-900/30',  text: 'text-indigo-700 dark:text-indigo-400'  },
-  rose:    { bg: 'bg-rose-100 dark:bg-rose-900/30',    text: 'text-rose-700 dark:text-rose-400'    },
-  teal:    { bg: 'bg-teal-100 dark:bg-teal-900/30',    text: 'text-teal-700 dark:text-teal-400'    },
-  blue:    { bg: 'bg-blue-100 dark:bg-blue-900/30',    text: 'text-blue-700 dark:text-blue-400'    },
+  sky: { bg: 'bg-sky-100 dark:bg-sky-900/30', text: 'text-sky-700 dark:text-sky-400' },
+  indigo: { bg: 'bg-indigo-100 dark:bg-indigo-900/30', text: 'text-indigo-700 dark:text-indigo-400' },
+  rose: { bg: 'bg-rose-100 dark:bg-rose-900/30', text: 'text-rose-700 dark:text-rose-400' },
+  teal: { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-400' },
+  blue: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-400' },
 };
 
 interface ProjectTemplate {
@@ -109,11 +109,11 @@ const TEMPLATES: ProjectTemplate[] = [
 export default function ProjectListView() {
   const { dispatch } = useProjectCreation();
   const { activeWorkspace, activeProject, switchProject, addProjectToWorkspace } = useWorkspace();
-  
+
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  
+
   const templatesSectionRef = useRef<HTMLDivElement>(null);
 
   function handleNewProject() {
@@ -148,8 +148,8 @@ export default function ProjectListView() {
   const categories = ['All', 'Work', 'Personal', 'Finance', 'Marketing', 'Team'];
 
   const filteredTemplates = TEMPLATES.filter(tpl => {
-    const matchesSearch = tpl.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          tpl.description.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = tpl.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      tpl.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'All' || tpl.category === selectedCategory.toLowerCase();
     return matchesSearch && matchesCategory;
   });
@@ -158,7 +158,7 @@ export default function ProjectListView() {
   const standardTemplates = filteredTemplates.filter(t => !t.featured);
 
   return (
-    <div className="space-y-6">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -218,11 +218,10 @@ export default function ProjectListView() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleOpenProject(project.id)}
-                    className={`bg-white dark:bg-gray-800 rounded-xl border p-4 cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group ${
-                      isActive
+                    className={`bg-white dark:bg-gray-800 rounded-xl border p-4 cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group ${isActive
                         ? 'border-blue-500 dark:border-teal-500 ring-1 ring-blue-500 dark:ring-teal-500'
                         : 'border-gray-200 dark:border-gray-700'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
@@ -303,11 +302,10 @@ export default function ProjectListView() {
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${
-                      isActive
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${isActive
                         ? 'bg-primary-green/10 text-primary-green border-primary-green'
                         : 'bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
-                    }`}
+                      }`}
                   >
                     {category}
                   </button>
@@ -328,11 +326,10 @@ export default function ProjectListView() {
                     >
                       <div className="flex-1 pr-4 space-y-2">
                         <div className="flex items-center gap-2">
-                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold tracking-wider uppercase ${
-                            template.id === 'tpl-plan-quarter'
+                          <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold tracking-wider uppercase ${template.id === 'tpl-plan-quarter'
                               ? 'bg-red-100 dark:bg-red-950/30 text-red-600 dark:text-red-400'
                               : 'bg-amber-100 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400'
-                          }`}>
+                            }`}>
                             {template.id === 'tpl-plan-quarter' ? '🎯 Featured' : '🚀 Popular'}
                           </span>
                         </div>
