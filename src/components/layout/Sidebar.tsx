@@ -1,7 +1,6 @@
 import React, { useState, useContext, memo, useEffect, useRef, useCallback } from 'react';
 import ProjectSwitcher from '../workspace/ProjectSwitcher';
 import {
-  LayoutDashboard,
   Bot,
   ShieldAlert,
   FileText,
@@ -629,14 +628,6 @@ const Sidebar = ({
 
           {workspaceMode === 'work' && (
             <>
-              <MenuItem
-                icon={LayoutDashboard}
-                label={t('sidebar.dashboard')}
-                page="dashboard"
-                currentPage={currentPage}
-                onClick={handleNav}
-                isExpanded={isExpanded}
-              />
               <MenuItem
                 icon={MessageSquare}
                 label={t('sidebar.discussions')}
