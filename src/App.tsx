@@ -37,6 +37,7 @@ const ResourceManagementPage = lazy(() => import('./components/orchestration/Res
 const CollaborationPage = lazy(() => import('./components/orchestration/CollaborationPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const PlexPage = lazy(() => import('./pages/PlexPage'));
+const WorkspaceAgentsPage = lazy(() => import('./pages/WorkspaceAgentsPage'));
 
 // Types
 export type Page = 
@@ -65,6 +66,7 @@ export type Page =
   | 'resource-management'
   | 'collaboration'
   | 'plex'
+  | 'workspace-agents'
   | 'paramètres';
 
 interface NavItem {
@@ -145,6 +147,7 @@ const PAGE_CONFIG: Record<Page, PageConfig> = {
   collaboration: { component: CollaborationPage, requiresNavigation: true },
   paramètres: { component: SettingsPage },
   plex: { component: PlexPage },
+  'workspace-agents': { component: WorkspaceAgentsPage },
 };
 
 // Loading component

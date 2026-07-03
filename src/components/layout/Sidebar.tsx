@@ -664,6 +664,14 @@ const Sidebar = ({
             onClick={handleNav}
             isExpanded={isExpanded}
           />
+          <MenuItem
+            icon={Bot}
+            label="Agents"
+            page="workspace-agents"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
         </div>
       </div>
 
