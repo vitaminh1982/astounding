@@ -1,6 +1,7 @@
 import React, { useState, useContext, memo, useEffect, useRef, useCallback } from 'react';
 import ProjectSwitcher from '../workspace/ProjectSwitcher';
 import {
+  LayoutDashboard,
   Bot,
   ShieldAlert,
   FileText,
@@ -46,6 +47,7 @@ import {
   CheckCheck,
   AlertCircle,
   Inbox,
+  Code2,
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -126,6 +128,7 @@ const SubMenuItem = memo(({
   currentPage,
   onClick,
   isExpanded,
+  hasNotification,
 }: {
   icon: React.ElementType;
   label: string;
@@ -133,6 +136,7 @@ const SubMenuItem = memo(({
   currentPage: Page;
   onClick: (page: Page) => void;
   isExpanded: boolean;
+  hasNotification?: boolean;
 }) => {
   const isActive = page && currentPage === page;
   return (
@@ -147,7 +151,12 @@ const SubMenuItem = memo(({
         !isExpanded && 'lg:justify-center',
       ].join(' ')}
     >
-      <Icon size={16} strokeWidth={1.75} className="flex-shrink-0" />
+      <div className="relative flex-shrink-0">
+        <Icon size={16} strokeWidth={1.75} className="flex-shrink-0" />
+        {hasNotification && (
+          <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#888888]" />
+        )}
+      </div>
       <span className={`truncate ${isExpanded ? '' : 'lg:hidden'}`}>{label}</span>
     </button>
   );
@@ -229,6 +238,11 @@ const Sidebar = ({
   const [isAgentsMenuOpen, setIsAgentsMenuOpen] = useState(false);
   const [isGovernanceMenuOpen, setIsGovernanceMenuOpen] = useState(false);
   const [isOrchestrationMenuOpen, setIsOrchestrationMenuOpen] = useState(false);
+  const [isDevMenuOpen, setIsDevMenuOpen] = useState(true);
+  
+  const [lastWorkPage, setLastWorkPage] = useState<Page>('projects');
+  const [lastStudioPage, setLastStudioPage] = useState<Page>('agents');
+  const [lastGovernPage, setLastGovernPage] = useState<Page>('orchestration');
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [popoverView, setPopoverView] = useState<'main' | 'appearance' | 'help' | 'accounts' | 'notifications'>('main');
@@ -378,6 +392,7 @@ const Sidebar = ({
     ) {
       setWorkspaceMode('studio');
       setIsAgentsMenuOpen(true);
+      setLastStudioPage(currentPage);
     } else if (
       isAnyGovernanceActive() ||
       isAnyOrchestrationActive() ||
@@ -397,19 +412,24 @@ const Sidebar = ({
       setWorkspaceMode('govern');
       if (isAnyGovernanceActive()) setIsGovernanceMenuOpen(true);
       if (isAnyOrchestrationActive()) setIsOrchestrationMenuOpen(true);
+      setLastGovernPage(currentPage);
     } else {
       setWorkspaceMode('work');
+      if (['dashboard', 'conversations', 'clients'].includes(currentPage)) {
+        setIsDevMenuOpen(true);
+      }
+      setLastWorkPage(currentPage);
     }
   }, [currentPage]);
 
   const handleWorkspaceModeChange = (mode: 'work' | 'studio' | 'govern') => {
     setWorkspaceMode(mode);
     if (mode === 'work') {
-      handleNav('dashboard');
+      handleNav(lastWorkPage);
     } else if (mode === 'studio') {
-      handleNav('agents');
+      handleNav(lastStudioPage);
     } else if (mode === 'govern') {
-      handleNav('orchestration');
+      handleNav(lastGovernPage);
     }
   };
 
@@ -462,7 +482,7 @@ const Sidebar = ({
       {/* Desktop Expanded Header & Mobile Header */}
       <div className={`flex items-center h-14 px-3 flex-shrink-0 justify-between ${isExpanded ? 'w-full' : 'lg:hidden w-full'}`}>
         <button
-          onClick={() => handleNav('dashboard')}
+          onClick={() => handleNav('projects')}
           className="flex items-center focus:outline-none hover:opacity-80 transition-opacity"
           aria-label="Go to dashboard"
         >
@@ -504,9 +524,10 @@ const Sidebar = ({
       </div>
 
       {/* ── Toggle (Work / Studio / Govern) ─────────────────────── */}
-      <div className={`p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative ${isExpanded ? 'flex' : 'flex lg:hidden'
+      <div id="mode-selector" className={`p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative ${isExpanded ? 'flex' : 'flex lg:hidden'
         }`}>
         <button
+          id="workspace-mode-work-btn"
           onClick={() => handleWorkspaceModeChange('work')}
           className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work'
               ? 'text-black dark:text-white font-semibold'
@@ -525,6 +546,7 @@ const Sidebar = ({
           )}
         </button>
         <button
+          id="workspace-mode-studio-btn"
           onClick={() => handleWorkspaceModeChange('studio')}
           className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio'
               ? 'text-black dark:text-white font-semibold'
@@ -543,6 +565,7 @@ const Sidebar = ({
           )}
         </button>
         <button
+          id="workspace-mode-govern-btn"
           onClick={() => handleWorkspaceModeChange('govern')}
           className={`flex-1 py-1.5 px-2 flex items-center justify-center gap-1.5 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern'
               ? 'text-black dark:text-white font-semibold'
@@ -562,9 +585,10 @@ const Sidebar = ({
         </button>
       </div>
 
-      <div className={`flex-col gap-1.5 p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl items-center flex-shrink-0 relative ${isExpanded ? 'hidden' : 'hidden lg:flex'
+      <div id="mode-selector-collapsed" className={`flex-col gap-1.5 p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl items-center flex-shrink-0 relative ${isExpanded ? 'hidden' : 'hidden lg:flex'
         }`}>
         <button
+          id="workspace-mode-work-btn-collapsed"
           onClick={() => handleWorkspaceModeChange('work')}
           className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${workspaceMode === 'work'
               ? 'text-black dark:text-white'
@@ -582,6 +606,7 @@ const Sidebar = ({
           )}
         </button>
         <button
+          id="workspace-mode-studio-btn-collapsed"
           onClick={() => handleWorkspaceModeChange('studio')}
           className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${workspaceMode === 'studio'
               ? 'text-black dark:text-white'
@@ -599,6 +624,7 @@ const Sidebar = ({
           )}
         </button>
         <button
+          id="workspace-mode-govern-btn-collapsed"
           onClick={() => handleWorkspaceModeChange('govern')}
           className={`w-8 h-8 flex items-center justify-center rounded-lg transition-colors duration-200 relative z-10 ${workspaceMode === 'govern'
               ? 'text-black dark:text-white'
@@ -620,41 +646,22 @@ const Sidebar = ({
       {/* ── Project Switcher ─────────────────────────────────────── */}
       <div className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
         <ProjectSwitcher onNavigate={handleNav} />
+        <div className="mt-1">
+          <MenuItem
+            icon={Briefcase}
+            label="Workspace"
+            page="projects"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
+        </div>
       </div>
 
       {/* ── Navigation ───────────────────────────────────────────── */}
       <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
         <nav className="space-y-0.5">
 
-          {workspaceMode === 'work' && (
-            <>
-              <MenuItem
-                icon={MessageSquare}
-                label={t('sidebar.discussions')}
-                page="conversations"
-                currentPage={currentPage}
-                onClick={handleNav}
-                isExpanded={isExpanded}
-                hasNotification
-              />
-              <MenuItem
-                icon={Users}
-                label={t('sidebar.customers')}
-                page="clients"
-                currentPage={currentPage}
-                onClick={handleNav}
-                isExpanded={isExpanded}
-              />
-              <MenuItem
-                icon={Briefcase}
-                label={t('sidebar.projects')}
-                page="projects"
-                currentPage={currentPage}
-                onClick={handleNav}
-                isExpanded={isExpanded}
-              />
-            </>
-          )}
 
           {workspaceMode === 'studio' && (
             <CollapsibleSection
@@ -726,6 +733,45 @@ const Sidebar = ({
           )}
         </nav>
       </div>
+
+      {workspaceMode === 'work' && (
+        <div className="px-2 pb-2 flex-shrink-0">
+          <CollapsibleSection
+            icon={Code2}
+            label="Dev"
+            isOpen={isDevMenuOpen}
+            isActive={['dashboard', 'conversations', 'clients'].includes(currentPage)}
+            isExpanded={isExpanded}
+            onToggle={() => setIsDevMenuOpen(prev => !prev)}
+          >
+            <SubMenuItem
+              icon={LayoutDashboard}
+              label={t('sidebar.dashboard')}
+              page="dashboard"
+              currentPage={currentPage}
+              onClick={handleNav}
+              isExpanded={isExpanded}
+            />
+            <SubMenuItem
+              icon={MessageSquare}
+              label={t('sidebar.discussions')}
+              page="conversations"
+              currentPage={currentPage}
+              onClick={handleNav}
+              isExpanded={isExpanded}
+              hasNotification
+            />
+            <SubMenuItem
+              icon={Users}
+              label={t('sidebar.customers')}
+              page="clients"
+              currentPage={currentPage}
+              onClick={handleNav}
+              isExpanded={isExpanded}
+            />
+          </CollapsibleSection>
+        </div>
+      )}
 
       {/* ── Footer / Profile Pill ────────────────────────────────── */}
       <div className="p-2 border-t border-black/5 dark:border-white/5 flex-shrink-0 relative">
