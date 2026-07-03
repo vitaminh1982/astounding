@@ -64,11 +64,13 @@ export interface IntakeChatMessage {
   content: string;
   sender: 'user' | 'assistant';
   timestamp: Date;
+  stepIndex?: number;
 }
 
 export interface IntakeData {
   projectName: string;
   goal: string;
+  projectType: string;
   targetAudience: string;
   deliverables: string;
   timeline: string;

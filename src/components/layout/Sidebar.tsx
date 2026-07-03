@@ -650,7 +650,7 @@ const Sidebar = ({
         <div className="mt-1">
           <MenuItem
             icon={Briefcase}
-            label="Workspace"
+            label="Projects"
             page="projects"
             currentPage={currentPage}
             onClick={handleNav}

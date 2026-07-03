@@ -4,6 +4,7 @@ import { Plus, FolderOpen, ArrowRight } from 'lucide-react';
 import { useProjectCreation } from '../../context/ProjectCreationContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
 import { toast } from 'react-hot-toast';
+import PlexCreateModal from './PlexCreateModal';
 
 const COLOR_MAP: Record<string, { bg: string; text: string }> = {
   violet: { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-700 dark:text-violet-400' },
@@ -182,7 +183,7 @@ export default function ProjectListView() {
                 );
               })}
 
-              {/* dashed card */}
+              {/* dashed card — opens Plex modal */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -341,81 +342,15 @@ export default function ProjectListView() {
         </div>
       )}
 
-      {/* Modal */}
+      {/* Plex-style Create Project Modal */}
       {isCreateModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white dark:bg-gray-800 rounded-2xl max-w-xl w-full p-6 relative border border-gray-100 dark:border-gray-700 shadow-2xl"
-          >
-            <button
-              onClick={() => setIsCreateModalOpen(false)}
-              className="absolute top-4 right-4 p-1.5 rounded-full text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-            >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-
-            <div className="mb-6">
-              <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Create a new project</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Choose how you'd like to start.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div
-                onClick={() => {
-                  setIsCreateModalOpen(false);
-                  handleNewProject();
-                }}
-                className="border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-teal-500 hover:bg-blue-50/5 dark:hover:bg-teal-950/5 rounded-2xl p-5 cursor-pointer flex flex-col items-center text-center space-y-3 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center text-gray-400 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors border border-gray-100 dark:border-gray-600">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
-                    Blank project
-                  </h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Start from scratch and set up your own structure.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                onClick={scrollToTemplates}
-                className="border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-teal-500 hover:bg-blue-50/5 dark:hover:bg-teal-950/5 rounded-2xl p-5 cursor-pointer flex flex-col items-center text-center space-y-3 transition-all group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-gray-50 dark:bg-gray-700/50 flex items-center justify-center text-gray-400 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors border border-gray-100 dark:border-gray-600">
-                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
-                    From a template
-                  </h3>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    Browse ready-made setups and launch faster.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500 border-t border-gray-100 dark:border-gray-700 pt-4">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span>You can change the structure anytime.</span>
-            </div>
-          </motion.div>
-        </div>
+        <PlexCreateModal
+          onClose={() => setIsCreateModalOpen(false)}
+          onConfirm={(prompt) => {
+            setIsCreateModalOpen(false);
+            handleNewProject();
+          }}
+        />
       )}
     </div>
   );

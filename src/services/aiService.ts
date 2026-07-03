@@ -14,31 +14,31 @@ import {
 const INTAKE_QUESTIONS = [
   {
     key: 'projectName',
-    question: "Let's get started! What would you like to name this project? A good name helps everyone align on the vision.",
+    question: "Let's kick things off — what's the **name** of your project?",
   },
   {
     key: 'goal',
-    question: "Great name! Now, what's the high-level goal of this project? What problem are you solving or what outcome do you want to achieve?",
+    question: "What is the **goal** of this project? What problem does it solve or what outcome do you want to achieve?",
   },
   {
-    key: 'targetAudience',
-    question: "Who are the primary users or target audience for this project? Understanding your audience helps us tailor the approach.",
+    key: 'projectType',
+    question: 'What **type of project** is this? (e.g. Software/App, Marketing Campaign, Design/Creative, Research/Analysis, Operations/Process)',
   },
   {
     key: 'deliverables',
-    question: "What are the key deliverables or success criteria? What does 'done' look like for this project?",
+    question: "What are the **key deliverables**? What does \"done\" look like for this project?",
   },
   {
     key: 'timeline',
-    question: "What's your timeline expectation? Are we talking weeks, months, or quarters? Any hard deadlines I should know about?",
+    question: "What's the **target timeline or deadline**? Any hard dates or milestones I should know about?",
   },
   {
     key: 'teamSize',
-    question: "How large is your team, and what existing constraints should I consider? (e.g., available skills, tools already in use, regulatory requirements)",
+    question: 'How large is the **team** working on this project?',
   },
   {
-    key: 'budget',
-    question: "Finally, what's the budget range or resource limit for this project? This helps me calibrate the delivery approach and team composition.",
+    key: 'targetAudience',
+    question: 'Who is the **target audience or end user** for this project? Who will benefit most from it?',
   },
 ];
 

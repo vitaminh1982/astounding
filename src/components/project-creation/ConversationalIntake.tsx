@@ -1,90 +1,218 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, Sparkles, ArrowLeft } from 'lucide-react';
+import { Send, Sparkles, ArrowLeft, Check } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 import { useProjectCreation } from '../../context/ProjectCreationContext';
-import { getNextIntakeQuestion, generateProjectFromIntake } from '../../services/aiService';
+import { generateProjectFromIntake } from '../../services/aiService';
 import { IntakeData } from '../../types/project-creation';
 
-const TOTAL_QUESTIONS = 7;
+// ─── Step definitions ────────────────────────────────────────────────────────
+
+interface StepChip {
+  label: string;
+  value: string;
+}
+
+interface IntakeStep {
+  key: string;
+  question: string;
+  subtext?: string;
+  inputType: 'text' | 'chips' | 'multiChips';
+  chips?: StepChip[];
+  placeholder?: string;
+}
+
+const INTAKE_STEPS: IntakeStep[] = [
+  {
+    key: 'projectName',
+    question: "Let's kick things off — what's the **name** of your project?",
+    subtext: 'A clear, memorable name helps everyone stay aligned.',
+    inputType: 'text',
+    placeholder: 'e.g. Q4 Product Launch, Brand Redesign…',
+  },
+  {
+    key: 'goal',
+    question: "What is the **goal** of this project? What problem does it solve?",
+    subtext: 'Describe the outcome you want to achieve and why it matters.',
+    inputType: 'text',
+    placeholder: 'e.g. Increase user retention by 30% through a redesigned onboarding flow…',
+  },
+  {
+    key: 'projectType',
+    question: 'What **type of project** is this?',
+    subtext: 'Pick the category that best describes the work.',
+    inputType: 'chips',
+    chips: [
+      { label: 'Software / App', value: 'Software / App' },
+      { label: 'Marketing Campaign', value: 'Marketing Campaign' },
+      { label: 'Design / Creative', value: 'Design / Creative' },
+      { label: 'Research / Analysis', value: 'Research / Analysis' },
+      { label: 'Operations / Process', value: 'Operations / Process' },
+      { label: 'Other', value: 'Other' },
+    ],
+  },
+  {
+    key: 'deliverables',
+    question: 'What are the **key deliverables** for this project?',
+    subtext: 'List the main outputs — what does "done" look like?',
+    inputType: 'text',
+    placeholder: 'e.g. MVP app, pitch deck, 3 research reports…',
+  },
+  {
+    key: 'timeline',
+    question: "What's the **target timeline or deadline**?",
+    subtext: 'Include any hard dates or milestones if you have them.',
+    inputType: 'text',
+    placeholder: 'e.g. End of Q3, within 6 weeks, by September 15…',
+  },
+  {
+    key: 'teamSize',
+    question: 'How large is the **team** working on this?',
+    inputType: 'chips',
+    chips: [
+      { label: 'Just me (1)', value: 'Just me (1)' },
+      { label: '2–3 people', value: '2–3 people' },
+      { label: '4–7 people', value: '4–7 people' },
+      { label: '8–15 people', value: '8–15 people' },
+      { label: '15+ people', value: '15+ people' },
+    ],
+  },
+  {
+    key: 'targetAudience',
+    question: 'Who is the **target audience or end user** for this project?',
+    subtext: 'Who will benefit most from it?',
+    inputType: 'text',
+    placeholder: 'e.g. B2B SaaS companies, internal ops teams, Gen Z consumers…',
+  },
+];
+
+const TOTAL_STEPS = INTAKE_STEPS.length;
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function renderMarkdown(text: string) {
+  // Bold **text**
+  return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+}
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function ConversationalIntake() {
   const { state, dispatch } = useProjectCreation();
+
+  // Local chip-selection state per step (cleared when step advances)
+  const [selectedChip, setSelectedChip] = useState<string | null>(null);
   const [inputValue, setInputValue] = useState('');
-  const [canStart, setCanStart] = useState(false);
+
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const didInitRef = useRef(false);
 
+  // Auto-scroll
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [state.intakeMessages, state.isAssistantTyping]);
 
+  // Ask first question on mount if no messages yet — guarded against Strict Mode double-fire
   useEffect(() => {
-    if (state.intakeMessages.length === 0) {
-      askNextQuestion();
+    if (state.intakeMessages.length === 0 && !didInitRef.current) {
+      didInitRef.current = true;
+      askQuestion(0);
     }
   }, []);
 
-  useEffect(() => {
-    setCanStart(state.intakeStep >= 5);
-  }, [state.intakeStep]);
+  // ── Ask a specific step's question ────────────────────────────────────────
+  function askQuestion(stepIndex: number) {
+    if (stepIndex >= TOTAL_STEPS) return;
 
-  async function askNextQuestion() {
     dispatch({ type: 'SET_ASSISTANT_TYPING', payload: true });
 
-    const result = await getNextIntakeQuestion(state.intakeStep);
-
-    dispatch({ type: 'SET_ASSISTANT_TYPING', payload: false });
-
-    if (result) {
-      dispatch({
-        type: 'ADD_INTAKE_MESSAGE',
-        payload: { id: uuidv4(), content: result.question, sender: 'assistant', timestamp: new Date() },
-      });
-    }
-  }
-
-  async function handleSend() {
-    const trimmed = inputValue.trim();
-    if (!trimmed) return;
-
-    dispatch({
-      type: 'ADD_INTAKE_MESSAGE',
-      payload: { id: uuidv4(), content: trimmed, sender: 'user', timestamp: new Date() },
-    });
-
-    const keys = ['projectName', 'goal', 'targetAudience', 'deliverables', 'timeline', 'teamSize', 'budget'];
-    const currentKey = keys[state.intakeStep] || 'constraints';
-    dispatch({ type: 'SET_INTAKE_DATA', payload: { key: currentKey, value: trimmed } });
-    dispatch({ type: 'INCREMENT_INTAKE_STEP' });
-
-    setInputValue('');
-
-    if (state.intakeStep + 1 < TOTAL_QUESTIONS) {
-      setTimeout(() => askNextQuestion(), 300);
-    } else {
-      dispatch({ type: 'SET_ASSISTANT_TYPING', payload: true });
-      await new Promise((r) => setTimeout(r, 1000));
+    // Simulate a short typing delay
+    setTimeout(() => {
       dispatch({ type: 'SET_ASSISTANT_TYPING', payload: false });
       dispatch({
         type: 'ADD_INTAKE_MESSAGE',
         payload: {
           id: uuidv4(),
-          content: "Excellent! I have all the information I need. I'll now configure your project with the optimal delivery track, assign specialized AI agents, and set up your phase pipeline. Click **Start Project** when you're ready!",
+          content: INTAKE_STEPS[stepIndex].question,
           sender: 'assistant',
           timestamp: new Date(),
+          // attach chips metadata via step index so the bubble can render them
+          stepIndex,
         },
       });
-      setCanStart(true);
+    }, 600 + Math.random() * 400);
+  }
+
+  // ── Submit an answer (text or chip) ───────────────────────────────────────
+  function submitAnswer(value: string) {
+    const step = INTAKE_STEPS[state.intakeStep];
+    if (!value.trim()) return;
+
+    // Add user bubble
+    dispatch({
+      type: 'ADD_INTAKE_MESSAGE',
+      payload: { id: uuidv4(), content: value, sender: 'user', timestamp: new Date() },
+    });
+
+    // Persist value
+    dispatch({ type: 'SET_INTAKE_DATA', payload: { key: step.key, value } });
+    dispatch({ type: 'INCREMENT_INTAKE_STEP' });
+
+    // Reset local state
+    setInputValue('');
+    setSelectedChip(null);
+
+    const nextStep = state.intakeStep + 1;
+
+    if (nextStep < TOTAL_STEPS) {
+      askQuestion(nextStep);
+    } else {
+      // All questions answered
+      dispatch({ type: 'SET_ASSISTANT_TYPING', payload: true });
+      setTimeout(() => {
+        dispatch({ type: 'SET_ASSISTANT_TYPING', payload: false });
+        dispatch({
+          type: 'ADD_INTAKE_MESSAGE',
+          payload: {
+            id: uuidv4(),
+            content:
+              "**Perfect!** I have everything I need. I'm now configuring your project — setting up the delivery track, assigning AI agents, and building your phase pipeline. Click **Start Project** when you're ready!",
+            sender: 'assistant',
+            timestamp: new Date(),
+          },
+        });
+      }, 900);
     }
   }
 
+  // Text input handlers
+  function handleSend() {
+    submitAnswer(inputValue);
+  }
+
+  function handleKeyDown(e: React.KeyboardEvent) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  }
+
+  // Chip handler
+  function handleChipClick(chip: StepChip) {
+    setSelectedChip(chip.value);
+    // Auto-submit chips immediately (single select)
+    setTimeout(() => submitAnswer(chip.value), 120);
+  }
+
+  // Start project
   async function handleStartProject() {
     dispatch({ type: 'SET_VIEW', payload: 'initializing' });
 
     const intake: IntakeData = {
       projectName: (state.intakeData.projectName as string) || 'Untitled Project',
       goal: (state.intakeData.goal as string) || '',
+      projectType: (state.intakeData.projectType as string) || '',
       targetAudience: (state.intakeData.targetAudience as string) || '',
       deliverables: (state.intakeData.deliverables as string) || '',
       timeline: (state.intakeData.timeline as string) || '',
@@ -99,12 +227,10 @@ export default function ConversationalIntake() {
     dispatch({ type: 'SET_VIEW', payload: 'workspace' });
   }
 
-  function handleKeyDown(e: React.KeyboardEvent) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  }
+  const currentStep = INTAKE_STEPS[state.intakeStep];
+  const isComplete = state.intakeStep >= TOTAL_STEPS;
+  const isChipStep = currentStep?.inputType === 'chips';
+  const progress = Math.min(state.intakeStep, TOTAL_STEPS) / TOTAL_STEPS;
 
   return (
     <div className="flex flex-col h-[calc(100vh-10rem)] max-w-3xl mx-auto">
@@ -112,82 +238,124 @@ export default function ConversationalIntake() {
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={() => dispatch({ type: 'SET_VIEW', payload: 'list' })}
-          className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+          className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors text-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </button>
         <div className="flex items-center gap-3">
-          <div className="text-sm text-gray-500 dark:text-gray-400">
-            {Math.min(state.intakeStep, TOTAL_QUESTIONS)} of ~{TOTAL_QUESTIONS} questions
-          </div>
-          <div className="w-32 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+          <span className="text-xs text-gray-500 dark:text-gray-400">
+            {Math.min(state.intakeStep, TOTAL_STEPS)} / {TOTAL_STEPS}
+          </span>
+          <div className="w-32 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 to-teal-500 rounded-full"
+              className="h-full bg-gradient-to-r from-indigo-500 to-teal-500 rounded-full"
               initial={{ width: 0 }}
-              animate={{ width: `${(Math.min(state.intakeStep, TOTAL_QUESTIONS) / TOTAL_QUESTIONS) * 100}%` }}
+              animate={{ width: `${progress * 100}%` }}
               transition={{ duration: 0.5 }}
             />
           </div>
         </div>
       </div>
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto space-y-4 pr-2 pb-4">
-        <AnimatePresence>
-          {state.intakeMessages.map((msg) => (
-            <motion.div
-              key={msg.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
-              className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div
-                className={`max-w-[80%] rounded-2xl px-5 py-3 ${
-                  msg.sender === 'user'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200'
-                }`}
+      {/* Messages thread */}
+      <div className="flex-1 overflow-y-auto space-y-4 pr-1 pb-4">
+        <AnimatePresence initial={false}>
+          {state.intakeMessages.map((msg) => {
+            const isAssistant = msg.sender === 'assistant';
+            // Which step config belongs to this message (if assistant)
+            const msgStepIndex = msg.stepIndex;
+            const msgStep = msgStepIndex !== undefined ? INTAKE_STEPS[msgStepIndex] : undefined;
+            // Chips should only show on the LAST assistant message + current step hasn't been answered yet
+            const isLastAssistantMsg =
+              isAssistant &&
+              state.intakeMessages[state.intakeMessages.length - 1]?.id === msg.id;
+            const showChips =
+              isLastAssistantMsg &&
+              msgStep?.inputType === 'chips' &&
+              !isComplete &&
+              state.intakeStep === msgStepIndex;
+
+            return (
+              <motion.div
+                key={msg.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.28 }}
+                className={`flex ${isAssistant ? 'justify-start' : 'justify-end'}`}
               >
-                {msg.sender === 'assistant' && (
-                  <div className="flex items-center gap-2 mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-500" />
-                    <span className="text-xs font-medium text-blue-500">Project Architect</span>
+                <div className="max-w-[82%] space-y-2">
+                  {/* Bubble */}
+                  <div
+                    className={`rounded-2xl px-5 py-3 ${
+                      isAssistant
+                        ? 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200'
+                        : 'bg-indigo-600 dark:bg-teal-600 text-white'
+                    }`}
+                  >
+                    {isAssistant && (
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <Sparkles className="w-3 h-3 text-indigo-500 dark:text-teal-400" />
+                        <span className="text-[10px] font-semibold text-indigo-500 dark:text-teal-400 uppercase tracking-wide">
+                          Plex
+                        </span>
+                      </div>
+                    )}
+                    <p
+                      className="text-sm leading-relaxed"
+                      dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }}
+                    />
+                    {isAssistant && msgStep?.subtext && isLastAssistantMsg && (
+                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{msgStep.subtext}</p>
+                    )}
                   </div>
-                )}
-                <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
-              </div>
-            </motion.div>
-          ))}
+
+                  {/* Chip options below last assistant message */}
+                  {showChips && msgStep?.chips && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 }}
+                      className="flex flex-wrap gap-2 pt-1 pl-1"
+                    >
+                      {msgStep.chips.map((chip) => (
+                        <button
+                          key={chip.value}
+                          onClick={() => handleChipClick(chip)}
+                          disabled={!!selectedChip}
+                          className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                            selectedChip === chip.value
+                              ? 'bg-indigo-600 dark:bg-teal-600 border-indigo-600 dark:border-teal-600 text-white shadow-md'
+                              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-indigo-400 dark:hover:border-teal-500 hover:text-indigo-600 dark:hover:text-teal-400'
+                          } disabled:pointer-events-none`}
+                        >
+                          {selectedChip === chip.value && <Check size={11} />}
+                          {chip.label}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </AnimatePresence>
 
         {/* Typing indicator */}
         {state.isAssistantTyping && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex justify-start"
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
             <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-3">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+                <Sparkles className="w-3 h-3 text-indigo-500 dark:text-teal-400" />
                 <div className="flex gap-1">
-                  <motion.span
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1.2, repeat: Infinity, delay: 0 }}
-                    className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
-                  />
-                  <motion.span
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 }}
-                    className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
-                  />
-                  <motion.span
-                    animate={{ opacity: [0.3, 1, 0.3] }}
-                    transition={{ duration: 1.2, repeat: Infinity, delay: 0.4 }}
-                    className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
-                  />
+                  {[0, 0.2, 0.4].map((delay, i) => (
+                    <motion.span
+                      key={i}
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ duration: 1.2, repeat: Infinity, delay }}
+                      className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
+                    />
+                  ))}
                 </div>
               </div>
             </div>
@@ -199,38 +367,46 @@ export default function ConversationalIntake() {
 
       {/* Input area */}
       <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-2">
-        <div className="flex items-center gap-3">
-          <input
-            ref={inputRef}
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder={state.intakeStep >= TOTAL_QUESTIONS ? "Intake complete!" : "Type your answer..."}
-            disabled={state.isAssistantTyping || state.intakeStep >= TOTAL_QUESTIONS}
-            className="flex-1 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 disabled:opacity-50 transition-all"
-          />
-          {state.intakeStep < TOTAL_QUESTIONS ? (
+        {isComplete ? (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex justify-center"
+          >
+            <button
+              onClick={handleStartProject}
+              className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-500 text-white font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/20 text-sm"
+            >
+              🚀 Start Project
+            </button>
+          </motion.div>
+        ) : isChipStep ? (
+          // Chip-only step: hide text input, hint user to pick above
+          <p className="text-center text-xs text-gray-400 dark:text-gray-500">
+            Select an option above to continue
+          </p>
+        ) : (
+          <div className="flex items-center gap-3">
+            <input
+              ref={inputRef}
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={currentStep?.placeholder || 'Type your answer…'}
+              disabled={state.isAssistantTyping || isComplete}
+              className="flex-1 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 disabled:opacity-50 transition-all text-sm"
+            />
             <button
               onClick={handleSend}
               disabled={!inputValue.trim() || state.isAssistantTyping}
-              className="p-3 rounded-xl bg-blue-600 dark:bg-teal-600 text-white hover:bg-blue-700 dark:hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-              aria-label="Send message"
+              className="p-3 rounded-xl bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              aria-label="Send"
             >
               <Send className="w-5 h-5" />
             </button>
-          ) : (
-            <motion.button
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              onClick={handleStartProject}
-              disabled={!canStart}
-              className="px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-teal-600 text-white font-semibold hover:from-blue-700 hover:to-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-lg shadow-blue-500/20"
-            >
-              Start Project
-            </motion.button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
