@@ -48,6 +48,7 @@ import {
   AlertCircle,
   Inbox,
   Code2,
+  BotMessageSquare,
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -651,6 +652,14 @@ const Sidebar = ({
             icon={Briefcase}
             label="Workspace"
             page="projects"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
+          <MenuItem
+            icon={BotMessageSquare}
+            label="Plex"
+            page="plex"
             currentPage={currentPage}
             onClick={handleNav}
             isExpanded={isExpanded}

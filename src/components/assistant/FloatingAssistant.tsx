@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Bot, X, Minus, Maximize2, MessageSquare } from 'lucide-react';
+import { Bot, BotMessageSquare, X, Minus, Maximize2, MessageSquare } from 'lucide-react';
 import { TRANSITIONS } from '../../utils/animations';
 import AssistantChat from './AssistantChat';
 import { useLocation } from 'react-router-dom';
@@ -74,7 +74,7 @@ export default function FloatingAssistant() {
           `}
           aria-label="Open Sendplex Assistant"
         >
-          <Bot className="w-5 h-5 md:w-6 md:h-6 transition-colors" />
+          <BotMessageSquare className="w-5 h-5 md:w-6 md:h-6 transition-colors" />
           <span className="absolute -top-2 -right-2 px-2 py-0.5 text-[10px] md:text-xs font-bold bg-orange-500 dark:bg-orange-400 text-white rounded-full pointer-events-none shadow-sm transition-colors">
             BETA
           </span>

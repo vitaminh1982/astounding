@@ -36,6 +36,7 @@ const MonitoringAnalyticsPage = lazy(() => import('./components/orchestration/Mo
 const ResourceManagementPage = lazy(() => import('./components/orchestration/ResourceManagementPage'));
 const CollaborationPage = lazy(() => import('./components/orchestration/CollaborationPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const PlexPage = lazy(() => import('./pages/PlexPage'));
 
 // Types
 export type Page = 
@@ -63,6 +64,7 @@ export type Page =
   | 'monitoring-analytics'
   | 'resource-management'
   | 'collaboration'
+  | 'plex'
   | 'paramètres';
 
 interface NavItem {
@@ -142,6 +144,7 @@ const PAGE_CONFIG: Record<Page, PageConfig> = {
   'resource-management': { component: ResourceManagementPage, requiresNavigation: true },
   collaboration: { component: CollaborationPage, requiresNavigation: true },
   paramètres: { component: SettingsPage },
+  plex: { component: PlexPage },
 };
 
 // Loading component
@@ -186,18 +189,16 @@ function AppContent() {
     []
   );
 
-  // Render current page dynamically
   const CurrentPageComponent = useMemo(() => {
-    const pageConfig = PAGE_CONFIG[currentPage];
-    if (!pageConfig) {
-      return PAGE_CONFIG.dashboard.component;
-    }
-
+    const pageConfig = PAGE_CONFIG[currentPage] || PAGE_CONFIG.dashboard;
     const Component = pageConfig.component;
-    const props = pageConfig.requiresNavigation ? { onNavigate: handleNavigation } : {};
+    const props = {
+      ...(pageConfig.requiresNavigation ? { onNavigate: handleNavigation } : {}),
+      ...(currentPage === 'plex' ? { isSidebarExpanded } : {})
+    };
 
     return <Component {...props} />;
-  }, [currentPage, handleNavigation]);
+  }, [currentPage, handleNavigation, isSidebarExpanded]);
 
   return (
     <div className="flex h-screen overflow-hidden app-bg transition-colors">
