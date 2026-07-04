@@ -647,32 +647,34 @@ const Sidebar = ({
       {/* ── Project Switcher ─────────────────────────────────────── */}
       <div className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
         <ProjectSwitcher onNavigate={handleNav} />
-        <div className="mt-1">
-          <MenuItem
-            icon={Briefcase}
-            label="Projects"
-            page="projects"
-            currentPage={currentPage}
-            onClick={handleNav}
-            isExpanded={isExpanded}
-          />
-          <MenuItem
-            icon={BotMessageSquare}
-            label="Plex"
-            page="plex"
-            currentPage={currentPage}
-            onClick={handleNav}
-            isExpanded={isExpanded}
-          />
-          <MenuItem
-            icon={Bot}
-            label="Agents"
-            page="workspace-agents"
-            currentPage={currentPage}
-            onClick={handleNav}
-            isExpanded={isExpanded}
-          />
-        </div>
+        {workspaceMode === 'work' && (
+          <div className="mt-1">
+            <MenuItem
+              icon={Briefcase}
+              label="Projects"
+              page="projects"
+              currentPage={currentPage}
+              onClick={handleNav}
+              isExpanded={isExpanded}
+            />
+            <MenuItem
+              icon={Sparkles}
+              label="Plex"
+              page="plex"
+              currentPage={currentPage}
+              onClick={handleNav}
+              isExpanded={isExpanded}
+            />
+            <MenuItem
+              icon={Bot}
+              label="Agents"
+              page="workspace-agents"
+              currentPage={currentPage}
+              onClick={handleNav}
+              isExpanded={isExpanded}
+            />
+          </div>
+        )}
       </div>
 
       {/* ── Navigation ───────────────────────────────────────────── */}

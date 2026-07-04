@@ -12,7 +12,7 @@ import {
   BookOpen,
   ChevronLeft,
   Presentation,
-  BotMessageSquare,
+  Sparkles,
 } from 'lucide-react';
 
 interface Message {
@@ -203,7 +203,7 @@ export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpand
               <div key={msg.id} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.type === 'assistant' && (
                   <div className="w-8 h-8 rounded-full bg-indigo-600 dark:bg-teal-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5 text-white shadow-sm">
-                    <BotMessageSquare size={16} />
+                    <Sparkles size={16} />
                   </div>
                 )}
                 <div
@@ -220,7 +220,7 @@ export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpand
             {isTyping && (
               <div className="flex justify-start items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-indigo-600 dark:bg-teal-600 flex items-center justify-center flex-shrink-0 text-white">
-                  <BotMessageSquare size={16} />
+                  <Sparkles size={16} />
                 </div>
                 <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg rounded-bl-none px-4 py-3 flex gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style={{ animationDelay: '0ms' }} />
@@ -236,7 +236,7 @@ export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpand
           <div className="flex-1 flex flex-col items-center justify-center px-6">
             {/* Greeting */}
             <div className="flex items-center gap-3 mb-8">
-              <BotMessageSquare size={38} className="text-indigo-600 dark:text-teal-500" />
+              <Sparkles size={38} className="text-indigo-600 dark:text-teal-500" />
               <h1 className="text-4xl font-semibold text-gray-950 dark:text-gray-50 tracking-tight">
                 {getGreeting()}, Oppie
               </h1>
