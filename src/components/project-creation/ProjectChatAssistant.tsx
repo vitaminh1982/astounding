@@ -35,19 +35,16 @@ export default function ProjectChatAssistant({
     reset,
   } = useProjectAgent();
 
-  // Scroll to bottom on new messages
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping, isSummaryReady]);
 
-  // Focus input when opened
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 150);
     }
   }, [isOpen]);
 
-  // Handle confirmed state
   useEffect(() => {
     if (isConfirmed && !creationTriggered) {
       setCreationTriggered(true);
@@ -126,27 +123,27 @@ export default function ProjectChatAssistant({
               leaveFrom="opacity-100 scale-100 translate-y-0"
               leaveTo="opacity-0 scale-95 translate-y-4"
             >
-              <Dialog.Panel className="w-full max-w-2xl bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden" style={{ maxHeight: '85vh' }}>
+              <Dialog.Panel className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden" style={{ maxHeight: '85vh' }}>
                 {/* Header */}
-                <div className="flex items-center gap-3 px-5 py-4 border-b border-slate-700 flex-shrink-0">
-                  <div className="w-9 h-9 bg-indigo-500/20 border border-indigo-500/30 rounded-xl flex items-center justify-center">
-                    <Sparkles size={16} className="text-indigo-400" />
+                <div className="flex items-center gap-3 px-5 py-4 border-b border-gray-200 dark:border-slate-700 flex-shrink-0">
+                  <div className="w-9 h-9 bg-indigo-100 dark:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30 rounded-xl flex items-center justify-center">
+                    <Sparkles size={16} className="text-indigo-500 dark:text-indigo-400" />
                   </div>
                   <div className="flex-1">
-                    <Dialog.Title className="text-sm font-semibold text-white">Project Setup Assistant</Dialog.Title>
-                    <p className="text-xs text-slate-500">Conversational AI · No forms required</p>
+                    <Dialog.Title className="text-sm font-semibold text-gray-900 dark:text-white">Project Setup Assistant</Dialog.Title>
+                    <p className="text-xs text-gray-500 dark:text-slate-500">Conversational AI · No forms required</p>
                   </div>
                   <div className="flex items-center gap-1">
                     <button
                       onClick={handleReset}
                       title="Start over"
-                      className="p-2 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"
+                      className="p-2 text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                     >
                       <RotateCcw size={15} />
                     </button>
                     <button
                       onClick={onClose}
-                      className="p-2 text-slate-500 hover:text-slate-300 hover:bg-slate-800 rounded-lg transition-colors"
+                      className="p-2 text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
                     >
                       <X size={16} />
                     </button>
@@ -157,7 +154,7 @@ export default function ProjectChatAssistant({
                 <ProgressBar step={currentStep} />
 
                 {/* Message list */}
-                <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 min-h-0">
+                <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 min-h-0 bg-gray-50 dark:bg-slate-950/40">
                   <AnimatePresence initial={false}>
                     {messages.map((msg) => {
                       const isLastAssistant =
@@ -211,11 +208,11 @@ export default function ProjectChatAssistant({
                         animate={{ opacity: 1, scale: 1 }}
                         className="flex flex-col items-center gap-3 py-6"
                       >
-                        <div className="w-12 h-12 bg-green-500/20 border border-green-500/30 rounded-full flex items-center justify-center">
-                          <Bot size={20} className="text-green-400" />
+                        <div className="w-12 h-12 bg-green-100 dark:bg-green-500/20 border border-green-300 dark:border-green-500/30 rounded-full flex items-center justify-center">
+                          <Bot size={20} className="text-green-600 dark:text-green-400" />
                         </div>
-                        <p className="text-sm font-semibold text-white">Creating your project...</p>
-                        <p className="text-xs text-slate-500">Setting up your workspace</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-white">Creating your project...</p>
+                        <p className="text-xs text-gray-500 dark:text-slate-500">Setting up your workspace</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -224,7 +221,7 @@ export default function ProjectChatAssistant({
                 </div>
 
                 {/* Input bar */}
-                <div className="px-5 py-4 border-t border-slate-700 flex-shrink-0">
+                <div className="px-5 py-4 border-t border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-900 flex-shrink-0">
                   <div className="flex gap-3 items-center">
                     <input
                       ref={inputRef}
@@ -233,7 +230,7 @@ export default function ProjectChatAssistant({
                       onKeyDown={handleKeyDown}
                       placeholder={inputPlaceholder}
                       disabled={isTyping || isConfirmed}
-                      className="flex-1 bg-slate-800 border border-slate-700 focus:border-indigo-500 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none transition-colors disabled:opacity-50"
+                      className="flex-1 bg-gray-100 dark:bg-slate-800 border border-gray-200 dark:border-slate-700 focus:border-indigo-500 dark:focus:border-indigo-500 rounded-xl px-4 py-2.5 text-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none transition-colors disabled:opacity-50"
                     />
                     <button
                       onClick={handleSend}
@@ -243,7 +240,7 @@ export default function ProjectChatAssistant({
                       <Send size={16} />
                     </button>
                   </div>
-                  <p className="text-xs text-slate-600 mt-2 text-center">
+                  <p className="text-xs text-gray-400 dark:text-slate-600 mt-2 text-center">
                     Press Enter to send · Type naturally · Say "change the timeline" to revise
                   </p>
                 </div>
@@ -276,7 +273,7 @@ const STEP_WEIGHTS: Record<string, number> = {
 function ProgressBar({ step }: { step: string }) {
   const pct = Math.round(((STEP_WEIGHTS[step] ?? 1) / 10) * 100);
   return (
-    <div className="h-0.5 bg-slate-800 flex-shrink-0">
+    <div className="h-0.5 bg-gray-200 dark:bg-slate-800 flex-shrink-0">
       <motion.div
         className="h-full bg-indigo-500"
         initial={{ width: 0 }}

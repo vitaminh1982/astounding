@@ -20,10 +20,10 @@ interface ProjectSummaryCardProps {
 }
 
 const COMPLEXITY_COLORS: Record<string, string> = {
-  low: 'bg-green-500/20 text-green-400 border-green-500/30',
-  medium: 'bg-amber-500/20 text-amber-400 border-amber-500/30',
-  high: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-  enterprise: 'bg-red-500/20 text-red-400 border-red-500/30',
+  low: 'bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400 border-green-300 dark:border-green-500/30',
+  medium: 'bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-400 border-amber-300 dark:border-amber-500/30',
+  high: 'bg-orange-100 dark:bg-orange-500/20 text-orange-700 dark:text-orange-400 border-orange-300 dark:border-orange-500/30',
+  enterprise: 'bg-red-100 dark:bg-red-500/20 text-red-700 dark:text-red-400 border-red-300 dark:border-red-500/30',
 };
 
 const TRACK_LABELS: Record<string, string> = {
@@ -55,19 +55,19 @@ export default function ProjectSummaryCard({ data, onConfirm, onRevise }: Projec
       initial={{ opacity: 0, scale: 0.97, y: 12 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="bg-slate-900 border border-indigo-500/40 rounded-2xl p-5 w-full"
+      className="bg-white dark:bg-slate-900 border border-indigo-300 dark:border-indigo-500/40 rounded-2xl p-5 w-full shadow-sm dark:shadow-none"
     >
       {/* Header */}
       <div className="flex items-center gap-2 mb-4">
-        <div className="w-7 h-7 bg-indigo-500/20 rounded-lg flex items-center justify-center">
-          <CheckCircle2 size={14} className="text-indigo-400" />
+        <div className="w-7 h-7 bg-indigo-100 dark:bg-indigo-500/20 rounded-lg flex items-center justify-center">
+          <CheckCircle2 size={14} className="text-indigo-500 dark:text-indigo-400" />
         </div>
-        <p className="text-sm font-semibold text-white">Project Summary</p>
+        <p className="text-sm font-semibold text-gray-900 dark:text-white">Project Summary</p>
         <div className="ml-auto flex items-center gap-2">
           <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${complexityClass}`}>
             {data.complexity ?? 'medium'} complexity
           </span>
-          <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-slate-700 text-slate-300 border border-slate-600">
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-slate-300 border border-gray-200 dark:border-slate-600">
             {trackLabel}
           </span>
         </div>
@@ -77,10 +77,10 @@ export default function ProjectSummaryCard({ data, onConfirm, onRevise }: Projec
       <div className="grid grid-cols-1 gap-2 mb-5">
         {fields.map((f) => (
           <div key={f.label} className="flex gap-3 items-start">
-            <div className="text-slate-500 mt-0.5 flex-shrink-0">{f.icon}</div>
+            <div className="text-gray-400 dark:text-slate-500 mt-0.5 flex-shrink-0">{f.icon}</div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-slate-500 leading-none mb-0.5">{f.label}</p>
-              <p className="text-sm text-slate-200 leading-snug">{f.value}</p>
+              <p className="text-xs text-gray-400 dark:text-slate-500 leading-none mb-0.5">{f.label}</p>
+              <p className="text-sm text-gray-800 dark:text-slate-200 leading-snug">{f.value}</p>
             </div>
           </div>
         ))}
@@ -90,7 +90,7 @@ export default function ProjectSummaryCard({ data, onConfirm, onRevise }: Projec
       <div className="flex gap-3">
         <button
           onClick={onRevise}
-          className="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white rounded-xl px-4 py-2.5 text-sm font-medium transition-colors"
+          className="flex-1 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-slate-300 hover:text-gray-900 dark:hover:text-white rounded-xl px-4 py-2.5 text-sm font-medium transition-colors"
         >
           Revise Details
         </button>

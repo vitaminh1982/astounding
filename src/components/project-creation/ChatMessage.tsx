@@ -30,13 +30,13 @@ export default function ChatMessage({ message, onQuickReply }: ChatMessageProps)
         className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
           isUser
             ? 'bg-indigo-600'
-            : 'bg-indigo-500/20 border border-indigo-500/30'
+            : 'bg-indigo-100 dark:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30'
         }`}
       >
         {isUser ? (
           <User size={14} className="text-white" />
         ) : (
-          <Bot size={14} className="text-indigo-400" />
+          <Bot size={14} className="text-indigo-500 dark:text-indigo-400" />
         )}
       </div>
 
@@ -46,7 +46,7 @@ export default function ChatMessage({ message, onQuickReply }: ChatMessageProps)
           className={`px-4 py-2.5 rounded-2xl text-sm leading-relaxed whitespace-pre-wrap ${
             isUser
               ? 'bg-indigo-600 text-white rounded-br-sm'
-              : 'bg-slate-800 border border-slate-700 text-slate-100 rounded-bl-sm'
+              : 'bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-gray-900 dark:text-slate-100 rounded-bl-sm'
           }`}
         >
           {message.content}
@@ -58,7 +58,7 @@ export default function ChatMessage({ message, onQuickReply }: ChatMessageProps)
               <button
                 key={reply}
                 onClick={() => onQuickReply?.(reply)}
-                className="px-3 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 border border-slate-600 hover:border-indigo-500 text-slate-300 hover:text-white rounded-full transition-all"
+                className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700 border border-gray-200 dark:border-slate-600 hover:border-indigo-400 dark:hover:border-indigo-500 text-gray-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-white rounded-full transition-all"
               >
                 {reply}
               </button>
