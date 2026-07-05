@@ -350,10 +350,10 @@ function OverviewTab() {
           })}
         </div>
       </div>
-      <div className="bg-indigo-50 dark:bg-gradient-to-r dark:from-indigo-900/40 dark:to-purple-900/40 border border-indigo-200 dark:border-indigo-500/30 rounded-xl p-4">
-        <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">Vision</p>
-        <p className="text-sm text-gray-700 dark:text-slate-300 leading-relaxed italic">"{MIRANKI_PROJECT.vision}"</p>
-      </div>
+        <div className="bg-indigo-50 dark:bg-gradient-to-r dark:from-indigo-950/60 dark:to-purple-950/60 border border-indigo-200 dark:border-indigo-400/40 rounded-xl p-4">
+          <p className="text-xs font-semibold text-indigo-600 dark:text-indigo-300 uppercase tracking-wider mb-2">Vision</p>
+          <p className="text-sm text-gray-700 dark:text-slate-100 leading-relaxed italic">"{MIRANKI_PROJECT.vision}"</p>
+        </div>
     </div>
   );
 }
