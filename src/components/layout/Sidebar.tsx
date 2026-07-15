@@ -524,8 +524,12 @@ const Sidebar = ({
         </button>
       </div>
 
+      <div id="workspace-selector" className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
+        <NavWorkspaceSwitcher />
+      </div>
+
       {/* ── Toggle (Work / Studio / Govern) ─────────────────────── */}
-      <div id="mode-selector" className={`p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative ${isExpanded ? 'flex' : 'flex lg:hidden'
+      <div id="mode-switcher" className={`p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative ${isExpanded ? 'flex' : 'flex lg:hidden'
         }`}>
         <button
           id="workspace-mode-work-btn"
@@ -586,7 +590,7 @@ const Sidebar = ({
         </button>
       </div>
 
-      <div id="mode-selector-collapsed" className={`flex-col gap-1.5 p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl items-center flex-shrink-0 relative ${isExpanded ? 'hidden' : 'hidden lg:flex'
+      <div id="mode-switcher-collapsed" className={`flex-col gap-1.5 p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl items-center flex-shrink-0 relative ${isExpanded ? 'hidden' : 'hidden lg:flex'
         }`}>
         <button
           id="workspace-mode-work-btn-collapsed"
@@ -644,38 +648,35 @@ const Sidebar = ({
         </button>
       </div>
 
-      {/* ── Workspace Switcher ────────────────────────────────────── */}
-      <div className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
-        <NavWorkspaceSwitcher />
-        {workspaceMode === 'work' && (
-          <div className="mt-1">
-            <MenuItem
-              icon={Briefcase}
-              label="Projects"
-              page="projects"
-              currentPage={currentPage}
-              onClick={handleNav}
-              isExpanded={isExpanded}
-            />
-            <MenuItem
-              icon={Sparkles}
-              label="Plex"
-              page="plex"
-              currentPage={currentPage}
-              onClick={handleNav}
-              isExpanded={isExpanded}
-            />
-            <MenuItem
-              icon={Bot}
-              label="Agents"
-              page="workspace-agents"
-              currentPage={currentPage}
-              onClick={handleNav}
-              isExpanded={isExpanded}
-            />
-          </div>
-        )}
-      </div>
+      {/* ── Work mode nav items ────────────────────────────────────── */}
+      {workspaceMode === 'work' && (
+        <div className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
+          <MenuItem
+            icon={Briefcase}
+            label="Projects"
+            page="projects"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
+          <MenuItem
+            icon={Sparkles}
+            label="Plex"
+            page="plex"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
+          <MenuItem
+            icon={Bot}
+            label="Agents"
+            page="workspace-agents"
+            currentPage={currentPage}
+            onClick={handleNav}
+            isExpanded={isExpanded}
+          />
+        </div>
+      )}
 
       {/* ── Navigation ───────────────────────────────────────────── */}
       <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
