@@ -1,5 +1,5 @@
 import React, { useState, useContext, memo, useEffect, useRef, useCallback } from 'react';
-import ProjectSwitcher from '../workspace/ProjectSwitcher';
+import NavWorkspaceSwitcher from '../workspace/NavWorkspaceSwitcher';
 import {
   LayoutDashboard,
   Bot,
@@ -644,9 +644,9 @@ const Sidebar = ({
         </button>
       </div>
 
-      {/* ── Project Switcher ─────────────────────────────────────── */}
+      {/* ── Workspace Switcher ────────────────────────────────────── */}
       <div className={`px-2 mb-2 flex-shrink-0 ${isExpanded ? 'block' : 'hidden lg:hidden'}`}>
-        <ProjectSwitcher onNavigate={handleNav} />
+        <NavWorkspaceSwitcher />
         {workspaceMode === 'work' && (
           <div className="mt-1">
             <MenuItem
