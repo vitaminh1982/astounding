@@ -25,6 +25,8 @@ import {
   Share2,
   Briefcase,
   PanelLeft,
+  PanelLeftClose,
+  PanelLeftOpen,
   Cpu,
   Shield,
   Settings,
@@ -50,7 +52,7 @@ import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface SidebarProps {
   currentPage: Page;
@@ -93,15 +95,18 @@ const SendplexNavItem = memo(({
     <button
       onClick={() => onClick(page)}
       title={label}
-      className={[
-        'w-full flex flex-col items-center gap-1 py-2 px-1 rounded-xl transition-colors focus:outline-none',
-        isActive
-          ? 'bg-white/60 dark:bg-white/10 text-gray-900 dark:text-gray-100 shadow-sm'
-          : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-white/40 dark:hover:bg-white/5',
-      ].join(' ')}
+      className="flex flex-col items-center gap-1.5 py-1.5 px-1 w-full focus:outline-none group/item"
     >
-      <Icon size={18} strokeWidth={1.75} />
-      <span className="text-[9px] font-medium leading-none">{label}</span>
+      <div className={[
+        'w-10 h-10 rounded-full flex items-center justify-center sendplex-nav-bg transition-all duration-200',
+        isActive
+          ? 'shadow-md ring-2 ring-green-300/40 dark:ring-green-700/40 text-gray-900 dark:text-gray-100'
+          : 'text-gray-500 dark:text-gray-400 group-hover/item:text-gray-900 dark:group-hover/item:text-gray-100 group-hover/item:shadow-sm',
+      ].join(' ')}>
+        <Icon size={17} strokeWidth={1.75} />
+      </div>
+      <span className={`text-[9px] font-medium leading-none transition-colors ${isActive ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400 dark:text-gray-500 group-hover/item:text-gray-700 dark:group-hover/item:text-gray-300'
+        }`}>{label}</span>
     </button>
   );
 });
@@ -308,9 +313,8 @@ const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
 
   return (
     <div
-      className={`py-2 hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer group flex items-start gap-2.5 ${
-        !notification.read ? 'font-medium' : ''
-      }`}
+      className={`py-2 hover:bg-black/5 dark:hover:bg-white/5 transition-all cursor-pointer group flex items-start gap-2.5 ${!notification.read ? 'font-medium' : ''
+        }`}
       onClick={onMarkAsRead}
       role="button"
       tabIndex={0}
@@ -323,9 +327,8 @@ const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-start gap-2">
-          <p className={`text-xs text-gray-900 dark:text-gray-100 truncate ${
-            !notification.read ? 'font-semibold' : 'text-gray-500 dark:text-gray-400'
-          }`}>
+          <p className={`text-xs text-gray-900 dark:text-gray-100 truncate ${!notification.read ? 'font-semibold' : 'text-gray-500 dark:text-gray-400'
+            }`}>
             {notification.title}
           </p>
           {!notification.read && (
@@ -597,7 +600,7 @@ const Sidebar = ({
           ══════════════════════════════════════════════════════════ */}
       <div
         id="sendplex-nav"
-        className="w-16 flex-shrink-0 flex flex-col sendplex-nav-bg rounded-2xl"
+        className="w-16 flex-shrink-0 flex flex-col rounded-2xl"
       >
         {/* Logo */}
         <div className="flex items-center justify-center h-14 px-2 flex-shrink-0">
@@ -615,11 +618,18 @@ const Sidebar = ({
         </div>
 
         {/* Nav items */}
-        <div className="flex-1 flex flex-col items-center gap-1 px-2 pt-1 overflow-y-auto">
+        <div className="flex-1 flex flex-col items-center justify-center gap-3 px-2">
           <SendplexNavItem
             icon={LayoutDashboard}
             label="Dashboard"
             page="dashboard"
+            currentPage={currentPage}
+            onClick={handleNav}
+          />
+          <SendplexNavItem
+            icon={FolderOpen}
+            label="Projects"
+            page="projects"
             currentPage={currentPage}
             onClick={handleNav}
           />
@@ -1006,243 +1016,256 @@ const Sidebar = ({
       </div>
 
       {/* ══════════════════════════════════════════════════════════
-          #workspace-nav — main sidebar content, collapses on desktop
+          Right column: workspace-selector (floating) + workspace-nav
           ══════════════════════════════════════════════════════════ */}
-      <div
-        id="workspace-nav"
-        className={[
-          'flex-col w-48 flex-shrink-0 glass-sidebar rounded-2xl overflow-hidden',
-          isExpanded ? 'flex' : 'flex lg:hidden',
-        ].join(' ')}
-      >
-        {/* PanelLeft toggle */}
-        <div className="flex items-center justify-between h-14 px-3 flex-shrink-0">
-          <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 truncate pr-2">
-            {activeWorkspace.name}
-          </span>
+      <div className="flex flex-col w-56 flex-shrink-0 group/navigation">
+
+        {/* workspace-selector — floats above workspace-nav */}
+        <div id="workspace-selector" className="flex-shrink-0 h-14 flex items-center">
           <button
             onClick={onToggleExpand}
-            className="hidden lg:flex p-1.5 rounded-md text-[#888888] dark:text-[#bbbbbb] hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors flex-shrink-0"
-            aria-label="Collapse sidebar"
+            className={[
+              'flex-shrink-0 transition-all duration-300 ease-in-out h-8 overflow-hidden rounded-lg text-[#888888] dark:text-[#bbbbbb] hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white flex items-center justify-center',
+              isExpanded
+                ? 'w-0 opacity-0 mr-0 group-hover/navigation:w-8 group-hover/navigation:opacity-100 group-hover/navigation:mr-1.5'
+                : 'w-8 opacity-100 mr-1.5'
+            ].join(' ')}
+            aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
           >
-            <PanelLeft size={18} strokeWidth={1.75} />
-          </button>
-        </div>
-
-        {/* workspace-selector */}
-        <div id="workspace-selector" className="px-2 mb-2 flex-shrink-0">
-          <NavWorkspaceSwitcher />
-        </div>
-
-        {/* mode-switcher */}
-        <div id="mode-switcher" className="p-1 mx-2 mb-3 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative flex">
-          <button
-            id="workspace-mode-work-btn"
-            onClick={() => handleWorkspaceModeChange('work')}
-            className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
-            title="Work"
-          >
-            <Briefcase size={13} strokeWidth={1.75} />
-            <span className="text-[10px]">Work</span>
-            {workspaceMode === 'work' && (
-              <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+            {isExpanded ? (
+              <PanelLeftClose size={18} strokeWidth={1.75} />
+            ) : (
+              <PanelLeftOpen size={18} strokeWidth={1.75} />
             )}
           </button>
-          <button
-            id="workspace-mode-studio-btn"
-            onClick={() => handleWorkspaceModeChange('studio')}
-            className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
-            title="Studio"
-          >
-            <Cpu size={13} strokeWidth={1.75} />
-            <span className="text-[10px]">Studio</span>
-            {workspaceMode === 'studio' && (
-              <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
-            )}
-          </button>
-          <button
-            id="workspace-mode-govern-btn"
-            onClick={() => handleWorkspaceModeChange('govern')}
-            className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
-            title="Govern"
-          >
-            <Shield size={13} strokeWidth={1.75} />
-            <span className="text-[10px]">Govern</span>
-            {workspaceMode === 'govern' && (
-              <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
-            )}
-          </button>
+          <div className="flex-1 min-w-0">
+            <NavWorkspaceSwitcher />
+          </div>
         </div>
 
-        {/* ── Work mode content ────────────────────────────────────── */}
-        {workspaceMode === 'work' && (
-          <div className="flex-1 overflow-y-auto px-2 space-y-4 pb-2">
-
-            {/* Projects section */}
-            <div>
-              <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
-                {activeWorkspace.name} projects
-              </p>
-              <div className="space-y-0.5">
-                {(activeWorkspace.projects ?? []).map(proj => {
-                  const isActive = activeProject?.id === proj.id;
-                  return (
-                    <button
-                      key={proj.id}
-                      className={[
-                        'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors text-xs',
-                        isActive
-                          ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
-                          : 'text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10',
-                      ].join(' ')}
-                    >
-                      <span className="text-base leading-none">{proj.emoji}</span>
-                      <span className="truncate">{proj.name}</span>
-                    </button>
-                  );
-                })}
-              </div>
-              <button
-                onClick={() => handleNav('projects')}
-                className="w-full flex items-center gap-1.5 px-2.5 py-1.5 mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors text-left"
-              >
-                All projects
-              </button>
-            </div>
-
-            {/* Agents section */}
-            <div>
-              <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
-                {activeWorkspace.name} agents
-              </p>
-              <div className="grid grid-cols-3 gap-1.5 px-1">
-                {WORKSPACE_AGENTS.slice(0, 6).map(agent => (
-                  <button
-                    key={agent.id}
-                    title={agent.name}
-                    onClick={() => handleNav('workspace-agents')}
-                    className="flex flex-col items-center gap-1 p-1.5 rounded-lg hover:bg-white/40 dark:hover:bg-white/10 transition-colors group"
-                  >
-                    <img
-                      src={agent.avatar}
-                      alt={agent.name}
-                      className="w-9 h-9 rounded-full object-cover border border-black/10 dark:border-white/10 group-hover:border-black/20 dark:group-hover:border-white/20 transition-colors"
-                    />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ── Studio mode content ──────────────────────────────────── */}
-        {workspaceMode === 'studio' && (
-          <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
-            <nav className="space-y-0.5">
-              <CollapsibleSection
-                icon={Bot}
-                label={t('sidebar.aiAgents')}
-                isOpen={isAgentsMenuOpen}
-                isActive={isAnyAgentsActive()}
-                isExpanded={true}
-                onToggle={handleAgentsToggle}
-              >
-                {aiAgentsSubmenu.map(item => (
-                  <SubMenuItem
-                    key={item.page}
-                    icon={item.icon}
-                    label={item.label}
-                    page={item.page}
-                    currentPage={currentPage}
-                    onClick={handleNav}
-                    isExpanded={true}
-                  />
-                ))}
-              </CollapsibleSection>
-            </nav>
-          </div>
-        )}
-
-        {/* ── Govern mode content ──────────────────────────────────── */}
-        {workspaceMode === 'govern' && (
-          <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
-            <nav className="space-y-0.5">
-              <CollapsibleSection
-                icon={Network}
-                label="Orchestration"
-                isOpen={isOrchestrationMenuOpen}
-                isActive={isAnyOrchestrationActive()}
-                isExpanded={true}
-                onToggle={handleOrchestrationToggle}
-              >
-                {orchestrationSubmenu.map(item => (
-                  <SubMenuItem
-                    key={item.page}
-                    icon={item.icon}
-                    label={item.label}
-                    page={item.page}
-                    currentPage={currentPage}
-                    onClick={handleNav}
-                    isExpanded={true}
-                  />
-                ))}
-              </CollapsibleSection>
-
-              <CollapsibleSection
-                icon={ShieldAlert}
-                label={t('sidebar.governance')}
-                isOpen={isGovernanceMenuOpen}
-                isActive={isAnyGovernanceActive()}
-                isExpanded={true}
-                onToggle={handleGovernanceToggle}
-              >
-                {governanceSubmenu.map(item => (
-                  <SubMenuItem
-                    key={item.page}
-                    icon={item.icon}
-                    label={item.label}
-                    page={item.page}
-                    currentPage={currentPage}
-                    onClick={handleNav}
-                    isExpanded={true}
-                  />
-                ))}
-              </CollapsibleSection>
-            </nav>
-          </div>
-        )}
-
-        {/* ── Dev section — bottom, work mode only ────────────────── */}
-        {workspaceMode === 'work' && (
-          <div className="px-2 pb-2 flex-shrink-0">
-            <CollapsibleSection
-              icon={Code2}
-              label="Dev"
-              isOpen={isDevMenuOpen}
-              isActive={['conversations', 'clients'].includes(currentPage)}
-              isExpanded={true}
-              onToggle={() => setIsDevMenuOpen(prev => !prev)}
+        {/* workspace-nav */}
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              id="workspace-nav"
+              className="group relative flex flex-col mt-4 flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left"
+              initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
+              animate={{ opacity: 1, x: 0, scaleX: 1 }}
+              exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <SubMenuItem
-                icon={MessageSquare}
-                label={t('sidebar.discussions')}
-                page="conversations"
-                currentPage={currentPage}
-                onClick={handleNav}
-                isExpanded={true}
-                hasNotification
-              />
-              <SubMenuItem
-                icon={Users}
-                label={t('sidebar.customers')}
-                page="clients"
-                currentPage={currentPage}
-                onClick={handleNav}
-                isExpanded={true}
-              />
-            </CollapsibleSection>
+
+          {/* mode-switcher */}
+          <div id="mode-switcher" className="p-1 m-2 mb-8 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative flex">
+            <button
+              id="workspace-mode-work-btn"
+              onClick={() => handleWorkspaceModeChange('work')}
+              className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+              title="Work"
+            >
+              <Briefcase size={13} strokeWidth={1.75} />
+              <span className="text-[10px]">Work</span>
+              {workspaceMode === 'work' && (
+                <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+              )}
+            </button>
+            <button
+              id="workspace-mode-studio-btn"
+              onClick={() => handleWorkspaceModeChange('studio')}
+              className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+              title="Studio"
+            >
+              <Cpu size={13} strokeWidth={1.75} />
+              <span className="text-[10px]">Studio</span>
+              {workspaceMode === 'studio' && (
+                <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+              )}
+            </button>
+            <button
+              id="workspace-mode-govern-btn"
+              onClick={() => handleWorkspaceModeChange('govern')}
+              className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+              title="Govern"
+            >
+              <Shield size={13} strokeWidth={1.75} />
+              <span className="text-[10px]">Govern</span>
+              {workspaceMode === 'govern' && (
+                <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+              )}
+            </button>
           </div>
-        )}
+
+          {/* ── Work mode content ────────────────────────────────────── */}
+          {workspaceMode === 'work' && (
+            <div className="flex-1 overflow-y-auto px-2 space-y-4 pb-2">
+
+              {/* Projects section */}
+              <div id="workspace-projects" className="mb-8">
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
+                  {activeWorkspace.name} projects
+                </p>
+                <div className="space-y-0.5">
+                  {(activeWorkspace.projects ?? []).map(proj => {
+                    const isActive = activeProject?.id === proj.id;
+                    return (
+                      <button
+                        key={proj.id}
+                        className={[
+                          'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors text-xs',
+                          isActive
+                            ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
+                            : 'text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10',
+                        ].join(' ')}
+                      >
+                        <span className="truncate">{proj.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <button
+                  onClick={() => handleNav('projects')}
+                  className="w-full flex items-center gap-1.5 px-2.5 py-1.5 mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors text-left"
+                >
+                  All projects
+                </button>
+              </div>
+
+              {/* Agents section */}
+              <div id="workspace-agents" className="mb-8">
+                <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
+                  {activeWorkspace.name} agents
+                </p>
+                <div className="grid grid-cols-3 gap-1.5 px-1">
+                  {WORKSPACE_AGENTS.slice(0, 6).map(agent => (
+                    <button
+                      key={agent.id}
+                      title={agent.name}
+                      onClick={() => handleNav('workspace-agents')}
+                      className="flex flex-col items-center gap-1 p-1.5 rounded-lg hover:bg-white/40 dark:hover:bg-white/10 transition-colors group"
+                    >
+                      <img
+                        src={agent.avatar}
+                        alt={agent.name}
+                        className="w-9 h-9 rounded-full object-cover border border-black/10 dark:border-white/10 group-hover:border-black/20 dark:group-hover:border-white/20 transition-colors"
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ── Studio mode content ──────────────────────────────────── */}
+          {workspaceMode === 'studio' && (
+            <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
+              <nav className="space-y-0.5">
+                <CollapsibleSection
+                  icon={Bot}
+                  label={t('sidebar.aiAgents')}
+                  isOpen={isAgentsMenuOpen}
+                  isActive={isAnyAgentsActive()}
+                  isExpanded={true}
+                  onToggle={handleAgentsToggle}
+                >
+                  {aiAgentsSubmenu.map(item => (
+                    <SubMenuItem
+                      key={item.page}
+                      icon={item.icon}
+                      label={item.label}
+                      page={item.page}
+                      currentPage={currentPage}
+                      onClick={handleNav}
+                      isExpanded={true}
+                    />
+                  ))}
+                </CollapsibleSection>
+              </nav>
+            </div>
+          )}
+
+          {/* ── Govern mode content ──────────────────────────────────── */}
+          {workspaceMode === 'govern' && (
+            <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
+              <nav className="space-y-0.5">
+                <CollapsibleSection
+                  icon={Network}
+                  label="Orchestration"
+                  isOpen={isOrchestrationMenuOpen}
+                  isActive={isAnyOrchestrationActive()}
+                  isExpanded={true}
+                  onToggle={handleOrchestrationToggle}
+                >
+                  {orchestrationSubmenu.map(item => (
+                    <SubMenuItem
+                      key={item.page}
+                      icon={item.icon}
+                      label={item.label}
+                      page={item.page}
+                      currentPage={currentPage}
+                      onClick={handleNav}
+                      isExpanded={true}
+                    />
+                  ))}
+                </CollapsibleSection>
+
+                <CollapsibleSection
+                  icon={ShieldAlert}
+                  label={t('sidebar.governance')}
+                  isOpen={isGovernanceMenuOpen}
+                  isActive={isAnyGovernanceActive()}
+                  isExpanded={true}
+                  onToggle={handleGovernanceToggle}
+                >
+                  {governanceSubmenu.map(item => (
+                    <SubMenuItem
+                      key={item.page}
+                      icon={item.icon}
+                      label={item.label}
+                      page={item.page}
+                      currentPage={currentPage}
+                      onClick={handleNav}
+                      isExpanded={true}
+                    />
+                  ))}
+                </CollapsibleSection>
+              </nav>
+            </div>
+          )}
+
+          {/* ── Dev section — bottom, work mode only ────────────────── */}
+          {workspaceMode === 'work' && (
+            <div className="px-2 pb-2 flex-shrink-0">
+              <CollapsibleSection
+                icon={Code2}
+                label="Dev"
+                isOpen={isDevMenuOpen}
+                isActive={['conversations', 'clients'].includes(currentPage)}
+                isExpanded={true}
+                onToggle={() => setIsDevMenuOpen(prev => !prev)}
+              >
+                <SubMenuItem
+                  icon={MessageSquare}
+                  label={t('sidebar.discussions')}
+                  page="conversations"
+                  currentPage={currentPage}
+                  onClick={handleNav}
+                  isExpanded={true}
+                  hasNotification
+                />
+                <SubMenuItem
+                  icon={Users}
+                  label={t('sidebar.customers')}
+                  page="clients"
+                  currentPage={currentPage}
+                  onClick={handleNav}
+                  isExpanded={true}
+                />
+              </CollapsibleSection>
+            </div>
+          )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </aside>
   );

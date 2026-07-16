@@ -74,7 +74,7 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
         aria-expanded={isOpen}
       >
         {/* Workspace icon */}
-        <span className="flex-shrink-0 w-7 h-7 rounded-md bg-black/10 dark:bg-white/10 flex items-center justify-center text-base leading-none">
+        <span className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-base leading-none">
           {wsEmoji(activeWorkspace.icon)}
         </span>
 
@@ -102,7 +102,7 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
           {/* Header: workspace info + quick actions */}
           <div className="px-3 pt-3 pb-2">
             <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-9 h-9 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center text-lg flex-shrink-0">
+              <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg flex-shrink-0">
                 {wsEmoji(activeWorkspace.icon)}
               </span>
               <div className="min-w-0">

@@ -37,14 +37,13 @@ export default function NavWorkspaceSwitcher() {
       {/* Trigger */}
       <button
         onClick={() => setIsOpen(v => !v)}
-        className={`w-full flex items-center gap-2.5 px-2 py-2 rounded-lg transition-colors focus:outline-none border ${
-          isOpen
-            ? 'border-black/20 dark:border-white/20 bg-black/5 dark:bg-white/5'
-            : 'border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5'
-        }`}
+        className={`w-full flex items-center gap-2.5 px-2 py-2 rounded-lg transition-colors focus:outline-none ${isOpen
+          ? 'bg-black/5 dark:bg-white/5'
+          : 'hover:bg-black/5 dark:hover:bg-white/5'
+          }`}
         aria-expanded={isOpen}
       >
-        <span className="flex-shrink-0 w-7 h-7 rounded-md bg-black/10 dark:bg-white/10 flex items-center justify-center text-base leading-none">
+        <span className="flex-shrink-0 w-7 h-7 rounded-md flex items-center justify-center text-base leading-none">
           {wsEmoji(activeWorkspace.icon)}
         </span>
         <span className="flex-1 min-w-0 text-left">
@@ -67,7 +66,7 @@ export default function NavWorkspaceSwitcher() {
           {/* Header */}
           <div className="px-3 pt-3 pb-2.5">
             <div className="flex items-center gap-2.5 mb-2.5">
-              <span className="w-9 h-9 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center text-lg flex-shrink-0">
+              <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg flex-shrink-0">
                 {wsEmoji(activeWorkspace.icon)}
               </span>
               <div className="min-w-0 flex-1">
@@ -107,14 +106,13 @@ export default function NavWorkspaceSwitcher() {
                     switchWorkspace(activeAccount.id, ws.id);
                     setIsOpen(false);
                   }}
-                  className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl transition-colors text-left ${
-                    isActive
-                      ? 'bg-black/5 dark:bg-white/5'
-                      : 'hover:bg-black/4 dark:hover:bg-white/4'
-                  }`}
+                  className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl transition-colors text-left ${isActive
+                    ? 'bg-black/5 dark:bg-white/5'
+                    : 'hover:bg-black/4 dark:hover:bg-white/4'
+                    }`}
                 >
                   <span className="flex items-center gap-2 min-w-0">
-                    <span className="w-7 h-7 rounded-md bg-black/8 dark:bg-white/8 flex items-center justify-center text-sm leading-none flex-shrink-0">
+                    <span className="w-7 h-7 rounded-md flex items-center justify-center text-sm leading-none flex-shrink-0">
                       {wsEmoji(ws.icon)}
                     </span>
                     <span className={`text-xs truncate ${isActive ? 'font-semibold text-gray-900 dark:text-gray-100' : 'font-medium text-gray-700 dark:text-gray-300'}`}>

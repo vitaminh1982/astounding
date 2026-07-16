@@ -144,11 +144,7 @@ export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpand
       activeChat 
         ? 'shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800' 
         : 'bg-transparent'
-    } ${
-      activeChat
-        ? (isSidebarExpanded ? 'left-[10px] lg:left-[276px]' : 'left-[10px] lg:left-[84px]')
-        : 'left-[10px] lg:left-[276px]'
-    }`}>
+    } left-[10px] lg:left-[276px]`}>
 
       {/* Sidebar */}
       {showSidebar && (
