@@ -18,6 +18,7 @@ dist-ssr
 # Hidden/dot directories (agent config, IDE tools, etc.)
 .agent/
 .gemini/
+.claude/
 
 # Editor directories and files
 .vscode/*
