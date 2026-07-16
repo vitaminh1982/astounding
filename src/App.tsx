@@ -232,52 +232,52 @@ function AppContent() {
   const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
 
   return (
-    <div className="flex h-screen overflow-hidden app-bg transition-colors">
+    <div className="flex flex-col h-screen overflow-hidden app-bg transition-colors">
       <Toaster {...TOAST_OPTIONS} />
 
-      {/* Sidebar — full height, fixed left */}
-      <Sidebar
-        currentPage={currentPage}
+      {/* Full-width header */}
+      <Navbar
         onNavigate={handleNavigation}
-        isOpen={isSidebarOpen}
-        onClose={closeSidebar}
+        onMenuClick={openSidebar}
         navigationItems={NAVIGATION_ITEMS}
-        isExpanded={isSidebarExpanded}
-        onToggleExpand={toggleSidebarExpand}
-        plexChats={plexChats}
-        activePlexChatId={activePlexChatId}
-        setActivePlexChatId={setActivePlexChatId}
-        onStartNewPlexChat={() => setActivePlexChatId(null)}
-        agentsSearchQuery={agentsSearchQuery}
-        setAgentsSearchQuery={setAgentsSearchQuery}
-        agentsStatusFilter={agentsStatusFilter}
-        setAgentsStatusFilter={setAgentsStatusFilter}
+        currentPage={currentPage}
+        isSidebarExpanded={isSidebarExpanded}
+        onToggleSidebar={toggleSidebarExpand}
       />
 
-      {/* Mobile overlay */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          onClick={closeSidebar}
-          aria-hidden="true"
-        />
-      )}
+      {/* Content row: sidebar (in-flow) + main */}
+      <div className="flex flex-1 min-h-0 overflow-hidden">
 
-      <div className={`
-        flex flex-col flex-1 min-h-0
-        transition-all duration-300 ease-in-out
-        ${(isSidebarExpanded && hasSidebar) ? 'lg:ml-[296px]' : 'lg:ml-[74px]'}
-      `}>
-        <Navbar
-          onNavigate={handleNavigation}
-          onMenuClick={openSidebar}
-          navigationItems={NAVIGATION_ITEMS}
+        {/* Sidebar — in-flow on desktop, overlay on mobile */}
+        <Sidebar
           currentPage={currentPage}
-          isSidebarExpanded={isSidebarExpanded}
-          onToggleSidebar={toggleSidebarExpand}
+          onNavigate={handleNavigation}
+          isOpen={isSidebarOpen}
+          onClose={closeSidebar}
+          navigationItems={NAVIGATION_ITEMS}
+          isExpanded={isSidebarExpanded}
+          onToggleExpand={toggleSidebarExpand}
+          plexChats={plexChats}
+          activePlexChatId={activePlexChatId}
+          setActivePlexChatId={setActivePlexChatId}
+          onStartNewPlexChat={() => setActivePlexChatId(null)}
+          agentsSearchQuery={agentsSearchQuery}
+          setAgentsSearchQuery={setAgentsSearchQuery}
+          agentsStatusFilter={agentsStatusFilter}
+          setAgentsStatusFilter={setAgentsStatusFilter}
         />
 
-        <main className="flex-1 overflow-y-auto px-4">
+        {/* Mobile overlay */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+            onClick={closeSidebar}
+            aria-hidden="true"
+          />
+        )}
+
+        {/* Main content */}
+        <main className="flex-1 overflow-y-auto px-4 min-h-0">
           <div className="max-w-7xl mx-auto py-6">
             <Suspense fallback={<PageLoader />}>
               {CurrentPageComponent}
