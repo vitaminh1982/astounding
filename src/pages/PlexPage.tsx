@@ -14,6 +14,7 @@ import {
   Presentation,
   Sparkles,
 } from 'lucide-react';
+import { Chat } from '../types/plex';
 
 interface Message {
   id: string;
@@ -22,20 +23,9 @@ interface Message {
   timestamp: Date;
 }
 
-interface Chat {
-  id: string;
-  title: string;
-  preview: string;
-  timestamp: Date;
-  messages: Message[];
-}
-
-const CATEGORY_PILLS = [
-  { id: 'create-project', icon: FolderPlus, label: 'Create project', prompt: 'Help me create a new project in my workspace. I need to define scope, goals, team members, and milestones.' },
-  { id: 'create-proposal', icon: FileText, label: 'Create proposal', prompt: 'Help me write a professional business proposal for a client.' },
-  { id: 'create-report', icon: BarChart, label: 'Create report', prompt: 'Help me generate a structured report. What topic or data should I analyze?' },
-  { id: 'create-slides', icon: Presentation, label: 'Create slides', prompt: "Help me create a slide deck presentation. What's the topic, audience, and key message?" },
-  { id: 'wide-research', icon: Search, label: 'Wide research', prompt: "Start a comprehensive research session. What topic would you like to explore in depth?" },
+const QUICK_ACTIONS = [
+  { id: 'create-doc', icon: FileText, label: 'Create document', prompt: 'I want to create a new document in my workspace. Can you help me format it?' },
+  { id: 'data-analysis', icon: BarChart, label: 'Analyze data', prompt: 'Here is some data. Please perform a statistical analysis and summarize key trends.' },
   { id: 'translation', icon: Languages, label: 'Translation', prompt: 'Translate content for me. Paste the text and specify the target language(s).' },
   { id: 'explore-docs', icon: BookOpen, label: 'Explore documents', prompt: 'Help me explore and analyze documents from my workspace knowledge base.' },
 ];
@@ -47,12 +37,23 @@ function getGreeting(): string {
   return 'Evening';
 }
 
-export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpanded?: boolean }) {
-  const [chats, setChats] = useState<Chat[]>([]);
-  const [activeChatId, setActiveChatId] = useState<string | null>(null);
+export default function PlexPage({
+  isSidebarExpanded = true,
+  onToggleSidebar,
+  chats,
+  setChats,
+  activeChatId,
+  setActiveChatId,
+}: {
+  isSidebarExpanded?: boolean;
+  onToggleSidebar?: () => void;
+  chats: Chat[];
+  setChats: React.Dispatch<React.SetStateAction<Chat[]>>;
+  activeChatId: string | null;
+  setActiveChatId: (id: string | null) => void;
+}) {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [showSidebar, setShowSidebar] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -140,62 +141,17 @@ export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpand
   };
 
   return (
-    <div className={`flex fixed top-[10px] bottom-[10px] right-[10px] transition-all duration-300 ease-in-out overflow-hidden z-30 rounded-2xl ${
-      activeChat 
-        ? 'shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800' 
-        : 'bg-transparent'
-    } ${
-      activeChat
-        ? (isSidebarExpanded ? 'left-[10px] lg:left-[276px]' : 'left-[10px] lg:left-[84px]')
-        : 'left-[10px] lg:left-[276px]'
+    <div className={`flex fixed top-[10px] bottom-[10px] right-[10px] transition-all duration-300 ease-in-out overflow-hidden z-30 rounded-2xl bg-transparent ${
+      isSidebarExpanded ? 'left-[10px] lg:left-[276px]' : 'left-[10px] lg:left-[84px]'
     }`}>
 
-      {/* Sidebar */}
-      {showSidebar && (
-        <aside className={`w-52 flex-shrink-0 flex flex-col transition-all ${
-          activeChat 
-            ? 'border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900/50' 
-            : 'border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg mr-4 shadow-sm'
-        }`}>
-          <div className="p-3 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between flex-shrink-0">
-            <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Plex</span>
-            <button
-              onClick={() => setShowSidebar(false)}
-              className="p-1 rounded-md text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-150 dark:hover:bg-gray-800 transition-colors"
-            >
-              <ChevronLeft size={13} />
-            </button>
-          </div>
-          <div className="p-2 flex-shrink-0">
-            <button
-              onClick={startNewChat}
-              className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 transition-colors"
-            >
-              <Plus size={13} />
-              New chat
-            </button>
-          </div>
-          <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
-            {chats.map(chat => (
-              <button
-                key={chat.id}
-                onClick={() => setActiveChatId(chat.id)}
-                className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
-                  activeChatId === chat.id
-                    ? 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 font-medium'
-                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
-                <p className="text-xs truncate">{chat.title}</p>
-                <p className="text-[10px] text-gray-400 truncate mt-0.5">{chat.preview}</p>
-              </button>
-            ))}
-          </div>
-        </aside>
-      )}
 
       {/* Main */}
-      <div className="flex-1 flex flex-col min-w-0 bg-transparent">
+      <div className={`flex-grow flex flex-col min-w-0 transition-all duration-300 ${
+        activeChat 
+          ? 'shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl' 
+          : 'bg-transparent'
+      }`}>
         {activeChat ? (
           /* ── Active chat ── */
           <div className="flex-1 overflow-y-auto p-6 space-y-4 max-w-3xl mx-auto w-full">
@@ -284,13 +240,12 @@ export default function PlexPage({ isSidebarExpanded = true }: { isSidebarExpand
               </div>
             </div>
 
-            {/* Category pills */}
             <div className="flex flex-wrap items-center justify-center gap-2 max-w-2xl">
-              {CATEGORY_PILLS.map(pill => (
+              {QUICK_ACTIONS.map(pill => (
                 <button
                   key={pill.id}
                   onClick={() => handleQuickAction(pill.prompt)}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-300 dark:hover:border-gray-600 transition-all shadow-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-250 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-305 dark:hover:border-gray-650 transition-all shadow-sm"
                 >
                   <pill.icon size={13} strokeWidth={1.75} className="text-gray-500 dark:text-gray-400" />
                   {pill.label}

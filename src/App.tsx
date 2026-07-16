@@ -1,5 +1,6 @@
 // App.tsx
 import React, { useState, useMemo, lazy, Suspense } from 'react';
+import { Chat } from './types/plex';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { LanguageProvider } from './context/LanguageContext';
@@ -163,6 +164,14 @@ function AppContent() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
+  // Lifted Plex state
+  const [plexChats, setPlexChats] = useState<Chat[]>([]);
+  const [activePlexChatId, setActivePlexChatId] = useState<string | null>(null);
+
+  // Lifted Agents state
+  const [agentsSearchQuery, setAgentsSearchQuery] = useState('');
+  const [agentsStatusFilter, setAgentsStatusFilter] = useState<'all' | 'active' | 'paused'>('all');
+
   const handleNavigation = useMemo(
     () => (page: Page) => {
       setCurrentPage(page);
@@ -197,11 +206,30 @@ function AppContent() {
     const Component = pageConfig.component;
     const props = {
       ...(pageConfig.requiresNavigation ? { onNavigate: handleNavigation } : {}),
-      ...(currentPage === 'plex' ? { isSidebarExpanded } : {})
+      ...(currentPage === 'plex'
+        ? {
+            isSidebarExpanded,
+            onToggleSidebar: toggleSidebarExpand,
+            chats: plexChats,
+            setChats: setPlexChats,
+            activeChatId: activePlexChatId,
+            setActiveChatId: setActivePlexChatId,
+          }
+        : {}),
+      ...(currentPage === 'workspace-agents'
+        ? {
+            isSidebarExpanded,
+            onToggleSidebar: toggleSidebarExpand,
+            searchQuery: agentsSearchQuery,
+            statusFilter: agentsStatusFilter,
+          }
+        : {})
     };
 
     return <Component {...props} />;
-  }, [currentPage, handleNavigation, isSidebarExpanded]);
+  }, [currentPage, handleNavigation, isSidebarExpanded, plexChats, activePlexChatId, agentsSearchQuery, agentsStatusFilter]);
+
+  const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
 
   return (
     <div className="flex h-screen overflow-hidden app-bg transition-colors">
@@ -216,6 +244,14 @@ function AppContent() {
         navigationItems={NAVIGATION_ITEMS}
         isExpanded={isSidebarExpanded}
         onToggleExpand={toggleSidebarExpand}
+        plexChats={plexChats}
+        activePlexChatId={activePlexChatId}
+        setActivePlexChatId={setActivePlexChatId}
+        onStartNewPlexChat={() => setActivePlexChatId(null)}
+        agentsSearchQuery={agentsSearchQuery}
+        setAgentsSearchQuery={setAgentsSearchQuery}
+        agentsStatusFilter={agentsStatusFilter}
+        setAgentsStatusFilter={setAgentsStatusFilter}
       />
 
       {/* Mobile overlay */}
@@ -227,11 +263,10 @@ function AppContent() {
         />
       )}
 
-      {/* Main wrapper — contient navbar sticky + contenu */}
       <div className={`
         flex flex-col flex-1 min-h-0
         transition-all duration-300 ease-in-out
-        ${isSidebarExpanded ? 'lg:ml-[296px]' : 'lg:ml-[74px]'}
+        ${(isSidebarExpanded && hasSidebar) ? 'lg:ml-[296px]' : 'lg:ml-[74px]'}
       `}>
         <Navbar
           onNavigate={handleNavigation}

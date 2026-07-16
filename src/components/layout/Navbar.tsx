@@ -262,9 +262,11 @@ const Navbar = ({
     setIsProfileOpen(false);
   }, []);
 
+  const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
+
   return (
     <nav className="bg-transparent sticky top-0 w-full z-20 transition-colors">
-      <div className={`px-4 py-2 lg:px-6 transition-all duration-300 ease-in-out ${isSidebarExpanded ? '' : 'lg:pl-[246px]'}`}>
+      <div className={`px-4 py-2 lg:px-6 transition-all duration-300 ease-in-out ${(isSidebarExpanded || !hasSidebar) ? '' : 'lg:pl-[246px]'}`}>
         <div className="flex justify-between items-center">
           {/* Left section — mobile menu only */}
           <div className="flex items-center">

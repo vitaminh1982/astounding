@@ -47,12 +47,14 @@ import {
   Inbox,
   Code2,
   BotMessageSquare,
+  Search,
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
 import { useTheme } from '../../context/ThemeContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Chat } from '../../types/plex';
 
 interface SidebarProps {
   currentPage: Page;
@@ -62,6 +64,18 @@ interface SidebarProps {
   navigationItems?: { id: Page; label: string; icon: string }[];
   isExpanded?: boolean;
   onToggleExpand?: () => void;
+
+  // Plex props
+  plexChats?: Chat[];
+  activePlexChatId?: string | null;
+  setActivePlexChatId?: (id: string | null) => void;
+  onStartNewPlexChat?: () => void;
+
+  // Agents props
+  agentsSearchQuery?: string;
+  setAgentsSearchQuery?: (query: string) => void;
+  agentsStatusFilter?: 'all' | 'active' | 'paused';
+  setAgentsStatusFilter?: (filter: 'all' | 'active' | 'paused') => void;
 }
 
 interface Notification {
@@ -356,7 +370,17 @@ const Sidebar = ({
   onClose,
   isExpanded = true,
   onToggleExpand,
+  plexChats,
+  activePlexChatId,
+  setActivePlexChatId,
+  onStartNewPlexChat,
+  agentsSearchQuery,
+  setAgentsSearchQuery,
+  agentsStatusFilter,
+  setAgentsStatusFilter,
 }: SidebarProps) => {
+  const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
+  const isProjectPage = hasSidebar && currentPage !== 'plex' && currentPage !== 'workspace-agents';
   const { t } = useContext(LanguageContext);
   const { theme, resolvedTheme, setTheme } = useTheme();
   const {
@@ -619,23 +643,25 @@ const Sidebar = ({
 
         {/* Expand/Collapse Button */}
         <div className="flex items-center justify-center h-12 flex-shrink-0">
-          <button
-            id="sidebar-toggle-btn"
-            onClick={onToggleExpand}
-            className={[
-              'p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out',
-              isExpanded
-                ? 'opacity-0 scale-90 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:scale-100 group-hover/sidebar:pointer-events-auto'
-                : 'opacity-100 scale-100 pointer-events-auto'
-            ].join(' ')}
-            aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
-          >
-            {isExpanded ? (
-              <PanelLeftClose size={18} strokeWidth={1.75} />
-            ) : (
-              <PanelLeftOpen size={18} strokeWidth={1.75} />
-            )}
-          </button>
+          {hasSidebar && (
+            <button
+              id="sidebar-toggle-btn"
+              onClick={onToggleExpand}
+              className={[
+                'p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out',
+                isExpanded
+                  ? 'opacity-0 scale-90 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:scale-100 group-hover/sidebar:pointer-events-auto'
+                  : 'opacity-100 scale-100 pointer-events-auto'
+              ].join(' ')}
+              aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
+            >
+              {isExpanded ? (
+                <PanelLeftClose size={18} strokeWidth={1.75} />
+              ) : (
+                <PanelLeftOpen size={18} strokeWidth={1.75} />
+              )}
+            </button>
+          )}
         </div>
 
         {/* Nav items */}
@@ -1039,239 +1065,351 @@ const Sidebar = ({
       {/* ══════════════════════════════════════════════════════════
           Right column: workspace-selector (floating) + workspace-nav
           ══════════════════════════════════════════════════════════ */}
-      <div className="flex flex-col w-56 flex-shrink-0 group/navigation">
+      {hasSidebar && (
+        <div className={`flex flex-col flex-shrink-0 group/navigation transition-all duration-300 ease-in-out overflow-hidden ${
+          isProjectPage
+            ? `w-56 ${isExpanded ? '' : 'pointer-events-none'}`
+            : (isExpanded ? 'w-56' : 'w-0 pointer-events-none')
+        }`}>
 
-        {/* workspace-selector — floats above workspace-nav */}
-        <div id="workspace-selector" className="flex-shrink-0 h-14 flex items-center">
-          <div className="flex-1 min-w-0">
-            <NavWorkspaceSwitcher />
-          </div>
-        </div>
-
-        {/* workspace-nav */}
-        <AnimatePresence>
-          {isExpanded && (
-            <motion.div
-              id="workspace-nav"
-              className="group relative flex flex-col mt-2 flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left"
-              initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
-              animate={{ opacity: 1, x: 0, scaleX: 1 }}
-              exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
-              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            >
-
-              {/* mode-switcher */}
-              <div id="mode-switcher" className="p-1 m-2 mb-8 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative flex">
-                <button
-                  id="workspace-mode-work-btn"
-                  onClick={() => handleWorkspaceModeChange('work')}
-                  className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
-                  title="Work"
-                >
-                  <Briefcase size={13} strokeWidth={1.75} />
-                  <span className="text-[10px]">Work</span>
-                  {workspaceMode === 'work' && (
-                    <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
-                  )}
-                </button>
-                <button
-                  id="workspace-mode-studio-btn"
-                  onClick={() => handleWorkspaceModeChange('studio')}
-                  className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
-                  title="Studio"
-                >
-                  <Cpu size={13} strokeWidth={1.75} />
-                  <span className="text-[10px]">Studio</span>
-                  {workspaceMode === 'studio' && (
-                    <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
-                  )}
-                </button>
-                <button
-                  id="workspace-mode-govern-btn"
-                  onClick={() => handleWorkspaceModeChange('govern')}
-                  className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
-                  title="Govern"
-                >
-                  <Shield size={13} strokeWidth={1.75} />
-                  <span className="text-[10px]">Govern</span>
-                  {workspaceMode === 'govern' && (
-                    <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
-                  )}
-                </button>
+          {/* workspace-selector or empty space — floats above workspace-nav */}
+          <div className="flex-shrink-0 h-14 flex items-center">
+            {isProjectPage ? (
+              <div id="workspace-selector" className="flex-1 min-w-0 pointer-events-auto">
+                <NavWorkspaceSwitcher />
               </div>
+            ) : (
+              <div className="h-14 flex-shrink-0" />
+            )}
+          </div>
 
-              {/* ── Work mode content ────────────────────────────────────── */}
-              {workspaceMode === 'work' && (
-                <div className="flex-1 overflow-y-auto px-2 space-y-4 pb-2">
+          {/* Sidebars contents */}
+          <AnimatePresence mode="wait">
+            {isExpanded && (
+              <>
+                {isProjectPage && (
+                  <motion.div
+                    key="project"
+                    id="project-sidebar"
+                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left"
+                    initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
+                    exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  >
 
-                  {/* Projects section */}
-                  <div id="workspace-projects" className="mb-8">
-                    <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
-                      {activeWorkspace.name} projects
-                    </p>
-                    <div className="space-y-0.5">
-                      {(activeWorkspace.projects ?? []).map(proj => {
-                        const isActive = activeProject?.id === proj.id;
-                        return (
-                          <button
-                            key={proj.id}
-                            className={[
-                              'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors text-xs',
-                              isActive
-                                ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
-                                : 'text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10',
-                            ].join(' ')}
-                          >
-                            <span className="truncate">{proj.name}</span>
-                          </button>
-                        );
-                      })}
+                {/* mode-switcher */}
+                <div id="mode-switcher" className="p-1 m-2 mb-8 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl flex-shrink-0 relative flex">
+                  <button
+                    id="workspace-mode-work-btn"
+                    onClick={() => handleWorkspaceModeChange('work')}
+                    className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+                    title="Work"
+                  >
+                    <Briefcase size={13} strokeWidth={1.75} />
+                    <span className="text-[10px]">Work</span>
+                    {workspaceMode === 'work' && (
+                      <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+                    )}
+                  </button>
+                  <button
+                    id="workspace-mode-studio-btn"
+                    onClick={() => handleWorkspaceModeChange('studio')}
+                    className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+                    title="Studio"
+                  >
+                    <Cpu size={13} strokeWidth={1.75} />
+                    <span className="text-[10px]">Studio</span>
+                    {workspaceMode === 'studio' && (
+                      <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+                    )}
+                  </button>
+                  <button
+                    id="workspace-mode-govern-btn"
+                    onClick={() => handleWorkspaceModeChange('govern')}
+                    className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+                    title="Govern"
+                  >
+                    <Shield size={13} strokeWidth={1.75} />
+                    <span className="text-[10px]">Govern</span>
+                    {workspaceMode === 'govern' && (
+                      <motion.div layoutId="active-workspace-indicator" className="absolute inset-0 bg-white dark:bg-white/15 shadow-sm border border-black/5 dark:border-white/5 rounded-lg -z-10" transition={{ type: 'spring', stiffness: 380, damping: 30 }} />
+                    )}
+                  </button>
+                </div>
+
+                {/* ── Work mode content ────────────────────────────────────── */}
+                {workspaceMode === 'work' && (
+                  <div className="flex-1 overflow-y-auto px-2 space-y-4 pb-2">
+
+                    {/* Projects section */}
+                    <div id="workspace-projects" className="mb-8">
+                      <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
+                        {activeWorkspace.name} projects
+                      </p>
+                      <div className="space-y-0.5">
+                        {(activeWorkspace.projects ?? []).map(proj => {
+                          const isActive = activeProject?.id === proj.id;
+                          return (
+                            <button
+                              key={proj.id}
+                              className={[
+                                'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors text-xs',
+                                isActive
+                                  ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
+                                  : 'text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10',
+                              ].join(' ')}
+                            >
+                              <span className="truncate">{proj.name}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
+                      <button
+                        onClick={() => handleNav('projects')}
+                        className="w-full flex items-center gap-1.5 px-2.5 py-1.5 mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors text-left"
+                      >
+                        All projects
+                      </button>
                     </div>
-                    <button
-                      onClick={() => handleNav('projects')}
-                      className="w-full flex items-center gap-1.5 px-2.5 py-1.5 mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors text-left"
-                    >
-                      All projects
-                    </button>
-                  </div>
 
-                  {/* Agents section */}
-                  <div id="workspace-agents" className="mb-8">
-                    <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
-                      {activeWorkspace.name} agents
-                    </p>
-                    <div className="grid grid-cols-3 gap-1.5 px-1">
-                      {WORKSPACE_AGENTS.slice(0, 6).map(agent => (
-                        <button
-                          key={agent.id}
-                          title={agent.name}
-                          onClick={() => handleNav('workspace-agents')}
-                          className="flex flex-col items-center gap-1 p-1.5 rounded-lg hover:bg-white/40 dark:hover:bg-white/10 transition-colors group"
-                        >
-                          <img
-                            src={agent.avatar}
-                            alt={agent.name}
-                            className="w-9 h-9 rounded-full object-cover border border-black/10 dark:border-white/10 group-hover:border-black/20 dark:group-hover:border-white/20 transition-colors"
+                    {/* Agents section */}
+                    <div id="workspace-agents" className="mb-8">
+                      <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider px-2 mb-1.5">
+                        {activeWorkspace.name} agents
+                      </p>
+                      <div className="grid grid-cols-3 gap-1.5 px-1">
+                        {WORKSPACE_AGENTS.slice(0, 6).map(agent => (
+                          <button
+                            key={agent.id}
+                            title={agent.name}
+                            onClick={() => handleNav('workspace-agents')}
+                            className="flex flex-col items-center gap-1 p-1.5 rounded-lg hover:bg-white/40 dark:hover:bg-white/10 transition-colors group"
+                          >
+                            <img
+                              src={agent.avatar}
+                              alt={agent.name}
+                              className="w-9 h-9 rounded-full object-cover border border-black/10 dark:border-white/10 group-hover:border-black/20 dark:group-hover:border-white/20 transition-colors"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* ── Studio mode content ──────────────────────────────────── */}
+                {workspaceMode === 'studio' && (
+                  <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
+                    <nav className="space-y-0.5">
+                      <CollapsibleSection
+                        icon={Bot}
+                        label={t('sidebar.aiAgents')}
+                        isOpen={isAgentsMenuOpen}
+                        isActive={isAnyAgentsActive()}
+                        isExpanded={true}
+                        onToggle={handleAgentsToggle}
+                      >
+                        {aiAgentsSubmenu.map(item => (
+                          <SubMenuItem
+                            key={item.page}
+                            icon={item.icon}
+                            label={item.label}
+                            page={item.page}
+                            currentPage={currentPage}
+                            onClick={handleNav}
+                            isExpanded={true}
                           />
+                        ))}
+                      </CollapsibleSection>
+                    </nav>
+                  </div>
+                )}
+
+                {/* ── Govern mode content ──────────────────────────────────── */}
+                {workspaceMode === 'govern' && (
+                  <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
+                    <nav className="space-y-0.5">
+                      <CollapsibleSection
+                        icon={Network}
+                        label="Orchestration"
+                        isOpen={isOrchestrationMenuOpen}
+                        isActive={isAnyOrchestrationActive()}
+                        isExpanded={true}
+                        onToggle={handleOrchestrationToggle}
+                      >
+                        {orchestrationSubmenu.map(item => (
+                          <SubMenuItem
+                            key={item.page}
+                            icon={item.icon}
+                            label={item.label}
+                            page={item.page}
+                            currentPage={currentPage}
+                            onClick={handleNav}
+                            isExpanded={true}
+                          />
+                        ))}
+                      </CollapsibleSection>
+
+                      <CollapsibleSection
+                        icon={ShieldAlert}
+                        label={t('sidebar.governance')}
+                        isOpen={isGovernanceMenuOpen}
+                        isActive={isAnyGovernanceActive()}
+                        isExpanded={true}
+                        onToggle={handleGovernanceToggle}
+                      >
+                        {governanceSubmenu.map(item => (
+                          <SubMenuItem
+                            key={item.page}
+                            icon={item.icon}
+                            label={item.label}
+                            page={item.page}
+                            currentPage={currentPage}
+                            onClick={handleNav}
+                            isExpanded={true}
+                          />
+                        ))}
+                      </CollapsibleSection>
+                    </nav>
+                  </div>
+                )}
+
+                {/* ── Dev section — bottom, work mode only ────────────────── */}
+                {workspaceMode === 'work' && (
+                  <div className="px-2 pb-2 flex-shrink-0">
+                    <CollapsibleSection
+                      icon={Code2}
+                      label="Dev"
+                      isOpen={isDevMenuOpen}
+                      isActive={['conversations', 'clients'].includes(currentPage)}
+                      isExpanded={true}
+                      onToggle={() => setIsDevMenuOpen(prev => !prev)}
+                    >
+                      <SubMenuItem
+                        icon={MessageSquare}
+                        label={t('sidebar.discussions')}
+                        page="conversations"
+                        currentPage={currentPage}
+                        onClick={handleNav}
+                        isExpanded={true}
+                        hasNotification
+                      />
+                      <SubMenuItem
+                        icon={Users}
+                        label={t('sidebar.customers')}
+                        page="clients"
+                        currentPage={currentPage}
+                        onClick={handleNav}
+                        isExpanded={true}
+                      />
+                    </CollapsibleSection>
+                  </div>
+                )}
+                  </motion.div>
+                )}
+
+                {currentPage === 'plex' && (
+                  <motion.div
+                    key="plex"
+                    id="plex-sidebar"
+                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left"
+                    initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
+                    exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <div className="p-3 border-b border-black/10 dark:border-white/10 flex items-center justify-between flex-shrink-0">
+                      <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Plex</span>
+                    </div>
+                    <div className="p-2 flex-shrink-0">
+                      <button
+                        onClick={onStartNewPlexChat}
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors"
+                      >
+                        <Plus size={13} />
+                        New chat
+                      </button>
+                    </div>
+                    <div className="flex-1 overflow-y-auto p-2 space-y-0.5">
+                      {(plexChats ?? []).map(chat => (
+                        <button
+                          key={chat.id}
+                          onClick={() => setActivePlexChatId?.(chat.id)}
+                          className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${
+                            activePlexChatId === chat.id
+                              ? 'bg-black/5 dark:bg-white/15 text-black dark:text-white font-medium shadow-sm'
+                              : 'text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5'
+                          }`}
+                        >
+                          <p className="text-xs truncate">{chat.title}</p>
+                          <p className="text-[10px] text-gray-400 truncate mt-0.5">{chat.preview}</p>
                         </button>
                       ))}
                     </div>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
 
-              {/* ── Studio mode content ──────────────────────────────────── */}
-              {workspaceMode === 'studio' && (
-                <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
-                  <nav className="space-y-0.5">
-                    <CollapsibleSection
-                      icon={Bot}
-                      label={t('sidebar.aiAgents')}
-                      isOpen={isAgentsMenuOpen}
-                      isActive={isAnyAgentsActive()}
-                      isExpanded={true}
-                      onToggle={handleAgentsToggle}
-                    >
-                      {aiAgentsSubmenu.map(item => (
-                        <SubMenuItem
-                          key={item.page}
-                          icon={item.icon}
-                          label={item.label}
-                          page={item.page}
-                          currentPage={currentPage}
-                          onClick={handleNav}
-                          isExpanded={true}
-                        />
-                      ))}
-                    </CollapsibleSection>
-                  </nav>
-                </div>
-              )}
-
-              {/* ── Govern mode content ──────────────────────────────────── */}
-              {workspaceMode === 'govern' && (
-                <div className="flex-grow overflow-y-auto p-2 space-y-0.5">
-                  <nav className="space-y-0.5">
-                    <CollapsibleSection
-                      icon={Network}
-                      label="Orchestration"
-                      isOpen={isOrchestrationMenuOpen}
-                      isActive={isAnyOrchestrationActive()}
-                      isExpanded={true}
-                      onToggle={handleOrchestrationToggle}
-                    >
-                      {orchestrationSubmenu.map(item => (
-                        <SubMenuItem
-                          key={item.page}
-                          icon={item.icon}
-                          label={item.label}
-                          page={item.page}
-                          currentPage={currentPage}
-                          onClick={handleNav}
-                          isExpanded={true}
-                        />
-                      ))}
-                    </CollapsibleSection>
-
-                    <CollapsibleSection
-                      icon={ShieldAlert}
-                      label={t('sidebar.governance')}
-                      isOpen={isGovernanceMenuOpen}
-                      isActive={isAnyGovernanceActive()}
-                      isExpanded={true}
-                      onToggle={handleGovernanceToggle}
-                    >
-                      {governanceSubmenu.map(item => (
-                        <SubMenuItem
-                          key={item.page}
-                          icon={item.icon}
-                          label={item.label}
-                          page={item.page}
-                          currentPage={currentPage}
-                          onClick={handleNav}
-                          isExpanded={true}
-                        />
-                      ))}
-                    </CollapsibleSection>
-                  </nav>
-                </div>
-              )}
-
-              {/* ── Dev section — bottom, work mode only ────────────────── */}
-              {workspaceMode === 'work' && (
-                <div className="px-2 pb-2 flex-shrink-0">
-                  <CollapsibleSection
-                    icon={Code2}
-                    label="Dev"
-                    isOpen={isDevMenuOpen}
-                    isActive={['conversations', 'clients'].includes(currentPage)}
-                    isExpanded={true}
-                    onToggle={() => setIsDevMenuOpen(prev => !prev)}
+                {currentPage === 'workspace-agents' && (
+                  <motion.div
+                    key="agents"
+                    id="agents-sidebar"
+                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left p-4 space-y-5"
+                    initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
+                    exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <SubMenuItem
-                      icon={MessageSquare}
-                      label={t('sidebar.discussions')}
-                      page="conversations"
-                      currentPage={currentPage}
-                      onClick={handleNav}
-                      isExpanded={true}
-                      hasNotification
-                    />
-                    <SubMenuItem
-                      icon={Users}
-                      label={t('sidebar.customers')}
-                      page="clients"
-                      currentPage={currentPage}
-                      onClick={handleNav}
-                      isExpanded={true}
-                    />
-                  </CollapsibleSection>
-                </div>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+                    <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-2">
+                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Filtres</span>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Recherche</span>
+                      <div className="relative">
+                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
+                        <input
+                          type="text"
+                          placeholder="Nom, rôle, compétence..."
+                          value={agentsSearchQuery ?? ''}
+                          onChange={(e) => setAgentsSearchQuery?.(e.target.value)}
+                          className="w-full pl-9 pr-3 py-1.5 border border-black/10 dark:border-white/10 rounded-lg bg-black/5 dark:bg-white/5 text-gray-900 dark:text-gray-100 placeholder-gray-450 focus:outline-none focus:ring-1 focus:ring-teal-500 text-xs"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Statut</span>
+                      <div className="flex flex-col gap-1">
+                        {[
+                          { value: 'all', label: 'Tous', count: WORKSPACE_AGENTS.length },
+                          { value: 'active', label: 'Actifs', count: WORKSPACE_AGENTS.filter(a => a.status === 'active').length },
+                          { value: 'paused', label: 'En pause', count: WORKSPACE_AGENTS.filter(a => a.status === 'paused').length },
+                        ].map((tab) => (
+                          <button
+                            key={tab.value}
+                            onClick={() => setAgentsStatusFilter?.(tab.value as any)}
+                            className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                              agentsStatusFilter === tab.value
+                                ? 'bg-black/5 dark:bg-white/15 text-black dark:text-white font-semibold'
+                                : 'text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5'
+                            }`}
+                          >
+                            <span>{tab.label}</span>
+                            <span className="bg-black/5 dark:bg-white/5 text-[10px] px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-450">
+                              {tab.count}
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
     </aside>
   );
 };
