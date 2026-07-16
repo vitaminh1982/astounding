@@ -231,7 +231,7 @@ function AppContent() {
       <div className={`
         flex flex-col flex-1 min-h-0
         transition-all duration-300 ease-in-out
-        lg:ml-[296px]
+        ${isSidebarExpanded ? 'lg:ml-[296px]' : 'lg:ml-[74px]'}
       `}>
         <Navbar
           onNavigate={handleNavigation}
