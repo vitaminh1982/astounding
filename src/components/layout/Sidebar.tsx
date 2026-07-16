@@ -602,6 +602,10 @@ const Sidebar = ({
   const handleNav = (page: Page) => {
     onNavigate(page);
     onClose?.();
+    const targetHasSidebar = page !== 'dashboard' && page !== 'paramètres' && page !== 'onboarding' && page !== 'usage';
+    if (targetHasSidebar && !isExpanded && onToggleExpand) {
+      onToggleExpand();
+    }
   };
 
   const handleCreateProject = () => {
