@@ -727,7 +727,7 @@ const Sidebar = ({
             <div
               ref={popoverRef}
               onMouseLeave={handleHoverReset}
-              className="absolute bottom-14 left-0 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 w-[320px]"
+              className="absolute bottom-14 left-2 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 w-[320px]"
             >
               <div className="space-y-3">
                 {/* 1. User Header */}
@@ -1165,7 +1165,7 @@ const Sidebar = ({
                                   onClick={() => handleNav('projects')}
                                   className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
                                 >
-                                  <Library size={12} strokeWidth={2} />
+                                  <Library size={14} strokeWidth={2} />
                                 </button>
                                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
                                   All Projects
@@ -1181,7 +1181,7 @@ const Sidebar = ({
                                   }}
                                   className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
                                 >
-                                  <MoreHorizontal size={12} strokeWidth={2} />
+                                  <MoreHorizontal size={14} strokeWidth={2} />
                                 </button>
                                 <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
                                   Project Actions
@@ -1194,7 +1194,7 @@ const Sidebar = ({
                                   onClick={handleCreateProject}
                                   className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
                                 >
-                                  <Plus size={12} strokeWidth={2.5} />
+                                  <Plus size={14} strokeWidth={2.5} />
                                 </button>
                                 <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
                                   Add Project
@@ -1254,7 +1254,7 @@ const Sidebar = ({
                                   onClick={() => handleNav('workspace-agents')}
                                   className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
                                 >
-                                  <Library size={12} strokeWidth={2} />
+                                  <Library size={14} strokeWidth={2} />
                                 </button>
                                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
                                   All Agents
@@ -1270,7 +1270,7 @@ const Sidebar = ({
                                   }}
                                   className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
                                 >
-                                  <MoreHorizontal size={12} strokeWidth={2} />
+                                  <MoreHorizontal size={14} strokeWidth={2} />
                                 </button>
                                 <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
                                   Agent Actions

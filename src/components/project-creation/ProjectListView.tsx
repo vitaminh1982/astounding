@@ -139,7 +139,6 @@ export default function ProjectListView() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {workspaceProjects.map((project, i) => {
                 const colors = COLOR_MAP[project.color] ?? COLOR_MAP['indigo'];
-                const isActive = activeProject?.id === project.id;
                 return (
                   <motion.div
                     key={project.id}
@@ -147,10 +146,7 @@ export default function ProjectListView() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleOpenProject(project.id)}
-                    className={`bg-white dark:bg-gray-800 rounded-xl border overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group ${isActive
-                        ? 'border-blue-500 dark:border-teal-500 ring-1 ring-blue-500 dark:ring-teal-500'
-                        : 'border-gray-200 dark:border-gray-700'
-                      }`}
+                    className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group"
                   >
                     {/* Project Image */}
                     <div className="h-32 w-full overflow-hidden bg-gray-100 dark:bg-gray-900 relative">

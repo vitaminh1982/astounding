@@ -61,7 +61,7 @@ export default function NavWorkspaceSwitcher() {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#141414] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50 text-sm">
+        <div className="absolute left-0 top-full mt-1 w-[280px] bg-white dark:bg-[#141414] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50 text-sm">
 
           {/* Header */}
           <div className="px-3 pt-3 pb-2.5">
@@ -81,12 +81,12 @@ export default function NavWorkspaceSwitcher() {
 
             {/* Settings & Invite */}
             <div className="flex gap-1.5">
-              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-                <Settings size={12} />
+              <button className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-[11px] font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors whitespace-nowrap">
+                <Settings size={12} className="flex-shrink-0" />
                 Settings
               </button>
-              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
-                <UserPlus size={12} />
+              <button className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-[11px] font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors whitespace-nowrap">
+                <UserPlus size={12} className="flex-shrink-0" />
                 Invite members
               </button>
             </div>

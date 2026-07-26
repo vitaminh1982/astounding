@@ -7,4 +7,7 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  server: {
+    port: process.env.PORT ? Number(process.env.PORT) : 5173,
+  },
 });
