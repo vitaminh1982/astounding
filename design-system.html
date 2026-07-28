@@ -42,8 +42,13 @@
       --t-border-stronger: rgba(255, 255, 255, 0.20);
       --t-input: rgba(255, 255, 255, 0.10);
 
+      /* NOTE: --t-primary = green-500 (#22c55e) intentionnellement.
+         colors.md liste green-400 (#4ade80) comme "primary" primitif,
+         mais le produit utilise #22c55e partout. À réconcilier avec colors.md. */
       --t-primary: #22c55e;
       --t-primary-fg: #003910;
+      /* NOTE: --t-secondary = même valeur que --t-primary en dark.
+         Distinct en light (#16a34a). À différencier si besoin d'un 2e rôle. */
       --t-secondary: #22c55e;
       --t-primary-container: #166534;
       --t-secondary-container: #005322;
@@ -51,6 +56,12 @@
       --t-tertiary: #b4c1ff;
       --t-error: #ff6e84;
       --t-ring: rgba(74, 222, 128, 0.45);
+      /* CTA gradient token — évite valeurs hardcodées dans .c-cta-btn */
+      --t-gradient-cta: linear-gradient(to right, #22c55e, #34d399);
+      --t-gradient-cta-hover: linear-gradient(to right, #22c55e, #6ee7b7);
+      --t-cta-shadow: rgba(34, 197, 94, 0.25);
+      --t-cta-shadow-hover: rgba(34, 197, 94, 0.35);
+      --t-cta-shadow-active: rgba(34, 197, 94, 0.30);
 
       --t-item-default: #bbbbbb;
       --t-item-hover-bg: rgba(255, 255, 255, 0.10);
@@ -118,6 +129,11 @@
       --t-tertiary: #6366f1;
       --t-error: #ef4444;
       --t-ring: rgba(34, 197, 94, 0.30);
+      --t-gradient-cta: linear-gradient(to right, #22c55e, #34d399);
+      --t-gradient-cta-hover: linear-gradient(to right, #22c55e, #6ee7b7);
+      --t-cta-shadow: rgba(34, 197, 94, 0.25);
+      --t-cta-shadow-hover: rgba(34, 197, 94, 0.35);
+      --t-cta-shadow-active: rgba(34, 197, 94, 0.30);
 
       --t-item-default: #444444;
       --t-item-hover-bg: rgba(255, 255, 255, 0.40);
@@ -159,6 +175,9 @@
       --radius-4xl: calc(0.75rem * 2.6);
       --font-body: 'Inter', sans-serif;
       --font-heading: 'Manrope', sans-serif;
+      /* NOTE: --font-mono utilise Inter (non-monospace) délibérément —
+         sert de police "label/token" dans l'UI, pas de code technique.
+         Renommer en --font-label si la confusion persiste. */
       --font-mono: 'Inter', monospace;
     }
 
@@ -623,9 +642,11 @@
       border-color: var(--t-border-stronger);
     }
 
+    /* --active = dropdown ouvert: border primary + shadow subtil pour différencier du hover */
     .c-dropdown-trigger--active {
       background: var(--t-item-hover-bg);
-      border-color: var(--t-border-stronger);
+      border-color: var(--t-primary);
+      box-shadow: 0 0 0 1px var(--t-primary);
     }
 
     .c-dropdown-trigger--focus {
@@ -916,6 +937,7 @@
       margin: 0.75rem 0;
     }
 
+    /* React: élément <button> natif — reset navigateur requis */
     .c-popup__workspace {
       display: flex;
       align-items: center;
@@ -925,6 +947,10 @@
       border-radius: var(--radius-xl);
       border: 1px solid var(--t-border-strong);
       cursor: pointer;
+      background: none;
+      width: 100%;
+      font-family: var(--font-body);
+      text-align: left;
     }
 
     .c-popup__workspace-inner {
@@ -1151,24 +1177,24 @@
       font-weight: 600;
       line-height: 1.333;
       cursor: pointer;
-      background: linear-gradient(to right, #22c55e, #34d399);
+      background: var(--t-gradient-cta);
       color: var(--t-cta-text);
-      box-shadow: 0 4px 14px -3px rgba(34, 197, 94, 0.25);
+      box-shadow: 0 4px 14px -3px var(--t-cta-shadow);
       transition: box-shadow 0.2s, transform 0.2s;
     }
 
     .c-cta-btn--hover {
-      background: linear-gradient(to right, #22c55e, #6ee7b7);
-      box-shadow: 0 6px 20px -3px rgba(34, 197, 94, 0.35);
+      background: var(--t-gradient-cta-hover);
+      box-shadow: 0 6px 20px -3px var(--t-cta-shadow-hover);
     }
 
     .c-cta-btn--active {
       transform: scale(0.98);
-      box-shadow: 0 2px 8px -2px rgba(34, 197, 94, 0.3);
+      box-shadow: 0 2px 8px -2px var(--t-cta-shadow-active);
     }
 
     .c-cta-btn--focus {
-      box-shadow: 0 0 0 3px var(--t-ring), 0 4px 14px -3px rgba(34, 197, 94, 0.25);
+      box-shadow: 0 0 0 3px var(--t-ring), 0 4px 14px -3px var(--t-cta-shadow);
     }
 
     .c-cta-btn--disabled {
@@ -1521,6 +1547,8 @@
     /* =====================================================
        PROMPT BANNER
        ===================================================== */
+    /* INTENTIONNEL: prompt-banner est un élément éditorial/outil, toujours dark.
+       Les valeurs hardcodées ici sont voulues — ce composant ne suit PAS le thème. */
     .ds-prompt-banner {
       background: #0a0f1e;
       border-bottom: 1px solid rgba(74, 222, 128, 0.20);
@@ -2113,6 +2141,60 @@ Return the complete updated design-system.html file. No explanation, no markdown
                 </div>
               </td>
             </tr>
+            <tr>
+              <td>
+                <p class="tok-name">--t-foreground-strong</p>
+                <p class="tok-val">Texte fort / emphase</p>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ffffff" role="img" aria-label="#ffffff"></div>
+                  <p class="tok-val">#ffffff</p>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#000000" role="img" aria-label="#000000"></div>
+                  <p class="tok-val">#000000</p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="tok-name">--t-on-primary</p>
+                <p class="tok-val">Texte sur fond primary</p>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#003910" role="img" aria-label="#003910"></div>
+                  <p class="tok-val">#003910 (green-950)</p>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:#ffffff" role="img" aria-label="#ffffff"></div>
+                  <p class="tok-val">#ffffff</p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <p class="tok-name">--t-gradient-cta</p>
+                <p class="tok-val">CTA button gradient</p>
+              </td>
+              <td class="col-dark">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:linear-gradient(to right,#22c55e,#34d399)" role="img" aria-label="#22c55e → #34d399"></div>
+                  <p class="tok-val">#22c55e → #34d399</p>
+                </div>
+              </td>
+              <td class="col-light">
+                <div class="swatch-pair">
+                  <div class="swatch" style="background:linear-gradient(to right,#22c55e,#34d399)" role="img" aria-label="#22c55e → #34d399"></div>
+                  <p class="tok-val">#22c55e → #34d399</p>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -2147,8 +2229,7 @@ Return the complete updated design-system.html file. No explanation, no markdown
 
       <!-- 1.3 Border Radius -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection__title">1.3 · Border Radius <span class="ds-subsection__qualifier">(base:
-            0.75rem)</span></h3>
+        <h3 class="ds-subsection__title">1.3 · Border Radius <span class="ds-subsection__qualifier">(base: 0.75rem · sm/md/lg/xl/2xl/<strong>3xl</strong>/4xl)</span></h3>
         <div class="radius-grid" role="list" aria-label="Border radius scale">
           <div class="radius-demo" role="listitem">
             <div class="radius-demo__box radius-demo__box--sm" aria-hidden="true"></div>
@@ -2611,7 +2692,8 @@ Return the complete updated design-system.html file. No explanation, no markdown
                 </div>
                 <!-- React: <hr> — no role needed, border reset via CSS -->
                 <hr class="c-popup__divider">
-                <div class="c-popup__workspace" role="button" tabindex="0" aria-label="Switch workspace">
+                <!-- React: <button> natif, pas <div role="button"> — règle DS absolue -->
+                <button class="c-popup__workspace" type="button" aria-label="Switch workspace">
                   <div class="c-popup__workspace-inner">
                     <span class="c-popup__workspace-icon" role="img" aria-label="Workspace icon">💼</span>
                     <div>
@@ -2620,7 +2702,7 @@ Return the complete updated design-system.html file. No explanation, no markdown
                     </div>
                   </div>
                   <span class="c-popup__workspace-arrow" aria-hidden="true">›</span>
-                </div>
+                </button>
                 <div class="c-popup__usage" aria-label="Token usage">
                   <p class="c-popup__usage-title">Token Usage</p>
                   <div class="c-popup__usage-meta">
@@ -2649,7 +2731,8 @@ Return the complete updated design-system.html file. No explanation, no markdown
                 </ul>
                 <hr class="c-popup__divider">
                 <div class="c-popup__footer">
-                  <button class="c-popup__signout-btn" role="menuitem">
+                  <!-- role="menuitem" supprimé: bouton hors <ul role="menu"> -->
+                  <button class="c-popup__signout-btn" type="button">
                     <span aria-hidden="true">⎋</span> Sign out
                   </button>
                   <button class="c-popup__notif-btn" aria-label="Notifications (1 unread)">
@@ -2738,7 +2821,8 @@ Return the complete updated design-system.html file. No explanation, no markdown
                   </div>
                 </div>
                 <hr class="c-popup__divider">
-                <div class="c-popup__workspace" role="button" tabindex="0" aria-label="Switch workspace">
+                <!-- React: <button> natif, pas <div role="button"> — règle DS absolue -->
+                <button class="c-popup__workspace" type="button" aria-label="Switch workspace">
                   <div class="c-popup__workspace-inner">
                     <span class="c-popup__workspace-icon" role="img" aria-label="Workspace icon">💼</span>
                     <div>
@@ -2747,7 +2831,7 @@ Return the complete updated design-system.html file. No explanation, no markdown
                     </div>
                   </div>
                   <span class="c-popup__workspace-arrow" aria-hidden="true">›</span>
-                </div>
+                </button>
                 <div class="c-popup__usage" aria-label="Token usage">
                   <p class="c-popup__usage-title">Token Usage</p>
                   <div class="c-popup__usage-meta">
@@ -2775,7 +2859,8 @@ Return the complete updated design-system.html file. No explanation, no markdown
                 </ul>
                 <hr class="c-popup__divider">
                 <div class="c-popup__footer">
-                  <button class="c-popup__signout-btn" role="menuitem">
+                  <!-- role="menuitem" supprimé: bouton hors <ul role="menu"> -->
+                  <button class="c-popup__signout-btn" type="button">
                     <span aria-hidden="true">⎋</span> Sign out
                   </button>
                   <button class="c-popup__notif-btn" aria-label="Notifications (1 unread)">
