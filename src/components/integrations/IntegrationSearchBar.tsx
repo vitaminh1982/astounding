@@ -24,7 +24,7 @@ export default function IntegrationSearchBar({ searchQuery, setSearchQuery }: In
                   shadow-sm dark:shadow-gray-900 placeholder-gray-400 dark:placeholder-gray-500 
                   bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground
                   focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring 
-                  focus:border-tertiary dark:focus:border-teal-500 sm:text-sm transition-colors"
+                  focus:border-tertiary dark:focus:border-green-500 sm:text-sm transition-colors"
         placeholder={t('integrations.searchPlaceholder')}
         aria-label={t('integrations.aria.searchTools')}
       />

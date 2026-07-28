@@ -247,7 +247,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                 <Upload className="w-4 h-4" />
                 Import Agent
               </button>
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Plus className="w-4 h-4" />
                 New Agent
               </button>
@@ -261,7 +261,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Total Agents</p>
-                <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 transition-colors">{agents.length}</p>
+                <p className="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors">{agents.length}</p>
               </div>
               <Bot className="w-8 h-8 text-indigo-500" />
             </div>
@@ -317,7 +317,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                   onClick={() => setActiveTab(key as any)}
                   className={`py-4 px-6 text-sm font-medium flex items-center gap-2 transition-colors ${
                     activeTab === key
-                      ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                      ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                       : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                   }`}
                 >
@@ -338,7 +338,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                   placeholder="Search agents by name, type, or purpose..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
               <div className="flex gap-2">
@@ -349,13 +349,13 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                 <div className="flex border border-border dark:border-border rounded-lg overflow-hidden">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`px-3 py-2 text-sm transition-colors ${viewMode === 'grid' ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400' : 'bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'}`}
+                    className={`px-3 py-2 text-sm transition-colors ${viewMode === 'grid' ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'}`}
                   >
                     Grid
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`px-3 py-2 text-sm border-l border-border dark:border-border transition-colors ${viewMode === 'list' ? 'bg-teal-50 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400' : 'bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'}`}
+                    className={`px-3 py-2 text-sm border-l border-border dark:border-border transition-colors ${viewMode === 'list' ? 'bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400' : 'bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'}`}
                   >
                     List
                   </button>
@@ -374,14 +374,14 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                     <div
                       key={agent.id}
                       className={`border border-border dark:border-border rounded-lg p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all cursor-pointer ${
-                        selectedAgent === agent.id ? 'border-teal-500 dark:border-teal-400 bg-teal-50 dark:bg-teal-900/30' : ''
+                        selectedAgent === agent.id ? 'border-green-500 dark:border-green-400 bg-green-50 dark:bg-green-900/30' : ''
                       } ${viewMode === 'list' ? 'flex items-center justify-between' : ''}`}
                       onClick={() => setSelectedAgent(agent.id)}
                     >
                       <div className={`${viewMode === 'list' ? 'flex items-center gap-4 flex-1' : ''}`}>
                         <div className="flex items-center gap-3 mb-4">
-                          <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
-                            <Bot className="w-6 h-6 text-primary-green dark:text-teal-400" />
+                          <div className="p-2 bg-indigo-100 dark:bg-green-900/30 rounded-lg transition-colors">
+                            <Bot className="w-6 h-6 text-primary-green dark:text-green-400" />
                           </div>
                           <div>
                             <div className="flex items-center gap-2">
@@ -453,10 +453,10 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                       )}
                       
                       <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-border dark:border-border transition-colors">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="View Details">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Configure">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Configure">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Start/Resume">
@@ -481,7 +481,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                         : 'Get started by creating your first AI agent'}
                     </p>
                     {!searchQuery && (
-                      <button className="mt-4 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                      <button className="mt-4 px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                         Create Agent
                       </button>
                     )}
@@ -496,7 +496,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                 <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Agent Configuration</h3>
                 <p className="text-muted-foreground dark:text-muted-foreground mb-4 transition-colors">Configure agent parameters, roles, and behavior settings</p>
                 <div className="flex justify-center gap-3">
-                  <button className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <button className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                     Configure Selected Agent
                   </button>
                   <button className="px-4 py-2 border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -512,7 +512,7 @@ export default function AgentManagementPage({ onNavigate }: AgentManagementPageP
                 <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Version Control</h3>
                 <p className="text-muted-foreground dark:text-muted-foreground mb-4 transition-colors">Manage agent versions, rollbacks, and updates</p>
                 <div className="flex justify-center gap-3">
-                  <button className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <button className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                     View Version History
                   </button>
                   <button className="px-4 py-2 border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">

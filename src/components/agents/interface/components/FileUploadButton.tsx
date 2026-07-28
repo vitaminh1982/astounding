@@ -53,7 +53,7 @@ const FileUploadButton: React.FC<FileUploadButtonProps> = ({
     }
     
     if (uploadState.isUploading) {
-      return 'bg-tertiary dark:bg-teal-600 text-white';
+      return 'bg-tertiary dark:bg-green-600 text-white';
     }
     
     if (uploadState.selectedFile) {

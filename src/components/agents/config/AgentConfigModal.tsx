@@ -87,7 +87,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
           {/* Header */}
           <div className="sticky top-0 bg-white dark:bg-surface-container-high border-b border-border dark:border-border p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
             <div className="flex items-center gap-3 min-w-0 flex-1">
-              <div className="w-2 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-cyan-500 rounded-full transition-colors" />
+              <div className="w-2 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 dark:from-green-500 dark:to-green-500 rounded-full transition-colors" />
               <div className="min-w-0 flex-1">
                 <h2 className="text-lg md:text-xl font-semibold text-foreground dark:text-foreground truncate transition-colors">
                   {localAgent.name || 'New Agent'}
@@ -117,7 +117,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               {/* Preview toggle */}
               <button 
                 onClick={togglePreview} 
-                className="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-teal-900/20 text-primary-green dark:text-teal-400 hover:bg-indigo-100 dark:hover:bg-teal-900/30 rounded-lg transition-colors text-sm font-medium border border-indigo-200 dark:border-teal-700"
+                className="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-green-900/20 text-primary-green dark:text-green-400 hover:bg-indigo-100 dark:hover:bg-green-900/30 rounded-lg transition-colors text-sm font-medium border border-indigo-200 dark:border-green-700"
                 aria-label={showPreview ? "Hide preview" : "Show preview"}
               >
                 {showPreview ? (
@@ -206,7 +206,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               )}
               
               <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 rounded-full transition-colors" />
+                <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-green-500 dark:from-blue-400 dark:to-green-400 rounded-full transition-colors" />
                 <h2 className="text-lg md:text-xl font-semibold text-foreground dark:text-foreground truncate transition-colors">
                   Live Preview
                 </h2>

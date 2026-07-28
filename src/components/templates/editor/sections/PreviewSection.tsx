@@ -86,7 +86,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                     onClick={() => handleModeChange('desktop')}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       previewMode === 'desktop'
-                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        ? 'bg-primary dark:bg-green-600 text-white'
                         : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="Desktop preview mode"
@@ -98,7 +98,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                     onClick={() => handleModeChange('mobile')}
                     className={`flex items-center px-4 py-2 text-sm font-medium border-l border-border dark:border-border transition-all duration-200 ${
                       previewMode === 'mobile'
-                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        ? 'bg-primary dark:bg-green-600 text-white'
                         : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="Mobile preview mode"
@@ -114,7 +114,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                     onClick={() => handleFormatChange('html')}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       previewFormat === 'html'
-                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        ? 'bg-primary dark:bg-green-600 text-white'
                         : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="HTML preview format"
@@ -126,7 +126,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                     onClick={() => handleFormatChange('text')}
                     className={`flex items-center px-4 py-2 text-sm font-medium border-l border-border dark:border-border transition-all duration-200 ${
                       previewFormat === 'text'
-                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        ? 'bg-primary dark:bg-green-600 text-white'
                         : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="Plain text preview format"
@@ -232,8 +232,8 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
           {/* Email Header */}
           <div className="p-4 border-b border-border dark:border-border bg-surface-container-low dark:bg-surface-container-high/50 transition-colors">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center transition-colors">
-                <span className="text-sm font-semibold text-primary-green dark:text-teal-400 transition-colors">
+              <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-green-900/30 flex items-center justify-center transition-colors">
+                <span className="text-sm font-semibold text-primary-green dark:text-green-400 transition-colors">
                   SP
                 </span>
               </div>
@@ -254,7 +254,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
               <div className="space-y-4">
                 {/* Logo */}
                 <div className="flex items-center justify-center py-4">
-                  <div className="h-12 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-teal-600 dark:to-cyan-600 rounded-lg flex items-center justify-center transition-colors">
+                  <div className="h-12 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-green-600 dark:to-green-600 rounded-lg flex items-center justify-center transition-colors">
                     <span className="text-white font-bold text-xl">Sendplex</span>
                   </div>
                 </div>
@@ -265,7 +265,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                     Hello Thomas,
                   </p>
                   <p>
-                    Welcome to <strong className="text-primary-green dark:text-teal-400 transition-colors">Sendplex</strong>! 🎉
+                    Welcome to <strong className="text-primary-green dark:text-green-400 transition-colors">Sendplex</strong>! 🎉
                   </p>
                   <p>
                     We are thrilled to have you as one of our new clients. To celebrate your arrival,
@@ -276,7 +276,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                   <div className="py-4">
                     <a
                       href="#"
-                      className="inline-block px-6 py-3 bg-primary dark:bg-teal-600 text-white font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-md dark:shadow-gray-900"
+                      className="inline-block px-6 py-3 bg-primary dark:bg-green-600 text-white font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-md dark:shadow-gray-900"
                     >
                       Get Started
                     </a>
@@ -296,9 +296,9 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                 <div className="mt-6 pt-6 border-t border-border dark:border-border text-xs text-muted-foreground dark:text-muted-foreground text-center transition-colors">
                   <p>© 2025 Sendplex. All rights reserved.</p>
                   <p className="mt-1">
-                    <a href="#" className="hover:text-primary-green dark:hover:text-teal-400 transition-colors">Unsubscribe</a>
+                    <a href="#" className="hover:text-primary-green dark:hover:text-green-400 transition-colors">Unsubscribe</a>
                     {' • '}
-                    <a href="#" className="hover:text-primary-green dark:hover:text-teal-400 transition-colors">Preferences</a>
+                    <a href="#" className="hover:text-primary-green dark:hover:text-green-400 transition-colors">Preferences</a>
                   </p>
                 </div>
               </div>
@@ -335,7 +335,7 @@ Unsubscribe: https://sendplex.com/unsubscribe`}
               className="absolute inset-0 bg-white/80 dark:bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg transition-colors"
             >
               <div className="flex flex-col items-center gap-3">
-                <Loader2 className="w-8 h-8 text-primary-green dark:text-teal-400 animate-spin transition-colors" />
+                <Loader2 className="w-8 h-8 text-primary-green dark:text-green-400 animate-spin transition-colors" />
                 <p className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">
                   Sending test email...
                 </p>

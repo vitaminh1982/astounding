@@ -35,7 +35,7 @@ const WorkflowNode: React.FC<WorkflowNodeProps> = ({ data, id }) => {
             type={handle.type}
             position={handle.position}
             id={handle.id}
-            className="!bg-primary dark:!bg-teal-400"
+            className="!bg-primary dark:!bg-green-400"
             style={{
               width: 8,
               height: 8,
@@ -48,7 +48,7 @@ const WorkflowNode: React.FC<WorkflowNodeProps> = ({ data, id }) => {
 
         {/* Node Content */}
         <div className="flex items-center gap-2">
-          <div className="p-2 rounded-lg bg-teal-50 dark:bg-teal-900/30 transition-colors">
+          <div className="p-2 rounded-lg bg-green-50 dark:bg-green-900/30 transition-colors">
             {data.icon}
           </div>
           <div className="flex flex-col">

@@ -81,7 +81,7 @@ export default function PromptCard({
         bg-white dark:bg-surface-container-high border rounded-xl shadow-sm dark:shadow-gray-900 overflow-hidden flex flex-col
         transition-all duration-200 ease-in-out
         ${isSelected 
-          ? 'border-primary-green dark:border-teal-500 ring-2 ring-indigo-500 dark:ring-teal-500' 
+          ? 'border-primary-green dark:border-green-500 ring-2 ring-indigo-500 dark:ring-green-500' 
           : 'border-border dark:border-border'
         }
         ${isHovered ? 'shadow-md dark:shadow-gray-800 transform scale-[1.01]' : ''}
@@ -91,8 +91,8 @@ export default function PromptCard({
       aria-labelledby={`prompt-title-${prompt.id}`}
     >
       {/* Category badge */}
-      <div className="bg-indigo-50 dark:bg-teal-900/20 px-4 py-1.5 border-b border-indigo-100 dark:border-teal-700 flex justify-between items-center transition-colors">
-        <span className="text-xs font-semibold text-indigo-700 dark:text-teal-300 uppercase tracking-wider">
+      <div className="bg-indigo-50 dark:bg-green-900/20 px-4 py-1.5 border-b border-indigo-100 dark:border-green-700 flex justify-between items-center transition-colors">
+        <span className="text-xs font-semibold text-indigo-700 dark:text-green-300 uppercase tracking-wider">
           {prompt.category.replace('_', ' ')}
         </span>
         
@@ -159,7 +159,7 @@ export default function PromptCard({
           {onUsePrompt && (
             <button
               onClick={handleUseClick}
-              className="flex items-center gap-1 px-3 py-1.5 bg-primary dark:bg-teal-600 text-white text-sm rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+              className="flex items-center gap-1 px-3 py-1.5 bg-primary dark:bg-green-600 text-white text-sm rounded-md hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
               title="Use Prompt"
             >
               <PlayCircle className="h-4 w-4" />

@@ -25,7 +25,7 @@ const OnboardingTab: React.FC<OnboardingTabProps> = ({ workspaceData, setWorkspa
             <textarea
               id="welcomeMessage"
               rows={4}
-              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 sm:text-sm transition-colors"
+              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 sm:text-sm transition-colors"
               value={workspaceData.onboarding.welcomeMessage}
               onChange={(e) => setWorkspaceData({
                 ...workspaceData,
@@ -46,7 +46,7 @@ const OnboardingTab: React.FC<OnboardingTabProps> = ({ workspaceData, setWorkspa
             </label>
             <select
               id="defaultRole"
-              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 sm:text-sm transition-colors"
+              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 sm:text-sm transition-colors"
               value={workspaceData.onboarding.defaultRole}
               onChange={(e) => setWorkspaceData({
                 ...workspaceData,
@@ -112,7 +112,7 @@ const OnboardingTab: React.FC<OnboardingTabProps> = ({ workspaceData, setWorkspa
                 <input
                   type="text"
                   placeholder="Add a new task..."
-                  className="flex-1 px-3 py-2 border border-border dark:border-border rounded-l-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 sm:text-sm transition-colors"
+                  className="flex-1 px-3 py-2 border border-border dark:border-border rounded-l-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 sm:text-sm transition-colors"
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' && e.currentTarget.value) {
                       e.preventDefault();
@@ -129,7 +129,7 @@ const OnboardingTab: React.FC<OnboardingTabProps> = ({ workspaceData, setWorkspa
                 />
                 <button
                   type="button"
-                  className="px-3 py-2 bg-primary dark:bg-teal-600 text-white rounded-r-md hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
+                  className="px-3 py-2 bg-primary dark:bg-green-600 text-white rounded-r-md hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
                   onClick={(e) => {
                     const input = e.currentTarget.previousSibling as HTMLInputElement;
                     if (input.value) {

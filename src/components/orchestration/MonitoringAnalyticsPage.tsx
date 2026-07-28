@@ -212,7 +212,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                 <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Download className="w-4 h-4" />
                 Export Report
               </button>
@@ -258,7 +258,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                   onClick={() => setActiveTab(key as any)}
                   className={`py-4 px-6 text-sm font-medium flex items-center gap-2 transition-colors ${
                     activeTab === key
-                      ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                      ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                       : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                   }`}
                 >
@@ -337,7 +337,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                   <BarChart3 className="w-12 h-12 text-outline dark:text-muted-foreground mx-auto mb-4 transition-colors" />
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Performance Metrics</h3>
                   <p className="text-muted-foreground dark:text-muted-foreground mb-4 transition-colors">Detailed KPIs, execution times, and success rates</p>
-                  <button className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <button className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                     View Detailed Analytics
                   </button>
                 </div>
@@ -380,7 +380,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                       placeholder="Search logs by source, message, or request ID..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                      className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                     />
                   </div>
                   <button className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -435,7 +435,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                       placeholder="Search alerts by message or agent..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                      className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                     />
                   </div>
                   <button className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -477,7 +477,7 @@ export default function MonitoringAnalyticsPage({ onNavigate }: MonitoringAnalyt
                             <Eye className="w-4 h-4" />
                           </button>
                           {!alert.resolved && (
-                            <button className="text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 transition-colors">
+                            <button className="text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 transition-colors">
                               <Settings className="w-4 h-4" />
                             </button>
                           )}

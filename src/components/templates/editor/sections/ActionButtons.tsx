@@ -265,7 +265,7 @@ export default function ActionButtons({
                 !isDirty ? 'No changes to save' :
                 ''
               }
-              className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Save template"
             >
               {isSaving ? (
@@ -328,7 +328,7 @@ export default function ActionButtons({
             <button
               onClick={handleSave}
               disabled={isSaving || !isDirty || hasErrors}
-              className="flex items-center gap-1.5 px-3 py-2 bg-primary dark:bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="flex items-center gap-1.5 px-3 py-2 bg-primary dark:bg-green-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Save template"
             >
               {isSaving ? (

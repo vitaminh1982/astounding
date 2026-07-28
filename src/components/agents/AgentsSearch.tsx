@@ -26,7 +26,7 @@ export default function AgentsSearch() {
           value={searchQuery}
           onChange={handleSearchChange}
           placeholder={t('agents.page.search.placeholder')}
-          className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors duration-200"
+          className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 transition-colors duration-200"
           aria-label={t('agents.page.search.placeholder')}
         />
       </div>

@@ -17,7 +17,7 @@ export default function ClientsFilters() {
             <input 
               type="text"
               placeholder={t('clients.search.placeholder')}
-              className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-teal-200 dark:focus:ring-teal-800 focus:border-teal-600 dark:focus:border-teal-400 transition-colors"
+              className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-200 dark:focus:ring-green-800 focus:border-green-600 dark:focus:border-green-400 transition-colors"
             />
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function ClientsFilters() {
       
       {/* Deuxième ligne : Boutons de filtrage */}
       <div className="flex flex-wrap gap-2 justify-start">
-        <button className="px-4 py-1.5 bg-primary dark:bg-teal-600 text-white rounded-full text-sm hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors">
+        <button className="px-4 py-1.5 bg-primary dark:bg-green-600 text-white rounded-full text-sm hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors">
           {t('clients.filters.all')}
         </button>
         <button className="px-4 py-1.5 bg-white dark:bg-surface-container-highest border border-border dark:border-border text-on-surface dark:text-muted-foreground rounded-full text-sm hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">

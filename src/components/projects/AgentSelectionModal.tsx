@@ -446,13 +446,13 @@ const AgentSelectionModal: React.FC<AgentSelectionModalProps> = ({
                   placeholder="Search agents by name, role, or capabilities..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-3 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                  className="w-full pl-10 pr-4 py-3 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
               
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border">
-                  <Users className="w-4 h-4 text-primary-green dark:text-teal-400" />
+                  <Users className="w-4 h-4 text-primary-green dark:text-green-400" />
                   <span className="text-sm font-medium text-on-surface dark:text-muted-foreground">
                     {tempSelectedIds.length} of {maxAgents} selected
                   </span>
@@ -500,9 +500,9 @@ const AgentSelectionModal: React.FC<AgentSelectionModalProps> = ({
                       className={`
                         relative p-6 border rounded-xl transition-all duration-200 cursor-pointer bg-white dark:bg-surface-container-highest/50
                         ${isSelected 
-                          ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20 ring-2 ring-indigo-200 dark:ring-teal-500/30' 
+                          ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20 ring-2 ring-indigo-200 dark:ring-green-500/30' 
                           : canSelect
-                          ? 'border-border dark:border-border hover:border-indigo-300 dark:hover:border-teal-400 hover:shadow-md dark:hover:shadow-gray-800'
+                          ? 'border-border dark:border-border hover:border-indigo-300 dark:hover:border-green-400 hover:shadow-md dark:hover:shadow-gray-800'
                           : 'border-border dark:border-border opacity-50 cursor-not-allowed'
                         }
                       `}
@@ -510,7 +510,7 @@ const AgentSelectionModal: React.FC<AgentSelectionModalProps> = ({
                       {/* Selection indicator */}
                       <div className="absolute top-4 right-4">
                         {isSelected ? (
-                          <CheckCircle className="w-6 h-6 text-primary-green dark:text-teal-400" />
+                          <CheckCircle className="w-6 h-6 text-primary-green dark:text-green-400" />
                         ) : (
                           <Circle className="w-6 h-6 text-muted-foreground dark:text-muted-foreground" />
                         )}
@@ -613,7 +613,7 @@ const AgentSelectionModal: React.FC<AgentSelectionModalProps> = ({
                 <button
                   onClick={handleSave}
                   disabled={isLoading || tempSelectedIds.length === 0}
-                  className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900"
+                  className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900"
                 >
                   {isLoading && (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>

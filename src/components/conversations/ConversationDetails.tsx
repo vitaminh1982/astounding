@@ -179,7 +179,7 @@ export default function ConversationDetails({ conversation }) {
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-teal-600 rounded-full flex items-center justify-center text-white transition-colors">
+              <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-green-500 dark:to-green-600 rounded-full flex items-center justify-center text-white transition-colors">
                 {conversation.client.avatar ? (
                   <img
                     src={conversation.client.avatar}
@@ -241,7 +241,7 @@ export default function ConversationDetails({ conversation }) {
               <div
                 className={`max-w-[70%] p-3 rounded-lg transition-colors ${
                   msg.sender === 'agent'
-                    ? 'bg-primary dark:bg-teal-600 text-white shadow-sm dark:shadow-gray-900'
+                    ? 'bg-primary dark:bg-green-600 text-white shadow-sm dark:shadow-gray-900'
                     : 'bg-white dark:bg-surface-container-high text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 border border-border dark:border-border'
                 }`}
               >
@@ -251,8 +251,8 @@ export default function ConversationDetails({ conversation }) {
                 </div>
               </div>
               {msg.sender === 'agent' && (
-                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-teal-900/30 transition-colors">
-                  <Bot className="w-4 h-4 text-primary-green dark:text-teal-400 transition-colors" />
+                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-green-900/30 transition-colors">
+                  <Bot className="w-4 h-4 text-primary-green dark:text-green-400 transition-colors" />
                 </div>
               )}
             </motion.div>
@@ -265,18 +265,18 @@ export default function ConversationDetails({ conversation }) {
               animate={{ opacity: 1, y: 0 }}
               className="flex gap-3 justify-end"
             >
-              <div className="max-w-[70%] p-3 rounded-lg bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 transition-colors">
+              <div className="max-w-[70%] p-3 rounded-lg bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 transition-colors">
                 <div className="flex items-center">
-                  <span className="text-primary-green dark:text-teal-300 text-sm mr-2 transition-colors">Typing</span>
+                  <span className="text-primary-green dark:text-green-300 text-sm mr-2 transition-colors">Typing</span>
                   <span className="flex space-x-1">
-                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '200ms' }}></span>
-                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '400ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-green-400 animate-bounce transition-colors" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-green-400 animate-bounce transition-colors" style={{ animationDelay: '200ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-green-400 animate-bounce transition-colors" style={{ animationDelay: '400ms' }}></span>
                   </span>
                 </div>
               </div>
-              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-teal-900/30 transition-colors">
-                <Bot className="w-4 h-4 text-primary-green dark:text-teal-400 transition-colors" />
+              <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-green-900/30 transition-colors">
+                <Bot className="w-4 h-4 text-primary-green dark:text-green-400 transition-colors" />
               </div>
             </motion.div>
           )}
@@ -334,7 +334,7 @@ export default function ConversationDetails({ conversation }) {
             disabled={!message.trim() || isSending || isTyping}
             className={`p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm
               ${message.trim() && !isSending && !isTyping
-                ? 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 dark:shadow-gray-900'
+                ? 'bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 text-white focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 dark:shadow-gray-900'
                 : 'bg-surface-container dark:bg-surface-container-highest text-outline dark:text-muted-foreground cursor-not-allowed focus:ring-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800'
               }
             `}

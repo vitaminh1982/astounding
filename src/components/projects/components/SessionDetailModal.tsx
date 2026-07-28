@@ -66,7 +66,7 @@ const SessionDetailModal: React.FC<SessionDetailModalProps> = ({
                     <div key={message.id} className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[70%] p-3 rounded-lg transition-colors ${
                         message.sender === 'user' 
-                          ? 'bg-primary dark:bg-teal-600 text-white' 
+                          ? 'bg-primary dark:bg-green-600 text-white' 
                           : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant'
                       }`}>
                         <p className="whitespace-pre-wrap">{message.content}</p>
@@ -97,7 +97,7 @@ const SessionDetailModal: React.FC<SessionDetailModalProps> = ({
             </button>
             <button
               onClick={handleResumeAndClose}
-              className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+              className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
             >
               Resume Conversation
             </button>

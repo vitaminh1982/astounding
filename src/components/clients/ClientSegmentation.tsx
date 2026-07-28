@@ -17,8 +17,8 @@ const segments = [
     count: 567, 
     icon: Clock, 
     // Light mode: bg-green-100 text-green-600
-    // Dark mode: bg-teal-700 text-teal-200
-    color: 'bg-green-100 text-green-600 dark:bg-teal-700 dark:text-teal-200',
+    // Dark mode: bg-green-700 text-green-200
+    color: 'bg-green-100 text-green-600 dark:bg-green-700 dark:text-green-200',
     percentage: 45
   },
   { 

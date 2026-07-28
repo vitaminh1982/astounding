@@ -61,7 +61,7 @@ export default function PolicyManagementPage() {
               </p>
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Plus className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   Create Policy
@@ -80,7 +80,7 @@ export default function PolicyManagementPage() {
                 onClick={() => setActiveTab('behavior')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'behavior'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -90,7 +90,7 @@ export default function PolicyManagementPage() {
                 onClick={() => setActiveTab('access')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'access'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -100,7 +100,7 @@ export default function PolicyManagementPage() {
                 onClick={() => setActiveTab('compliance')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'compliance'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -110,7 +110,7 @@ export default function PolicyManagementPage() {
                 onClick={() => setActiveTab('ethics')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'ethics'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -129,7 +129,7 @@ export default function PolicyManagementPage() {
                   placeholder="Search policies..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
               <button className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest hover: dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -148,15 +148,15 @@ export default function PolicyManagementPage() {
                     key={policy.id}
                     className={`p-4 border rounded-lg hover:shadow-md dark:hover:shadow-gray-800 transition-all cursor-pointer ${
                       selectedPolicy === policy.id 
-                        ? 'border-teal-500 dark:border-teal-400 ring-1 ring-teal-500 dark:ring-teal-400' 
+                        ? 'border-green-500 dark:border-green-400 ring-1 ring-green-500 dark:ring-green-400' 
                         : 'border-border dark:border-border'
                     }`}
                     onClick={() => setSelectedPolicy(policy.id)}
                   >
                     <div className="flex justify-between items-start">
                       <div className="flex items-start space-x-4">
-                        <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
-                          <FileText className="h-6 w-6 text-primary-green dark:text-teal-400" />
+                        <div className="p-2 bg-indigo-100 dark:bg-green-900/30 rounded-lg transition-colors">
+                          <FileText className="h-6 w-6 text-primary-green dark:text-green-400" />
                         </div>
                         <div>
                           <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{policy.name}</h3>
@@ -175,7 +175,7 @@ export default function PolicyManagementPage() {
                             e.stopPropagation();
                             setIsEditModalOpen(true);
                           }}
-                          className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
+                          className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
                         >
                           <Edit2 className="h-5 w-5" />
                         </button>
@@ -205,7 +205,7 @@ export default function PolicyManagementPage() {
                     <div className="mt-6">
                       <button
                         type="button"
-                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm dark:shadow-gray-900 text-sm font-medium rounded-md text-white bg-teal-600 dark:bg-primary hover:bg-teal-700 dark:hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-ring dark:focus:ring-teal-400 transition-colors"
+                        className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm dark:shadow-gray-900 text-sm font-medium rounded-md text-white bg-green-600 dark:bg-primary hover:bg-green-700 dark:hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 focus:ring-ring dark:focus:ring-green-400 transition-colors"
                       >
                         <Plus className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
                         Create Policy
@@ -229,21 +229,21 @@ export default function PolicyManagementPage() {
                 <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">Policy Name</label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-colors"
+                  className="w-full px-3 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 transition-colors"
                   defaultValue={filteredPolicies.find(p => p.id === selectedPolicy)?.name}
                 />
               </div>
               <div>
                 <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">Description</label>
                 <textarea
-                  className="w-full px-3 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-colors"
+                  className="w-full px-3 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 transition-colors"
                   rows={3}
                   defaultValue={filteredPolicies.find(p => p.id === selectedPolicy)?.description}
                 ></textarea>
               </div>
               <div>
                 <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">Status</label>
-                <select className="w-full px-3 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-colors">
+                <select className="w-full px-3 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 transition-colors">
                   <option value="active">Active</option>
                   <option value="draft">Draft</option>
                   <option value="inactive">Inactive</option>
@@ -252,7 +252,7 @@ export default function PolicyManagementPage() {
               <div>
                 <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">Policy Content</label>
                 <textarea
-                  className="w-full px-3 py-2 border border-border dark:border-border rounded-md font-mono text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-colors"
+                  className="w-full px-3 py-2 border border-border dark:border-border rounded-md font-mono text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 transition-colors"
                   rows={10}
                   defaultValue={`{
   "policy_type": "behavior",
@@ -285,7 +285,7 @@ export default function PolicyManagementPage() {
               </button>
               <button
                 onClick={() => setIsEditModalOpen(false)}
-                className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-md hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors shadow-sm dark:shadow-gray-900"
+                className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-md hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-sm dark:shadow-gray-900"
               >
                 Save Changes
               </button>

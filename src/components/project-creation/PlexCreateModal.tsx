@@ -113,7 +113,7 @@ export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalP
           {/* Header */}
           <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border dark:border-gray-800">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-primary dark:bg-teal-600 flex items-center justify-center text-white">
+              <div className="w-8 h-8 rounded-full bg-primary dark:bg-green-600 flex items-center justify-center text-white">
                 <BotMessageSquare size={16} />
               </div>
               <div>
@@ -133,7 +133,7 @@ export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalP
           {/* Prompt Area */}
           <div className="px-6 py-5">
             {/* Input box — same style as Plex */}
-            <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 focus-within:border-indigo-400 dark:focus-within:border-teal-500 transition-all">
+            <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-green-500/50 focus-within:border-indigo-400 dark:focus-within:border-green-500 transition-all">
               <textarea
                 ref={textareaRef}
                 value={input}
@@ -156,7 +156,7 @@ export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalP
                   disabled={!input.trim()}
                   className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all ${
                     input.trim()
-                      ? 'bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 shadow-sm'
+                      ? 'bg-primary dark:bg-green-600 text-white hover:bg-indigo-700 dark:hover:bg-green-700 shadow-sm'
                       : 'bg-surface-container dark:bg-surface-container-highest text-outline cursor-not-allowed'
                   }`}
                   aria-label="Send"
@@ -174,7 +174,7 @@ export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalP
                   <button
                     key={pill.id}
                     onClick={() => handlePillClick(pill.prompt)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border dark:border-border bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground text-xs font-medium hover:border-indigo-400 dark:hover:border-teal-500 hover:text-primary-green dark:hover:text-teal-400 hover:bg-indigo-50/50 dark:hover:bg-teal-950/20 transition-all shadow-sm"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border dark:border-border bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground text-xs font-medium hover:border-indigo-400 dark:hover:border-green-500 hover:text-primary-green dark:hover:text-green-400 hover:bg-indigo-50/50 dark:hover:bg-green-950/20 transition-all shadow-sm"
                   >
                     <Icon size={13} className="flex-shrink-0" />
                     {pill.label}

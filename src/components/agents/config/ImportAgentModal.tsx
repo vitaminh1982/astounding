@@ -44,7 +44,7 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
       case 'green': return 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400';
       case 'purple': return 'bg-purple-100 dark:bg-purple-900/30 text-tertiary dark:text-tertiary';
       case 'orange': return 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400';
-      case 'teal': return 'bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400';
+      case 'green': return 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400';
       case 'red': return 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-destructive';
       case 'pink': return 'bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400';
       default: return 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground';
@@ -69,7 +69,7 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
         <div className="flex-1 overflow-y-auto p-6">
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-teal-500"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-green-500"></div>
             </div>
           ) : (
             <>
@@ -84,7 +84,7 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
                   placeholder="Search agents..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-4 py-2 border border-border dark:border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                  className="w-full px-4 py-2 border border-border dark:border-border rounded-md focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
                 />
               </div>
               
@@ -100,7 +100,7 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
                       key={agent.id} 
                       className={`border rounded-lg p-4 cursor-pointer transition-all hover:shadow-md dark:hover:shadow-gray-900 relative ${
                         isSelected 
-                          ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20' 
+                          ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20' 
                           : 'border-border dark:border-border bg-white dark:bg-surface-container-highest hover:border-border dark:hover:border-outline'
                       }`}
                       onClick={() => setSelectedAgent(agent)}
@@ -132,13 +132,13 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
                           )}
                         </div>
                         <div className="flex-shrink-0">
-                          <span className="font-medium text-indigo-700 dark:text-teal-400">{agent.pricePerMonth}€/mo</span>
+                          <span className="font-medium text-indigo-700 dark:text-green-400">{agent.pricePerMonth}€/mo</span>
                         </div>
                       </div>
                       
                       {/* Info indicator when content is truncated and not hovered */}
                       {!isHovered && agent.description.length > 100 && (
-                        <div className="absolute bottom-2 right-2 text-indigo-500 dark:text-teal-400 bg-white dark:bg-surface-container-high bg-opacity-80 dark:bg-opacity-80 rounded-full p-1">
+                        <div className="absolute bottom-2 right-2 text-indigo-500 dark:text-green-400 bg-white dark:bg-surface-container-high bg-opacity-80 dark:bg-opacity-80 rounded-full p-1">
                           <Info size={16} />
                         </div>
                       )}
@@ -169,7 +169,7 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
                         onClick={() => setCurrentPage(i + 1)}
                         className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium transition-colors ${
                           currentPage === i + 1
-                            ? 'bg-indigo-50 dark:bg-teal-900/30 border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400 z-10'
+                            ? 'bg-indigo-50 dark:bg-green-900/30 border-primary-green dark:border-green-500 text-primary-green dark:text-green-400 z-10'
                             : 'bg-white dark:bg-surface-container-highest border-border dark:border-border text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                       >
@@ -206,8 +206,8 @@ const ImportAgentModal: React.FC<ImportAgentModalProps> = ({ onClose, onImportCo
           <button 
             className={`px-4 py-2 rounded-md text-white transition-colors shadow-sm dark:shadow-gray-900 ${
               selectedAgent 
-                ? 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700' 
-                : 'bg-indigo-400 dark:bg-teal-400 cursor-not-allowed'
+                ? 'bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700' 
+                : 'bg-indigo-400 dark:bg-green-400 cursor-not-allowed'
             }`}
             onClick={handleImport}
             disabled={!selectedAgent}

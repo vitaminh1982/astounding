@@ -181,8 +181,8 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         whileTap={{ scale: 0.99 }}
                         className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           isSelected
-                            ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                            : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
+                            ? 'border-indigo-300 dark:border-green-600 bg-indigo-50 dark:bg-green-900/20'
+                            : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-green-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                       >
                         {/* Radio Button */}
@@ -197,11 +197,11 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                           />
                           <div className={`w-5 h-5 rounded-full border-2 transition-all ${
                             isSelected
-                              ? 'border-indigo-600 dark:border-teal-600'
+                              ? 'border-indigo-600 dark:border-green-600'
                               : 'border-border dark:border-border'
                           }`}>
                             {isSelected && (
-                              <div className="w-full h-full rounded-full bg-primary dark:bg-teal-600 scale-50" />
+                              <div className="w-full h-full rounded-full bg-primary dark:bg-green-600 scale-50" />
                             )}
                           </div>
                         </div>
@@ -251,7 +251,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                     <Users className="w-4 h-4" />
                     Team Access Permissions
                   </h4>
-                  <span className="text-sm text-primary-green dark:text-teal-400 font-medium transition-colors">
+                  <span className="text-sm text-primary-green dark:text-green-400 font-medium transition-colors">
                     {activeTeamsCount} teams
                   </span>
                 </div>
@@ -267,8 +267,8 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         whileHover={{ scale: 1.01 }}
                         className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           isActive
-                            ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                            : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
+                            ? 'border-indigo-300 dark:border-green-600 bg-indigo-50 dark:bg-green-900/20'
+                            : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-green-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                       >
                         {/* Checkbox */}
@@ -281,7 +281,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                           />
                           <div className={`w-5 h-5 border-2 rounded transition-all ${
                             isActive
-                              ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                              ? 'bg-primary dark:bg-green-600 border-indigo-600 dark:border-green-600'
                               : 'bg-white dark:bg-surface-container-highest border-border dark:border-border'
                           }`}>
                             {isActive && (
@@ -293,12 +293,12 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         {/* Icon */}
                         <div className={`p-2 rounded-lg flex-shrink-0 transition-colors ${
                           isActive
-                            ? 'bg-indigo-100 dark:bg-teal-900/50'
+                            ? 'bg-indigo-100 dark:bg-green-900/50'
                             : 'bg-surface-container-low dark:bg-surface-container-highest'
                         }`}>
                           <Icon className={`w-5 h-5 transition-colors ${
                             isActive
-                              ? 'text-primary-green dark:text-teal-400'
+                              ? 'text-primary-green dark:text-green-400'
                               : 'text-muted-foreground dark:text-muted-foreground'
                           }`} />
                         </div>
@@ -315,7 +315,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                             </span>
                             <span className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${
                               isActive
-                                ? 'bg-indigo-100 dark:bg-teal-900/50 text-indigo-700 dark:text-teal-300'
+                                ? 'bg-indigo-100 dark:bg-green-900/50 text-indigo-700 dark:text-green-300'
                                 : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground'
                             }`}>
                               {option.badge}
@@ -422,7 +422,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
       {/* Mobile Apply Button */}
       <div className="sm:hidden p-4 bg-white dark:bg-surface-container-high border-t border-border dark:border-border shadow-lg dark:shadow-gray-900 transition-colors">
         <button
-          className="w-full py-3 px-4 bg-primary dark:bg-teal-600 text-white rounded-lg font-medium hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="w-full py-3 px-4 bg-primary dark:bg-green-600 text-white rounded-lg font-medium hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         >
           Apply Changes
         </button>

@@ -93,8 +93,8 @@ export default function UpgradeOptions() {
     <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-xl font-semibold text-foreground dark:text-foreground">Upgrade Options</h3>
-        <div className="p-2 bg-blue-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <Zap className="w-5 h-5 text-tertiary dark:text-teal-300" />
+        <div className="p-2 bg-blue-100 dark:bg-green-900 rounded-lg transition-colors">
+          <Zap className="w-5 h-5 text-tertiary dark:text-green-300" />
         </div>
       </div>
       
@@ -104,13 +104,13 @@ export default function UpgradeOptions() {
             key={index} 
             className={`border rounded-xl p-4 relative bg-white dark:bg-surface-container-highest transition-colors ${
               plan.isRecommended 
-                ? 'border-tertiary dark:border-teal-500' 
+                ? 'border-tertiary dark:border-green-500' 
                 : 'border-border dark:border-border'
             } ${!plan.isAvailable ? 'opacity-80' : ''}`}
           >
             {plan.isRecommended && (
               <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                <span className="bg-tertiary dark:bg-teal-600 text-white text-xs px-3 py-1 rounded-full font-medium transition-colors">
+                <span className="bg-tertiary dark:bg-green-600 text-white text-xs px-3 py-1 rounded-full font-medium transition-colors">
                   Most Popular
                 </span>
               </div>
@@ -132,7 +132,7 @@ export default function UpgradeOptions() {
               disabled={!plan.isAvailable}
               className={`w-full py-2.5 rounded-lg flex items-center justify-center mb-5 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-700 ${
                 plan.isAvailable
-                  ? 'bg-tertiary dark:bg-teal-600 text-white hover:bg-blue-700 dark:hover:bg-teal-700 focus:ring-blue-500 dark:focus:ring-ring' 
+                  ? 'bg-tertiary dark:bg-green-600 text-white hover:bg-blue-700 dark:hover:bg-green-700 focus:ring-blue-500 dark:focus:ring-ring' 
                   : 'bg-surface-container dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground cursor-not-allowed'
               }`}
             >
@@ -213,7 +213,7 @@ export default function UpgradeOptions() {
       
       <div className="mt-6 pt-6 border-t border-border dark:border-border">
         <p className="text-sm text-muted-foreground dark:text-muted-foreground text-center">
-          Need a custom plan? <a href="#" className="text-tertiary dark:text-teal-400 hover:text-blue-800 dark:hover:text-teal-300 transition-colors">Contact our sales team</a>
+          Need a custom plan? <a href="#" className="text-tertiary dark:text-green-400 hover:text-blue-800 dark:hover:text-green-300 transition-colors">Contact our sales team</a>
         </p>
       </div>
     </div>

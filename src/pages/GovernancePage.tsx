@@ -129,7 +129,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
                 </span>
               </button>
               <button 
-          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+          className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
                 <Download className="w-4 h-4" />
                 <span className="whitespace-nowrap">
@@ -269,7 +269,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                         <button 
                           onClick={() => onNavigate('agent-configuration')}
-                          className="text-primary-green dark:text-teal-400 hover:text-indigo-900 dark:hover:text-teal-300 mr-4 transition-colors"
+                          className="text-primary-green dark:text-green-400 hover:text-indigo-900 dark:hover:text-green-300 mr-4 transition-colors"
                         >
                           Configure
                         </button>
@@ -291,7 +291,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
               <div className="p-6 border-b border-border dark:border-border transition-colors">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Recent Incidents</h3>
-                  <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-900 dark:hover:text-teal-300 transition-colors">
+                  <button className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-900 dark:hover:text-green-300 transition-colors">
                     View All
                   </button>
                 </div>
@@ -328,7 +328,7 @@ export default function GovernancePage({ onNavigate }: GovernancePageProps) {
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Compliance Metrics</h3>
                   <button 
                     onClick={() => onNavigate('audit-compliance')}
-                    className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-900 dark:hover:text-teal-300 transition-colors"
+                    className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-900 dark:hover:text-green-300 transition-colors"
                   >
                     View Details
                   </button>

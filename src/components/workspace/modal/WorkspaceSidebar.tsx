@@ -37,7 +37,7 @@ const WorkspaceSidebar: React.FC<WorkspaceSidebarProps> = ({ activeTab, setActiv
                 onClick={() => setActiveTab(tab.id)}
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors ${
                   activeTab === tab.id
-                    ? 'bg-indigo-50 dark:bg-teal-900 text-indigo-700 dark:text-teal-100'
+                    ? 'bg-indigo-50 dark:bg-green-900 text-indigo-700 dark:text-green-100'
                     : 'text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                 }`}
               >

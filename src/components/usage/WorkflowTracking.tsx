@@ -13,8 +13,8 @@ export default function WorkflowTracking({ usageData }: WorkflowTrackingProps) {
     <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Workflow Tracking</h3>
-        <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <GitBranch className="w-5 h-5 text-primary-green dark:text-teal-300" />
+        <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+          <GitBranch className="w-5 h-5 text-primary-green dark:text-green-300" />
         </div>
       </div>
       

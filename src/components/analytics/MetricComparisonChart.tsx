@@ -242,7 +242,7 @@ const MetricComparisonChart: React.FC<MetricComparisonChartProps> = ({
           {/* Export button */}
           <button 
             onClick={handleExport}
-            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             <Download className="w-4 h-4" />
             <span>Export</span>
@@ -254,7 +254,7 @@ const MetricComparisonChart: React.FC<MetricComparisonChartProps> = ({
       <div style={{ height: `${height}px` }} className="relative">
         {isLoading ? (
           <div className="absolute inset-0 flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest/50 bg-opacity-75 rounded-lg transition-colors">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-teal-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-green-500"></div>
           </div>
         ) : (
           <Bar ref={chartRef} data={data} options={options} />

@@ -89,7 +89,7 @@ export default function AuditCompliancePage() {
               </p>
             </div>
             <div className="flex gap-3">
-              <button           className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+              <button           className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
                 <Download className="w-4 h-4" />
                 <span className="whitespace-nowrap">
@@ -109,7 +109,7 @@ export default function AuditCompliancePage() {
                 onClick={() => setActiveTab('audit')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'audit'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -119,7 +119,7 @@ export default function AuditCompliancePage() {
                 onClick={() => setActiveTab('compliance')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'compliance'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -129,7 +129,7 @@ export default function AuditCompliancePage() {
                 onClick={() => setActiveTab('decisions')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'decisions'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -148,7 +148,7 @@ export default function AuditCompliancePage() {
                   placeholder={`Search ${activeTab === 'audit' ? 'audit logs' : activeTab === 'compliance' ? 'compliance reports' : 'decision logs'}...`}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
               <div className="flex gap-2">
@@ -203,7 +203,7 @@ export default function AuditCompliancePage() {
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                           <button
                             onClick={() => setSelectedAudit(log.id)}
-                            className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors"
+                            className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors"
                           >
                             View Details
                           </button>
@@ -221,8 +221,8 @@ export default function AuditCompliancePage() {
                   <div key={report.id} className="border border-border dark:border-border rounded-lg p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all">
                     <div className="flex justify-between items-start">
                       <div className="flex items-start space-x-4">
-                        <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
-                          <ClipboardCheck className="h-6 w-6 text-primary-green dark:text-teal-400" />
+                        <div className="p-2 bg-indigo-100 dark:bg-green-900/30 rounded-lg transition-colors">
+                          <ClipboardCheck className="h-6 w-6 text-primary-green dark:text-green-400" />
                         </div>
                         <div>
                           <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{report.title}</h3>
@@ -237,10 +237,10 @@ export default function AuditCompliancePage() {
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Eye className="h-5 w-5" />
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Download className="h-5 w-5" />
                         </button>
                       </div>
@@ -264,8 +264,8 @@ export default function AuditCompliancePage() {
                   <div key={log.id} className="border border-border dark:border-border rounded-lg p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all">
                     <div className="flex justify-between items-start">
                       <div className="flex items-start space-x-4">
-                        <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
-                          <FileText className="h-6 w-6 text-primary-green dark:text-teal-400" />
+                        <div className="p-2 bg-indigo-100 dark:bg-green-900/30 rounded-lg transition-colors">
+                          <FileText className="h-6 w-6 text-primary-green dark:text-green-400" />
                         </div>
                         <div>
                           <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{log.decision}</h3>
@@ -280,7 +280,7 @@ export default function AuditCompliancePage() {
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Eye className="h-5 w-5" />
                         </button>
                       </div>
@@ -361,7 +361,7 @@ export default function AuditCompliancePage() {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setSelectedAudit(null)}
-                className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-md hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors shadow-sm dark:shadow-gray-900"
+                className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-md hover:bg-green-700 dark:hover:bg-green-600 transition-colors shadow-sm dark:shadow-gray-900"
               >
                 Close
               </button>

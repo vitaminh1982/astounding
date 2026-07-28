@@ -24,7 +24,7 @@ const COLOR_MAP: Record<string, { bg: string; text: string; ring: string; progre
   blue: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-tertiary dark:text-tertiary', ring: 'ring-blue-400', progress: 'bg-tertiary' },
   amber: { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-600 dark:text-destructive', ring: 'ring-amber-400', progress: 'bg-destructive' },
   pink: { bg: 'bg-pink-100 dark:bg-pink-900/30', text: 'text-pink-600 dark:text-pink-400', ring: 'ring-pink-400', progress: 'bg-pink-500' },
-  cyan: { bg: 'bg-cyan-100 dark:bg-cyan-900/30', text: 'text-cyan-600 dark:text-cyan-400', ring: 'ring-cyan-400', progress: 'bg-cyan-500' },
+  green: { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-600 dark:text-green-400', ring: 'ring-green-400', progress: 'bg-green-500' },
   emerald: { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-600 dark:text-emerald-400', ring: 'ring-emerald-400', progress: 'bg-emerald-500' },
   violet: { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-600 dark:text-violet-400', ring: 'ring-violet-400', progress: 'bg-violet-500' },
   green: { bg: 'bg-green-100 dark:bg-green-900/30', text: 'text-green-600 dark:text-green-400', ring: 'ring-green-400', progress: 'bg-green-500' },

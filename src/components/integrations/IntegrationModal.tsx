@@ -92,7 +92,7 @@ export default function IntegrationModal({
                     id="api-key"
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
-                    className="mt-1 block w-full border border-border dark:border-border rounded-md shadow-sm dark:shadow-gray-900 py-2 px-3 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:border-tertiary dark:focus:border-teal-500 sm:text-sm transition-colors"
+                    className="mt-1 block w-full border border-border dark:border-border rounded-md shadow-sm dark:shadow-gray-900 py-2 px-3 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:border-tertiary dark:focus:border-green-500 sm:text-sm transition-colors"
                     required={!integration.isConnected}
                   />
                 </div>
@@ -106,7 +106,7 @@ export default function IntegrationModal({
                   id="sync-frequency"
                   value={syncFrequency}
                   onChange={(e) => setSyncFrequency(e.target.value)}
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:border-tertiary dark:focus:border-teal-500 sm:text-sm rounded-md transition-colors"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:border-tertiary dark:focus:border-green-500 sm:text-sm rounded-md transition-colors"
                 >
                   <option value="realtime">{t('integrations.realtime')}</option>
                   <option value="hourly">{t('integrations.hourly')}</option>
@@ -123,7 +123,7 @@ export default function IntegrationModal({
                   id="access-level"
                   value={accessLevel}
                   onChange={(e) => setAccessLevel(e.target.value)}
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:border-tertiary dark:focus:border-teal-500 sm:text-sm rounded-md transition-colors"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:border-tertiary dark:focus:border-green-500 sm:text-sm rounded-md transition-colors"
                 >
                   <option value="readOnly">{t('integrations.readOnly')}</option>
                   <option value="readWrite">{t('integrations.readWrite')}</option>
@@ -139,7 +139,7 @@ export default function IntegrationModal({
                     type="checkbox"
                     checked={notifications}
                     onChange={(e) => setNotifications(e.target.checked)}
-                    className="focus:ring-blue-500 dark:focus:ring-ring h-4 w-4 text-tertiary dark:text-teal-600 border-border dark:border-border bg-white dark:bg-surface-container-highest rounded transition-colors"
+                    className="focus:ring-blue-500 dark:focus:ring-ring h-4 w-4 text-tertiary dark:text-green-600 border-border dark:border-border bg-white dark:bg-surface-container-highest rounded transition-colors"
                   />
                 </div>
                 <div className="ml-3 text-sm">
@@ -154,8 +154,8 @@ export default function IntegrationModal({
                   type="submit"
                   className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm dark:shadow-gray-900 px-4 py-2 text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 sm:ml-3 sm:w-auto sm:text-sm transition-colors
                   ${integration.isConnected 
-                    ? 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-blue-500 dark:focus:ring-ring'
-                    : 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-blue-500 dark:focus:ring-ring'}`}
+                    ? 'bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 focus:ring-blue-500 dark:focus:ring-ring'
+                    : 'bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 focus:ring-blue-500 dark:focus:ring-ring'}`}
                 >
                   {integration.isConnected 
                     ? t('integrations.saveSuccess')

@@ -44,7 +44,7 @@ export default function CustomizationSettings() {
                 <div className="text-center">
                   <Upload className="mx-auto h-12 w-12 text-outline dark:text-muted-foreground" />
                   <div className="mt-2">
-                    <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
+                    <button className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors">
                       Download a logo
                     </button>
                   </div>

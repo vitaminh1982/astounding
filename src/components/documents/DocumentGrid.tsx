@@ -110,7 +110,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
                   return agent ? (
                     <span
                       key={agent.id}
-                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-teal-50 dark:bg-teal-900/30 border border-teal-200 dark:border-teal-800 text-teal-600 dark:text-teal-400 transition-colors group"
+                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800 text-green-600 dark:text-green-400 transition-colors group"
                     >
                       <Bot className="h-3 w-3 mr-1" />
                       {agent.name}

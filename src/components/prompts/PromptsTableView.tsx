@@ -146,7 +146,7 @@ export default function PromptsTableView({
                     : 'bg-surface-container-low dark:bg-surface-container-highest'
                 } ${
                   selectedPromptId === prompt.id 
-                    ? 'bg-teal-50 dark:bg-teal-900/30' 
+                    ? 'bg-green-50 dark:bg-green-900/30' 
                     : ''
                 } hover:bg-surface-container-low dark:hover:bg-surface-container-highest cursor-pointer transition-colors`}
                 onClick={() => handleRowClick(prompt.id)}
@@ -162,7 +162,7 @@ export default function PromptsTableView({
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 transition-colors">
+                  <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 transition-colors">
                     {prompt.category.replace('_', ' ')}
                   </span>
                 </td>
@@ -182,7 +182,7 @@ export default function PromptsTableView({
                           e.stopPropagation();
                           onUsePrompt(prompt.id);
                         }}
-                        className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors"
+                        className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors"
                         title="Use Prompt"
                       >
                         <PlayCircle className="h-5 w-5" />

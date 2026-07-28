@@ -106,7 +106,7 @@ export default function ProjectWorkspace() {
               onClick={() => dispatch({ type: 'SET_ACTIVE_TAB', payload: tab.id })}
               className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-t-lg transition-colors relative ${
                 activeTab === tab.id
-                  ? 'text-tertiary dark:text-teal-400 bg-white dark:bg-surface-container-high border border-b-0 border-border dark:border-border'
+                  ? 'text-tertiary dark:text-green-400 bg-white dark:bg-surface-container-high border border-b-0 border-border dark:border-border'
                   : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant'
               }`}
               aria-label={tab.label}

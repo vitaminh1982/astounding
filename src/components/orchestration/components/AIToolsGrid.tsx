@@ -11,12 +11,12 @@ const AIToolsGrid: React.FC = () => {
     { name: 'AI Sheets', icon: Table, color: 'text-green-600', bgColor: 'bg-green-50 dark:bg-green-900/30', isNew: false },
     { name: 'AI Docs', icon: FileText, color: 'text-tertiary', bgColor: 'bg-blue-50 dark:bg-blue-900/30', isNew: true },
     { name: 'AI Pods', icon: Lightbulb, color: 'text-tertiary', bgColor: 'bg-purple-50 dark:bg-purple-900/30', isNew: true },
-    { name: 'AI Chat', icon: MessageSquare, color: 'text-teal-600', bgColor: 'bg-teal-50 dark:bg-teal-900/30', isNew: false },
+    { name: 'AI Chat', icon: MessageSquare, color: 'text-green-600', bgColor: 'bg-green-50 dark:bg-green-900/30', isNew: false },
     { name: 'AI Image', icon: Image, color: 'text-yellow-600', bgColor: 'bg-yellow-50 dark:bg-yellow-900/30', isNew: false },
     { name: 'AI Video', icon: Play, color: 'text-red-600', bgColor: 'bg-red-50 dark:bg-red-900/30', isNew: false },
     { name: 'Deep Research', icon: Globe, color: 'text-lime-600', bgColor: 'bg-lime-50 dark:bg-lime-900/30', isNew: false },
     { name: 'Call For Me', icon: Phone, color: 'text-pink-600', bgColor: 'bg-pink-50 dark:bg-pink-900/30', isNew: false },
-    { name: 'Download For Me', icon: Download, color: 'text-cyan-600', bgColor: 'bg-cyan-50 dark:bg-cyan-900/30', isNew: false },
+    { name: 'Download For Me', icon: Download, color: 'text-green-600', bgColor: 'bg-green-50 dark:bg-green-900/30', isNew: false },
     { name: 'All Agents', icon: Bot, color: 'text-muted-foreground dark:text-muted-foreground', bgColor: 'bg-surface-container-low dark:bg-surface-container-highest', isNew: false },
     { name: 'Workflows', icon: GitBranch, color: 'text-primary-green', bgColor: 'bg-indigo-50 dark:bg-indigo-900/30', isNew: false }
   ];

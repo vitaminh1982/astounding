@@ -136,8 +136,8 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                   </button>
                   
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 rounded-lg transition-colors">
-                      <User className="w-6 h-6 text-primary-green dark:text-teal-400 transition-colors" />
+                    <div className="p-2 bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 rounded-lg transition-colors">
+                      <User className="w-6 h-6 text-primary-green dark:text-green-400 transition-colors" />
                     </div>
                     <div>
                       <h2 className="text-xl sm:text-2xl font-bold text-foreground dark:text-foreground transition-colors">
@@ -185,7 +185,7 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                 <div className="mt-4 p-3 bg-surface-container-low dark:bg-surface-container-high/50 rounded-lg border border-border dark:border-border transition-colors">
                   <div className="flex items-center gap-3">
                     <div className="p-1.5 bg-white dark:bg-surface-container-highest rounded-lg shadow-sm transition-colors">
-                      <currentSection.icon className="w-4 h-4 text-primary-green dark:text-teal-400 transition-colors" />
+                      <currentSection.icon className="w-4 h-4 text-primary-green dark:text-green-400 transition-colors" />
                     </div>
                     <div>
                       <h3 className="font-medium text-foreground dark:text-foreground transition-colors">
@@ -222,18 +222,18 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                         }}
                         className={`w-full px-4 py-3 text-left flex items-center gap-3 transition-colors ${
                           activeSection === section.id
-                            ? 'bg-indigo-50 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 border-r-2 border-primary-green dark:border-teal-500'
+                            ? 'bg-indigo-50 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 border-r-2 border-primary-green dark:border-green-500'
                             : 'text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                       >
                         <div className={`p-1.5 rounded-lg transition-colors ${
                           activeSection === section.id
-                            ? 'bg-indigo-100 dark:bg-teal-900/50'
+                            ? 'bg-indigo-100 dark:bg-green-900/50'
                             : 'bg-surface-container-low dark:bg-surface-container-highest'
                         }`}>
                           <section.icon className={`w-4 h-4 transition-colors ${
                             activeSection === section.id
-                              ? 'text-primary-green dark:text-teal-400'
+                              ? 'text-primary-green dark:text-green-400'
                               : 'text-muted-foreground dark:text-muted-foreground'
                           }`} />
                         </div>
@@ -242,7 +242,7 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                           <p className="text-xs opacity-75">{section.description}</p>
                         </div>
                         {activeSection === section.id && (
-                          <div className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400" />
+                          <div className="w-2 h-2 rounded-full bg-primary dark:bg-green-400" />
                         )}
                       </motion.button>
                     ))}
@@ -266,27 +266,27 @@ export default function ClientEditor({ client, onClose, onSave }: ClientEditorPr
                         onClick={() => setActiveSection(section.id)}
                         className={`w-full p-4 rounded-lg text-left transition-all duration-200 group ${
                           activeSection === section.id
-                            ? 'bg-white dark:bg-surface-container-highest text-indigo-700 dark:text-teal-300 shadow-sm dark:shadow-gray-900 border border-indigo-200 dark:border-teal-800'
+                            ? 'bg-white dark:bg-surface-container-highest text-indigo-700 dark:text-green-300 shadow-sm dark:shadow-gray-900 border border-indigo-200 dark:border-green-800'
                             : 'text-on-surface dark:text-muted-foreground hover:bg-white dark:hover:bg-surface-container-highest hover:shadow-sm dark:hover:shadow-gray-900'
                         }`}
                       >
                         <div className="flex items-center gap-3 mb-2">
                           <div className={`p-2 rounded-lg transition-colors ${
                             activeSection === section.id
-                              ? 'bg-indigo-100 dark:bg-teal-900/30'
-                              : 'bg-surface-container dark:bg-surface-container-highest group-hover:bg-indigo-100 dark:group-hover:bg-teal-900/30'
+                              ? 'bg-indigo-100 dark:bg-green-900/30'
+                              : 'bg-surface-container dark:bg-surface-container-highest group-hover:bg-indigo-100 dark:group-hover:bg-green-900/30'
                           }`}>
                             <section.icon className={`w-5 h-5 transition-colors ${
                               activeSection === section.id
-                                ? 'text-primary-green dark:text-teal-400'
-                                : 'text-muted-foreground dark:text-muted-foreground group-hover:text-primary-green dark:group-hover:text-teal-400'
+                                ? 'text-primary-green dark:text-green-400'
+                                : 'text-muted-foreground dark:text-muted-foreground group-hover:text-primary-green dark:group-hover:text-green-400'
                             }`} />
                           </div>
                           <div className="flex-1">
                             <p className="font-medium">{section.label}</p>
                           </div>
                           {activeSection === section.id && (
-                            <div className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400" />
+                            <div className="w-2 h-2 rounded-full bg-primary dark:bg-green-400" />
                           )}
                         </div>
                         <p className="text-sm opacity-75 ml-11">

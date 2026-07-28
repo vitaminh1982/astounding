@@ -102,7 +102,7 @@ export default function EmptyTemplateEditor({ onClose, onSave }: EmptyTemplateEd
                       type="text"
                       value={template.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all ${
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all ${
                         errors.name ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                       }`}
                       placeholder="Enter template name"
@@ -119,7 +119,7 @@ export default function EmptyTemplateEditor({ onClose, onSave }: EmptyTemplateEd
                     <textarea
                       value={template.description}
                       onChange={(e) => handleInputChange('description', e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all ${
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all ${
                         errors.description ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                       }`}
                       rows={3}
@@ -137,7 +137,7 @@ export default function EmptyTemplateEditor({ onClose, onSave }: EmptyTemplateEd
                     <select
                       value={template.category}
                       onChange={(e) => handleInputChange('category', e.target.value as TemplateCategory)}
-                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-all ${
+                      className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-all ${
                         errors.category ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                       }`}
                     >
@@ -160,7 +160,7 @@ export default function EmptyTemplateEditor({ onClose, onSave }: EmptyTemplateEd
                       type="text"
                       value={template.tags.join(', ')}
                       onChange={(e) => handleTagsChange(e.target.value)}
-                      className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                      className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
                       placeholder="Enter tags separated by commas"
                     />
                     <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
@@ -197,7 +197,7 @@ export default function EmptyTemplateEditor({ onClose, onSave }: EmptyTemplateEd
               </button>
               <button
                 onClick={handleSubmit}
-                className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
               >
                 Create Template
               </button>

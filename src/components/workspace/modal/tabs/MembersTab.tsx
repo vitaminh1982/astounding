@@ -15,7 +15,7 @@ const MembersTab: React.FC<MembersTabProps> = ({ workspaceData }) => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-medium text-foreground dark:text-foreground">Workspace Members</h3>
-        <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+        <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
           <Plus className="w-4 h-4 mr-2" />
           Invite Member
         </button>
@@ -47,7 +47,7 @@ const MembersTab: React.FC<MembersTabProps> = ({ workspaceData }) => {
               <tr key={member.id} className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <div className="h-10 w-10 rounded-full bg-indigo-100 dark:bg-teal-900 flex items-center justify-center text-primary-green dark:text-teal-100 font-medium">
+                    <div className="h-10 w-10 rounded-full bg-indigo-100 dark:bg-green-900 flex items-center justify-center text-primary-green dark:text-green-100 font-medium">
                       {member.name.charAt(0)}
                     </div>
                     <div className="ml-4">
@@ -70,7 +70,7 @@ const MembersTab: React.FC<MembersTabProps> = ({ workspaceData }) => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <button className="text-primary-green dark:text-teal-400 hover:text-indigo-900 dark:hover:text-teal-300 transition-colors">
+                  <button className="text-primary-green dark:text-green-400 hover:text-indigo-900 dark:hover:text-green-300 transition-colors">
                     Edit
                   </button>
                 </td>
@@ -97,7 +97,7 @@ const MembersTab: React.FC<MembersTabProps> = ({ workspaceData }) => {
                 </div>
               </div>
               <div className="flex space-x-2">
-                <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
+                <button className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors">
                   Resend
                 </button>
                 <button className="text-sm text-red-600 dark:text-destructive hover:text-red-800 dark:hover:text-red-300 transition-colors">

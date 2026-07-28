@@ -67,12 +67,12 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
 
             {/* Quick Stats */}
             <div className="flex gap-4">
-              <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-teal-900/20 dark:to-teal-800/20 rounded-xl px-4 py-3 border border-indigo-200 dark:border-teal-700 transition-colors">
+              <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl px-4 py-3 border border-indigo-200 dark:border-green-700 transition-colors">
                 <div className="flex items-center gap-2 mb-1">
-                  <MessageSquare className="w-4 h-4 text-primary-green dark:text-teal-400" />
-                  <span className="text-xs font-medium text-primary-green dark:text-teal-400">Total Sessions</span>
+                  <MessageSquare className="w-4 h-4 text-primary-green dark:text-green-400" />
+                  <span className="text-xs font-medium text-primary-green dark:text-green-400">Total Sessions</span>
                 </div>
-                <div className="text-2xl font-bold text-indigo-900 dark:text-teal-300">{stats.totalSessions}</div>
+                <div className="text-2xl font-bold text-indigo-900 dark:text-green-300">{stats.totalSessions}</div>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 rounded-xl px-4 py-3 border border-green-200 dark:border-green-700 transition-colors">
                 <div className="flex items-center gap-2 mb-1">
@@ -95,7 +95,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
                   placeholder="Search conversations, agents, topics..."
                   value={historyFilter.search}
                   onChange={(e) => setHistoryFilter(prev => ({ ...prev, search: e.target.value }))}
-                  className="pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 text-sm w-full bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                  className="pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 text-sm w-full bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
                 />
               </div>
 
@@ -105,7 +105,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
                 <select
                   value={historyFilter.agent}
                   onChange={(e) => setHistoryFilter(prev => ({ ...prev, agent: e.target.value }))}
-                  className="pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg text-sm appearance-none bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 min-w-[150px] transition-all"
+                  className="pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg text-sm appearance-none bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 min-w-[150px] transition-all"
                 >
                   <option value="all">All Agents</option>
                   {agents.map(agent => (
@@ -120,7 +120,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
                 <select
                   value={historyFilter.groupBy}
                   onChange={(e) => setHistoryFilter(prev => ({ ...prev, groupBy: e.target.value as 'agent' | 'date' }))}
-                  className="pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg text-sm appearance-none bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 min-w-[150px] transition-all"
+                  className="pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg text-sm appearance-none bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 min-w-[150px] transition-all"
                 >
                   <option value="date">Group by Date</option>
                   <option value="agent">Group by Agent</option>
@@ -136,7 +136,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
                   onClick={() => setViewMode('timeline')}
                   className={`p-2 rounded transition-colors ${
                     viewMode === 'timeline' 
-                      ? 'bg-white dark:bg-surface-container-highest text-primary-green dark:text-teal-400 shadow-sm' 
+                      ? 'bg-white dark:bg-surface-container-highest text-primary-green dark:text-green-400 shadow-sm' 
                       : 'text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-on-surface-variant'
                   }`}
                   title="Timeline View"
@@ -147,7 +147,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
                   onClick={() => setViewMode('grid')}
                   className={`p-2 rounded transition-colors ${
                     viewMode === 'grid' 
-                      ? 'bg-white dark:bg-surface-container-highest text-primary-green dark:text-teal-400 shadow-sm' 
+                      ? 'bg-white dark:bg-surface-container-highest text-primary-green dark:text-green-400 shadow-sm' 
                       : 'text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-on-surface-variant'
                   }`}
                   title="Grid View"
@@ -173,22 +173,22 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
             <div className="mt-4 flex items-center gap-2 flex-wrap">
               <span className="text-xs text-muted-foreground dark:text-muted-foreground font-medium">Active filters:</span>
               {historyFilter.agent !== 'all' && (
-                <span className="px-3 py-1 bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 rounded-full text-xs font-medium flex items-center gap-1.5">
+                <span className="px-3 py-1 bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 rounded-full text-xs font-medium flex items-center gap-1.5">
                   Agent: {historyFilter.agent}
                   <button 
                     onClick={() => setHistoryFilter(prev => ({ ...prev, agent: 'all' }))}
-                    className="hover:bg-indigo-200 dark:hover:bg-teal-800/50 rounded-full p-0.5 transition-colors"
+                    className="hover:bg-indigo-200 dark:hover:bg-green-800/50 rounded-full p-0.5 transition-colors"
                   >
                     ×
                   </button>
                 </span>
               )}
               {historyFilter.search && (
-                <span className="px-3 py-1 bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 rounded-full text-xs font-medium flex items-center gap-1.5">
+                <span className="px-3 py-1 bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 rounded-full text-xs font-medium flex items-center gap-1.5">
                   Search: "{historyFilter.search}"
                   <button 
                     onClick={() => setHistoryFilter(prev => ({ ...prev, search: '' }))}
-                    className="hover:bg-indigo-200 dark:hover:bg-teal-800/50 rounded-full p-0.5 transition-colors"
+                    className="hover:bg-indigo-200 dark:hover:bg-green-800/50 rounded-full p-0.5 transition-colors"
                   >
                     ×
                   </button>
@@ -196,7 +196,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
               )}
               <button 
                 onClick={() => setHistoryFilter({ agent: 'all', status: 'all', search: '', groupBy: 'date' })}
-                className="text-xs text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 font-medium underline transition-colors"
+                className="text-xs text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 font-medium underline transition-colors"
               >
                 Clear all
               </button>
@@ -221,7 +221,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
             {showFilters && (
               <button 
                 onClick={() => setHistoryFilter({ agent: 'all', status: 'all', search: '', groupBy: 'date' })}
-                className="mt-6 px-6 py-2.5 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors font-medium shadow-sm dark:shadow-gray-900"
+                className="mt-6 px-6 py-2.5 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors font-medium shadow-sm dark:shadow-gray-900"
               >
                 Clear Filters
               </button>
@@ -232,7 +232,7 @@ const HistoryTab: React.FC<HistoryTabProps> = ({ agents, onResumeSession }) => {
             {Object.entries(groupedSessions).map(([groupKey, sessions]) => (
               <div key={groupKey}>
                 {/* Group Header */}
-                <div className="sticky top-0 z-10 bg-gradient-to-r from-gray-100 to-transparent dark:from-gray-700 dark:to-transparent backdrop-blur-sm py-3 px-4 rounded-lg mb-4 border-l-4 border-primary-green dark:border-teal-500 transition-colors">
+                <div className="sticky top-0 z-10 bg-gradient-to-r from-gray-100 to-transparent dark:from-gray-700 dark:to-transparent backdrop-blur-sm py-3 px-4 rounded-lg mb-4 border-l-4 border-primary-green dark:border-green-500 transition-colors">
                   <div className="flex items-center justify-between">
                     <h4 className="text-sm font-semibold text-foreground dark:text-foreground uppercase tracking-wider">
                       {historyFilter.groupBy === 'date' 

@@ -102,7 +102,7 @@ const GettingStarted: React.FC = () => {
                 step.status === 'completed' 
                   ? 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900' 
                   : step.status === 'in-progress'
-                  ? 'border-blue-200 dark:border-teal-800 bg-blue-50 dark:bg-teal-900'
+                  ? 'border-blue-200 dark:border-green-800 bg-blue-50 dark:bg-green-900'
                   : 'border-border dark:border-border bg-surface-container-low dark:bg-surface-container-high'
               }`}
             >
@@ -111,7 +111,7 @@ const GettingStarted: React.FC = () => {
                   step.status === 'completed' 
                     ? 'bg-green-100 dark:bg-green-800 text-green-600 dark:text-green-300' 
                     : step.status === 'in-progress'
-                    ? 'bg-blue-100 dark:bg-teal-800 text-tertiary dark:text-teal-300'
+                    ? 'bg-blue-100 dark:bg-green-800 text-tertiary dark:text-green-300'
                     : 'bg-surface-container-low dark:bg-surface-container-highest text-outline dark:text-muted-foreground'
                 }`}>
                   {step.status === 'completed' ? (
@@ -130,7 +130,7 @@ const GettingStarted: React.FC = () => {
                       step.status === 'completed' 
                         ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200' 
                         : step.status === 'in-progress'
-                        ? 'bg-blue-100 dark:bg-teal-800 text-blue-800 dark:text-teal-200'
+                        ? 'bg-blue-100 dark:bg-green-800 text-blue-800 dark:text-green-200'
                         : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant'
                     }`}>
                       {step.status === 'completed' 
@@ -166,7 +166,7 @@ const GettingStarted: React.FC = () => {
         </div>
       </div>
       
-      <div className="bg-indigo-50 dark:bg-teal-900 border border-indigo-100 dark:border-teal-800 rounded-xl p-6 transition-colors">
+      <div className="bg-indigo-50 dark:bg-green-900 border border-indigo-100 dark:border-green-800 rounded-xl p-6 transition-colors">
         <h3 className="text-lg font-semibold text-on-surface dark:text-foreground mb-4">Best Practices for User Adoption</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-4 transition-colors">
@@ -198,14 +198,14 @@ const GettingStarted: React.FC = () => {
               href={resource.link}
               className="flex items-start p-4 bg-surface-container-low dark:bg-surface-container-high border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
             >
-              <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg mr-4 transition-colors">
-                <resource.icon className="w-5 h-5 text-primary-green dark:text-teal-300" />
+              <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg mr-4 transition-colors">
+                <resource.icon className="w-5 h-5 text-primary-green dark:text-green-300" />
               </div>
               <div>
                 <h4 className="font-medium text-on-surface dark:text-foreground">{resource.title}</h4>
                 <p className="text-sm text-muted-foreground dark:text-muted-foreground">{resource.description}</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 ml-auto" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 ml-auto" />
             </a>
           ))}
         </div>
@@ -220,7 +220,7 @@ const GettingStarted: React.FC = () => {
               <p className="text-sm text-muted-foreground dark:text-muted-foreground mb-3">
                 Your Sendplex environment is now ready for configuration. Our team is available to help you with the next steps.
               </p>
-              <button className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+              <button className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
                 Schedule Onboarding Call
               </button>
             </div>

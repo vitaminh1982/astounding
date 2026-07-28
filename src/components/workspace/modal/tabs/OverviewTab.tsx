@@ -45,7 +45,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({ workspaceData }) => {
               { user: 'Thomas Dubois', action: 'created a new template', time: '2 days ago' }
             ].map((activity, index) => (
               <div key={index} className="flex items-center p-3 bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border transition-colors">
-                <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-teal-900 flex items-center justify-center text-primary-green dark:text-teal-100 mr-3">
+                <div className="w-8 h-8 rounded-full bg-indigo-100 dark:bg-green-900 flex items-center justify-center text-primary-green dark:text-green-100 mr-3">
                   {activity.user.charAt(0)}
                 </div>
                 <div className="flex-1">
@@ -66,7 +66,7 @@ const OverviewTab: React.FC<OverviewTabProps> = ({ workspaceData }) => {
               { 
                 label: 'Total Members', 
                 value: workspaceData.members.length, 
-                icon: <Users className="w-5 h-5 text-primary-green dark:text-teal-400" /> 
+                icon: <Users className="w-5 h-5 text-primary-green dark:text-green-400" /> 
               },
               { 
                 label: 'Active Agents', 

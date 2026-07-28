@@ -37,7 +37,7 @@ const RoleCard = ({ role }) => {
     <div className="p-4 border border-border dark:border-border bg-white dark:bg-surface-container-high rounded-lg transition-colors">
       <div className="flex items-center justify-between mb-2">
         <h4 className="font-medium text-foreground dark:text-foreground">{role.name}</h4>
-        <Shield className="w-4 h-4 text-primary-green dark:text-teal-400" />
+        <Shield className="w-4 h-4 text-primary-green dark:text-green-400" />
       </div>
       <p className="text-sm text-muted-foreground dark:text-muted-foreground mb-2">{role.description}</p>
       <div className="flex flex-wrap gap-2">
@@ -70,7 +70,7 @@ export default function UserManagement() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-foreground dark:text-foreground sm:text-sm md:text-base">Roles and Permissions</h3>
-            <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-700 dark:hover:text-teal-300 transition-colors">
+            <button className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-700 dark:hover:text-green-300 transition-colors">
               Manage roles
             </button>
           </div>
@@ -85,7 +85,7 @@ export default function UserManagement() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-semibold text-foreground dark:text-foreground sm:text-sm md:text-base">Teams</h3>
-            <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+            <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
               <UserPlus className="w-4 h-4" />
               New team
             </button>

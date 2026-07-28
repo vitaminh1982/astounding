@@ -11,8 +11,8 @@ export default function CreditAllocation({ usageData }: CreditAllocationProps) {
   
   // Generate colors for both light and dark modes
   const colors = [
-    { light: '#6366f1', dark: '#14b8a6', bg: 'bg-primary dark:bg-primary' }, // indigo -> teal
-    { light: '#3b82f6', dark: '#06b6d4', bg: 'bg-tertiary dark:bg-cyan-500' },   // blue -> cyan
+    { light: '#6366f1', dark: '#14b8a6', bg: 'bg-primary dark:bg-primary' }, // indigo -> green
+    { light: '#3b82f6', dark: '#06b6d4', bg: 'bg-tertiary dark:bg-green-500' },   // blue -> green
     { light: '#10b981', dark: '#10b981', bg: 'bg-green-500 dark:bg-green-500' }, // green stays green
     { light: '#f59e0b', dark: '#f59e0b', bg: 'bg-yellow-500 dark:bg-yellow-500' }, // yellow stays yellow
     { light: '#ef4444', dark: '#ef4444', bg: 'bg-destructive dark:bg-destructive' },     // red stays red
@@ -23,8 +23,8 @@ export default function CreditAllocation({ usageData }: CreditAllocationProps) {
     <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Credit Allocation</h3>
-        <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <DollarSign className="w-5 h-5 text-primary-green dark:text-teal-300" />
+        <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+          <DollarSign className="w-5 h-5 text-primary-green dark:text-green-300" />
         </div>
       </div>
       

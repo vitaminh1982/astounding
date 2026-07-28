@@ -91,7 +91,7 @@ export default function IntegrationCard({ integration, onOpenModal }: Integratio
                     shadow-sm dark:shadow-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors
                     ${integration.isConnected
                       ? 'border-border dark:border-border bg-white dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:ring-ring dark:focus:ring-ring'
-                      : 'border-transparent bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-ring dark:focus:ring-ring'}`}
+                      : 'border-transparent bg-primary dark:bg-green-600 text-white hover:bg-indigo-700 dark:hover:bg-green-700 focus:ring-ring dark:focus:ring-ring'}`}
         >
           {integration.isConnected
             ? t('integrations.configure')

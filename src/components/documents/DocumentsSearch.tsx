@@ -23,7 +23,7 @@ const DocumentsSearch: React.FC<DocumentsSearchProps> = ({
         type="text"
         value={searchQuery}
         onChange={(e) => onSearchChange(e.target.value)}
-        className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-indigo-200 dark:focus:ring-ring/20 focus:border-indigo-600 dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+        className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-indigo-200 dark:focus:ring-ring/20 focus:border-indigo-600 dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
         placeholder={t('documents.search.placeholder')}
         aria-label={t('documents.search.ariaLabel')}
       />

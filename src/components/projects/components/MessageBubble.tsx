@@ -471,7 +471,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         {message.canConvertToTask && (
           <button
             onClick={() => handleConvert('task')}
-            className="px-3 py-1.5 text-xs font-medium text-primary-green dark:text-teal-400 hover:text-indigo-700 dark:hover:text-teal-300 hover:bg-indigo-50 dark:hover:bg-teal-900/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="px-3 py-1.5 text-xs font-medium text-primary-green dark:text-green-400 hover:text-indigo-700 dark:hover:text-green-300 hover:bg-indigo-50 dark:hover:bg-green-900/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             aria-label="Convert message to task"
           >
             Convert to task
@@ -480,7 +480,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         {message.canConvertToDocument && (
           <button
             onClick={() => handleConvert('document')}
-            className="px-3 py-1.5 text-xs font-medium text-primary-green dark:text-teal-400 hover:text-indigo-700 dark:hover:text-teal-300 hover:bg-indigo-50 dark:hover:bg-teal-900/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="px-3 py-1.5 text-xs font-medium text-primary-green dark:text-green-400 hover:text-indigo-700 dark:hover:text-green-300 hover:bg-indigo-50 dark:hover:bg-green-900/20 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             aria-label="Convert message to deliverable"
           >
             Convert to deliverable
@@ -503,7 +503,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       {/* Agent Avatar */}
       {isAgent && (
         <div 
-          className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-teal-500 dark:to-cyan-600 flex items-center justify-center flex-shrink-0 transition-colors shadow-sm dark:shadow-gray-900"
+          className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-green-500 dark:to-green-600 flex items-center justify-center flex-shrink-0 transition-colors shadow-sm dark:shadow-gray-900"
           aria-label={`${agentInfo.name} avatar`}
         >
           <span className="text-xs font-semibold text-white">
@@ -527,7 +527,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         <div 
           className={`rounded-lg p-4 shadow-sm hover:shadow-md dark:shadow-gray-900 dark:hover:shadow-gray-800 transition-all duration-200 ${
             isUser 
-              ? 'bg-primary dark:bg-teal-600 text-white' 
+              ? 'bg-primary dark:bg-green-600 text-white' 
               : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant'
           }`}
         >
@@ -544,15 +544,15 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
                   key={att.id} 
                   className={`flex items-center gap-2 text-xs rounded-lg px-3 py-2 border transition-colors ${
                     isUser
-                      ? 'bg-primary dark:bg-primary border-indigo-400 dark:border-teal-400 hover:bg-indigo-400 dark:hover:bg-teal-400'
-                      : 'bg-white dark:bg-surface-container-highest border-border dark:border-outline hover:border-indigo-300 dark:hover:border-teal-400'
+                      ? 'bg-primary dark:bg-primary border-indigo-400 dark:border-green-400 hover:bg-indigo-400 dark:hover:bg-green-400'
+                      : 'bg-white dark:bg-surface-container-highest border-border dark:border-outline hover:border-indigo-300 dark:hover:border-green-400'
                   }`}
                 >
-                  <Paperclip className={`w-3.5 h-3.5 ${isUser ? 'text-indigo-200 dark:text-teal-200' : 'text-muted-foreground dark:text-muted-foreground'} transition-colors`} />
+                  <Paperclip className={`w-3.5 h-3.5 ${isUser ? 'text-indigo-200 dark:text-green-200' : 'text-muted-foreground dark:text-muted-foreground'} transition-colors`} />
                   <span className={`font-medium ${isUser ? 'text-white' : 'text-on-surface dark:text-muted-foreground'} transition-colors`}>
                     {att.name}
                   </span>
-                  <span className={`ml-auto ${isUser ? 'text-indigo-200 dark:text-teal-200' : 'text-outline dark:text-muted-foreground'} transition-colors`}>
+                  <span className={`ml-auto ${isUser ? 'text-indigo-200 dark:text-green-200' : 'text-outline dark:text-muted-foreground'} transition-colors`}>
                     ({formatFileSize(att.size)})
                   </span>
                 </div>
@@ -589,7 +589,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       {/* User Avatar */}
       {isUser && (
         <div 
-          className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-teal-600 flex items-center justify-center flex-shrink-0 transition-colors shadow-sm dark:shadow-gray-900"
+          className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 dark:from-blue-600 dark:to-green-600 flex items-center justify-center flex-shrink-0 transition-colors shadow-sm dark:shadow-gray-900"
           aria-label="Your avatar"
         >
           <span className="text-xs font-semibold text-white">

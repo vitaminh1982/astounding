@@ -10,7 +10,7 @@ export default function ActionButtons({ onSave }: ActionButtonsProps) {
     <div className="flex gap-4">
       <button
         onClick={onSave}
-        className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+        className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
       >
         <Play className="w-4 h-4" />
         Save

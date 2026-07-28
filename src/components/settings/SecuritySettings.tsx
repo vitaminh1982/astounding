@@ -74,7 +74,7 @@ export default function SecuritySettings() {
                 name="sessionTimeout"
                 value={securitySettings.sessionTimeout}
                 onChange={handleChange}
-                className="p-2 w-full border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors"
+                className="p-2 w-full border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors"
               >
                 <option value="30">30 minutes</option>
                 <option value="60">1 hour</option>
@@ -116,7 +116,7 @@ export default function SecuritySettings() {
               <div className="space-y-3">
                 <div>
                   <label className="block text-sm font-medium text-on-surface dark:text-on-surface-variant">Messages</label>
-                  <select className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors">
+                  <select className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors">
                     <option>6 months</option>
                     <option>1 year</option>
                     <option>2 years</option>
@@ -124,7 +124,7 @@ export default function SecuritySettings() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-on-surface dark:text-on-surface-variant">Logs</label>
-                  <select className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors">
+                  <select className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors">
                     <option>3 months</option>
                     <option>6 months</option>
                     <option>1 year</option>

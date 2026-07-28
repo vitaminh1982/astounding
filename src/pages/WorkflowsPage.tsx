@@ -193,7 +193,7 @@ const WorkflowsPage: React.FC = () => {
             </div>
             <button 
               onClick={handleCreateWorkflow}
-              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-green-600 text-white hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
               aria-label={t('workflows.newWorkflow')}
             >
               <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -285,7 +285,7 @@ const WorkflowsPage: React.FC = () => {
                             transition-all duration-200 
                             whitespace-nowrap
                             ${activeTab === key
-                              ? 'bg-indigo-50 dark:bg-teal-900/30 text-primary-green dark:text-teal-400 shadow-sm'
+                              ? 'bg-indigo-50 dark:bg-green-900/30 text-primary-green dark:text-green-400 shadow-sm'
                               : 'text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-on-surface-variant hover: dark:hover:bg-surface-container-highest/50'
                             }
                           `}

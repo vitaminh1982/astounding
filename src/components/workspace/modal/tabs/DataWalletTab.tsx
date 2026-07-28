@@ -129,9 +129,9 @@ const DataGovernanceOverview = () => (
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-muted-foreground dark:text-muted-foreground">Access Requests</p>
-          <p className="text-2xl font-bold text-tertiary dark:text-teal-400">3</p>
+          <p className="text-2xl font-bold text-tertiary dark:text-green-400">3</p>
         </div>
-        <UserCheck className="w-8 h-8 text-tertiary dark:text-teal-400" />
+        <UserCheck className="w-8 h-8 text-tertiary dark:text-green-400" />
       </div>
       <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-2">Pending your approval</p>
     </div>
@@ -155,7 +155,7 @@ const UserDataControls = () => (
     <h4 className="text-lg font-medium text-foreground dark:text-foreground mb-4">Your Data Rights</h4>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
       <button className="flex flex-col items-center p-3 border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
-        <Download className="w-6 h-6 text-tertiary dark:text-teal-400 mb-2" />
+        <Download className="w-6 h-6 text-tertiary dark:text-green-400 mb-2" />
         <span className="text-sm font-medium text-foreground dark:text-foreground">Export Data</span>
         <span className="text-xs text-muted-foreground dark:text-muted-foreground text-center">Download your data</span>
       </button>
@@ -197,8 +197,8 @@ const DataFlowDiagram = () => (
       <ArrowRight className="w-5 h-5 text-outline dark:text-muted-foreground" />
       
       <div className="text-center">
-        <div className="w-12 h-12 bg-blue-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mx-auto mb-2">
-          <Building className="w-6 h-6 text-tertiary dark:text-teal-300" />
+        <div className="w-12 h-12 bg-blue-100 dark:bg-green-900 rounded-lg flex items-center justify-center mx-auto mb-2">
+          <Building className="w-6 h-6 text-tertiary dark:text-green-300" />
         </div>
         <p className="text-sm font-medium text-foreground dark:text-foreground">Business Data</p>
         <p className="text-xs text-muted-foreground dark:text-muted-foreground">Team accessible</p>
@@ -232,7 +232,7 @@ const DataWalletHeader = () => (
           <Shield className="w-4 h-4 mr-1" />
           <span>Secured</span>
         </div>
-        <div className="flex items-center text-tertiary dark:text-teal-400 text-sm">
+        <div className="flex items-center text-tertiary dark:text-green-400 text-sm">
           <CheckCircle className="w-4 h-4 mr-1" />
           <span>GDPR Compliant</span>
         </div>
@@ -509,7 +509,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
                 className={`
                   flex items-center space-x-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors
                   ${activeCategory === key 
-                    ? `border-${category.color}-500 text-${category.color}-600 dark:text-${category.color === 'blue' ? 'teal' : category.color}-400 dark:border-${category.color === 'blue' ? 'teal' : category.color}-400` 
+                    ? `border-${category.color}-500 text-${category.color}-600 dark:text-${category.color === 'blue' ? 'green' : category.color}-400 dark:border-${category.color === 'blue' ? 'green' : category.color}-400` 
                     : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant hover:border-border dark:hover:border-border'
                   }
                 `}
@@ -609,7 +609,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
                   <td className="px-6 py-4">
                     <div className="flex items-start space-x-3">
                       <div className="flex-shrink-0">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-${getCategoryColor(activeCategory)}-100 dark:bg-${getCategoryColor(activeCategory) === 'blue' ? 'teal' : getCategoryColor(activeCategory)}-900`}>
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center bg-${getCategoryColor(activeCategory)}-100 dark:bg-${getCategoryColor(activeCategory) === 'blue' ? 'green' : getCategoryColor(activeCategory)}-900`}>
                           {getCategoryIcon(activeCategory)}
                         </div>
                       </div>
@@ -629,7 +629,7 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-teal-900 text-blue-800 dark:text-teal-100">
+                    <span className="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 dark:bg-green-900 text-blue-800 dark:text-green-100">
                       {item.type}
                     </span>
                   </td>
@@ -644,10 +644,10 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="flex justify-end space-x-2">
-                      <button className="text-primary-green dark:text-teal-400 hover:text-indigo-900 dark:hover:text-teal-300 p-1 rounded hover:bg-indigo-50 dark:hover:bg-teal-900 transition-colors">
+                      <button className="text-primary-green dark:text-green-400 hover:text-indigo-900 dark:hover:text-green-300 p-1 rounded hover:bg-indigo-50 dark:hover:bg-green-900 transition-colors">
                         <Eye className="w-4 h-4" />
                       </button>
-                      <button className="text-tertiary dark:text-teal-400 hover:text-blue-900 dark:hover:text-teal-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-teal-900 transition-colors">
+                      <button className="text-tertiary dark:text-green-400 hover:text-blue-900 dark:hover:text-green-300 p-1 rounded hover:bg-blue-50 dark:hover:bg-green-900 transition-colors">
                         <Download className="w-4 h-4" />
                       </button>
                       {item.owner === 'user' && (
@@ -698,11 +698,11 @@ const DataWalletTab: React.FC<DataWalletTabProps> = ({ workspaceData }) => {
       )}
       
       {activeCategory === 'business' && (
-        <div className="bg-blue-50 dark:bg-teal-900 border border-blue-100 dark:border-teal-800 rounded-lg p-4 flex items-start">
-          <Info className="w-5 h-5 text-tertiary dark:text-teal-300 mt-0.5 flex-shrink-0" />
+        <div className="bg-blue-50 dark:bg-green-900 border border-blue-100 dark:border-green-800 rounded-lg p-4 flex items-start">
+          <Info className="w-5 h-5 text-tertiary dark:text-green-300 mt-0.5 flex-shrink-0" />
           <div className="ml-3">
-            <h4 className="text-sm font-medium text-blue-800 dark:text-teal-200">Business Data Sharing</h4>
-            <p className="mt-1 text-sm text-tertiary dark:text-teal-300">
+            <h4 className="text-sm font-medium text-blue-800 dark:text-green-200">Business Data Sharing</h4>
+            <p className="mt-1 text-sm text-tertiary dark:text-green-300">
               Business data is shared within your organization according to your company's data governance policies. Access is controlled and audited.
             </p>
           </div>

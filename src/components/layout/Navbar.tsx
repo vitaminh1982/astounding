@@ -78,20 +78,20 @@ const ProfileDropdown = memo(({
         className="absolute right-0 mt-3 w-72 bg-white dark:bg-surface-container-high rounded-xl shadow-xl dark:shadow-gray-900 border border-border dark:border-border overflow-hidden z-50 transition-colors"
       >
         {/* User info section with gradient */}
-        <div className="relative bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-teal-500 dark:to-teal-600 px-4 py-4 transition-colors">
+        <div className="relative bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-green-500 dark:to-green-600 px-4 py-4 transition-colors">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center ring-2 ring-white/50 transition-colors">
               <User className="w-6 h-6 text-white" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white font-semibold truncate transition-colors">Minh Nguyen</p>
-              <p className="text-indigo-100 dark:text-teal-100 text-sm transition-colors">Admin</p>
+              <p className="text-indigo-100 dark:text-green-100 text-sm transition-colors">Admin</p>
             </div>
           </div>
 
           {/* Decorative gradient orbs */}
           <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full blur-2xl" />
-          <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-purple-400/20 dark:bg-teal-400/20 rounded-full blur-xl transition-colors" />
+          <div className="absolute -bottom-4 -left-4 w-20 h-20 bg-purple-400/20 dark:bg-green-400/20 rounded-full blur-xl transition-colors" />
         </div>
 
         {/* Mobile credits display */}
@@ -177,7 +177,7 @@ const ProfileDropdown = memo(({
             </p>
           </div>
           <button
-            className="w-full flex items-center justify-between px-4 py-3 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full flex items-center justify-between px-4 py-3 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             onClick={() => {
               onOpenWorkspaceModal();
               onClose();
@@ -185,7 +185,7 @@ const ProfileDropdown = memo(({
             aria-label="Open workspace settings"
           >
             <span className="flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-teal-400 to-teal-500 flex-shrink-0 shadow-sm transition-colors flex items-center justify-center text-white text-xs font-semibold">
+              <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-green-500 flex-shrink-0 shadow-sm transition-colors flex items-center justify-center text-white text-xs font-semibold">
                 {activeWorkspace.name.charAt(0)}
               </span>
               <span className="font-medium transition-colors">{activeWorkspace.name}</span>
@@ -222,14 +222,14 @@ const MenuItem = ({ icon: Icon, label, onClick, badge }: {
 }) => (
   <button
     onClick={onClick}
-    className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+    className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
   >
     <span className="flex items-center gap-3">
-      <Icon className="h-5 w-5 text-outline dark:text-muted-foreground group-hover:text-indigo-500 dark:group-hover:text-teal-400 transition-colors" />
+      <Icon className="h-5 w-5 text-outline dark:text-muted-foreground group-hover:text-indigo-500 dark:group-hover:text-green-400 transition-colors" />
       <span className="font-medium transition-colors">{label}</span>
     </span>
     {badge !== undefined && badge > 0 && (
-      <span className="px-2 py-0.5 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 text-primary-green dark:text-teal-400 text-xs font-semibold rounded-full transition-colors">
+      <span className="px-2 py-0.5 bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 text-primary-green dark:text-green-400 text-xs font-semibold rounded-full transition-colors">
         {badge}
       </span>
     )}

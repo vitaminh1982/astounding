@@ -33,8 +33,8 @@ export default function UsageHistory({ usageData, onExport }: UsageHistoryProps)
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Usage History</h3>
         <div className="flex items-center gap-2">
-          <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-            <BarChart2 className="w-5 h-5 text-primary-green dark:text-teal-300" />
+          <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+            <BarChart2 className="w-5 h-5 text-primary-green dark:text-green-300" />
           </div>
           <div className="relative group">
             <button 
@@ -116,7 +116,7 @@ export default function UsageHistory({ usageData, onExport }: UsageHistoryProps)
               <div key={index} className="flex flex-col items-center flex-1">
                 <div className="w-full flex justify-center items-end h-[85%]">
                   <div 
-                    className="w-full max-w-[30px] bg-primary dark:bg-primary rounded-t-sm mx-1 transition-all duration-500 ease-in-out hover:bg-primary dark:hover:bg-teal-600"
+                    className="w-full max-w-[30px] bg-primary dark:bg-primary rounded-t-sm mx-1 transition-all duration-500 ease-in-out hover:bg-primary dark:hover:bg-green-600"
                     style={{ 
                       height: `${(month.credits / usageData.credits.total) * 100}%`,
                       minHeight: '4px'

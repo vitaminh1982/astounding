@@ -148,7 +148,7 @@ export default function ValidationInfo({ template }: ValidationInfoProps) {
                   {statusConfig.label}
                 </div>
                 {status.version && (
-                  <div className="px-3 py-1 bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 text-xs font-medium rounded-full border border-indigo-200 dark:border-teal-800 transition-colors">
+                  <div className="px-3 py-1 bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 text-xs font-medium rounded-full border border-indigo-200 dark:border-green-800 transition-colors">
                     v{status.version}
                   </div>
                 )}

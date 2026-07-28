@@ -135,8 +135,8 @@ export default function Analytics({ client }: AnalyticsProps) {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center gap-3">
-        <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 rounded-lg transition-colors">
-          <BarChart3 className="w-5 h-5 text-primary-green dark:text-teal-400 transition-colors" />
+        <div className="p-2 bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 rounded-lg transition-colors">
+          <BarChart3 className="w-5 h-5 text-primary-green dark:text-green-400 transition-colors" />
         </div>
         <div>
           <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
@@ -236,7 +236,7 @@ export default function Analytics({ client }: AnalyticsProps) {
       {/* Performance Insights */}
       <div className="p-6 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800/50 dark:to-gray-900/50 border border-border dark:border-border rounded-lg transition-colors">
         <div className="flex items-center gap-2 mb-4">
-          <BarChart3 className="w-5 h-5 text-primary-green dark:text-teal-400 transition-colors" />
+          <BarChart3 className="w-5 h-5 text-primary-green dark:text-green-400 transition-colors" />
           <h4 className="font-medium text-foreground dark:text-foreground transition-colors">
             Performance Insights
           </h4>

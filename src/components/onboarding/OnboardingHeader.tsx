@@ -18,8 +18,8 @@ const OnboardingHeader: React.FC<OnboardingHeaderProps> = ({ onNavigate, onClose
     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div>
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-            <ShieldCheck className="w-6 h-6 text-primary-green dark:text-teal-300 transition-colors" />
+          <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+            <ShieldCheck className="w-6 h-6 text-primary-green dark:text-green-300 transition-colors" />
           </div>
           <h1 className="text-2xl font-bold text-on-surface dark:text-foreground transition-colors">
             AI Governance & Management

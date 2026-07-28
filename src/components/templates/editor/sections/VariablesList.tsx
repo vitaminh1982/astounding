@@ -137,8 +137,8 @@ export default function VariablesList() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-100 dark:bg-cyan-900/30 border border-indigo-200 dark:border-cyan-800 rounded-lg transition-colors">
-            <Variable className="w-5 h-5 text-primary-green dark:text-cyan-400 transition-colors" />
+          <div className="p-2 bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 rounded-lg transition-colors">
+            <Variable className="w-5 h-5 text-primary-green dark:text-green-400 transition-colors" />
           </div>
           <div>
             <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
@@ -179,7 +179,7 @@ export default function VariablesList() {
                     placeholder="Search variables by name or example..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
+                    className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
                   />
                   {searchTerm && (
                     <button
@@ -210,7 +210,7 @@ export default function VariablesList() {
                       onClick={() => setActiveCategory(tab.id)}
                       className={`relative flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 ${
                         isActive
-                          ? 'text-primary-green dark:text-teal-400'
+                          ? 'text-primary-green dark:text-green-400'
                           : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                       }`}
                     >
@@ -218,7 +218,7 @@ export default function VariablesList() {
                       <span>{tab.label}</span>
                       <span className={`px-1.5 py-0.5 rounded-full text-xs font-medium transition-colors ${
                         isActive
-                          ? 'bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300'
+                          ? 'bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300'
                           : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground'
                       }`}>
                         {tab.count}
@@ -226,7 +226,7 @@ export default function VariablesList() {
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-teal-400"
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-green-400"
                           transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                         />
                       )}
@@ -251,14 +251,14 @@ export default function VariablesList() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             transition={{ delay: index * 0.03 }}
-                            className="group p-3 rounded-lg border border-border dark:border-border hover:border-indigo-300 dark:hover:border-teal-600 bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800"
+                            className="group p-3 rounded-lg border border-border dark:border-border hover:border-indigo-300 dark:hover:border-green-600 bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800"
                           >
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 {/* Variable Code */}
                                 <div className="flex items-center gap-2 mb-1">
                                   <Hash className="w-3 h-3 text-outline dark:text-muted-foreground flex-shrink-0 transition-colors" />
-                                  <code className="text-sm font-mono text-primary-green dark:text-teal-400 font-semibold transition-colors">
+                                  <code className="text-sm font-mono text-primary-green dark:text-green-400 font-semibold transition-colors">
                                     {variableString}
                                   </code>
                                 </div>
@@ -294,7 +294,7 @@ export default function VariablesList() {
                                 className={`p-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                                   isCopied
                                     ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 focus:ring-green-500 dark:focus:ring-green-400'
-                                    : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-indigo-100 dark:hover:bg-teal-900/30 hover:text-primary-green dark:hover:text-teal-400 focus:ring-ring dark:focus:ring-ring'
+                                    : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-indigo-100 dark:hover:bg-green-900/30 hover:text-primary-green dark:hover:text-green-400 focus:ring-ring dark:focus:ring-ring'
                                 }`}
                                 title={isCopied ? 'Copied!' : 'Copy variable'}
                               >

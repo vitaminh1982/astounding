@@ -42,7 +42,7 @@ export default function PromptsSearch({
           type="text"
           name="prompt-search"
           id="prompt-search"
-          className="block w-full pl-10 pr-3 py-2 border border-border dark:border-border rounded-md leading-5 bg-white dark:bg-surface-container-highest placeholder-gray-500 dark:placeholder-gray-400 text-foreground dark:text-foreground focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 sm:text-sm transition-colors"
+          className="block w-full pl-10 pr-3 py-2 border border-border dark:border-border rounded-md leading-5 bg-white dark:bg-surface-container-highest placeholder-gray-500 dark:placeholder-gray-400 text-foreground dark:text-foreground focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 sm:text-sm transition-colors"
           placeholder={t('prompts.search.placeholder', 'Search for a prompt...')} // Translation key
           value={searchQuery}
           onChange={handleInputChange}

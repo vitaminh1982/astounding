@@ -55,7 +55,7 @@ export default function GeneralSettings() {
               name={field.name}
               value={formData[field.name as keyof typeof formData]}
               onChange={handleChange}
-              className="mt-1 p-2 block w-full rounded-md border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors"
+              className="mt-1 p-2 block w-full rounded-md border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors"
             />
           </div>
         ))}
@@ -73,10 +73,10 @@ export default function GeneralSettings() {
                 disabled={!!soon}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
                   language === code
-                    ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20 text-indigo-700 dark:text-teal-300'
+                    ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20 text-indigo-700 dark:text-green-300'
                     : soon
                     ? 'border-border dark:border-border text-outline dark:text-muted-foreground cursor-not-allowed opacity-60'
-                    : 'border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-400 dark:hover:border-teal-500 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
+                    : 'border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-400 dark:hover:border-green-500 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                 }`}
               >
                 {label}
@@ -86,7 +86,7 @@ export default function GeneralSettings() {
                   </span>
                 )}
                 {language === code && !soon && (
-                  <Check size={13} className="text-indigo-500 dark:text-teal-400" />
+                  <Check size={13} className="text-indigo-500 dark:text-green-400" />
                 )}
               </button>
             ))}

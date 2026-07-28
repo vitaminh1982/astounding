@@ -19,7 +19,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ message, agentAvatar }) =
       <div
         className={`rounded-lg p-3 max-w-[70%] transition-colors ${
           message.sender === 'user'
-            ? 'bg-indigo-100 dark:bg-teal-900 text-foreground dark:text-foreground'
+            ? 'bg-indigo-100 dark:bg-green-900 text-foreground dark:text-foreground'
             : 'bg-surface-container-low dark:bg-surface-container-highest text-foreground dark:text-foreground'
         }`}
       >

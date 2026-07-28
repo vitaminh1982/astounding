@@ -735,7 +735,7 @@ export const useAgents = () => {
       "Customer Support": "indigo",
       "Business": "blue",
       "HR": "purple",
-      "Productivity": "teal",
+      "Productivity": "emerald",
       "Marketing": "pink",
       "Sales": "green",
       "Legal": "orange",

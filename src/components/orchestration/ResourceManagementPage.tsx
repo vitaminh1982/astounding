@@ -220,7 +220,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                 <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Settings className="w-4 h-4" />
                 Configure
               </button>
@@ -234,9 +234,9 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Total Resources</p>
-                <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 transition-colors">78%</p>
+                <p className="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors">78%</p>
               </div>
-              <Server className="w-8 h-8 text-primary-green dark:text-teal-400" />
+              <Server className="w-8 h-8 text-primary-green dark:text-green-400" />
             </div>
             <div className="mt-2 text-xs text-green-600 dark:text-green-400 transition-colors">Within optimal range</div>
           </div>
@@ -277,7 +277,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                   onClick={() => setActiveTab(key as any)}
                   className={`py-4 px-6 text-sm font-medium flex items-center gap-2 transition-colors ${
                     activeTab === key
-                      ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                      ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                       : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                   }`}
                 >
@@ -324,7 +324,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                   <BarChart3 className="w-12 h-12 text-outline dark:text-muted-foreground mx-auto mb-4 transition-colors" />
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Resource Usage Over Time</h3>
                   <p className="text-muted-foreground dark:text-muted-foreground transition-colors">Interactive chart showing resource consumption patterns and trends</p>
-                  <button className="mt-4 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <button className="mt-4 px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                     View Detailed Analytics
                   </button>
                 </div>
@@ -335,7 +335,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Environment Configuration</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                     <Plus className="w-4 h-4" />
                     New Environment
                   </button>
@@ -358,7 +358,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                       <div className="grid grid-cols-2 gap-4 mb-4">
                         <div>
                           <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Active Agents</p>
-                          <p className="text-xl font-bold text-teal-600 dark:text-teal-400 transition-colors">{env.agents}</p>
+                          <p className="text-xl font-bold text-green-600 dark:text-green-400 transition-colors">{env.agents}</p>
                         </div>
                         <div>
                           <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Uptime</p>
@@ -391,10 +391,10 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                       </div>
                       
                       <div className="flex justify-end gap-2 pt-4 border-t border-border dark:border-border transition-colors">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="View Details">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Configure">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Configure">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         {env.status === 'inactive' && (
@@ -413,7 +413,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Auto-scaling Rules</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <button className="flex items-center gap-2 px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                     <Plus className="w-4 h-4" />
                     New Rule
                   </button>
@@ -448,10 +448,10 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                       </div>
                       
                       <div className="flex justify-end gap-2 mt-4">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="View Details">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Edit Rule">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Edit Rule">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button className="px-3 py-1 text-xs border border-border dark:border-border rounded hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -463,20 +463,20 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                 </div>
 
                 {/* Scaling metrics */}
-                <div className="bg-teal-50 dark:bg-teal-900/30 rounded-lg p-6 border border-teal-200 dark:border-teal-600 transition-colors">
-                  <h4 className="font-medium text-teal-900 dark:text-teal-300 mb-4 transition-colors">Scaling Performance</h4>
+                <div className="bg-green-50 dark:bg-green-900/30 rounded-lg p-6 border border-green-200 dark:border-green-600 transition-colors">
+                  <h4 className="font-medium text-green-900 dark:text-green-300 mb-4 transition-colors">Scaling Performance</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 transition-colors">2.3min</p>
-                      <p className="text-sm text-teal-700 dark:text-teal-300 transition-colors">Avg Scale-up Time</p>
+                      <p className="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors">2.3min</p>
+                      <p className="text-sm text-green-700 dark:text-green-300 transition-colors">Avg Scale-up Time</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 transition-colors">98.5%</p>
-                      <p className="text-sm text-teal-700 dark:text-teal-300 transition-colors">Scaling Success Rate</p>
+                      <p className="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors">98.5%</p>
+                      <p className="text-sm text-green-700 dark:text-green-300 transition-colors">Scaling Success Rate</p>
                     </div>
                     <div className="text-center">
-                      <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 transition-colors">25</p>
-                      <p className="text-sm text-teal-700 dark:text-teal-300 transition-colors">Scaling Events (24h)</p>
+                      <p className="text-2xl font-bold text-green-600 dark:text-green-400 transition-colors">25</p>
+                      <p className="text-sm text-green-700 dark:text-green-300 transition-colors">Scaling Events (24h)</p>
                     </div>
                   </div>
                 </div>

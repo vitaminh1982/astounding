@@ -65,7 +65,7 @@ export default function FloatingAssistant() {
             relative
             flex items-center justify-center
             w-full h-full rounded-full
-            bg-primary dark:bg-teal-600 text-white
+            bg-primary dark:bg-green-600 text-white
             shadow-lg dark:shadow-gray-900 hover:shadow-xl dark:hover:shadow-gray-800
             ${TRANSITIONS.default}
             hover:scale-110
@@ -110,7 +110,7 @@ export default function FloatingAssistant() {
           aria-modal="true"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-3 md:p-4 bg-primary dark:bg-teal-600 text-white transition-colors">
+          <div className="flex items-center justify-between p-3 md:p-4 bg-primary dark:bg-green-600 text-white transition-colors">
             <div className="flex items-center gap-2">
               <Bot className="w-4 h-4 md:w-5 md:h-5 transition-colors" />
               <span className="font-medium text-sm md:text-base transition-colors">Sendplex Assistant</span>
@@ -122,7 +122,7 @@ export default function FloatingAssistant() {
               {/* Minimize/Maximize button - hidden on mobile */}
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="hidden sm:flex p-1.5 hover:bg-indigo-700 dark:hover:bg-teal-700 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
+                className="hidden sm:flex p-1.5 hover:bg-indigo-700 dark:hover:bg-green-700 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
                 aria-label={isMinimized ? "Expand assistant" : "Minimize assistant"}
               >
                 {isMinimized ? <Maximize2 className="w-4 h-4" /> : <Minus className="w-4 h-4" />}

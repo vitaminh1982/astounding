@@ -50,10 +50,10 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
       changeType: 'increase' as const,
       changeLabel: t('metrics.cards.messages.changeLabel') || 'since yesterday',
       icon: MessageSquare,
-      color: 'text-teal-600 dark:text-teal-400',
-      bgColor: 'bg-teal-100 dark:bg-teal-900/20',
-      hoverBgColor: 'group-hover:bg-teal-200 dark:group-hover:bg-teal-900/30',
-      borderColor: 'border-teal-200 dark:border-teal-800',
+      color: 'text-green-600 dark:text-green-400',
+      bgColor: 'bg-green-100 dark:bg-green-900/20',
+      hoverBgColor: 'group-hover:bg-green-200 dark:group-hover:bg-green-900/30',
+      borderColor: 'border-green-200 dark:border-green-800',
       page: 'conversations' as Page
     },
   ], [t]);
@@ -166,7 +166,7 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
             tabIndex={0}
             role="button"
             aria-label={`Navigate to ${metric.title} page. Current value: ${metric.value}, Change: ${metric.change} ${metric.changeLabel}`}
-            className="group bg-white dark:bg-surface-container-high rounded-xl shadow-sm hover:shadow-lg dark:shadow-gray-900 dark:hover:shadow-gray-800 border border-border dark:border-border transition-all duration-200 cursor-pointer overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+            className="group bg-white dark:bg-surface-container-high rounded-xl shadow-sm hover:shadow-lg dark:shadow-gray-900 dark:hover:shadow-gray-800 border border-border dark:border-border transition-all duration-200 cursor-pointer overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
           >
             {/* Card Content */}
             <div className="p-4 sm:p-6">

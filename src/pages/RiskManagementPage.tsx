@@ -121,7 +121,7 @@ export default function RiskManagementPage() {
               </p>
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Plus className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   New Assessment
@@ -140,7 +140,7 @@ export default function RiskManagementPage() {
                 onClick={() => setActiveTab('assessment')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'assessment'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -150,7 +150,7 @@ export default function RiskManagementPage() {
                 onClick={() => setActiveTab('protocols')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'protocols'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -160,7 +160,7 @@ export default function RiskManagementPage() {
                 onClick={() => setActiveTab('incidents')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'incidents'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -170,7 +170,7 @@ export default function RiskManagementPage() {
                 onClick={() => setActiveTab('mitigation')}
                 className={`py-4 px-6 text-sm font-medium transition-colors ${
                   activeTab === 'mitigation'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -189,7 +189,7 @@ export default function RiskManagementPage() {
                   placeholder={`Search ${activeTab === 'assessment' ? 'risk assessments' : activeTab === 'protocols' ? 'safety protocols' : activeTab === 'incidents' ? 'incident reports' : 'mitigation strategies'}...`}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
               <button className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest hover: dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -234,8 +234,8 @@ export default function RiskManagementPage() {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                           <div className="flex space-x-2">
-                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">View</button>
-                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">Edit</button>
+                            <button className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors">View</button>
+                            <button className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors">Edit</button>
                           </div>
                         </td>
                       </tr>
@@ -251,8 +251,8 @@ export default function RiskManagementPage() {
                   <div key={protocol.id} className="border border-border dark:border-border rounded-lg p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all">
                     <div className="flex justify-between items-start">
                       <div className="flex items-start space-x-4">
-                        <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
-                          <Shield className="h-6 w-6 text-primary-green dark:text-teal-400" />
+                        <div className="p-2 bg-indigo-100 dark:bg-green-900/30 rounded-lg transition-colors">
+                          <Shield className="h-6 w-6 text-primary-green dark:text-green-400" />
                         </div>
                         <div>
                           <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{protocol.name}</h3>
@@ -269,13 +269,13 @@ export default function RiskManagementPage() {
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Edit2 className="h-5 w-5" />
                         </button>
                       </div>
                     </div>
                     <div className="mt-4 flex justify-end">
-                      <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">Configure Protocol</button>
+                      <button className="text-sm text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors">Configure Protocol</button>
                     </div>
                   </div>
                 ))}
@@ -306,10 +306,10 @@ export default function RiskManagementPage() {
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Eye className="h-5 w-5" />
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Edit2 className="h-5 w-5" />
                         </button>
                       </div>
@@ -343,7 +343,7 @@ export default function RiskManagementPage() {
                         </div>
                       </div>
                       <div className="flex space-x-2">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                           <Edit2 className="h-5 w-5" />
                         </button>
                       </div>

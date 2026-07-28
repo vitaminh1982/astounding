@@ -156,7 +156,7 @@ The {company.name} Team`);
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex-1 p-4 text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 relative ${
                   isActive
-                    ? 'text-primary-green dark:text-teal-400'
+                    ? 'text-primary-green dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                 }`}
               >
@@ -165,7 +165,7 @@ The {company.name} Team`);
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-teal-400"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-green-400"
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
                 )}
@@ -200,7 +200,7 @@ The {company.name} Team`);
                     className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                       errors.title
                         ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
-                        : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
+                        : 'border-border dark:border-border focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring'
                     }`}
                     placeholder="Ex: Welcome to our company!"
                     maxLength={100}
@@ -237,7 +237,7 @@ The {company.name} Team`);
                       className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 font-mono text-sm shadow-sm dark:shadow-gray-900 transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                         errors.message
                           ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
-                          : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
+                          : 'border-border dark:border-border focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring'
                       }`}
                       placeholder="Write your message here... Use {variables} for dynamic content."
                       maxLength={5000}
@@ -295,7 +295,7 @@ The {company.name} Team`);
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => handleCopyVariable(category, v)}
-                            className="p-3 bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border text-sm flex justify-between items-center group hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-indigo-50 dark:hover:bg-teal-900/20 transition-all shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                            className="p-3 bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border text-sm flex justify-between items-center group hover:border-indigo-300 dark:hover:border-green-600 hover:bg-indigo-50 dark:hover:bg-green-900/20 transition-all shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                           >
                             <code className="font-mono text-on-surface dark:text-muted-foreground transition-colors">
                               {varText}
@@ -303,7 +303,7 @@ The {company.name} Team`);
                             <div className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
                               isCopied
                                 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
-                                : 'bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 opacity-0 group-hover:opacity-100'
+                                : 'bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 opacity-0 group-hover:opacity-100'
                             }`}>
                               {isCopied ? (
                                 <span className="flex items-center gap-1">
@@ -371,7 +371,7 @@ The {company.name} Team`);
                             />
                             <div className={`w-5 h-5 border-2 rounded transition-all ${
                               isChecked
-                                ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                                ? 'bg-primary dark:bg-green-600 border-indigo-600 dark:border-green-600'
                                 : 'bg-white dark:bg-surface-container-highest border-border dark:border-border'
                             }`}>
                               {isChecked && (
@@ -412,7 +412,7 @@ The {company.name} Team`);
                       setSettings(updatedSettings);
                       notifyChange();
                     }}
-                    className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                    className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   >
                     <option value="immediate">Send Immediately</option>
                     <option value="1hour">Send After 1 Hour</option>
@@ -443,7 +443,7 @@ The {company.name} Team`);
                           setSettings(updatedSettings);
                           notifyChange();
                         }}
-                        className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                        className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                         placeholder="24"
                       />
                       <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">

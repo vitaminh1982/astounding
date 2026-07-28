@@ -45,7 +45,7 @@ const ConvertMessageModal: React.FC<ConvertMessageModalProps> = ({
           </button>
           <button 
             onClick={onConfirm} 
-            className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+            className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
           >
             Convert
           </button>

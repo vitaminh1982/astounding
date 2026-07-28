@@ -32,7 +32,7 @@ const TAG_COLORS = [
   'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 border-blue-200 dark:border-blue-800',
   'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 border-purple-200 dark:border-purple-800',
   'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300 border-amber-200 dark:border-amber-800',
-  'bg-teal-100 dark:bg-teal-900/30 text-teal-800 dark:text-teal-300 border-teal-200 dark:border-teal-800',
+  'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border-green-200 dark:border-green-800',
 ];
 
 export default function Segmentation({ client, onChange }: SegmentationProps) {
@@ -137,8 +137,8 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 rounded-lg transition-colors">
-            <Users className="w-5 h-5 text-primary-green dark:text-teal-400 transition-colors" />
+          <div className="p-2 bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 rounded-lg transition-colors">
+            <Users className="w-5 h-5 text-primary-green dark:text-green-400 transition-colors" />
           </div>
           <div>
             <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
@@ -175,7 +175,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
             <select
               value={segment}
               onChange={handleSegmentChange}
-              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
             >
               {Object.entries(SEGMENT_CONFIG).map(([key, config]) => (
                 <option key={key} value={key}>
@@ -324,7 +324,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
                 className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                   error
                     ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
-                    : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
+                    : 'border-border dark:border-border focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring'
                 }`}
                 maxLength={20}
                 disabled={tags.length >= 10}
@@ -342,7 +342,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
             <button
               onClick={addTag}
               disabled={!newTag.trim() || tags.length >= 10}
-              className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
+              className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
               aria-label="Add new tag"
             >
               <Plus className="w-4 h-4" />
@@ -367,8 +367,8 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
         </div>
 
         <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
-          <div className="p-2 bg-blue-100 dark:bg-teal-900/30 rounded-lg inline-flex mb-2 transition-colors">
-            <Zap className="w-4 h-4 text-tertiary dark:text-teal-400 transition-colors" />
+          <div className="p-2 bg-blue-100 dark:bg-green-900/30 rounded-lg inline-flex mb-2 transition-colors">
+            <Zap className="w-4 h-4 text-tertiary dark:text-green-400 transition-colors" />
           </div>
           <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
             {engagementScore}%

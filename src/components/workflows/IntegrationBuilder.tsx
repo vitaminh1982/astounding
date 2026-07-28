@@ -170,7 +170,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
         </div>
         <button
           onClick={handleAddIntegration}
-          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+          className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
           aria-label="Add new integration"
         >
           <Plus className="w-4 h-4 mr-2" />
@@ -194,7 +194,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
             </p>
             <button
               onClick={handleAddIntegration}
-              className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+              className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
             >
               <Plus className="w-4 h-4 mr-2" />
               Add Your First Integration

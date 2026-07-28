@@ -76,7 +76,7 @@ export default function PersonalityConfig({ config }: PersonalityConfigProps) {
           value={personalityConfig.customTone}
           onChange={handleToneChange}
           rows={5}
-          className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-surface-container dark:bg-surface-container-highest text-foreground dark:text-foreground font-mono shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors"
+          className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-surface-container dark:bg-surface-container-highest text-foreground dark:text-foreground font-mono shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors"
         />
       </div>
     </div>

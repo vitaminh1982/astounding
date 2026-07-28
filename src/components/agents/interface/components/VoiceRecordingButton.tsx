@@ -66,7 +66,7 @@ const VoiceRecordingButton: React.FC<VoiceRecordingButtonProps> = ({
     }
     
     if (voiceState.isTranscribing) {
-      return 'bg-tertiary dark:bg-teal-600 text-white';
+      return 'bg-tertiary dark:bg-green-600 text-white';
     }
     
     return 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container dark:hover:bg-surface-container-highest';

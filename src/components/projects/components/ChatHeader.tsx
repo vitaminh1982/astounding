@@ -243,7 +243,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
           focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring dark:focus:ring-ring
           disabled:opacity-50 disabled:cursor-not-allowed
           ${isActive 
-            ? 'border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400' 
+            ? 'border-primary-green dark:border-green-500 text-primary-green dark:text-green-400' 
             : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-border'
           }
         `}
@@ -277,7 +277,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
             aria-label="Loading"
           >
             <svg 
-              className="animate-spin h-4 w-4 text-primary-green dark:text-teal-400" 
+              className="animate-spin h-4 w-4 text-primary-green dark:text-green-400" 
               xmlns="http://www.w3.org/2000/svg" 
               fill="none" 
               viewBox="0 0 24 24"

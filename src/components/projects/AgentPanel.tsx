@@ -132,7 +132,7 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
               onClick={() => onToggleAgentSelection(agent.id)}
               className={`p-3 rounded-lg border transition-all cursor-pointer ${
                 selectedAgents.includes(agent.id)
-                  ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20'
+                  ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20'
                   : 'border-border dark:border-border hover:border-border dark:hover:border-outline hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50'
               }`}
             >
@@ -170,7 +170,7 @@ const AgentPanel: React.FC<AgentPanelProps> = ({
 
         <div className="mt-4 pt-4 border-t border-border dark:border-border">
           <button
-            className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 rounded-lg hover:bg-indigo-200 dark:hover:bg-teal-900/50 transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-2 px-4 bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 rounded-lg hover:bg-indigo-200 dark:hover:bg-green-900/50 transition-colors"
             onClick={onManageAgents}
           >
             <Settings className="w-4 h-4" />

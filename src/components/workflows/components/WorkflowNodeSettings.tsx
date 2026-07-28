@@ -27,7 +27,7 @@ const WorkflowNodeSettings: React.FC<WorkflowNodeSettingsProps> = ({
         {/* Header */}
         <div className="flex items-center justify-between pb-3 border-b border-border dark:border-border">
           <h3 className="text-lg font-semibold flex items-center gap-2 text-foreground dark:text-foreground transition-colors">
-            <Settings className="w-5 h-5 text-teal-600 dark:text-teal-400 transition-colors" strokeWidth={2.5} />
+            <Settings className="w-5 h-5 text-green-600 dark:text-green-400 transition-colors" strokeWidth={2.5} />
             Node Settings
           </h3>
           <button
@@ -49,7 +49,7 @@ const WorkflowNodeSettings: React.FC<WorkflowNodeSettingsProps> = ({
               type="text"
               value={selectedNode.data.label}
               onChange={(e) => handleLabelChange(e.target.value)}
-              className="border border-border dark:border-border rounded-lg px-3 py-2 text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all"
+              className="border border-border dark:border-border rounded-lg px-3 py-2 text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 transition-all"
               placeholder="Enter node name"
             />
           </div>
@@ -61,7 +61,7 @@ const WorkflowNodeSettings: React.FC<WorkflowNodeSettingsProps> = ({
             <textarea
               value={selectedNode.data.description || ''}
               onChange={(e) => handleDescriptionChange(e.target.value)}
-              className="border border-border dark:border-border rounded-lg px-3 py-2 text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 transition-all resize-none"
+              className="border border-border dark:border-border rounded-lg px-3 py-2 text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 transition-all resize-none"
               rows={3}
               placeholder="Enter description"
             />
@@ -70,7 +70,7 @@ const WorkflowNodeSettings: React.FC<WorkflowNodeSettingsProps> = ({
           {/* Node Type Badge */}
           <div className="flex items-center gap-2 pt-2">
             <span className="text-xs font-medium text-muted-foreground dark:text-muted-foreground transition-colors">Type:</span>
-            <span className="px-2 py-1 text-xs font-medium rounded-full bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 transition-colors">
+            <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 transition-colors">
               {selectedNode.data.type}
             </span>
           </div>

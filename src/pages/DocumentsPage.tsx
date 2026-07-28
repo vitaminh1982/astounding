@@ -167,7 +167,7 @@ const DocumentsPage: React.FC = () => {
                 {t('documents.actions.export')}
               </button>
               <button
-                          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                          className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
         
                 onClick={() => setIsUploadModalOpen(true)}
               >

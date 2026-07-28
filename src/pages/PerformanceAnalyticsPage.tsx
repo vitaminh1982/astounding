@@ -106,7 +106,7 @@ export default function PerformanceAnalyticsPage() {
                   <option value="1y" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last Year</option>
                 </select>
               </div>
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900">
                 <Download className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   Export Report
@@ -125,7 +125,7 @@ export default function PerformanceAnalyticsPage() {
                 onClick={() => setActiveTab('overview')}
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'overview'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -135,7 +135,7 @@ export default function PerformanceAnalyticsPage() {
                 onClick={() => setActiveTab('agents')}
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'agents'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -145,7 +145,7 @@ export default function PerformanceAnalyticsPage() {
                 onClick={() => setActiveTab('conversations')}
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'conversations'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -155,7 +155,7 @@ export default function PerformanceAnalyticsPage() {
                 onClick={() => setActiveTab('efficiency')}
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'efficiency'
-                    ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                    ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                     : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
@@ -227,7 +227,7 @@ export default function PerformanceAnalyticsPage() {
                 <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                   <div className="flex justify-between items-center mb-6">
                     <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Top Performing Agents</h3>
-                    <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1">View All</button>
+                    <button className="text-sm text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1">View All</button>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
@@ -293,7 +293,7 @@ export default function PerformanceAnalyticsPage() {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1">View Details</button>
+                            <button className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1">View Details</button>
                           </td>
                         </tr>
                       ))}

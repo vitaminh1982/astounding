@@ -80,7 +80,7 @@ export default function KanbanTab({ tasks, agents }: Props) {
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Kanban Board</h3>
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-tertiary dark:bg-teal-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-teal-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-tertiary dark:bg-green-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-green-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Task

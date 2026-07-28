@@ -19,7 +19,7 @@ export default function AnalyticsConfig({ metrics }: AnalyticsConfigProps) {
             <span className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Resolution rate</span>
             <BarChart2 className="w-4 h-4 text-outline dark:text-muted-foreground" />
           </div>
-          <div className="text-2xl font-bold text-primary-green dark:text-teal-400">{metrics.resolutionRate}%</div>
+          <div className="text-2xl font-bold text-primary-green dark:text-green-400">{metrics.resolutionRate}%</div>
         </div>
 
         <div className="border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-4 transition-colors">
@@ -27,7 +27,7 @@ export default function AnalyticsConfig({ metrics }: AnalyticsConfigProps) {
             <span className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Response Time</span>
             <Clock className="w-4 h-4 text-outline dark:text-muted-foreground" />
           </div>
-          <div className="text-2xl font-bold text-primary-green dark:text-teal-400">{metrics.responseTime}</div>
+          <div className="text-2xl font-bold text-primary-green dark:text-green-400">{metrics.responseTime}</div>
         </div>
 
         <div className="border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-4 transition-colors">
@@ -35,7 +35,7 @@ export default function AnalyticsConfig({ metrics }: AnalyticsConfigProps) {
             <span className="text-sm font-medium text-on-surface dark:text-on-surface-variant">CSAT Score</span>
             <Star className="w-4 h-4 text-outline dark:text-muted-foreground" />
           </div>
-          <div className="text-2xl font-bold text-primary-green dark:text-teal-400">{metrics.csatScore}/5</div>
+          <div className="text-2xl font-bold text-primary-green dark:text-green-400">{metrics.csatScore}/5</div>
         </div>
       </div>
     </div>

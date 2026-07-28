@@ -22,8 +22,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border transition-colors">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-              <Users className="w-5 h-5 text-primary-green dark:text-teal-300" />
+            <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+              <Users className="w-5 h-5 text-primary-green dark:text-green-300" />
             </div>
             <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">Personalization</h3>
           </div>
@@ -32,8 +32,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
           </p>
           <div className="space-y-3">
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">User Preference Learning</h4>
@@ -41,8 +41,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Contextual Awareness</h4>
@@ -50,8 +50,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Adaptive Interfaces</h4>
@@ -63,8 +63,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
         
         <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border transition-colors">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-              <MessageSquare className="w-5 h-5 text-primary-green dark:text-teal-300" />
+            <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+              <MessageSquare className="w-5 h-5 text-primary-green dark:text-green-300" />
             </div>
             <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">Ethical Guidelines</h3>
           </div>
@@ -73,8 +73,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
           </p>
           <div className="space-y-3">
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Value Alignment</h4>
@@ -82,8 +82,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Bias Mitigation</h4>
@@ -91,8 +91,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Fairness Monitoring</h4>
@@ -104,8 +104,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
         
         <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border transition-colors">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-              <Eye className="w-5 h-5 text-primary-green dark:text-teal-300" />
+            <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+              <Eye className="w-5 h-5 text-primary-green dark:text-green-300" />
             </div>
             <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">Transparency</h3>
           </div>
@@ -114,8 +114,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
           </p>
           <div className="space-y-3">
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Decision Explanations</h4>
@@ -123,8 +123,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Confidence Indicators</h4>
@@ -132,8 +132,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Source Attribution</h4>
@@ -145,8 +145,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
         
         <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border transition-colors">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-              <RefreshCw className="w-5 h-5 text-primary-green dark:text-teal-300" />
+            <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+              <RefreshCw className="w-5 h-5 text-primary-green dark:text-green-300" />
             </div>
             <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">Continuous Improvement</h3>
           </div>
@@ -155,8 +155,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
           </p>
           <div className="space-y-3">
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Feedback Integration</h4>
@@ -164,8 +164,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Performance Analytics</h4>
@@ -173,8 +173,8 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
               </div>
             </div>
             <div className="flex items-start">
-              <div className="p-1 bg-indigo-100 dark:bg-teal-900 rounded-full mt-0.5 mr-3 transition-colors">
-                <div className="w-2 h-2 bg-primary dark:bg-teal-300 rounded-full"></div>
+              <div className="p-1 bg-indigo-100 dark:bg-green-900 rounded-full mt-0.5 mr-3 transition-colors">
+                <div className="w-2 h-2 bg-primary dark:bg-green-300 rounded-full"></div>
               </div>
               <div>
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Iterative Development</h4>
@@ -185,7 +185,7 @@ const HumanCenteredAI: React.FC<HumanCenteredAIProps> = ({ onNext }) => {
         </div>
       </div>
       
-      <div className="bg-indigo-50 dark:bg-teal-900 rounded-xl p-6 border border-indigo-100 dark:border-teal-800 transition-colors">
+      <div className="bg-indigo-50 dark:bg-green-900 rounded-xl p-6 border border-indigo-100 dark:border-green-800 transition-colors">
         <h3 className="text-lg font-semibold text-on-surface dark:text-foreground mb-4">Human-AI Collaboration Framework</h3>
         <p className="text-muted-foreground dark:text-muted-foreground mb-6">
           Sendplex is designed to facilitate effective collaboration between humans and AI systems, creating a partnership that leverages the strengths of both to achieve optimal outcomes.

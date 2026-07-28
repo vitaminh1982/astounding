@@ -43,7 +43,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
       {/* Card Header */}
       <div className="p-4">
         <div className="flex items-start justify-between mb-3">
-          <h4 className="font-semibold text-foreground dark:text-foreground text-sm leading-tight flex-1 pr-2 group-hover:text-primary-green dark:group-hover:text-teal-400 transition-colors">
+          <h4 className="font-semibold text-foreground dark:text-foreground text-sm leading-tight flex-1 pr-2 group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors">
             {task.name}
           </h4>
           <button 
@@ -77,7 +77,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
         {/* Agent & Date Info */}
         <div className="flex items-center justify-between text-xs text-muted-foreground dark:text-muted-foreground mb-3 pb-3 border-b border-border dark:border-border">
           <div className="flex items-center gap-1.5">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 dark:from-teal-400 dark:to-cyan-500 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-gray-800 shadow-sm transition-colors">
+            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 dark:from-green-400 dark:to-green-500 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-gray-800 shadow-sm transition-colors">
               {task.assignedAgent.charAt(0).toUpperCase()}
             </div>
             <span className="font-medium text-on-surface dark:text-muted-foreground text-xs">{task.assignedAgent}</span>
@@ -96,7 +96,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
                 e.stopPropagation();
                 onRetryTask(task.id);
               }}
-              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-indigo-50 dark:bg-teal-900/20 text-indigo-700 dark:text-teal-300 rounded-lg hover:bg-indigo-100 dark:hover:bg-teal-900/30 active:bg-indigo-200 dark:active:bg-teal-900/40 transition-colors text-xs font-medium"
+              className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-indigo-50 dark:bg-green-900/20 text-indigo-700 dark:text-green-300 rounded-lg hover:bg-indigo-100 dark:hover:bg-green-900/30 active:bg-indigo-200 dark:active:bg-green-900/40 transition-colors text-xs font-medium"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               Retry

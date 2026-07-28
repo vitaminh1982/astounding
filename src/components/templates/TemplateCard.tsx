@@ -45,7 +45,7 @@ export default function TemplateCard({ template, className }: TemplateCardProps)
           {template.tags.map((tag, index) => (
             <span 
               key={index}
-              className="bg-indigo-50 dark:bg-teal-900/20 text-primary-green dark:text-teal-300 px-2 py-0.5 sm:py-1 rounded-full text-xs whitespace-nowrap transition-colors"
+              className="bg-indigo-50 dark:bg-green-900/20 text-primary-green dark:text-green-300 px-2 py-0.5 sm:py-1 rounded-full text-xs whitespace-nowrap transition-colors"
             >
               {tag}
             </span>

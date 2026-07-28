@@ -8,7 +8,7 @@ export default function InitializingView() {
       <motion.div
         animate={{ rotate: 360 }}
         transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-        className="w-16 h-16 rounded-2xl bg-gradient-to-r from-blue-500 to-teal-500 flex items-center justify-center mb-6"
+        className="w-16 h-16 rounded-2xl bg-gradient-to-r from-blue-500 to-green-500 flex items-center justify-center mb-6"
       >
         <Sparkles className="w-8 h-8 text-white" />
       </motion.div>

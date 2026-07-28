@@ -280,7 +280,7 @@ const ProjectSwitchModal: React.FC<ProjectSwitchModalProps> = ({
                 placeholder="Search projects by name, client, or industry..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                className="w-full pl-10 pr-4 py-3 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
               />
             </div>
           </div>
@@ -306,8 +306,8 @@ const ProjectSwitchModal: React.FC<ProjectSwitchModalProps> = ({
                     className={`
                       relative p-6 border rounded-xl cursor-pointer transition-all duration-200
                       ${project.id === currentProjectId 
-                        ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20 ring-2 ring-indigo-200 dark:ring-teal-500/30' 
-                        : 'border-border dark:border-border hover:border-indigo-300 dark:hover:border-teal-400 hover:shadow-md dark:hover:shadow-gray-800 bg-white dark:bg-surface-container-highest/50'
+                        ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20 ring-2 ring-indigo-200 dark:ring-green-500/30' 
+                        : 'border-border dark:border-border hover:border-indigo-300 dark:hover:border-green-400 hover:shadow-md dark:hover:shadow-gray-800 bg-white dark:bg-surface-container-highest/50'
                       }
                       ${selectedProject?.id === project.id ? 'opacity-75' : ''}
                     `}
@@ -315,8 +315,8 @@ const ProjectSwitchModal: React.FC<ProjectSwitchModalProps> = ({
                     {/* Loading overlay */}
                     {selectedProject?.id === project.id && isLoading && (
                       <div className="absolute inset-0 bg-white dark:bg-surface-container-high bg-opacity-75 dark:bg-opacity-75 flex items-center justify-center rounded-xl">
-                        <div className="flex items-center gap-2 text-primary-green dark:text-teal-400">
-                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-indigo-600 dark:border-teal-400"></div>
+                        <div className="flex items-center gap-2 text-primary-green dark:text-green-400">
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-indigo-600 dark:border-green-400"></div>
                           <span className="text-sm font-medium">Switching...</span>
                         </div>
                       </div>
@@ -325,7 +325,7 @@ const ProjectSwitchModal: React.FC<ProjectSwitchModalProps> = ({
                     {/* Current project indicator */}
                     {project.id === currentProjectId && (
                       <div className="absolute top-4 right-4">
-                        <div className="flex items-center gap-1 px-2 py-1 bg-primary dark:bg-teal-600 text-white text-xs rounded-full">
+                        <div className="flex items-center gap-1 px-2 py-1 bg-primary dark:bg-green-600 text-white text-xs rounded-full">
                           <CheckCircle className="w-3 h-3" />
                           Current
                         </div>
@@ -338,7 +338,7 @@ const ProjectSwitchModal: React.FC<ProjectSwitchModalProps> = ({
                         <h3 className="text-lg font-semibold text-foreground dark:text-foreground pr-16">{project.name}</h3>
                       </div>
                       <div className="flex items-center gap-2 mb-2">
-                        <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-cyan-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
+                        <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-green-500 dark:to-green-500 rounded-lg flex items-center justify-center text-white font-bold text-sm">
                           {project.client.name.charAt(0)}
                         </div>
                         <div>
@@ -432,7 +432,7 @@ const ProjectSwitchModal: React.FC<ProjectSwitchModalProps> = ({
                 </button>
                 <button
                   onClick={onClose}
-                  className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                  className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
                 >
                   Stay on Current Project
                 </button>

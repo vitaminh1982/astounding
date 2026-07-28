@@ -34,7 +34,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
               onClick={() => onSectionClick(section.id)}
               className={`w-full flex items-center p-3 rounded-lg text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 isActive
-                  ? 'bg-indigo-50 dark:bg-teal-900 text-indigo-700 dark:text-teal-100 shadow-sm dark:shadow-gray-900'
+                  ? 'bg-indigo-50 dark:bg-green-900 text-indigo-700 dark:text-green-100 shadow-sm dark:shadow-gray-900'
                   : isCompleted
                   ? 'text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest hover:shadow-sm dark:hover:shadow-gray-900'
                   : 'text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
@@ -44,7 +44,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
             >
               <div className={`p-2 rounded-lg mr-3 transition-colors ${
                 isActive 
-                  ? 'bg-indigo-100 dark:bg-teal-800' 
+                  ? 'bg-indigo-100 dark:bg-green-800' 
                   : isCompleted 
                   ? 'bg-green-100 dark:bg-green-900' 
                   : 'bg-surface-container-low dark:bg-surface-container-highest'
@@ -52,13 +52,13 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
                 {isCompleted ? (
                   <CheckCircle className={`w-5 h-5 transition-colors ${
                     isActive 
-                      ? 'text-primary-green dark:text-teal-300' 
+                      ? 'text-primary-green dark:text-green-300' 
                       : 'text-green-600 dark:text-green-300'
                   }`} />
                 ) : (
                   <section.icon className={`w-5 h-5 transition-colors ${
                     isActive 
-                      ? 'text-primary-green dark:text-teal-300' 
+                      ? 'text-primary-green dark:text-green-300' 
                       : 'text-muted-foreground dark:text-muted-foreground'
                   }`} />
                 )}
@@ -72,7 +72,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
       <div className="mt-6 pt-6 border-t border-border dark:border-border transition-colors">
         <div className="flex justify-between items-center">
           <span className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Progress</span>
-          <span className="text-sm font-medium text-primary-green dark:text-teal-400 transition-colors">
+          <span className="text-sm font-medium text-primary-green dark:text-green-400 transition-colors">
             {Math.round((completedSections.length / sections.length) * 100)}%
           </span>
         </div>

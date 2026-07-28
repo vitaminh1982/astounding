@@ -22,7 +22,7 @@ const WorkspaceFooter: React.FC<WorkspaceFooterProps> = ({ onClose, onSave }) =>
       <button
         type="button"
         onClick={onSave}
-        className="px-4 py-2 bg-primary dark:bg-teal-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 transition-colors"
+        className="px-4 py-2 bg-primary dark:bg-green-600 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 transition-colors"
       >
         Save Changes
       </button>

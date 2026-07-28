@@ -317,7 +317,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                 <button
                   className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
                     selectedType === 'ai' 
-                      ? 'border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400' 
+                      ? 'border-primary-green dark:border-green-500 text-primary-green dark:text-green-400' 
                       : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground'
                   }`}
                   onClick={() => setSelectedType('ai')}
@@ -327,7 +327,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                 <button
                   className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
                     selectedType === 'enterprise' 
-                      ? 'border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400' 
+                      ? 'border-primary-green dark:border-green-500 text-primary-green dark:text-green-400' 
                       : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground'
                   }`}
                   onClick={() => setSelectedType('enterprise')}
@@ -341,7 +341,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                 {filteredProviders.map(provider => (
                   <div
                     key={provider.id}
-                    className="border border-border dark:border-border rounded-lg p-4 hover:border-primary-green dark:hover:border-teal-400 hover:shadow-md dark:hover:shadow-gray-900 transition-all cursor-pointer bg-white dark:bg-surface-container-highest"
+                    className="border border-border dark:border-border rounded-lg p-4 hover:border-primary-green dark:hover:border-green-400 hover:shadow-md dark:hover:shadow-gray-900 transition-all cursor-pointer bg-white dark:bg-surface-container-highest"
                     onClick={() => handleSelectProvider(provider)}
                   >
                     <div className="flex items-start gap-3">
@@ -363,7 +363,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
             // Provider configuration view
             <div className="p-6">
               <button
-                className="flex items-center text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 mb-6 transition-colors"
+                className="flex items-center text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 mb-6 transition-colors"
                 onClick={handleBackToProviders}
               >
                 <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -394,7 +394,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                     
                     {field.type === 'select' ? (
                       <select
-                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors ${
+                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 transition-colors ${
                           formErrors[field.id] ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                         }`}
                         value={formValues[field.id] || ''}
@@ -422,7 +422,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                       <input
                         type={field.type}
                         placeholder={field.placeholder}
-                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors ${
+                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 transition-colors ${
                           formErrors[field.id] ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                         }`}
                         value={formValues[field.id] || ''}
@@ -489,7 +489,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
               <button
                 onClick={handleTestConnection}
                 disabled={isTestingConnection}
-                className="px-4 py-2 border border-indigo-300 dark:border-teal-600 rounded-md shadow-sm text-sm font-medium text-indigo-700 dark:text-teal-300 bg-indigo-50 dark:bg-teal-900/20 hover:bg-indigo-100 dark:hover:bg-teal-900/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-4 py-2 border border-indigo-300 dark:border-green-600 rounded-md shadow-sm text-sm font-medium text-indigo-700 dark:text-green-300 bg-indigo-50 dark:bg-green-900/20 hover:bg-indigo-100 dark:hover:bg-green-900/30 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 {isTestingConnection ? 'Testing...' : 'Test Connection'}
               </button>
@@ -497,7 +497,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
               <button
                 onClick={handleSaveConnection}
                 disabled={testResult !== 'success'}
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:shadow-gray-900"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:shadow-gray-900"
               >
                 Connect
               </button>

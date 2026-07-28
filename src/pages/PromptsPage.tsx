@@ -188,7 +188,7 @@ export default function PromptsPage() {
                 onClick={() => setViewType('card')}
                 className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   viewType === 'card'
-                    ? 'bg-primary dark:bg-teal-600 text-white shadow-inner'
+                    ? 'bg-primary dark:bg-green-600 text-white shadow-inner'
                     : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover: dark:hover:bg-surface-container-highest'
                 }`}
                 aria-label="Card View"
@@ -201,7 +201,7 @@ export default function PromptsPage() {
                 onClick={() => setViewType('list')}
                 className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 border-l border-border dark:border-border ${
                   viewType === 'list' 
-                    ? 'bg-primary dark:bg-teal-600 text-white shadow-inner' 
+                    ? 'bg-primary dark:bg-green-600 text-white shadow-inner' 
                     : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover: dark:hover:bg-surface-container-highest'
                 }`}
                 aria-label="List View"

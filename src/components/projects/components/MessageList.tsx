@@ -212,7 +212,7 @@ const MessageList: React.FC<MessageListProps> = ({
         </p>
         <button
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-tertiary dark:bg-teal-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+          className="px-4 py-2 bg-tertiary dark:bg-green-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
           Reload Page
         </button>

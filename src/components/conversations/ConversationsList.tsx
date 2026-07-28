@@ -10,9 +10,9 @@ export default function ConversationsList({ onSelect, selectedId }) {
     <div className="space-y-4 mt-4">
       {/* Loading indicator */}
       {loading && (
-        <div className="flex items-center justify-center py-2 mb-4 bg-indigo-50 dark:bg-teal-900/30 border border-indigo-100 dark:border-teal-800 rounded-lg transition-colors">
-          <Loader className="w-4 h-4 text-indigo-500 dark:text-teal-400 animate-spin mr-2 transition-colors" />
-          <span className="text-sm text-primary-green dark:text-teal-300 transition-colors">Loading active conversations...</span>
+        <div className="flex items-center justify-center py-2 mb-4 bg-indigo-50 dark:bg-green-900/30 border border-indigo-100 dark:border-green-800 rounded-lg transition-colors">
+          <Loader className="w-4 h-4 text-indigo-500 dark:text-green-400 animate-spin mr-2 transition-colors" />
+          <span className="text-sm text-primary-green dark:text-green-300 transition-colors">Loading active conversations...</span>
         </div>
       )}
       
@@ -33,8 +33,8 @@ export default function ConversationsList({ onSelect, selectedId }) {
           className={`
             relative w-full p-4 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm hover:shadow-md
             ${selectedId === conversation.id 
-              ? 'bg-indigo-50 dark:bg-teal-900/30 border-indigo-200 dark:border-teal-600 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 shadow-md dark:shadow-gray-900' 
-              : 'bg-white dark:bg-surface-container-high border-border dark:border-border hover:border-indigo-200 dark:hover:border-teal-600 hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:ring-gray-500 dark:focus:ring-ring dark:focus:ring-offset-gray-900 dark:shadow-gray-900 dark:hover:shadow-gray-800'
+              ? 'bg-indigo-50 dark:bg-green-900/30 border-indigo-200 dark:border-green-600 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 shadow-md dark:shadow-gray-900' 
+              : 'bg-white dark:bg-surface-container-high border-border dark:border-border hover:border-indigo-200 dark:hover:border-green-600 hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:ring-gray-500 dark:focus:ring-ring dark:focus:ring-offset-gray-900 dark:shadow-gray-900 dark:hover:shadow-gray-800'
             }
           `}
         >
@@ -48,7 +48,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
             <div className="flex items-center gap-3">
               <div className={`
                 w-10 h-10 rounded-full flex items-center justify-center text-white font-medium transition-colors
-                ${conversation.client.avatar ? '' : 'bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-teal-600'}
+                ${conversation.client.avatar ? '' : 'bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-green-500 dark:to-green-600'}
               `}>
                 {conversation.client.avatar ? (
                   <img 

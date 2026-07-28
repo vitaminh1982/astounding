@@ -161,7 +161,7 @@ const DocumentsTab: React.FC = () => {
           <div className="flex justify-center gap-3">
             <button 
               onClick={handleGenerate}
-              className="px-5 py-2.5 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors flex items-center gap-2 font-medium shadow-sm dark:shadow-gray-900"
+              className="px-5 py-2.5 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors flex items-center gap-2 font-medium shadow-sm dark:shadow-gray-900"
             >
               <Sparkles className="w-4 h-4" />
               Generate Document
@@ -193,7 +193,7 @@ const DocumentsTab: React.FC = () => {
           <div className="flex gap-3">
             <button 
               onClick={handleGenerate}
-              className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors flex items-center gap-2 font-medium shadow-sm dark:shadow-gray-900"
+              className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors flex items-center gap-2 font-medium shadow-sm dark:shadow-gray-900"
             >
               <Sparkles className="w-4 h-4" />
               Generate Document
@@ -216,7 +216,7 @@ const DocumentsTab: React.FC = () => {
             placeholder="Search documents..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
           />
         </div>
       </div>
@@ -233,7 +233,7 @@ const DocumentsTab: React.FC = () => {
               </p>
               <button
                 onClick={() => setSearchQuery('')}
-                className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
               >
                 Clear Search
               </button>

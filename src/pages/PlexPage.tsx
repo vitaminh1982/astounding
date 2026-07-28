@@ -158,14 +158,14 @@ export default function PlexPage({
             {activeChat.messages.map(msg => (
               <div key={msg.id} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.type === 'assistant' && (
-                  <div className="w-8 h-8 rounded-full bg-primary dark:bg-teal-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5 text-white shadow-sm">
+                  <div className="w-8 h-8 rounded-full bg-primary dark:bg-green-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5 text-white shadow-sm">
                     <Sparkles size={16} />
                   </div>
                 )}
                 <div
                   className={`max-w-[75%] rounded-lg px-4 py-2.5 text-sm leading-relaxed ${
                     msg.type === 'user'
-                      ? 'bg-primary dark:bg-teal-600 text-white rounded-br-none shadow-sm'
+                      ? 'bg-primary dark:bg-green-600 text-white rounded-br-none shadow-sm'
                       : 'bg-surface-container-low dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-bl-none border border-border dark:border-border'
                   }`}
                 >
@@ -175,7 +175,7 @@ export default function PlexPage({
             ))}
             {isTyping && (
               <div className="flex justify-start items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-primary dark:bg-teal-600 flex items-center justify-center flex-shrink-0 text-white">
+                <div className="w-8 h-8 rounded-full bg-primary dark:bg-green-600 flex items-center justify-center flex-shrink-0 text-white">
                   <Sparkles size={16} />
                 </div>
                 <div className="bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded-lg rounded-bl-none px-4 py-3 flex gap-1">
@@ -200,7 +200,7 @@ export default function PlexPage({
 
             {/* Input */}
             <div className="w-full max-w-2xl mb-6">
-              <div className="bg-white dark:bg-background rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 transition-all">
+              <div className="bg-white dark:bg-background rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-green-500/50 transition-all">
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -231,7 +231,7 @@ export default function PlexPage({
                     <button
                       onClick={handleSend}
                       disabled={!input.trim()}
-                      className="w-8 h-8 rounded-md flex items-center justify-center bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
+                      className="w-8 h-8 rounded-md flex items-center justify-center bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
                     >
                       <Send size={12} strokeWidth={2} />
                     </button>
@@ -259,7 +259,7 @@ export default function PlexPage({
         {activeChat && (
           <div className="flex-shrink-0 px-6 pb-5">
             <div className="max-w-3xl mx-auto">
-              <div className="bg-white dark:bg-background rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 transition-all">
+              <div className="bg-white dark:bg-background rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-green-500/50 transition-all">
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -285,7 +285,7 @@ export default function PlexPage({
                     <button
                       onClick={handleSend}
                       disabled={!input.trim()}
-                      className="w-8 h-8 rounded-md flex items-center justify-center bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
+                      className="w-8 h-8 rounded-md flex items-center justify-center bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
                     >
                       <Send size={12} strokeWidth={2} />
                     </button>

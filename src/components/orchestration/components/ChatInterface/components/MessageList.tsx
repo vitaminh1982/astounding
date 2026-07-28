@@ -52,15 +52,15 @@ const MessageList: React.FC<MessageListProps> = ({
             <div
               className={`flex items-start max-w-[85%] p-4 rounded-xl shadow-sm dark:shadow-gray-900 transition-colors ${
                 message.type === 'user'
-                  ? 'bg-teal-600 dark:bg-primary text-white'
+                  ? 'bg-green-600 dark:bg-primary text-white'
                   : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-foreground border border-border dark:border-border'
               }`}
             >
               {message.type === 'ai' && (
-                <Bot className="w-5 h-5 text-teal-600 dark:text-teal-400 mr-3 flex-shrink-0 mt-0.5" />
+                <Bot className="w-5 h-5 text-green-600 dark:text-green-400 mr-3 flex-shrink-0 mt-0.5" />
               )}
               {message.type === 'user' && (
-                <User className="w-5 h-5 text-teal-100 dark:text-teal-200 mr-3 flex-shrink-0 mt-0.5" />
+                <User className="w-5 h-5 text-green-100 dark:text-green-200 mr-3 flex-shrink-0 mt-0.5" />
               )}
               <div className="text-sm">
                 {message.type === 'user' && (
@@ -104,7 +104,7 @@ const MessageList: React.FC<MessageListProps> = ({
                 )}
                 <div className={`text-xs mt-2 font-medium transition-colors ${
                   message.type === 'user' 
-                    ? 'text-teal-200 dark:text-teal-300' 
+                    ? 'text-green-200 dark:text-green-300' 
                     : 'text-muted-foreground dark:text-muted-foreground'
                 }`}>
                   {message.timestamp.toLocaleTimeString()}
@@ -122,7 +122,7 @@ const MessageList: React.FC<MessageListProps> = ({
           className="flex justify-start"
         >
           <div className="flex items-center bg-white dark:bg-surface-container-high p-4 rounded-xl shadow-sm dark:shadow-gray-900 border border-border dark:border-border transition-colors">
-            <Bot className="w-5 h-5 text-teal-600 dark:text-teal-400 mr-3" />
+            <Bot className="w-5 h-5 text-green-600 dark:text-green-400 mr-3" />
             <div className="flex items-center gap-2">
               <span className="text-sm text-on-surface dark:text-foreground font-medium transition-colors">Processing</span>
               <div className="flex gap-1">

@@ -34,7 +34,7 @@ const WorkflowEdge: React.FC<EdgeProps> = ({
           ...style,
           strokeWidth: 2,
         }}
-        className="react-flow__edge-path stroke-indigo-500 dark:stroke-teal-400"
+        className="react-flow__edge-path stroke-indigo-500 dark:stroke-green-400"
         d={edgePath}
         markerEnd={markerEnd}
       />

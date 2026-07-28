@@ -24,7 +24,7 @@ const SettingsTab: React.FC<SettingsTabProps> = ({ workspaceData, setWorkspaceDa
             <input
               id="workspaceName"
               type="text"
-              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 sm:text-sm transition-colors"
+              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 sm:text-sm transition-colors"
               value={workspaceData.name}
               onChange={(e) => setWorkspaceData({
                 ...workspaceData,
@@ -40,7 +40,7 @@ const SettingsTab: React.FC<SettingsTabProps> = ({ workspaceData, setWorkspaceDa
             <textarea
               id="workspaceDescription"
               rows={3}
-              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 sm:text-sm transition-colors"
+              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 sm:text-sm transition-colors"
               value={workspaceData.description}
               onChange={(e) => setWorkspaceData({
                 ...workspaceData,

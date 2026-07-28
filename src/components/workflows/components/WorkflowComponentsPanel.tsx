@@ -28,7 +28,7 @@ const WorkflowComponentsPanel: React.FC<WorkflowComponentsPanelProps> = ({
           aria-expanded={!isMinimized}
         >
           <h3 className="text-base font-semibold flex items-center gap-2 text-foreground dark:text-foreground">
-            <Tool className="w-4 h-4 text-primary-green dark:text-teal-400" strokeWidth={2.5} />
+            <Tool className="w-4 h-4 text-primary-green dark:text-green-400" strokeWidth={2.5} />
             Components
           </h3>
           <button className="text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors rounded-lg p-1 hover:bg-white/50 dark:hover:bg-surface-container-highest">
@@ -54,7 +54,7 @@ const WorkflowComponentsPanel: React.FC<WorkflowComponentsPanelProps> = ({
                 key={key}
                 draggable
                 onDragStart={(event) => handleDragStart(event, key)}
-                className="flex items-center gap-3 p-3 border border-border dark:border-border rounded-lg cursor-move hover:bg-surface-container-low dark:hover:bg-gray-750 hover:border-indigo-300 dark:hover:border-teal-600 transition-all duration-200 active:scale-95 group bg-white dark:bg-surface-container-high"
+                className="flex items-center gap-3 p-3 border border-border dark:border-border rounded-lg cursor-move hover:bg-surface-container-low dark:hover:bg-gray-750 hover:border-indigo-300 dark:hover:border-green-600 transition-all duration-200 active:scale-95 group bg-white dark:bg-surface-container-high"
                 role="button"
                 tabIndex={0}
               >

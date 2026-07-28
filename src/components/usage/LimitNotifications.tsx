@@ -37,8 +37,8 @@ export default function LimitNotifications({
     <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Limit Notifications</h3>
-        <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <Bell className="w-5 h-5 text-primary-green dark:text-teal-300" />
+        <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+          <Bell className="w-5 h-5 text-primary-green dark:text-green-300" />
         </div>
       </div>
       
@@ -71,7 +71,7 @@ export default function LimitNotifications({
                 </div>
               ))}
               <button 
-                className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors"
+                className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors"
                 onClick={() => setSettings({ 
                   ...settings, 
                   thresholds: [...settings.thresholds, 50] 
@@ -110,7 +110,7 @@ export default function LimitNotifications({
                       id="email-address"
                       value={settings.emailAddress}
                       onChange={handleEmailChange}
-                      className="pl-10 pr-3 py-2 w-full border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors"
+                      className="pl-10 pr-3 py-2 w-full border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 transition-colors"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -128,7 +128,7 @@ export default function LimitNotifications({
             </button>
             <button
               onClick={handleSave}
-              className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             >
               Save Settings
             </button>
@@ -163,7 +163,7 @@ export default function LimitNotifications({
           
           <button
             onClick={() => setIsEditing(true)}
-            className="flex items-center text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors"
+            className="flex items-center text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors"
           >
             <Sliders className="w-4 h-4 mr-2" />
             Configure Notifications

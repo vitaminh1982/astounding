@@ -21,8 +21,8 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-              <ShieldCheck className="w-5 h-5 text-primary-green dark:text-teal-300 transition-colors" />
+            <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+              <ShieldCheck className="w-5 h-5 text-primary-green dark:text-green-300 transition-colors" />
             </div>
             <h3 className="text-lg font-semibold text-on-surface dark:text-foreground transition-colors">AI Governance</h3>
           </div>
@@ -32,15 +32,15 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
           </p>
           <ul className="space-y-2 text-muted-foreground dark:text-muted-foreground">
             <li className="flex items-start">
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
               <span className="transition-colors">Centralized policy management</span>
             </li>
             <li className="flex items-start">
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
               <span className="transition-colors">Compliance monitoring and reporting</span>
             </li>
             <li className="flex items-start">
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
               <span className="transition-colors">Risk assessment and mitigation</span>
             </li>
           </ul>
@@ -48,8 +48,8 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
         
         <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-              <Bot className="w-5 h-5 text-primary-green dark:text-teal-300 transition-colors" />
+            <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+              <Bot className="w-5 h-5 text-primary-green dark:text-green-300 transition-colors" />
             </div>
             <h3 className="text-lg font-semibold text-on-surface dark:text-foreground transition-colors">AI Management</h3>
           </div>
@@ -59,25 +59,25 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
           </p>
           <ul className="space-y-2 text-muted-foreground dark:text-muted-foreground">
             <li className="flex items-start">
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
               <span className="transition-colors">Agent configuration and deployment</span>
             </li>
             <li className="flex items-start">
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
               <span className="transition-colors">Performance monitoring and analytics</span>
             </li>
             <li className="flex items-start">
-              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-green-400 mt-1 mr-2 flex-shrink-0 transition-colors" />
               <span className="transition-colors">Integration with existing systems</span>
             </li>
           </ul>
         </div>
       </div>
       
-      <div className="bg-indigo-50 dark:bg-teal-900 rounded-xl p-6 border border-indigo-100 dark:border-teal-800 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
+      <div className="bg-indigo-50 dark:bg-green-900 rounded-xl p-6 border border-indigo-100 dark:border-green-800 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-indigo-100 dark:bg-teal-800 rounded-lg transition-colors">
-            <Building className="w-5 h-5 text-primary-green dark:text-teal-300 transition-colors" />
+          <div className="p-2 bg-indigo-100 dark:bg-green-800 rounded-lg transition-colors">
+            <Building className="w-5 h-5 text-primary-green dark:text-green-300 transition-colors" />
           </div>
           <h3 className="text-lg font-semibold text-on-surface dark:text-foreground transition-colors">Enterprise Integration</h3>
         </div>
@@ -103,8 +103,8 @@ const PlatformOverview: React.FC<PlatformOverviewProps> = ({ onNext }) => {
       
       <div className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-            <Workflow className="w-5 h-5 text-primary-green dark:text-teal-300 transition-colors" />
+          <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+            <Workflow className="w-5 h-5 text-primary-green dark:text-green-300 transition-colors" />
           </div>
           <h3 className="text-lg font-semibold text-on-surface dark:text-foreground transition-colors">Workflow Automation</h3>
         </div>

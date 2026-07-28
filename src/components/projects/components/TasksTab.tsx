@@ -148,7 +148,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
                 placeholder="Search tasks..."
                 value={taskFilter.search}
                 onChange={(e) => setTaskFilter(prev => ({ ...prev, search: e.target.value }))}
-                className="pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 text-sm w-full sm:w-64 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
+                className="pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 text-sm w-full sm:w-64 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-all"
               />
             </div>
 
@@ -158,7 +158,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
               <select
                 value={taskFilter.agent}
                 onChange={(e) => setTaskFilter(prev => ({ ...prev, agent: e.target.value }))}
-                className="pl-10 pr-8 py-2 border border-border dark:border-border rounded-lg text-sm appearance-none bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 w-full sm:w-auto cursor-pointer transition-all"
+                className="pl-10 pr-8 py-2 border border-border dark:border-border rounded-lg text-sm appearance-none bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 w-full sm:w-auto cursor-pointer transition-all"
               >
                 <option value="all">All Agents</option>
                 {agents.map(agent => (
@@ -173,7 +173,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
             </div>
 
             {/* Add Task Button */}
-            <button className="flex items-center justify-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 active:bg-indigo-800 dark:active:bg-teal-800 transition-colors text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md">
+            <button className="flex items-center justify-center gap-2 px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 active:bg-indigo-800 dark:active:bg-green-800 transition-colors text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md">
               <Plus className="w-4 h-4" />
               New Task
             </button>
@@ -185,11 +185,11 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
           <div className="mt-4 flex items-center gap-2 flex-wrap">
             <span className="text-xs text-muted-foreground dark:text-muted-foreground font-medium">Active filters:</span>
             {taskFilter.agent !== 'all' && (
-              <span className="px-3 py-1.5 bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 rounded-full text-xs font-medium flex items-center gap-1.5">
+              <span className="px-3 py-1.5 bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 rounded-full text-xs font-medium flex items-center gap-1.5">
                 Agent: {taskFilter.agent}
                 <button 
                   onClick={() => setTaskFilter(prev => ({ ...prev, agent: 'all' }))}
-                  className="hover:bg-indigo-200 dark:hover:bg-teal-800/50 rounded-full p-0.5 transition-colors ml-1"
+                  className="hover:bg-indigo-200 dark:hover:bg-green-800/50 rounded-full p-0.5 transition-colors ml-1"
                   aria-label="Remove agent filter"
                 >
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,11 +199,11 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
               </span>
             )}
             {taskFilter.search && (
-              <span className="px-3 py-1.5 bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300 rounded-full text-xs font-medium flex items-center gap-1.5">
+              <span className="px-3 py-1.5 bg-indigo-100 dark:bg-green-900/30 text-indigo-700 dark:text-green-300 rounded-full text-xs font-medium flex items-center gap-1.5">
                 Search: "{taskFilter.search.length > 20 ? taskFilter.search.substring(0, 20) + '...' : taskFilter.search}"
                 <button 
                   onClick={() => setTaskFilter(prev => ({ ...prev, search: '' }))}
-                  className="hover:bg-indigo-200 dark:hover:bg-teal-800/50 rounded-full p-0.5 transition-colors ml-1"
+                  className="hover:bg-indigo-200 dark:hover:bg-green-800/50 rounded-full p-0.5 transition-colors ml-1"
                   aria-label="Clear search"
                 >
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -214,7 +214,7 @@ const TasksTab: React.FC<TasksTabProps> = ({ agents }) => {
             )}
             <button 
               onClick={() => setTaskFilter({ agent: 'all', status: 'all', search: '' })}
-              className="text-xs text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 font-medium hover:underline transition-colors"
+              className="text-xs text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 font-medium hover:underline transition-colors"
             >
               Clear all
             </button>

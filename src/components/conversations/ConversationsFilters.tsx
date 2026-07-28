@@ -41,9 +41,9 @@ export default function ConversationsFilters() {
   const FilterButton: React.FC<{ option: FilterOption }> = ({ option }) => {
     const isActive = activeFilter === option.id;
 
-    // Define color classes for dark mode with teal theme consistency
-    const activeClasses = `bg-primary dark:bg-teal-600 text-white shadow-sm dark:shadow-gray-900`;
-    const inactiveClasses = `bg-white dark:bg-surface-container-highest border border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-200 dark:hover:border-teal-500 hover:bg-indigo-50 dark:hover:bg-surface-container-highest shadow-sm dark:shadow-gray-900`;
+    // Define color classes for dark mode with green theme consistency
+    const activeClasses = `bg-primary dark:bg-green-600 text-white shadow-sm dark:shadow-gray-900`;
+    const inactiveClasses = `bg-white dark:bg-surface-container-highest border border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-200 dark:hover:border-green-500 hover:bg-indigo-50 dark:hover:bg-surface-container-highest shadow-sm dark:shadow-gray-900`;
     const activeCountClasses = `bg-primary dark:bg-primary text-white`;
     const inactiveCountClasses = `bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground`;
 
@@ -100,7 +100,7 @@ export default function ConversationsFilters() {
                      bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground
                      placeholder-gray-500 dark:placeholder-gray-400
                      focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring 
-                     focus:border-primary-green dark:focus:border-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900
+                     focus:border-primary-green dark:focus:border-green-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900
                      transition-all duration-200 shadow-sm dark:shadow-gray-900"
             aria-label="Search conversations"
           />
@@ -133,7 +133,7 @@ export default function ConversationsFilters() {
               transition-all duration-200 shadow-sm dark:shadow-gray-900
               focus:outline-none focus:ring-2 focus:ring-offset-2
               ${isFilterMenuOpen
-                ? 'bg-indigo-50 dark:bg-teal-900/30 border-indigo-200 dark:border-teal-700 text-primary-green dark:text-teal-300 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800'
+                ? 'bg-indigo-50 dark:bg-green-900/30 border-indigo-200 dark:border-green-700 text-primary-green dark:text-green-300 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800'
                 : 'bg-white dark:bg-surface-container-highest border-border dark:border-border text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest hover:border-outline-variant dark:hover:border-outline focus:ring-gray-500 dark:focus:ring-ring dark:focus:ring-offset-gray-900'
               }
             `}

@@ -23,16 +23,16 @@ const CustomNode: React.FC<{
   id: string;
 }> = ({ data, id }) => {
   return (
-    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-md dark:shadow-gray-900 p-3 border-2 border-indigo-200 dark:border-teal-600 transition-colors">
+    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-md dark:shadow-gray-900 p-3 border-2 border-indigo-200 dark:border-green-600 transition-colors">
       <Handle 
         type="target" 
         position={Position.Top} 
         id={`${id}-target`} 
         style={{ background: 'var(--handle-color, #4F46E5)' }}
-        className="dark:[--handle-color:#14B8A6]"
+        className="dark:[--handle-color:#22C55E]"
       />
       <div className="flex items-center gap-2">
-        <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
+        <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
           {data.icon}
         </div>
         <div>
@@ -47,7 +47,7 @@ const CustomNode: React.FC<{
         position={Position.Bottom} 
         id={`${id}-source`} 
         style={{ background: 'var(--handle-color, #4F46E5)' }}
-        className="dark:[--handle-color:#14B8A6]"
+        className="dark:[--handle-color:#22C55E]"
       />
     </div>
   );
@@ -82,7 +82,7 @@ const CustomEdge: React.FC<any> = ({
           strokeWidth: 2,
           stroke: 'var(--edge-color, #4F46E5)',
         }}
-        className="react-flow__edge-path dark:[--edge-color:#14B8A6]"
+        className="react-flow__edge-path dark:[--edge-color:#22C55E]"
         d={getBezierPath()}
         markerEnd={markerEnd}
       />
@@ -108,7 +108,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 50 },
     data: { 
       label: 'Email Trigger', 
-      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>,
       description: 'Starts on new email' 
@@ -120,7 +120,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 150 },
     data: { 
       label: 'AI Agent', 
-      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>,
       description: 'Processes request' 
@@ -132,7 +132,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 250 },
     data: { 
       label: 'Decision', 
-      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>,
       description: 'Routes based on content' 
@@ -144,7 +144,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 350 },
     data: { 
       label: 'Action', 
-      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-green-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
       </svg>,
       description: 'Executes task' 
@@ -246,9 +246,9 @@ const WorkflowVisualization: React.FC<WorkflowVisualizationProps> = ({
             nodeColor={(node) => {
               switch (node.id) {
                 case 'trigger':
-                  return '#14B8A6'; // teal-500 for consistency in both modes
+                  return '#22C55E'; // green-500 for consistency in both modes
                 case 'agent':
-                  return '#06B6D4'; // cyan-500
+                  return '#16A34A'; // green-600
                 case 'decision':
                   return '#F59E0B'; // amber-500
                 case 'action':

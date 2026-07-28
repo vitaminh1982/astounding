@@ -170,7 +170,7 @@ export function generateAgents(intake: IntakeData): ProjectAgent[] {
       currentTask: 'Mapping data pipeline requirements',
       status: 'idle',
       progress: 0,
-      color: 'cyan',
+      color: 'green',
     });
   } else {
     baseAgents.push({

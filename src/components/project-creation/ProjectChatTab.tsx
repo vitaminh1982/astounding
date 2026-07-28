@@ -163,7 +163,7 @@ export default function ProjectChatTab({ project }: Props) {
           <button
             onClick={handleSend}
             disabled={!inputValue.trim() || isTyping}
-            className="p-3 rounded-xl bg-tertiary dark:bg-teal-600 text-white hover:bg-blue-700 dark:hover:bg-teal-700 disabled:opacity-40 transition-colors"
+            className="p-3 rounded-xl bg-tertiary dark:bg-green-600 text-white hover:bg-blue-700 dark:hover:bg-green-700 disabled:opacity-40 transition-colors"
             aria-label="Send"
           >
             <Send className="w-5 h-5" />

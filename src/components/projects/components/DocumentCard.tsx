@@ -79,7 +79,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
   };
 
   return (
-    <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg hover:shadow-md dark:hover:shadow-gray-900 hover:border-indigo-300 dark:hover:border-teal-400 transition-all duration-200 overflow-hidden">
+    <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg hover:shadow-md dark:hover:shadow-gray-900 hover:border-indigo-300 dark:hover:border-green-400 transition-all duration-200 overflow-hidden">
       <div className="p-4">
         <div className="flex gap-4">
           {/* File Icon */}
@@ -139,7 +139,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
               </button>
               <button
                 onClick={() => onDownload(document)}
-                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm font-medium shadow-sm dark:shadow-gray-900"
+                className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors text-sm font-medium shadow-sm dark:shadow-gray-900"
               >
                 <Download className="w-4 h-4" />
                 Download

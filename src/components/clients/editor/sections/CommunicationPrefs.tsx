@@ -105,8 +105,8 @@ export default function CommunicationPrefs({ client, onChange }: CommunicationPr
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-100 dark:bg-teal-900/30 border border-blue-200 dark:border-teal-800 rounded-lg transition-colors">
-            <Bell className="w-5 h-5 text-tertiary dark:text-teal-400 transition-colors" />
+          <div className="p-2 bg-blue-100 dark:bg-green-900/30 border border-blue-200 dark:border-green-800 rounded-lg transition-colors">
+            <Bell className="w-5 h-5 text-tertiary dark:text-green-400 transition-colors" />
           </div>
           <div>
             <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
@@ -148,7 +148,7 @@ export default function CommunicationPrefs({ client, onChange }: CommunicationPr
                 whileTap={{ scale: 0.98 }}
                 className={`relative p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
                   isSelected
-                    ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
+                    ? 'border-indigo-300 dark:border-green-600 bg-indigo-50 dark:bg-green-900/20'
                     : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-border dark:hover:border-border'
                 } shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800`}
                 onClick={() => toggleChannel(channelId as any)}
@@ -171,7 +171,7 @@ export default function CommunicationPrefs({ client, onChange }: CommunicationPr
                       </p>
                     </div>
                     {isSelected && (
-                      <div className="p-1 bg-primary dark:bg-teal-600 rounded-full">
+                      <div className="p-1 bg-primary dark:bg-green-600 rounded-full">
                         <Check className="w-3 h-3 text-white" />
                       </div>
                     )}
@@ -202,7 +202,7 @@ export default function CommunicationPrefs({ client, onChange }: CommunicationPr
             <select
               value={preferences.language}
               onChange={handleLanguageChange}
-              className="w-full pl-4 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+              className="w-full pl-4 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
             >
               {Object.entries(LANGUAGE_CONFIG).map(([code, config]) => (
                 <option key={code} value={code}>
@@ -237,7 +237,7 @@ export default function CommunicationPrefs({ client, onChange }: CommunicationPr
             <select
               value={preferences.contactFrequency}
               onChange={handleFrequencyChange}
-              className="w-full pl-4 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+              className="w-full pl-4 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
             >
               {Object.entries(FREQUENCY_CONFIG).map(([freq, config]) => (
                 <option key={freq} value={freq}>

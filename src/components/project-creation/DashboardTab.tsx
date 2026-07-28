@@ -64,7 +64,7 @@ export default function DashboardTab({ project }: Props) {
           </div>
           <div className="w-full h-2.5 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-blue-500 to-teal-500 rounded-full"
+              className="h-full bg-gradient-to-r from-blue-500 to-green-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${project.overallProgress}%` }}
               transition={{ duration: 0.8 }}
@@ -118,7 +118,7 @@ export default function DashboardTab({ project }: Props) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-gradient-to-r from-blue-50 to-teal-50 dark:from-blue-900/10 dark:to-teal-900/10 border border-blue-200 dark:border-blue-800/50 rounded-xl p-5"
+        className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/10 dark:to-green-900/10 border border-blue-200 dark:border-blue-800/50 rounded-xl p-5"
       >
         <div className="flex items-center gap-2 mb-2">
           <Users className="w-4 h-4 text-tertiary dark:text-tertiary" />

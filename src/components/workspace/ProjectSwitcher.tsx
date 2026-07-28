@@ -15,7 +15,7 @@ const COLOR_MAP: Record<string, { bg: string; text: string }> = {
   sky:     { bg: 'bg-sky-200',     text: 'text-sky-800'     },
   indigo:  { bg: 'bg-indigo-200',  text: 'text-indigo-800'  },
   rose:    { bg: 'bg-rose-200',    text: 'text-rose-800'    },
-  teal:    { bg: 'bg-teal-200',    text: 'text-teal-800'    },
+  green:    { bg: 'bg-green-200',    text: 'text-green-800'    },
   blue:    { bg: 'bg-blue-200',    text: 'text-blue-800'    },
 };
 

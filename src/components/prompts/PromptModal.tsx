@@ -184,7 +184,7 @@ export default function PromptModal({
                       errors.title 
                         ? 'border-destructive dark:border-red-400' 
                         : 'border-border dark:border-border'
-                    } rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-teal-500 sm:text-sm`}
+                    } rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-green-500 sm:text-sm`}
                     required
                     maxLength={TITLE_MAX_LENGTH}
                   />
@@ -216,7 +216,7 @@ export default function PromptModal({
                       errors.description 
                         ? 'border-destructive dark:border-red-400' 
                         : 'border-border dark:border-border'
-                    } rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-teal-500 sm:text-sm`}
+                    } rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-green-500 sm:text-sm`}
                     maxLength={DESCRIPTION_MAX_LENGTH}
                   />
                   {errors.description && (
@@ -240,7 +240,7 @@ export default function PromptModal({
                       errors.content 
                         ? 'border-destructive dark:border-red-400' 
                         : 'border-border dark:border-border'
-                    } rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-teal-500 sm:text-sm font-mono`}
+                    } rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-green-500 sm:text-sm font-mono`}
                     required
                   />
                   {errors.content && (
@@ -261,7 +261,7 @@ export default function PromptModal({
                       name="category"
                       value={editedPrompt.category}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-teal-500 sm:text-sm"
+                      className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-green-500 sm:text-sm"
                     >
                       <option value="marketing">Marketing</option>
                       <option value="content_creation">Content Creation</option>
@@ -307,13 +307,13 @@ export default function PromptModal({
                     {editedPrompt.tags.map((tag, index) => (
                       <span 
                         key={index} 
-                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-teal-900 text-indigo-800 dark:text-teal-100"
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 dark:bg-green-900 text-indigo-800 dark:text-green-100"
                       >
                         {tag}
                         <button
                           type="button"
                           onClick={() => handleRemoveTag(tag)}
-                          className="ml-1.5 inline-flex items-center justify-center h-4 w-4 rounded-full text-primary-green dark:text-teal-300 hover:text-primary-green dark:hover:text-teal-100 focus:outline-none"
+                          className="ml-1.5 inline-flex items-center justify-center h-4 w-4 rounded-full text-primary-green dark:text-green-300 hover:text-primary-green dark:hover:text-green-100 focus:outline-none"
                         >
                           <span className="sr-only">Remove tag</span>
                           <X className="h-3 w-3" />
@@ -328,7 +328,7 @@ export default function PromptModal({
                       onChange={(e) => setNewTag(e.target.value)}
                       onKeyPress={handleTagKeyPress}
                       placeholder="Add a tag"
-                      className="flex-1 px-3 py-2 border border-border dark:border-border rounded-l-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-teal-500 sm:text-sm"
+                      className="flex-1 px-3 py-2 border border-border dark:border-border rounded-l-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-ring focus:border-primary-green dark:focus:ring-ring dark:focus:border-green-500 sm:text-sm"
                     />
                     <button
                       type="button"
@@ -351,8 +351,8 @@ export default function PromptModal({
                 </div>
                 
                 <div className="bg-white dark:bg-surface-container-highest rounded-lg shadow p-4 mb-4">
-                  <div className="bg-indigo-50 dark:bg-teal-900 px-4 py-1.5 border-b border-indigo-100 dark:border-teal-800 flex justify-between items-center rounded-t-lg">
-                    <span className="text-xs font-semibold text-indigo-700 dark:text-teal-100 uppercase tracking-wider">
+                  <div className="bg-indigo-50 dark:bg-green-900 px-4 py-1.5 border-b border-indigo-100 dark:border-green-800 flex justify-between items-center rounded-t-lg">
+                    <span className="text-xs font-semibold text-indigo-700 dark:text-green-100 uppercase tracking-wider">
                       {editedPrompt.category.replace('_', ' ')}
                     </span>
                     <span className={`p-1 rounded-full ${
@@ -443,7 +443,7 @@ export default function PromptModal({
             <div>
               <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2">{prompt?.title}</h3>
               <div className="flex flex-wrap gap-2 mb-4">
-                <span className="px-2 py-1 rounded-full text-xs bg-indigo-100 dark:bg-teal-900 text-indigo-800 dark:text-teal-100">
+                <span className="px-2 py-1 rounded-full text-xs bg-indigo-100 dark:bg-green-900 text-indigo-800 dark:text-green-100">
                   {prompt?.category.replace('_', ' ')}
                 </span>
                 {prompt?.tags.map((tag, index) => (
@@ -460,7 +460,7 @@ export default function PromptModal({
                 <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Prompt Content</h4>
                 <button
                   onClick={handleCopy}
-                  className="flex items-center text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 px-2 py-1 rounded hover:bg-indigo-50 dark:hover:bg-teal-900 transition-colors"
+                  className="flex items-center text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 px-2 py-1 rounded hover:bg-indigo-50 dark:hover:bg-green-900 transition-colors"
                 >
                   {isCopied ? (
                     <>
@@ -557,7 +557,7 @@ export default function PromptModal({
               <button
                 type="button"
                 onClick={(e) => handleSave(e, false)}
-                className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
+                className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
               >
                 {visibility === 'public' ? 'Publish' : 'Save'}
               </button>
@@ -571,7 +571,7 @@ export default function PromptModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
+              className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-md text-sm font-medium hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
             >
               Close
             </button>

@@ -49,7 +49,7 @@ export default function AISettings() {
                 name="responseTime"
                 value={aiSettings.responseTime}
                 onChange={handleChange}
-                className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors"
+                className="mt-1 p-2 block w-full rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors"
               >
                 <option value="10">10 seconds</option>
                 <option value="20">20 seconds</option>
@@ -66,7 +66,7 @@ export default function AISettings() {
                     name="escalationThreshold"
                     value={aiSettings.escalationThreshold}
                     onChange={handleChange}
-                    className="p-2 block w-20 rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors"
+                    className="p-2 block w-20 rounded-md border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm focus:border-primary-green dark:focus:border-green-500 focus:ring-ring dark:focus:ring-ring transition-colors"
                   />
                   <span className="text-sm text-muted-foreground dark:text-muted-foreground">attempts before escalation</span>
                 </div>

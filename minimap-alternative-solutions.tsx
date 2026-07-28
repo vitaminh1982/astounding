@@ -45,7 +45,7 @@
   nodeColor={(node) => {
     const isDark = document.documentElement.classList.contains('dark');
     // Always use a contrasting color regardless of mode
-    return isDark ? '#22d3ee' : '#0891b2'; // cyan shades
+    return isDark ? '#22d3ee' : '#0891b2'; // green shades
   }}
   nodeStrokeColor={(node) => {
     const isDark = document.documentElement.classList.contains('dark');

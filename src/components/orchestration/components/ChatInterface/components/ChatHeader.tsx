@@ -17,7 +17,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
   return (
     <div className="flex items-center justify-between p-4 bg-white dark:bg-surface-container-high border-b border-border dark:border-border transition-colors">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-teal-600 dark:from-teal-400 dark:to-teal-500 rounded-lg flex items-center justify-center shadow-sm">
+        <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 dark:from-green-400 dark:to-green-500 rounded-lg flex items-center justify-center shadow-sm">
           <Bot className="w-4 h-4 text-white" />
         </div>
         <div>

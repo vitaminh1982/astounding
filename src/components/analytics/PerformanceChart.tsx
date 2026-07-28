@@ -412,7 +412,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
           {/* Export button */}
           <button 
             onClick={handleExport}
-            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             <Download className="w-4 h-4" />
             <span>Export</span>
@@ -428,7 +428,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
               <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">Start Date</label>
               <input
                 type="date"
-                className="px-3 py-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors"
+                className="px-3 py-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 transition-colors"
                 value={customDateRange.start ? format(customDateRange.start, 'yyyy-MM-dd') : ''}
                 onChange={(e) => setCustomDateRange({
                   ...customDateRange,
@@ -440,7 +440,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
               <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">End Date</label>
               <input
                 type="date"
-                className="px-3 py-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors"
+                className="px-3 py-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 transition-colors"
                 value={customDateRange.end ? format(customDateRange.end, 'yyyy-MM-dd') : ''}
                 onChange={(e) => setCustomDateRange({
                   ...customDateRange,
@@ -452,7 +452,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
             </div>
             <div className="flex items-end">
               <button
-                className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => {
                   if (customDateRange.start && customDateRange.end) {
                     // Apply custom date range
@@ -475,7 +475,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
           <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">Metrics</h4>
           <button
             onClick={() => setShowLegend(!showLegend)}
-            className="text-xs text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
+            className="text-xs text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
           >
             {showLegend ? 'Hide Legend' : 'Show Legend'}
           </button>
@@ -532,7 +532,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
       <div style={{ height: `${height}px` }} className="relative">
         {isLoading ? (
           <div className="absolute inset-0 flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest/50 bg-opacity-75 rounded-lg transition-colors">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-teal-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-green-500"></div>
           </div>
         ) : error ? (
           <div className="absolute inset-0 flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest/50 bg-opacity-75 rounded-lg transition-colors">
@@ -540,7 +540,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
               <AlertCircle className="h-12 w-12 mx-auto mb-2" />
               <p>{error}</p>
               <button 
-                className="mt-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
+                className="mt-2 px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
                 onClick={() => {
                   setIsLoading(true);
                   setError(null);

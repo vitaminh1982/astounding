@@ -42,7 +42,7 @@ const ApiCard = () => {
           className="flex-1 text-sm bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border text-foreground dark:text-foreground rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
           readOnly
         />
-        <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
+        <button className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors">
           Copy
         </button>
       </div>
@@ -72,7 +72,7 @@ const SynchronizationCard = () => {
           <div className="font-medium text-foreground dark:text-foreground">Frequency</div>
           <div className="text-sm text-muted-foreground dark:text-muted-foreground">Every 5 minutes</div>
         </div>
-        <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
+        <button className="text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors">
           Modify
         </button>
       </div>

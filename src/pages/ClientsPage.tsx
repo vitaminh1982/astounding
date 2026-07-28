@@ -38,7 +38,7 @@ export default function ClientsPage() {
 
           {/* Scroll Indicator (desktop only) */}
           {showIndicator && (
-            <div className="hidden lg:block fixed right-0 top-1/2 -translate-y-1/2 bg-primary-500 dark:bg-teal-600 text-white rounded-l-lg shadow-lg z-50 transition-transform hover:translate-x-0 translate-x-[calc(100%-8px)] group">
+            <div className="hidden lg:block fixed right-0 top-1/2 -translate-y-1/2 bg-primary-500 dark:bg-green-600 text-white rounded-l-lg shadow-lg z-50 transition-transform hover:translate-x-0 translate-x-[calc(100%-8px)] group">
               <div className="flex items-center p-3 cursor-pointer" onClick={() => setShowIndicator(false)}>
                 <ChevronRightIcon className="h-5 w-5 mr-2" />
                 <span className="whitespace-nowrap group-hover:block hidden">

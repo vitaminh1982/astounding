@@ -249,7 +249,7 @@ export default function ConversationalIntake() {
           </span>
           <div className="w-32 h-1.5 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-indigo-500 to-teal-500 rounded-full"
+              className="h-full bg-gradient-to-r from-indigo-500 to-green-500 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress * 100}%` }}
               transition={{ duration: 0.5 }}
@@ -290,13 +290,13 @@ export default function ConversationalIntake() {
                     className={`rounded-2xl px-5 py-3 ${
                       isAssistant
                         ? 'bg-white dark:bg-surface-container-high border border-border dark:border-border text-on-surface dark:text-on-surface-variant'
-                        : 'bg-primary dark:bg-teal-600 text-white'
+                        : 'bg-primary dark:bg-green-600 text-white'
                     }`}
                   >
                     {isAssistant && (
                       <div className="flex items-center gap-1.5 mb-1">
-                        <Sparkles className="w-3 h-3 text-indigo-500 dark:text-teal-400" />
-                        <span className="text-[10px] font-semibold text-indigo-500 dark:text-teal-400 uppercase tracking-wide">
+                        <Sparkles className="w-3 h-3 text-indigo-500 dark:text-green-400" />
+                        <span className="text-[10px] font-semibold text-indigo-500 dark:text-green-400 uppercase tracking-wide">
                           Plex
                         </span>
                       </div>
@@ -325,8 +325,8 @@ export default function ConversationalIntake() {
                           disabled={!!selectedChip}
                           className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all ${
                             selectedChip === chip.value
-                              ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600 text-white shadow-md'
-                              : 'bg-white dark:bg-surface-container-high border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-400 dark:hover:border-teal-500 hover:text-primary-green dark:hover:text-teal-400'
+                              ? 'bg-primary dark:bg-green-600 border-indigo-600 dark:border-green-600 text-white shadow-md'
+                              : 'bg-white dark:bg-surface-container-high border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-400 dark:hover:border-green-500 hover:text-primary-green dark:hover:text-green-400'
                           } disabled:pointer-events-none`}
                         >
                           {selectedChip === chip.value && <Check size={11} />}
@@ -346,7 +346,7 @@ export default function ConversationalIntake() {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
             <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl px-5 py-3">
               <div className="flex items-center gap-2">
-                <Sparkles className="w-3 h-3 text-indigo-500 dark:text-teal-400" />
+                <Sparkles className="w-3 h-3 text-indigo-500 dark:text-green-400" />
                 <div className="flex gap-1">
                   {[0, 0.2, 0.4].map((delay, i) => (
                     <motion.span
@@ -375,7 +375,7 @@ export default function ConversationalIntake() {
           >
             <button
               onClick={handleStartProject}
-              className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-teal-500 text-white font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/20 text-sm"
+              className="px-8 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-green-500 text-white font-semibold hover:opacity-90 transition-all shadow-lg shadow-indigo-500/20 text-sm"
             >
               🚀 Start Project
             </button>
@@ -400,7 +400,7 @@ export default function ConversationalIntake() {
             <button
               onClick={handleSend}
               disabled={!inputValue.trim() || state.isAssistantTyping}
-              className="p-3 rounded-xl bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="p-3 rounded-xl bg-primary dark:bg-green-600 text-white hover:bg-indigo-700 dark:hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               aria-label="Send"
             >
               <Send className="w-5 h-5" />

@@ -67,12 +67,12 @@ export default function PromptsCategories({
                         flex items-center justify-between p-2 rounded-md cursor-pointer
                         transition-colors duration-150 ease-in-out
                         ${isSelected
-                            ? 'bg-indigo-100 dark:bg-teal-900/20 text-indigo-700 dark:text-teal-300 font-medium' // Selected state style
+                            ? 'bg-indigo-100 dark:bg-green-900/20 text-indigo-700 dark:text-green-300 font-medium' // Selected state style
                             : 'text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest hover:text-on-surface dark:hover:text-muted-foreground' // Default state style
                         }
                     `;
                     // Dynamically set icon classes based on selection state
-                    const iconClasses = `w-5 h-5 mr-3 ${isSelected ? 'text-primary-green dark:text-teal-400' : 'text-outline dark:text-muted-foreground'}`;
+                    const iconClasses = `w-5 h-5 mr-3 ${isSelected ? 'text-primary-green dark:text-green-400' : 'text-outline dark:text-muted-foreground'}`;
 
                     return (
                         <li key={category.id}>
@@ -88,7 +88,7 @@ export default function PromptsCategories({
                                     <span>{t(category.labelKey, category.defaultLabel)}</span>
                                 </div>
                                 {/* Prompt Count Badge */}
-                                <span className={`text-xs font-medium px-2 py-0.5 rounded-full transition-colors ${isSelected ? 'bg-indigo-200 dark:bg-teal-900/30 text-indigo-800 dark:text-teal-300' : 'bg-surface-container dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground'}`}>
+                                <span className={`text-xs font-medium px-2 py-0.5 rounded-full transition-colors ${isSelected ? 'bg-indigo-200 dark:bg-green-900/30 text-indigo-800 dark:text-green-300' : 'bg-surface-container dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground'}`}>
                                     {category.count}
                                 </span>
                             </button>

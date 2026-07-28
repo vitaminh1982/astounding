@@ -179,7 +179,7 @@ export default function Preview({ agent }: PreviewProps) {
               <div
                 className={`rounded-lg p-3 max-w-[70%] ${
                   message.sender === 'user'
-                    ? 'bg-indigo-100 dark:bg-teal-900 text-foreground dark:text-foreground'
+                    ? 'bg-indigo-100 dark:bg-green-900 text-foreground dark:text-foreground'
                     : 'bg-surface-container-low dark:bg-surface-container-highest text-foreground dark:text-foreground'
                 }`}
               >
@@ -240,10 +240,10 @@ export default function Preview({ agent }: PreviewProps) {
             />
             <button
               type="submit"
-              className={`bg-primary dark:bg-teal-600 text-white px-3 py-1 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 ${
+              className={`bg-primary dark:bg-green-600 text-white px-3 py-1 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 ${
                 isLoading || isTyping || !newMessage.trim() 
                   ? 'opacity-50 cursor-not-allowed' 
-                  : 'hover:bg-indigo-700 dark:hover:bg-teal-700'
+                  : 'hover:bg-indigo-700 dark:hover:bg-green-700'
               }`}
               disabled={isLoading || isTyping || !newMessage.trim()}
             >

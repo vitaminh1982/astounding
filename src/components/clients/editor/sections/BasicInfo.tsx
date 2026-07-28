@@ -124,8 +124,8 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-blue-100 dark:bg-teal-900/30 border border-blue-200 dark:border-teal-800 rounded-lg transition-colors">
-            <User className="w-5 h-5 text-tertiary dark:text-teal-400 transition-colors" />
+          <div className="p-2 bg-blue-100 dark:bg-green-900/30 border border-blue-200 dark:border-green-800 rounded-lg transition-colors">
+            <User className="w-5 h-5 text-tertiary dark:text-green-400 transition-colors" />
           </div>
           <div>
             <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
@@ -167,7 +167,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.name
                   ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring'
+                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-green-500 focus:ring-blue-500 dark:focus:ring-ring'
               }`}
               placeholder="Enter client's full name"
               maxLength={50}
@@ -206,7 +206,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.email
                   ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring'
+                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-green-500 focus:ring-blue-500 dark:focus:ring-ring'
               }`}
               placeholder="client@example.com"
             />
@@ -242,7 +242,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.phone
                   ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring'
+                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-green-500 focus:ring-blue-500 dark:focus:ring-ring'
               }`}
               placeholder="+1 (555) 123-4567"
             />
@@ -273,7 +273,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-tertiary dark:focus:border-green-500 focus:ring-blue-500 dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -314,7 +314,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
             value={formData.notes}
             onChange={handleChange}
             rows={4}
-            className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-tertiary dark:focus:border-green-500 focus:ring-blue-500 dark:focus:ring-ring transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             placeholder="Add any internal notes about this client..."
             maxLength={500}
           />

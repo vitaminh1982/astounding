@@ -141,7 +141,7 @@ Remember that your main goal is customer satisfaction while respecting company p
       <div
         className={`bg-white dark:bg-surface-container-high rounded-lg shadow dark:shadow-gray-900 transition-all duration-200 border border-transparent dark:border-border ${
           isClickable
-            ? 'hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-indigo-200 dark:hover:border-teal-600 cursor-pointer'
+            ? 'hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-indigo-200 dark:hover:border-green-600 cursor-pointer'
             : 'opacity-60 cursor-not-allowed'
         }`}
         onClick={isClickable ? handleOpenInterface : undefined}
@@ -190,7 +190,7 @@ Remember that your main goal is customer satisfaction while respecting company p
               {agent.skills.map((skill, index) => (
                 <span 
                   key={index}
-                  className="bg-indigo-50 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 text-primary-green dark:text-teal-400 px-3 py-1 rounded-full text-xs font-medium transition-colors"
+                  className="bg-indigo-50 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 text-primary-green dark:text-green-400 px-3 py-1 rounded-full text-xs font-medium transition-colors"
                 >
                   {skill}
                 </span>

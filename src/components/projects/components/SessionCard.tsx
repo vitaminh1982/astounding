@@ -81,18 +81,18 @@ const SessionCard: React.FC<SessionCardProps> = ({
   const getAgentGradient = (agentName: string) => {
     const gradients: Record<string, string> = {
       'Seiya': 'from-purple-400 to-pink-500 dark:from-purple-500 dark:to-pink-600',
-      'Shiryu': 'from-green-400 to-teal-500 dark:from-green-500 dark:to-teal-600',
+      'Shiryu': 'from-green-400 to-green-500 dark:from-green-500 dark:to-green-600',
       'Ikki': 'from-orange-400 to-red-500 dark:from-orange-500 dark:to-red-600',
-      'Hyôga': 'from-blue-400 to-cyan-500 dark:from-blue-500 dark:to-cyan-600',
+      'Hyôga': 'from-blue-400 to-green-500 dark:from-blue-500 dark:to-green-600',
       'Shun': 'from-emerald-400 to-green-500 dark:from-emerald-500 dark:to-green-600',
     };
-    return gradients[agentName] || 'from-indigo-400 to-purple-500 dark:from-teal-500 dark:to-cyan-600';
+    return gradients[agentName] || 'from-indigo-400 to-purple-500 dark:from-green-500 dark:to-green-600';
   };
 
   // Compact View (Original style enhanced)
   if (viewMode === 'compact') {
     return (
-      <div className="border border-border dark:border-border rounded-lg p-4 hover:shadow-md dark:hover:shadow-gray-900 hover:border-indigo-300 dark:hover:border-teal-400 transition-all duration-200 bg-white dark:bg-surface-container-high">
+      <div className="border border-border dark:border-border rounded-lg p-4 hover:shadow-md dark:hover:shadow-gray-900 hover:border-indigo-300 dark:hover:border-green-400 transition-all duration-200 bg-white dark:bg-surface-container-high">
         <div className="flex justify-between items-start">
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2 flex-wrap">
@@ -103,7 +103,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
                     <div className="absolute -top-1 -right-1 w-2 h-2 bg-tertiary dark:bg-purple-400 rounded-full animate-pulse"></div>
                   </div>
                 ) : (
-                  <User className="w-5 h-5 text-primary-green dark:text-teal-400" />
+                  <User className="w-5 h-5 text-primary-green dark:text-green-400" />
                 )}
                 <span className="font-semibold text-foreground dark:text-foreground">{session.agentName}</span>
               </div>
@@ -149,7 +149,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
             </button>
             <button
               onClick={() => onResumeSession(session)}
-              className="flex items-center gap-1.5 px-3 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm font-medium shadow-sm dark:shadow-gray-900"
+              className="flex items-center gap-1.5 px-3 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors text-sm font-medium shadow-sm dark:shadow-gray-900"
               title="Resume conversation"
             >
               <Play className="w-4 h-4" />
@@ -164,7 +164,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
   // Grid View
   if (viewMode === 'grid') {
     return (
-      <div className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-800 hover:border-indigo-200 dark:hover:border-teal-400 transition-all duration-300 overflow-hidden group">
+      <div className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-800 hover:border-indigo-200 dark:hover:border-green-400 transition-all duration-300 overflow-hidden group">
         {/* Card Header with Agent Info */}
         <div className={`bg-gradient-to-br ${getAgentGradient(session.agentName)} p-4 relative overflow-hidden`}>
           {/* Decorative background pattern */}
@@ -251,7 +251,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
             </button>
             <button
               onClick={() => onResumeSession(session)}
-              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm font-medium group/btn shadow-sm dark:shadow-gray-900"
+              className="flex-1 flex items-center justify-center gap-2 px-3 py-2.5 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors text-sm font-medium group/btn shadow-sm dark:shadow-gray-900"
             >
               <Play className="w-4 h-4" />
               Resume
@@ -274,7 +274,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
       </div>
 
       {/* Card Content */}
-      <div className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-800 transition-all duration-300 overflow-hidden group-hover:border-indigo-200 dark:group-hover:border-teal-400 group-hover:-translate-y-1">
+      <div className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm dark:shadow-gray-900 hover:shadow-lg dark:hover:shadow-gray-800 transition-all duration-300 overflow-hidden group-hover:border-indigo-200 dark:group-hover:border-green-400 group-hover:-translate-y-1">
         <div className="p-5">
           {/* Header */}
           <div className="flex items-start justify-between mb-3">
@@ -342,7 +342,7 @@ const SessionCard: React.FC<SessionCardProps> = ({
             </button>
             <button
               onClick={() => onResumeSession(session)}
-              className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm font-medium group/btn shadow-sm dark:shadow-gray-900"
+              className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors text-sm font-medium group/btn shadow-sm dark:shadow-gray-900"
             >
               <Play className="w-4 h-4" />
               Resume Chat

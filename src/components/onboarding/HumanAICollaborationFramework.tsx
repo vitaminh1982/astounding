@@ -84,12 +84,12 @@ const HumanAICollaborationFramework: React.FC = () => {
         <div className="w-full md:w-1/3 relative">
           {/* Connecting circles with gradient background */}
           <div className="relative">
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-r from-blue-200 to-indigo-200 dark:from-teal-800 dark:to-teal-700 opacity-20 dark:opacity-30"></div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-gradient-to-r from-blue-300 to-indigo-300 dark:from-teal-700 dark:to-teal-600 opacity-20 dark:opacity-30"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-gradient-to-r from-blue-200 to-indigo-200 dark:from-green-800 dark:to-green-700 opacity-20 dark:opacity-30"></div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-gradient-to-r from-blue-300 to-indigo-300 dark:from-green-700 dark:to-green-600 opacity-20 dark:opacity-30"></div>
             
             {/* Central icon */}
             <div className="relative flex flex-col items-center">
-              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-teal-600 dark:to-teal-500 flex items-center justify-center shadow-lg dark:shadow-gray-900 mb-3 transition-all">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 dark:from-green-600 dark:to-green-500 flex items-center justify-center shadow-lg dark:shadow-gray-900 mb-3 transition-all">
                 <RefreshCw className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-lg font-bold text-on-surface dark:text-foreground text-center mb-4">Collaboration Zones</h3>
@@ -97,14 +97,14 @@ const HumanAICollaborationFramework: React.FC = () => {
               {/* Bidirectional arrows */}
               <div className="hidden md:block absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-full">
                 <div className="flex items-center">
-                  <div className="w-8 h-0.5 bg-blue-400 dark:bg-teal-400"></div>
-                  <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-t-transparent border-b-transparent border-r-blue-400 dark:border-r-teal-400"></div>
+                  <div className="w-8 h-0.5 bg-blue-400 dark:bg-green-400"></div>
+                  <div className="w-0 h-0 border-t-4 border-b-4 border-r-8 border-t-transparent border-b-transparent border-r-blue-400 dark:border-r-green-400"></div>
                 </div>
               </div>
               <div className="hidden md:block absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-full">
                 <div className="flex items-center">
-                  <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-t-transparent border-b-transparent border-l-indigo-400 dark:border-l-teal-400"></div>
-                  <div className="w-8 h-0.5 bg-indigo-400 dark:bg-teal-400"></div>
+                  <div className="w-0 h-0 border-t-4 border-b-4 border-l-8 border-t-transparent border-b-transparent border-l-indigo-400 dark:border-l-green-400"></div>
+                  <div className="w-8 h-0.5 bg-indigo-400 dark:bg-green-400"></div>
                 </div>
               </div>
             </div>
@@ -112,10 +112,10 @@ const HumanAICollaborationFramework: React.FC = () => {
             {/* Collaboration zones in a grid */}
             <div className="grid grid-cols-2 gap-2 mt-4">
               {collaborationZones.map(zone => (
-                <div key={zone.id} className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-teal-900 dark:to-teal-800 p-2 rounded-lg shadow-sm dark:shadow-gray-800 border border-blue-100 dark:border-teal-700 transition-colors">
+                <div key={zone.id} className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-green-900 dark:to-green-800 p-2 rounded-lg shadow-sm dark:shadow-gray-800 border border-blue-100 dark:border-green-700 transition-colors">
                   <div className="flex items-center">
                     <div className="p-1.5 bg-white dark:bg-surface-container-highest rounded-full mr-2 shadow-sm dark:shadow-gray-800 border border-border dark:border-border transition-colors">
-                      {React.cloneElement(zone.icon, { className: "text-primary-green dark:text-teal-300 w-3.5 h-3.5" })}
+                      {React.cloneElement(zone.icon, { className: "text-primary-green dark:text-green-300 w-3.5 h-3.5" })}
                     </div>
                     <span className="text-xs font-medium text-on-surface dark:text-on-surface-variant">{zone.label}</span>
                   </div>
@@ -126,19 +126,19 @@ const HumanAICollaborationFramework: React.FC = () => {
         </div>
         
         {/* AI Capabilities Column */}
-        <div className="w-full md:w-1/3 bg-indigo-50 dark:bg-teal-900 rounded-lg p-4 border border-indigo-100 dark:border-teal-800 transition-colors">
+        <div className="w-full md:w-1/3 bg-indigo-50 dark:bg-green-900 rounded-lg p-4 border border-indigo-100 dark:border-green-800 transition-colors">
           <div className="text-center mb-4">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 dark:bg-teal-800 mb-2 transition-colors">
-              <Brain className="w-6 h-6 text-primary-green dark:text-teal-300" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-indigo-100 dark:bg-green-800 mb-2 transition-colors">
+              <Brain className="w-6 h-6 text-primary-green dark:text-green-300" />
             </div>
-            <h3 className="text-lg font-semibold text-indigo-800 dark:text-teal-200">AI Capabilities</h3>
+            <h3 className="text-lg font-semibold text-indigo-800 dark:text-green-200">AI Capabilities</h3>
           </div>
           
           <div className="space-y-3">
             {aiCapabilities.map(capability => (
               <div key={capability.id} className="flex items-center bg-white dark:bg-surface-container-highest p-2 rounded-lg shadow-sm dark:shadow-gray-800 border border-border dark:border-border transition-colors">
-                <div className="p-1.5 bg-indigo-100 dark:bg-teal-800 rounded-full mr-2 transition-colors">
-                  {React.cloneElement(capability.icon, { className: "text-primary-green dark:text-teal-300" })}
+                <div className="p-1.5 bg-indigo-100 dark:bg-green-800 rounded-full mr-2 transition-colors">
+                  {React.cloneElement(capability.icon, { className: "text-primary-green dark:text-green-300" })}
                 </div>
                 <span className="text-sm font-medium text-on-surface dark:text-on-surface-variant">{capability.label}</span>
               </div>

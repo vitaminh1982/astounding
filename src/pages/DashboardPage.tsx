@@ -116,7 +116,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             action={
               <button
                 onClick={handleOpenReportModal}
-                className="flex items-center gap-2 text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
+                className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
               >
                 <Plus className="w-4 h-4" />
                 {t('dashboard.addReport')}
@@ -206,7 +206,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </button>
         <button
           onClick={onNewReport}
-          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors duration-200 shadow-sm hover:shadow-md dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+          className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors duration-200 shadow-sm hover:shadow-md dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900"
           aria-label={newReportLabel}
         >
           <Plus className="w-4 h-4" />
@@ -250,7 +250,7 @@ const ReportsList: React.FC<ReportsListProps> = ({ reports }) => (
     {reports.map((report) => (
       <div
         key={report.id}
-        className="p-4 border border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest/50 rounded-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+        className="p-4 border border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest/50 rounded-lg hover:border-green-500 dark:hover:border-green-400 hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         tabIndex={0}
         role="button"
         onKeyDown={(e) => {

@@ -98,7 +98,7 @@ const CoreFeatures: React.FC<CoreFeaturesProps> = ({ onNext }) => {
         ))}
       </div>
       
-      <div className="bg-indigo-50 dark:bg-teal-900 rounded-xl p-6 border border-indigo-100 dark:border-teal-800 transition-colors">
+      <div className="bg-indigo-50 dark:bg-green-900 rounded-xl p-6 border border-indigo-100 dark:border-green-800 transition-colors">
         <h3 className="text-lg font-semibold text-on-surface dark:text-foreground mb-4">Feature Comparison</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">

@@ -59,7 +59,7 @@ const NotificationButton: React.FC<NotificationButtonProps> = ({
         focus:ring-2 
         focus:ring-offset-2 
         dark:focus:ring-offset-gray-800
-        focus:ring-${variant === 'warning' ? 'amber' : 'teal'}-500
+        focus:ring-${variant === 'warning' ? 'amber' : 'green'}-500
       `}
       onClick={onClick}
     >

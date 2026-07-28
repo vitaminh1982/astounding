@@ -60,7 +60,7 @@ export default function IntegrationsConfig({ integrations = [], onChange }: Inte
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Integrations</h3>
         <button
           onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         >
           <Plus className="w-4 h-4" />
           Add
@@ -102,7 +102,7 @@ export default function IntegrationsConfig({ integrations = [], onChange }: Inte
           <p className="text-sm text-outline dark:text-muted-foreground mt-1 mb-4">Add tools that your agent can connect with.</p>
           <button 
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 mx-auto focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
+            className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 mx-auto focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
           >
             <Plus className="w-4 h-4" />
             Add Integration
@@ -136,7 +136,7 @@ export default function IntegrationsConfig({ integrations = [], onChange }: Inte
                   onClick={() => setSelectedCategory(null)}
                   className={`px-3 py-1 text-xs rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                     selectedCategory === null 
-                      ? 'bg-indigo-100 dark:bg-teal-900 text-indigo-800 dark:text-teal-200 focus:ring-ring dark:focus:ring-ring' 
+                      ? 'bg-indigo-100 dark:bg-green-900 text-indigo-800 dark:text-green-200 focus:ring-ring dark:focus:ring-ring' 
                       : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-highest focus:ring-gray-500'
                   }`}
                 >
@@ -148,7 +148,7 @@ export default function IntegrationsConfig({ integrations = [], onChange }: Inte
                     onClick={() => setSelectedCategory(category === selectedCategory ? null : category)}
                     className={`px-3 py-1 text-xs rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                       category === selectedCategory 
-                        ? 'bg-indigo-100 dark:bg-teal-900 text-indigo-800 dark:text-teal-200 focus:ring-ring dark:focus:ring-ring' 
+                        ? 'bg-indigo-100 dark:bg-green-900 text-indigo-800 dark:text-green-200 focus:ring-ring dark:focus:ring-ring' 
                         : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant hover:bg-surface-container dark:hover:bg-surface-container-highest focus:ring-gray-500'
                     }`}
                   >
@@ -174,7 +174,7 @@ export default function IntegrationsConfig({ integrations = [], onChange }: Inte
                       </div>
                       <button
                         onClick={() => handleAddIntegration(integration.name)}
-                        className="px-3 py-1 text-xs bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
+                        className="px-3 py-1 text-xs bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
                       >
                         Connect
                       </button>

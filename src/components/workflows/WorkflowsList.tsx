@@ -161,7 +161,7 @@ const WorkflowsList: React.FC<WorkflowsListProps> = ({ onSelect, selectedId }) =
               onClick={() => setFilter(status)}
               className={`px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
                 filter === status
-                  ? 'bg-indigo-100 dark:bg-teal-900/40 text-indigo-700 dark:text-teal-300 ring-2 ring-indigo-500 dark:ring-teal-500 ring-inset'
+                  ? 'bg-indigo-100 dark:bg-green-900/40 text-indigo-700 dark:text-green-300 ring-2 ring-indigo-500 dark:ring-green-500 ring-inset'
                   : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container dark:hover:bg-surface-container-highest'
               }`}
               aria-pressed={filter === status}
@@ -224,8 +224,8 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({ workflow, isSelected, onCli
       className={`
         p-4 rounded-lg border cursor-pointer transition-all duration-200
         ${isSelected 
-          ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20 shadow-md' 
-          : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-surface-container-low dark:hover:bg-gray-750 hover:shadow-sm'
+          ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20 shadow-md' 
+          : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-300 dark:hover:border-green-600 hover:bg-surface-container-low dark:hover:bg-gray-750 hover:shadow-sm'
         }
       `}
       role="button"
@@ -372,7 +372,7 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
             </button>
             <button
               type="submit"
-              className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md active:scale-95"
+              className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-green-600 text-white hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md active:scale-95"
             >
               {t('workflows.list.modal.createButton')}
             </button>

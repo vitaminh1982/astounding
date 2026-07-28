@@ -25,7 +25,7 @@ export default function AssistantChat({ currentPath }: AssistantChatProps) {
       id: '1',
       type: 'assistant',
       content: [
-        'Hello! I am your Sendplex assistant, a cousin of <a href="https://www.sendplify.eu" target="_blank" rel="noopener noreferrer" class="text-primary-green dark:text-teal-400 hover:text-indigo-700 dark:hover:text-teal-300 hover:underline transition-colors">Sendplify.eu</a>. I can help you with:',
+        'Hello! I am your Sendplex assistant, a cousin of <a href="https://www.sendplify.eu" target="_blank" rel="noopener noreferrer" class="text-primary-green dark:text-green-400 hover:text-indigo-700 dark:hover:text-green-300 hover:underline transition-colors">Sendplify.eu</a>. I can help you with:',
         '- Navigating the interface',
         '- Understanding the features', 
         '- Following step-by-step guides',
@@ -89,7 +89,7 @@ export default function AssistantChat({ currentPath }: AssistantChatProps) {
                 className={`
                   max-w-[80%] p-3 rounded-lg shadow-sm transition-all duration-200
                   ${message.type === 'user' 
-                    ? 'bg-primary dark:bg-teal-600 text-white shadow-md dark:shadow-gray-900' 
+                    ? 'bg-primary dark:bg-green-600 text-white shadow-md dark:shadow-gray-900' 
                     : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant border border-border dark:border-border shadow-sm dark:shadow-gray-900'}
                 `}
               >
@@ -146,7 +146,7 @@ export default function AssistantChat({ currentPath }: AssistantChatProps) {
                      bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground 
                      placeholder-gray-500 dark:placeholder-gray-400
                      focus:ring-2 focus:ring-ring dark:focus:ring-ring 
-                     focus:border-primary-green dark:focus:border-teal-500 
+                     focus:border-primary-green dark:focus:border-green-500 
                      focus:ring-offset-2 dark:focus:ring-offset-gray-800
                      disabled:opacity-50 disabled:cursor-not-allowed
                      shadow-sm dark:shadow-gray-900 transition-all duration-200"
@@ -155,8 +155,8 @@ export default function AssistantChat({ currentPath }: AssistantChatProps) {
           <button
             onClick={handleSend}
             disabled={!input.trim() || isTyping}
-            className="p-2 bg-primary dark:bg-teal-600 text-white rounded-lg 
-                     hover:bg-indigo-700 dark:hover:bg-teal-700 
+            className="p-2 bg-primary dark:bg-green-600 text-white rounded-lg 
+                     hover:bg-indigo-700 dark:hover:bg-green-700 
                      focus:ring-2 focus:ring-ring dark:focus:ring-ring 
                      focus:ring-offset-2 dark:focus:ring-offset-gray-800
                      disabled:opacity-50 disabled:cursor-not-allowed

@@ -50,29 +50,29 @@ const ChatInput: React.FC<ChatInputProps> = ({
     <form onSubmit={onSendMessage} className="mt-4">
       {/* File upload preview */}
       {uploadState.selectedFile && (
-        <div className="mb-3 p-3 bg-blue-50 dark:bg-teal-900 border border-blue-200 dark:border-teal-700 rounded-lg transition-colors">
+        <div className="mb-3 p-3 bg-blue-50 dark:bg-green-900 border border-blue-200 dark:border-green-700 rounded-lg transition-colors">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-tertiary dark:text-teal-300">📄</span>
+              <span className="text-tertiary dark:text-green-300">📄</span>
               <div>
-                <p className="text-sm font-medium text-blue-800 dark:text-teal-100">
+                <p className="text-sm font-medium text-blue-800 dark:text-green-100">
                   {uploadState.selectedFile.name}
                 </p>
-                <p className="text-xs text-tertiary dark:text-teal-300">
+                <p className="text-xs text-tertiary dark:text-green-300">
                   {formatFileSize(uploadState.selectedFile.size)}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               {uploadState.isUploading && (
-                <div className="text-xs text-tertiary dark:text-teal-300">
+                <div className="text-xs text-tertiary dark:text-green-300">
                   {uploadState.uploadProgress}%
                 </div>
               )}
               <button
                 type="button"
                 onClick={onClearFile}
-                className="text-tertiary dark:text-teal-300 hover:text-blue-800 dark:hover:text-teal-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-teal-900 rounded-sm"
+                className="text-tertiary dark:text-green-300 hover:text-blue-800 dark:hover:text-green-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-green-900 rounded-sm"
                 disabled={uploadState.isUploading}
               >
                 ✕
@@ -80,9 +80,9 @@ const ChatInput: React.FC<ChatInputProps> = ({
             </div>
           </div>
           {uploadState.isUploading && (
-            <div className="mt-2 w-full bg-blue-200 dark:bg-teal-700 rounded-full h-1 transition-colors">
+            <div className="mt-2 w-full bg-blue-200 dark:bg-green-700 rounded-full h-1 transition-colors">
               <div 
-                className="bg-tertiary dark:bg-teal-400 h-1 rounded-full transition-all duration-300"
+                className="bg-tertiary dark:bg-green-400 h-1 rounded-full transition-all duration-300"
                 style={{ width: `${uploadState.uploadProgress}%` }}
               />
             </div>
@@ -126,10 +126,10 @@ const ChatInput: React.FC<ChatInputProps> = ({
         
         <button
           type="submit"
-          className={`bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+          className={`bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
             isLoading || isTyping || !newMessage.trim() || !isAgentActive
               ? 'opacity-50 cursor-not-allowed' 
-              : 'hover:bg-indigo-700 dark:hover:bg-teal-700'
+              : 'hover:bg-indigo-700 dark:hover:bg-green-700'
           }`}
           disabled={isLoading || isTyping || !newMessage.trim() || !isAgentActive}
         >

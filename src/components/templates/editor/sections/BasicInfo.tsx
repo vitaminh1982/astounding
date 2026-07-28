@@ -201,13 +201,13 @@ export default function BasicInfo({
               {editedTemplate.tags.map(tag => (
                 <span 
                   key={tag} 
-                  className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm bg-indigo-100 dark:bg-teal-900 text-indigo-700 dark:text-teal-100 transition-colors"
+                  className="inline-flex items-center gap-1 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm bg-indigo-100 dark:bg-green-900 text-indigo-700 dark:text-green-100 transition-colors"
                 >
                   {tag}
                   {isEditable && (
                     <button 
                       onClick={() => handleRemoveTag(tag)} 
-                      className="hover:text-indigo-900 dark:hover:text-teal-50 p-0.5 rounded-full hover:bg-indigo-200 dark:hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring"
+                      className="hover:text-indigo-900 dark:hover:text-green-50 p-0.5 rounded-full hover:bg-indigo-200 dark:hover:bg-green-800 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring"
                       aria-label={`Remove ${tag} tag`}
                     >
                       <X className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -257,7 +257,7 @@ export default function BasicInfo({
               <button
                 onClick={handleAddTag}
                 disabled={!newTag.trim() || editedTemplate.tags.length >= MAX_TAGS}
-                className="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 rounded-md bg-primary dark:bg-teal-600 text-white text-xs sm:text-sm hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:bg-surface-container dark:disabled:bg-surface-container-highest disabled:cursor-not-allowed disabled:text-muted-foreground dark:disabled:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 rounded-md bg-primary dark:bg-green-600 text-white text-xs sm:text-sm hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors disabled:bg-surface-container dark:disabled:bg-surface-container-highest disabled:cursor-not-allowed disabled:text-muted-foreground dark:disabled:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="Add tag"
               >
                 <Plus className="w-3 h-3 sm:w-4 sm:h-4" />

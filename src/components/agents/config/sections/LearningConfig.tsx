@@ -33,7 +33,7 @@ export default function LearningConfig({ config }: LearningConfigProps) {
       
       <div className="border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-4 transition-colors">
         <div className="flex items-center gap-2 mb-4">
-          <Brain className="w-5 h-5 text-primary-green dark:text-teal-300" />
+          <Brain className="w-5 h-5 text-primary-green dark:text-green-300" />
           <h4 className="font-medium text-foreground dark:text-foreground">Learning Sources</h4>
         </div>
         <div className="space-y-2">

@@ -46,7 +46,7 @@ export default function TeamTab({ collaborators, onAddCollaborator }: Props) {
         </div>
         <button
           onClick={() => setShowInvite(true)}
-          className="flex items-center gap-2 px-4 py-2 text-sm bg-tertiary dark:bg-teal-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-teal-700 transition-colors"
+          className="flex items-center gap-2 px-4 py-2 text-sm bg-tertiary dark:bg-green-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-green-700 transition-colors"
         >
           <UserPlus className="w-4 h-4" />
           Invite Collaborator
@@ -106,7 +106,7 @@ export default function TeamTab({ collaborators, onAddCollaborator }: Props) {
                 <button
                   onClick={handleInvite}
                   disabled={!email.trim()}
-                  className="w-full py-2.5 bg-tertiary dark:bg-teal-600 text-white rounded-lg font-medium hover:bg-blue-700 dark:hover:bg-teal-700 disabled:opacity-40 transition-colors text-sm"
+                  className="w-full py-2.5 bg-tertiary dark:bg-green-600 text-white rounded-lg font-medium hover:bg-blue-700 dark:hover:bg-green-700 disabled:opacity-40 transition-colors text-sm"
                 >
                   Send Invitation
                 </button>

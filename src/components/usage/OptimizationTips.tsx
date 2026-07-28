@@ -12,8 +12,8 @@ export default function OptimizationTips({ tips, onImplementTip }: OptimizationT
     <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Usage Optimization Tips</h3>
-        <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <Lightbulb className="w-5 h-5 text-primary-green dark:text-teal-300" />
+        <div className="p-2 bg-indigo-100 dark:bg-green-900 rounded-lg transition-colors">
+          <Lightbulb className="w-5 h-5 text-primary-green dark:text-green-300" />
         </div>
       </div>
       
@@ -33,12 +33,12 @@ export default function OptimizationTips({ tips, onImplementTip }: OptimizationT
                   <div className={`p-2 rounded-lg mr-3 transition-colors ${
                     tip.implemented 
                       ? 'bg-green-100 dark:bg-green-800' 
-                      : 'bg-indigo-100 dark:bg-teal-900'
+                      : 'bg-indigo-100 dark:bg-green-900'
                   }`}>
                     {tip.implemented ? (
                       <Check className="w-5 h-5 text-green-600 dark:text-green-300" />
                     ) : (
-                      <Lightbulb className="w-5 h-5 text-primary-green dark:text-teal-300" />
+                      <Lightbulb className="w-5 h-5 text-primary-green dark:text-green-300" />
                     )}
                   </div>
                   <div>
@@ -54,7 +54,7 @@ export default function OptimizationTips({ tips, onImplementTip }: OptimizationT
                 {!tip.implemented && (
                   <button
                     onClick={() => onImplementTip(tip.id)}
-                    className="mt-2 flex items-center text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm"
+                    className="mt-2 flex items-center text-sm text-primary-green dark:text-green-400 hover:text-indigo-800 dark:hover:text-green-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm"
                   >
                     Implement
                     <ChevronRight className="w-4 h-4 ml-1" />

@@ -923,8 +923,8 @@ const Sidebar = ({
                       className="w-full flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-left"
                     >
                       <span className="flex items-center gap-2.5">
-                        <ArrowUpCircle size={16} className="text-primary-green dark:text-teal-400" />
-                        <span className="text-xs font-medium text-primary-green dark:text-teal-400 hover:underline">Upgrade plan</span>
+                        <ArrowUpCircle size={16} className="text-primary-green dark:text-green-400" />
+                        <span className="text-xs font-medium text-primary-green dark:text-green-400 hover:underline">Upgrade plan</span>
                       </span>
                       <span className="text-xs font-normal text-outline dark:text-muted-foreground">{activeWorkspace.plan}</span>
                     </button>

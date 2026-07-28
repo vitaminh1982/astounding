@@ -49,7 +49,7 @@ export default function PromptsHeader({ onCreatePrompt, onCreateRole }: PromptsH
         {/* Create New Prompt Button */}
         <button
           onClick={handleCreatePrompt}
-          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
+          className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-green-600 text-white hover:bg-indigo-700 dark:hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
           aria-label={t('prompts.header.generatePrompt', 'Create New Prompt')}
         >
           <Plus className="w-4 h-4" strokeWidth={2.5} />

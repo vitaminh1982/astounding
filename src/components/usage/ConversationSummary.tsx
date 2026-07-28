@@ -60,7 +60,7 @@ export default function ConversationSummary({ usageData }: ConversationSummaryPr
                 className={`absolute bottom-0 rounded-t-sm transition-colors ${
                   isToday 
                     ? 'bg-primary dark:bg-primary' 
-                    : 'bg-indigo-300 dark:bg-teal-300'
+                    : 'bg-indigo-300 dark:bg-green-300'
                 }`}
                 style={{
                   left: `${(index * 20) + 7.5}%`, // Position bars evenly
@@ -91,8 +91,8 @@ export default function ConversationSummary({ usageData }: ConversationSummaryPr
       
       <div className="mt-4 pt-3 border-t border-border dark:border-border grid grid-cols-2 gap-4">
         <div className="flex items-center">
-          <div className="p-2 bg-blue-50 dark:bg-teal-900 rounded-lg mr-2.5 transition-colors">
-            <MessageSquare className="w-3.5 h-3.5 text-tertiary dark:text-teal-300" />
+          <div className="p-2 bg-blue-50 dark:bg-green-900 rounded-lg mr-2.5 transition-colors">
+            <MessageSquare className="w-3.5 h-3.5 text-tertiary dark:text-green-300" />
           </div>
           <div>
             <p className="text-xs text-muted-foreground dark:text-muted-foreground">Avg/Conv</p>

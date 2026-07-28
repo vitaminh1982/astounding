@@ -106,7 +106,7 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
           <h4 className="font-medium text-foreground dark:text-foreground">Knowledge Base</h4>
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             <Plus className="w-4 h-4" />
             Add Document
@@ -118,8 +118,8 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
             {knowledgeConfig.bases.map((doc) => (
               <div key={doc} className="flex items-center justify-between border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-3 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-50 dark:bg-teal-900 rounded-lg transition-colors">
-                    <FileText className="w-4 h-4 text-tertiary dark:text-teal-300" />
+                  <div className="p-2 bg-blue-50 dark:bg-green-900 rounded-lg transition-colors">
+                    <FileText className="w-4 h-4 text-tertiary dark:text-green-300" />
                   </div>
                   <span className="truncate text-foreground dark:text-foreground">{doc}</span>
                 </div>
@@ -140,7 +140,7 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
             <p className="text-sm text-outline dark:text-muted-foreground mt-1 mb-4">Add documents that your agent can learn from.</p>
             <button 
               onClick={() => setIsAddModalOpen(true)}
-              className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 mx-auto focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
+              className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900 mx-auto focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
             >
               <Plus className="w-4 h-4" />
               Add Document
@@ -200,7 +200,7 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
                   <div className="border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-3 transition-colors">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <FileText className="w-5 h-5 text-tertiary dark:text-teal-400" />
+                        <FileText className="w-5 h-5 text-tertiary dark:text-green-400" />
                         <div className="truncate">
                           <p className="truncate font-medium text-foreground dark:text-foreground">{selectedFile.name}</p>
                           <p className="text-xs text-muted-foreground dark:text-muted-foreground">
@@ -225,7 +225,7 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
                         <div className="relative pt-1">
                           <div className="flex mb-1 items-center justify-between">
                             <div>
-                              <span className="text-xs font-medium text-primary-green dark:text-teal-400">
+                              <span className="text-xs font-medium text-primary-green dark:text-green-400">
                                 {uploadProgress}% Complete
                               </span>
                             </div>
@@ -243,7 +243,7 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
                 ) : (
                   <div
                     onClick={() => fileInputRef.current?.click()}
-                    className="border-2 border-dashed border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-6 text-center cursor-pointer hover:border-primary-green dark:hover:border-teal-500 transition-colors"
+                    className="border-2 border-dashed border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-6 text-center cursor-pointer hover:border-primary-green dark:hover:border-green-500 transition-colors"
                   >
                     <Upload className="w-8 h-8 text-outline dark:text-muted-foreground mx-auto mb-2" />
                     <p className="text-sm text-muted-foreground dark:text-muted-foreground">
@@ -295,8 +295,8 @@ export default function KnowledgeConfig({ config, onChange }: KnowledgeConfigPro
                 onClick={handleAddDocument}
                 className={`px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                   isUploading || !documentName.trim() || !selectedFile
-                    ? 'bg-indigo-300 dark:bg-teal-700 text-white cursor-not-allowed opacity-50'
-                    : 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white focus:ring-ring dark:focus:ring-ring'
+                    ? 'bg-indigo-300 dark:bg-green-700 text-white cursor-not-allowed opacity-50'
+                    : 'bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700 text-white focus:ring-ring dark:focus:ring-ring'
                 }`}
                 disabled={isUploading || !documentName.trim() || !selectedFile}
               >

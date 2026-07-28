@@ -143,7 +143,7 @@ function TdSegment({ client }: TdSegmentProps) {
     <td className="px-4 md:px-8 py-6 whitespace-nowrap">
       <span className="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full 
                      bg-indigo-100 text-indigo-800 
-                     dark:bg-teal-600 dark:text-teal-100">
+                     dark:bg-green-600 dark:text-green-100">
         {client.segment}
       </span>
     </td>

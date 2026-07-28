@@ -15,7 +15,7 @@ const RolesTab: React.FC<RolesTabProps> = ({ workspaceData }) => {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-lg font-medium text-foreground dark:text-foreground">Roles & Permissions</h3>
-        <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+        <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
           <Plus className="w-4 h-4 mr-2" />
           Create Role
         </button>

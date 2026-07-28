@@ -121,8 +121,8 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-border dark:border-border transition-colors">
             <div className="flex items-center gap-3">
-              <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 rounded-lg transition-colors">
-                <MessageSquare className="w-6 h-6 text-primary-green dark:text-teal-400 transition-colors" />
+              <div className="p-2 bg-indigo-100 dark:bg-green-900/30 border border-indigo-200 dark:border-green-800 rounded-lg transition-colors">
+                <MessageSquare className="w-6 h-6 text-primary-green dark:text-green-400 transition-colors" />
               </div>
               <div>
                 <h2 className="text-xl font-bold text-foreground dark:text-foreground transition-colors">
@@ -155,7 +155,7 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
                   value={conversationName}
                   onChange={(e) => setConversationName(e.target.value)}
                   placeholder="Enter a name for your conversation"
-                  className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
+                  className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
                   maxLength={50}
                 />
               </div>
@@ -171,7 +171,7 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
                   Select Agent(s) *
                 </p>
                 {selectedAgents.length > 0 && (
-                  <span className="text-sm text-primary-green dark:text-teal-400 font-medium transition-colors">
+                  <span className="text-sm text-primary-green dark:text-green-400 font-medium transition-colors">
                     {selectedAgents.length} selected
                   </span>
                 )}
@@ -191,15 +191,15 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
                       className={`
                         p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800
                         ${isSelected 
-                          ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20' 
-                          : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
+                          ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20' 
+                          : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-300 dark:hover:border-green-600 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }
                       `}
                     >
                       <div className="flex items-center">
                         <div className={`text-3xl mr-4 p-2 rounded-lg transition-colors ${
                           isSelected 
-                            ? 'bg-indigo-100 dark:bg-teal-900/50' 
+                            ? 'bg-indigo-100 dark:bg-green-900/50' 
                             : 'bg-surface-container-low dark:bg-surface-container-highest'
                         }`}>
                           {agent.icon}
@@ -207,14 +207,14 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
                         <div className="flex-1">
                           <h3 className={`font-semibold transition-colors ${
                             isSelected 
-                              ? 'text-indigo-900 dark:text-teal-100' 
+                              ? 'text-indigo-900 dark:text-green-100' 
                               : 'text-foreground dark:text-foreground'
                           }`}>
                             {agent.name}
                           </h3>
                           <p className={`text-sm mt-1 transition-colors ${
                             isSelected 
-                              ? 'text-indigo-700 dark:text-teal-300' 
+                              ? 'text-indigo-700 dark:text-green-300' 
                               : 'text-muted-foreground dark:text-muted-foreground'
                           }`}>
                             {agent.description}
@@ -225,7 +225,7 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
                             <motion.div
                               initial={{ scale: 0 }}
                               animate={{ scale: 1 }}
-                              className="h-6 w-6 bg-primary dark:bg-teal-600 rounded-full flex items-center justify-center shadow-sm transition-colors"
+                              className="h-6 w-6 bg-primary dark:bg-green-600 rounded-full flex items-center justify-center shadow-sm transition-colors"
                             >
                               <CheckCircle className="h-4 w-4 text-white" />
                             </motion.div>
@@ -268,7 +268,7 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
                     checked={isGroup || selectedAgents.length > 1}
                     onChange={() => setIsGroup(!isGroup)}
                     disabled={selectedAgents.length > 1}
-                    className="h-4 w-4 text-primary-green dark:text-teal-600 focus:ring-ring dark:focus:ring-ring border-border dark:border-border rounded transition-colors"
+                    className="h-4 w-4 text-primary-green dark:text-green-600 focus:ring-ring dark:focus:ring-ring border-border dark:border-border rounded transition-colors"
                   />
                   <label htmlFor="isGroup" className="ml-3 flex items-center gap-2">
                     <Users className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
@@ -324,7 +324,7 @@ export default function NewMessageModal({ isOpen, onClose, onCreateConversation 
               <button 
                 type="submit"
                 disabled={selectedAgents.length === 0}
-                className="px-6 py-3 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:bg-surface-container dark:disabled:bg-surface-container-highest disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 flex items-center gap-2"
+                className="px-6 py-3 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 disabled:bg-surface-container dark:disabled:bg-surface-container-highest disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 flex items-center gap-2"
               >
                 <MessageSquare className="w-4 h-4" />
                 Start Conversation

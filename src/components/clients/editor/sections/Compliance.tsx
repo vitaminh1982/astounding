@@ -205,8 +205,8 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
                   />
                   <div className={`w-5 h-5 border-2 rounded transition-all duration-200 flex items-center justify-center ${
                     consents[item.key]
-                      ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
-                      : 'bg-white dark:bg-surface-container-highest border-border dark:border-border hover:border-indigo-400 dark:hover:border-teal-400'
+                      ? 'bg-primary dark:bg-green-600 border-indigo-600 dark:border-green-600'
+                      : 'bg-white dark:bg-surface-container-highest border-border dark:border-border hover:border-indigo-400 dark:hover:border-green-400'
                   }`}>
                     {consents[item.key] && (
                       <Check className="w-3 h-3 text-white" />
@@ -270,15 +270,15 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
             </h5>
           </div>
           <div className="space-y-1">
-            <button className="text-xs text-primary-green dark:text-teal-400 hover:underline transition-colors">
+            <button className="text-xs text-primary-green dark:text-green-400 hover:underline transition-colors">
               Request data export
             </button>
             <br />
-            <button className="text-xs text-primary-green dark:text-teal-400 hover:underline transition-colors">
+            <button className="text-xs text-primary-green dark:text-green-400 hover:underline transition-colors">
               Request data deletion
             </button>
             <br />
-            <button className="text-xs text-primary-green dark:text-teal-400 hover:underline transition-colors">
+            <button className="text-xs text-primary-green dark:text-green-400 hover:underline transition-colors">
               View privacy policy
             </button>
           </div>
@@ -287,7 +287,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
 
       {/* Compliance Actions */}
       <div className="flex flex-wrap gap-3 pt-4 border-t border-border dark:border-border transition-colors">
-        <button className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+        <button className="px-4 py-2 bg-primary dark:bg-green-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
           <Download className="w-4 h-4" />
           Export Data
         </button>

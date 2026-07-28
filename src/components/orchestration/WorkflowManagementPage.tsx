@@ -212,7 +212,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                 <Copy className="w-4 h-4" />
                 Clone Workflow
               </button>
-              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Plus className="w-4 h-4" />
                 New Workflow
               </button>
@@ -280,7 +280,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                   onClick={() => setActiveTab(key as any)}
                   className={`py-4 px-6 text-sm font-medium flex items-center gap-2 transition-colors ${
                     activeTab === key
-                      ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                      ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                       : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                   }`}
                 >
@@ -301,7 +301,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                   placeholder={`Search ${activeTab === 'templates' ? 'templates' : 'workflows'}...`}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                  className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                 />
               </div>
               <button className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -344,7 +344,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                         </div>
                         <div className="w-full bg-surface-container dark:bg-surface-container-highest rounded-full h-2">
                           <div 
-                            className="bg-teal-600 h-2 rounded-full transition-all duration-300"
+                            className="bg-green-600 h-2 rounded-full transition-all duration-300"
                             style={{ width: `${(workflow.completedTasks / workflow.tasks) * 100}%` }}
                           ></div>
                         </div>
@@ -368,7 +368,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                           <p className="text-xs text-muted-foreground dark:text-muted-foreground mb-2 transition-colors">Assigned Agents:</p>
                           <div className="flex flex-wrap gap-2">
                             {workflow.agents.map((agent, index) => (
-                              <span key={index} className="px-2 py-1 bg-teal-100 dark:bg-teal-900/30 text-teal-700 dark:text-teal-300 text-xs rounded-full transition-colors">
+                              <span key={index} className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded-full transition-colors">
                                 {agent}
                               </span>
                             ))}
@@ -377,10 +377,10 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                       </div>
                       
                       <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-border dark:border-border transition-colors">
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="View Details">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Edit Workflow">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Edit Workflow">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Run Workflow">
@@ -403,7 +403,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Task Assignment & Delegation</h3>
                   <p className="text-muted-foreground dark:text-muted-foreground mb-4 transition-colors">Manage task prioritization, deadlines, and distribution across agents</p>
                   <div className="flex justify-center gap-3">
-                    <button className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                    <button className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                       Assign New Task
                     </button>
                     <button className="px-4 py-2 border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
@@ -479,10 +479,10 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                       </div>
                       
                       <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-border dark:border-border transition-colors">
-                        <button className="px-3 py-1 text-xs bg-teal-600 dark:bg-primary text-white rounded hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                        <button className="px-3 py-1 text-xs bg-green-600 dark:bg-primary text-white rounded hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                           Use Template
                         </button>
-                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Preview">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Preview">
                           <Eye className="w-4 h-4" />
                         </button>
                         <button className="p-2 text-outline dark:text-muted-foreground hover:text-green-600 dark:hover:text-green-400 rounded-full hover:bg-green-50 dark:hover:bg-green-900/30 transition-colors" title="Clone">
@@ -502,7 +502,7 @@ export default function WorkflowManagementPage({ onNavigate }: WorkflowManagemen
                   <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Dependencies & Triggers</h3>
                   <p className="text-muted-foreground dark:text-muted-foreground mb-4 transition-colors">Configure task relationships and event-based triggers</p>
                   <div className="flex justify-center gap-3">
-                    <button className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                    <button className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors">
                       Configure Triggers
                     </button>
                     <button className="px-4 py-2 border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">

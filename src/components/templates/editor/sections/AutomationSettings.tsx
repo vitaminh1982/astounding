@@ -149,7 +149,7 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
               <SettingsIcon className="w-4 h-4" />
               Automation Triggers
             </h4>
-            <span className="text-sm text-primary-green dark:text-teal-400 font-medium transition-colors">
+            <span className="text-sm text-primary-green dark:text-green-400 font-medium transition-colors">
               {activeTriggerCount} active
             </span>
           </div>
@@ -165,8 +165,8 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                   whileTap={{ scale: 0.99 }}
                   className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                     isActive
-                      ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                      : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
+                      ? 'border-indigo-300 dark:border-green-600 bg-indigo-50 dark:bg-green-900/20'
+                      : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-green-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                   }`}
                 >
                   <div className="flex-shrink-0 mt-1">
@@ -179,7 +179,7 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                       />
                       <div className={`w-5 h-5 border-2 rounded transition-all ${
                         isActive
-                          ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                          ? 'bg-primary dark:bg-green-600 border-indigo-600 dark:border-green-600'
                           : 'bg-white dark:bg-surface-container-highest border-border dark:border-border'
                       }`}>
                         {isActive && (
@@ -243,8 +243,8 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                   whileTap={{ scale: 0.98 }}
                   className={`flex flex-col p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                     isSelected
-                      ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                      : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
+                      ? 'border-indigo-300 dark:border-green-600 bg-indigo-50 dark:bg-green-900/20'
+                      : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-green-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                   }`}
                 >
                   <input
@@ -259,12 +259,12 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                   <div className="flex items-center gap-3 mb-2">
                     <div className={`p-2 rounded-lg transition-colors ${
                       isSelected
-                        ? 'bg-indigo-100 dark:bg-teal-900/50'
+                        ? 'bg-indigo-100 dark:bg-green-900/50'
                         : 'bg-surface-container-low dark:bg-surface-container-highest'
                     }`}>
                       <IconComponent className={`w-5 h-5 transition-colors ${
                         isSelected
-                          ? 'text-primary-green dark:text-teal-400'
+                          ? 'text-primary-green dark:text-green-400'
                           : 'text-muted-foreground dark:text-muted-foreground'
                       }`} />
                     </div>
@@ -315,7 +315,7 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                     max="720"
                     value={customDelay.hours}
                     onChange={(e) => handleCustomDelayChange({ hours: parseInt(e.target.value) || 1 })}
-                    className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
+                    className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
                     placeholder="24"
                   />
                   <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
@@ -332,7 +332,7 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                     <select
                       value={customDelay.timeWindow}
                       onChange={(e) => handleCustomDelayChange({ timeWindow: e.target.value as CustomDelay['timeWindow'] })}
-                      className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors appearance-none focus:outline-none pr-10"
+                      className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 shadow-sm dark:shadow-gray-900 transition-colors appearance-none focus:outline-none pr-10"
                     >
                       <option value="anytime">Anytime</option>
                       <option value="business">Business Hours (9AM - 6PM)</option>
@@ -353,7 +353,7 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                         type="time"
                         value={customDelay.customStart || '09:00'}
                         onChange={(e) => handleCustomDelayChange({ customStart: e.target.value })}
-                        className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
+                        className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
                       />
                     </div>
                     <div>
@@ -364,7 +364,7 @@ export default function AutomationSettings({ template, onChange }: AutomationSet
                         type="time"
                         value={customDelay.customEnd || '18:00'}
                         onChange={(e) => handleCustomDelayChange({ customEnd: e.target.value })}
-                        className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
+                        className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-green-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
                       />
                     </div>
                   </div>

@@ -43,7 +43,7 @@ export default function UsagePage() {
           <p className="text-muted-foreground dark:text-muted-foreground mb-4">{error}</p>
           <button 
             onClick={handleRefresh}
-            className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="px-4 py-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             {t('usage.error.retry', 'Try Again')}
           </button>

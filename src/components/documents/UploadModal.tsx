@@ -67,7 +67,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
         <div
           className={`mt-4 p-6 border-2 border-dashed rounded-lg transition-all ${
             dragActive 
-              ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20' 
+              ? 'border-primary-green dark:border-green-500 bg-indigo-50 dark:bg-green-900/20' 
               : 'border-border dark:border-border hover:border-outline-variant dark:hover:border-outline'
           }`}
           onDragEnter={handleDrag}
@@ -79,7 +79,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
             <Upload className="mx-auto h-12 w-12 text-outline dark:text-muted-foreground transition-colors" />
             <div className="mt-4">
               <label htmlFor="file-upload" className="cursor-pointer">
-                <span className="text-primary-green dark:text-teal-400 hover:text-indigo-500 dark:hover:text-teal-300 transition-colors">
+                <span className="text-primary-green dark:text-green-400 hover:text-indigo-500 dark:hover:text-green-300 transition-colors">
                   Click to upload
                 </span>
                 <input
@@ -115,8 +115,8 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
             disabled={!selectedFile}
             className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors shadow-sm dark:shadow-gray-900 ${
               selectedFile
-                ? 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700'
-                : 'bg-indigo-400 dark:bg-teal-400 cursor-not-allowed'
+                ? 'bg-primary dark:bg-green-600 hover:bg-indigo-700 dark:hover:bg-green-700'
+                : 'bg-indigo-400 dark:bg-green-400 cursor-not-allowed'
             }`}
           >
             Upload

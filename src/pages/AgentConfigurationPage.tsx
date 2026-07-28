@@ -98,7 +98,7 @@ export default function AgentConfigurationPage() {
                     placeholder="Search agents..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+                    className="pl-10 pr-4 py-2 w-full border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
                   />
                 </div>
               </div>
@@ -110,12 +110,12 @@ export default function AgentConfigurationPage() {
                       onClick={() => setSelectedAgent(agent.id)}
                       className={`w-full flex items-center p-3 rounded-lg text-left transition-colors ${
                         selectedAgent === agent.id
-                          ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-500 dark:border-teal-400 border'
+                          ? 'bg-green-50 dark:bg-green-900/30 border-green-500 dark:border-green-400 border'
                           : 'hover: dark:hover:bg-surface-container-highest border border-transparent'
                       }`}
                     >
-                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center mr-3 transition-colors">
-                        <Bot className="h-5 w-5 text-primary-green dark:text-teal-400" />
+                      <div className="flex-shrink-0 h-10 w-10 rounded-full bg-indigo-100 dark:bg-green-900/30 flex items-center justify-center mr-3 transition-colors">
+                        <Bot className="h-5 w-5 text-primary-green dark:text-green-400" />
                       </div>
                       <div className="min-w-0 flex-1">
                         <p className="text-sm font-medium text-foreground dark:text-foreground truncate transition-colors">{agent.name}</p>
@@ -141,8 +141,8 @@ export default function AgentConfigurationPage() {
                 <div className="p-6 border-b border-border dark:border-border transition-colors">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
-                      <div className="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center mr-4 transition-colors">
-                        <Bot className="h-6 w-6 text-primary-green dark:text-teal-400" />
+                      <div className="flex-shrink-0 h-12 w-12 rounded-full bg-indigo-100 dark:bg-green-900/30 flex items-center justify-center mr-4 transition-colors">
+                        <Bot className="h-6 w-6 text-primary-green dark:text-green-400" />
                       </div>
                       <div>
                         <h2 className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">
@@ -159,7 +159,7 @@ export default function AgentConfigurationPage() {
                         <RotateCcw className="h-4 w-4 mr-2" />
                         Reset
                       </button>
-                      <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+                      <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                         <Save className="h-4 w-4 mr-2" />
                         Save Changes
                       </button>
@@ -173,7 +173,7 @@ export default function AgentConfigurationPage() {
                         onClick={() => setActiveTab('behavior')}
                         className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'behavior'
-                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                             : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                         }`}
                       >
@@ -186,7 +186,7 @@ export default function AgentConfigurationPage() {
                         onClick={() => setActiveTab('knowledge')}
                         className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'knowledge'
-                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                             : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                         }`}
                       >
@@ -199,7 +199,7 @@ export default function AgentConfigurationPage() {
                         onClick={() => setActiveTab('integration')}
                         className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'integration'
-                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                             : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                         }`}
                       >
@@ -212,7 +212,7 @@ export default function AgentConfigurationPage() {
                         onClick={() => setActiveTab('safety')}
                         className={`py-4 px-6 text-sm font-medium transition-colors ${
                           activeTab === 'safety'
-                            ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
+                            ? 'border-b-2 border-green-500 dark:border-green-400 text-green-600 dark:text-green-400'
                             : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                         }`}
                       >
@@ -234,7 +234,7 @@ export default function AgentConfigurationPage() {
                           <div key={param.id} className="border border-border dark:border-border rounded-lg p-4 transition-colors">
                             <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">{param.name}</label>
                             <select
-                              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
+                              className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                               defaultValue={param.value}
                             >
                               {param.options.map((option) => (
@@ -248,7 +248,7 @@ export default function AgentConfigurationPage() {
                       <div className="border border-border dark:border-border rounded-lg p-4 transition-colors">
                         <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">Custom Prompt Template</label>
                         <textarea
-                          className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm font-mono bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
+                          className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm font-mono bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                           rows={8}
                           defaultValue={`You are a ${agents.find(a => a.id === selectedAgent)?.name}, a helpful AI assistant designed to provide excellent customer service.
 
@@ -317,7 +317,7 @@ When responding to customers:
                     <div className="space-y-6">
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Knowledge Sources</h3>
-                        <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+                        <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900">
                           <Plus className="h-4 w-4 mr-2" />
                           Add Source
                         </button>
@@ -347,7 +347,7 @@ When responding to customers:
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{source.lastUpdated}</td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                   <div className="flex space-x-3">
-                                    <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">Edit</button>
+                                    <button className="text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors">Edit</button>
                                     <button className="text-red-600 dark:text-destructive hover:text-red-900 dark:hover:text-red-300 transition-colors">Remove</button>
                                   </div>
                                 </td>
@@ -362,7 +362,7 @@ When responding to customers:
                         <div className="space-y-4">
                           <div>
                             <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">Update Frequency</label>
-                            <select className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors">
+                            <select className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors">
                               <option>Real-time</option>
                               <option>Hourly</option>
                               <option selected>Daily</option>
@@ -386,7 +386,7 @@ When responding to customers:
                             <input
                               id="enable-learning"
                               type="checkbox"
-                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                              className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                               defaultChecked
                             />
                             <label htmlFor="enable-learning" className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">
@@ -402,7 +402,7 @@ When responding to customers:
                     <div className="space-y-6">
                       <div className="flex justify-between items-center">
                         <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Integrations</h3>
-                        <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                        <button className="flex items-center gap-2 bg-primary dark:bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-green-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
                           <Plus className="h-4 w-4 mr-2" />
                           Add Integration
@@ -414,8 +414,8 @@ When responding to customers:
                           <div key={integration.id} className="border border-border dark:border-border rounded-lg p-4 transition-colors">
                             <div className="flex justify-between items-start">
                               <div className="flex items-start space-x-4">
-                                <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 rounded-lg transition-colors">
-                                  <Link className="h-6 w-6 text-primary-green dark:text-teal-400" />
+                                <div className="p-2 bg-indigo-100 dark:bg-green-900/30 rounded-lg transition-colors">
+                                  <Link className="h-6 w-6 text-primary-green dark:text-green-400" />
                                 </div>
                                 <div>
                                   <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{integration.name}</h3>
@@ -428,7 +428,7 @@ When responding to customers:
                                 </div>
                               </div>
                               <div>
-                                <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors">Configure</button>
+                                <button className="text-sm text-green-600 dark:text-green-400 hover:text-green-900 dark:hover:text-green-300 transition-colors">Configure</button>
                               </div>
                             </div>
                             <div className="mt-4">
@@ -436,7 +436,7 @@ When responding to customers:
                                 <input
                                   id={`enable-${integration.id}`}
                                   type="checkbox"
-                                  className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                                  className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                                   defaultChecked={integration.status === 'connected'}
                                 />
                                 <label htmlFor={`enable-${integration.id}`} className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">
@@ -456,7 +456,7 @@ When responding to customers:
                             <div className="flex items-center">
                               <input
                                 type="number"
-                                className="w-24 px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
+                                className="w-24 px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                                 defaultValue="100"
                               />
                               <span className="ml-2 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">requests per minute</span>
@@ -467,7 +467,7 @@ When responding to customers:
                             <div className="flex items-center">
                               <input
                                 type="number"
-                                className="w-24 px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
+                                className="w-24 px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                                 defaultValue="30"
                               />
                               <span className="ml-2 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">seconds</span>
@@ -477,7 +477,7 @@ When responding to customers:
                             <input
                               id="enable-retry"
                               type="checkbox"
-                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                              className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                               defaultChecked
                             />
                             <label htmlFor="enable-retry" className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">
@@ -498,7 +498,7 @@ When responding to customers:
                             <div key={setting.id}>
                               <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">{setting.name}</label>
                               <select
-                                className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
+                                className="w-full px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                                 defaultValue={setting.level}
                               >
                                 {setting.options.map((option) => (
@@ -532,7 +532,7 @@ When responding to customers:
                             <div className="flex items-center">
                               <input
                                 type="number"
-                                className="w-24 px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-teal-400 focus:border-teal-500 dark:focus:border-teal-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
+                                className="w-24 px-3 py-2 border border-border dark:border-border rounded-md shadow-sm focus:outline-none focus:ring-ring dark:focus:ring-green-400 focus:border-green-500 dark:focus:border-green-400 sm:text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                                 defaultValue="3"
                               />
                               <span className="ml-2 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">attempts</span>
@@ -542,7 +542,7 @@ When responding to customers:
                             <input
                               id="enable-explicit-escalation"
                               type="checkbox"
-                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                              className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                               defaultChecked
                             />
                             <label htmlFor="enable-explicit-escalation" className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">
@@ -559,7 +559,7 @@ When responding to customers:
                             <input
                               id="enable-gdpr"
                               type="checkbox"
-                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                              className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                               defaultChecked
                             />
                             <label htmlFor="enable-gdpr" className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">
@@ -570,7 +570,7 @@ When responding to customers:
                             <input
                               id="enable-logging"
                               type="checkbox"
-                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                              className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                               defaultChecked
                             />
                             <label htmlFor="enable-logging" className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">
@@ -581,7 +581,7 @@ When responding to customers:
                             <input
                               id="enable-pii-detection"
                               type="checkbox"
-                              className="h-4 w-4 text-teal-600 dark:text-teal-400 focus:ring-ring dark:focus:ring-teal-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
+                              className="h-4 w-4 text-green-600 dark:text-green-400 focus:ring-ring dark:focus:ring-green-400 border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                               defaultChecked
                             />
                             <label htmlFor="enable-pii-detection" className="ml-2 block text-sm text-on-surface dark:text-muted-foreground transition-colors">

@@ -14,14 +14,14 @@ const WorkflowToolbar: React.FC<WorkflowToolbarProps> = ({ onSave, onLoad }) => 
         className="p-2.5 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-md dark:shadow-gray-900 hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors group"
         aria-label="Save workflow"
       >
-        <Save className="w-5 h-5 text-on-surface dark:text-on-surface-variant group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors" />
+        <Save className="w-5 h-5 text-on-surface dark:text-on-surface-variant group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors" />
       </button>
       <button
         onClick={onLoad}
         className="p-2.5 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-md dark:shadow-gray-900 hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors group"
         aria-label="Load workflow"
       >
-        <FolderOpen className="w-5 h-5 text-on-surface dark:text-on-surface-variant group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors" />
+        <FolderOpen className="w-5 h-5 text-on-surface dark:text-on-surface-variant group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors" />
       </button>
     </div>
   );

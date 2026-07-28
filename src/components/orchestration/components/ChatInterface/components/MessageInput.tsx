@@ -221,7 +221,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
       )}
       
       {/* Main Input Area */}
-      <div className="flex items-center gap-3 bg-surface-container-low dark:bg-surface-container-highest/50 rounded-xl p-3 border border-border dark:border-border focus-within:border-teal-500 dark:focus-within:border-teal-400 focus-within:ring-2 focus-within:ring-teal-200 dark:focus-within:ring-teal-800 transition-colors">
+      <div className="flex items-center gap-3 bg-surface-container-low dark:bg-surface-container-highest/50 rounded-xl p-3 border border-border dark:border-border focus-within:border-green-500 dark:focus-within:border-green-400 focus-within:ring-2 focus-within:ring-green-200 dark:focus-within:ring-green-800 transition-colors">
         <Search className="w-5 h-5 text-muted-foreground dark:text-muted-foreground flex-shrink-0" />
         
         <textarea
@@ -269,7 +269,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
             disabled={isRecording || isTranscribing}
             className={`p-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               showModelOptions || getActiveModelCount() > 0
-                ? 'bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400'
+                ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400'
                 : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
             }`}
             title="Select AI models"
@@ -342,7 +342,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               exit={{ scale: 0, opacity: 0 }}
               onClick={onSendMessage}
               disabled={isLoading || isRecording || isTranscribing}
-              className="p-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 shadow-sm dark:shadow-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="p-2 bg-green-600 dark:bg-primary text-white rounded-lg hover:bg-green-700 dark:hover:bg-green-600 shadow-sm dark:shadow-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               title="Send message"
             >
               <Send className="w-4 h-4" />
@@ -397,7 +397,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         
         <div className="flex items-center gap-2">
           {getActiveModelCount() > 0 && (
-            <span className="text-teal-600 dark:text-teal-400">
+            <span className="text-green-600 dark:text-green-400">
               {getActiveModelCount()} model{getActiveModelCount() > 1 ? 's' : ''} selected
             </span>
           )}
