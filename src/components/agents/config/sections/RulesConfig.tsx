@@ -38,77 +38,77 @@ export default function RulesConfig({ config }: RulesConfigProps) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Managing rules</h3>
+      <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Managing rules</h3>
       
       <div>
-        <h4 className="font-medium text-gray-900 dark:text-gray-100 mb-2">Availabilities schedule</h4>
-        <div className="p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors">
+        <h4 className="font-medium text-foreground dark:text-foreground mb-2">Availabilities schedule</h4>
+        <div className="p-2 border border-border dark:border-border rounded-md bg-surface-container-low dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors">
           {rulesConfig.availability}
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg p-4 transition-colors">
+        <div className="border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-4 transition-colors">
           <div className="flex items-center gap-2 mb-4">
-            <Clock className="w-5 h-5 text-indigo-600 dark:text-teal-300" />
-            <h4 className="font-medium text-gray-900 dark:text-gray-100">Escalation threshold</h4>
+            <Clock className="w-5 h-5 text-primary-green dark:text-teal-300" />
+            <h4 className="font-medium text-foreground dark:text-foreground">Escalation threshold</h4>
           </div>
           <div className="space-y-3">
             <div>
-              <label className="text-sm text-gray-600 dark:text-gray-200">Max response time</label>
+              <label className="text-sm text-muted-foreground dark:text-on-surface-variant">Max response time</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   value={rulesConfig.thresholds.maxResponseTime}
                   onChange={(e) => handleThresholdChange('maxResponseTime', parseInt(e.target.value))}
-                  className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
+                  className="w-20 px-2 py-1 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
                 />
-                <span className="text-sm text-gray-500 dark:text-gray-400">seconds</span>
+                <span className="text-sm text-muted-foreground dark:text-muted-foreground">seconds</span>
               </div>
             </div>
             <div>
-              <label className="text-sm text-gray-600 dark:text-gray-200">Max session duration</label>
+              <label className="text-sm text-muted-foreground dark:text-on-surface-variant">Max session duration</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   value={rulesConfig.thresholds.maxSessionDuration}
                   onChange={(e) => handleThresholdChange('maxSessionDuration', parseInt(e.target.value))}
-                  className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
+                  className="w-20 px-2 py-1 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
                 />
-                <span className="text-sm text-gray-500 dark:text-gray-400">minutes</span>
+                <span className="text-sm text-muted-foreground dark:text-muted-foreground">minutes</span>
               </div>
             </div>
             <div>
-              <label className="text-sm text-gray-600 dark:text-gray-200">Max attempts</label>
+              <label className="text-sm text-muted-foreground dark:text-on-surface-variant">Max attempts</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   value={rulesConfig.thresholds.maxAttempts}
                   onChange={(e) => handleThresholdChange('maxAttempts', parseInt(e.target.value))}
-                  className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
+                  className="w-20 px-2 py-1 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
                 />
-                <span className="text-sm text-gray-500 dark:text-gray-400">trials</span>
+                <span className="text-sm text-muted-foreground dark:text-muted-foreground">trials</span>
               </div>
             </div>
             <div>
-              <label className="text-sm text-gray-600 dark:text-gray-200">Trust Score</label>
+              <label className="text-sm text-muted-foreground dark:text-on-surface-variant">Trust Score</label>
               <div className="flex items-center gap-2">
                 <input
                   type="number"
                   value={rulesConfig.thresholds.confidenceScore}
                   onChange={(e) => handleThresholdChange('confidenceScore', parseInt(e.target.value))}
-                  className="w-20 px-2 py-1 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
+                  className="w-20 px-2 py-1 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
                 />
-                <span className="text-sm text-gray-500 dark:text-gray-400">%</span>
+                <span className="text-sm text-muted-foreground dark:text-muted-foreground">%</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 rounded-lg p-4 transition-colors">
+        <div className="border border-border dark:border-border bg-white dark:bg-surface-container-highest rounded-lg p-4 transition-colors">
           <div className="flex items-center gap-2 mb-4">
-            <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />
-            <h4 className="font-medium text-gray-900 dark:text-gray-100">Escalation Conditions towards Human</h4>
+            <AlertTriangle className="w-5 h-5 text-destructive dark:text-destructive" />
+            <h4 className="font-medium text-foreground dark:text-foreground">Escalation Conditions towards Human</h4>
           </div>
           <div className="space-y-2">
             {rulesConfig.escalationConditions.map((condition, index) => (
@@ -117,9 +117,9 @@ export default function RulesConfig({ config }: RulesConfigProps) {
                   type="checkbox"
                   checked={rulesConfig.escalationConditions.includes(condition)}
                   onChange={(e) => handleConditionChange(condition, e.target.checked)}
-                  className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-indigo-600 dark:text-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700 transition-colors"
+                  className="rounded border-border dark:border-border bg-white dark:bg-surface-container-highest text-primary-green dark:text-primary-green focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 transition-colors"
                 />
-                <span className="text-sm text-gray-700 dark:text-gray-200">{condition}</span>
+                <span className="text-sm text-on-surface dark:text-on-surface-variant">{condition}</span>
               </label>
             ))}
           </div>

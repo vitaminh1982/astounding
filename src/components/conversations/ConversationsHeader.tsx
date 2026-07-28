@@ -10,8 +10,8 @@ interface NotificationBadgeProps {
 
 const NotificationBadge: React.FC<NotificationBadgeProps> = ({ count, variant = 'primary' }) => {
   const baseColors = {
-    primary: 'bg-red-500',
-    warning: 'bg-amber-500'
+    primary: 'bg-destructive',
+    warning: 'bg-destructive'
   };
 
   return (
@@ -52,7 +52,7 @@ const NotificationButton: React.FC<NotificationButtonProps> = ({
       whileTap={{ scale: 0.95 }}
       className={`
         relative p-2 
-        hover:bg-gray-100 dark:hover:bg-gray-700
+        hover:bg-surface-container-low dark:hover:bg-surface-container-highest
         rounded-full 
         transition-colors
         focus:outline-none 
@@ -83,12 +83,12 @@ export default function ConversationsHeader() {
   return (
     <div className="flex justify-between items-center mb-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">Discussions</h1>
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">Managed discussions that require attention</p>
+        <h1 className="text-2xl font-bold text-on-surface dark:text-foreground transition-colors">Discussions</h1>
+        <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground transition-colors">Managed discussions that require attention</p>
       </div>
       <div className="flex gap-3 items-center">
         <NotificationButton
-          icon={<AlertTriangle className="h-5 w-5 text-amber-500 dark:text-amber-400" />}
+          icon={<AlertTriangle className="h-5 w-5 text-destructive dark:text-destructive" />}
           count={2}
           tooltip="Conversations urgentes"
           variant="warning"
@@ -96,7 +96,7 @@ export default function ConversationsHeader() {
         />
         
         <NotificationButton
-          icon={<Bell className="h-5 w-5 text-gray-600 dark:text-gray-400" />}
+          icon={<Bell className="h-5 w-5 text-muted-foreground dark:text-muted-foreground" />}
           count={8}
           tooltip="Notifications"
           onClick={handleNotifications}

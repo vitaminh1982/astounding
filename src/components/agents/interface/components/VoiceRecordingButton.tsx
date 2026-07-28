@@ -44,7 +44,7 @@ const VoiceRecordingButton: React.FC<VoiceRecordingButtonProps> = ({
         <>
           <div className="relative">
             <MicOff className="w-4 h-4" />
-            <div className="absolute -inset-1 rounded-full bg-red-500 dark:bg-red-400 animate-ping opacity-75" />
+            <div className="absolute -inset-1 rounded-full bg-destructive dark:bg-destructive animate-ping opacity-75" />
           </div>
           <span className="text-xs font-mono">
             {formatRecordingTime(voiceState.recordingTime)}
@@ -58,18 +58,18 @@ const VoiceRecordingButton: React.FC<VoiceRecordingButtonProps> = ({
 
   const getButtonStyles = () => {
     if (disabled) {
-      return 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed';
+      return 'bg-surface-container dark:bg-surface-container-highest text-outline dark:text-muted-foreground cursor-not-allowed';
     }
     
     if (voiceState.isRecording) {
-      return 'bg-red-500 dark:bg-red-600 text-white hover:bg-red-600 dark:hover:bg-red-700';
+      return 'bg-destructive dark:bg-red-600 text-white hover:bg-red-600 dark:hover:bg-red-700';
     }
     
     if (voiceState.isTranscribing) {
-      return 'bg-blue-500 dark:bg-teal-600 text-white';
+      return 'bg-tertiary dark:bg-teal-600 text-white';
     }
     
-    return 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600';
+    return 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container dark:hover:bg-surface-container-highest';
   };
 
   const getFocusStyles = () => {
@@ -78,7 +78,7 @@ const VoiceRecordingButton: React.FC<VoiceRecordingButtonProps> = ({
     }
     
     if (voiceState.isTranscribing) {
-      return 'focus:ring-blue-500 dark:focus:ring-teal-500';
+      return 'focus:ring-blue-500 dark:focus:ring-ring';
     }
     
     return 'focus:ring-gray-500 dark:focus:ring-gray-400';

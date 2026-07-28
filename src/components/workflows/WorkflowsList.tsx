@@ -114,15 +114,15 @@ const WorkflowsList: React.FC<WorkflowsListProps> = ({ onSelect, selectedId }) =
   );
 
   return (
-    <div className="workflows-list h-full flex flex-col bg-white dark:bg-gray-800 transition-colors">
+    <div className="workflows-list h-full flex flex-col bg-white dark:bg-surface-container-high transition-colors">
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+        <h2 className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
           {t('workflows.list.title')}
         </h2>
         <button
           onClick={() => setIsCreating(true)}
-          className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-sm hover:shadow active:scale-95"
+          className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 bg-white dark:bg-surface-container-highest border border-border dark:border-border text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-sm hover:shadow active:scale-95"
           aria-label={t('workflows.list.newButton')}
         >
           <Plus className="h-4 w-4" strokeWidth={2.5} />
@@ -134,18 +134,18 @@ const WorkflowsList: React.FC<WorkflowsListProps> = ({ onSelect, selectedId }) =
       <div className="mb-4 space-y-3">
         {/* Search Input */}
         <div className="relative">
-          <Search className="h-5 w-5 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors" />
+          <Search className="h-5 w-5 text-outline dark:text-muted-foreground absolute left-3 top-1/2 transform -translate-y-1/2 transition-colors" />
           <input
             type="text"
             placeholder={t('workflows.list.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-10 py-2.5 w-full rounded-lg transition-all duration-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent"
+            className="pl-10 pr-10 py-2.5 w-full rounded-lg transition-all duration-200 bg-white dark:bg-surface-container-highest border border-border dark:border-border text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-transparent"
           />
           {searchTerm && (
             <button
               onClick={handleClearSearch}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-muted-foreground transition-colors"
               aria-label="Clear search"
             >
               <X className="h-4 w-4" />
@@ -162,7 +162,7 @@ const WorkflowsList: React.FC<WorkflowsListProps> = ({ onSelect, selectedId }) =
               className={`px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
                 filter === status
                   ? 'bg-indigo-100 dark:bg-teal-900/40 text-indigo-700 dark:text-teal-300 ring-2 ring-indigo-500 dark:ring-teal-500 ring-inset'
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                  : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container dark:hover:bg-surface-container-highest'
               }`}
               aria-pressed={filter === status}
             >
@@ -176,10 +176,10 @@ const WorkflowsList: React.FC<WorkflowsListProps> = ({ onSelect, selectedId }) =
       <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600">
         {filteredWorkflows.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-gray-700 mb-3 transition-colors">
-              <Search className="h-6 w-6 text-gray-400 dark:text-gray-500" />
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-low dark:bg-surface-container-highest mb-3 transition-colors">
+              <Search className="h-6 w-6 text-outline dark:text-muted-foreground" />
             </div>
-            <p className="text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-muted-foreground dark:text-muted-foreground transition-colors">
               {t('workflows.list.noWorkflowsFound')}
             </p>
           </div>
@@ -213,7 +213,7 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({ workflow, isSelected, onCli
   
   const statusColors = useMemo(() => ({
     active: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800',
-    draft: 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-600',
+    draft: 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border',
     paused: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800',
     archived: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800',
   }), []);
@@ -224,8 +224,8 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({ workflow, isSelected, onCli
       className={`
         p-4 rounded-lg border cursor-pointer transition-all duration-200
         ${isSelected 
-          ? 'border-indigo-500 dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20 shadow-md' 
-          : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-gray-50 dark:hover:bg-gray-750 hover:shadow-sm'
+          ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20 shadow-md' 
+          : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-surface-container-low dark:hover:bg-gray-750 hover:shadow-sm'
         }
       `}
       role="button"
@@ -235,10 +235,10 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({ workflow, isSelected, onCli
     >
       <div className="flex justify-between items-start gap-3">
         <div className="flex-1 min-w-0">
-          <h3 className="font-medium text-gray-900 dark:text-gray-100 truncate transition-colors">
+          <h3 className="font-medium text-foreground dark:text-foreground truncate transition-colors">
             {workflow.name}
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2 transition-colors">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 line-clamp-2 transition-colors">
             {workflow.description}
           </p>
         </div>
@@ -250,7 +250,7 @@ const WorkflowCard: React.FC<WorkflowCardProps> = ({ workflow, isSelected, onCli
         </span>
       </div>
       
-      <div className="mt-3 flex items-center text-xs text-gray-500 dark:text-gray-400 transition-colors">
+      <div className="mt-3 flex items-center text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
         <span>
           {t('workflows.list.card.updatedAt')} {new Date(workflow.updatedAt).toLocaleDateString()}
         </span>
@@ -302,18 +302,18 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
       aria-modal="true"
       aria-labelledby="modal-title"
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 w-full max-w-md transform transition-all">
+      <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-2xl p-6 w-full max-w-md transform transition-all">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 
             id="modal-title"
-            className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors"
+            className="text-xl font-semibold text-foreground dark:text-foreground transition-colors"
           >
             {t('workflows.list.modal.title')}
           </h2>
           <button
             onClick={onClose}
-            className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors rounded-lg p-1 hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-muted-foreground transition-colors rounded-lg p-1 hover:bg-surface-container-low dark:hover:bg-surface-container-highest"
             aria-label="Close modal"
           >
             <X className="h-5 w-5" />
@@ -326,7 +326,7 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
             <div>
               <label 
                 htmlFor="workflow-name"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors"
+                className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors"
               >
                 {t('workflows.list.modal.nameLabel')}
               </label>
@@ -335,7 +335,7 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="block w-full rounded-lg px-4 py-2.5 transition-all duration-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent"
+                className="block w-full rounded-lg px-4 py-2.5 transition-all duration-200 bg-white dark:bg-surface-container-highest border border-border dark:border-border text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-transparent"
                 placeholder="Enter workflow name"
                 required
                 autoFocus
@@ -346,7 +346,7 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
             <div>
               <label 
                 htmlFor="workflow-description"
-                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors"
+                className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors"
               >
                 {t('workflows.list.modal.descriptionLabel')}
               </label>
@@ -354,7 +354,7 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
                 id="workflow-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="block w-full rounded-lg px-4 py-2.5 transition-all duration-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent resize-none"
+                className="block w-full rounded-lg px-4 py-2.5 transition-all duration-200 bg-white dark:bg-surface-container-highest border border-border dark:border-border text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-transparent resize-none"
                 rows={4}
                 placeholder="Describe the workflow purpose..."
               />
@@ -366,13 +366,13 @@ const CreateWorkflowModal: React.FC<CreateWorkflowModalProps> = ({ onClose, onCr
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white dark:bg-surface-container-highest border border-border dark:border-border text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             >
               {t('workflows.list.modal.cancelButton')}
             </button>
             <button
               type="submit"
-              className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md active:scale-95"
+              className="px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 shadow-sm hover:shadow-md active:scale-95"
             >
               {t('workflows.list.modal.createButton')}
             </button>

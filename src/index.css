@@ -5,6 +5,93 @@
 @tailwind utilities;
 
 /* ================================================================
+   LIGHT MODE OVERRIDES
+   tokens.css `:root` = dark navy par défaut (dark mode).
+   Ce bloc inverse tous les tokens sémantiques pour le light mode.
+   Actif quand la classe `.dark` est absente de <html>.
+   ================================================================ */
+html:not(.dark) {
+  /* ── Sémantiques shadcn/Tailwind ───────────────────────────── */
+  --background:            #f4f8f7;
+  --foreground:            var(--primitive-color-navy-950);    /* #060e20 - full dark header text */
+
+  --card:                  #ffffff;
+  --card-foreground:       var(--primitive-color-navy-950);
+
+  --popover:               #ffffff;
+  --popover-foreground:    var(--primitive-color-navy-950);
+
+  --primary:               var(--primitive-color-green-500);   /* #22c55e */
+  --primary-foreground:    #ffffff;
+
+  --secondary:             var(--primitive-color-green-400);   /* #4ade80 */
+  --secondary-foreground:  var(--primitive-color-navy-950);
+
+  --muted:                 #eef4f2;
+  --muted-foreground:      var(--primitive-color-navy-600);    /* #192540 - strong crisp dark slate for muted text */
+
+  --accent:                #e4eee9;
+  --accent-foreground:     var(--primitive-color-navy-950);
+
+  --destructive:           #ef4444;
+  --border:                rgba(6, 14, 32, 0.12);              /* dark border contrast */
+  --input:                 rgba(6, 14, 32, 0.08);
+  --ring:                  var(--primitive-color-green-500);
+
+  /* ── Surfaces ──────────────────────────────────────────────── */
+  --color-surface:                    #ffffff;
+  --color-surface-bright:             #ffffff;
+  --color-surface-container-low:      #f4f8f7;
+  --color-surface-container:          #e8f0ed;
+  --color-surface-container-high:     #d8e4df;
+  --color-surface-container-highest:  #c8d8d2;
+
+  /* ── On-surface ────────────────────────────────────────────── */
+  --color-on-surface:         var(--primitive-color-navy-900);  /* #091328 - main body text */
+  --color-on-surface-variant: var(--primitive-color-navy-700);  /* #141f38 - secondary text */
+  --color-outline:            var(--primitive-color-navy-600);  /* #192540 - uppercase labels like "WORKSPACE AGENTS" */
+  --color-outline-variant:    var(--primitive-color-navy-400);  /* #40485d - borders/subtle text */
+
+  /* ── Couleurs thématiques ──────────────────────────────────── */
+  --color-primary-green:       var(--primitive-color-green-500);
+  --color-primary-container:   #dcfce7;
+  --color-secondary-green:     var(--primitive-color-green-400);
+  --color-secondary-container: #bbf7d0;
+  --color-on-primary:          #ffffff;
+  --color-tertiary:            #6366f1;
+  --color-error:               #ef4444;
+
+  /* ── Alias @theme Tailwind ─────────────────────────────────── */
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-popover:              var(--popover);
+  --color-popover-foreground:   var(--popover-foreground);
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-destructive:          var(--destructive);
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-ring:                 var(--ring);
+
+  /* ── Composants ────────────────────────────────────────────── */
+  --button-primary-bg:    var(--primary);
+  --button-primary-fg:    var(--primary-foreground);
+  --button-secondary-bg:  var(--secondary);
+  --button-secondary-fg:  var(--secondary-foreground);
+  --card-bg:              var(--card);
+  --card-fg:              var(--card-foreground);
+}
+
+
+/* ================================================================
    MODE WIREFRAME — Override complet des tokens couleur
    Palette stricte : 5 tons, aucune couleur.
    Pour réactiver les couleurs du DS : supprimer ce bloc entier.
@@ -334,37 +421,37 @@ body,
   min-width: 150px;
   font-size: 14px;
   text-align: center;
-  border: 2px solid #2563eb;
-  background-color: white;
+  border: 2px solid var(--color-tertiary);
+  background-color: var(--color-surface);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 .react-flow__node-trigger {
-  border-color: #ef4444;
+  border-color: var(--destructive);
 }
 
 .react-flow__node-ai_agent {
-  border-color: #8b5cf6;
+  border-color: var(--color-tertiary);
 }
 
 .react-flow__node-action {
-  border-color: #10b981;
+  border-color: var(--secondary);
 }
 
 .react-flow__node-tool {
-  border-color: #f59e0b;
+  border-color: var(--primary);
 }
 
 /* React Flow Minimap Enhancements */
 .react-flow__minimap {
-  background-color: var(--minimap-bg);
+  background-color: var(--color-surface);
   border-radius: 0.5rem;
   overflow: hidden;
 }
 
 .react-flow__minimap-node {
-  fill: var(--minimap-node-color);
-  stroke: var(--minimap-node-stroke);
+  fill: var(--color-tertiary);
+  stroke: var(--color-primary-green);
   stroke-width: 2px;
   opacity: 0.9;
 }
@@ -380,32 +467,26 @@ body,
   height: 100%;
 }
 
-/* Dark mode minimap variables */
+/* Dark mode minimap uses DS token vars */
 .dark .react-flow__minimap {
-  --minimap-bg: rgb(31 41 55);
-  --minimap-node-color: rgb(96 165 250);
-  --minimap-node-stroke: rgb(147 197 253);
   --minimap-mask-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Light mode minimap variables */
+/* Light mode minimap */
 .react-flow__minimap {
-  --minimap-bg: rgb(255 255 255);
-  --minimap-node-color: rgb(59 130 246);
-  --minimap-node-stroke: rgb(37 99 235);
   --minimap-mask-color: rgba(0, 0, 0, 0.05);
 }
 
 .react-flow__handle {
   width: 8px;
   height: 8px;
-  background-color: #2563eb;
+  background-color: var(--color-tertiary);
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid var(--color-surface);
 }
 
 .react-flow__edge-path {
-  stroke: #94a3b8;
+  stroke: var(--color-outline);
   stroke-width: 2;
 }
 
@@ -419,7 +500,7 @@ body,
 }
 
 .react-flow__edge-button:hover circle {
-  fill: #2563eb;
+  fill: var(--color-tertiary);
 }
 
 .react-flow__node-content {
@@ -431,7 +512,7 @@ body,
 }
 
 .react-flow__minimap {
-  background-color: #f8fafc;
+  background-color: var(--color-surface-container-low);
   border-radius: 8px;
 }
 
@@ -442,16 +523,18 @@ body,
 
 .react-flow__controls button {
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--color-surface);
   border-bottom: none;
 }
 
 .react-flow__controls button:hover {
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-container-low);
 }
 
+/* App background — original light mode, DS green dark mode */
 .app-bg {
-  background: radial-gradient(at 10% 20%, rgba(0, 130, 251, 0.12) 0px, transparent 50%),
+  background:
+    radial-gradient(at 10% 20%, rgba(0, 130, 251, 0.12) 0px, transparent 50%),
     radial-gradient(at 85% 75%, rgba(0, 229, 255, 0.14) 0px, transparent 50%),
     radial-gradient(at 35% 90%, rgba(251, 246, 227, 0.85) 0px, transparent 55%),
     radial-gradient(at 5% 65%, rgba(0, 223, 196, 0.08) 0px, transparent 40%),
@@ -459,9 +542,10 @@ body,
 }
 
 .dark .app-bg {
-  background: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-    #111827;
+  background:
+    radial-gradient(at 0% 0%, rgba(34, 197, 94, 0.08) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(180, 193, 255, 0.06) 0px, transparent 50%),
+    var(--color-background, var(--primitive-color-navy-950));
 }
 
 /* Premium frosted glass sidebar effect */
@@ -483,21 +567,27 @@ body,
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Sendplex nav — subtle green-tinted gradient panel */
+/* Sendplex nav — green-tinted glass using DS green primitives */
 .sendplex-nav-bg {
-  background: linear-gradient(180deg, rgba(236, 253, 245, 0.92) 0%, rgba(209, 250, 229, 0.75) 100%);
+  /* green-100/200 tints from DS primitive palette */
+  background: linear-gradient(180deg,
+    rgba(220, 252, 231, 0.92) 0%,
+    rgba(187, 247, 208, 0.75) 100%);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(167, 243, 208, 0.35);
-  box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.06),
+  border: 1px solid rgba(74, 222, 128, 0.25); /* green-400/25 */
+  box-shadow: 0 8px 32px 0 rgba(34, 197, 94, 0.06),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.65);
 }
 
 .dark .sendplex-nav-bg {
-  background: linear-gradient(180deg, rgba(6, 78, 59, 0.18) 0%, rgba(4, 47, 46, 0.12) 100%);
+  /* navy-900 / green-900 dark tint */
+  background: linear-gradient(180deg,
+    rgba(5, 46, 22, 0.18) 0%,
+    rgba(3, 30, 29, 0.12) 100%);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
-  border: 1px solid rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.10); /* green-500/10 */
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5),
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
 }

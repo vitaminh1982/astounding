@@ -42,12 +42,12 @@ export default function IntegrationFilters({
     <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
       {/* Category filter */}
       <div className="flex items-center">
-        <label htmlFor="category-filter" className="block text-sm font-medium text-gray-700 mr-2">
+        <label htmlFor="category-filter" className="block text-sm font-medium text-on-surface mr-2">
           {t('integrations.filters.category')}:
         </label>
         <select
           id="category-filter"
-          className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+          className="block w-full pl-3 pr-10 py-2 text-base border-border focus:outline-none focus:ring-blue-500 focus:border-tertiary sm:text-sm rounded-md"
           value={categoryFilter}
           onChange={(e) => setCategoryFilter(e.target.value)}
         >
@@ -62,12 +62,12 @@ export default function IntegrationFilters({
       {/* Status filter - hide if hideStatusFilter is true */}
       {!hideStatusFilter && (
         <div className="flex items-center">
-          <label htmlFor="status-filter" className="block text-sm font-medium text-gray-700 mr-2">
+          <label htmlFor="status-filter" className="block text-sm font-medium text-on-surface mr-2">
             {t('integrations.filters.status.label')}:
           </label>
           <select
             id="status-filter"
-            className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+            className="block w-full pl-3 pr-10 py-2 text-base border-border focus:outline-none focus:ring-blue-500 focus:border-tertiary sm:text-sm rounded-md"
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
           >

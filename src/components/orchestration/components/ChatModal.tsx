@@ -32,7 +32,7 @@ const ChatModal: React.FC<ChatModalProps> = ({
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.95, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl dark:shadow-gray-900 w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden border border-gray-200 dark:border-gray-600 transition-colors"
+            className="bg-white dark:bg-surface-container-high rounded-xl shadow-2xl dark:shadow-gray-900 w-full max-w-6xl h-[90vh] flex flex-col overflow-hidden border border-border dark:border-border transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             <ChatInterface 

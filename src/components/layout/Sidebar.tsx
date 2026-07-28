@@ -109,12 +109,12 @@ const SendplexNavItem = memo(({
       <div className={[
         'w-10 h-10 rounded-full flex items-center justify-center sendplex-nav-bg transition-all duration-200',
         isActive
-          ? 'shadow-md ring-2 ring-green-300/40 dark:ring-green-700/40 text-gray-900 dark:text-gray-100'
-          : 'text-gray-500 dark:text-gray-400 group-hover/item:text-gray-900 dark:group-hover/item:text-gray-100 group-hover/item:shadow-sm',
+          ? 'shadow-md ring-2 ring-primary-green/40 dark:ring-primary-green/40 text-foreground dark:text-foreground'
+          : 'text-muted-foreground dark:text-muted-foreground group-hover/item:text-primary-green dark:group-hover/item:text-primary-green group-hover/item:shadow-sm',
       ].join(' ')}>
         <Icon size={17} strokeWidth={1.75} />
       </div>
-      <span className={`text-[9px] font-medium leading-none transition-colors ${isActive ? 'text-gray-800 dark:text-gray-200' : 'text-gray-400 dark:text-gray-500 group-hover/item:text-gray-700 dark:group-hover/item:text-gray-300'
+      <span className={`text-[9px] font-medium leading-none transition-colors ${isActive ? 'text-primary-green dark:text-primary-green' : 'text-outline dark:text-muted-foreground group-hover/item:text-primary-green dark:group-hover/item:text-primary-green'
         }`}>{label}</span>
     </button>
   );
@@ -145,14 +145,14 @@ const SubMenuItem = memo(({
         'flex w-full items-center gap-3 px-3 py-1.5',
         'text-sm rounded-lg transition-all duration-150',
         isActive
-          ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
-          : 'text-[#666666] dark:text-[#999999] hover:bg-white/40 hover:text-black dark:hover:bg-white/10 dark:hover:text-white',
+          ? 'bg-surface dark:bg-white/15 text-foreground font-semibold ring-1 ring-primary-green/30'
+          : 'text-muted-foreground hover:bg-surface/40 hover:text-primary-green dark:hover:bg-white/10',
       ].join(' ')}
     >
       <div className="relative flex-shrink-0">
         <Icon size={16} strokeWidth={1.75} className="flex-shrink-0" />
         {hasNotification && (
-          <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-[#888888]" />
+          <span className="absolute -top-1 -right-1 h-2 w-2 rounded-full bg-destructive" />
         )}
       </div>
       <span className="truncate">{label}</span>
@@ -186,15 +186,15 @@ const CollapsibleSection = memo(({
         'flex w-full items-center px-3 py-2 justify-between',
         'text-sm rounded-lg transition-all duration-150',
         isActive
-          ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
-          : 'text-[#444444] dark:text-[#bbbbbb] hover:bg-white/40 hover:text-black dark:hover:bg-white/10 dark:hover:text-white',
+          ? 'bg-surface dark:bg-white/15 text-foreground font-semibold ring-1 ring-primary-green/20'
+          : 'text-on-surface dark:text-muted-foreground hover:bg-surface/40 hover:text-primary-green dark:hover:bg-white/10',
       ].join(' ')}
     >
       <div className="flex items-center gap-3">
         <Icon size={18} strokeWidth={1.75} />
         <span>{label}</span>
       </div>
-      <span className="text-[#aaaaaa]">
+      <span className="text-outline">
         {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
       </span>
     </button>
@@ -225,10 +225,10 @@ const NotificationPanel = memo(({
   return (
     <div className="space-y-3">
       <div className="flex items-center justify-between">
-        <p className="text-xs font-semibold text-gray-900 dark:text-gray-100">Notifications</p>
+        <p className="text-xs font-semibold text-foreground dark:text-foreground">Notifications</p>
         <button
           onClick={onClose}
-          className="p-1 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+          className="p-1 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg text-outline hover:text-muted-foreground dark:hover:text-muted-foreground transition-colors"
           aria-label="Close notifications"
         >
           <X size={16} />
@@ -239,14 +239,14 @@ const NotificationPanel = memo(({
         <div className="flex items-center gap-2 mb-3 border-b border-black/5 dark:border-white/5 pb-2">
           <button
             onClick={onMarkAllAsRead}
-            className="flex items-center gap-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-md transition-colors px-2 py-1"
+            className="flex items-center gap-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground dark:text-muted-foreground text-xs font-medium rounded-md transition-colors px-2 py-1"
           >
             <CheckCheck size={12} />
             Mark all read
           </button>
           <button
             onClick={onClearAll}
-            className="flex items-center gap-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-xs font-medium rounded-md transition-colors px-2 py-1"
+            className="flex items-center gap-1 bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground dark:text-muted-foreground text-xs font-medium rounded-md transition-colors px-2 py-1"
           >
             <Trash2 size={12} />
             Clear all
@@ -257,11 +257,11 @@ const NotificationPanel = memo(({
       <div className="max-h-[300px] overflow-y-auto space-y-1.5 pr-0.5">
         {notifications.length === 0 ? (
           <div className="py-8 text-center">
-            <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-gray-400 dark:text-gray-500">
+            <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center text-outline dark:text-muted-foreground">
               <Inbox size={24} />
             </div>
-            <p className="text-gray-500 dark:text-gray-400 font-medium mb-0.5">No notifications</p>
-            <p className="text-gray-400 dark:text-gray-500 text-xs">You're all caught up!</p>
+            <p className="text-muted-foreground dark:text-muted-foreground font-medium mb-0.5">No notifications</p>
+            <p className="text-outline dark:text-muted-foreground text-xs">You're all caught up!</p>
           </div>
         ) : (
           <div className="divide-y divide-black/5 dark:divide-white/5">
@@ -291,9 +291,9 @@ const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
     const iconClass = "h-4 w-4";
     const iconMap = {
       success: <Check className={`${iconClass} text-green-500 dark:text-green-400`} />,
-      warning: <AlertCircle className={`${iconClass} text-amber-500 dark:text-amber-400`} />,
-      error: <AlertCircle className={`${iconClass} text-red-500 dark:text-red-400`} />,
-      info: <Inbox className={`${iconClass} text-blue-500 dark:text-blue-400`} />
+      warning: <AlertCircle className={`${iconClass} text-destructive dark:text-destructive`} />,
+      error: <AlertCircle className={`${iconClass} text-destructive dark:text-destructive`} />,
+      info: <Inbox className={`${iconClass} text-tertiary dark:text-tertiary`} />
     };
     return iconMap[notification.type] || iconMap.info;
   };
@@ -301,9 +301,9 @@ const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
   const getIconBg = () => {
     const bgMap = {
       success: 'bg-green-500/10 border border-green-500/20',
-      warning: 'bg-amber-500/10 border border-amber-500/20',
-      error: 'bg-red-500/10 border border-red-500/20',
-      info: 'bg-blue-500/10 border border-blue-500/20'
+      warning: 'bg-destructive/10 border border-amber-500/20',
+      error: 'bg-destructive/10 border border-destructive/20',
+      info: 'bg-tertiary/10 border border-tertiary/20'
     };
     return bgMap[notification.type] || bgMap.info;
   };
@@ -336,18 +336,18 @@ const NotificationItem = memo(({ notification, onMarkAsRead, index }: {
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex justify-between items-start gap-2">
-          <p className={`text-xs text-gray-900 dark:text-gray-100 truncate ${!notification.read ? 'font-semibold' : 'text-gray-500 dark:text-gray-400'
+          <p className={`text-xs text-foreground dark:text-foreground truncate ${!notification.read ? 'font-semibold' : 'text-muted-foreground dark:text-muted-foreground'
             }`}>
             {notification.title}
           </p>
           {!notification.read && (
-            <span className="h-1.5 w-1.5 bg-red-500 rounded-full flex-shrink-0 mt-1" />
+            <span className="h-1.5 w-1.5 bg-destructive rounded-full flex-shrink-0 mt-1" />
           )}
         </div>
-        <p className="text-[11px] text-gray-500 dark:text-gray-400 line-clamp-2 mt-0.5 leading-normal">
+        <p className="text-[11px] text-muted-foreground dark:text-muted-foreground line-clamp-2 mt-0.5 leading-normal">
           {notification.message}
         </p>
-        <div className="flex items-center gap-1 mt-1 text-[10px] text-gray-400">
+        <div className="flex items-center gap-1 mt-1 text-[10px] text-outline">
           <Clock size={10} />
           <span>{formatTime(notification.timestamp)}</span>
         </div>
@@ -669,7 +669,7 @@ const Sidebar = ({
               id="sidebar-toggle-btn"
               onClick={onToggleExpand}
               className={[
-                'p-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out',
+                'p-2 rounded-lg text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-white transition-all duration-300 ease-in-out',
                 isExpanded
                   ? 'opacity-0 scale-90 pointer-events-none group-hover/sidebar:opacity-100 group-hover/sidebar:scale-100 group-hover/sidebar:pointer-events-auto'
                   : 'opacity-100 scale-100 pointer-events-auto'
@@ -724,27 +724,27 @@ const Sidebar = ({
             <div
               ref={popoverRef}
               onMouseLeave={handleHoverReset}
-              className="absolute bottom-14 left-2 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 w-[320px]"
+              className="absolute bottom-14 left-2 bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 z-50 text-sm transition-all duration-150 w-[320px]"
             >
               <div className="space-y-3">
                 {/* 1. User Header */}
                 <div className="flex items-center gap-3 pb-1" onMouseEnter={handleHoverReset}>
                   <div className="relative flex-shrink-0">
-                    <div className="w-11 h-11 rounded-full bg-black/10 dark:bg-white/10 text-gray-800 dark:text-gray-200 font-medium flex items-center justify-center text-xs border border-black/5 dark:border-white/5 shadow-inner">
+                    <div className="w-11 h-11 rounded-full bg-black/10 dark:bg-white/10 text-on-surface dark:text-on-surface-variant font-medium flex items-center justify-center text-xs border border-black/5 dark:border-white/5 shadow-inner">
                       OA
                     </div>
                     {(() => {
                       const pill = getPlanPillText(activeWorkspace.plan);
                       return pill ? (
-                        <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 text-[10px] font-normal px-1.5 rounded border border-black/10 dark:border-white/10 shadow whitespace-nowrap scale-90">
+                        <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 bg-black/5 dark:bg-white/10 text-muted-foreground dark:text-muted-foreground text-[10px] font-normal px-1.5 rounded border border-black/10 dark:border-white/10 shadow whitespace-nowrap scale-90">
                           {pill}
                         </span>
                       ) : null;
                     })()}
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate leading-tight">Oppie Adirono</p>
-                    <p className="text-[10px] font-normal text-gray-500 dark:text-gray-400 truncate mt-0.5">{activeAccount.email}</p>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground truncate leading-tight">Oppie Adirono</p>
+                    <p className="text-[10px] font-normal text-muted-foreground dark:text-muted-foreground truncate mt-0.5">{activeAccount.email}</p>
                   </div>
                 </div>
 
@@ -765,27 +765,27 @@ const Sidebar = ({
                           <span>{activeWorkspace.icon === 'briefcase' ? '💼' : activeWorkspace.icon === 'user' ? '👤' : '🏢'}</span>
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate leading-tight">{activeWorkspace.name}</p>
-                          <p className="text-[10px] font-normal text-gray-500 dark:text-gray-400 truncate mt-0.5">
+                          <p className="text-xs font-medium text-foreground dark:text-foreground truncate leading-tight">{activeWorkspace.name}</p>
+                          <p className="text-[10px] font-normal text-muted-foreground dark:text-muted-foreground truncate mt-0.5">
                             {activeWorkspace.plan.toLowerCase().includes('plan') ? activeWorkspace.plan : `${activeWorkspace.plan} plan`} · {activeWorkspace.members}
                           </p>
                         </div>
                       </div>
-                      <ChevronRight size={16} className="text-gray-400 flex-shrink-0" />
+                      <ChevronRight size={16} className="text-outline flex-shrink-0" />
                     </button>
 
                     {/* Workspace switcher submenu */}
                     {popoverView === 'accounts' && (
                       <div className="absolute z-50 bottom-[calc(100%+8px)] left-0 right-0 lg:bottom-0 lg:top-auto lg:left-full lg:right-auto lg:pl-2">
-                        <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-[320px]">
+                        <div className="bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-[320px]">
                           <div className="space-y-3">
                             <div className="flex items-center gap-2.5 p-2 rounded-xl bg-black/5 dark:bg-white/5">
                               <span className="w-8 h-8 rounded-lg bg-black/10 dark:bg-white/10 flex items-center justify-center text-sm flex-shrink-0">
                                 {activeWorkspace.icon === 'briefcase' ? '💼' : activeWorkspace.icon === 'user' ? '👤' : '🏢'}
                               </span>
                               <div className="min-w-0">
-                                <p className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate">{activeWorkspace.name}</p>
-                                <p className="text-[10px] font-normal text-gray-500 dark:text-gray-400">{activeWorkspace.plan} · {activeWorkspace.members}</p>
+                                <p className="text-xs font-medium text-foreground dark:text-foreground truncate">{activeWorkspace.name}</p>
+                                <p className="text-[10px] font-normal text-muted-foreground dark:text-muted-foreground">{activeWorkspace.plan} · {activeWorkspace.members}</p>
                               </div>
                             </div>
 
@@ -795,8 +795,8 @@ const Sidebar = ({
                               {accounts.map((account) => (
                                 <div key={account.id} className="space-y-1">
                                   <div className="flex items-center justify-between px-1 mb-0.5 border-b border-black/5 dark:border-white/5 pb-0.5">
-                                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500 truncate">{account.email}</span>
-                                    <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 flex-shrink-0 ml-1">
+                                    <span className="text-[10px] font-medium text-outline dark:text-muted-foreground truncate">{account.email}</span>
+                                    <button className="text-outline hover:text-muted-foreground dark:hover:text-muted-foreground flex-shrink-0 ml-1">
                                       <MoreHorizontal size={13} />
                                     </button>
                                   </div>
@@ -808,16 +808,16 @@ const Sidebar = ({
                                         <button
                                           key={ws.id}
                                           onClick={() => { switchWorkspace(account.id, ws.id); setPopoverView('main'); setIsProfileMenuOpen(false); }}
-                                          className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg transition-colors text-left ${isActive ? 'bg-black/5 dark:bg-white/5 text-gray-900 dark:text-gray-100 font-medium' : 'text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5 font-normal'}`}
+                                          className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg transition-colors text-left ${isActive ? 'bg-black/5 dark:bg-white/5 text-foreground dark:text-foreground font-medium' : 'text-on-surface dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 font-normal'}`}
                                         >
                                           <span className="flex items-center gap-2 truncate">
                                             <span className="text-xs">{ws.icon === 'briefcase' ? '💼' : ws.icon === 'user' ? '👤' : '🏢'}</span>
                                             <span className="text-xs truncate">{ws.name}</span>
                                             {pill && (
-                                              <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">{pill}</span>
+                                              <span className="text-[10px] bg-black/5 dark:bg-white/10 text-muted-foreground dark:text-muted-foreground border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">{pill}</span>
                                             )}
                                           </span>
-                                          {isActive && <Check size={13} className="flex-shrink-0 text-gray-800 dark:text-gray-200" />}
+                                          {isActive && <Check size={13} className="flex-shrink-0 text-on-surface dark:text-on-surface-variant" />}
                                         </button>
                                       );
                                     })}
@@ -843,7 +843,7 @@ const Sidebar = ({
                                     ) : (
                                       <button
                                         onClick={() => setAddingWorkspaceToAccount(account.id)}
-                                        className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-normal text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-left transition-colors"
+                                        className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-normal text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant text-left transition-colors"
                                       >
                                         <Plus size={11} />
                                         New workspace
@@ -878,7 +878,7 @@ const Sidebar = ({
                             ) : (
                               <button
                                 onClick={() => setIsAddingAccount(true)}
-                                className="w-full px-3 py-2 flex items-center gap-2.5 rounded-lg text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-left transition-colors"
+                                className="w-full px-3 py-2 flex items-center gap-2.5 rounded-lg text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant text-left transition-colors"
                               >
                                 <UserPlus size={14} />
                                 <span className="text-xs font-medium">Add new account</span>
@@ -892,26 +892,26 @@ const Sidebar = ({
 
                   {/* Token Usage */}
                   <div className="px-1 space-y-2.5" onMouseEnter={handleHoverReset}>
-                    <p className="text-xs font-medium text-gray-900 dark:text-gray-100">Token Usage</p>
+                    <p className="text-xs font-medium text-foreground dark:text-foreground">Token Usage</p>
                     <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-normal text-gray-500 dark:text-gray-400">
+                      <div className="flex justify-between text-xs font-normal text-muted-foreground dark:text-muted-foreground">
                         <span>Active conversations</span>
-                        <span className="text-xs font-medium text-gray-700 dark:text-gray-300">1,250 / 4,000</span>
+                        <span className="text-xs font-medium text-on-surface dark:text-muted-foreground">1,250 / 4,000</span>
                       </div>
                       <div className="w-full h-1.5 bg-black/5 dark:bg-white/10 rounded-full overflow-hidden">
                         <div className="h-full bg-neutral-600 dark:bg-neutral-400 rounded-full" style={{ width: '31.25%' }} />
                       </div>
                     </div>
                     <div className="space-y-1">
-                      <div className="flex justify-between text-xs font-normal text-gray-500 dark:text-gray-400">
+                      <div className="flex justify-between text-xs font-normal text-muted-foreground dark:text-muted-foreground">
                         <span>Background processing</span>
-                        <span className="text-xs font-medium text-gray-700 dark:text-gray-300">350 / 1,000</span>
+                        <span className="text-xs font-medium text-on-surface dark:text-muted-foreground">350 / 1,000</span>
                       </div>
                       <div className="w-full h-1.5 bg-black/5 dark:bg-white/10 rounded-full overflow-hidden">
                         <div className="h-full bg-neutral-600 dark:bg-neutral-400 rounded-full" style={{ width: '35%' }} />
                       </div>
                     </div>
-                    <p className="text-[10px] font-normal text-gray-400 dark:text-gray-500 leading-normal">
+                    <p className="text-[10px] font-normal text-outline dark:text-muted-foreground leading-normal">
                       Resets on the 1st of each month. Unused tokens don't roll over.
                     </p>
                   </div>
@@ -923,10 +923,10 @@ const Sidebar = ({
                       className="w-full flex items-center justify-between px-2 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-left"
                     >
                       <span className="flex items-center gap-2.5">
-                        <ArrowUpCircle size={16} className="text-indigo-600 dark:text-teal-400" />
-                        <span className="text-xs font-medium text-indigo-600 dark:text-teal-400 hover:underline">Upgrade plan</span>
+                        <ArrowUpCircle size={16} className="text-primary-green dark:text-teal-400" />
+                        <span className="text-xs font-medium text-primary-green dark:text-teal-400 hover:underline">Upgrade plan</span>
                       </span>
-                      <span className="text-xs font-normal text-gray-400 dark:text-gray-500">{activeWorkspace.plan}</span>
+                      <span className="text-xs font-normal text-outline dark:text-muted-foreground">{activeWorkspace.plan}</span>
                     </button>
                   </div>
                 </div>
@@ -938,10 +938,10 @@ const Sidebar = ({
                   <button
                     onMouseEnter={handleHoverReset}
                     onClick={() => { handleNav('paramètres'); setIsProfileMenuOpen(false); setPopoverView('main'); }}
-                    className="w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left"
+                    className="w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors text-left"
                   >
                     <span className="flex items-center gap-2.5">
-                      <Settings size={16} className="text-gray-400" />
+                      <Settings size={16} className="text-outline" />
                       <span className="text-xs font-medium">Settings</span>
                     </span>
                   </button>
@@ -949,22 +949,22 @@ const Sidebar = ({
                   <div className="relative" onMouseEnter={() => setPopoverView('appearance')}>
                     <button
                       onClick={() => setPopoverView(popoverView === 'appearance' ? 'main' : 'appearance')}
-                      className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left ${popoverView === 'appearance' ? 'bg-black/5 dark:bg-white/5' : ''}`}
+                      className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors text-left ${popoverView === 'appearance' ? 'bg-black/5 dark:bg-white/5' : ''}`}
                     >
                       <span className="flex items-center gap-2.5">
-                        {resolvedTheme === 'dark' ? <Moon size={16} className="text-gray-400" /> : <Sun size={16} className="text-gray-400" />}
+                        {resolvedTheme === 'dark' ? <Moon size={16} className="text-outline" /> : <Sun size={16} className="text-outline" />}
                         <span className="text-xs font-medium">Appearance</span>
                       </span>
-                      <span className="text-xs font-normal text-gray-400 capitalize flex items-center gap-1">
+                      <span className="text-xs font-normal text-outline capitalize flex items-center gap-1">
                         {theme}
-                        <ChevronRight size={14} className="text-gray-400" />
+                        <ChevronRight size={14} className="text-outline" />
                       </span>
                     </button>
                     {popoverView === 'appearance' && (
                       <div className="absolute z-50 bottom-[calc(100%+8px)] left-0 right-0 lg:bottom-0 lg:top-auto lg:left-full lg:right-auto lg:pl-2">
-                        <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-52">
+                        <div className="bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-52">
                           <div className="space-y-0.5">
-                            <p className="text-[10px] font-medium text-gray-400 dark:text-gray-500 px-2 py-1 uppercase tracking-wider mb-1">Appearance</p>
+                            <p className="text-[10px] font-medium text-outline dark:text-muted-foreground px-2 py-1 uppercase tracking-wider mb-1">Appearance</p>
                             {[
                               { value: 'light', icon: Sun, label: 'Light' },
                               { value: 'dark', icon: Moon, label: 'Dark' },
@@ -973,13 +973,13 @@ const Sidebar = ({
                               <button
                                 key={value}
                                 onClick={() => setTheme(value as any)}
-                                className="w-full px-2.5 py-1.5 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left text-xs font-normal"
+                                className="w-full px-2.5 py-1.5 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors text-left text-xs font-normal"
                               >
                                 <span className="flex items-center gap-2">
-                                  <ThemeIcon size={14} className="text-gray-400" />
+                                  <ThemeIcon size={14} className="text-outline" />
                                   <span>{label}</span>
                                 </span>
-                                {theme === value && <Check size={12} className="text-gray-800 dark:text-gray-200 flex-shrink-0" />}
+                                {theme === value && <Check size={12} className="text-on-surface dark:text-on-surface-variant flex-shrink-0" />}
                               </button>
                             ))}
                           </div>
@@ -991,22 +991,22 @@ const Sidebar = ({
                   <div className="relative" onMouseEnter={() => setPopoverView('help')}>
                     <button
                       onClick={() => setPopoverView(popoverView === 'help' ? 'main' : 'help')}
-                      className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left ${popoverView === 'help' ? 'bg-black/5 dark:bg-white/5' : ''}`}
+                      className={`w-full px-2 py-2 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors text-left ${popoverView === 'help' ? 'bg-black/5 dark:bg-white/5' : ''}`}
                     >
                       <span className="flex items-center gap-2.5">
-                        <HelpCircle size={16} className="text-gray-400" />
+                        <HelpCircle size={16} className="text-outline" />
                         <span className="text-xs font-medium">Help</span>
                       </span>
-                      <ChevronRight size={14} className="text-gray-400" />
+                      <ChevronRight size={14} className="text-outline" />
                     </button>
                     {popoverView === 'help' && (
                       <div className="absolute z-50 bottom-[calc(100%+8px)] left-0 right-0 lg:bottom-0 lg:top-auto lg:left-full lg:right-auto lg:pl-2">
-                        <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-52">
+                        <div className="bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-52">
                           <div className="space-y-0.5">
-                            <p className="text-[10px] font-medium text-gray-400 dark:text-gray-500 px-2 py-1 uppercase tracking-wider mb-1">Help & Resources</p>
+                            <p className="text-[10px] font-medium text-outline dark:text-muted-foreground px-2 py-1 uppercase tracking-wider mb-1">Help & Resources</p>
                             <button
                               onClick={() => { handleNav('onboarding'); setIsProfileMenuOpen(false); setPopoverView('main'); }}
-                              className="w-full px-2.5 py-1.5 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left text-xs font-normal"
+                              className="w-full px-2.5 py-1.5 flex items-center justify-between rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors text-left text-xs font-normal"
                             >
                               <span>Onboarding</span>
                             </button>
@@ -1023,20 +1023,20 @@ const Sidebar = ({
                 <div className="flex items-center gap-2" onMouseEnter={handleHoverReset}>
                   <button
                     onClick={() => { setIsProfileMenuOpen(false); setPopoverView('main'); }}
-                    className="flex-grow px-2 py-2 flex items-center gap-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors text-left font-medium text-xs"
+                    className="flex-grow px-2 py-2 flex items-center gap-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors text-left font-medium text-xs"
                   >
-                    <LogOut size={16} className="text-gray-400" />
+                    <LogOut size={16} className="text-outline" />
                     <span>Sign out</span>
                   </button>
 
                   <button
                     onClick={(e) => { e.stopPropagation(); setPopoverView(popoverView === 'notifications' ? 'main' : 'notifications'); }}
-                    className={`p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors border ${popoverView === 'notifications' ? 'bg-black/5 dark:bg-white/5 border-black/20 dark:border-white/20' : 'border-black/10 dark:border-white/10'} relative flex-shrink-0`}
+                    className={`p-2 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors border ${popoverView === 'notifications' ? 'bg-black/5 dark:bg-white/5 border-black/20 dark:border-white/20' : 'border-black/10 dark:border-white/10'} relative flex-shrink-0`}
                     title="Notifications"
                   >
-                    <Inbox size={16} className="text-gray-400 dark:text-gray-500 hover:text-black dark:hover:text-white transition-colors" />
+                    <Inbox size={16} className="text-outline dark:text-muted-foreground hover:text-foreground dark:hover:text-white transition-colors" />
                     {unreadCount > 0 && (
-                      <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-red-500 ring-1 ring-white dark:ring-[#1a1a1a]" />
+                      <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-destructive ring-1 ring-white dark:ring-[var(--color-surface-container-low)]" />
                     )}
                   </button>
                 </div>
@@ -1044,7 +1044,7 @@ const Sidebar = ({
                 {/* Notifications submenu */}
                 {popoverView === 'notifications' && (
                   <div className="absolute z-50 bottom-[calc(100%+8px)] left-0 right-0 lg:bottom-0 lg:top-auto lg:left-full lg:right-auto lg:pl-2">
-                    <div className="bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-[320px]">
+                    <div className="bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-2xl rounded-2xl p-4 text-sm w-full lg:w-[320px]">
                       <NotificationPanel
                         notifications={notifications}
                         onMarkAsRead={markAsRead}
@@ -1067,7 +1067,7 @@ const Sidebar = ({
             className="w-full flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/40 dark:hover:bg-white/5 transition-colors focus:outline-none"
           >
             <div className="relative">
-              <div className="w-8 h-8 rounded-full bg-black/10 dark:bg-white/10 text-gray-800 dark:text-gray-200 font-semibold flex items-center justify-center text-xs border border-black/5 dark:border-white/5 shadow-inner">
+              <div className="w-8 h-8 rounded-full bg-black/10 dark:bg-white/10 text-on-surface dark:text-on-surface-variant font-semibold flex items-center justify-center text-xs border border-black/5 dark:border-white/5 shadow-inner">
                 OA
               </div>
               {(() => {
@@ -1110,7 +1110,7 @@ const Sidebar = ({
                       <button
                         id="workspace-mode-work-btn"
                         onClick={() => handleWorkspaceModeChange('work')}
-                        className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+                        className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'work' ? 'text-foreground dark:text-white font-semibold' : 'text-[var(--color-muted-foreground)] dark:text-[var(--color-outline)] hover:text-foreground dark:hover:text-white'}`}
                         title="Work"
                       >
                         <Briefcase size={13} strokeWidth={1.75} />
@@ -1122,7 +1122,7 @@ const Sidebar = ({
                       <button
                         id="workspace-mode-studio-btn"
                         onClick={() => handleWorkspaceModeChange('studio')}
-                        className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+                        className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'studio' ? 'text-foreground dark:text-white font-semibold' : 'text-[var(--color-muted-foreground)] dark:text-[var(--color-outline)] hover:text-foreground dark:hover:text-white'}`}
                         title="Studio"
                       >
                         <Cpu size={13} strokeWidth={1.75} />
@@ -1134,7 +1134,7 @@ const Sidebar = ({
                       <button
                         id="workspace-mode-govern-btn"
                         onClick={() => handleWorkspaceModeChange('govern')}
-                        className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern' ? 'text-black dark:text-white font-semibold' : 'text-[#666666] dark:text-[#999999] hover:text-black dark:hover:text-white'}`}
+                        className={`flex-1 py-1.5 px-1 flex items-center justify-center gap-1 rounded-lg text-xs font-medium transition-colors duration-200 relative z-10 ${workspaceMode === 'govern' ? 'text-foreground dark:text-white font-semibold' : 'text-[var(--color-muted-foreground)] dark:text-[var(--color-outline)] hover:text-foreground dark:hover:text-white'}`}
                         title="Govern"
                       >
                         <Shield size={13} strokeWidth={1.75} />
@@ -1152,7 +1152,7 @@ const Sidebar = ({
                         {/* Projects section */}
                         <div id="workspace-projects" className="mb-8">
                           <div className="flex items-center justify-between px-2 mb-1.5 group/proj-heading relative">
-                            <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                            <p className="text-[10px] font-semibold text-outline dark:text-muted-foreground uppercase tracking-wider">
                               Projects
                             </p>
                             <div className="flex items-center gap-1 opacity-0 group-hover/proj-heading:opacity-100 transition-opacity">
@@ -1160,11 +1160,11 @@ const Sidebar = ({
                               <div className="relative group/tooltip flex justify-center">
                                 <button
                                   onClick={() => handleNav('projects')}
-                                  className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
+                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
                                 >
                                   <Library size={14} strokeWidth={2} />
                                 </button>
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium">
                                   All Projects
                                 </div>
                               </div>
@@ -1176,7 +1176,7 @@ const Sidebar = ({
                                     e.stopPropagation();
                                     setIsProjectsDropdownOpen(prev => !prev);
                                   }}
-                                  className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
+                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
                                 >
                                   <MoreHorizontal size={14} strokeWidth={2} />
                                 </button>
@@ -1186,11 +1186,11 @@ const Sidebar = ({
                               <div className="relative group/tooltip flex justify-center">
                                 <button
                                   onClick={handleCreateProject}
-                                  className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
+                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
                                 >
                                   <Plus size={14} strokeWidth={2.5} />
                                 </button>
-                                <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
+                                <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium">
                                   Add Project
                                 </div>
                               </div>
@@ -1200,14 +1200,14 @@ const Sidebar = ({
                             {isProjectsDropdownOpen && (
                               <div
                                 ref={projectsDropdownRef}
-                                className="absolute right-2 top-full mt-1 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg rounded-lg overflow-hidden z-50 text-xs w-40 py-1"
+                                className="absolute right-2 top-full mt-1 bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-lg rounded-lg overflow-hidden z-50 text-xs w-40 py-1"
                               >
                                 <button
                                   onClick={() => {
                                     handleCreateProject();
                                     setIsProjectsDropdownOpen(false);
                                   }}
-                                  className="w-full flex items-center gap-2 px-3 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-medium"
+                                  className="w-full flex items-center gap-2 px-3 py-2 text-left text-on-surface dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-medium"
                                 >
                                   <Plus size={12} />
                                   Add new project
@@ -1228,8 +1228,8 @@ const Sidebar = ({
                                   className={[
                                     'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors',
                                     isActive
-                                      ? 'bg-white dark:bg-white/15 text-black dark:text-white font-semibold'
-                                      : 'text-gray-700 dark:text-gray-300 hover:bg-white/40 dark:hover:bg-white/10',
+                                      ? 'bg-white dark:bg-white/15 text-foreground dark:text-white font-semibold'
+                                      : 'text-on-surface dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10',
                                   ].join(' ')}
                                 >
                                   <span className="truncate">{proj.name}</span>
@@ -1242,7 +1242,7 @@ const Sidebar = ({
                         {/* Agents section */}
                         <div id="workspace-agents" className="mb-8">
                           <div className="flex items-center justify-between px-2 mb-1.5 group/agent-heading relative">
-                            <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+                            <p className="text-[10px] font-semibold text-outline dark:text-muted-foreground uppercase tracking-wider">
                               Workspace agents
                             </p>
                             <div className="flex items-center gap-1 opacity-0 group-hover/agent-heading:opacity-100 transition-opacity">
@@ -1250,11 +1250,11 @@ const Sidebar = ({
                               <div className="relative group/tooltip flex justify-center">
                                 <button
                                   onClick={() => handleNav('workspace-agents')}
-                                  className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
+                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
                                 >
                                   <Library size={14} strokeWidth={2} />
                                 </button>
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium">
                                   All Agents
                                 </div>
                               </div>
@@ -1266,7 +1266,7 @@ const Sidebar = ({
                                     e.stopPropagation();
                                     setIsAgentsDropdownOpen(prev => !prev);
                                   }}
-                                  className="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:bg-white/40 dark:hover:bg-white/10 hover:text-black dark:hover:text-white transition-colors duration-150"
+                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
                                 >
                                   <MoreHorizontal size={14} strokeWidth={2} />
                                 </button>
@@ -1277,14 +1277,14 @@ const Sidebar = ({
                             {isAgentsDropdownOpen && (
                               <div
                                 ref={agentsDropdownRef}
-                                className="absolute right-2 top-full mt-1 bg-white dark:bg-[#1a1a1a] border border-black/10 dark:border-white/10 shadow-lg rounded-lg overflow-hidden z-50 text-xs w-40 py-1"
+                                className="absolute right-2 top-full mt-1 bg-white dark:bg-surface-container-low border border-black/10 dark:border-white/10 shadow-lg rounded-lg overflow-hidden z-50 text-xs w-40 py-1"
                               >
                                 <button
                                   onClick={() => {
                                     handleNav('workspace-agents');
                                     setIsAgentsDropdownOpen(false);
                                   }}
-                                  className="w-full flex items-center gap-2 px-3 py-2 text-left text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-medium"
+                                  className="w-full flex items-center gap-2 px-3 py-2 text-left text-on-surface dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-medium"
                                 >
                                   <Users size={12} />
                                   Manage agents
@@ -1311,7 +1311,7 @@ const Sidebar = ({
                                       className="w-9 h-9 rounded-full object-cover border border-black/10 dark:border-white/10 group-hover:border-black/20 dark:group-hover:border-white/20 transition-colors"
                                     />
                                   </button>
-                                  <div className={`absolute top-full ${tooltipClass} mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5`}>
+                                  <div className={`absolute top-full ${tooltipClass} mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium`}>
                                     {agent.name}
                                   </div>
                                 </div>
@@ -1435,12 +1435,12 @@ const Sidebar = ({
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <div className="p-3 border-b border-black/10 dark:border-white/10 flex items-center justify-between flex-shrink-0">
-                      <span className="text-[10px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Plex</span>
+                      <span className="text-[10px] font-semibold text-muted-foreground dark:text-muted-foreground uppercase tracking-widest">Plex</span>
                     </div>
                     <div className="p-2 flex-shrink-0">
                       <button
                         onClick={onStartNewPlexChat}
-                        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 transition-colors"
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-medium border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 text-on-surface dark:text-muted-foreground transition-colors"
                       >
                         <Plus size={13} />
                         New chat
@@ -1452,12 +1452,12 @@ const Sidebar = ({
                           key={chat.id}
                           onClick={() => setActivePlexChatId?.(chat.id)}
                           className={`w-full text-left px-3 py-2 rounded-lg transition-colors ${activePlexChatId === chat.id
-                            ? 'bg-black/5 dark:bg-white/15 text-black dark:text-white font-medium shadow-sm'
-                            : 'text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5'
+                            ? 'bg-black/5 dark:bg-white/15 text-foreground dark:text-white font-medium shadow-sm'
+                            : 'text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5'
                             }`}
                         >
                           <p className="text-xs truncate">{chat.title}</p>
-                          <p className="text-[10px] text-gray-400 truncate mt-0.5">{chat.preview}</p>
+                          <p className="text-[10px] text-outline truncate mt-0.5">{chat.preview}</p>
                         </button>
                       ))}
                     </div>

@@ -85,14 +85,14 @@ const GettingStarted: React.FC = () => {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Getting Started Guide</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h2 className="text-2xl font-bold text-on-surface dark:text-foreground mb-4">Getting Started Guide</h2>
+        <p className="text-muted-foreground dark:text-muted-foreground">
           Follow this step-by-step implementation process to successfully deploy Sendplex across your organization.
         </p>
       </div>
       
       <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Implementation Process</h3>
+        <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">Implementation Process</h3>
         
         <div className="space-y-4">
           {implementationSteps.map((step) => (
@@ -103,7 +103,7 @@ const GettingStarted: React.FC = () => {
                   ? 'border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900' 
                   : step.status === 'in-progress'
                   ? 'border-blue-200 dark:border-teal-800 bg-blue-50 dark:bg-teal-900'
-                  : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800'
+                  : 'border-border dark:border-border bg-surface-container-low dark:bg-surface-container-high'
               }`}
             >
               <div className="flex items-start">
@@ -111,8 +111,8 @@ const GettingStarted: React.FC = () => {
                   step.status === 'completed' 
                     ? 'bg-green-100 dark:bg-green-800 text-green-600 dark:text-green-300' 
                     : step.status === 'in-progress'
-                    ? 'bg-blue-100 dark:bg-teal-800 text-blue-600 dark:text-teal-300'
-                    : 'bg-gray-100 dark:bg-gray-700 text-gray-400 dark:text-gray-500'
+                    ? 'bg-blue-100 dark:bg-teal-800 text-tertiary dark:text-teal-300'
+                    : 'bg-surface-container-low dark:bg-surface-container-highest text-outline dark:text-muted-foreground'
                 }`}>
                   {step.status === 'completed' ? (
                     <CheckCircle className="w-5 h-5" />
@@ -123,15 +123,15 @@ const GettingStarted: React.FC = () => {
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100">{step.title}</h4>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{step.description}</p>
+                      <h4 className="text-lg font-medium text-foreground dark:text-foreground">{step.title}</h4>
+                      <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">{step.description}</p>
                     </div>
                     <div className={`px-3 py-1 rounded-full text-xs font-medium ${
                       step.status === 'completed' 
                         ? 'bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200' 
                         : step.status === 'in-progress'
                         ? 'bg-blue-100 dark:bg-teal-800 text-blue-800 dark:text-teal-200'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+                        : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant'
                     }`}>
                       {step.status === 'completed' 
                         ? 'Completed' 
@@ -145,14 +145,14 @@ const GettingStarted: React.FC = () => {
                     {step.tasks.map((task) => (
                       <div key={task.id} className="flex items-start">
                         <div className={`p-0.5 rounded-full mr-2 mt-0.5 ${
-                          task.completed ? 'bg-green-100 dark:bg-green-800' : 'bg-gray-100 dark:bg-gray-700'
+                          task.completed ? 'bg-green-100 dark:bg-green-800' : 'bg-surface-container-low dark:bg-surface-container-highest'
                         }`}>
                           <CheckCircle className={`w-4 h-4 ${
-                            task.completed ? 'text-green-600 dark:text-green-300' : 'text-gray-400 dark:text-gray-500'
+                            task.completed ? 'text-green-600 dark:text-green-300' : 'text-outline dark:text-muted-foreground'
                           }`} />
                         </div>
                         <span className={`text-sm ${
-                          task.completed ? 'text-gray-700 dark:text-gray-300' : 'text-gray-500 dark:text-gray-400'
+                          task.completed ? 'text-on-surface dark:text-muted-foreground' : 'text-muted-foreground dark:text-muted-foreground'
                         }`}>
                           {task.name}
                         </span>
@@ -167,45 +167,45 @@ const GettingStarted: React.FC = () => {
       </div>
       
       <div className="bg-indigo-50 dark:bg-teal-900 border border-indigo-100 dark:border-teal-800 rounded-xl p-6 transition-colors">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Best Practices for User Adoption</h3>
+        <h3 className="text-lg font-semibold text-on-surface dark:text-foreground mb-4">Best Practices for User Adoption</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition-colors">
-            <h4 className="font-medium text-gray-800 dark:text-gray-100 mb-2">Start Small, Scale Fast</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Begin with a focused pilot project before expanding to the entire organization.</p>
+          <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-4 transition-colors">
+            <h4 className="font-medium text-on-surface dark:text-foreground mb-2">Start Small, Scale Fast</h4>
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground">Begin with a focused pilot project before expanding to the entire organization.</p>
           </div>
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition-colors">
-            <h4 className="font-medium text-gray-800 dark:text-gray-100 mb-2">Involve Key Stakeholders</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Ensure buy-in from leadership and department heads early in the process.</p>
+          <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-4 transition-colors">
+            <h4 className="font-medium text-on-surface dark:text-foreground mb-2">Involve Key Stakeholders</h4>
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground">Ensure buy-in from leadership and department heads early in the process.</p>
           </div>
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition-colors">
-            <h4 className="font-medium text-gray-800 dark:text-gray-100 mb-2">Provide Adequate Training</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Invest in comprehensive training for all users to maximize adoption.</p>
+          <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-4 transition-colors">
+            <h4 className="font-medium text-on-surface dark:text-foreground mb-2">Provide Adequate Training</h4>
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground">Invest in comprehensive training for all users to maximize adoption.</p>
           </div>
-          <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 transition-colors">
-            <h4 className="font-medium text-gray-800 dark:text-gray-100 mb-2">Measure & Communicate Success</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-400">Track key metrics and share wins to build momentum and enthusiasm.</p>
+          <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-4 transition-colors">
+            <h4 className="font-medium text-on-surface dark:text-foreground mb-2">Measure & Communicate Success</h4>
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground">Track key metrics and share wins to build momentum and enthusiasm.</p>
           </div>
         </div>
       </div>
       
       <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">Resources & Support</h3>
+        <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">Resources & Support</h3>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {resources.map((resource) => (
             <a 
               key={resource.id}
               href={resource.link}
-              className="flex items-start p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="flex items-start p-4 bg-surface-container-low dark:bg-surface-container-high border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
             >
               <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg mr-4 transition-colors">
-                <resource.icon className="w-5 h-5 text-indigo-600 dark:text-teal-300" />
+                <resource.icon className="w-5 h-5 text-primary-green dark:text-teal-300" />
               </div>
               <div>
-                <h4 className="font-medium text-gray-800 dark:text-gray-100">{resource.title}</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{resource.description}</p>
+                <h4 className="font-medium text-on-surface dark:text-foreground">{resource.title}</h4>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground">{resource.description}</p>
               </div>
-              <ArrowRight className="w-4 h-4 text-indigo-600 dark:text-teal-400 ml-auto" />
+              <ArrowRight className="w-4 h-4 text-primary-green dark:text-teal-400 ml-auto" />
             </a>
           ))}
         </div>
@@ -216,11 +216,11 @@ const GettingStarted: React.FC = () => {
               <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-300" />
             </div>
             <div>
-              <h4 className="font-medium text-gray-800 dark:text-gray-100">Ready to Get Started?</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              <h4 className="font-medium text-on-surface dark:text-foreground">Ready to Get Started?</h4>
+              <p className="text-sm text-muted-foreground dark:text-muted-foreground mb-3">
                 Your Sendplex environment is now ready for configuration. Our team is available to help you with the next steps.
               </p>
-              <button className="px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+              <button className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
                 Schedule Onboarding Call
               </button>
             </div>

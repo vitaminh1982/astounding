@@ -35,7 +35,7 @@ export default function OrchestrationPage({ onNavigate }: OrchestrationPageProps
 
         <SystemMetricsGrid metrics={systemMetrics} />
 
-        <section className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 overflow-hidden mb-8 transition-colors">
+        <section className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm dark:shadow-gray-900 border border-border dark:border-border overflow-hidden mb-8 transition-colors">
           <ChatInterface 
             conversationHistory={conversationHistory}
             isLoading={isLoading}

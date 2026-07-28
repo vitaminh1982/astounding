@@ -99,10 +99,10 @@ export default function AgentsHeader() {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
         {/* Header Text */}
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">
+          <h1 className="text-2xl sm:text-3xl font-bold text-on-surface dark:text-foreground">
             {t('agents.page.header.title')}
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1">
+          <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground mt-1">
             {t('agents.page.header.subtitle')}
           </p>
         </div>
@@ -112,7 +112,7 @@ export default function AgentsHeader() {
           {/* Connect Agent Button */}
           <button 
             onClick={handleConnect}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-sm"
+            className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-200 shadow-sm"
             aria-label={t('agents.page.header.connectAgent')}
           >
             <Link className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default function AgentsHeader() {
           {/* Import Agent Button */}
           <button 
             onClick={handleImport}
-            className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 shadow-sm"
+            className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-200 shadow-sm"
             aria-label={t('agents.page.header.importAgent')}
           >
             <Upload className="w-4 h-4" />
@@ -136,7 +136,7 @@ export default function AgentsHeader() {
           {/* New Agent Button - Indigo in light mode, Green/Teal in dark mode */}
           <button 
             onClick={handleNewAgent}
-            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
             aria-label={t('agents.page.header.newAgent')}
           >
             <Plus className="w-4 h-4" />

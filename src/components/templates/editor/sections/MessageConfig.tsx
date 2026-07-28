@@ -103,9 +103,9 @@ The {company.name} Team`);
 
   const getCharacterCountColor = (count: number, max: number): string => {
     const percentage = (count / max) * 100;
-    if (percentage >= 90) return 'text-red-600 dark:text-red-400';
-    if (percentage >= 75) return 'text-amber-600 dark:text-amber-400';
-    return 'text-gray-500 dark:text-gray-400';
+    if (percentage >= 90) return 'text-red-600 dark:text-destructive';
+    if (percentage >= 75) return 'text-amber-600 dark:text-destructive';
+    return 'text-muted-foreground dark:text-muted-foreground';
   };
 
   const tabs = [
@@ -123,10 +123,10 @@ The {company.name} Team`);
             <MessageSquare className="w-5 h-5 text-green-600 dark:text-green-400 transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Message Configuration
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Compose and configure your template message
             </p>
           </div>
@@ -144,8 +144,8 @@ The {company.name} Team`);
       </div>
 
       {/* Tab Navigation */}
-      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
-        <div className="flex border-b border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
+        <div className="flex border-b border-border dark:border-border transition-colors">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
             const Icon = tab.icon;
@@ -156,8 +156,8 @@ The {company.name} Team`);
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex-1 p-4 text-sm font-medium flex items-center justify-center gap-2 transition-all duration-200 relative ${
                   isActive
-                    ? 'text-indigo-600 dark:text-teal-400'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                    ? 'text-primary-green dark:text-teal-400'
+                    : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                 }`}
               >
                 <Icon className="w-5 h-5" />
@@ -165,7 +165,7 @@ The {company.name} Team`);
                 {isActive && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600 dark:bg-teal-400"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-teal-400"
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
                 )}
@@ -188,31 +188,31 @@ The {company.name} Team`);
               >
                 {/* Title Field */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2 transition-colors">
+                  <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 flex items-center gap-2 transition-colors">
                     <Type className="w-4 h-4" />
                     Message Title
-                    <span className="text-red-500 dark:text-red-400">*</span>
+                    <span className="text-destructive dark:text-destructive">*</span>
                   </label>
                   <input
                     type="text"
                     value={title}
                     onChange={(e) => handleTitleChange(e.target.value)}
-                    className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+                    className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                       errors.title
-                        ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                        : 'border-gray-300 dark:border-gray-600 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                        ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                        : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
                     }`}
                     placeholder="Ex: Welcome to our company!"
                     maxLength={100}
                   />
                   <div className="mt-2 flex items-center justify-between">
                     {errors.title ? (
-                      <p className="text-sm text-red-600 dark:text-red-400 flex items-center gap-1 transition-colors">
+                      <p className="text-sm text-red-600 dark:text-destructive flex items-center gap-1 transition-colors">
                         <AlertCircle className="w-4 h-4" />
                         {errors.title}
                       </p>
                     ) : (
-                      <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                         A clear, concise title for your message
                       </p>
                     )}
@@ -224,35 +224,35 @@ The {company.name} Team`);
 
                 {/* Message Field */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2 transition-colors">
+                  <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 flex items-center gap-2 transition-colors">
                     <MessageSquare className="w-4 h-4" />
                     Message Content
-                    <span className="text-red-500 dark:text-red-400">*</span>
+                    <span className="text-destructive dark:text-destructive">*</span>
                   </label>
                   <div className="relative">
                     <textarea
                       value={message}
                       onChange={(e) => handleMessageChange(e.target.value)}
                       rows={14}
-                      className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 font-mono text-sm shadow-sm dark:shadow-gray-900 transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+                      className={`w-full px-4 py-3 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 font-mono text-sm shadow-sm dark:shadow-gray-900 transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                         errors.message
-                          ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                          : 'border-gray-300 dark:border-gray-600 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                          ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                          : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
                       }`}
                       placeholder="Write your message here... Use {variables} for dynamic content."
                       maxLength={5000}
                     />
-                    <div className={`absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-medium transition-colors ${getCharacterCountColor(message.length, 5000)} bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600`}>
+                    <div className={`absolute bottom-3 right-3 px-2 py-1 rounded text-xs font-medium transition-colors ${getCharacterCountColor(message.length, 5000)} bg-white dark:bg-surface-container-high border border-border dark:border-border`}>
                       {message.length}/5000
                     </div>
                   </div>
                   {errors.message && (
-                    <p className="mt-2 text-sm text-red-600 dark:text-red-400 flex items-center gap-1 transition-colors">
+                    <p className="mt-2 text-sm text-red-600 dark:text-destructive flex items-center gap-1 transition-colors">
                       <AlertCircle className="w-4 h-4" />
                       {errors.message}
                     </p>
                   )}
-                  <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                  <p className="mt-2 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                     💡 Use variables from the Variables tab to personalize your message
                   </p>
                 </div>
@@ -270,7 +270,7 @@ The {company.name} Team`);
               >
                 <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
                   <div className="flex items-start gap-2">
-                    <Info className="w-5 h-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5 transition-colors" />
+                    <Info className="w-5 h-5 text-tertiary dark:text-tertiary flex-shrink-0 mt-0.5 transition-colors" />
                     <div className="text-sm text-blue-700 dark:text-blue-300 transition-colors">
                       <p className="font-medium mb-1">How to use variables</p>
                       <p>Click any variable to copy it, then paste it into your message. Variables will be replaced with actual data when the message is sent.</p>
@@ -279,8 +279,8 @@ The {company.name} Team`);
                 </div>
 
                 {Object.entries(variables).map(([category, vars]) => (
-                  <div key={category} className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
-                    <h4 className="text-sm font-semibold capitalize mb-3 text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
+                  <div key={category} className="bg-surface-container-low dark:bg-surface-container-high/50 p-4 rounded-lg border border-border dark:border-border transition-colors">
+                    <h4 className="text-sm font-semibold capitalize mb-3 text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
                       <Hash className="w-4 h-4" />
                       {category}
                     </h4>
@@ -295,9 +295,9 @@ The {company.name} Team`);
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             onClick={() => handleCopyVariable(category, v)}
-                            className="p-3 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-sm flex justify-between items-center group hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-indigo-50 dark:hover:bg-teal-900/20 transition-all shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                            className="p-3 bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border text-sm flex justify-between items-center group hover:border-indigo-300 dark:hover:border-teal-600 hover:bg-indigo-50 dark:hover:bg-teal-900/20 transition-all shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                           >
-                            <code className="font-mono text-gray-700 dark:text-gray-300 transition-colors">
+                            <code className="font-mono text-on-surface dark:text-muted-foreground transition-colors">
                               {varText}
                             </code>
                             <div className={`px-2 py-1 rounded-md text-xs font-medium transition-colors ${
@@ -336,8 +336,8 @@ The {company.name} Team`);
                 className="space-y-6"
               >
                 {/* General Options */}
-                <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
-                  <h4 className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
+                <div className="bg-surface-container-low dark:bg-surface-container-high/50 p-4 rounded-lg border border-border dark:border-border transition-colors">
+                  <h4 className="text-sm font-semibold mb-4 text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
                     <Settings2 className="w-4 h-4" />
                     General Options
                   </h4>
@@ -353,7 +353,7 @@ The {company.name} Team`);
                       return (
                         <label
                           key={option.key}
-                          className="flex items-start gap-3 p-3 hover:bg-white dark:hover:bg-gray-700 rounded-lg cursor-pointer transition-colors"
+                          className="flex items-start gap-3 p-3 hover:bg-white dark:hover:bg-surface-container-highest rounded-lg cursor-pointer transition-colors"
                         >
                           <div className="flex-shrink-0 mt-1">
                             <input
@@ -371,8 +371,8 @@ The {company.name} Team`);
                             />
                             <div className={`w-5 h-5 border-2 rounded transition-all ${
                               isChecked
-                                ? 'bg-indigo-600 dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
-                                : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600'
+                                ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                                : 'bg-white dark:bg-surface-container-highest border-border dark:border-border'
                             }`}>
                               {isChecked && (
                                 <Check className="w-full h-full text-white p-0.5" />
@@ -381,12 +381,12 @@ The {company.name} Team`);
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-1">
-                              <Icon className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
-                              <span className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                              <Icon className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
+                              <span className="text-sm font-medium text-foreground dark:text-foreground transition-colors">
                                 {option.label}
                               </span>
                             </div>
-                            <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                            <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                               {option.description}
                             </p>
                           </div>
@@ -397,8 +397,8 @@ The {company.name} Team`);
                 </div>
 
                 {/* Send Delay */}
-                <div className="bg-gray-50 dark:bg-gray-800/50 p-4 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors">
-                  <h4 className="text-sm font-semibold mb-4 text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
+                <div className="bg-surface-container-low dark:bg-surface-container-high/50 p-4 rounded-lg border border-border dark:border-border transition-colors">
+                  <h4 className="text-sm font-semibold mb-4 text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
                     <Clock className="w-4 h-4" />
                     Send Delay
                   </h4>
@@ -412,7 +412,7 @@ The {company.name} Team`);
                       setSettings(updatedSettings);
                       notifyChange();
                     }}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                    className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                   >
                     <option value="immediate">Send Immediately</option>
                     <option value="1hour">Send After 1 Hour</option>
@@ -427,7 +427,7 @@ The {company.name} Team`);
                       exit={{ opacity: 0, height: 0 }}
                       className="mt-4"
                     >
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                         Custom Delay (hours)
                       </label>
                       <input
@@ -443,10 +443,10 @@ The {company.name} Team`);
                           setSettings(updatedSettings);
                           notifyChange();
                         }}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                        className="w-full px-4 py-3 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                         placeholder="24"
                       />
-                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                      <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                         Maximum: 720 hours (30 days)
                       </p>
                     </motion.div>

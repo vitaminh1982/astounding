@@ -102,7 +102,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
       case 'inactive':
         return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border-red-200 dark:border-red-800';
       default:
-        return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 border-gray-200 dark:border-gray-600';
+        return 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border-border dark:border-border';
     }
   };
 
@@ -125,13 +125,13 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-blue-100 dark:bg-teal-900/30 border border-blue-200 dark:border-teal-800 rounded-lg transition-colors">
-            <User className="w-5 h-5 text-blue-600 dark:text-teal-400 transition-colors" />
+            <User className="w-5 h-5 text-tertiary dark:text-teal-400 transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Basic Information
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Essential client details and contact information
             </p>
           </div>
@@ -152,11 +152,11 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Name Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+          <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
             Full Name *
           </label>
           <div className="relative">
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground">
               <User className="w-4 h-4" />
             </div>
             <input
@@ -164,10 +164,10 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.name
-                  ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-teal-500'
+                  ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring'
               }`}
               placeholder="Enter client's full name"
               maxLength={50}
@@ -179,23 +179,23 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
             )}
           </div>
           {errors.name && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center gap-1 transition-colors">
+            <p className="mt-1 text-sm text-red-600 dark:text-destructive flex items-center gap-1 transition-colors">
               <AlertCircle className="w-3 h-3" />
               {errors.name}
             </p>
           )}
-          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
             {formData.name.length}/50 characters
           </p>
         </div>
 
         {/* Email Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+          <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
             Email Address *
           </label>
           <div className="relative">
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground">
               <Mail className="w-4 h-4" />
             </div>
             <input
@@ -203,10 +203,10 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.email
-                  ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-teal-500'
+                  ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring'
               }`}
               placeholder="client@example.com"
             />
@@ -217,7 +217,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
             )}
           </div>
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center gap-1 transition-colors">
+            <p className="mt-1 text-sm text-red-600 dark:text-destructive flex items-center gap-1 transition-colors">
               <AlertCircle className="w-3 h-3" />
               {errors.email}
             </p>
@@ -226,12 +226,12 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
 
         {/* Phone Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+          <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
             Phone Number
-            <span className="text-gray-500 dark:text-gray-400 font-normal ml-1">(Optional)</span>
+            <span className="text-muted-foreground dark:text-muted-foreground font-normal ml-1">(Optional)</span>
           </label>
           <div className="relative">
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground">
               <Phone className="w-4 h-4" />
             </div>
             <input
@@ -239,10 +239,10 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              className={`w-full pl-10 pr-4 py-2.5 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.phone
-                  ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-gray-300 dark:border-gray-600 focus:border-blue-500 dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-teal-500'
+                  ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                  : 'border-border dark:border-border focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring'
               }`}
               placeholder="+1 (555) 123-4567"
             />
@@ -253,7 +253,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
             )}
           </div>
           {errors.phone && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400 flex items-center gap-1 transition-colors">
+            <p className="mt-1 text-sm text-red-600 dark:text-destructive flex items-center gap-1 transition-colors">
               <AlertCircle className="w-3 h-3" />
               {errors.phone}
             </p>
@@ -262,18 +262,18 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
 
         {/* Status Field */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+          <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
             Client Status
           </label>
           <div className="relative">
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground">
               <Activity className="w-4 h-4" />
             </div>
             <select
               name="status"
               value={formData.status}
               onChange={handleChange}
-              className="w-full pl-10 pr-10 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 focus:border-blue-500 dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
             >
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
@@ -282,7 +282,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
             </select>
             {/* Custom dropdown arrow */}
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-outline dark:text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -292,7 +292,7 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
               <div className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
                 formData.status === 'active' 
                   ? 'bg-green-600 dark:bg-green-400' 
-                  : 'bg-red-600 dark:bg-red-400'
+                  : 'bg-red-600 dark:bg-destructive'
               }`} />
               {formData.status.charAt(0).toUpperCase() + formData.status.slice(1)}
             </span>
@@ -302,11 +302,11 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
 
       {/* Notes Field */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+        <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
           Internal Notes
         </label>
         <div className="relative">
-          <div className="absolute left-3 top-3 text-gray-400 dark:text-gray-500">
+          <div className="absolute left-3 top-3 text-outline dark:text-muted-foreground">
             <FileText className="w-4 h-4" />
           </div>
           <textarea
@@ -314,34 +314,34 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
             value={formData.notes}
             onChange={handleChange}
             rows={4}
-            className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-blue-500 dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-teal-500 transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 focus:border-tertiary dark:focus:border-teal-500 focus:ring-blue-500 dark:focus:ring-ring transition-colors resize-none focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             placeholder="Add any internal notes about this client..."
             maxLength={500}
           />
         </div>
-        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+        <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
           {formData.notes.length}/500 characters
         </p>
       </div>
 
       {/* Registration Information */}
-      <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+      <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
         <div className="flex items-center gap-2 mb-2">
-          <Calendar className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
-          <h4 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+          <Calendar className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
+          <h4 className="font-medium text-foreground dark:text-foreground transition-colors">
             Registration Information
           </h4>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div>
-            <span className="text-gray-500 dark:text-gray-400 transition-colors">Registration Date:</span>
-            <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+            <span className="text-muted-foreground dark:text-muted-foreground transition-colors">Registration Date:</span>
+            <p className="font-medium text-foreground dark:text-foreground transition-colors">
               {formatRegistrationDate(client.registrationDate)}
             </p>
           </div>
           <div>
-            <span className="text-gray-500 dark:text-gray-400 transition-colors">Client ID:</span>
-            <p className="font-mono text-xs font-medium text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded transition-colors">
+            <span className="text-muted-foreground dark:text-muted-foreground transition-colors">Client ID:</span>
+            <p className="font-mono text-xs font-medium text-foreground dark:text-foreground bg-surface-container-low dark:bg-surface-container-highest px-2 py-1 rounded transition-colors">
               {client.id}
             </p>
           </div>
@@ -356,12 +356,12 @@ export default function BasicInfo({ client, onChange }: BasicInfoProps) {
           className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg transition-colors"
         >
           <div className="flex items-start gap-2">
-            <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 flex-shrink-0 transition-colors" />
+            <AlertCircle className="w-5 h-5 text-destructive dark:text-destructive mt-0.5 flex-shrink-0 transition-colors" />
             <div>
               <h4 className="text-sm font-medium text-red-800 dark:text-red-200 transition-colors">
                 Please fix the following errors:
               </h4>
-              <ul className="mt-1 text-sm text-red-600 dark:text-red-400 space-y-1 transition-colors">
+              <ul className="mt-1 text-sm text-red-600 dark:text-destructive space-y-1 transition-colors">
                 {Object.entries(errors).map(([field, error]) => (
                   <li key={field}>• {error}</li>
                 ))}

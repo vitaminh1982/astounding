@@ -116,7 +116,7 @@ const DashboardPage: React.FC<DashboardPageProps> = ({ onNavigate }) => {
             action={
               <button
                 onClick={handleOpenReportModal}
-                className="flex items-center gap-2 text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
+                className="flex items-center gap-2 text-sm text-teal-600 dark:text-teal-400 hover:text-teal-700 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
               >
                 <Plus className="w-4 h-4" />
                 {t('dashboard.addReport')}
@@ -185,10 +185,10 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   <div className="mb-6">
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 transition-colors">
+        <h1 className="text-2xl sm:text-3xl font-bold text-on-surface dark:text-foreground transition-colors">
           {title}
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mt-1 transition-colors">
+        <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
           {subtitle}
         </p>
       </div>
@@ -198,7 +198,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         <button
           onClick={onExport}
           disabled={isExporting}
-          className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm dark:shadow-gray-900"
+          className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant dark:hover:bg-surface-container-highest transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm dark:shadow-gray-900"
           aria-label={exportLabel}
         >
           <Download className={`w-4 h-4 ${isExporting ? 'animate-bounce' : ''}`} />
@@ -206,7 +206,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </button>
         <button
           onClick={onNewReport}
-          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors duration-200 shadow-sm hover:shadow-md dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors duration-200 shadow-sm hover:shadow-md dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900"
           aria-label={newReportLabel}
         >
           <Plus className="w-4 h-4" />
@@ -228,10 +228,10 @@ const DashboardSection: React.FC<DashboardSectionProps> = ({
   action,
   children,
 }) => (
-  <section className="rounded-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900 transition-all duration-200 hover:shadow-md dark:hover:shadow-gray-800">
+  <section className="rounded-lg bg-white dark:bg-surface-container-high border border-border dark:border-border shadow-sm dark:shadow-gray-900 transition-all duration-200 hover:shadow-md dark:hover:shadow-gray-800">
     <div className="p-4 sm:p-6">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+        <h2 className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
           {title}
         </h2>
         {action}
@@ -250,7 +250,7 @@ const ReportsList: React.FC<ReportsListProps> = ({ reports }) => (
     {reports.map((report) => (
       <div
         key={report.id}
-        className="p-4 border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50 rounded-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white dark:hover:bg-gray-700 transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+        className="p-4 border border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest/50 rounded-lg hover:border-teal-500 dark:hover:border-teal-400 hover:bg-white dark:hover:bg-surface-container-highest transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         tabIndex={0}
         role="button"
         onKeyDown={(e) => {
@@ -260,14 +260,14 @@ const ReportsList: React.FC<ReportsListProps> = ({ reports }) => (
           }
         }}
       >
-        <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+        <h3 className="font-medium text-foreground dark:text-foreground transition-colors">
           {report.name}
         </h3>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+        <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
           {report.type}
         </p>
         {report.schedule && (
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-2 transition-colors">
+          <p className="text-xs text-outline dark:text-muted-foreground mt-2 transition-colors">
             {report.schedule}
           </p>
         )}

@@ -331,7 +331,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         </div>
         <button
           onClick={clearFeedbackError}
-          className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 transition-colors p-1 rounded hover:bg-red-100 dark:hover:bg-red-800/30"
+          className="text-red-600 dark:text-destructive hover:text-red-800 dark:hover:text-red-300 transition-colors p-1 rounded hover:bg-red-100 dark:hover:bg-red-800/30"
           aria-label="Dismiss error"
           type="button"
         >
@@ -432,7 +432,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
   // ============================================================================
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 h-[calc(100vh-14rem)] flex flex-col overflow-hidden transition-colors">
+    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow dark:shadow-gray-900 border border-border dark:border-border h-[calc(100vh-14rem)] flex flex-col overflow-hidden transition-colors">
       <ChatHeader 
         activeTab={activeTab} 
         onTabChange={setActiveTab} 

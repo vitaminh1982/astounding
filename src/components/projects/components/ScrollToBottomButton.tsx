@@ -15,7 +15,7 @@ const ScrollToBottomButton: React.FC<ScrollToBottomButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className="absolute bottom-24 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 z-10 group"
+      className="absolute bottom-24 right-6 bg-tertiary hover:bg-blue-700 text-white rounded-full p-3 shadow-lg transition-all duration-200 hover:scale-110 z-10 group"
       aria-label="Scroll to bottom"
     >
       <svg 
@@ -33,12 +33,12 @@ const ScrollToBottomButton: React.FC<ScrollToBottomButtonProps> = ({
       </svg>
       
       {messageCount && (
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
+        <span className="absolute -top-2 -right-2 bg-destructive text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
           {messageCount > 9 ? '9+' : messageCount}
         </span>
       )}
       
-      <span className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-gray-900 text-white text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
+      <span className="absolute bottom-full right-0 mb-2 px-3 py-1 bg-background text-white text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
         New messages
       </span>
     </button>

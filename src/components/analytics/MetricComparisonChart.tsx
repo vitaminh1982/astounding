@@ -217,32 +217,32 @@ const MetricComparisonChart: React.FC<MetricComparisonChartProps> = ({
   };
 
   return (
-    <div className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-6 transition-colors ${className}`}>
+    <div className={`bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-6 transition-colors ${className}`}>
       {/* Header */}
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">{title}</h3>
-          {description && <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{description}</p>}
+          <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{title}</h3>
+          {description && <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{description}</p>}
         </div>
         <div className="flex gap-2">
           {/* Time range selector */}
-          <div className="flex items-center bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden transition-colors">
-            <Calendar className="ml-3 w-4 h-4 text-gray-500 dark:text-gray-400 transition-colors" />
+          <div className="flex items-center bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg overflow-hidden transition-colors">
+            <Calendar className="ml-3 w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
             <select
-              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300 transition-colors focus:outline-none"
+              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-on-surface dark:text-muted-foreground transition-colors focus:outline-none"
               value={timeRange}
               onChange={(e) => setTimeRange(e.target.value as '7d' | '30d' | '90d')}
             >
-              <option value="7d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">vs Previous 7 Days</option>
-              <option value="30d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">vs Previous 30 Days</option>
-              <option value="90d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">vs Previous 90 Days</option>
+              <option value="7d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">vs Previous 7 Days</option>
+              <option value="30d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">vs Previous 30 Days</option>
+              <option value="90d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">vs Previous 90 Days</option>
             </select>
           </div>
           
           {/* Export button */}
           <button 
             onClick={handleExport}
-            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             <Download className="w-4 h-4" />
             <span>Export</span>
@@ -253,7 +253,7 @@ const MetricComparisonChart: React.FC<MetricComparisonChartProps> = ({
       {/* Chart */}
       <div style={{ height: `${height}px` }} className="relative">
         {isLoading ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-700/50 bg-opacity-75 rounded-lg transition-colors">
+          <div className="absolute inset-0 flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest/50 bg-opacity-75 rounded-lg transition-colors">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-teal-500"></div>
           </div>
         ) : (
@@ -264,22 +264,22 @@ const MetricComparisonChart: React.FC<MetricComparisonChartProps> = ({
       {/* Summary table */}
       <div className="mt-6 overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-          <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+          <thead className="bg-surface-container-low dark:bg-surface-container-highest transition-colors">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Category</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Current</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Previous</th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Change</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Category</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Current</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Previous</th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Change</th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
+          <tbody className="bg-white dark:bg-surface-container-high divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
             {comparisonData.map((item, index) => (
-              <tr key={index} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{item.category}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{formatValue(item.currentPeriod)}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{formatValue(item.previousPeriod)}</td>
+              <tr key={index} className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground transition-colors">{item.category}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{formatValue(item.currentPeriod)}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{formatValue(item.previousPeriod)}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className={`flex items-center text-sm transition-colors ${item.change >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                  <div className={`flex items-center text-sm transition-colors ${item.change >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-destructive'}`}>
                     {item.change >= 0 ? (
                       <ChevronUp className="w-4 h-4 mr-1" />
                     ) : (

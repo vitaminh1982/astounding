@@ -79,20 +79,20 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
       >
         {/* Main Configuration Panel */}
         <div 
-          className={`bg-white dark:bg-gray-800 rounded-lg md:rounded-xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 ease-in-out border border-gray-200 dark:border-gray-600
+          className={`bg-white dark:bg-surface-container-high rounded-lg md:rounded-xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 ease-in-out border border-border dark:border-border
             ${showPreview && !isMobile ? 'md:w-1/2' : 'w-full'} 
             ${showPreview && isMobile ? 'hidden' : 'flex flex-col'}
             ${isFullscreen ? 'h-full' : 'max-h-[90vh]'}`}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600 p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
+          <div className="sticky top-0 bg-white dark:bg-surface-container-high border-b border-border dark:border-border p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
             <div className="flex items-center gap-3 min-w-0 flex-1">
               <div className="w-2 h-8 bg-gradient-to-b from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-cyan-500 rounded-full transition-colors" />
               <div className="min-w-0 flex-1">
-                <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 truncate transition-colors">
+                <h2 className="text-lg md:text-xl font-semibold text-foreground dark:text-foreground truncate transition-colors">
                   {localAgent.name || 'New Agent'}
                 </h2>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   AI Agent Configuration
                 </p>
               </div>
@@ -103,13 +103,13 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               {!isMobile && (
                 <button 
                   onClick={toggleFullscreen}
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                  className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors"
                   aria-label={isFullscreen ? "Exit fullscreen" : "Enter fullscreen"}
                 >
                   {isFullscreen ? (
-                    <Minimize2 className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <Minimize2 className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
                   ) : (
-                    <Maximize2 className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                    <Maximize2 className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
                   )}
                 </button>
               )}
@@ -117,7 +117,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               {/* Preview toggle */}
               <button 
                 onClick={togglePreview} 
-                className="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-teal-900/20 text-indigo-600 dark:text-teal-400 hover:bg-indigo-100 dark:hover:bg-teal-900/30 rounded-lg transition-colors text-sm font-medium border border-indigo-200 dark:border-teal-700"
+                className="flex items-center gap-2 px-3 py-2 bg-indigo-50 dark:bg-teal-900/20 text-primary-green dark:text-teal-400 hover:bg-indigo-100 dark:hover:bg-teal-900/30 rounded-lg transition-colors text-sm font-medium border border-indigo-200 dark:border-teal-700"
                 aria-label={showPreview ? "Hide preview" : "Show preview"}
               >
                 {showPreview ? (
@@ -136,10 +136,10 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               {/* Close button */}
               <button 
                 onClick={onClose} 
-                className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+                className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors"
                 aria-label="Close modal"
               >
-                <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                <X className="w-5 h-5 text-muted-foreground dark:text-muted-foreground" />
               </button>
             </div>
           </div>
@@ -179,7 +179,7 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
           </div>
 
           {/* Footer with action buttons */}
-          <div className="sticky bottom-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-600 p-4 md:p-5 transition-colors">
+          <div className="sticky bottom-0 bg-white dark:bg-surface-container-high border-t border-border dark:border-border p-4 md:p-5 transition-colors">
             <ActionButtons onSave={handleSave} onCancel={onClose} />
           </div>
         </div>
@@ -187,27 +187,27 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
         {/* Preview Panel */}
         {showPreview && (
           <div 
-            className={`bg-white dark:bg-gray-800 rounded-lg md:rounded-xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 ease-in-out border border-gray-200 dark:border-gray-600
+            className={`bg-white dark:bg-surface-container-high rounded-lg md:rounded-xl shadow-2xl dark:shadow-gray-900/50 overflow-hidden transition-all duration-300 ease-in-out border border-border dark:border-border
               ${isMobile ? 'w-full' : 'md:w-1/2 md:ml-4'} 
               ${isFullscreen ? 'h-full' : 'max-h-[90vh]'}
               flex flex-col`}
           >
             {/* Preview Header */}
-            <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-600 p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
+            <div className="sticky top-0 bg-white dark:bg-surface-container-high border-b border-border dark:border-border p-4 md:p-5 flex justify-between items-center z-20 transition-colors">
               {/* Back button on mobile */}
               {isMobile && (
                 <button 
-                  className="mr-3 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors" 
+                  className="mr-3 p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors" 
                   onClick={togglePreview}
                   aria-label="Go back"
                 >
-                  <ArrowLeft className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <ArrowLeft className="w-5 h-5 text-muted-foreground dark:text-muted-foreground" />
                 </button>
               )}
               
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 rounded-full transition-colors" />
-                <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-gray-100 truncate transition-colors">
+                <h2 className="text-lg md:text-xl font-semibold text-foreground dark:text-foreground truncate transition-colors">
                   Live Preview
                 </h2>
               </div>
@@ -215,17 +215,17 @@ export default function AgentConfigModal({ agent, onClose, onSave }: AgentConfig
               {/* Close button (desktop only) */}
               {!isMobile && (
                 <button 
-                  className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors ml-4" 
+                  className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors ml-4" 
                   onClick={togglePreview}
                   aria-label="Close preview"
                 >
-                  <X className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                  <X className="w-5 h-5 text-muted-foreground dark:text-muted-foreground" />
                 </button>
               )}
             </div>
             
             {/* Preview Content */}
-            <div className="flex-1 overflow-y-auto overscroll-contain p-4 md:p-6 bg-gray-50 dark:bg-gray-900/50 transition-colors">
+            <div className="flex-1 overflow-y-auto overscroll-contain p-4 md:p-6 bg-surface-container-low dark:bg-background/50 transition-colors">
               <Preview agent={localAgent} />
             </div>
           </div>

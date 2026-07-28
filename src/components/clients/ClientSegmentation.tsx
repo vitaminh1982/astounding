@@ -7,9 +7,9 @@ const segments = [
     name: 'Premium', 
     count: 234, 
     icon: Users, 
-    // Light mode: bg-indigo-100 text-indigo-600
+    // Light mode: bg-indigo-100 text-primary-green
     // Dark mode: bg-purple-700 text-purple-200
-    color: 'bg-indigo-100 text-indigo-600 dark:bg-purple-700 dark:text-purple-200',
+    color: 'bg-indigo-100 text-primary-green dark:bg-purple-700 dark:text-purple-200',
     percentage: 12
   },
   { 
@@ -34,9 +34,9 @@ const segments = [
     name: 'Inactif', 
     count: 123, 
     icon: MessageSquare, 
-    // Light mode: bg-gray-100 text-gray-600
-    // Dark mode: bg-gray-700 text-gray-300
-    color: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300',
+    // Light mode: bg-surface-container-low text-muted-foreground
+    // Dark mode: bg-surface-container-highest text-muted-foreground
+    color: 'bg-surface-container-low text-muted-foreground dark:bg-surface-container-highest dark:text-muted-foreground',
     percentage: 15
   },
 ];
@@ -55,18 +55,18 @@ interface SegmentProps {
 
 function SegmentHeader({ segment }: SegmentProps) {
   return (
-    <div className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 cursor-pointer dark:hover:bg-gray-700">
+    <div className="flex items-center justify-between p-3 rounded-lg hover:bg-surface-container-low cursor-pointer dark:hover:bg-surface-container-highest">
       <div className="flex items-center gap-3 sm:gap-4">
         <div className={`p-2.5 rounded-lg ${segment.color} transition-transform group-hover:scale-105`}>
           <segment.icon className="w-5 h-5" />
         </div>
         <div>
-          <span className="text-sm font-medium text-gray-900 dark:text-gray-200">{segment.name}</span>
-          <p className="text-xs text-gray-500 mt-0.5 dark:text-gray-400">{segment.count} customers</p>
+          <span className="text-sm font-medium text-foreground dark:text-on-surface-variant">{segment.name}</span>
+          <p className="text-xs text-muted-foreground mt-0.5 dark:text-muted-foreground">{segment.count} customers</p>
         </div>
       </div>
       <div className="text-right">
-        <span className="text-sm font-semibold text-gray-900 dark:text-gray-200">{segment.percentage}%</span>
+        <span className="text-sm font-semibold text-foreground dark:text-on-surface-variant">{segment.percentage}%</span>
       </div>
     </div>
   );
@@ -75,14 +75,14 @@ function SegmentHeader({ segment }: SegmentProps) {
 function ProgressBar({ percentage, color }: { percentage: number; color: string }) {
   // Dynamically adjust colors for dark mode if they exist in the color string
   const colorClasses = color.split(' ');
-  const lightModeColor = colorClasses.find(cls => cls.startsWith('bg-') && !cls.includes('dark:')) || 'bg-gray-500';
+  const lightModeColor = colorClasses.find(cls => cls.startsWith('bg-') && !cls.includes('dark:')) || 'bg-outline';
   const darkModeColor = colorClasses.find(cls => cls.startsWith('dark:bg-'))?.replace('dark:bg-', 'bg-') || lightModeColor.replace('bg-', 'bg-gray-');
   
   // Construct the final Tailwind classes for the progress bar's filled portion
   const progressBarFillClass = `${lightModeColor} ${darkModeColor}`;
 
   return (
-    <div className="w-full bg-gray-100 rounded-full h-1.5 dark:bg-gray-700">
+    <div className="w-full bg-surface-container-low rounded-full h-1.5 dark:bg-surface-container-highest">
       <div className={`h-1.5 rounded-full ${progressBarFillClass}`} style={{ width: `${percentage}%` }} />
     </div>
   );
@@ -102,10 +102,10 @@ function Segment({ segment }: SegmentProps) {
 function Total() {
   const total = segments.reduce((acc, curr) => acc + curr.count, 0);
   return (
-    <div className="mt-6 pt-4 border-t dark:border-gray-700">
+    <div className="mt-6 pt-4 border-t dark:border-border">
       <div className="flex justify-between items-center">
-        <span className="text-sm text-gray-500 dark:text-gray-400">Total Customers</span>
-        <span className="text-sm font-semibold text-gray-900 dark:text-gray-200">{total}</span>
+        <span className="text-sm text-muted-foreground dark:text-muted-foreground">Total Customers</span>
+        <span className="text-sm font-semibold text-foreground dark:text-on-surface-variant">{total}</span>
       </div>
     </div>
   );
@@ -113,15 +113,15 @@ function Total() {
 
 export default function ClientSegmentation() {
   return (
-    <div className="bg-white rounded-lg shadow p-4 md:p-6 dark:bg-gray-800 dark:shadow-md">
+    <div className="bg-white rounded-lg shadow p-4 md:p-6 dark:bg-surface-container-high dark:shadow-md">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="font-semibold text-lg md:text-xl text-gray-900 dark:text-gray-200">Segmentation</h2>
-          <p className="text-sm text-gray-500 mt-1 dark:text-gray-400">Customer segmentations</p>
+          <h2 className="font-semibold text-lg md:text-xl text-foreground dark:text-on-surface-variant">Segmentation</h2>
+          <p className="text-sm text-muted-foreground mt-1 dark:text-muted-foreground">Customer segmentations</p>
         </div>
-        <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors dark:hover:bg-gray-700">
-          <PieChart className="w-5 h-5 text-gray-400 dark:text-gray-500" />
+        <button className="p-2 hover:bg-surface-container-low rounded-lg transition-colors dark:hover:bg-surface-container-highest">
+          <PieChart className="w-5 h-5 text-outline dark:text-muted-foreground" />
         </button>
       </div>
       

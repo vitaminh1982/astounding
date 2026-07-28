@@ -97,7 +97,7 @@ R - Response format: Structured with headings, bullet points, and actionable ste
           <h2 className="text-xl font-bold">
             {t('prompts.generator.title', 'Generate New Prompt')}
           </h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+          <button onClick={onClose} className="text-muted-foreground hover:text-on-surface">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -106,13 +106,13 @@ R - Response format: Structured with headings, bullet points, and actionable ste
         <div className="p-6">
           {/* User input section */}
           <div className="mb-6">
-            <label htmlFor="prompt-description" className="block text-sm font-medium text-gray-700 mb-2">
+            <label htmlFor="prompt-description" className="block text-sm font-medium text-on-surface mb-2">
               {t('prompts.generator.describePrompt', 'Describe what kind of prompt you want to generate:')}
             </label>
             <textarea
               id="prompt-description"
               rows={4}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full p-3 border border-border rounded-lg focus:ring-ring focus:border-primary-green"
               placeholder={t('prompts.generator.placeholder', 'e.g., I need a prompt to generate marketing content for a new tech product...')}
               value={userInput}
               onChange={handleInputChange}
@@ -123,7 +123,7 @@ R - Response format: Structured with headings, bullet points, and actionable ste
               onClick={generatePrompt}
               disabled={isGenerating || !userInput.trim()}
               className={`mt-3 px-4 py-2 rounded-lg text-white ${
-                isGenerating || !userInput.trim() ? 'bg-indigo-300' : 'bg-indigo-600 hover:bg-indigo-700'
+                isGenerating || !userInput.trim() ? 'bg-indigo-300' : 'bg-primary hover:bg-indigo-700'
               } transition-colors w-full sm:w-auto`}
             >
               {isGenerating 
@@ -134,7 +134,7 @@ R - Response format: Structured with headings, bullet points, and actionable ste
           
           {/* Generated prompt display */}
           {generatedPrompt && (
-            <div className="mt-6 border rounded-lg p-4 bg-gray-50">
+            <div className="mt-6 border rounded-lg p-4 bg-surface-container-low">
               <h3 className="text-lg font-semibold mb-2">{generatedPrompt.title}</h3>
               <div className="bg-white border rounded-lg p-4 mb-4 whitespace-pre-line">
                 {generatedPrompt.content}
@@ -144,7 +144,7 @@ R - Response format: Structured with headings, bullet points, and actionable ste
                   {generatedPrompt.category}
                 </span>
                 {generatedPrompt.tags?.map(tag => (
-                  <span key={tag} className="bg-gray-200 text-gray-800 text-xs px-2 py-1 rounded-full">
+                  <span key={tag} className="bg-surface-container text-on-surface text-xs px-2 py-1 rounded-full">
                     {tag}
                   </span>
                 ))}

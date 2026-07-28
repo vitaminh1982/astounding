@@ -197,7 +197,7 @@ export default function ActionButtons({
             {onClose && (
               <button
                 onClick={onClose}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border text-sm font-medium rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="Cancel and close"
               >
                 <X className="w-4 h-4" />
@@ -213,7 +213,7 @@ export default function ActionButtons({
               <button
                 onClick={() => handleAction('duplicate', onDuplicate, 'Template duplicated successfully!')}
                 disabled={actionStates.duplicate}
-                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border text-sm font-medium rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="Duplicate template"
               >
                 {actionStates.duplicate ? (
@@ -265,7 +265,7 @@ export default function ActionButtons({
                 !isDirty ? 'No changes to save' :
                 ''
               }
-              className="flex items-center gap-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Save template"
             >
               {isSaving ? (
@@ -317,7 +317,7 @@ export default function ActionButtons({
             {onClose && (
               <button
                 onClick={onClose}
-                className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border text-sm font-medium rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="Cancel"
               >
                 <X className="w-4 h-4" />
@@ -328,7 +328,7 @@ export default function ActionButtons({
             <button
               onClick={handleSave}
               disabled={isSaving || !isDirty || hasErrors}
-              className="flex items-center gap-1.5 px-3 py-2 bg-indigo-600 dark:bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="flex items-center gap-1.5 px-3 py-2 bg-primary dark:bg-teal-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Save template"
             >
               {isSaving ? (
@@ -361,7 +361,7 @@ export default function ActionButtons({
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setShowMore(!showMore)}
-                className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="flex items-center gap-1.5 px-3 py-2 bg-white dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border text-sm font-medium rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="More actions"
                 aria-expanded={showMore}
                 aria-haspopup="true"
@@ -376,7 +376,7 @@ export default function ActionButtons({
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 10 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute bottom-full right-0 mb-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 py-1 z-10 transition-colors overflow-hidden"
+                    className="absolute bottom-full right-0 mb-2 w-56 bg-white dark:bg-surface-container-high rounded-lg shadow-xl dark:shadow-gray-900 border border-border dark:border-border py-1 z-10 transition-colors overflow-hidden"
                     role="menu"
                     aria-orientation="vertical"
                   >
@@ -384,7 +384,7 @@ export default function ActionButtons({
                       <button
                         onClick={() => handleAction('duplicate', onDuplicate, 'Template duplicated successfully!')}
                         disabled={actionStates.duplicate}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                        className="w-full flex items-center gap-3 px-4 py-3 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                         role="menuitem"
                       >
                         {actionStates.duplicate ? (
@@ -398,7 +398,7 @@ export default function ActionButtons({
 
                     {onDeactivate && (
                       <>
-                        <div className="border-t border-gray-200 dark:border-gray-700 my-1" />
+                        <div className="border-t border-border dark:border-border my-1" />
                         <button
                           onClick={handleDeactivate}
                           disabled={actionStates.deactivate}
@@ -413,7 +413,7 @@ export default function ActionButtons({
 
                     {onDelete && (
                       <>
-                        <div className="border-t border-gray-200 dark:border-gray-700 my-1" />
+                        <div className="border-t border-border dark:border-border my-1" />
                         <button
                           onClick={handleDelete}
                           disabled={actionStates.delete}
@@ -450,21 +450,21 @@ export default function ActionButtons({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 shadow-2xl dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 transition-colors"
+              className="bg-white dark:bg-surface-container-high rounded-xl max-w-md w-full p-6 shadow-2xl dark:shadow-gray-900 border border-border dark:border-border transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className="flex-shrink-0 p-3 bg-red-100 dark:bg-red-900/30 rounded-full">
-                  <AlertTriangle className="w-6 h-6 text-red-600 dark:text-red-400" />
+                  <AlertTriangle className="w-6 h-6 text-red-600 dark:text-destructive" />
                 </div>
                 <div className="flex-1">
                   <h3 
                     id="delete-dialog-title"
-                    className="text-lg font-bold text-gray-900 dark:text-gray-100 transition-colors mb-2"
+                    className="text-lg font-bold text-foreground dark:text-foreground transition-colors mb-2"
                   >
                     Delete Template?
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                     Are you sure you want to delete "<span className="font-semibold">{template.title}</span>"? This action cannot be undone and all associated data will be permanently removed.
                   </p>
                 </div>
@@ -474,14 +474,14 @@ export default function ActionButtons({
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
                   disabled={actionStates.delete}
-                  className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="px-4 py-2 bg-white dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDelete}
                   disabled={actionStates.delete}
-                  className="px-4 py-2 bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="px-4 py-2 bg-red-600 dark:bg-destructive text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 >
                   {actionStates.delete ? (
                     <>
@@ -518,21 +518,21 @@ export default function ActionButtons({
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-white dark:bg-gray-800 rounded-xl max-w-md w-full p-6 shadow-2xl dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 transition-colors"
+              className="bg-white dark:bg-surface-container-high rounded-xl max-w-md w-full p-6 shadow-2xl dark:shadow-gray-900 border border-border dark:border-border transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-start gap-4 mb-4">
                 <div className="flex-shrink-0 p-3 bg-amber-100 dark:bg-amber-900/30 rounded-full">
-                  <Power className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                  <Power className="w-6 h-6 text-amber-600 dark:text-destructive" />
                 </div>
                 <div className="flex-1">
                   <h3 
                     id="deactivate-dialog-title"
-                    className="text-lg font-bold text-gray-900 dark:text-gray-100 transition-colors mb-2"
+                    className="text-lg font-bold text-foreground dark:text-foreground transition-colors mb-2"
                   >
                     Deactivate Template?
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                     Are you sure you want to deactivate "<span className="font-semibold">{template.title}</span>"? Users will no longer be able to use this template until it's reactivated.
                   </p>
                 </div>
@@ -542,14 +542,14 @@ export default function ActionButtons({
                 <button
                   onClick={() => setShowDeactivateConfirm(false)}
                   disabled={actionStates.deactivate}
-                  className="px-4 py-2 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="px-4 py-2 bg-white dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={confirmDeactivate}
                   disabled={actionStates.deactivate}
-                  className="px-4 py-2 bg-amber-600 dark:bg-amber-500 text-white rounded-lg hover:bg-amber-700 dark:hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                  className="px-4 py-2 bg-amber-600 dark:bg-destructive text-white rounded-lg hover:bg-amber-700 dark:hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium shadow-sm dark:shadow-gray-900 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-amber-500 dark:focus:ring-amber-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 >
                   {actionStates.deactivate ? (
                     <>

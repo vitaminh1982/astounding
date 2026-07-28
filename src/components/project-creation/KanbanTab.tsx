@@ -6,16 +6,16 @@ import { useProjectCreation } from '../../context/ProjectCreationContext';
 import { ProjectTask, ProjectAgent } from '../../types/project-creation';
 
 const COLUMNS: { id: ProjectTask['status']; label: string; color: string }[] = [
-  { id: 'backlog', label: 'Backlog', color: 'border-gray-400' },
+  { id: 'backlog', label: 'Backlog', color: 'border-outline-variant' },
   { id: 'in-progress', label: 'In Progress', color: 'border-blue-400' },
   { id: 'in-review', label: 'In Review', color: 'border-amber-400' },
   { id: 'done', label: 'Done', color: 'border-green-400' },
 ];
 
 const PRIORITY_COLORS: Record<string, string> = {
-  low: 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400',
-  medium: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400',
-  high: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400',
+  low: 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground',
+  medium: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-tertiary',
+  high: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-destructive',
 };
 
 const AGENT_ICON_MAP: Record<string, React.ReactNode> = {
@@ -77,10 +77,10 @@ export default function KanbanTab({ tasks, agents }: Props) {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Kanban Board</h3>
+        <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Kanban Board</h3>
         <button
           onClick={() => setShowAddForm(true)}
-          className="flex items-center gap-2 px-3 py-2 text-sm bg-blue-600 dark:bg-teal-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-teal-700 transition-colors"
+          className="flex items-center gap-2 px-3 py-2 text-sm bg-tertiary dark:bg-teal-600 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-teal-700 transition-colors"
         >
           <Plus className="w-4 h-4" />
           Add Task
@@ -94,7 +94,7 @@ export default function KanbanTab({ tasks, agents }: Props) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4"
+            className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4"
           >
             <div className="flex items-center gap-3">
               <input
@@ -103,18 +103,18 @@ export default function KanbanTab({ tasks, agents }: Props) {
                 onChange={(e) => setNewTitle(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleAddTask()}
                 placeholder="Task title..."
-                className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="flex-1 px-3 py-2 text-sm border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
                 autoFocus
               />
               <button
                 onClick={handleAddTask}
-                className="px-4 py-2 text-sm bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                className="px-4 py-2 text-sm bg-tertiary text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
                 Add
               </button>
               <button
                 onClick={() => setShowAddForm(false)}
-                className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                className="px-4 py-2 text-sm text-muted-foreground hover:text-on-surface dark:text-muted-foreground dark:hover:text-on-surface-variant transition-colors"
               >
                 Cancel
               </button>
@@ -132,11 +132,11 @@ export default function KanbanTab({ tasks, agents }: Props) {
               key={column.id}
               onDragOver={handleDragOver}
               onDrop={() => handleDrop(column.id)}
-              className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-3 min-h-[300px]"
+              className="bg-surface-container-low dark:bg-background/50 rounded-xl p-3 min-h-[300px]"
             >
               <div className={`flex items-center gap-2 mb-3 pb-2 border-b-2 ${column.color}`}>
-                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300">{column.label}</h4>
-                <span className="text-xs bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 rounded-full px-2 py-0.5">
+                <h4 className="text-sm font-semibold text-on-surface dark:text-muted-foreground">{column.label}</h4>
+                <span className="text-xs bg-surface-container dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground rounded-full px-2 py-0.5">
                   {columnTasks.length}
                 </span>
               </div>
@@ -154,28 +154,28 @@ export default function KanbanTab({ tasks, agents }: Props) {
                         exit={{ opacity: 0, scale: 0.95 }}
                         draggable
                         onDragStart={() => handleDragStart(task.id)}
-                        className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
+                        className={`bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-3 cursor-grab active:cursor-grabbing hover:shadow-md transition-shadow ${
                           draggedTask === task.id ? 'opacity-50' : ''
                         }`}
                       >
                         <div className="flex items-start gap-2">
-                          <GripVertical className="w-4 h-4 text-gray-300 dark:text-gray-600 mt-0.5 flex-shrink-0" />
+                          <GripVertical className="w-4 h-4 text-muted-foreground dark:text-muted-foreground mt-0.5 flex-shrink-0" />
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{task.title}</p>
+                            <p className="text-sm font-medium text-foreground dark:text-foreground truncate">{task.title}</p>
                             <div className="flex items-center gap-2 mt-2">
                               <span className={`text-[10px] px-1.5 py-0.5 rounded font-medium ${PRIORITY_COLORS[task.priority]}`}>
                                 {task.priority}
                               </span>
-                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400">
+                              <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground">
                                 {task.phaseTag}
                               </span>
                             </div>
                             {agent && (
                               <div className="flex items-center gap-1.5 mt-2">
-                                <span className="text-gray-400 dark:text-gray-500">
+                                <span className="text-outline dark:text-muted-foreground">
                                   {AGENT_ICON_MAP[agent.icon] || <Cpu className="w-3 h-3" />}
                                 </span>
-                                <span className="text-[10px] text-gray-500 dark:text-gray-400">{agent.name}</span>
+                                <span className="text-[10px] text-muted-foreground dark:text-muted-foreground">{agent.name}</span>
                               </div>
                             )}
                           </div>
@@ -186,7 +186,7 @@ export default function KanbanTab({ tasks, agents }: Props) {
                 </AnimatePresence>
 
                 {columnTasks.length === 0 && (
-                  <div className="text-center py-8 text-xs text-gray-400 dark:text-gray-500">
+                  <div className="text-center py-8 text-xs text-outline dark:text-muted-foreground">
                     {column.id === 'backlog' ? 'No tasks yet' : 'Drop tasks here'}
                   </div>
                 )}

@@ -22,7 +22,7 @@ export default function ClientsPage() {
           {/* Main Column */}
           <div className="w-full lg:flex-1 min-w-0">
             {/* Filters */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm mb-6 p-4">
+            <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm mb-6 p-4">
               <div className="overflow-x-auto">
                 <div className="min-w-[600px] lg:min-w-0">
                   <ClientsFilters />
@@ -31,7 +31,7 @@ export default function ClientsPage() {
             </div>
 
             {/* Clients List */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+            <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm p-6">
               <ClientsList />
             </div>
           </div>
@@ -51,10 +51,10 @@ export default function ClientsPage() {
           {/* Sidebar */}
           <div className="w-full lg:w-[380px] lg:flex-shrink-0">
             <div className="space-y-6">
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+              <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm p-6">
                 <ClientSegmentation />
               </div>
-              <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-6">
+              <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm p-6">
                 <ClientAnalytics />
               </div>
             </div>

@@ -23,7 +23,7 @@ const CustomNode: React.FC<{
   id: string;
 }> = ({ data, id }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900 p-3 border-2 border-indigo-200 dark:border-teal-600 transition-colors">
+    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-md dark:shadow-gray-900 p-3 border-2 border-indigo-200 dark:border-teal-600 transition-colors">
       <Handle 
         type="target" 
         position={Position.Top} 
@@ -36,9 +36,9 @@ const CustomNode: React.FC<{
           {data.icon}
         </div>
         <div>
-          <div className="font-medium text-sm text-gray-900 dark:text-gray-100">{data.label}</div>
+          <div className="font-medium text-sm text-foreground dark:text-foreground">{data.label}</div>
           {data.description && (
-            <div className="text-xs text-gray-500 dark:text-gray-400">{data.description}</div>
+            <div className="text-xs text-muted-foreground dark:text-muted-foreground">{data.description}</div>
           )}
         </div>
       </div>
@@ -108,7 +108,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 50 },
     data: { 
       label: 'Email Trigger', 
-      icon: <svg className="w-4 h-4 text-indigo-600 dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>,
       description: 'Starts on new email' 
@@ -120,7 +120,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 150 },
     data: { 
       label: 'AI Agent', 
-      icon: <svg className="w-4 h-4 text-indigo-600 dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>,
       description: 'Processes request' 
@@ -132,7 +132,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 250 },
     data: { 
       label: 'Decision', 
-      icon: <svg className="w-4 h-4 text-indigo-600 dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>,
       description: 'Routes based on content' 
@@ -144,7 +144,7 @@ const initialNodes: Node[] = [
     position: { x: 250, y: 350 },
     data: { 
       label: 'Action', 
-      icon: <svg className="w-4 h-4 text-indigo-600 dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      icon: <svg className="w-4 h-4 text-primary-green dark:text-teal-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
       </svg>,
       description: 'Executes task' 
@@ -214,9 +214,9 @@ const WorkflowVisualization: React.FC<WorkflowVisualizationProps> = ({
   };
 
   return (
-    <div className={`bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors ${className}`} style={{ height }}>
+    <div className={`bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border transition-colors ${className}`} style={{ height }}>
       {nodeError ? (
-        <div className="h-full flex items-center justify-center text-red-500 dark:text-red-400 p-4 text-center">
+        <div className="h-full flex items-center justify-center text-destructive dark:text-destructive p-4 text-center">
           <div>
             <svg className="w-10 h-10 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />

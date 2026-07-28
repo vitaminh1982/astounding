@@ -375,11 +375,11 @@ export default function PromptsList({
     return (
       <div className={`text-center py-16 px-6 ${className}`}>
         <div className="mx-auto flex flex-col items-center">
-          <SearchX className="h-12 w-12 text-gray-400 dark:text-gray-500 mb-4 transition-colors" aria-hidden="true" />
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 transition-colors">
+          <SearchX className="h-12 w-12 text-outline dark:text-muted-foreground mb-4 transition-colors" aria-hidden="true" />
+          <h3 className="text-lg font-semibold text-on-surface dark:text-on-surface-variant transition-colors">
             {t('prompts.list.noResultsTitle', 'No Prompts Found')}
           </h3>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="mt-1 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             {t('prompts.list.noResultsDescription', 'Try adjusting your search query or filters to find what you\'re looking for.')}
           </p>
         </div>

@@ -52,8 +52,8 @@ const MessageList: React.FC<MessageListProps> = ({
             <div
               className={`flex items-start max-w-[85%] p-4 rounded-xl shadow-sm dark:shadow-gray-900 transition-colors ${
                 message.type === 'user'
-                  ? 'bg-teal-600 dark:bg-teal-500 text-white'
-                  : 'bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-200 dark:border-gray-600'
+                  ? 'bg-teal-600 dark:bg-primary text-white'
+                  : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-foreground border border-border dark:border-border'
               }`}
             >
               {message.type === 'ai' && (
@@ -69,7 +69,7 @@ const MessageList: React.FC<MessageListProps> = ({
                 {message.type === 'ai' && message.content && (
                   <>
                     {message.content.reasoningSteps && message.content.reasoningSteps.length > 0 && (
-                      <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-blue-600 transition-colors">
+                      <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg border border-blue-200 dark:border-tertiary transition-colors">
                         <p className="font-bold text-blue-900 dark:text-blue-300 mb-2 flex items-center gap-2 text-sm transition-colors">
                           <Bot className="w-4 h-4" />
                           Reasoning Process:
@@ -97,7 +97,7 @@ const MessageList: React.FC<MessageListProps> = ({
                         </ul>
                       </div>
                     )}
-                    <div className="text-sm text-gray-800 dark:text-gray-100 leading-relaxed font-medium transition-colors">
+                    <div className="text-sm text-on-surface dark:text-foreground leading-relaxed font-medium transition-colors">
                       {message.content.finalResponse}
                     </div>
                   </>
@@ -105,7 +105,7 @@ const MessageList: React.FC<MessageListProps> = ({
                 <div className={`text-xs mt-2 font-medium transition-colors ${
                   message.type === 'user' 
                     ? 'text-teal-200 dark:text-teal-300' 
-                    : 'text-gray-500 dark:text-gray-400'
+                    : 'text-muted-foreground dark:text-muted-foreground'
                 }`}>
                   {message.timestamp.toLocaleTimeString()}
                 </div>
@@ -121,15 +121,15 @@ const MessageList: React.FC<MessageListProps> = ({
           animate={{ opacity: 1, y: 0 }}
           className="flex justify-start"
         >
-          <div className="flex items-center bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
+          <div className="flex items-center bg-white dark:bg-surface-container-high p-4 rounded-xl shadow-sm dark:shadow-gray-900 border border-border dark:border-border transition-colors">
             <Bot className="w-5 h-5 text-teal-600 dark:text-teal-400 mr-3" />
             <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-800 dark:text-gray-100 font-medium transition-colors">Processing</span>
+              <span className="text-sm text-on-surface dark:text-foreground font-medium transition-colors">Processing</span>
               <div className="flex gap-1">
                 {[0, 1, 2].map(i => (
                   <div 
                     key={i}
-                    className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-bounce"
+                    className="w-1.5 h-1.5 bg-primary rounded-full animate-bounce"
                     style={{ animationDelay: `${i * 0.1}s` }}
                   />
                 ))}

@@ -57,7 +57,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
   if (!documents || documents.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 dark:text-gray-400 transition-colors">No available document</p>
+        <p className="text-muted-foreground dark:text-muted-foreground transition-colors">No available document</p>
       </div>
     );
   }
@@ -67,23 +67,23 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
       {documents.map((document) => (
         <div
           key={document.id}
-          className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all border border-gray-200 dark:border-gray-600"
+          className="bg-white dark:bg-surface-container-high p-4 rounded-lg shadow dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all border border-border dark:border-border"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg transition-colors">
-                <File className="h-6 w-6 text-gray-600 dark:text-gray-400 transition-colors" />
+              <div className="p-2 bg-surface-container-low dark:bg-surface-container-highest rounded-lg transition-colors">
+                <File className="h-6 w-6 text-muted-foreground dark:text-muted-foreground transition-colors" />
               </div>
               <div>
-                <h3 className="font-medium text-gray-900 dark:text-gray-100 truncate max-w-[200px] transition-colors">
+                <h3 className="font-medium text-foreground dark:text-foreground truncate max-w-[200px] transition-colors">
                   {document.name}
                 </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{document.size}</p>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{document.size}</p>
               </div>
             </div>
             <button
               onClick={() => onDelete?.(document.id)}
-              className="text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 transition-colors p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="text-outline dark:text-muted-foreground hover:text-destructive dark:hover:text-destructive transition-colors p-1 rounded hover:bg-red-50 dark:hover:bg-red-900/20 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               title="Supprimer"
             >
               <Trash2 className="h-5 w-5" />
@@ -91,18 +91,18 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
           </div>
 
           <div className="mt-4">
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Last update: {document.lastModified}
             </p>
           </div>
 
           <div className="mt-4">
-            <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <p className="text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
               Assigned Agents:
             </p>
             <div className="flex flex-wrap gap-2">
               {document.assignedAgents.length === 0 ? (
-                <span className="text-sm text-gray-500 dark:text-gray-400 italic">
+                <span className="text-sm text-muted-foreground dark:text-muted-foreground italic">
                   No agents assigned
                 </span>
               ) : (
@@ -116,7 +116,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
                       {agent.name}
                       <button
                         onClick={() => handleAgentRemoval(document.id, agent.id)}
-                        className="ml-1 hover:text-red-600 dark:hover:text-red-400 focus:outline-none"
+                        className="ml-1 hover:text-red-600 dark:hover:text-destructive focus:outline-none"
                         title={`Remove ${agent.name}`}
                       >
                         <X className="h-3 w-3" />
@@ -134,7 +134,7 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
           >
             <button
               onClick={() => toggleDropdown(document.id)}
-              className="w-full flex items-center justify-between px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-500"
+              className="w-full flex items-center justify-between px-3 py-2 text-sm border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring"
             >
               <span className="flex items-center">
                 <Bot className="h-4 w-4 mr-2" />
@@ -151,11 +151,11 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
             </button>
 
             {openDropdowns[document.id] && (
-              <div className="absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-60 overflow-auto">
+              <div className="absolute z-10 w-full mt-1 bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-md shadow-lg max-h-60 overflow-auto">
                 {availableAgents.filter(
                   (agent) => !document.assignedAgents.some(a => a?.id === agent.id)
                 ).length === 0 ? (
-                  <div className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 italic">
+                  <div className="px-3 py-2 text-sm text-muted-foreground dark:text-muted-foreground italic">
                     All agents assigned
                   </div>
                 ) : (
@@ -168,9 +168,9 @@ const DocumentGrid: React.FC<DocumentGridProps> = ({
                           handleAgentSelection(document.id, agent.id);
                           toggleDropdown(document.id);
                         }}
-                        className="w-full text-left px-3 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-900 dark:text-gray-100 transition-colors flex items-center"
+                        className="w-full text-left px-3 py-2 text-sm hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-foreground dark:text-foreground transition-colors flex items-center"
                       >
-                        <Bot className="h-4 w-4 mr-2 text-teal-500" />
+                        <Bot className="h-4 w-4 mr-2 text-primary-green" />
                         {agent.name}
                       </button>
                     ))

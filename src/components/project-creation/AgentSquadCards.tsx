@@ -21,8 +21,8 @@ const ICON_MAP: Record<string, React.ReactNode> = {
 };
 
 const COLOR_MAP: Record<string, { bg: string; text: string; ring: string; progress: string }> = {
-  blue: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-600 dark:text-blue-400', ring: 'ring-blue-400', progress: 'bg-blue-500' },
-  amber: { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-600 dark:text-amber-400', ring: 'ring-amber-400', progress: 'bg-amber-500' },
+  blue: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-tertiary dark:text-tertiary', ring: 'ring-blue-400', progress: 'bg-tertiary' },
+  amber: { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-600 dark:text-destructive', ring: 'ring-amber-400', progress: 'bg-destructive' },
   pink: { bg: 'bg-pink-100 dark:bg-pink-900/30', text: 'text-pink-600 dark:text-pink-400', ring: 'ring-pink-400', progress: 'bg-pink-500' },
   cyan: { bg: 'bg-cyan-100 dark:bg-cyan-900/30', text: 'text-cyan-600 dark:text-cyan-400', ring: 'ring-cyan-400', progress: 'bg-cyan-500' },
   emerald: { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-600 dark:text-emerald-400', ring: 'ring-emerald-400', progress: 'bg-emerald-500' },
@@ -31,10 +31,10 @@ const COLOR_MAP: Record<string, { bg: string; text: string; ring: string; progre
 };
 
 const STATUS_LABELS: Record<string, { label: string; dotColor: string }> = {
-  idle: { label: 'Idle', dotColor: 'bg-gray-400' },
+  idle: { label: 'Idle', dotColor: 'bg-outline-variant' },
   working: { label: 'Working', dotColor: 'bg-green-500' },
-  blocked: { label: 'Blocked', dotColor: 'bg-red-500' },
-  done: { label: 'Done', dotColor: 'bg-blue-500' },
+  blocked: { label: 'Blocked', dotColor: 'bg-destructive' },
+  done: { label: 'Done', dotColor: 'bg-tertiary' },
 };
 
 export default function AgentSquadCards({ agents }: Props) {
@@ -50,7 +50,7 @@ export default function AgentSquadCards({ agents }: Props) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1, duration: 0.4 }}
-            className="relative bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-shadow"
+            className="relative bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border p-4 hover:shadow-lg dark:hover:shadow-gray-900/50 transition-shadow"
           >
             {/* Avatar with pulse */}
             <div className="flex items-center gap-3 mb-3">
@@ -67,24 +67,24 @@ export default function AgentSquadCards({ agents }: Props) {
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{agent.name}</h4>
-                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{agent.role}</p>
+                <h4 className="text-sm font-semibold text-foreground dark:text-foreground truncate">{agent.name}</h4>
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground truncate">{agent.role}</p>
               </div>
             </div>
 
             {/* Status badge */}
             <div className="flex items-center gap-1.5 mb-3">
               <span className={`w-2 h-2 rounded-full ${statusInfo.dotColor}`} />
-              <span className="text-xs text-gray-600 dark:text-gray-400">{statusInfo.label}</span>
+              <span className="text-xs text-muted-foreground dark:text-muted-foreground">{statusInfo.label}</span>
             </div>
 
             {/* Current task */}
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 line-clamp-2 min-h-[2rem]">
+            <p className="text-xs text-muted-foreground dark:text-muted-foreground mb-3 line-clamp-2 min-h-[2rem]">
               {agent.currentTask}
             </p>
 
             {/* Progress bar */}
-            <div className="w-full h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+            <div className="w-full h-1.5 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden">
               <motion.div
                 className={`h-full rounded-full ${colors.progress}`}
                 initial={{ width: 0 }}
@@ -92,7 +92,7 @@ export default function AgentSquadCards({ agents }: Props) {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
               />
             </div>
-            <span className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 block text-right">
+            <span className="text-[10px] text-outline dark:text-muted-foreground mt-1 block text-right">
               {agent.progress}%
             </span>
           </motion.div>

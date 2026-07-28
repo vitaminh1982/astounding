@@ -24,13 +24,13 @@ export default function ActionButtons({
   isDeleting = false
 }: ActionButtonsProps) {
   return (
-    <div className="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-gray-200 dark:border-gray-700 transition-colors">
+    <div className="flex flex-col sm:flex-row justify-end gap-3 pt-6 border-t border-border dark:border-border transition-colors">
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 md:gap-3">
         {/* Save Button */}
         <button
           onClick={() => onSave(client)}
           disabled={isSaving}
-          className="flex items-center justify-center gap-2 px-4 sm:px-3 md:px-4 py-2.5 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
+          className="flex items-center justify-center gap-2 px-4 sm:px-3 md:px-4 py-2.5 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
           aria-label={isSaving ? "Saving client information" : "Save client information"}
         >
           {isSaving ? (
@@ -50,7 +50,7 @@ export default function ActionButtons({
         {onReset && (
           <button
             onClick={onReset}
-            className="flex items-center justify-center gap-2 px-4 sm:px-3 md:px-4 py-2.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 hover:border-gray-400 dark:hover:border-gray-500 transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
+            className="flex items-center justify-center gap-2 px-4 sm:px-3 md:px-4 py-2.5 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border rounded-lg hover:bg-surface-container dark:hover:bg-surface-container-highest hover:border-outline-variant dark:hover:border-outline transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
             aria-label="Reset form to original values"
           >
             <RefreshCw className="w-4 h-4 sm:w-3 sm:h-3 md:w-4 md:h-4 transition-colors" />

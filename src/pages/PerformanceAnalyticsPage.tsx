@@ -55,7 +55,7 @@ export default function PerformanceAnalyticsPage() {
       case 'good': return 'bg-blue-100 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-300';
       case 'average': return 'bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 text-yellow-800 dark:text-yellow-300';
       case 'poor': return 'bg-red-100 dark:bg-red-900/30 border border-red-200 dark:border-red-800 text-red-800 dark:text-red-300';
-      default: return 'bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-300';
+      default: return 'bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border text-on-surface dark:text-muted-foreground';
     }
   };
 
@@ -63,7 +63,7 @@ export default function PerformanceAnalyticsPage() {
     if (trend.startsWith('+')) {
       return <TrendingUp className="w-4 h-4 text-green-500 dark:text-green-400 transition-colors" />;
     } else if (trend.startsWith('-')) {
-      return <TrendingDown className="w-4 h-4 text-red-500 dark:text-red-400 transition-colors" />;
+      return <TrendingDown className="w-4 h-4 text-destructive dark:text-destructive transition-colors" />;
     }
     return null;
   };
@@ -85,28 +85,28 @@ export default function PerformanceAnalyticsPage() {
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">
+              <h1 className="text-2xl font-bold text-on-surface dark:text-foreground transition-colors">
                 Performance Analytics
               </h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
+              <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground transition-colors">
                 Monitor and analyze AI agent performance metrics
               </p>
             </div>
             <div className="flex gap-3">
-              <div className="flex items-center bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden transition-colors">
-                <Calendar className="ml-3 w-4 h-4 text-gray-500 dark:text-gray-400 transition-colors" />
+              <div className="flex items-center bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg overflow-hidden transition-colors">
+                <Calendar className="ml-3 w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
                 <select
-                  className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300 transition-colors focus:outline-none"
+                  className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-on-surface dark:text-muted-foreground transition-colors focus:outline-none"
                   value={timeRange}
                   onChange={(e) => setTimeRange(e.target.value)}
                 >
-                  <option value="7d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 7 Days</option>
-                  <option value="30d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 30 Days</option>
-                  <option value="90d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 90 Days</option>
-                  <option value="1y" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last Year</option>
+                  <option value="7d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last 7 Days</option>
+                  <option value="30d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last 30 Days</option>
+                  <option value="90d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last 90 Days</option>
+                  <option value="1y" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last Year</option>
                 </select>
               </div>
-              <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900">
                 <Download className="w-4 h-4" />
                 <span className="whitespace-nowrap">
                   Export Report
@@ -117,16 +117,16 @@ export default function PerformanceAnalyticsPage() {
         </div>
 
         {/* Main content */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
+        <div className="bg-white dark:bg-surface-container-high rounded-lg shadow dark:shadow-gray-900 border border-border dark:border-border transition-colors">
           {/* Tabs */}
-          <div className="border-b border-gray-200 dark:border-gray-600 transition-colors">
+          <div className="border-b border-border dark:border-border transition-colors">
             <nav className="flex -mb-px">
               <button
                 onClick={() => setActiveTab('overview')}
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'overview'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                    : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
                 Performance Overview
@@ -136,7 +136,7 @@ export default function PerformanceAnalyticsPage() {
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'agents'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                    : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
                 Agent Performance
@@ -146,7 +146,7 @@ export default function PerformanceAnalyticsPage() {
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'conversations'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                    : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
                 Conversation Metrics
@@ -156,7 +156,7 @@ export default function PerformanceAnalyticsPage() {
                 className={`py-4 px-6 text-sm font-medium transition-colors focus:outline-none ${
                   activeTab === 'efficiency'
                     ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
-                    : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                    : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                 }`}
               >
                 Resource Efficiency
@@ -170,48 +170,48 @@ export default function PerformanceAnalyticsPage() {
               <div>
                 {/* Overview metrics cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Total Conversations</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Total Conversations</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon(performanceMetrics.overview.trend.conversations)}
                         <span className="ml-1 text-sm">{performanceMetrics.overview.trend.conversations}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.overview.totalConversations.toLocaleString()}</div>
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.overview.totalConversations.toLocaleString()}</div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Avg Response Time</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Avg Response Time</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon(performanceMetrics.overview.trend.responseTime)}
                         <span className="ml-1 text-sm">{performanceMetrics.overview.trend.responseTime}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.overview.avgResponseTime}</div>
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.overview.avgResponseTime}</div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Resolution Rate</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Resolution Rate</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon(performanceMetrics.overview.trend.resolutionRate)}
                         <span className="ml-1 text-sm">{performanceMetrics.overview.trend.resolutionRate}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.overview.resolutionRate}%</div>
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.overview.resolutionRate}%</div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Customer Satisfaction</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Customer Satisfaction</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon('+' + performanceMetrics.overview.trend.satisfaction)}
                         <span className="ml-1 text-sm">{performanceMetrics.overview.trend.satisfaction}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.overview.customerSatisfaction}/5</div>
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.overview.customerSatisfaction}/5</div>
                   </div>
                 </div>
 
@@ -224,31 +224,31 @@ export default function PerformanceAnalyticsPage() {
                 />
 
                 {/* Top performing agents */}
-                <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                   <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Top Performing Agents</h3>
-                    <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1">View All</button>
+                    <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Top Performing Agents</h3>
+                    <button className="text-sm text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1">View All</button>
                   </div>
                   <div className="overflow-x-auto">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                      <thead className="dark:bg-gray-800 transition-colors">
+                      <thead className="dark:bg-surface-container-high transition-colors">
                         <tr>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Agent</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Conversations</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Response Time</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Resolution Rate</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Satisfaction</th>
-                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Status</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Agent</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Conversations</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Response Time</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Resolution Rate</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Satisfaction</th>
+                          <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Status</th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white dark:bg-gray-700 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
+                      <tbody className="bg-white dark:bg-surface-container-highest divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                         {performanceMetrics.agentPerformance.slice(0, 3).map((agent) => (
-                          <tr key={agent.id} className="hover: dark:hover:bg-gray-600 transition-colors">
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{agent.name}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.conversations.toLocaleString()}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.responseTime}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.resolutionRate}%</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.satisfaction}/5</td>
+                          <tr key={agent.id} className="hover: dark:hover:bg-surface-container-highest transition-colors">
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground transition-colors">{agent.name}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.conversations.toLocaleString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.responseTime}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.resolutionRate}%</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.satisfaction}/5</td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full transition-colors ${getStatusColor(agent.status)}`}>
                                 {agent.status.charAt(0).toUpperCase() + agent.status.slice(1)}
@@ -268,32 +268,32 @@ export default function PerformanceAnalyticsPage() {
                 {/* Agent performance table */}
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                    <thead className="dark:bg-gray-700 transition-colors">
+                    <thead className="dark:bg-surface-container-highest transition-colors">
                       <tr>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Agent</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Conversations</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Response Time</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Resolution Rate</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Satisfaction</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Status</th>
-                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Actions</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Agent</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Conversations</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Response Time</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Resolution Rate</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Satisfaction</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Status</th>
+                        <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
+                    <tbody className="bg-white dark:bg-surface-container-high divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
                       {filteredAgentPerformance.map((agent) => (
-                        <tr key={agent.id} className="hover: dark:hover:bg-gray-700 transition-colors">
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{agent.name}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.conversations.toLocaleString()}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.responseTime}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.resolutionRate}%</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{agent.satisfaction}/5</td>
+                        <tr key={agent.id} className="hover: dark:hover:bg-surface-container-highest transition-colors">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground transition-colors">{agent.name}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.conversations.toLocaleString()}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.responseTime}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.resolutionRate}%</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{agent.satisfaction}/5</td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full transition-colors ${getStatusColor(agent.status)}`}>
                               {agent.status.charAt(0).toUpperCase() + agent.status.slice(1)}
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1">View Details</button>
+                            <button className="text-teal-600 dark:text-teal-400 hover:text-teal-900 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1">View Details</button>
                           </td>
                         </tr>
                       ))}
@@ -331,34 +331,34 @@ export default function PerformanceAnalyticsPage() {
               <div className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                   {filteredConversationMetrics.map((metric, index) => (
-                    <div key={index} className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-4 transition-colors">{metric.category}</h3>
+                    <div key={index} className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-4 transition-colors">{metric.category}</h3>
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Conversations</p>
-                          <p className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">{metric.count.toLocaleString()}</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Conversations</p>
+                          <p className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">{metric.count.toLocaleString()}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Avg Duration</p>
-                          <p className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">{metric.avgDuration}</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Avg Duration</p>
+                          <p className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">{metric.avgDuration}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Resolution Rate</p>
-                          <p className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">{metric.resolutionRate}%</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Resolution Rate</p>
+                          <p className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">{metric.resolutionRate}%</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Satisfaction</p>
-                          <p className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">{metric.satisfaction}/5</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Satisfaction</p>
+                          <p className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">{metric.satisfaction}/5</p>
                         </div>
                       </div>
                       <div className="mt-4">
-                        <div className="w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
+                        <div className="w-full h-2 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden transition-colors">
                           <div 
-                            className="h-full bg-teal-500 transition-all duration-300"
+                            className="h-full bg-primary transition-all duration-300"
                             style={{ width: `${(metric.count / performanceMetrics.overview.totalConversations) * 100}%` }}
                           ></div>
                         </div>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+                        <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
                           {((metric.count / performanceMetrics.overview.totalConversations) * 100).toFixed(1)}% of total conversations
                         </p>
                       </div>
@@ -379,60 +379,60 @@ export default function PerformanceAnalyticsPage() {
               <div className="space-y-8">
                 {/* Resource usage metrics */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">CPU Usage</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">CPU Usage</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon(performanceMetrics.resourceEfficiency.trend.cpuUsage)}
                         <span className="ml-1 text-sm">{performanceMetrics.resourceEfficiency.trend.cpuUsage}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.resourceEfficiency.cpuUsage}%</div>
-                    <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.resourceEfficiency.cpuUsage}%</div>
+                    <div className="mt-4 h-2 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden transition-colors">
                       <div 
-                        className="h-full bg-blue-500 transition-all duration-300"
+                        className="h-full bg-tertiary transition-all duration-300"
                         style={{ width: `${performanceMetrics.resourceEfficiency.cpuUsage}%` }}
                       ></div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Memory Usage</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Memory Usage</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon(performanceMetrics.resourceEfficiency.trend.memoryUsage)}
                         <span className="ml-1 text-sm">{performanceMetrics.resourceEfficiency.trend.memoryUsage}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.resourceEfficiency.memoryUsage}%</div>
-                    <div className="mt-4 h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.resourceEfficiency.memoryUsage}%</div>
+                    <div className="mt-4 h-2 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden transition-colors">
                       <div 
-                        className="h-full bg-purple-500 transition-all duration-300"
+                        className="h-full bg-tertiary transition-all duration-300"
                         style={{ width: `${performanceMetrics.resourceEfficiency.memoryUsage}%` }}
                       ></div>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">API Calls</h3>
-                      <div className="flex items-center text-red-600 dark:text-red-400">
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">API Calls</h3>
+                      <div className="flex items-center text-red-600 dark:text-destructive">
                         {getTrendIcon(performanceMetrics.resourceEfficiency.trend.apiCalls)}
                         <span className="ml-1 text-sm">{performanceMetrics.resourceEfficiency.trend.apiCalls}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.resourceEfficiency.apiCalls.toLocaleString()}</div>
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.resourceEfficiency.apiCalls.toLocaleString()}</div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                  <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Cost Per Conversation</h3>
+                      <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Cost Per Conversation</h3>
                       <div className="flex items-center text-green-600 dark:text-green-400">
                         {getTrendIcon(performanceMetrics.resourceEfficiency.trend.costPerConversation)}
                         <span className="ml-1 text-sm">{performanceMetrics.resourceEfficiency.trend.costPerConversation}</span>
                       </div>
                     </div>
-                    <div className="text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">{performanceMetrics.resourceEfficiency.costPerConversation}</div>
+                    <div className="text-3xl font-bold text-foreground dark:text-foreground transition-colors">{performanceMetrics.resourceEfficiency.costPerConversation}</div>
                   </div>
                 </div>
 
@@ -445,41 +445,41 @@ export default function PerformanceAnalyticsPage() {
                 />
 
                 {/* Optimization recommendations */}
-                <div className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                <div className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                   <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Optimization Recommendations</h3>
+                    <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Optimization Recommendations</h3>
                   </div>
                   <div className="space-y-4">
-                    <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg bg-green-50 dark:bg-green-900/20 transition-colors">
+                    <div className="p-4 border border-border dark:border-border rounded-lg bg-green-50 dark:bg-green-900/20 transition-colors">
                       <div className="flex items-start">
                         <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400 mt-0.5 mr-3 flex-shrink-0 transition-colors" />
                         <div>
-                          <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">Implement Response Caching</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors">Cache common responses to reduce API calls and improve response times.</p>
+                          <h4 className="text-sm font-medium text-foreground dark:text-foreground transition-colors">Implement Response Caching</h4>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">Cache common responses to reduce API calls and improve response times.</p>
                           <div className="mt-2">
                             <span className="text-xs text-green-700 dark:text-green-300 transition-colors">Potential savings: 15% API calls</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors">
+                    <div className="p-4 border border-border dark:border-border rounded-lg transition-colors">
                       <div className="flex items-start">
                         <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mt-0.5 mr-3 flex-shrink-0 transition-colors" />
                         <div>
-                          <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">Optimize Knowledge Base Queries</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors">Refine knowledge base search algorithms to reduce query complexity.</p>
+                          <h4 className="text-sm font-medium text-foreground dark:text-foreground transition-colors">Optimize Knowledge Base Queries</h4>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">Refine knowledge base search algorithms to reduce query complexity.</p>
                           <div className="mt-2">
                             <span className="text-xs text-yellow-700 dark:text-yellow-300 transition-colors">Potential savings: 8% CPU usage</span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-lg transition-colors">
+                    <div className="p-4 border border-border dark:border-border rounded-lg transition-colors">
                       <div className="flex items-start">
                         <AlertCircle className="h-5 w-5 text-yellow-500 dark:text-yellow-400 mt-0.5 mr-3 flex-shrink-0 transition-colors" />
                         <div>
-                          <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">Implement Batch Processing</h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 transition-colors">Process non-time-sensitive tasks in batches to reduce resource overhead.</p>
+                          <h4 className="text-sm font-medium text-foreground dark:text-foreground transition-colors">Implement Batch Processing</h4>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">Process non-time-sensitive tasks in batches to reduce resource overhead.</p>
                           <div className="mt-2">
                             <span className="text-xs text-yellow-700 dark:text-yellow-300 transition-colors">Potential savings: 12% memory usage</span>
                           </div>

@@ -8,13 +8,13 @@ import PlexCreateModal from './PlexCreateModal';
 
 const COLOR_MAP: Record<string, { bg: string; text: string }> = {
   violet: { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-700 dark:text-violet-400' },
-  amber: { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-amber-400' },
+  amber: { bg: 'bg-amber-100 dark:bg-amber-900/30', text: 'text-amber-700 dark:text-destructive' },
   emerald: { bg: 'bg-emerald-100 dark:bg-emerald-900/30', text: 'text-emerald-700 dark:text-emerald-400' },
   sky: { bg: 'bg-sky-100 dark:bg-sky-900/30', text: 'text-sky-700 dark:text-sky-400' },
-  indigo: { bg: 'bg-indigo-100 dark:bg-indigo-900/30', text: 'text-indigo-700 dark:text-indigo-400' },
+  indigo: { bg: 'bg-indigo-100 dark:bg-indigo-900/30', text: 'text-indigo-700 dark:text-primary-green' },
   rose: { bg: 'bg-rose-100 dark:bg-rose-900/30', text: 'text-rose-700 dark:text-rose-400' },
   teal: { bg: 'bg-teal-100 dark:bg-teal-900/30', text: 'text-teal-700 dark:text-teal-400' },
-  blue: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-400' },
+  blue: { bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-tertiary' },
 };
 
 interface ProjectTemplate {
@@ -98,8 +98,8 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">All Projects</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <h1 className="text-2xl font-bold text-foreground dark:text-foreground">All Projects</h1>
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">
             Create and manage AI-driven projects
           </p>
         </div>
@@ -121,11 +121,11 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
           animate={{ opacity: 1, y: 0 }}
           className="flex flex-col items-center justify-center py-20 text-center"
         >
-          <div className="w-16 h-16 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center mb-4">
-            <FolderOpen className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+          <div className="w-16 h-16 rounded-2xl bg-surface-container-low dark:bg-surface-container-high flex items-center justify-center mb-4">
+            <FolderOpen className="w-8 h-8 text-outline dark:text-muted-foreground" />
           </div>
-          <h3 className="text-lg font-medium text-gray-700 dark:text-gray-300 mb-2">No projects yet</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm mb-6">
+          <h3 className="text-lg font-medium text-on-surface dark:text-muted-foreground mb-2">No projects yet</h3>
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground max-w-sm mb-6">
             Start your first AI-driven project. Our assistant will guide you through a conversational intake to configure the perfect setup.
           </p>
           <button
@@ -140,7 +140,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
         <div className="space-y-8">
           {/* Projects row */}
           <div>
-            <p className="text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">
+            <p className="text-[10px] font-bold text-outline dark:text-muted-foreground uppercase tracking-wider mb-3">
               Your Projects · {workspaceProjects.length}
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -153,10 +153,10 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleOpenProject(project.id)}
-                    className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group"
+                    className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all group"
                   >
                     {/* Project Image */}
-                    <div className="h-32 w-full overflow-hidden bg-gray-100 dark:bg-gray-900 relative">
+                    <div className="h-32 w-full overflow-hidden bg-surface-container-low dark:bg-background relative">
                       <img
                         src={project.image}
                         alt={project.name}
@@ -170,7 +170,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     <div className="p-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
+                          <h3 className="text-sm font-semibold text-foreground dark:text-foreground group-hover:text-tertiary dark:group-hover:text-teal-400 transition-colors">
                             {project.name}
                           </h3>
                           <div className="mt-1">
@@ -179,7 +179,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                             </span>
                           </div>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-gray-400 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors ml-1 flex-shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-outline group-hover:text-tertiary dark:group-hover:text-teal-400 transition-colors ml-1 flex-shrink-0" />
                       </div>
                     </div>
                   </motion.div>
@@ -192,9 +192,9 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: workspaceProjects.length * 0.05 }}
                 onClick={() => setIsCreateModalOpen(true)}
-                className="border-2 border-dashed border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-teal-500 bg-gray-50/50 dark:bg-gray-800/30 rounded-xl flex flex-col items-center justify-center min-h-[180px] cursor-pointer hover:shadow-md transition-all group"
+                className="border-2 border-dashed border-border dark:border-border hover:border-blue-400 dark:hover:border-teal-500 bg-surface-container-low/50 dark:bg-surface-container-high/30 rounded-xl flex flex-col items-center justify-center min-h-[180px] cursor-pointer hover:shadow-md transition-all group"
               >
-                <div className="flex flex-col items-center gap-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-500 dark:group-hover:text-teal-400 transition-colors font-medium text-sm">
+                <div className="flex flex-col items-center gap-2 text-outline dark:text-muted-foreground group-hover:text-tertiary dark:group-hover:text-teal-400 transition-colors font-medium text-sm">
                   <Plus className="w-6 h-6" />
                   <span>New blank project</span>
                 </div>
@@ -203,11 +203,11 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
           </div>
 
           {/* Templates Section */}
-          <div ref={templatesSectionRef} className="pt-6 border-t border-gray-100 dark:border-gray-800 space-y-4">
+          <div ref={templatesSectionRef} className="pt-6 border-t border-border dark:border-gray-800 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">Start something new</h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">
+                <h2 className="text-xl font-bold text-foreground dark:text-foreground">Start something new</h2>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-0.5">
                   Browse ready-made project setups and launch in seconds
                 </p>
               </div>
@@ -221,7 +221,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
 
             {/* Search */}
             <div className="relative">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+              <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -231,7 +231,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="What would you like to build?"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 transition-all text-sm"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-border dark:border-border bg-white dark:bg-surface-container-high text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring transition-all text-sm"
               />
             </div>
 
@@ -245,7 +245,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     onClick={() => setSelectedCategory(category)}
                     className={`px-4 py-1.5 rounded-full text-xs font-semibold border transition-all ${isActive
                         ? 'bg-primary-green/10 text-primary-green border-primary-green'
-                        : 'bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400 border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                        : 'bg-white dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground border-border dark:border-border hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                       }`}
                   >
                     {category}
@@ -262,25 +262,25 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     <div
                       key={template.id}
                       onClick={() => handleCreateFromTemplate(template)}
-                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all cursor-pointer flex items-center justify-between group"
+                      className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl p-5 hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all cursor-pointer flex items-center justify-between group"
                     >
                       <div className="flex-1 pr-4 space-y-2">
                         <div className="flex items-center gap-2">
                           <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold tracking-wider uppercase ${template.id === 'tpl-plan-quarter'
-                              ? 'bg-red-100 dark:bg-red-950/30 text-red-600 dark:text-red-400'
-                              : 'bg-amber-100 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400'
+                              ? 'bg-red-100 dark:bg-red-950/30 text-red-600 dark:text-destructive'
+                              : 'bg-amber-100 dark:bg-amber-950/30 text-amber-600 dark:text-destructive'
                             }`}>
                             {template.id === 'tpl-plan-quarter' ? '🎯 Featured' : '🚀 Popular'}
                           </span>
                         </div>
-                        <h3 className="text-base font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
+                        <h3 className="text-base font-bold text-foreground dark:text-foreground group-hover:text-tertiary dark:group-hover:text-teal-400 transition-colors">
                           {template.name}
                         </h3>
-                        <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                        <p className="text-xs text-muted-foreground dark:text-muted-foreground line-clamp-2">
                           {template.description}
                         </p>
                       </div>
-                      <div className="w-32 h-24 rounded-xl overflow-hidden relative border border-gray-100 dark:border-gray-700 flex-shrink-0">
+                      <div className="w-32 h-24 rounded-xl overflow-hidden relative border border-border dark:border-border flex-shrink-0">
                         <img
                           src={template.image}
                           alt={template.name}
@@ -302,9 +302,9 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     <div
                       key={template.id}
                       onClick={() => handleCreateFromTemplate(template)}
-                      className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all cursor-pointer overflow-hidden flex flex-col group"
+                      className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-teal-600 transition-all cursor-pointer overflow-hidden flex flex-col group"
                     >
-                      <div className="h-28 w-full relative overflow-hidden border-b border-gray-100 dark:border-gray-700">
+                      <div className="h-28 w-full relative overflow-hidden border-b border-border dark:border-border">
                         <img
                           src={template.image}
                           alt={template.name}
@@ -313,10 +313,10 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                       </div>
                       <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                         <div>
-                          <h4 className="text-sm font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-teal-400 transition-colors">
+                          <h4 className="text-sm font-bold text-foreground dark:text-foreground group-hover:text-tertiary dark:group-hover:text-teal-400 transition-colors">
                             {template.name}
                           </h4>
-                          <p className="text-xs text-gray-400 dark:text-gray-500 line-clamp-2 mt-1">
+                          <p className="text-xs text-outline dark:text-muted-foreground line-clamp-2 mt-1">
                             {template.description}
                           </p>
                         </div>
@@ -324,7 +324,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                           <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${colors.bg} ${colors.text}`}>
                             {template.deliveryTrackLabel}
                           </span>
-                          <span className="flex items-center gap-0.5 text-gray-500 dark:text-gray-400 font-medium">
+                          <span className="flex items-center gap-0.5 text-muted-foreground dark:text-muted-foreground font-medium">
                             ⭐ {template.rating}
                           </span>
                         </div>
@@ -335,7 +335,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
               </div>
             ) : (
               searchQuery && (
-                <div className="text-center py-8 text-gray-400 dark:text-gray-500 text-sm">
+                <div className="text-center py-8 text-outline dark:text-muted-foreground text-sm">
                   No templates found matching "{searchQuery}"
                 </div>
               )

@@ -23,10 +23,10 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
-        <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100">
+        <h1 className="text-2xl font-bold text-on-surface dark:text-foreground">
           {t('settings.title')}
         </h1>
-        <h2 className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+        <h2 className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground">
           {t('settings.subtitle')}
         </h2>
         <div className="mb-6" />

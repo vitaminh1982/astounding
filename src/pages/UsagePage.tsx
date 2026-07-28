@@ -33,17 +33,17 @@ export default function UsagePage() {
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center transition-colors">
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 rounded-lg shadow-lg dark:shadow-gray-900 max-w-md w-full text-center transition-colors">
-          <div className="text-red-500 dark:text-red-400 mb-4">
+        <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border p-8 rounded-lg shadow-lg dark:shadow-gray-900 max-w-md w-full text-center transition-colors">
+          <div className="text-destructive dark:text-destructive mb-4">
             <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">{t('usage.error.title', 'Error Loading Usage Data')}</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-4">{error}</p>
+          <h2 className="text-2xl font-bold text-on-surface dark:text-foreground mb-2">{t('usage.error.title', 'Error Loading Usage Data')}</h2>
+          <p className="text-muted-foreground dark:text-muted-foreground mb-4">{error}</p>
           <button 
             onClick={handleRefresh}
-            className="px-4 py-2 bg-teal-600 dark:bg-teal-500 text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             {t('usage.error.retry', 'Try Again')}
           </button>
@@ -73,7 +73,7 @@ export default function UsagePage() {
           <div className="flex justify-center py-4">
             <button
               onClick={() => setShowAdvanced(!showAdvanced)}
-              className="flex items-center justify-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+              className="flex items-center justify-center gap-2 px-4 py-2 border border-border dark:border-border rounded-md bg-white dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant hover: dark:hover:bg-surface-container-highest transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900"
             >
               {showAdvanced ? 
                 t('usage.advancedOptions.hide', 'Hide Detailed Analytics') : 

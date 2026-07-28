@@ -113,7 +113,7 @@ export default function OnboardingPage({ onNavigate }: OnboardingPageProps) {
           <div className="lg:col-span-9">
             <div 
               ref={contentRef} 
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-6 md:p-8 transition-colors"
+              className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 md:p-8 transition-colors"
             >
               {renderActiveSection()}
             </div>

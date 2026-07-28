@@ -170,7 +170,7 @@ const WorkflowsPage: React.FC = () => {
   const getStatusColor = useCallback((status: string) => {
     const colors = {
       active: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800',
-      draft: 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300 border border-gray-200 dark:border-gray-700',
+      draft: 'bg-surface-container-low dark:bg-surface-container-high text-on-surface dark:text-muted-foreground border border-border dark:border-border',
       paused: 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 border border-yellow-200 dark:border-yellow-800',
       error: 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800',
     };
@@ -184,16 +184,16 @@ const WorkflowsPage: React.FC = () => {
         <div className="mb-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="space-y-1">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">
+              <h1 className="text-2xl sm:text-3xl font-bold text-foreground dark:text-foreground transition-colors">
                 {t('workflows.title')}
               </h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
+              <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground transition-colors">
                 {t('workflows.subtitle')}
               </p>
             </div>
             <button 
               onClick={handleCreateWorkflow}
-              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
+              className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
               aria-label={t('workflows.newWorkflow')}
             >
               <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -210,9 +210,9 @@ const WorkflowsPage: React.FC = () => {
               className={`
                 ${isMobileViewingDetails ? 'hidden md:block' : 'w-full'}
                 md:w-1/2 
-                border-r border-gray-200 dark:border-gray-700
+                border-r border-border dark:border-border
                 overflow-y-auto
-                bg-white dark:bg-gray-800
+                bg-white dark:bg-surface-container-high
                 transition-colors
               `}
               initial={{ x: -20, opacity: 0 }}
@@ -234,7 +234,7 @@ const WorkflowsPage: React.FC = () => {
               className={`
                 ${!isMobileViewingDetails ? 'hidden md:block' : 'w-full absolute md:relative top-0 left-0 h-full z-10'}
                 md:w-1/2 
-                bg-white dark:bg-gray-800
+                bg-white dark:bg-surface-container-high
                 transition-colors
               `}
               initial={{ x: 20, opacity: 0 }}
@@ -245,10 +245,10 @@ const WorkflowsPage: React.FC = () => {
               {selectedWorkflow ? (
                 <div className="h-full flex flex-col">
                   {/* Mobile Back Button */}
-                  <div className="md:hidden p-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 transition-colors">
+                  <div className="md:hidden p-4 bg-white dark:bg-surface-container-high border-b border-border dark:border-border transition-colors">
                     <button
                       onClick={handleBackToList}
-                      className="flex items-center gap-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                      className="flex items-center gap-2 text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-foreground transition-colors"
                     >
                       <ArrowLeft className="h-5 w-5" />
                       <span className="font-medium">{t('workflows.backToList')}</span>
@@ -256,13 +256,13 @@ const WorkflowsPage: React.FC = () => {
                   </div>
 
                   {/* Workflow Header */}
-                  <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors">
+                  <div className="p-4 sm:p-6 border-b border-border dark:border-border bg-white dark:bg-surface-container-high transition-colors">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex-1 min-w-0 mr-4">
-                        <h2 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-gray-100 truncate transition-colors">
+                        <h2 className="text-xl sm:text-2xl font-semibold text-foreground dark:text-foreground truncate transition-colors">
                           {selectedWorkflow.name}
                         </h2>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+                        <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
                           {selectedWorkflow.description || t('workflows.noDescription')}
                         </p>
                       </div>
@@ -285,8 +285,8 @@ const WorkflowsPage: React.FC = () => {
                             transition-all duration-200 
                             whitespace-nowrap
                             ${activeTab === key
-                              ? 'bg-indigo-50 dark:bg-teal-900/30 text-indigo-600 dark:text-teal-400 shadow-sm'
-                              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover: dark:hover:bg-gray-700/50'
+                              ? 'bg-indigo-50 dark:bg-teal-900/30 text-primary-green dark:text-teal-400 shadow-sm'
+                              : 'text-muted-foreground dark:text-muted-foreground hover:text-foreground dark:hover:text-on-surface-variant hover: dark:hover:bg-surface-container-highest/50'
                             }
                           `}
                           aria-pressed={activeTab === key}
@@ -380,10 +380,10 @@ const WorkflowsPage: React.FC = () => {
                 </div>
               ) : (
                 /* Empty State */
-                <div className="h-full flex flex-col items-center justify-center p-6 text-center bg-white dark:bg-gray-800 transition-colors">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4 transition-colors">
+                <div className="h-full flex flex-col items-center justify-center p-6 text-center bg-white dark:bg-surface-container-high transition-colors">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-container-low dark:bg-surface-container-highest mb-4 transition-colors">
                     <svg 
-                      className="h-8 w-8 text-gray-400 dark:text-gray-500 transition-colors"
+                      className="h-8 w-8 text-outline dark:text-muted-foreground transition-colors"
                       fill="none" 
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -396,10 +396,10 @@ const WorkflowsPage: React.FC = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+                  <h3 className="text-lg font-semibold text-foreground dark:text-foreground mb-2 transition-colors">
                     {t('workflows.noWorkflowSelected')}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm transition-colors">
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground max-w-sm transition-colors">
                     {t('workflows.selectWorkflowPrompt')}
                   </p>
                 </div>

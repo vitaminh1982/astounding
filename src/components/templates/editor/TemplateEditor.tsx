@@ -139,20 +139,20 @@ export default function TemplateEditor({
       <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         {/* Background overlay */}
         <div 
-          className="fixed inset-0 bg-gray-500 bg-opacity-75 dark:bg-gray-900 dark:bg-opacity-80 transition-opacity backdrop-blur-sm" 
+          className="fixed inset-0 bg-outline bg-opacity-75 dark:bg-background dark:bg-opacity-80 transition-opacity backdrop-blur-sm" 
           aria-hidden="true"
         ></div>
 
         {/* Modal panel */}
-        <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full max-w-[1200px]">
+        <div className="inline-block align-bottom bg-white dark:bg-surface-container-high rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-full max-w-[1200px]">
           
           {/* Header */}
-          <div className="bg-white dark:bg-gray-800 px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700 sticky top-0 z-10">
+          <div className="bg-white dark:bg-surface-container-high px-4 sm:px-6 py-3 sm:py-4 border-b border-border dark:border-border sticky top-0 z-10">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <h2 
                   id="template-editor-title"
-                  className="text-lg sm:text-2xl font-bold text-gray-900 dark:text-gray-100"
+                  className="text-lg sm:text-2xl font-bold text-foreground dark:text-foreground"
                 >
                   Template Modification
                 </h2>
@@ -165,8 +165,8 @@ export default function TemplateEditor({
               
               <div className="flex items-center gap-2">
                 {/* Save shortcut hint */}
-                <span className="hidden md:inline-flex text-xs text-gray-500 dark:text-gray-400 mr-2">
-                  <kbd className="px-2 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                <span className="hidden md:inline-flex text-xs text-muted-foreground dark:text-muted-foreground mr-2">
+                  <kbd className="px-2 py-1 bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded">
                     {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}+S
                   </kbd>
                   <span className="ml-1">to save</span>
@@ -174,7 +174,7 @@ export default function TemplateEditor({
 
                 <button 
                   onClick={handleClose}
-                  className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 sm:p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-teal-500 dark:focus:ring-offset-gray-800"
+                  className="text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-outline hover:bg-surface-container-low dark:hover:bg-surface-container-highest p-1.5 sm:p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800"
                   aria-label="Close editor"
                 >
                   <X className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -186,7 +186,7 @@ export default function TemplateEditor({
             {showValidation && Object.keys(errors).length > 0 && (
               <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
                 <div className="flex items-start gap-2">
-                  <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                  <AlertCircle className="w-5 h-5 text-red-600 dark:text-destructive flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
                     <h3 className="text-sm font-medium text-red-800 dark:text-red-200">
                       Please fix the following errors:
@@ -199,7 +199,7 @@ export default function TemplateEditor({
                   </div>
                   <button
                     onClick={() => setShowValidation(false)}
-                    className="text-red-400 hover:text-red-600 dark:text-red-500 dark:hover:text-red-300"
+                    className="text-destructive hover:text-red-600 dark:text-destructive dark:hover:text-red-300"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -215,7 +215,7 @@ export default function TemplateEditor({
                 
                 {/* Left Column (spans 2 columns on desktop) */}
                 <div className="lg:col-span-2 space-y-4 sm:space-y-6">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <BasicInfo 
                       template={editedTemplate} 
                       onUpdate={handleSectionUpdate}
@@ -223,7 +223,7 @@ export default function TemplateEditor({
                     />
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <MessageConfig 
                       template={editedTemplate}
                       onUpdate={handleSectionUpdate}
@@ -231,7 +231,7 @@ export default function TemplateEditor({
                     />
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <CustomizationOptions 
                       template={editedTemplate}
                       onUpdate={handleSectionUpdate}
@@ -239,7 +239,7 @@ export default function TemplateEditor({
                     />
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <AutomationSettings 
                       template={editedTemplate}
                       onUpdate={handleSectionUpdate}
@@ -250,11 +250,11 @@ export default function TemplateEditor({
                 
                 {/* Right Column */}
                 <div className="space-y-4 sm:space-y-6">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <VariablesList />
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <SharingSettings 
                       template={editedTemplate}
                       onUpdate={handleSectionUpdate}
@@ -262,11 +262,11 @@ export default function TemplateEditor({
                     />
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <PreviewSection template={editedTemplate} />
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4 sm:p-6">
+                  <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border p-4 sm:p-6">
                     <ValidationInfo template={editedTemplate} />
                   </div>
                 </div>
@@ -275,7 +275,7 @@ export default function TemplateEditor({
           </div>
 
           {/* Action Buttons - Fixed at bottom */}
-          <div className="sticky bottom-0 bg-white dark:bg-gray-800 px-4 sm:px-6 py-3 sm:py-4 border-t border-gray-200 dark:border-gray-700 shadow-lg">
+          <div className="sticky bottom-0 bg-white dark:bg-surface-container-high px-4 sm:px-6 py-3 sm:py-4 border-t border-border dark:border-border shadow-lg">
             <ActionButtons 
               template={editedTemplate}
               onSave={handleSave}

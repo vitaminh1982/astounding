@@ -8,12 +8,12 @@ export default function LanguageSwitcher() {
     <div className="flex items-center gap-2">
       <button
         onClick={toggleLanguage}
-        className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+        className="p-2 rounded-full hover:bg-surface-container-low transition-colors"
         title={language === 'en' ? 'Switch to French' : 'Passer en Anglais'}
       >
         {language === 'fr' ? '🇫🇷' : '🇬🇧'}
       </button>
-      <span className="text-sm text-gray-600">
+      <span className="text-sm text-muted-foreground">
         {language === 'fr' ? 'Français' : 'English'}
       </span>
     </div>

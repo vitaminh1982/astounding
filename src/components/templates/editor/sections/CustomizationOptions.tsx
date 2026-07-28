@@ -59,14 +59,14 @@ export default function CustomizationOptions({ template, onChange }: Customizati
       label: 'Include Company Logo',
       description: 'Automatically adds your company logo in the message header or footer',
       icon: Image,
-      color: 'text-blue-600 dark:text-blue-400'
+      color: 'text-tertiary dark:text-tertiary'
     },
     {
       key: 'digitalSignature',
       label: 'Add Digital Signature',
       description: 'Includes a secure digital signature for authentication and verification',
       icon: FileSignature,
-      color: 'text-purple-600 dark:text-purple-400'
+      color: 'text-tertiary dark:text-tertiary'
     },
     {
       key: 'clickableLinks',
@@ -103,13 +103,13 @@ export default function CustomizationOptions({ template, onChange }: Customizati
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-indigo-100 dark:bg-purple-900/30 border border-indigo-200 dark:border-purple-800 rounded-lg transition-colors">
-            <Palette className="w-5 h-5 text-indigo-600 dark:text-purple-400 transition-colors" />
+            <Palette className="w-5 h-5 text-primary-green dark:text-tertiary transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Customization Options
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Configure message appearance and features
             </p>
           </div>
@@ -126,15 +126,15 @@ export default function CustomizationOptions({ template, onChange }: Customizati
         )}
       </div>
 
-      <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 space-y-6 shadow-sm dark:shadow-gray-900 transition-colors">
+      <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-6 space-y-6 shadow-sm dark:shadow-gray-900 transition-colors">
         {/* Message Options */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <h4 className="font-medium text-base text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
+            <h4 className="font-medium text-base text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
               <Settings className="w-4 h-4" />
               Message Options
             </h4>
-            <span className="text-sm text-indigo-600 dark:text-teal-400 font-medium transition-colors">
+            <span className="text-sm text-primary-green dark:text-teal-400 font-medium transition-colors">
               {activeOptionsCount} active
             </span>
           </div>
@@ -151,7 +151,7 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                   className={`relative rounded-lg border-2 transition-all duration-200 ${
                     isActive
                       ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                      : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                      : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                   }`}
                 >
                   <label className="flex items-start gap-3 p-4 cursor-pointer">
@@ -166,8 +166,8 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                         />
                         <div className={`w-5 h-5 border-2 rounded transition-all ${
                           isActive
-                            ? 'bg-indigo-600 dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
-                            : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600'
+                            ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                            : 'bg-white dark:bg-surface-container-highest border-border dark:border-border'
                         }`}>
                           {isActive && (
                             <Check className="w-full h-full text-white p-0.5" />
@@ -180,11 +180,11 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                     <div className={`p-2 rounded-lg flex-shrink-0 transition-colors ${
                       isActive
                         ? 'bg-indigo-100 dark:bg-teal-900/50'
-                        : 'bg-gray-100 dark:bg-gray-700'
+                        : 'bg-surface-container-low dark:bg-surface-container-highest'
                     }`}>
                       <Icon className={`w-5 h-5 transition-colors ${
                         isActive
-                          ? 'text-indigo-600 dark:text-teal-400'
+                          ? 'text-primary-green dark:text-teal-400'
                           : color
                       }`} />
                     </div>
@@ -194,16 +194,16 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                       <div className="flex items-center gap-2 mb-1">
                         <span className={`font-medium transition-colors ${
                           isActive
-                            ? 'text-gray-900 dark:text-gray-100'
-                            : 'text-gray-700 dark:text-gray-300'
+                            ? 'text-foreground dark:text-foreground'
+                            : 'text-on-surface dark:text-muted-foreground'
                         }`}>
                           {label}
                         </span>
                       </div>
                       <p className={`text-sm hidden sm:block transition-colors ${
                         isActive
-                          ? 'text-gray-600 dark:text-gray-400'
-                          : 'text-gray-500 dark:text-gray-400'
+                          ? 'text-muted-foreground dark:text-muted-foreground'
+                          : 'text-muted-foreground dark:text-muted-foreground'
                       }`}>
                         {description}
                       </p>
@@ -212,7 +212,7 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                     {/* Mobile Info Button */}
                     <button
                       type="button"
-                      className="sm:hidden p-2 text-gray-400 dark:text-gray-500 hover:text-indigo-600 dark:hover:text-teal-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500"
+                      className="sm:hidden p-2 text-outline dark:text-muted-foreground hover:text-primary-green dark:hover:text-teal-400 rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring"
                       onClick={(e) => {
                         e.preventDefault();
                         setActiveTooltip(isTooltipActive ? null : key);
@@ -230,7 +230,7 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                         initial={{ opacity: 0, y: -10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
-                        className="sm:hidden absolute z-20 left-4 right-4 mt-2 p-3 bg-gray-800 dark:bg-gray-900 text-white text-sm rounded-lg shadow-lg border border-gray-700 dark:border-gray-600"
+                        className="sm:hidden absolute z-20 left-4 right-4 mt-2 p-3 bg-surface-container-high dark:bg-background text-white text-sm rounded-lg shadow-lg border border-border dark:border-border"
                       >
                         <div className="flex items-start gap-2">
                           <Info className="w-4 h-4 flex-shrink-0 mt-0.5" />
@@ -246,18 +246,18 @@ export default function CustomizationOptions({ template, onChange }: Customizati
         </div>
 
         {/* Advanced Settings */}
-        <div className="pt-6 border-t border-gray-200 dark:border-gray-700 transition-colors">
+        <div className="pt-6 border-t border-border dark:border-border transition-colors">
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="w-full flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full flex items-center justify-between p-4 bg-surface-container-low dark:bg-surface-container-high/50 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             <div className="flex items-center gap-2">
-              <Settings className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-              <span className="font-medium text-gray-900 dark:text-gray-100">
+              <Settings className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
+              <span className="font-medium text-foreground dark:text-foreground">
                 Advanced Settings
               </span>
             </div>
-            <ChevronDown className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform duration-200 ${
+            <ChevronDown className={`w-5 h-5 text-muted-foreground dark:text-muted-foreground transition-transform duration-200 ${
               showAdvanced ? 'rotate-180' : ''
             }`} />
           </button>
@@ -270,11 +270,11 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700 space-y-4 transition-colors">
+                <div className="mt-4 p-4 bg-surface-container-low dark:bg-surface-container-high/50 rounded-lg border border-border dark:border-border space-y-4 transition-colors">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {/* Signature Format */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2 transition-colors">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 flex items-center gap-2 transition-colors">
                         <FileSignature className="w-4 h-4" />
                         Signature Format
                       </label>
@@ -283,16 +283,16 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                           value={advancedSettings.signatureFormat}
                           onChange={(e) => handleAdvancedChange('signatureFormat', e.target.value)}
                           disabled={!options.digitalSignature}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors appearance-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none pr-10"
+                          className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors appearance-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none pr-10"
                         >
                           <option value="simple">Simple</option>
                           <option value="detailed">Detailed</option>
                           <option value="custom">Custom</option>
                         </select>
-                        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" />
+                        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-outline dark:text-muted-foreground pointer-events-none" />
                       </div>
                       {!options.digitalSignature && (
-                        <p className="mt-1 text-xs text-amber-600 dark:text-amber-400 transition-colors">
+                        <p className="mt-1 text-xs text-amber-600 dark:text-destructive transition-colors">
                           Enable digital signature to configure format
                         </p>
                       )}
@@ -300,7 +300,7 @@ export default function CustomizationOptions({ template, onChange }: Customizati
 
                     {/* Logo Position */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2 transition-colors">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 flex items-center gap-2 transition-colors">
                         <Image className="w-4 h-4" />
                         Logo Position
                       </label>
@@ -309,15 +309,15 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                           value={advancedSettings.logoPosition}
                           onChange={(e) => handleAdvancedChange('logoPosition', e.target.value as 'header' | 'footer')}
                           disabled={!options.includeLogo}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors appearance-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none pr-10"
+                          className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors appearance-none disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none pr-10"
                         >
                           <option value="header">Header</option>
                           <option value="footer">Footer</option>
                         </select>
-                        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" />
+                        <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-outline dark:text-muted-foreground pointer-events-none" />
                       </div>
                       {!options.includeLogo && (
-                        <p className="mt-1 text-xs text-amber-600 dark:text-amber-400 transition-colors">
+                        <p className="mt-1 text-xs text-amber-600 dark:text-destructive transition-colors">
                           Enable logo to configure position
                         </p>
                       )}
@@ -327,7 +327,7 @@ export default function CustomizationOptions({ template, onChange }: Customizati
                   {/* Advanced Settings Info */}
                   <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
                     <div className="flex items-start gap-2">
-                      <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
+                      <Info className="w-4 h-4 text-tertiary dark:text-tertiary mt-0.5 flex-shrink-0" />
                       <div className="text-sm text-blue-700 dark:text-blue-300 transition-colors">
                         <p className="font-medium mb-1">Advanced Configuration</p>
                         <p className="text-xs">
@@ -344,26 +344,26 @@ export default function CustomizationOptions({ template, onChange }: Customizati
       </div>
 
       {/* Summary */}
-      <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+      <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
         <div className="flex items-start gap-3">
           <div className="p-1 bg-indigo-100 dark:bg-purple-900/30 rounded transition-colors">
-            <Palette className="w-4 h-4 text-indigo-600 dark:text-purple-400 transition-colors" />
+            <Palette className="w-4 h-4 text-primary-green dark:text-tertiary transition-colors" />
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
-            <p className="font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+          <div className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
+            <p className="font-medium text-foreground dark:text-foreground mb-2 transition-colors">
               Current Configuration
             </p>
             <ul className="space-y-1">
               <li className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${options.includeLogo ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'}`} />
+                <div className={`w-2 h-2 rounded-full ${options.includeLogo ? 'bg-green-500' : 'bg-surface-container dark:bg-surface-container-highest'}`} />
                 Logo: {options.includeLogo ? `Enabled (${advancedSettings.logoPosition})` : 'Disabled'}
               </li>
               <li className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${options.digitalSignature ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'}`} />
+                <div className={`w-2 h-2 rounded-full ${options.digitalSignature ? 'bg-green-500' : 'bg-surface-container dark:bg-surface-container-highest'}`} />
                 Signature: {options.digitalSignature ? `Enabled (${advancedSettings.signatureFormat})` : 'Disabled'}
               </li>
               <li className="flex items-center gap-2">
-                <div className={`w-2 h-2 rounded-full ${options.clickableLinks ? 'bg-green-500' : 'bg-gray-300 dark:bg-gray-600'}`} />
+                <div className={`w-2 h-2 rounded-full ${options.clickableLinks ? 'bg-green-500' : 'bg-surface-container dark:bg-surface-container-highest'}`} />
                 Clickable Links: {options.clickableLinks ? 'Enabled' : 'Disabled'}
               </li>
             </ul>

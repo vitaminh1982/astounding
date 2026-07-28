@@ -238,16 +238,16 @@ export default function ConversationalIntake() {
       <div className="flex items-center justify-between mb-6">
         <button
           onClick={() => dispatch({ type: 'SET_VIEW', payload: 'list' })}
-          className="flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors text-sm"
+          className="flex items-center gap-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant transition-colors text-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Projects
         </button>
         <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-500 dark:text-gray-400">
+          <span className="text-xs text-muted-foreground dark:text-muted-foreground">
             {Math.min(state.intakeStep, TOTAL_STEPS)} / {TOTAL_STEPS}
           </span>
-          <div className="w-32 h-1.5 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
+          <div className="w-32 h-1.5 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden">
             <motion.div
               className="h-full bg-gradient-to-r from-indigo-500 to-teal-500 rounded-full"
               initial={{ width: 0 }}
@@ -289,8 +289,8 @@ export default function ConversationalIntake() {
                   <div
                     className={`rounded-2xl px-5 py-3 ${
                       isAssistant
-                        ? 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200'
-                        : 'bg-indigo-600 dark:bg-teal-600 text-white'
+                        ? 'bg-white dark:bg-surface-container-high border border-border dark:border-border text-on-surface dark:text-on-surface-variant'
+                        : 'bg-primary dark:bg-teal-600 text-white'
                     }`}
                   >
                     {isAssistant && (
@@ -306,7 +306,7 @@ export default function ConversationalIntake() {
                       dangerouslySetInnerHTML={{ __html: renderMarkdown(msg.content) }}
                     />
                     {isAssistant && msgStep?.subtext && isLastAssistantMsg && (
-                      <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">{msgStep.subtext}</p>
+                      <p className="text-xs text-outline dark:text-muted-foreground mt-1">{msgStep.subtext}</p>
                     )}
                   </div>
 
@@ -325,8 +325,8 @@ export default function ConversationalIntake() {
                           disabled={!!selectedChip}
                           className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all ${
                             selectedChip === chip.value
-                              ? 'bg-indigo-600 dark:bg-teal-600 border-indigo-600 dark:border-teal-600 text-white shadow-md'
-                              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-indigo-400 dark:hover:border-teal-500 hover:text-indigo-600 dark:hover:text-teal-400'
+                              ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600 text-white shadow-md'
+                              : 'bg-white dark:bg-surface-container-high border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-indigo-400 dark:hover:border-teal-500 hover:text-primary-green dark:hover:text-teal-400'
                           } disabled:pointer-events-none`}
                         >
                           {selectedChip === chip.value && <Check size={11} />}
@@ -344,7 +344,7 @@ export default function ConversationalIntake() {
         {/* Typing indicator */}
         {state.isAssistantTyping && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl px-5 py-3">
+            <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl px-5 py-3">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-3 h-3 text-indigo-500 dark:text-teal-400" />
                 <div className="flex gap-1">
@@ -353,7 +353,7 @@ export default function ConversationalIntake() {
                       key={i}
                       animate={{ opacity: [0.3, 1, 0.3] }}
                       transition={{ duration: 1.2, repeat: Infinity, delay }}
-                      className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"
+                      className="w-2 h-2 bg-outline-variant dark:bg-outline rounded-full"
                     />
                   ))}
                 </div>
@@ -366,7 +366,7 @@ export default function ConversationalIntake() {
       </div>
 
       {/* Input area */}
-      <div className="border-t border-gray-200 dark:border-gray-700 pt-4 mt-2">
+      <div className="border-t border-border dark:border-border pt-4 mt-2">
         {isComplete ? (
           <motion.div
             initial={{ opacity: 0, y: 8 }}
@@ -382,7 +382,7 @@ export default function ConversationalIntake() {
           </motion.div>
         ) : isChipStep ? (
           // Chip-only step: hide text input, hint user to pick above
-          <p className="text-center text-xs text-gray-400 dark:text-gray-500">
+          <p className="text-center text-xs text-outline dark:text-muted-foreground">
             Select an option above to continue
           </p>
         ) : (
@@ -395,12 +395,12 @@ export default function ConversationalIntake() {
               onKeyDown={handleKeyDown}
               placeholder={currentStep?.placeholder || 'Type your answer…'}
               disabled={state.isAssistantTyping || isComplete}
-              className="flex-1 px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 disabled:opacity-50 transition-all text-sm"
+              className="flex-1 px-4 py-3 rounded-xl border border-border dark:border-border bg-white dark:bg-surface-container-high text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring disabled:opacity-50 transition-all text-sm"
             />
             <button
               onClick={handleSend}
               disabled={!inputValue.trim() || state.isAssistantTyping}
-              className="p-3 rounded-xl bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              className="p-3 rounded-xl bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
               aria-label="Send"
             >
               <Send className="w-5 h-5" />

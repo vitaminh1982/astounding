@@ -47,21 +47,21 @@ export default function NavWorkspaceSwitcher() {
           {wsEmoji(activeWorkspace.icon)}
         </span>
         <span className="flex-1 min-w-0 text-left">
-          <span className="block text-xs font-medium text-gray-900 dark:text-gray-100 truncate leading-tight">
+          <span className="block text-xs font-medium text-foreground dark:text-foreground truncate leading-tight">
             {activeWorkspace.name}
           </span>
-          <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 truncate leading-tight">
+          <span className="block text-[10px] font-normal text-muted-foreground dark:text-muted-foreground truncate leading-tight">
             {activeWorkspace.plan}
           </span>
         </span>
         {isOpen
-          ? <ChevronUp size={14} className="flex-shrink-0 text-gray-400" />
-          : <ChevronDown size={14} className="flex-shrink-0 text-gray-400" />}
+          ? <ChevronUp size={14} className="flex-shrink-0 text-outline" />
+          : <ChevronDown size={14} className="flex-shrink-0 text-outline" />}
       </button>
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute left-0 top-full mt-1 w-[280px] bg-white dark:bg-[#141414] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50 text-sm">
+        <div className="absolute left-0 top-full mt-1 w-[280px] bg-white dark:bg-[var(--color-surface-container-low)] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50 text-sm">
 
           {/* Header */}
           <div className="px-3 pt-3 pb-2.5">
@@ -70,10 +70,10 @@ export default function NavWorkspaceSwitcher() {
                 {wsEmoji(activeWorkspace.icon)}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="text-xs font-semibold text-gray-900 dark:text-gray-100 truncate">
+                <p className="text-xs font-semibold text-foreground dark:text-foreground truncate">
                   {activeWorkspace.name}
                 </p>
-                <p className="text-[10px] font-normal text-gray-500 dark:text-gray-400 mt-0.5">
+                <p className="text-[10px] font-normal text-muted-foreground dark:text-muted-foreground mt-0.5">
                   {activeWorkspace.plan} · {activeWorkspace.members}
                 </p>
               </div>
@@ -81,11 +81,11 @@ export default function NavWorkspaceSwitcher() {
 
             {/* Settings & Invite */}
             <div className="flex gap-1.5">
-              <button className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-[11px] font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors whitespace-nowrap">
+              <button className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-[11px] font-medium text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors whitespace-nowrap">
                 <Settings size={12} className="flex-shrink-0" />
                 Settings
               </button>
-              <button className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-[11px] font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors whitespace-nowrap">
+              <button className="flex-1 flex items-center justify-center gap-1 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-[11px] font-medium text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors whitespace-nowrap">
                 <UserPlus size={12} className="flex-shrink-0" />
                 Invite members
               </button>
@@ -115,16 +115,16 @@ export default function NavWorkspaceSwitcher() {
                     <span className="w-7 h-7 rounded-md flex items-center justify-center text-sm leading-none flex-shrink-0">
                       {wsEmoji(ws.icon)}
                     </span>
-                    <span className={`text-xs truncate ${isActive ? 'font-semibold text-gray-900 dark:text-gray-100' : 'font-medium text-gray-700 dark:text-gray-300'}`}>
+                    <span className={`text-xs truncate ${isActive ? 'font-semibold text-foreground dark:text-foreground' : 'font-medium text-on-surface dark:text-muted-foreground'}`}>
                       {ws.name}
                     </span>
                     {wsPill && (
-                      <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">
+                      <span className="text-[10px] bg-black/5 dark:bg-white/10 text-muted-foreground dark:text-muted-foreground border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">
                         {wsPill}
                       </span>
                     )}
                   </span>
-                  {isActive && <Check size={13} className="flex-shrink-0 text-gray-600 dark:text-gray-300" />}
+                  {isActive && <Check size={13} className="flex-shrink-0 text-muted-foreground dark:text-muted-foreground" />}
                 </button>
               );
             })}

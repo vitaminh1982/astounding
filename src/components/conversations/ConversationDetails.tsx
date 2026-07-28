@@ -28,9 +28,9 @@ export default function ConversationDetails({ conversation }) {
 
   if (!conversation) {
     return (
-      <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="h-full flex items-center justify-center text-muted-foreground dark:text-muted-foreground bg-surface-container-low dark:bg-background transition-colors">
         <div className="text-center">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">No Conversation Selected</h3>
+          <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">No Conversation Selected</h3>
           <p className="transition-colors">Select a discussion to start</p>
         </div>
       </div>
@@ -173,9 +173,9 @@ export default function ConversationDetails({ conversation }) {
   };
 
   return (
-    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="h-full flex flex-col bg-surface-container-low dark:bg-background transition-colors">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm dark:shadow-gray-900 transition-colors">
+      <div className="p-4 border-b border-border dark:border-border bg-white dark:bg-surface-container-high shadow-sm dark:shadow-gray-900 transition-colors">
         <div className="flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="relative">
@@ -192,13 +192,13 @@ export default function ConversationDetails({ conversation }) {
               </div>
               {/* Status indicator */}
               <span className={`absolute bottom-0 right-0 w-3 h-3 rounded-full border-2 border-white dark:border-gray-800 transition-colors
-                ${conversation.status === 'active' ? 'bg-green-500 dark:bg-green-400' : 'bg-gray-400 dark:bg-gray-500'}`}
+                ${conversation.status === 'active' ? 'bg-green-500 dark:bg-green-400' : 'bg-outline-variant dark:bg-outline'}`}
               />
             </div>
             <div>
               {/* Client name and email */}
-              <h2 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{conversation.client.name}</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{conversation.client.email}</p>
+              <h2 className="font-medium text-foreground dark:text-foreground transition-colors">{conversation.client.name}</h2>
+              <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{conversation.client.email}</p>
 
               {/* Show webhook indicator for live conversations */}
               {typeof conversation.id === 'string' && conversation.id.startsWith('session-') && (
@@ -212,7 +212,7 @@ export default function ConversationDetails({ conversation }) {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-full text-muted-foreground dark:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             aria-label="More options"
           >
             <MoreVertical className="w-5 h-5" />
@@ -234,15 +234,15 @@ export default function ConversationDetails({ conversation }) {
               }`}
             >
               {msg.sender !== 'agent' && (
-                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-gray-100 dark:bg-gray-700 transition-colors">
-                  <User className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
+                <div className="w-8 h-8 rounded-full flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest transition-colors">
+                  <User className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
                 </div>
               )}
               <div
                 className={`max-w-[70%] p-3 rounded-lg transition-colors ${
                   msg.sender === 'agent'
-                    ? 'bg-indigo-600 dark:bg-teal-600 text-white shadow-sm dark:shadow-gray-900'
-                    : 'bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700'
+                    ? 'bg-primary dark:bg-teal-600 text-white shadow-sm dark:shadow-gray-900'
+                    : 'bg-white dark:bg-surface-container-high text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 border border-border dark:border-border'
                 }`}
               >
                 <div className="whitespace-pre-wrap">{msg.content}</div>
@@ -252,7 +252,7 @@ export default function ConversationDetails({ conversation }) {
               </div>
               {msg.sender === 'agent' && (
                 <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-teal-900/30 transition-colors">
-                  <Bot className="w-4 h-4 text-indigo-600 dark:text-teal-400 transition-colors" />
+                  <Bot className="w-4 h-4 text-primary-green dark:text-teal-400 transition-colors" />
                 </div>
               )}
             </motion.div>
@@ -267,16 +267,16 @@ export default function ConversationDetails({ conversation }) {
             >
               <div className="max-w-[70%] p-3 rounded-lg bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 transition-colors">
                 <div className="flex items-center">
-                  <span className="text-indigo-600 dark:text-teal-300 text-sm mr-2 transition-colors">Typing</span>
+                  <span className="text-primary-green dark:text-teal-300 text-sm mr-2 transition-colors">Typing</span>
                   <span className="flex space-x-1">
-                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '200ms' }}></span>
-                    <span className="w-2 h-2 rounded-full bg-indigo-600 dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '400ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '0ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '200ms' }}></span>
+                    <span className="w-2 h-2 rounded-full bg-primary dark:bg-teal-400 animate-bounce transition-colors" style={{ animationDelay: '400ms' }}></span>
                   </span>
                 </div>
               </div>
               <div className="w-8 h-8 rounded-full flex items-center justify-center bg-indigo-100 dark:bg-teal-900/30 transition-colors">
-                <Bot className="w-4 h-4 text-indigo-600 dark:text-teal-400 transition-colors" />
+                <Bot className="w-4 h-4 text-primary-green dark:text-teal-400 transition-colors" />
               </div>
             </motion.div>
           )}
@@ -285,14 +285,14 @@ export default function ConversationDetails({ conversation }) {
       </div>
 
       {/* Input */}
-      <div className="p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900 transition-colors">
+      <div className="p-4 bg-white dark:bg-surface-container-high border-t border-border dark:border-border shadow-sm dark:shadow-gray-900 transition-colors">
         <form onSubmit={handleSubmit} className="flex gap-2">
           <div className="flex gap-2">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-full text-muted-foreground dark:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Attach file"
             >
               <Paperclip className="w-5 h-5" />
@@ -301,7 +301,7 @@ export default function ConversationDetails({ conversation }) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-full text-muted-foreground dark:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Add image"
             >
               <Image className="w-5 h-5" />
@@ -310,7 +310,7 @@ export default function ConversationDetails({ conversation }) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               type="button"
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full text-gray-600 dark:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              className="p-2 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-full text-muted-foreground dark:text-muted-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
               aria-label="Add emoji"
             >
               <Smile className="w-5 h-5" />
@@ -322,7 +322,7 @@ export default function ConversationDetails({ conversation }) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
-            className="flex-1 border border-gray-300 dark:border-gray-600 rounded-lg px-4 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent shadow-sm dark:shadow-gray-900 transition-colors"
+            className="flex-1 border border-border dark:border-border rounded-lg px-4 py-2 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-transparent shadow-sm dark:shadow-gray-900 transition-colors"
             disabled={isSending || isTyping}
             aria-label="Type your message"
           />
@@ -334,8 +334,8 @@ export default function ConversationDetails({ conversation }) {
             disabled={!message.trim() || isSending || isTyping}
             className={`p-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm
               ${message.trim() && !isSending && !isTyping
-                ? 'bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white focus:ring-indigo-500 dark:focus:ring-teal-500 dark:focus:ring-offset-gray-800 dark:shadow-gray-900'
-                : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed focus:ring-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800'
+                ? 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 dark:shadow-gray-900'
+                : 'bg-surface-container dark:bg-surface-container-highest text-outline dark:text-muted-foreground cursor-not-allowed focus:ring-gray-300 dark:focus:ring-gray-600 dark:focus:ring-offset-gray-800'
               }
             `}
             aria-label={isSending ? "Sending message" : "Send message"}

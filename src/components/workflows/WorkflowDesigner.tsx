@@ -64,7 +64,7 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
   };
 
   return (
-    <div className="h-full bg-white dark:bg-gray-900 transition-colors">
+    <div className="h-full bg-white dark:bg-background transition-colors">
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -78,19 +78,19 @@ const WorkflowDesigner: React.FC<WorkflowDesignerProps> = ({
         onDragOver={onDragOver}
         onDrop={onDrop}
         fitView
-        className="bg-gray-50 dark:bg-gray-900 transition-colors"
+        className="bg-surface-container-low dark:bg-background transition-colors"
       >
         <Background
-          className="bg-gray-50 dark:bg-gray-900 transition-colors"
+          className="bg-surface-container-low dark:bg-background transition-colors"
           gap={16}
           color="var(--grid-color)"
           style={{
             '--grid-color': 'rgb(156 163 175)', // gray-400
           } as React.CSSProperties & { '--grid-color': string }}
         />
-        <Controls className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg dark:shadow-gray-900 transition-colors [&_button]:text-gray-700 dark:[&_button]:text-gray-200 [&_button:hover]:bg-gray-100 dark:[&_button:hover]:bg-gray-700 [&_button]:transition-colors" />
+        <Controls className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-lg dark:shadow-gray-900 transition-colors [&_button]:text-on-surface dark:[&_button]:text-on-surface-variant [&_button:hover]:bg-surface-container-low dark:[&_button:hover]:bg-surface-container-highest [&_button]:transition-colors" />
         <MiniMap
-          className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg"
+          className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-lg"
           maskColor="rgb(0, 0, 0, 0.05)"
           nodeColor={(node) => {
             const isDark = document.documentElement.classList.contains('dark');

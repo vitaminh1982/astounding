@@ -36,7 +36,7 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
       changeType: 'increase' as const,
       changeLabel: t('metrics.cards.templates.changeLabel') || 'since last week',
       icon: FileText,
-      color: 'text-purple-600 dark:text-purple-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-purple-100 dark:bg-purple-900/20',
       hoverBgColor: 'group-hover:bg-purple-200 dark:group-hover:bg-purple-900/30',
       borderColor: 'border-purple-200 dark:border-purple-800',
@@ -101,18 +101,18 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
           icon: TrendingDown,
           bgColor: 'bg-red-50 dark:bg-red-900/20',
           hoverBgColor: 'hover:bg-red-100 dark:hover:bg-red-900/30',
-          textColor: 'text-red-600 dark:text-red-400',
-          iconColor: 'text-red-500 dark:text-red-400',
+          textColor: 'text-red-600 dark:text-destructive',
+          iconColor: 'text-destructive dark:text-destructive',
           borderColor: 'border-red-200 dark:border-red-800'
         };
       case 'neutral':
         return {
           icon: Minus,
-          bgColor: 'bg-gray-50 dark:bg-gray-800',
-          hoverBgColor: 'hover:bg-gray-100 dark:hover:bg-gray-700',
-          textColor: 'text-gray-600 dark:text-gray-400',
-          iconColor: 'text-gray-500 dark:text-gray-400',
-          borderColor: 'border-gray-200 dark:border-gray-700'
+          bgColor: 'bg-surface-container-low dark:bg-surface-container-high',
+          hoverBgColor: 'hover:bg-surface-container-low dark:hover:bg-surface-container-highest',
+          textColor: 'text-muted-foreground dark:text-muted-foreground',
+          iconColor: 'text-muted-foreground dark:text-muted-foreground',
+          borderColor: 'border-border dark:border-border'
         };
     }
   };
@@ -123,14 +123,14 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {[1, 2, 3].map((index) => (
           <div key={index} className="animate-pulse">
-            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-4 sm:p-6 transition-colors">
+            <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-4 sm:p-6 transition-colors">
               <div className="flex justify-between items-center">
-                <div className="h-12 w-12 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors"/>
-                <div className="h-6 w-20 rounded-full bg-gray-200 dark:bg-gray-700 transition-colors"/>
+                <div className="h-12 w-12 rounded-full bg-surface-container dark:bg-surface-container-highest transition-colors"/>
+                <div className="h-6 w-20 rounded-full bg-surface-container dark:bg-surface-container-highest transition-colors"/>
               </div>
-              <div className="mt-4 h-4 w-24 bg-gray-200 dark:bg-gray-700 rounded transition-colors"/>
-              <div className="mt-2 h-8 w-16 bg-gray-200 dark:bg-gray-700 rounded transition-colors"/>
-              <div className="mt-4 h-3 w-32 bg-gray-200 dark:bg-gray-700 rounded transition-colors"/>
+              <div className="mt-4 h-4 w-24 bg-surface-container dark:bg-surface-container-highest rounded transition-colors"/>
+              <div className="mt-2 h-8 w-16 bg-surface-container dark:bg-surface-container-highest rounded transition-colors"/>
+              <div className="mt-4 h-3 w-32 bg-surface-container dark:bg-surface-container-highest rounded transition-colors"/>
             </div>
           </div>
         ))}
@@ -166,7 +166,7 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
             tabIndex={0}
             role="button"
             aria-label={`Navigate to ${metric.title} page. Current value: ${metric.value}, Change: ${metric.change} ${metric.changeLabel}`}
-            className="group bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-lg dark:shadow-gray-900 dark:hover:shadow-gray-800 border border-gray-200 dark:border-gray-700 transition-all duration-200 cursor-pointer overflow-hidden focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+            className="group bg-white dark:bg-surface-container-high rounded-xl shadow-sm hover:shadow-lg dark:shadow-gray-900 dark:hover:shadow-gray-800 border border-border dark:border-border transition-all duration-200 cursor-pointer overflow-hidden focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
           >
             {/* Card Content */}
             <div className="p-4 sm:p-6">
@@ -191,7 +191,7 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
 
               {/* Metric Details */}
               <div className="mt-4 sm:mt-5">
-                <h3 className="text-sm sm:text-base font-medium text-gray-600 dark:text-gray-400 transition-colors">
+                <h3 className="text-sm sm:text-base font-medium text-muted-foreground dark:text-muted-foreground transition-colors">
                   {metric.title}
                 </h3>
                 <motion.div 
@@ -200,13 +200,13 @@ export default function MetricsCards({ onNavigate, loading = false }: MetricsCar
                   animate="visible"
                   className="mt-1 sm:mt-2"
                 >
-                  <span className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">
+                  <span className="text-2xl sm:text-3xl font-bold text-foreground dark:text-foreground transition-colors">
                     {metric.value}
                   </span>
                 </motion.div>
                 
                 {/* Change Label */}
-                <p className="mt-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="mt-2 text-xs sm:text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                   {metric.changeLabel}
                 </p>
               </div>

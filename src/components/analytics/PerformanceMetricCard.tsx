@@ -19,7 +19,7 @@ const PerformanceMetricCard: React.FC<PerformanceMetricCardProps> = ({
   trendValue,
   icon,
   iconBgColor = 'bg-indigo-100',
-  iconColor = 'text-indigo-600',
+  iconColor = 'text-primary-green',
   className = ''
 }) => {
   const getTrendIcon = () => {
@@ -28,14 +28,14 @@ const PerformanceMetricCard: React.FC<PerformanceMetricCardProps> = ({
     if (trend === 'up') {
       return <TrendingUp className="w-4 h-4 text-green-500" />;
     } else if (trend === 'down') {
-      return <TrendingDown className="w-4 h-4 text-red-500" />;
+      return <TrendingDown className="w-4 h-4 text-destructive" />;
     }
     
     return null;
   };
 
   const getTrendColor = () => {
-    if (!trend) return 'text-gray-500';
+    if (!trend) return 'text-muted-foreground';
     
     // For metrics where down is good (like response time)
     if (title.toLowerCase().includes('time') || title.toLowerCase().includes('cost')) {
@@ -49,7 +49,7 @@ const PerformanceMetricCard: React.FC<PerformanceMetricCardProps> = ({
   return (
     <div className={`bg-white rounded-lg border p-6 ${className}`}>
       <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+        <h3 className="text-lg font-medium text-foreground">{title}</h3>
         {icon && (
           <div className={`p-2 ${iconBgColor} rounded-lg`}>
             <div className={iconColor}>{icon}</div>
@@ -63,7 +63,7 @@ const PerformanceMetricCard: React.FC<PerformanceMetricCardProps> = ({
             {getTrendIcon()}
             <span className="ml-1">{trendValue}</span>
           </div>
-          {trend && <span className="ml-2 text-gray-500">from previous period</span>}
+          {trend && <span className="ml-2 text-muted-foreground">from previous period</span>}
         </div>
       )}
     </div>

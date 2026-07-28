@@ -17,9 +17,9 @@ const ToolsSidebar: React.FC<ToolsSidebarProps> = ({ tools, onToggleTool }) => {
   };
 
   return (
-    <aside className="w-80 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-sm dark:shadow-gray-900 p-5 overflow-y-auto transition-colors">
+    <aside className="w-80 bg-white dark:bg-surface-container-high border-l border-border dark:border-border shadow-sm dark:shadow-gray-900 p-5 overflow-y-auto transition-colors">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Agent Tools</h2>
+        <h2 className="text-xl font-semibold text-on-surface dark:text-foreground">Agent Tools</h2>
         <span className="px-2 py-1 bg-green-100 dark:bg-green-900 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-200 text-xs font-medium rounded-full transition-colors">
           {tools.filter(t => t.isActive).length} Active
         </span>
@@ -33,7 +33,7 @@ const ToolsSidebar: React.FC<ToolsSidebarProps> = ({ tools, onToggleTool }) => {
               relative p-4 rounded-xl transition-all duration-200
               ${tool.isActive 
                 ? 'bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 border border-green-200 dark:border-green-700 shadow-sm dark:shadow-gray-900' 
-                : 'bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                : 'bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
               }
             `}
           >
@@ -41,11 +41,11 @@ const ToolsSidebar: React.FC<ToolsSidebarProps> = ({ tools, onToggleTool }) => {
               <div className="flex items-center">
                 <div className={`
                   w-10 h-10 rounded-lg flex items-center justify-center mr-3 transition-colors
-                  ${tool.isActive ? 'bg-green-600 dark:bg-green-700 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-500 dark:text-gray-400'}
+                  ${tool.isActive ? 'bg-green-600 dark:bg-green-700 text-white' : 'bg-surface-container dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground'}
                 `}>
                   {getToolIcon(tool.name)}
                 </div>
-                <h3 className={`font-medium transition-colors ${tool.isActive ? 'text-green-700 dark:text-green-200' : 'text-gray-700 dark:text-gray-200'}`}>
+                <h3 className={`font-medium transition-colors ${tool.isActive ? 'text-green-700 dark:text-green-200' : 'text-on-surface dark:text-on-surface-variant'}`}>
                   {tool.name}
                 </h3>
               </div>
@@ -57,11 +57,11 @@ const ToolsSidebar: React.FC<ToolsSidebarProps> = ({ tools, onToggleTool }) => {
                   onChange={() => onToggleTool(tool.id)}
                   className="sr-only peer"
                 />
-                <div className="w-11 h-6 bg-gray-200 dark:bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white dark:after:bg-gray-200 after:border-gray-300 dark:after:border-gray-500 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600 dark:peer-checked:bg-green-500 transition-colors"></div>
+                <div className="w-11 h-6 bg-surface-container dark:bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white dark:after:bg-surface-container after:border-border dark:after:border-outline after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600 dark:peer-checked:bg-green-500 transition-colors"></div>
               </label>
             </div>
             
-            <p className={`text-sm ml-13 transition-colors ${tool.isActive ? 'text-green-600 dark:text-green-300' : 'text-gray-600 dark:text-gray-400'}`}>
+            <p className={`text-sm ml-13 transition-colors ${tool.isActive ? 'text-green-600 dark:text-green-300' : 'text-muted-foreground dark:text-muted-foreground'}`}>
               {tool.description}
             </p>
             
@@ -80,10 +80,10 @@ const ToolsSidebar: React.FC<ToolsSidebarProps> = ({ tools, onToggleTool }) => {
         ))}
       </div>
       
-      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+      <div className="mt-6 pt-6 border-t border-border dark:border-border">
         <button 
           type="button"
-          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         >
           <Plus className="w-4 h-4" />
           <span>Add Custom Tool</span>

@@ -28,7 +28,7 @@ const WorkspaceSidebar: React.FC<WorkspaceSidebarProps> = ({ activeTab, setActiv
   ];
 
   return (
-    <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+    <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest">
       <nav className="p-4">
         <ul className="space-y-1">
           {tabs.map((tab) => (
@@ -38,7 +38,7 @@ const WorkspaceSidebar: React.FC<WorkspaceSidebarProps> = ({ activeTab, setActiv
                 className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors ${
                   activeTab === tab.id
                     ? 'bg-indigo-50 dark:bg-teal-900 text-indigo-700 dark:text-teal-100'
-                    : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600'
+                    : 'text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                 }`}
               >
                 {tab.icon}

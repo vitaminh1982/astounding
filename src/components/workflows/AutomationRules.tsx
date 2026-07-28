@@ -106,13 +106,13 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
         <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="text-lg font-semibold">Automation Rules</h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               Create and manage your workflow automation rules
             </p>
           </div>
           <button
             onClick={handleAddRule}
-            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
             <Plus className="w-4 h-4 mr-2" />
             Add Rule
@@ -125,10 +125,10 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
             placeholder="Search rules..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-ring"
           />
           <svg
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-outline"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -142,16 +142,16 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
         {filteredRules.length === 0 ? (
           <div className="text-center py-12">
             <div className="rounded-full bg-indigo-100 p-3 mx-auto w-fit">
-              <Zap className="w-6 h-6 text-indigo-600" />
+              <Zap className="w-6 h-6 text-primary-green" />
             </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">No automation rules</h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <h3 className="mt-4 text-lg font-medium text-foreground">No automation rules</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
               {searchQuery ? 'No rules match your search criteria.' : 'Get started by creating your first automation rule.'}
             </p>
             {!searchQuery && (
               <button
                 onClick={handleAddRule}
-                className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
                 <Plus className="w-4 h-4 mr-2" />
                 Create Rule
@@ -170,23 +170,23 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
                     <div className="flex items-center">
                       <h3 className="font-medium text-lg">{rule.name}</h3>
                       <span className={`ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        rule.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                        rule.isActive ? 'bg-green-100 text-green-800' : 'bg-surface-container-low text-on-surface'
                       }`}>
                         <Circle className="w-2 h-2 mr-1" fill={rule.isActive ? 'currentColor' : 'none'} />
                         {rule.isActive ? 'Active' : 'Inactive'}
                       </span>
                       {rule.priority && (
-                        <span className="ml-2 text-xs text-gray-500">
+                        <span className="ml-2 text-xs text-muted-foreground">
                           Priority: {rule.priority}
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-500 mt-1">{rule.description}</p>
+                    <p className="text-sm text-muted-foreground mt-1">{rule.description}</p>
                   </div>
                   <div className="flex items-center space-x-2 ml-4">
                     <button
                       onClick={() => setEditingRule(rule)}
-                      className="p-1 text-gray-400 hover:text-indigo-600 rounded-full hover:bg-gray-100"
+                      className="p-1 text-outline hover:text-primary-green rounded-full hover:bg-surface-container-low"
                       title="Edit"
                     >
                       <Edit2 className="w-4 h-4" />
@@ -196,7 +196,7 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
                       className={`p-1 rounded-full ${
                         rule.isActive
                           ? 'text-green-600 hover:bg-green-100'
-                          : 'text-gray-400 hover:bg-gray-100'
+                          : 'text-outline hover:bg-surface-container-low'
                       }`}
                       title={rule.isActive ? 'Deactivate' : 'Activate'}
                     >
@@ -204,7 +204,7 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
                     </button>
                     <button
                       onClick={() => setDeleteConfirmation(rule.id)}
-                      className="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-100"
+                      className="p-1 text-outline hover:text-red-600 rounded-full hover:bg-red-100"
                       title="Delete"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -212,27 +212,27 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
                   </div>
                 </div>
                 <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div className="col-span-1 bg-gray-50 rounded-md p-3">
-                    <div className="flex items-center text-sm text-gray-700 mb-2">
+                  <div className="col-span-1 bg-surface-container-low rounded-md p-3">
+                    <div className="flex items-center text-sm text-on-surface mb-2">
                       <Code className="w-4 h-4 mr-2" />
                       <span className="font-medium">Condition</span>
                     </div>
-                    <pre className="text-sm text-gray-600 whitespace-pre-wrap">
+                    <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
                       {rule.condition}
                     </pre>
                   </div>
-                  <div className="col-span-1 bg-gray-50 rounded-md p-3">
-                    <div className="flex items-center text-sm text-gray-700 mb-2">
+                  <div className="col-span-1 bg-surface-container-low rounded-md p-3">
+                    <div className="flex items-center text-sm text-on-surface mb-2">
                       <Zap className="w-4 h-4 mr-2" />
                       <span className="font-medium">Action</span>
                     </div>
-                    <pre className="text-sm text-gray-600 whitespace-pre-wrap">
+                    <pre className="text-sm text-muted-foreground whitespace-pre-wrap">
                       {rule.action}
                     </pre>
                   </div>
                 </div>
                 {rule.lastExecuted && (
-                  <div className="mt-3 text-xs text-gray-500">
+                  <div className="mt-3 text-xs text-muted-foreground">
                     Last executed: {new Date(rule.lastExecuted).toLocaleString()} 
                     {rule.executionCount !== undefined && ` · ${rule.executionCount} executions`}
                   </div>
@@ -269,14 +269,14 @@ const AutomationRules: React.FC<AutomationRulesProps> = ({
       {deleteConfirmation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Delete Rule</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="text-lg font-medium text-foreground mb-2">Delete Rule</h3>
+            <p className="text-sm text-muted-foreground">
               Are you sure you want to delete this automation rule? This action cannot be undone.
             </p>
             <div className="mt-4 flex justify-end space-x-3">
               <button
                 onClick={() => setDeleteConfirmation(null)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                className="px-4 py-2 text-sm font-medium text-on-surface bg-white border border-border rounded-md hover:bg-surface-container-low"
               >
                 Cancel
               </button>
@@ -318,51 +318,51 @@ const RuleEditor: React.FC<RuleEditorProps> = ({ rule, onSave, onCancel }) => {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Name
             </label>
             <input
               type="text"
               value={editedRule.name}
               onChange={(e) => setEditedRule({...editedRule, name: e.target.value})}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Description
             </label>
             <textarea
               value={editedRule.description}
               onChange={(e) => setEditedRule({...editedRule, description: e.target.value})}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
               rows={2}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Condition
             </label>
             <textarea
               value={editedRule.condition}
               onChange={(e) => setEditedRule({...editedRule, condition: e.target.value})}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
               rows={2}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Action
             </label>
             <textarea
               value={editedRule.action}
               onChange={(e) => setEditedRule({...editedRule, action: e.target.value})}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
               rows={2}
               required
             />
@@ -372,7 +372,7 @@ const RuleEditor: React.FC<RuleEditorProps> = ({ rule, onSave, onCancel }) => {
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 text-gray-700 border rounded-md hover:bg-gray-50"
+              className="px-4 py-2 text-on-surface border rounded-md hover:bg-surface-container-low"
             >
               Cancel
             </button>

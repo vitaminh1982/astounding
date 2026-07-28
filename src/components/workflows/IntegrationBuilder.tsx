@@ -42,14 +42,14 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
   const integrationTypeConfig = useMemo(() => ({
     api: {
       icon: Zap,
-      color: 'text-blue-600 dark:text-blue-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200 dark:border-blue-800',
       label: 'API'
     },
     database: {
       icon: Database,
-      color: 'text-purple-600 dark:text-purple-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200 dark:border-purple-800',
       label: 'Database'
@@ -120,10 +120,10 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
   // Loading State
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="flex items-center justify-center h-full bg-surface-container-low dark:bg-background transition-colors">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-indigo-500 mx-auto"></div>
-          <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 transition-colors">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-primary-green mx-auto"></div>
+          <p className="mt-4 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             Loading integrations...
           </p>
         </div>
@@ -134,20 +134,20 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
   // Error State
   if (error) {
     return (
-      <div className="flex items-center justify-center h-full bg-gray-50 dark:bg-gray-900 transition-colors">
+      <div className="flex items-center justify-center h-full bg-surface-container-low dark:bg-background transition-colors">
         <div className="text-center max-w-md">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-100 dark:bg-red-900/20 mb-4 transition-colors">
-            <AlertCircle className="w-8 h-8 text-red-600 dark:text-red-400" />
+            <AlertCircle className="w-8 h-8 text-red-600 dark:text-destructive" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+          <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">
             Error loading integrations
           </h3>
-          <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             {error}
           </p>
           <button
             onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-indigo-600 dark:bg-indigo-500 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition-all duration-200"
+            className="mt-4 px-4 py-2 bg-primary dark:bg-primary text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-primary transition-all duration-200"
           >
             Try Again
           </button>
@@ -157,20 +157,20 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
   }
 
   return (
-    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="h-full flex flex-col bg-surface-container-low dark:bg-background transition-colors">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 p-4 border-b border-border dark:border-border bg-white dark:bg-surface-container-high transition-colors">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+          <h2 className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
             Integrations
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
             Connect external services and APIs to your workflow
           </p>
         </div>
         <button
           onClick={handleAddIntegration}
-          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
           aria-label="Add new integration"
         >
           <Plus className="w-4 h-4 mr-2" />
@@ -184,17 +184,17 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
           /* Empty State */
           <div className="h-full flex flex-col items-center justify-center text-center p-8">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/20 mb-4 transition-colors">
-              <Zap className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
+              <Zap className="w-8 h-8 text-primary-green dark:text-primary-green" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+            <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">
               No integrations configured
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm mb-6 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground max-w-sm mb-6 transition-colors">
               Connect your workflow to external services, APIs, databases, and messaging platforms to automate your processes.
             </p>
             <button
               onClick={handleAddIntegration}
-              className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+              className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
             >
               <Plus className="w-4 h-4 mr-2" />
               Add Your First Integration
@@ -210,7 +210,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
               return (
                 <div
                   key={integration.id}
-                  className={`p-4 border ${typeConfig.borderColor} rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-200`}
+                  className={`p-4 border ${typeConfig.borderColor} rounded-xl bg-white dark:bg-surface-container-high shadow-sm hover:shadow-md transition-all duration-200`}
                 >
                   {/* Integration Header */}
                   <div className="flex justify-between items-start gap-4">
@@ -220,13 +220,13 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="font-medium text-lg text-gray-900 dark:text-gray-100 truncate transition-colors">
+                          <h3 className="font-medium text-lg text-foreground dark:text-foreground truncate transition-colors">
                             {integration.name || 'Untitled Integration'}
                           </h3>
                           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-colors ${
                             integration.isActive 
                               ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800' 
-                              : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
+                              : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border'
                           }`}>
                             <Circle 
                               className="w-2 h-2 mr-1" 
@@ -235,7 +235,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                             {integration.isActive ? 'Active' : 'Inactive'}
                           </span>
                         </div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2 transition-colors">
+                        <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 line-clamp-2 transition-colors">
                           {integration.description || 'No description provided'}
                         </p>
                       </div>
@@ -245,7 +245,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                     <div className="flex items-center gap-1 flex-shrink-0">
                       <button
                         onClick={() => setEditingIntegration(integration)}
-                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all duration-200"
+                        className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-primary-green dark:hover:text-primary-green hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all duration-200"
                         aria-label="Edit integration"
                         title="Edit"
                       >
@@ -256,7 +256,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                         className={`p-2 rounded-lg transition-all duration-200 ${
                           integration.isActive
                             ? 'text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20'
-                            : 'text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700'
+                            : 'text-outline dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                         aria-label={integration.isActive ? 'Deactivate integration' : 'Activate integration'}
                         title={integration.isActive ? 'Deactivate' : 'Activate'}
@@ -265,7 +265,7 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                       </button>
                       <button
                         onClick={() => setDeleteConfirmation(integration.id)}
-                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200"
+                        className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-red-600 dark:hover:text-destructive hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200"
                         aria-label="Delete integration"
                         title="Delete"
                       >
@@ -275,10 +275,10 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                   </div>
 
                   {/* Integration Details */}
-                  <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 transition-colors">
+                  <div className="mt-4 pt-4 border-t border-border dark:border-border transition-colors">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                       <div className="flex items-center">
-                        <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 transition-colors">
+                        <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 transition-colors">
                           Type:
                         </span>
                         <span className={`px-2 py-1 rounded-md ${typeConfig.bgColor} ${typeConfig.color} text-xs font-medium`}>
@@ -288,10 +288,10 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                       
                       {integration.type === 'api' && integration.config.method && (
                         <div className="flex items-center">
-                          <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 transition-colors">
+                          <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 transition-colors">
                             Method:
                           </span>
-                          <code className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs font-mono transition-colors">
+                          <code className="px-2 py-1 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant rounded text-xs font-mono transition-colors">
                             {integration.config.method}
                           </code>
                         </div>
@@ -299,14 +299,14 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
                       
                       {integration.type === 'api' && integration.config.endpoint && (
                         <div className="col-span-full">
-                          <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 transition-colors">
+                          <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 transition-colors">
                             Endpoint:
                           </span>
                           <a
                             href={integration.config.endpoint}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 break-all transition-colors"
+                            className="text-primary-green dark:text-primary-green hover:text-indigo-700 dark:hover:text-indigo-300 break-all transition-colors"
                           >
                             {integration.config.endpoint}
                           </a>
@@ -338,34 +338,34 @@ const IntegrationBuilder: React.FC<IntegrationBuilderProps> = ({
           onClick={handleCancelDelete}
         >
           <div 
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-md border border-gray-200 dark:border-gray-700 transition-colors"
+            className="bg-white dark:bg-surface-container-high rounded-xl shadow-2xl w-full max-w-md border border-border dark:border-border transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/20 flex items-center justify-center transition-colors">
-                  <AlertCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
+                  <AlertCircle className="w-6 h-6 text-red-600 dark:text-destructive" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">
                     Delete Integration
                   </h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                     Are you sure you want to delete this integration? This action cannot be undone and may affect your workflow's functionality.
                   </p>
                 </div>
               </div>
             </div>
-            <div className="flex justify-end gap-3 p-4 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-700 rounded-b-xl transition-colors">
+            <div className="flex justify-end gap-3 p-4 bg-surface-container-low dark:bg-background/50 border-t border-border dark:border-border rounded-b-xl transition-colors">
               <button
                 onClick={handleCancelDelete}
-                className="px-4 py-2.5 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
+                className="px-4 py-2.5 text-on-surface dark:text-muted-foreground bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDeleteIntegration(deleteConfirmation)}
-                className="px-4 py-2.5 bg-red-600 dark:bg-red-500 text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 shadow-sm hover:shadow-md transition-all duration-200"
+                className="px-4 py-2.5 bg-red-600 dark:bg-destructive text-white rounded-lg hover:bg-red-700 dark:hover:bg-red-600 shadow-sm hover:shadow-md transition-all duration-200"
               >
                 Delete Integration
               </button>
@@ -406,22 +406,22 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
       onClick={onCancel}
     >
       <div 
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-700 transition-colors"
+        className="bg-white dark:bg-surface-container-high rounded-xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-border dark:border-border transition-colors"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between transition-colors z-10">
+        <div className="sticky top-0 bg-white dark:bg-surface-container-high border-b border-border dark:border-border p-6 flex items-center justify-between transition-colors z-10">
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-lg ${integrationTypeConfig[editedIntegration.type]?.bgColor || 'bg-blue-50 dark:bg-blue-900/20'} flex items-center justify-center transition-colors`}>
-              <TypeIcon className={`w-5 h-5 ${integrationTypeConfig[editedIntegration.type]?.color || 'text-blue-600 dark:text-blue-400'}`} />
+              <TypeIcon className={`w-5 h-5 ${integrationTypeConfig[editedIntegration.type]?.color || 'text-tertiary dark:text-tertiary'}`} />
             </div>
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+            <h2 className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">
               {integration.id ? 'Edit Integration' : 'Create Integration'}
             </h2>
           </div>
           <button
             onClick={onCancel}
-            className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
+            className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-all duration-200"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -432,14 +432,14 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
         <form onSubmit={handleSubmit} className="p-6 space-y-5">
           {/* Name Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
-              Integration Name <span className="text-red-500">*</span>
+            <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
+              Integration Name <span className="text-destructive">*</span>
             </label>
             <input
               type="text"
               value={editedIntegration.name}
               onChange={(e) => setEditedIntegration({...editedIntegration, name: e.target.value})}
-              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+              className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
               placeholder="Enter integration name"
               required
             />
@@ -447,13 +447,13 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
 
           {/* Description Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
               Description
             </label>
             <textarea
               value={editedIntegration.description}
               onChange={(e) => setEditedIntegration({...editedIntegration, description: e.target.value})}
-              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors resize-none"
+              className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors resize-none"
               rows={3}
               placeholder="Describe what this integration does"
             />
@@ -461,8 +461,8 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
 
           {/* Type Field */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
-              Integration Type <span className="text-red-500">*</span>
+            <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
+              Integration Type <span className="text-destructive">*</span>
             </label>
             <select
               value={editedIntegration.type}
@@ -475,7 +475,7 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
                   config: newType === 'api' ? { endpoint: '', method: 'GET' } : {} 
                 });
               }}
-              className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors appearance-none"
+              className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors appearance-none"
             >
               <option value="api">API</option>
               <option value="database">Database</option>
@@ -487,13 +487,13 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
           {/* API-Specific Fields */}
           {editedIntegration.type === 'api' && (
             <div className="space-y-4 p-4 bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
-              <h3 className="text-sm font-medium text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
-                <Zap className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+              <h3 className="text-sm font-medium text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
+                <Zap className="w-4 h-4 text-tertiary dark:text-tertiary" />
                 API Configuration
               </h3>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                   Endpoint URL
                 </label>
                 <input
@@ -506,13 +506,13 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
                       endpoint: e.target.value
                     }
                   })}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
                   placeholder="https://api.example.com/endpoint"
                 />
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                   HTTP Method
                 </label>
                 <select
@@ -524,7 +524,7 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
                       method: e.target.value as 'GET' | 'POST' | 'PUT' | 'DELETE'
                     }
                   })}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors appearance-none"
+                  className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors appearance-none"
                 >
                   <option value="GET">GET</option>
                   <option value="POST">POST</option>
@@ -537,17 +537,17 @@ const IntegrationEditor: React.FC<IntegrationEditorProps> = ({
           {/* Add other type specific configurations here if needed */}
 
           {/* Action Buttons */}
-          <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700 transition-colors">
+          <div className="flex justify-end gap-3 pt-4 border-t border-border dark:border-border transition-colors">
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2.5 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
+              className="px-4 py-2.5 text-on-surface dark:text-muted-foreground bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-2.5 bg-indigo-600 dark:bg-indigo-500 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-2"
+              className="px-4 py-2.5 bg-primary dark:bg-primary text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-primary shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-2"
             >
               <CheckCircle className="w-4 h-4" />
               {integration.id ? 'Save Changes' : 'Create Integration'}

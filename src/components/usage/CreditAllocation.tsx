@@ -11,20 +11,20 @@ export default function CreditAllocation({ usageData }: CreditAllocationProps) {
   
   // Generate colors for both light and dark modes
   const colors = [
-    { light: '#6366f1', dark: '#14b8a6', bg: 'bg-indigo-500 dark:bg-teal-500' }, // indigo -> teal
-    { light: '#3b82f6', dark: '#06b6d4', bg: 'bg-blue-500 dark:bg-cyan-500' },   // blue -> cyan
+    { light: '#6366f1', dark: '#14b8a6', bg: 'bg-primary dark:bg-primary' }, // indigo -> teal
+    { light: '#3b82f6', dark: '#06b6d4', bg: 'bg-tertiary dark:bg-cyan-500' },   // blue -> cyan
     { light: '#10b981', dark: '#10b981', bg: 'bg-green-500 dark:bg-green-500' }, // green stays green
     { light: '#f59e0b', dark: '#f59e0b', bg: 'bg-yellow-500 dark:bg-yellow-500' }, // yellow stays yellow
-    { light: '#ef4444', dark: '#ef4444', bg: 'bg-red-500 dark:bg-red-500' },     // red stays red
-    { light: '#8b5cf6', dark: '#a855f7', bg: 'bg-purple-500 dark:bg-purple-500' } // purple stays purple
+    { light: '#ef4444', dark: '#ef4444', bg: 'bg-destructive dark:bg-destructive' },     // red stays red
+    { light: '#8b5cf6', dark: '#a855f7', bg: 'bg-tertiary dark:bg-tertiary' } // purple stays purple
   ];
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Credit Allocation</h3>
+        <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Credit Allocation</h3>
         <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <DollarSign className="w-5 h-5 text-indigo-600 dark:text-teal-300" />
+          <DollarSign className="w-5 h-5 text-primary-green dark:text-teal-300" />
         </div>
       </div>
       
@@ -109,25 +109,25 @@ export default function CreditAllocation({ usageData }: CreditAllocationProps) {
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">
-                <p className="text-xs text-gray-500 dark:text-gray-400">Total</p>
-                <p className="text-xl font-bold text-gray-900 dark:text-gray-100">{usageData.credits.used.toLocaleString()}</p>
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground">Total</p>
+                <p className="text-xl font-bold text-foreground dark:text-foreground">{usageData.credits.used.toLocaleString()}</p>
               </div>
             </div>
           </div>
         </div>
         
         <div>
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">Breakdown</h4>
+          <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant mb-4">Breakdown</h4>
           <div className="space-y-4">
             {creditAllocation.map((item, index) => (
               <div key={index} className="flex items-center">
                 <div className={`w-4 h-4 rounded-sm ${colors[index % colors.length].bg} mr-3 transition-colors`}></div>
                 <div className="flex-1">
                   <div className="flex justify-between items-center">
-                    <p className="font-medium text-gray-900 dark:text-gray-100">{item.category}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{item.percentage}%</p>
+                    <p className="font-medium text-foreground dark:text-foreground">{item.category}</p>
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground">{item.percentage}%</p>
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400">{item.amount.toLocaleString()} credits</div>
+                  <div className="text-sm text-muted-foreground dark:text-muted-foreground">{item.amount.toLocaleString()} credits</div>
                 </div>
               </div>
             ))}
@@ -135,18 +135,18 @@ export default function CreditAllocation({ usageData }: CreditAllocationProps) {
         </div>
       </div>
       
-      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">Cost Efficiency</h4>
+      <div className="mt-6 pt-6 border-t border-border dark:border-border">
+        <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant mb-4">Cost Efficiency</h4>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg p-3 transition-colors">
-            <p className="text-xs text-gray-500 dark:text-gray-400">Cost per Conversation</p>
-            <p className="text-lg font-medium text-gray-900 dark:text-gray-100">
+          <div className="bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded-lg p-3 transition-colors">
+            <p className="text-xs text-muted-foreground dark:text-muted-foreground">Cost per Conversation</p>
+            <p className="text-lg font-medium text-foreground dark:text-foreground">
               {(usageData.credits.used / usageData.conversations.total).toFixed(2)} credits
             </p>
           </div>
-          <div className="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg p-3 transition-colors">
-            <p className="text-xs text-gray-500 dark:text-gray-400">Cost per Message</p>
-            <p className="text-lg font-medium text-gray-900 dark:text-gray-100">
+          <div className="bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded-lg p-3 transition-colors">
+            <p className="text-xs text-muted-foreground dark:text-muted-foreground">Cost per Message</p>
+            <p className="text-lg font-medium text-foreground dark:text-foreground">
               {(usageData.credits.used / usageData.messages.used).toFixed(2)} credits
             </p>
           </div>

@@ -24,7 +24,7 @@ export default function TemplatesPage() {
         <div className="mb-4 lg:hidden">
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="w-full px-4 py-2 text-left bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-700"
+            className="w-full px-4 py-2 text-left bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant rounded-lg border border-border dark:border-border"
           >
             {t('templates.categories.title')} {isMobileMenuOpen ? '▼' : '▶'}
           </button>

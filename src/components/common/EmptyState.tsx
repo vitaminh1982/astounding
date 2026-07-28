@@ -65,15 +65,15 @@ const EmptyState: React.FC<EmptyStateProps> = ({
   // Variant configurations
   const variantConfig = {
     default: 'bg-transparent',
-    card: 'bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm',
-    minimal: 'bg-gray-50 dark:bg-gray-900/50 rounded-lg',
+    card: 'bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border shadow-sm',
+    minimal: 'bg-surface-container-low dark:bg-background/50 rounded-lg',
   };
 
   // Button variant configurations
   const buttonVariants = {
-    primary: 'bg-indigo-600 dark:bg-indigo-500 hover:bg-indigo-700 dark:hover:bg-indigo-600 text-white shadow-sm hover:shadow-md',
-    secondary: 'bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 shadow-sm',
-    ghost: 'bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300',
+    primary: 'bg-primary dark:bg-primary hover:bg-indigo-700 dark:hover:bg-primary text-white shadow-sm hover:shadow-md',
+    secondary: 'bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border shadow-sm',
+    ghost: 'bg-transparent hover:bg-surface-container-low dark:hover:bg-surface-container-high text-on-surface dark:text-muted-foreground',
   };
 
   const config = sizeConfig[size];
@@ -138,14 +138,14 @@ const EmptyState: React.FC<EmptyStateProps> = ({
           {/* Animated background gradient on hover */}
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 dark:from-indigo-400/10 dark:to-purple-400/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          <Icon className={`${config.iconSize} text-gray-400 dark:text-gray-500 transition-colors duration-200 relative z-10`} />
+          <Icon className={`${config.iconSize} text-outline dark:text-muted-foreground transition-colors duration-200 relative z-10`} />
         </motion.div>
       )}
 
       {/* Title */}
       <motion.h3
         variants={animated ? itemVariants : undefined}
-        className={`${config.title} font-semibold text-gray-900 dark:text-gray-100 mb-2 transition-colors duration-200`}
+        className={`${config.title} font-semibold text-foreground dark:text-foreground mb-2 transition-colors duration-200`}
       >
         {title}
       </motion.h3>
@@ -154,7 +154,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
       {description && (
         <motion.p
           variants={animated ? itemVariants : undefined}
-          className={`${config.description} text-gray-500 dark:text-gray-400 max-w-md mb-6 leading-relaxed transition-colors duration-200`}
+          className={`${config.description} text-muted-foreground dark:text-muted-foreground max-w-md mb-6 leading-relaxed transition-colors duration-200`}
         >
           {description}
         </motion.p>

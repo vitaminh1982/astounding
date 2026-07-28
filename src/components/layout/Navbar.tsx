@@ -75,7 +75,7 @@ const ProfileDropdown = memo(({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: -10 }}
         transition={{ duration: 0.15 }}
-        className="absolute right-0 mt-3 w-72 bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden z-50 transition-colors"
+        className="absolute right-0 mt-3 w-72 bg-white dark:bg-surface-container-high rounded-xl shadow-xl dark:shadow-gray-900 border border-border dark:border-border overflow-hidden z-50 transition-colors"
       >
         {/* User info section with gradient */}
         <div className="relative bg-gradient-to-br from-indigo-500 to-purple-600 dark:from-teal-500 dark:to-teal-600 px-4 py-4 transition-colors">
@@ -95,7 +95,7 @@ const ProfileDropdown = memo(({
         </div>
 
         {/* Mobile credits display */}
-        <div className="md:hidden px-4 py-3 bg-gray-50 dark:bg-gray-900/50 border-b border-gray-200 dark:border-gray-700 transition-colors">
+        <div className="md:hidden px-4 py-3 bg-surface-container-low dark:bg-background/50 border-b border-border dark:border-border transition-colors">
           <CreditConsumptionBar
             directCredits={{ used: 1250, total: 4000 }}
             backgroundCredits={{ used: 350, total: 1000 }}
@@ -132,18 +132,18 @@ const ProfileDropdown = memo(({
         </div>
 
         {/* Préférences : thème + langue */}
-        <div className="border-t border-gray-200 dark:border-gray-700 py-2 transition-colors">
+        <div className="border-t border-border dark:border-border py-2 transition-colors">
           {/* Dark mode toggle */}
           <button
             onClick={toggleTheme}
-            className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none"
+            className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none"
             aria-label={resolvedTheme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
           >
             <span className="flex items-center gap-3">
               {resolvedTheme === 'light' ? (
-                <Moon className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                <Moon className="h-5 w-5 text-outline dark:text-muted-foreground" />
               ) : (
-                <Sun className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                <Sun className="h-5 w-5 text-outline dark:text-muted-foreground" />
               )}
               <span className="font-medium">
                 {resolvedTheme === 'light' ? 'Dark mode' : 'Light mode'}
@@ -154,11 +154,11 @@ const ProfileDropdown = memo(({
           {/* Language toggle */}
           <button
             onClick={toggleLanguage}
-            className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none"
+            className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none"
             aria-label={language === 'en' ? 'Switch to French' : 'Passer en anglais'}
           >
             <span className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+              <Globe className="h-5 w-5 text-outline dark:text-muted-foreground" />
               <span className="font-medium">
                 {language === 'fr' ? 'Français' : 'English'}
               </span>
@@ -170,14 +170,14 @@ const ProfileDropdown = memo(({
         </div>
 
         {/* Workspaces section */}
-        <div className="border-t border-gray-200 dark:border-gray-700 transition-colors">
-          <div className="px-4 py-2 bg-gray-50 dark:bg-gray-900/50 transition-colors">
-            <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">
+        <div className="border-t border-border dark:border-border transition-colors">
+          <div className="px-4 py-2 bg-surface-container-low dark:bg-background/50 transition-colors">
+            <p className="text-xs font-semibold text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">
               Your Workspace
             </p>
           </div>
           <button
-            className="w-full flex items-center justify-between px-4 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full flex items-center justify-between px-4 py-3 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             onClick={() => {
               onOpenWorkspaceModal();
               onClose();
@@ -192,16 +192,16 @@ const ProfileDropdown = memo(({
             </span>
             <span className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse transition-colors" />
-              <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:translate-x-0.5 transition-all" />
+              <ChevronRight className="w-4 h-4 text-outline dark:text-muted-foreground group-hover:translate-x-0.5 transition-all" />
             </span>
           </button>
         </div>
 
         {/* Sign out button */}
-        <div className="border-t border-gray-200 dark:border-gray-700 py-2 transition-colors">
+        <div className="border-t border-border dark:border-border py-2 transition-colors">
           <button
             onClick={onClose}
-            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors group focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="w-full flex items-center gap-3 px-4 py-3 text-sm text-red-600 dark:text-destructive hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors group focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
             aria-label="Sign out"
           >
             <LogOut className="h-5 w-5 group-hover:-translate-x-0.5 transition-transform" />
@@ -222,14 +222,14 @@ const MenuItem = ({ icon: Icon, label, onClick, badge }: {
 }) => (
   <button
     onClick={onClick}
-    className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-teal-500 dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+    className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 transition-colors group focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-teal-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
   >
     <span className="flex items-center gap-3">
-      <Icon className="h-5 w-5 text-gray-400 dark:text-gray-500 group-hover:text-indigo-500 dark:group-hover:text-teal-400 transition-colors" />
+      <Icon className="h-5 w-5 text-outline dark:text-muted-foreground group-hover:text-indigo-500 dark:group-hover:text-teal-400 transition-colors" />
       <span className="font-medium transition-colors">{label}</span>
     </span>
     {badge !== undefined && badge > 0 && (
-      <span className="px-2 py-0.5 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 text-indigo-600 dark:text-teal-400 text-xs font-semibold rounded-full transition-colors">
+      <span className="px-2 py-0.5 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 text-primary-green dark:text-teal-400 text-xs font-semibold rounded-full transition-colors">
         {badge}
       </span>
     )}
@@ -274,7 +274,7 @@ const Navbar = ({
         className="lg:hidden p-1.5 mr-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-lg transition-colors focus:outline-none"
         aria-label="Toggle menu"
       >
-        <Menu className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+        <Menu className="h-4 w-4 text-muted-foreground dark:text-muted-foreground" />
       </button>
 
       {/* Logo — w-16 matches sendplex-nav width */}

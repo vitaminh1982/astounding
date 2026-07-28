@@ -19,16 +19,16 @@ export default function PhasePipeline({ phases, currentPhaseIndex }: Props) {
 
   const getPhaseColors = (status: ProjectPhase['status']) => {
     switch (status) {
-      case 'locked': return 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500';
-      case 'active': return 'bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-500 text-blue-600 dark:text-blue-400';
+      case 'locked': return 'bg-surface-container-low dark:bg-surface-container-high border-border dark:border-border text-outline dark:text-muted-foreground';
+      case 'active': return 'bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-tertiary text-tertiary dark:text-tertiary';
       case 'completed': return 'bg-green-50 dark:bg-green-900/20 border-green-400 dark:border-green-500 text-green-600 dark:text-green-400';
     }
   };
 
   const getConnectorColor = (index: number) => {
     if (index < currentPhaseIndex) return 'bg-green-400 dark:bg-green-500';
-    if (index === currentPhaseIndex) return 'bg-blue-400 dark:bg-blue-500';
-    return 'bg-gray-300 dark:bg-gray-600';
+    if (index === currentPhaseIndex) return 'bg-blue-400 dark:bg-tertiary';
+    return 'bg-surface-container dark:bg-surface-container-highest';
   };
 
   return (
@@ -44,7 +44,7 @@ export default function PhasePipeline({ phases, currentPhaseIndex }: Props) {
             >
               {phase.status === 'active' && (
                 <motion.div
-                  className="absolute inset-0 rounded-xl border-2 border-blue-400 dark:border-blue-500"
+                  className="absolute inset-0 rounded-xl border-2 border-blue-400 dark:border-tertiary"
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
@@ -72,7 +72,7 @@ export default function PhasePipeline({ phases, currentPhaseIndex }: Props) {
             {index < phases.length - 1 && (
               <div className="flex items-center">
                 <div className={`w-8 h-0.5 ${getConnectorColor(index)} rounded-full`} />
-                <ChevronRight className="w-4 h-4 text-gray-400 dark:text-gray-500 -ml-1" />
+                <ChevronRight className="w-4 h-4 text-outline dark:text-muted-foreground -ml-1" />
               </div>
             )}
           </React.Fragment>

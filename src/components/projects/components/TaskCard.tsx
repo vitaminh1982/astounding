@@ -19,7 +19,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
       case 'high': return 'border-l-red-500 bg-red-50/30 dark:bg-red-900/10';
       case 'medium': return 'border-l-yellow-500 bg-yellow-50/30 dark:bg-yellow-900/10';
       case 'low': return 'border-l-green-500 bg-green-50/30 dark:bg-green-900/10';
-      default: return 'border-l-gray-500 bg-gray-50/30 dark:bg-gray-700/30';
+      default: return 'border-l-gray-500 bg-surface-container-low/30 dark:bg-surface-container-highest/30';
     }
   };
 
@@ -28,13 +28,13 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
       case 'high': return 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 border-red-200 dark:border-red-700';
       case 'medium': return 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 border-yellow-200 dark:border-yellow-700';
       case 'low': return 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 border-green-200 dark:border-green-700';
-      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600';
+      default: return 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border-border dark:border-border';
     }
   };
 
   return (
     <div 
-      className={`bg-white dark:bg-gray-800 rounded-lg border-l-4 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200 cursor-pointer group ${getPriorityStyles(task.priority)}`}
+      className={`bg-white dark:bg-surface-container-high rounded-lg border-l-4 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200 cursor-pointer group ${getPriorityStyles(task.priority)}`}
       onClick={(e) => {
         // Handle card click (e.g., open modal)
         console.log('Task clicked:', task.id);
@@ -43,21 +43,21 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
       {/* Card Header */}
       <div className="p-4">
         <div className="flex items-start justify-between mb-3">
-          <h4 className="font-semibold text-gray-900 dark:text-gray-100 text-sm leading-tight flex-1 pr-2 group-hover:text-indigo-600 dark:group-hover:text-teal-400 transition-colors">
+          <h4 className="font-semibold text-foreground dark:text-foreground text-sm leading-tight flex-1 pr-2 group-hover:text-primary-green dark:group-hover:text-teal-400 transition-colors">
             {task.name}
           </h4>
           <button 
-            className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded"
+            className="opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded"
             onClick={(e) => {
               e.stopPropagation();
               // Handle more options
             }}
           >
-            <MoreVertical className="w-4 h-4 text-gray-400 dark:text-gray-500" />
+            <MoreVertical className="w-4 h-4 text-outline dark:text-muted-foreground" />
           </button>
         </div>
 
-        <p className="text-xs text-gray-600 dark:text-gray-300 mb-3 line-clamp-2 leading-relaxed">
+        <p className="text-xs text-muted-foreground dark:text-muted-foreground mb-3 line-clamp-2 leading-relaxed">
           {task.description}
         </p>
 
@@ -67,7 +67,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
             {task.priority.toUpperCase()}
           </span>
           {task.estimatedDuration && (
-            <span className="text-xs text-gray-500 dark:text-gray-400 flex items-center gap-1">
+            <span className="text-xs text-muted-foreground dark:text-muted-foreground flex items-center gap-1">
               <Clock className="w-3 h-3" />
               {task.estimatedDuration}
             </span>
@@ -75,12 +75,12 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
         </div>
 
         {/* Agent & Date Info */}
-        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mb-3 pb-3 border-b border-gray-100 dark:border-gray-600">
+        <div className="flex items-center justify-between text-xs text-muted-foreground dark:text-muted-foreground mb-3 pb-3 border-b border-border dark:border-border">
           <div className="flex items-center gap-1.5">
             <div className="w-6 h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 dark:from-teal-400 dark:to-cyan-500 flex items-center justify-center text-white text-xs font-medium ring-2 ring-white dark:ring-gray-800 shadow-sm transition-colors">
               {task.assignedAgent.charAt(0).toUpperCase()}
             </div>
-            <span className="font-medium text-gray-700 dark:text-gray-300 text-xs">{task.assignedAgent}</span>
+            <span className="font-medium text-on-surface dark:text-muted-foreground text-xs">{task.assignedAgent}</span>
           </div>
           <div className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
@@ -107,7 +107,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task, onRetryTask }) => {
               e.stopPropagation();
               // Handle view action
             }}
-            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 active:bg-gray-200 dark:active:bg-gray-500 transition-colors text-xs font-medium"
+            className="flex-1 flex items-center justify-center gap-1.5 px-3 py-2 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest active:bg-surface-container dark:active:bg-outline transition-colors text-xs font-medium"
           >
             <Eye className="w-3.5 h-3.5" />
             View

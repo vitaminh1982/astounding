@@ -22,8 +22,8 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         className={`
           ${sizeClasses[size]}
           border-4 
-          border-gray-200 
-          dark:border-gray-700
+          border-border 
+          dark:border-border
           border-t-blue-600 
           dark:border-t-blue-400
           rounded-full 

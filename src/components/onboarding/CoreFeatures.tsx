@@ -16,7 +16,7 @@ const CoreFeatures: React.FC<CoreFeaturesProps> = ({ onNext }) => {
       description: 'Design and deploy sophisticated AI-powered workflows that automate complex business processes.',
       icon: Workflow,
       color: 'bg-blue-100 dark:bg-blue-900',
-      textColor: 'text-blue-600 dark:text-blue-300',
+      textColor: 'text-tertiary dark:text-blue-300',
       benefits: [
         'Reduce manual workload by up to 70%',
         'Ensure consistent process execution',
@@ -29,7 +29,7 @@ const CoreFeatures: React.FC<CoreFeaturesProps> = ({ onNext }) => {
       description: 'Create and manage AI assistants that augment your workforce and enhance customer experiences.',
       icon: Bot,
       color: 'bg-purple-100 dark:bg-purple-900',
-      textColor: 'text-purple-600 dark:text-purple-300',
+      textColor: 'text-tertiary dark:text-purple-300',
       benefits: [
         '24/7 availability for customer support',
         'Consistent and personalized interactions',
@@ -67,29 +67,29 @@ const CoreFeatures: React.FC<CoreFeaturesProps> = ({ onNext }) => {
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Core Features & Benefits</h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <h2 className="text-2xl font-bold text-on-surface dark:text-foreground mb-4">Core Features & Benefits</h2>
+        <p className="text-muted-foreground dark:text-muted-foreground">
           Sendplex offers a comprehensive suite of features designed to help you deploy, manage, and govern AI systems at scale.
         </p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {features.map((feature) => (
-          <div key={feature.id} className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 transition-colors">
+          <div key={feature.id} className="bg-surface-container-low dark:bg-surface-container-high rounded-xl p-6 border border-border dark:border-border transition-colors">
             <div className="flex items-center gap-3 mb-4">
               <div className={`p-2 ${feature.color} rounded-lg transition-colors`}>
                 <feature.icon className={`w-5 h-5 ${feature.textColor}`} />
               </div>
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">{feature.title}</h3>
+              <h3 className="text-lg font-semibold text-on-surface dark:text-foreground">{feature.title}</h3>
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">{feature.description}</p>
+            <p className="text-muted-foreground dark:text-muted-foreground mb-4">{feature.description}</p>
             <div className="space-y-2">
-              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200">Key Benefits:</h4>
+              <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant">Key Benefits:</h4>
               <ul className="space-y-2">
                 {feature.benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start">
                     <span className={`inline-block w-2 h-2 ${feature.textColor} rounded-full mt-1.5 mr-2`}></span>
-                    <span className="text-sm text-gray-600 dark:text-gray-300">{benefit}</span>
+                    <span className="text-sm text-muted-foreground dark:text-muted-foreground">{benefit}</span>
                   </li>
                 ))}
               </ul>
@@ -99,36 +99,36 @@ const CoreFeatures: React.FC<CoreFeaturesProps> = ({ onNext }) => {
       </div>
       
       <div className="bg-indigo-50 dark:bg-teal-900 rounded-xl p-6 border border-indigo-100 dark:border-teal-800 transition-colors">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-4">Feature Comparison</h3>
+        <h3 className="text-lg font-semibold text-on-surface dark:text-foreground mb-4">Feature Comparison</h3>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-gray-700">
+            <thead className="bg-surface-container-low dark:bg-surface-container-highest">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Feature</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Sendplex</th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Competitors</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Feature</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Sendplex</th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Competitors</th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">Centralized Governance</td>
+            <tbody className="bg-white dark:bg-surface-container-high divide-y divide-gray-200 dark:divide-gray-700">
+              <tr className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground">Centralized Governance</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">✓ Comprehensive</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Limited</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground">Limited</td>
               </tr>
-              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">Multi-Agent Orchestration</td>
+              <tr className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground">Multi-Agent Orchestration</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">✓ Advanced</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Basic</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground">Basic</td>
               </tr>
-              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">Enterprise Integration</td>
+              <tr className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground">Enterprise Integration</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">✓ Seamless</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Complex</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground">Complex</td>
               </tr>
-              <tr className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">Performance Analytics</td>
+              <tr className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-foreground dark:text-foreground">Performance Analytics</td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-green-600 dark:text-green-400">✓ Real-time</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Delayed</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground">Delayed</td>
               </tr>
             </tbody>
           </table>

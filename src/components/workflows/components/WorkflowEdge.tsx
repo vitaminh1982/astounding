@@ -49,7 +49,7 @@ const WorkflowEdge: React.FC<EdgeProps> = ({
           style={{ filter: 'drop-shadow(0 2px 4px rgb(0 0 0 / 0.1))' }}
         />
         <Trash2
-          className="w-4 h-4 text-red-500 dark:text-red-400"
+          className="w-4 h-4 text-destructive dark:text-destructive"
           style={{ transform: 'translate(-8px, -8px)' }}
           data-edge-id={id}
         />

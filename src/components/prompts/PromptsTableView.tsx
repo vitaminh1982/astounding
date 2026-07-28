@@ -57,8 +57,8 @@ export default function PromptsTableView({
     if (sortField !== field) return null;
     
     return sortDirection === 'asc' 
-      ? <ChevronUp className="w-4 h-4 inline-block ml-1 text-gray-500 dark:text-gray-400 transition-colors" /> 
-      : <ChevronDown className="w-4 h-4 inline-block ml-1 text-gray-500 dark:text-gray-400 transition-colors" />;
+      ? <ChevronUp className="w-4 h-4 inline-block ml-1 text-muted-foreground dark:text-muted-foreground transition-colors" /> 
+      : <ChevronDown className="w-4 h-4 inline-block ml-1 text-muted-foreground dark:text-muted-foreground transition-colors" />;
   };
   
   // Function to truncate text
@@ -76,15 +76,15 @@ export default function PromptsTableView({
 
   if (prompts.length === 0) {
     return (
-      <div className="text-center py-16 px-6 bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 transition-colors">
+      <div className="text-center py-16 px-6 bg-white dark:bg-surface-container-high rounded-lg shadow dark:shadow-gray-900 transition-colors">
         <div className="mx-auto flex flex-col items-center">
-          <svg className="h-12 w-12 text-gray-400 dark:text-gray-500 mb-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="h-12 w-12 text-outline dark:text-muted-foreground mb-4 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
           </svg>
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 transition-colors">
+          <h3 className="text-lg font-semibold text-on-surface dark:text-foreground transition-colors">
             No Prompts Found
           </h3>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="mt-1 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             Try adjusting your search query or filters to find what you're looking for.
           </p>
         </div>
@@ -93,14 +93,14 @@ export default function PromptsTableView({
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 overflow-hidden transition-colors">
+    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow dark:shadow-gray-900 overflow-hidden transition-colors">
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
-          <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+          <thead className="bg-surface-container-low dark:bg-surface-container-highest transition-colors">
             <tr>
               <th 
                 scope="col" 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-100 transition-colors"
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-on-surface dark:hover:text-foreground transition-colors"
                 onClick={() => handleSort('title')}
               >
                 <div className="flex items-center">
@@ -109,7 +109,7 @@ export default function PromptsTableView({
               </th>
               <th 
                 scope="col" 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hover:text-gray-700 dark:hover:text-gray-100 transition-colors"
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider cursor-pointer hover:text-on-surface dark:hover:text-foreground transition-colors"
                 onClick={() => handleSort('category')}
               >
                 <div className="flex items-center">
@@ -118,13 +118,13 @@ export default function PromptsTableView({
               </th>
               <th 
                 scope="col" 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell transition-colors"
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider hidden md:table-cell transition-colors"
               >
                 Preview
               </th>
               <th 
                 scope="col" 
-                className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider cursor-pointer hidden lg:table-cell hover:text-gray-700 dark:hover:text-gray-100 transition-colors"
+                className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider cursor-pointer hidden lg:table-cell hover:text-on-surface dark:hover:text-foreground transition-colors"
                 onClick={() => handleSort('usageCount')}
               >
                 <div className="flex items-center">
@@ -136,19 +136,19 @@ export default function PromptsTableView({
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
+          <tbody className="bg-white dark:bg-surface-container-high divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
             {sortedPrompts.map((prompt, index) => (
               <tr 
                 key={prompt.id} 
                 className={`${
                   index % 2 === 0 
-                    ? 'bg-white dark:bg-gray-800' 
-                    : 'bg-gray-50 dark:bg-gray-700'
+                    ? 'bg-white dark:bg-surface-container-high' 
+                    : 'bg-surface-container-low dark:bg-surface-container-highest'
                 } ${
                   selectedPromptId === prompt.id 
                     ? 'bg-teal-50 dark:bg-teal-900/30' 
                     : ''
-                } hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer transition-colors`}
+                } hover:bg-surface-container-low dark:hover:bg-surface-container-highest cursor-pointer transition-colors`}
                 onClick={() => handleRowClick(prompt.id)}
               >
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -156,7 +156,7 @@ export default function PromptsTableView({
                     {prompt.isFavorite && (
                       <Star className="h-4 w-4 text-yellow-500 dark:text-yellow-400 mr-2 fill-current transition-colors" />
                     )}
-                    <div className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                    <div className="text-sm font-medium text-foreground dark:text-foreground transition-colors">
                       {prompt.title}
                     </div>
                   </div>
@@ -167,11 +167,11 @@ export default function PromptsTableView({
                   </span>
                 </td>
                 <td className="px-6 py-4 hidden md:table-cell">
-                  <div className="text-sm text-gray-500 dark:text-gray-400 max-w-xs transition-colors">
+                  <div className="text-sm text-muted-foreground dark:text-muted-foreground max-w-xs transition-colors">
                     {truncateText(prompt.content, 50)}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 hidden lg:table-cell transition-colors">
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground hidden lg:table-cell transition-colors">
                   {prompt.usageCount} times
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
@@ -194,7 +194,7 @@ export default function PromptsTableView({
                           e.stopPropagation();
                           onEditPrompt(prompt.id);
                         }}
-                        className="text-blue-600 dark:text-blue-400 hover:text-blue-900 dark:hover:text-blue-300 transition-colors"
+                        className="text-tertiary dark:text-tertiary hover:text-blue-900 dark:hover:text-blue-300 transition-colors"
                         title="Edit Prompt"
                       >
                         <Pencil className="h-5 w-5" />
@@ -209,7 +209,7 @@ export default function PromptsTableView({
                         className={`${
                           prompt.isFavorite 
                             ? 'text-yellow-500 dark:text-yellow-400' 
-                            : 'text-gray-400 dark:text-gray-500'
+                            : 'text-outline dark:text-muted-foreground'
                         } hover:text-yellow-600 dark:hover:text-yellow-300 transition-colors`}
                         title={prompt.isFavorite ? "Remove from favorites" : "Add to favorites"}
                       >
@@ -222,7 +222,7 @@ export default function PromptsTableView({
                           e.stopPropagation();
                           onDeletePrompt(prompt.id);
                         }}
-                        className="text-red-600 dark:text-red-400 hover:text-red-900 dark:hover:text-red-300 transition-colors"
+                        className="text-red-600 dark:text-destructive hover:text-red-900 dark:hover:text-red-300 transition-colors"
                         title="Delete Prompt"
                       >
                         <Trash2 className="h-5 w-5" />

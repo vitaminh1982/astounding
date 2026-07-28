@@ -138,7 +138,7 @@ const Tooltip: React.FC<TooltipProps> = ({
             className="pointer-events-none"
           >
             <div className="relative">
-              <div className="bg-gray-900 text-white px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg whitespace-nowrap">
+              <div className="bg-foreground text-background px-3 py-1.5 rounded-lg text-sm font-medium shadow-lg whitespace-nowrap">
                 {content}
                 <div className={`absolute w-0 h-0 border-solid ${getArrowStyle()}`} />
               </div>

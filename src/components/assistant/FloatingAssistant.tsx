@@ -65,11 +65,11 @@ export default function FloatingAssistant() {
             relative
             flex items-center justify-center
             w-full h-full rounded-full
-            bg-indigo-600 dark:bg-teal-600 text-white
+            bg-primary dark:bg-teal-600 text-white
             shadow-lg dark:shadow-gray-900 hover:shadow-xl dark:hover:shadow-gray-800
             ${TRANSITIONS.default}
             hover:scale-110
-            focus:outline-none focus:ring-4 focus:ring-indigo-500/50 dark:focus:ring-teal-500/50
+            focus:outline-none focus:ring-4 focus:ring-ring/50 dark:focus:ring-ring/50
             transition-all duration-200
           `}
           aria-label="Open Sendplex Assistant"
@@ -81,7 +81,7 @@ export default function FloatingAssistant() {
         </button>
 
         {/* Tooltip - positioned outside clickable area */}
-        <div className="hidden md:block absolute bottom-full right-0 mb-2 w-48 p-2 bg-gray-900 dark:bg-gray-700 border border-gray-700 dark:border-gray-600 text-white dark:text-gray-200 text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none shadow-lg dark:shadow-gray-900">
+        <div className="hidden md:block absolute bottom-full right-0 mb-2 w-48 p-2 bg-background dark:bg-surface-container-highest border border-border dark:border-border text-white dark:text-on-surface-variant text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-200 pointer-events-none shadow-lg dark:shadow-gray-900">
           <span className="transition-colors">Need help? I am here to guide you!</span>
           {/* Tooltip arrow */}
           <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900 dark:border-t-gray-700"></div>
@@ -100,7 +100,7 @@ export default function FloatingAssistant() {
             }
             ${isMinimized ? 'w-auto' : 'w-full sm:w-[400px]'}
             ${isMinimized ? 'h-12' : 'h-[85vh] sm:h-[600px]'}
-            bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
+            bg-white dark:bg-surface-container-high border border-border dark:border-border
             rounded-lg shadow-2xl dark:shadow-gray-900
             ${TRANSITIONS.default}
             overflow-hidden transition-all duration-200
@@ -110,7 +110,7 @@ export default function FloatingAssistant() {
           aria-modal="true"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-3 md:p-4 bg-indigo-600 dark:bg-teal-600 text-white transition-colors">
+          <div className="flex items-center justify-between p-3 md:p-4 bg-primary dark:bg-teal-600 text-white transition-colors">
             <div className="flex items-center gap-2">
               <Bot className="w-4 h-4 md:w-5 md:h-5 transition-colors" />
               <span className="font-medium text-sm md:text-base transition-colors">Sendplex Assistant</span>
@@ -131,7 +131,7 @@ export default function FloatingAssistant() {
               {/* Close button */}
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1.5 hover:bg-red-500 dark:hover:bg-red-600 rounded transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
+                className="p-1.5 hover:bg-destructive dark:hover:bg-red-600 rounded transition-colors flex items-center gap-1 focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-transparent"
                 aria-label="Close assistant"
               >
                 <X className="w-4 h-4" />
@@ -142,7 +142,7 @@ export default function FloatingAssistant() {
 
           {/* Content */}
           {!isMinimized && (
-            <div className="flex-1 bg-white dark:bg-gray-800 transition-colors">
+            <div className="flex-1 bg-white dark:bg-surface-container-high transition-colors">
               <AssistantChat currentPath={location.pathname} />
             </div>
           )}

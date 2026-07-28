@@ -56,7 +56,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
       label: 'Public',
       description: 'Visible to all customers and can be used publicly',
       icon: Globe2,
-      color: 'text-blue-600 dark:text-blue-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-blue-100 dark:bg-blue-900/30',
       borderColor: 'border-blue-200 dark:border-blue-800'
     },
@@ -65,7 +65,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
       label: 'Private',
       description: 'Only accessible to your team members with permissions',
       icon: Lock,
-      color: 'text-purple-600 dark:text-purple-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-purple-100 dark:bg-purple-900/30',
       borderColor: 'border-purple-200 dark:border-purple-800'
     }
@@ -113,10 +113,10 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
             <Users className="w-5 h-5 text-orange-600 dark:text-orange-400 transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Sharing & Access
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Control who can access this template
             </p>
           </div>
@@ -125,7 +125,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
         {/* Mobile Toggle */}
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="sm:hidden p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="sm:hidden p-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           aria-label={showDetails ? "Hide sharing settings" : "Show sharing settings"}
         >
           <ChevronRight className={`w-5 h-5 transition-transform ${showDetails ? 'rotate-90' : ''}`} />
@@ -152,11 +152,11 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
             exit={{ opacity: 0, height: 0 }}
             className="space-y-6"
           >
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-6 shadow-sm dark:shadow-gray-900 transition-colors space-y-6">
+            <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-6 shadow-sm dark:shadow-gray-900 transition-colors space-y-6">
               {/* Visibility Settings */}
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
+                  <h4 className="text-sm font-semibold text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
                     <Globe2 className="w-4 h-4" />
                     Template Visibility
                   </h4>
@@ -182,7 +182,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           isSelected
                             ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                            : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                            : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                       >
                         {/* Radio Button */}
@@ -198,10 +198,10 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                           <div className={`w-5 h-5 rounded-full border-2 transition-all ${
                             isSelected
                               ? 'border-indigo-600 dark:border-teal-600'
-                              : 'border-gray-300 dark:border-gray-600'
+                              : 'border-border dark:border-border'
                           }`}>
                             {isSelected && (
-                              <div className="w-full h-full rounded-full bg-indigo-600 dark:bg-teal-600 scale-50" />
+                              <div className="w-full h-full rounded-full bg-primary dark:bg-teal-600 scale-50" />
                             )}
                           </div>
                         </div>
@@ -210,12 +210,12 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         <div className={`p-2 rounded-lg flex-shrink-0 transition-colors ${
                           isSelected
                             ? option.bgColor
-                            : 'bg-gray-100 dark:bg-gray-700'
+                            : 'bg-surface-container-low dark:bg-surface-container-highest'
                         }`}>
                           <Icon className={`w-5 h-5 transition-colors ${
                             isSelected
                               ? option.color
-                              : 'text-gray-600 dark:text-gray-400'
+                              : 'text-muted-foreground dark:text-muted-foreground'
                           }`} />
                         </div>
 
@@ -224,16 +224,16 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                           <div className="flex items-center gap-2 mb-1">
                             <span className={`font-semibold transition-colors ${
                               isSelected
-                                ? 'text-gray-900 dark:text-gray-100'
-                                : 'text-gray-700 dark:text-gray-300'
+                                ? 'text-foreground dark:text-foreground'
+                                : 'text-on-surface dark:text-muted-foreground'
                             }`}>
                               {option.label}
                             </span>
                           </div>
                           <p className={`text-sm transition-colors ${
                             isSelected
-                              ? 'text-gray-600 dark:text-gray-400'
-                              : 'text-gray-500 dark:text-gray-400'
+                              ? 'text-muted-foreground dark:text-muted-foreground'
+                              : 'text-muted-foreground dark:text-muted-foreground'
                           }`}>
                             {option.description}
                           </p>
@@ -245,13 +245,13 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
               </div>
 
               {/* Team Access Settings */}
-              <div className="pt-6 border-t border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="pt-6 border-t border-border dark:border-border transition-colors">
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2 transition-colors">
+                  <h4 className="text-sm font-semibold text-foreground dark:text-foreground flex items-center gap-2 transition-colors">
                     <Users className="w-4 h-4" />
                     Team Access Permissions
                   </h4>
-                  <span className="text-sm text-indigo-600 dark:text-teal-400 font-medium transition-colors">
+                  <span className="text-sm text-primary-green dark:text-teal-400 font-medium transition-colors">
                     {activeTeamsCount} teams
                   </span>
                 </div>
@@ -268,7 +268,7 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         className={`flex items-start gap-3 p-4 rounded-lg border-2 cursor-pointer transition-all duration-200 ${
                           isActive
                             ? 'border-indigo-300 dark:border-teal-600 bg-indigo-50 dark:bg-teal-900/20'
-                            : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-gray-50 dark:hover:bg-gray-700'
+                            : 'border-border dark:border-border bg-white dark:bg-surface-container-high hover:border-indigo-200 dark:hover:border-teal-700 hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                         }`}
                       >
                         {/* Checkbox */}
@@ -281,8 +281,8 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                           />
                           <div className={`w-5 h-5 border-2 rounded transition-all ${
                             isActive
-                              ? 'bg-indigo-600 dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
-                              : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600'
+                              ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                              : 'bg-white dark:bg-surface-container-highest border-border dark:border-border'
                           }`}>
                             {isActive && (
                               <Check className="w-full h-full text-white p-0.5" />
@@ -294,12 +294,12 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                         <div className={`p-2 rounded-lg flex-shrink-0 transition-colors ${
                           isActive
                             ? 'bg-indigo-100 dark:bg-teal-900/50'
-                            : 'bg-gray-100 dark:bg-gray-700'
+                            : 'bg-surface-container-low dark:bg-surface-container-highest'
                         }`}>
                           <Icon className={`w-5 h-5 transition-colors ${
                             isActive
-                              ? 'text-indigo-600 dark:text-teal-400'
-                              : 'text-gray-600 dark:text-gray-400'
+                              ? 'text-primary-green dark:text-teal-400'
+                              : 'text-muted-foreground dark:text-muted-foreground'
                           }`} />
                         </div>
 
@@ -308,23 +308,23 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
                           <div className="flex items-center justify-between gap-2 mb-1">
                             <span className={`font-semibold transition-colors ${
                               isActive
-                                ? 'text-gray-900 dark:text-gray-100'
-                                : 'text-gray-700 dark:text-gray-300'
+                                ? 'text-foreground dark:text-foreground'
+                                : 'text-on-surface dark:text-muted-foreground'
                             }`}>
                               {option.label}
                             </span>
                             <span className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${
                               isActive
                                 ? 'bg-indigo-100 dark:bg-teal-900/50 text-indigo-700 dark:text-teal-300'
-                                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                                : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground'
                             }`}>
                               {option.badge}
                             </span>
                           </div>
                           <p className={`text-sm transition-colors ${
                             isActive
-                              ? 'text-gray-600 dark:text-gray-400'
-                              : 'text-gray-500 dark:text-gray-400'
+                              ? 'text-muted-foreground dark:text-muted-foreground'
+                              : 'text-muted-foreground dark:text-muted-foreground'
                           }`}>
                             {option.description}
                           </p>
@@ -348,63 +348,63 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
 
             {/* Summary Statistics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+              <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
                 <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg inline-flex mb-2 transition-colors">
-                  <Globe2 className="w-4 h-4 text-blue-600 dark:text-blue-400 transition-colors" />
+                  <Globe2 className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                   {visibility === 'public' ? 'Public' : 'Private'}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   Visibility
                 </p>
               </div>
 
-              <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+              <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
                 <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg inline-flex mb-2 transition-colors">
                   <Users className="w-4 h-4 text-green-600 dark:text-green-400 transition-colors" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                   {activeTeamsCount}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   Active Teams
                 </p>
               </div>
 
-              <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+              <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
                 <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg inline-flex mb-2 transition-colors">
-                  <Shield className="w-4 h-4 text-purple-600 dark:text-purple-400 transition-colors" />
+                  <Shield className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                   {visibility === 'private' ? 'Secure' : 'Open'}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   Security
                 </p>
               </div>
 
-              <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+              <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
                 <div className="p-2 bg-amber-100 dark:bg-amber-900/30 rounded-lg inline-flex mb-2 transition-colors">
-                  <UserCheck className="w-4 h-4 text-amber-600 dark:text-amber-400 transition-colors" />
+                  <UserCheck className="w-4 h-4 text-amber-600 dark:text-destructive transition-colors" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                   {Object.values(access).filter(Boolean).length > 0 ? 'Shared' : 'None'}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   Access Level
                 </p>
               </div>
             </div>
 
             {/* Info Box */}
-            <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+            <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
               <div className="flex items-start gap-3">
                 <div className="p-1 bg-blue-100 dark:bg-blue-900/30 rounded transition-colors">
-                  <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 transition-colors" />
+                  <Info className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
-                  <p className="font-medium text-gray-900 dark:text-gray-100 mb-1 transition-colors">
+                <div className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
+                  <p className="font-medium text-foreground dark:text-foreground mb-1 transition-colors">
                     Access Control Tips
                   </p>
                   <ul className="space-y-1 list-disc list-inside">
@@ -420,9 +420,9 @@ export default function SharingSettings({ template, onChange }: SharingSettingsP
       </AnimatePresence>
 
       {/* Mobile Apply Button */}
-      <div className="sm:hidden p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-gray-900 transition-colors">
+      <div className="sm:hidden p-4 bg-white dark:bg-surface-container-high border-t border-border dark:border-border shadow-lg dark:shadow-gray-900 transition-colors">
         <button
-          className="w-full py-3 px-4 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg font-medium hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="w-full py-3 px-4 bg-primary dark:bg-teal-600 text-white rounded-lg font-medium hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
         >
           Apply Changes
         </button>

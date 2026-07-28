@@ -27,17 +27,17 @@ export default function UsageForecasting({ usageData }: UsageForecastingProps) {
   const warningLevel = getWarningLevel();
   
   const warningColors = {
-    high: 'text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900 border-red-100 dark:border-red-800',
+    high: 'text-red-600 dark:text-destructive bg-red-50 dark:bg-red-900 border-red-100 dark:border-red-800',
     medium: 'text-yellow-600 dark:text-yellow-400 bg-yellow-50 dark:bg-yellow-900 border-yellow-100 dark:border-yellow-800',
     low: 'text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900 border-green-100 dark:border-green-800'
   };
   
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 p-6 transition-colors">
+    <div className="bg-white dark:bg-surface-container-high rounded-lg shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-6 transition-colors">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Usage Forecasting</h3>
+        <h3 className="text-lg font-semibold text-foreground dark:text-foreground">Usage Forecasting</h3>
         <div className="p-2 bg-indigo-100 dark:bg-teal-900 rounded-lg transition-colors">
-          <TrendingUp className="w-5 h-5 text-indigo-600 dark:text-teal-300" />
+          <TrendingUp className="w-5 h-5 text-primary-green dark:text-teal-300" />
         </div>
       </div>
       
@@ -53,20 +53,20 @@ export default function UsageForecasting({ usageData }: UsageForecastingProps) {
           </p>
         </div>
         
-        <div className="bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg p-4 transition-colors">
+        <div className="bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded-lg p-4 transition-colors">
           <div className="flex items-center mb-2">
-            <TrendingUp className="w-5 h-5 text-gray-500 dark:text-gray-400 mr-2" />
-            <h4 className="font-medium text-gray-900 dark:text-gray-100">Projected Usage</h4>
+            <TrendingUp className="w-5 h-5 text-muted-foreground dark:text-muted-foreground mr-2" />
+            <h4 className="font-medium text-foreground dark:text-foreground">Projected Usage</h4>
           </div>
-          <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{projectedUsage.projectedUsage.toLocaleString()}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <p className="text-2xl font-bold text-foreground dark:text-foreground">{projectedUsage.projectedUsage.toLocaleString()}</p>
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">
             {projectedPercentage.toFixed(1)}% of your total credits
           </p>
           
-          <div className="mt-2 w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
+          <div className="mt-2 w-full h-2 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden">
             <div 
               className={`h-full transition-colors ${
-                projectedPercentage >= 90 ? 'bg-red-500 dark:bg-red-400' :
+                projectedPercentage >= 90 ? 'bg-destructive dark:bg-destructive' :
                 projectedPercentage >= 75 ? 'bg-yellow-500 dark:bg-yellow-400' :
                 'bg-green-500 dark:bg-green-400'
               }`}
@@ -79,7 +79,7 @@ export default function UsageForecasting({ usageData }: UsageForecastingProps) {
       {warningLevel === 'high' && (
         <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6 transition-colors">
           <div className="flex items-start">
-            <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 mr-3 mt-0.5" />
+            <AlertCircle className="w-5 h-5 text-red-600 dark:text-destructive mr-3 mt-0.5" />
             <div>
               <h4 className="font-medium text-red-800 dark:text-red-200">Credit Limit Alert</h4>
               <p className="text-sm text-red-600 dark:text-red-300 mt-1">
@@ -91,8 +91,8 @@ export default function UsageForecasting({ usageData }: UsageForecastingProps) {
       )}
       
       <div>
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-4">Usage Trend</h4>
-        <div className="h-48 bg-gray-50 dark:bg-gray-700 border border-gray-100 dark:border-gray-600 rounded-lg p-4 flex items-center justify-center transition-colors">
+        <h4 className="text-sm font-medium text-on-surface dark:text-on-surface-variant mb-4">Usage Trend</h4>
+        <div className="h-48 bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded-lg p-4 flex items-center justify-center transition-colors">
           <div className="w-full h-full relative">
             {/* Simplified trend line visualization */}
             <svg viewBox="0 0 100 50" className="w-full h-full">

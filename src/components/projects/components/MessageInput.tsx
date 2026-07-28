@@ -47,14 +47,14 @@ const MessageInput: React.FC<MessageInputProps> = ({
   };
 
   return (
-    <div className="border-t border-gray-200 dark:border-gray-600">
+    <div className="border-t border-border dark:border-border">
       {/* Chat controls */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 transition-colors">
+      <div className="p-4 border-b border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest/50 transition-colors">
         <div className="flex flex-wrap items-center gap-4 justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Selected Agents:</span>
+            <span className="text-sm font-medium text-on-surface dark:text-muted-foreground">Selected Agents:</span>
             {selectedAgents.length === 0 ? (
-              <span className="text-sm text-gray-500 dark:text-gray-400">All agents (collaborative mode)</span>
+              <span className="text-sm text-muted-foreground dark:text-muted-foreground">All agents (collaborative mode)</span>
             ) : (
               <div className="flex gap-2">
                 {selectedAgents.map((agentId) => {
@@ -71,11 +71,11 @@ const MessageInput: React.FC<MessageInputProps> = ({
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Visibility:</span>
+            <span className="text-sm font-medium text-on-surface dark:text-muted-foreground">Visibility:</span>
             <select
               value={visibility}
               onChange={(e) => setVisibility(e.target.value as any)}
-              className="text-sm border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500"
+              className="text-sm border border-border dark:border-border rounded-md px-2 py-1 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500"
               aria-label="Message visibility"
             >
               <option value="project">Project</option>
@@ -87,7 +87,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
       </div>
 
       {/* Chat input */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-600 m-4 transition-colors">
+      <div className="bg-white dark:bg-surface-container-high rounded-lg border border-border dark:border-border m-4 transition-colors">
         <div className="flex items-center gap-3 p-4">
           <input
             ref={fileInputRef}
@@ -101,7 +101,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
           <button
             onClick={onFileButtonClick}
-            className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 flex-shrink-0 transition-colors"
+            className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest flex-shrink-0 transition-colors"
             title="Attach files"
           >
             <Paperclip className="w-5 h-5" />
@@ -113,7 +113,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
               onChange={(e) => setNewMessage(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder="Ask your AI agents anything... Use @Seiya, @Shiryu, @Hyôga, @Shun, or @Ikki to mention specific agents"
-              className="w-full px-4 py-2 border-0 focus:outline-none placeholder-gray-500 dark:placeholder-gray-400 bg-transparent text-gray-900 dark:text-gray-100"
+              className="w-full px-4 py-2 border-0 focus:outline-none placeholder-gray-500 dark:placeholder-gray-400 bg-transparent text-foreground dark:text-foreground"
               aria-label="Message input"
             />
             
@@ -123,12 +123,12 @@ const MessageInput: React.FC<MessageInputProps> = ({
                 {attachments.map((att) => (
                   <div
                     key={att.id}
-                    className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700 px-3 py-1 rounded-md text-xs border border-gray-200 dark:border-gray-600 transition-colors"
+                    className="flex items-center gap-2 bg-surface-container-low dark:bg-surface-container-highest px-3 py-1 rounded-md text-xs border border-border dark:border-border transition-colors"
                   >
-                    <span className="text-gray-700 dark:text-gray-300">{att.name}</span>
+                    <span className="text-on-surface dark:text-muted-foreground">{att.name}</span>
                     <button
                       onClick={() => onRemoveAttachment(att.id)}
-                      className="text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 ml-2 transition-colors"
+                      className="text-outline dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground ml-2 transition-colors"
                       aria-label={`Remove ${att.name}`}
                     >
                       ✕
@@ -141,7 +141,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
           <button
             onClick={onSendMessage}
-            className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 flex-shrink-0 transition-colors shadow-sm dark:shadow-gray-900"
+            className="inline-flex items-center justify-center w-12 h-12 rounded-md bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 flex-shrink-0 transition-colors shadow-sm dark:shadow-gray-900"
             aria-label="Send message"
           >
             <Send className="w-5 h-5" />

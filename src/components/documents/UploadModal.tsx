@@ -53,12 +53,12 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
       <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-60 z-50" onClick={onClose} />
       
       {/* Modal */}
-      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 rounded-lg shadow-xl dark:shadow-gray-900 p-6 z-50 w-full max-w-md border border-gray-200 dark:border-gray-600 transition-colors">
+      <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-surface-container-high rounded-lg shadow-xl dark:shadow-gray-900 p-6 z-50 w-full max-w-md border border-border dark:border-border transition-colors">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Upload a document</h3>
+          <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Upload a document</h3>
           <button
             onClick={onClose}
-            className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-outline p-2 rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
           >
             <X className="h-5 w-5" />
           </button>
@@ -67,8 +67,8 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
         <div
           className={`mt-4 p-6 border-2 border-dashed rounded-lg transition-all ${
             dragActive 
-              ? 'border-indigo-500 dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20' 
-              : 'border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500'
+              ? 'border-primary-green dark:border-teal-500 bg-indigo-50 dark:bg-teal-900/20' 
+              : 'border-border dark:border-border hover:border-outline-variant dark:hover:border-outline'
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -76,10 +76,10 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
           onDrop={handleDrop}
         >
           <div className="text-center">
-            <Upload className="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500 transition-colors" />
+            <Upload className="mx-auto h-12 w-12 text-outline dark:text-muted-foreground transition-colors" />
             <div className="mt-4">
               <label htmlFor="file-upload" className="cursor-pointer">
-                <span className="text-indigo-600 dark:text-teal-400 hover:text-indigo-500 dark:hover:text-teal-300 transition-colors">
+                <span className="text-primary-green dark:text-teal-400 hover:text-indigo-500 dark:hover:text-teal-300 transition-colors">
                   Click to upload
                 </span>
                 <input
@@ -89,15 +89,15 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
                   onChange={handleFileChange}
                 />
               </label>
-              <p className="pl-1 text-gray-600 dark:text-gray-300 transition-colors">or drag and drop here</p>
+              <p className="pl-1 text-muted-foreground dark:text-muted-foreground transition-colors">or drag and drop here</p>
             </div>
           </div>
         </div>
 
         {selectedFile && (
-          <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg border border-gray-200 dark:border-gray-600 transition-colors">
-            <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">Selected file:</p>
-            <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{selectedFile.name}</p>
+          <div className="mt-4 p-4 bg-surface-container-low dark:bg-surface-container-highest/50 rounded-lg border border-border dark:border-border transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Selected file:</p>
+            <p className="font-medium text-foreground dark:text-foreground transition-colors">{selectedFile.name}</p>
           </div>
         )}
 
@@ -105,7 +105,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+            className="px-4 py-2 text-sm font-medium text-on-surface dark:text-muted-foreground bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-md hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
           >
             Cancel
           </button>
@@ -115,7 +115,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ isOpen, onClose, onUpload }) 
             disabled={!selectedFile}
             className={`px-4 py-2 text-sm font-medium text-white rounded-md transition-colors shadow-sm dark:shadow-gray-900 ${
               selectedFile
-                ? 'bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700'
+                ? 'bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700'
                 : 'bg-indigo-400 dark:bg-teal-400 cursor-not-allowed'
             }`}
           >

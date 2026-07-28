@@ -51,23 +51,23 @@ export default function IntegrationCard({ integration, onOpenModal }: Integratio
   const IconComponent = iconMapping[integration.iconType] || iconMapping['default'];
 
   return (
-    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow dark:shadow-gray-900 rounded-lg border border-gray-200 dark:border-gray-600 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
+    <div className="bg-white dark:bg-surface-container-high overflow-hidden shadow dark:shadow-gray-900 rounded-lg border border-border dark:border-border hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200">
       <div className="p-5">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
-            <div className="p-2 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center transition-colors">
-              <div className="h-8 w-8 text-gray-700 dark:text-gray-300 transition-colors">
+            <div className="p-2 bg-surface-container-low dark:bg-surface-container-highest rounded-lg flex items-center justify-center transition-colors">
+              <div className="h-8 w-8 text-on-surface dark:text-muted-foreground transition-colors">
                 {IconComponent}
               </div>
             </div>
-            <h3 className="ml-3 text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">{integration.name}</h3>
+            <h3 className="ml-3 text-lg font-medium text-foreground dark:text-foreground transition-colors">{integration.name}</h3>
           </div>
           
           <span 
             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border transition-colors
             ${integration.isConnected 
               ? 'bg-green-100 dark:bg-green-900/30 border-green-200 dark:border-green-800 text-green-800 dark:text-green-300' 
-              : 'bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-300'}`}
+              : 'bg-surface-container-low dark:bg-surface-container-highest border-border dark:border-border text-on-surface dark:text-muted-foreground'}`}
           >
             {integration.isConnected 
               ? t('integrations.connected') 
@@ -75,23 +75,23 @@ export default function IntegrationCard({ integration, onOpenModal }: Integratio
           </span>
         </div>
         
-        <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 h-10 transition-colors">{integration.description}</p>
+        <p className="text-sm text-muted-foreground dark:text-muted-foreground line-clamp-2 h-10 transition-colors">{integration.description}</p>
         
         {integration.isConnected && integration.connectedSince && (
-          <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="mt-2 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
             {t('integrations.connectedSince')}: {integration.connectedSince}
           </p>
         )}
       </div>
       
-      <div className="bg-gray-50 dark:bg-gray-700/50 px-5 py-3 transition-colors">
+      <div className="bg-surface-container-low dark:bg-surface-container-highest/50 px-5 py-3 transition-colors">
         <button
           onClick={() => onOpenModal(integration)}
           className={`w-full inline-flex justify-center items-center px-4 py-2 border rounded-md 
                     shadow-sm dark:shadow-gray-900 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors
                     ${integration.isConnected
-                      ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 focus:ring-indigo-500 dark:focus:ring-teal-500'
-                      : 'border-transparent bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-indigo-500 dark:focus:ring-teal-500'}`}
+                      ? 'border-border dark:border-border bg-white dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:ring-ring dark:focus:ring-ring'
+                      : 'border-transparent bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:ring-ring dark:focus:ring-ring'}`}
         >
           {integration.isConnected
             ? t('integrations.configure')

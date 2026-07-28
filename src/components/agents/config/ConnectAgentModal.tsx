@@ -288,20 +288,20 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-60 flex items-center justify-center z-50 p-4 md:p-0">
       <motion.div 
-        className="bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors"
+        className="bg-white dark:bg-surface-container-high rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl dark:shadow-gray-900 border border-border dark:border-border transition-colors"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.2 }}
       >
         {/* Header */}
-        <div className="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-600">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
+        <div className="flex justify-between items-center p-6 border-b border-border dark:border-border">
+          <h2 className="text-xl font-semibold text-foreground dark:text-foreground">
             {selectedProvider ? `Connect to ${selectedProvider.name}` : 'Connect External Agent'}
           </h2>
           <button 
             onClick={onClose} 
-            className="text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            className="text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-outline p-2 rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
           >
             <X className="w-6 h-6" />
           </button>
@@ -313,12 +313,12 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
             // Provider selection view
             <div className="p-6">
               {/* Provider type tabs */}
-              <div className="flex border-b border-gray-200 dark:border-gray-600 mb-6">
+              <div className="flex border-b border-border dark:border-border mb-6">
                 <button
                   className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
                     selectedType === 'ai' 
-                      ? 'border-indigo-500 dark:border-teal-500 text-indigo-600 dark:text-teal-400' 
-                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                      ? 'border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400' 
+                      : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground'
                   }`}
                   onClick={() => setSelectedType('ai')}
                 >
@@ -327,8 +327,8 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                 <button
                   className={`px-4 py-2 font-medium text-sm border-b-2 transition-colors ${
                     selectedType === 'enterprise' 
-                      ? 'border-indigo-500 dark:border-teal-500 text-indigo-600 dark:text-teal-400' 
-                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300'
+                      ? 'border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400' 
+                      : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground'
                   }`}
                   onClick={() => setSelectedType('enterprise')}
                 >
@@ -341,7 +341,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                 {filteredProviders.map(provider => (
                   <div
                     key={provider.id}
-                    className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:border-indigo-500 dark:hover:border-teal-400 hover:shadow-md dark:hover:shadow-gray-900 transition-all cursor-pointer bg-white dark:bg-gray-700"
+                    className="border border-border dark:border-border rounded-lg p-4 hover:border-primary-green dark:hover:border-teal-400 hover:shadow-md dark:hover:shadow-gray-900 transition-all cursor-pointer bg-white dark:bg-surface-container-highest"
                     onClick={() => handleSelectProvider(provider)}
                   >
                     <div className="flex items-start gap-3">
@@ -351,8 +351,8 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                         className="w-10 h-10 rounded-md object-cover"
                       />
                       <div>
-                        <h3 className="font-medium text-gray-900 dark:text-gray-100">{provider.name}</h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{provider.description}</p>
+                        <h3 className="font-medium text-foreground dark:text-foreground">{provider.name}</h3>
+                        <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">{provider.description}</p>
                       </div>
                     </div>
                   </div>
@@ -363,7 +363,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
             // Provider configuration view
             <div className="p-6">
               <button
-                className="flex items-center text-sm text-indigo-600 dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 mb-6 transition-colors"
+                className="flex items-center text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 mb-6 transition-colors"
                 onClick={handleBackToProviders}
               >
                 <svg className="w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -379,23 +379,23 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                   className="w-12 h-12 rounded-md object-cover"
                 />
                 <div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{selectedProvider.name}</h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{selectedProvider.description}</p>
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground">{selectedProvider.name}</h3>
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">{selectedProvider.description}</p>
                 </div>
               </div>
               
               <div className="space-y-6">
                 {selectedProvider.fields.map(field => (
                   <div key={field.id}>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                       {field.label}
-                      {field.required && <span className="text-red-500 dark:text-red-400 ml-1">*</span>}
+                      {field.required && <span className="text-destructive dark:text-destructive ml-1">*</span>}
                     </label>
                     
                     {field.type === 'select' ? (
                       <select
-                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 transition-colors ${
-                          formErrors[field.id] ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors ${
+                          formErrors[field.id] ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                         }`}
                         value={formValues[field.id] || ''}
                         onChange={(e) => handleInputChange(field.id, e.target.value)}
@@ -412,9 +412,9 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                           id={field.id}
                           checked={formValues[field.id] || false}
                           onChange={(e) => handleInputChange(field.id, e.target.checked)}
-                          className="h-4 w-4 text-indigo-600 dark:text-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700"
+                          className="h-4 w-4 text-primary-green dark:text-primary-green focus:ring-ring dark:focus:ring-ring border-border dark:border-border rounded bg-white dark:bg-surface-container-highest"
                         />
-                        <label htmlFor={field.id} className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
+                        <label htmlFor={field.id} className="ml-2 block text-sm text-on-surface dark:text-muted-foreground">
                           {field.label}
                         </label>
                       </div>
@@ -422,8 +422,8 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                       <input
                         type={field.type}
                         placeholder={field.placeholder}
-                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 transition-colors ${
-                          formErrors[field.id] ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                        className={`w-full px-3 py-2 border rounded-md shadow-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors ${
+                          formErrors[field.id] ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                         }`}
                         value={formValues[field.id] || ''}
                         onChange={(e) => handleInputChange(field.id, e.target.value)}
@@ -431,11 +431,11 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                     )}
                     
                     {field.description && (
-                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{field.description}</p>
+                      <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">{field.description}</p>
                     )}
                     
                     {formErrors[field.id] && (
-                      <p className="mt-1 text-xs text-red-500 dark:text-red-400">{formErrors[field.id]}</p>
+                      <p className="mt-1 text-xs text-destructive dark:text-destructive">{formErrors[field.id]}</p>
                     )}
                   </div>
                 ))}
@@ -451,7 +451,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                       {testResult === 'success' ? (
                         <Check className="w-5 h-5 text-green-500 dark:text-green-400 mt-0.5 mr-3" />
                       ) : (
-                        <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5 mr-3" />
+                        <AlertCircle className="w-5 h-5 text-destructive dark:text-destructive mt-0.5 mr-3" />
                       )}
                       <div>
                         <h4 className={`text-sm font-medium ${
@@ -460,7 +460,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
                           {testResult === 'success' ? 'Connection Successful' : 'Connection Failed'}
                         </h4>
                         <p className={`text-sm ${
-                          testResult === 'success' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-red-400'
+                          testResult === 'success' ? 'text-green-700 dark:text-green-400' : 'text-red-700 dark:text-destructive'
                         } mt-1`}>
                           {testResult === 'success' 
                             ? `Successfully connected to ${selectedProvider.name}. You can now save this connection.` 
@@ -476,10 +476,10 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
         </div>
         
         {/* Footer */}
-        <div className="p-6 border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50 flex justify-end gap-3 transition-colors">
+        <div className="p-6 border-t border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest/50 flex justify-end gap-3 transition-colors">
           <button
             onClick={onClose}
-            className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+            className="px-4 py-2 border border-border dark:border-border rounded-md shadow-sm text-sm font-medium text-on-surface dark:text-muted-foreground bg-white dark:bg-surface-container-highest hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
           >
             Cancel
           </button>
@@ -497,7 +497,7 @@ const ConnectAgentModal: React.FC<ConnectAgentModalProps> = ({ onClose, onConnec
               <button
                 onClick={handleSaveConnection}
                 disabled={testResult !== 'success'}
-                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:shadow-gray-900"
+                className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:shadow-gray-900"
               >
                 Connect
               </button>

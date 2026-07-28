@@ -31,7 +31,7 @@ const LogsOverview: React.FC<LogsOverviewProps> = ({
 
   const getLogLevelColor = (level: LogEntry['level']) => {
     const colors = {
-      info: 'text-blue-600 bg-blue-100',
+      info: 'text-tertiary bg-blue-100',
       warning: 'text-yellow-600 bg-yellow-100',
       error: 'text-red-600 bg-red-100',
     };
@@ -64,7 +64,7 @@ const LogsOverview: React.FC<LogsOverviewProps> = ({
         <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="text-lg font-semibold">Logs Overview</h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               View detailed logs of your workflow agent
             </p>
           </div>
@@ -76,10 +76,10 @@ const LogsOverview: React.FC<LogsOverviewProps> = ({
             placeholder="Search logs..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-ring"
           />
           <Search
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-outline"
           />
         </div>
       </div>
@@ -87,11 +87,11 @@ const LogsOverview: React.FC<LogsOverviewProps> = ({
       <div className="flex-1 overflow-y-auto p-4">
         {filteredLogs.length === 0 ? (
           <div className="text-center py-12">
-            <div className="rounded-full bg-gray-100 p-3 mx-auto w-fit">
-              <FileText className="w-6 h-6 text-gray-600" />
+            <div className="rounded-full bg-surface-container-low p-3 mx-auto w-fit">
+              <FileText className="w-6 h-6 text-muted-foreground" />
             </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">No logs available</h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <h3 className="mt-4 text-lg font-medium text-foreground">No logs available</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
               {searchQuery ? 'No logs match your search criteria.' : 'There are no logs to display.'}
             </p>
           </div>
@@ -110,12 +110,12 @@ const LogsOverview: React.FC<LogsOverviewProps> = ({
                       </div>
                       <div>
                         <h3 className="font-medium text-lg">{log.message}</h3>
-                        <p className="text-sm text-gray-500">{log.details}</p>
+                        <p className="text-sm text-muted-foreground">{log.details}</p>
                       </div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2 ml-4">
-                    <span className="text-xs text-gray-500 flex items-center">
+                    <span className="text-xs text-muted-foreground flex items-center">
                       <Clock className="w-3 h-3 mr-1" />
                       {new Date(log.timestamp).toLocaleString()}
                     </span>

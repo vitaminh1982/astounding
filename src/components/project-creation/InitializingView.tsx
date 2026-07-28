@@ -13,8 +13,8 @@ export default function InitializingView() {
         <Sparkles className="w-8 h-8 text-white" />
       </motion.div>
 
-      <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Configuring Your Project</h2>
-      <p className="text-sm text-gray-500 dark:text-gray-400 max-w-md text-center mb-8">
+      <h2 className="text-xl font-bold text-foreground dark:text-foreground mb-2">Configuring Your Project</h2>
+      <p className="text-sm text-muted-foreground dark:text-muted-foreground max-w-md text-center mb-8">
         Setting up your delivery track, assigning AI agents, and building the phase pipeline...
       </p>
 
@@ -30,9 +30,9 @@ export default function InitializingView() {
             <motion.div
               animate={{ scale: [0.8, 1.2, 0.8] }}
               transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
-              className="w-2 h-2 rounded-full bg-blue-500"
+              className="w-2 h-2 rounded-full bg-tertiary"
             />
-            <span className="text-sm text-gray-600 dark:text-gray-400">{step}</span>
+            <span className="text-sm text-muted-foreground dark:text-muted-foreground">{step}</span>
           </motion.div>
         ))}
       </div>

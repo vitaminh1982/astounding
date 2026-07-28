@@ -13,19 +13,19 @@ export default function FloatingAssistant() {
             <h3 className="font-medium">Assistant</h3>
             <button 
               onClick={() => setIsOpen(false)}
-              className="p-1 rounded-full hover:bg-gray-100"
+              className="p-1 rounded-full hover:bg-surface-container-low"
             >
               <X size={18} />
             </button>
           </div>
           <div className="flex-1 overflow-y-auto">
-            <p className="text-gray-600">How can I help you today?</p>
+            <p className="text-muted-foreground">How can I help you today?</p>
           </div>
         </div>
       ) : (
         <button
           onClick={() => setIsOpen(true)}
-          className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-full p-3 shadow-lg transition-colors"
+          className="bg-primary hover:bg-indigo-700 text-white rounded-full p-3 shadow-lg transition-colors"
         >
           <MessageCircle size={24} />
         </button>

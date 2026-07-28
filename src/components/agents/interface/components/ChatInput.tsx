@@ -53,26 +53,26 @@ const ChatInput: React.FC<ChatInputProps> = ({
         <div className="mb-3 p-3 bg-blue-50 dark:bg-teal-900 border border-blue-200 dark:border-teal-700 rounded-lg transition-colors">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <span className="text-blue-600 dark:text-teal-300">📄</span>
+              <span className="text-tertiary dark:text-teal-300">📄</span>
               <div>
                 <p className="text-sm font-medium text-blue-800 dark:text-teal-100">
                   {uploadState.selectedFile.name}
                 </p>
-                <p className="text-xs text-blue-600 dark:text-teal-300">
+                <p className="text-xs text-tertiary dark:text-teal-300">
                   {formatFileSize(uploadState.selectedFile.size)}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               {uploadState.isUploading && (
-                <div className="text-xs text-blue-600 dark:text-teal-300">
+                <div className="text-xs text-tertiary dark:text-teal-300">
                   {uploadState.uploadProgress}%
                 </div>
               )}
               <button
                 type="button"
                 onClick={onClearFile}
-                className="text-blue-600 dark:text-teal-300 hover:text-blue-800 dark:hover:text-teal-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-teal-900 rounded-sm"
+                className="text-tertiary dark:text-teal-300 hover:text-blue-800 dark:hover:text-teal-100 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-teal-900 rounded-sm"
                 disabled={uploadState.isUploading}
               >
                 ✕
@@ -82,7 +82,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
           {uploadState.isUploading && (
             <div className="mt-2 w-full bg-blue-200 dark:bg-teal-700 rounded-full h-1 transition-colors">
               <div 
-                className="bg-blue-600 dark:bg-teal-400 h-1 rounded-full transition-all duration-300"
+                className="bg-tertiary dark:bg-teal-400 h-1 rounded-full transition-all duration-300"
                 style={{ width: `${uploadState.uploadProgress}%` }}
               />
             </div>
@@ -120,13 +120,13 @@ const ChatInput: React.FC<ChatInputProps> = ({
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder={isAgentActive ? "Type your message..." : "Agent is deactivated"}
-          className="flex-1 p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-gray-500 dark:placeholder:text-gray-400"
+          className="flex-1 p-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors disabled:opacity-50 disabled:cursor-not-allowed placeholder:text-muted-foreground dark:placeholder:text-outline"
           disabled={isLoading || isTyping || !isAgentActive}
         />
         
         <button
           type="submit"
-          className={`bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+          className={`bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
             isLoading || isTyping || !newMessage.trim() || !isAgentActive
               ? 'opacity-50 cursor-not-allowed' 
               : 'hover:bg-indigo-700 dark:hover:bg-teal-700'

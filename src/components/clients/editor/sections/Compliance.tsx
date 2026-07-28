@@ -64,9 +64,9 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
   const getCategoryColor = (category: ConsentItem['category']) => {
     const colors = {
       essential: 'text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 border-green-200 dark:border-green-800',
-      functional: 'text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800',
-      analytics: 'text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/30 border-purple-200 dark:border-purple-800',
-      marketing: 'text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800'
+      functional: 'text-tertiary dark:text-tertiary bg-blue-100 dark:bg-blue-900/30 border-blue-200 dark:border-blue-800',
+      analytics: 'text-tertiary dark:text-tertiary bg-purple-100 dark:bg-purple-900/30 border-purple-200 dark:border-purple-800',
+      marketing: 'text-amber-600 dark:text-destructive bg-amber-100 dark:bg-amber-900/30 border-amber-200 dark:border-amber-800'
     };
     return colors[category];
   };
@@ -95,10 +95,10 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
             <Shield className="w-5 h-5 text-green-600 dark:text-green-400 transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               GDPR Compliance
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Data protection and privacy preferences
             </p>
           </div>
@@ -106,7 +106,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
         
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="px-3 py-1.5 text-sm bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border rounded-lg hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           aria-label={showDetails ? "Hide compliance details" : "Show compliance details"}
         >
           <Eye className="w-4 h-4" />
@@ -115,7 +115,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
       </div>
 
       {/* Compliance Status Overview */}
-      <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
+      <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <div className={`p-1.5 rounded-full transition-colors ${
@@ -128,16 +128,16 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
               {complianceStatus.status === 'good' ? (
                 <Check className="w-4 h-4 text-green-600 dark:text-green-400 transition-colors" />
               ) : complianceStatus.status === 'partial' ? (
-                <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-amber-400 transition-colors" />
+                <AlertTriangle className="w-4 h-4 text-amber-600 dark:text-destructive transition-colors" />
               ) : (
-                <X className="w-4 h-4 text-red-600 dark:text-red-400 transition-colors" />
+                <X className="w-4 h-4 text-red-600 dark:text-destructive transition-colors" />
               )}
             </div>
             <div>
-              <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+              <p className="font-medium text-foreground dark:text-foreground transition-colors">
                 Consent Status
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+              <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                 {complianceStatus.activeConsents} of {complianceStatus.totalConsents} consents active
               </p>
             </div>
@@ -148,12 +148,12 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
               complianceStatus.status === 'good' 
                 ? 'text-green-600 dark:text-green-400' 
                 : complianceStatus.status === 'partial' 
-                ? 'text-amber-600 dark:text-amber-400' 
-                : 'text-red-600 dark:text-red-400'
+                ? 'text-amber-600 dark:text-destructive' 
+                : 'text-red-600 dark:text-destructive'
             }`}>
               {complianceStatus.percentage}%
             </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
               Compliance Level
             </p>
           </div>
@@ -161,7 +161,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
         
         {/* Progress Bar */}
         <div className="relative">
-          <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden transition-colors">
+          <div className="h-2 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden transition-colors">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${complianceStatus.percentage}%` }}
@@ -170,8 +170,8 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
                 complianceStatus.status === 'good' 
                   ? 'bg-green-500 dark:bg-green-400' 
                   : complianceStatus.status === 'partial' 
-                  ? 'bg-amber-500 dark:bg-amber-400' 
-                  : 'bg-red-500 dark:bg-red-400'
+                  ? 'bg-destructive dark:bg-destructive' 
+                  : 'bg-destructive dark:bg-destructive'
               }`}
             />
           </div>
@@ -180,7 +180,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
 
       {/* Consent Controls */}
       <div className="space-y-4">
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 transition-colors">
+        <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground flex items-center gap-2 transition-colors">
           <FileText className="w-4 h-4" />
           Consent Preferences
         </h4>
@@ -192,7 +192,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900 transition-colors"
+              className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-sm dark:shadow-gray-900 transition-colors"
             >
               <div className="flex items-start gap-3">
                 {/* Custom Checkbox */}
@@ -205,8 +205,8 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
                   />
                   <div className={`w-5 h-5 border-2 rounded transition-all duration-200 flex items-center justify-center ${
                     consents[item.key]
-                      ? 'bg-indigo-600 dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
-                      : 'bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 hover:border-indigo-400 dark:hover:border-teal-400'
+                      ? 'bg-primary dark:bg-teal-600 border-indigo-600 dark:border-teal-600'
+                      : 'bg-white dark:bg-surface-container-highest border-border dark:border-border hover:border-indigo-400 dark:hover:border-teal-400'
                   }`}>
                     {consents[item.key] && (
                       <Check className="w-3 h-3 text-white" />
@@ -216,7 +216,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
                 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
-                    <p className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+                    <p className="font-medium text-foreground dark:text-foreground transition-colors">
                       {item.label}
                     </p>
                     <span className={`px-2 py-0.5 text-xs font-medium rounded-full border transition-colors ${getCategoryColor(item.category)}`}>
@@ -230,7 +230,7 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="text-sm text-gray-600 dark:text-gray-400 transition-colors"
+                        className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors"
                       >
                         {item.description}
                       </motion.p>
@@ -246,39 +246,39 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
       {/* Compliance Information */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Last Update Info */}
-        <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+        <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
           <div className="flex items-center gap-2 mb-2">
-            <Clock className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
-            <h5 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+            <Clock className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
+            <h5 className="font-medium text-foreground dark:text-foreground transition-colors">
               Last Updated
             </h5>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             {client.gdpr.lastUpdate}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+          <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
             Preferences can be modified at any time
           </p>
         </div>
 
         {/* Data Rights */}
-        <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+        <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
           <div className="flex items-center gap-2 mb-2">
-            <Lock className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
-            <h5 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">
+            <Lock className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
+            <h5 className="font-medium text-foreground dark:text-foreground transition-colors">
               Your Rights
             </h5>
           </div>
           <div className="space-y-1">
-            <button className="text-xs text-indigo-600 dark:text-teal-400 hover:underline transition-colors">
+            <button className="text-xs text-primary-green dark:text-teal-400 hover:underline transition-colors">
               Request data export
             </button>
             <br />
-            <button className="text-xs text-indigo-600 dark:text-teal-400 hover:underline transition-colors">
+            <button className="text-xs text-primary-green dark:text-teal-400 hover:underline transition-colors">
               Request data deletion
             </button>
             <br />
-            <button className="text-xs text-indigo-600 dark:text-teal-400 hover:underline transition-colors">
+            <button className="text-xs text-primary-green dark:text-teal-400 hover:underline transition-colors">
               View privacy policy
             </button>
           </div>
@@ -286,13 +286,13 @@ export default function Compliance({ client, onChange }: ComplianceProps) {
       </div>
 
       {/* Compliance Actions */}
-      <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 dark:border-gray-700 transition-colors">
-        <button className="px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+      <div className="flex flex-wrap gap-3 pt-4 border-t border-border dark:border-border transition-colors">
+        <button className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
           <Download className="w-4 h-4" />
           Export Data
         </button>
         
-        <button className="px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors flex items-center gap-2 text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800">
+        <button className="px-4 py-2 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border rounded-lg hover:bg-surface-container dark:hover:bg-surface-container-highest transition-colors flex items-center gap-2 text-sm font-medium shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800">
           <FileText className="w-4 h-4" />
           Privacy Policy
         </button>

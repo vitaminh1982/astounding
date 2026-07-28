@@ -33,7 +33,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
   const triggerTypeConfig = useMemo(() => ({
     schedule: {
       icon: Clock,
-      color: 'text-blue-600 dark:text-blue-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-blue-50 dark:bg-blue-900/20',
       borderColor: 'border-blue-200 dark:border-blue-800'
     },
@@ -45,7 +45,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
     },
     webhook: {
       icon: Webhook,
-      color: 'text-purple-600 dark:text-purple-400',
+      color: 'text-tertiary dark:text-tertiary',
       bgColor: 'bg-purple-50 dark:bg-purple-900/20',
       borderColor: 'border-purple-200 dark:border-purple-800'
     },
@@ -100,20 +100,20 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
   }, []);
 
   return (
-    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="h-full flex flex-col bg-surface-container-low dark:bg-background transition-colors">
       {/* Header */}
-      <div className="flex justify-between items-center p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors">
+      <div className="flex justify-between items-center p-4 border-b border-border dark:border-border bg-white dark:bg-surface-container-high transition-colors">
         <div>
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+          <h2 className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
             Workflow Triggers
           </h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
             Configure automated triggers for your workflow
           </p>
         </div>
         <button
           onClick={handleAddTrigger}
-          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
           aria-label="Add new trigger"
         >
           <Plus className="w-4 h-4" />
@@ -132,7 +132,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
               return (
                 <div
                   key={trigger.id}
-                  className={`p-4 border ${typeConfig.borderColor} rounded-xl bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-all duration-200`}
+                  className={`p-4 border ${typeConfig.borderColor} rounded-xl bg-white dark:bg-surface-container-high shadow-sm hover:shadow-md transition-all duration-200`}
                 >
                   {/* Trigger Header */}
                   <div className="flex justify-between items-start gap-4">
@@ -141,10 +141,10 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                         <TypeIcon className={`w-5 h-5 ${typeConfig.color}`} />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium text-lg text-gray-900 dark:text-gray-100 truncate transition-colors">
+                        <h3 className="font-medium text-lg text-foreground dark:text-foreground truncate transition-colors">
                           {trigger.name || 'Untitled Trigger'}
                         </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2 transition-colors">
+                        <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 line-clamp-2 transition-colors">
                           {trigger.description || 'No description provided'}
                         </p>
                       </div>
@@ -154,7 +154,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                     <div className="flex items-center gap-2 flex-shrink-0">
                       <button
                         onClick={() => setEditingTrigger(trigger)}
-                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all duration-200"
+                        className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-primary-green dark:hover:text-primary-green hover:bg-indigo-50 dark:hover:bg-indigo-900/20 rounded-lg transition-all duration-200"
                         aria-label="Edit trigger"
                       >
                         <Edit2 className="w-4 h-4" />
@@ -164,7 +164,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                         className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 flex items-center gap-1.5 ${
                           trigger.isActive
                             ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800'
-                            : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-600'
+                            : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border border-border dark:border-border'
                         }`}
                         aria-label={trigger.isActive ? 'Deactivate trigger' : 'Activate trigger'}
                       >
@@ -173,7 +173,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                       </button>
                       <button
                         onClick={() => handleDeleteTrigger(trigger.id)}
-                        className="p-2 text-gray-600 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200"
+                        className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-red-600 dark:hover:text-destructive hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200"
                         aria-label="Delete trigger"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -182,9 +182,9 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                   </div>
 
                   {/* Trigger Details */}
-                  <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-2 transition-colors">
+                  <div className="mt-4 pt-4 border-t border-border dark:border-border space-y-2 transition-colors">
                     <div className="flex items-center text-sm">
-                      <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 transition-colors">
+                      <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 transition-colors">
                         Type:
                       </span>
                       <span className={`capitalize px-2 py-1 rounded-md ${typeConfig.bgColor} ${typeConfig.color} text-xs font-medium`}>
@@ -194,10 +194,10 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                     
                     {trigger.type === 'schedule' && trigger.config.schedule && (
                       <div className="flex items-center text-sm">
-                        <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 transition-colors">
+                        <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 transition-colors">
                           Schedule:
                         </span>
-                        <code className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded text-xs font-mono transition-colors">
+                        <code className="px-2 py-1 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-on-surface-variant rounded text-xs font-mono transition-colors">
                           {trigger.config.schedule}
                         </code>
                       </div>
@@ -205,10 +205,10 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                     
                     {trigger.type === 'event' && trigger.config.eventType && (
                       <div className="flex items-center text-sm">
-                        <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 transition-colors">
+                        <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 transition-colors">
                           Event:
                         </span>
-                        <span className="text-gray-600 dark:text-gray-400 transition-colors">
+                        <span className="text-muted-foreground dark:text-muted-foreground transition-colors">
                           {trigger.config.eventType}
                         </span>
                       </div>
@@ -216,14 +216,14 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                     
                     {trigger.type === 'webhook' && trigger.config.webhookUrl && (
                       <div className="flex items-start text-sm">
-                        <span className="font-medium text-gray-700 dark:text-gray-300 mr-2 flex-shrink-0 transition-colors">
+                        <span className="font-medium text-on-surface dark:text-muted-foreground mr-2 flex-shrink-0 transition-colors">
                           Webhook:
                         </span>
                         <a
                           href={trigger.config.webhookUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 break-all transition-colors"
+                          className="text-primary-green dark:text-primary-green hover:text-indigo-700 dark:hover:text-indigo-300 break-all transition-colors"
                         >
                           {trigger.config.webhookUrl}
                         </a>
@@ -237,18 +237,18 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
         ) : (
           /* Empty State */
           <div className="h-full flex flex-col items-center justify-center text-center p-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4 transition-colors">
-              <Zap className="h-8 w-8 text-gray-400 dark:text-gray-500 transition-colors" />
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-container-low dark:bg-surface-container-highest mb-4 transition-colors">
+              <Zap className="h-8 w-8 text-outline dark:text-muted-foreground transition-colors" />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">
+            <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">
               No triggers configured
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 max-w-sm mb-6 transition-colors">
+            <p className="text-muted-foreground dark:text-muted-foreground max-w-sm mb-6 transition-colors">
               Add your first trigger to start automating your workflow. Choose from schedules, events, webhooks, or manual triggers.
             </p>
             <button
               onClick={handleAddTrigger}
-              className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+              className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
             >
               <Plus className="w-4 h-4" />
               Add Your First Trigger
@@ -264,17 +264,17 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
           onClick={handleCloseModal}
         >
           <div 
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-700 transition-colors"
+            className="bg-white dark:bg-surface-container-high rounded-xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto border border-border dark:border-border transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="sticky top-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 p-6 flex items-center justify-between transition-colors">
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+            <div className="sticky top-0 bg-white dark:bg-surface-container-high border-b border-border dark:border-border p-6 flex items-center justify-between transition-colors">
+              <h2 className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">
                 {isAddingTrigger ? 'Create Trigger' : 'Edit Trigger'}
               </h2>
               <button
                 onClick={handleCloseModal}
-                className="p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-all duration-200"
+                className="p-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-all duration-200"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -291,14 +291,14 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
             >
               {/* Name Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
-                  Name <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
+                  Name <span className="text-destructive">*</span>
                 </label>
                 <input
                   type="text"
                   value={editingTrigger.name}
                   onChange={(e) => setEditingTrigger({...editingTrigger, name: e.target.value})}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
                   placeholder="Enter trigger name"
                   required
                 />
@@ -306,13 +306,13 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
 
               {/* Description Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                   Description
                 </label>
                 <textarea
                   value={editingTrigger.description}
                   onChange={(e) => setEditingTrigger({...editingTrigger, description: e.target.value})}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors resize-none"
+                  className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors resize-none"
                   rows={3}
                   placeholder="Describe what this trigger does"
                 />
@@ -320,8 +320,8 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
 
               {/* Type Field */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
-                  Type <span className="text-red-500">*</span>
+                <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
+                  Type <span className="text-destructive">*</span>
                 </label>
                 <select
                   value={editingTrigger.type}
@@ -330,7 +330,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                     type: e.target.value as Trigger['type'],
                     config: {}
                   })}
-                  className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
                 >
                   <option value="schedule">Schedule</option>
                   <option value="event">Event</option>
@@ -342,7 +342,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
               {/* Conditional Fields Based on Type */}
               {editingTrigger.type === 'schedule' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                  <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                     Schedule (Cron Expression)
                   </label>
                   <input
@@ -355,18 +355,18 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                         schedule: e.target.value
                       }
                     })}
-                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors font-mono text-sm"
+                    className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors font-mono text-sm"
                     placeholder="*/5 * * * *"
                   />
-                  <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 transition-colors">
-                    Example: <code className="bg-gray-100 dark:bg-gray-700 px-1 py-0.5 rounded">*/5 * * * *</code> runs every 5 minutes
+                  <p className="mt-2 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
+                    Example: <code className="bg-surface-container-low dark:bg-surface-container-highest px-1 py-0.5 rounded">*/5 * * * *</code> runs every 5 minutes
                   </p>
                 </div>
               )}
 
               {editingTrigger.type === 'event' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                  <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                     Event Type
                   </label>
                   <input
@@ -379,7 +379,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                         eventType: e.target.value
                       }
                     })}
-                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
                     placeholder="e.g., user.created, order.completed"
                   />
                 </div>
@@ -387,7 +387,7 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
 
               {editingTrigger.type === 'webhook' && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+                  <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
                     Webhook URL
                   </label>
                   <input
@@ -400,24 +400,24 @@ const TriggerPanel: React.FC<TriggerPanelProps> = ({
                         webhookUrl: e.target.value
                       }
                     })}
-                    className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
+                    className="w-full px-4 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent transition-colors"
                     placeholder="https://example.com/webhook"
                   />
                 </div>
               )}
 
               {/* Action Buttons */}
-              <div className="flex justify-end gap-3 pt-4 border-t border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex justify-end gap-3 pt-4 border-t border-border dark:border-border transition-colors">
                 <button
                   type="button"
                   onClick={handleCloseModal}
-                  className="px-4 py-2.5 text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
+                  className="px-4 py-2.5 text-on-surface dark:text-muted-foreground bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2.5 bg-indigo-600 dark:bg-indigo-500 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 shadow-sm hover:shadow-md transition-all duration-200"
+                  className="px-4 py-2.5 bg-primary dark:bg-primary text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-primary shadow-sm hover:shadow-md transition-all duration-200"
                 >
                   {isAddingTrigger ? 'Create Trigger' : 'Save Changes'}
                 </button>

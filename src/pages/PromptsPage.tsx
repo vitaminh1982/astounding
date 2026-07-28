@@ -180,16 +180,16 @@ export default function PromptsPage() {
         {/* View Toggle */}
         <div className="flex justify-between items-center mb-4">
           <div className="flex items-center space-x-2">
-            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
+            <span className="text-sm font-medium text-muted-foreground dark:text-muted-foreground">
               {t('prompts.view.label') || 'View:'}
             </span>
-            <div className="flex border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shadow-sm">
+            <div className="flex border border-border dark:border-border rounded-lg overflow-hidden shadow-sm">
               <button
                 onClick={() => setViewType('card')}
                 className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 ${
                   viewType === 'card'
-                    ? 'bg-indigo-600 dark:bg-teal-600 text-white shadow-inner'
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700'
+                    ? 'bg-primary dark:bg-teal-600 text-white shadow-inner'
+                    : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover: dark:hover:bg-surface-container-highest'
                 }`}
                 aria-label="Card View"
                 aria-pressed={viewType === 'card'}
@@ -199,10 +199,10 @@ export default function PromptsPage() {
               </button>
               <button
                 onClick={() => setViewType('list')}
-                className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 border-l border-gray-300 dark:border-gray-600 ${
+                className={`flex items-center px-3 py-2 text-sm font-medium transition-all duration-200 border-l border-border dark:border-border ${
                   viewType === 'list' 
-                    ? 'bg-indigo-600 dark:bg-teal-600 text-white shadow-inner' 
-                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700'
+                    ? 'bg-primary dark:bg-teal-600 text-white shadow-inner' 
+                    : 'bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover: dark:hover:bg-surface-container-highest'
                 }`}
                 aria-label="List View"
                 aria-pressed={viewType === 'list'}
@@ -218,7 +218,7 @@ export default function PromptsPage() {
         <div className="mb-4 lg:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="w-full px-4 py-3 text-left bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg border border-gray-300 dark:border-gray-600 shadow-sm hover: dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-all duration-200"
+            className="w-full px-4 py-3 text-left bg-white dark:bg-surface-container-high text-foreground dark:text-foreground rounded-lg border border-border dark:border-border shadow-sm hover: dark:hover:bg-surface-container-highest focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-all duration-200"
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-categories-menu"
           >
@@ -264,13 +264,13 @@ export default function PromptsPage() {
             <div className="mt-4">
               {filteredPrompts.length === 0 ? (
                 <div className="text-center py-12">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-                    <SlidersHorizontal className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-container-low dark:bg-surface-container-high mb-4">
+                    <SlidersHorizontal className="w-8 h-8 text-outline dark:text-muted-foreground" />
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2">
                     No prompts found
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <p className="text-sm text-muted-foreground dark:text-muted-foreground">
                     Try adjusting your search or filters
                   </p>
                 </div>

@@ -149,7 +149,7 @@ export default function PlexPage({
       {/* Main */}
       <div className={`flex-grow flex flex-col min-w-0 transition-all duration-300 ${
         activeChat 
-          ? 'shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-2xl' 
+          ? 'shadow dark:shadow-gray-900 border border-border dark:border-border bg-white dark:bg-surface-container-high rounded-2xl' 
           : 'bg-transparent'
       }`}>
         {activeChat ? (
@@ -158,15 +158,15 @@ export default function PlexPage({
             {activeChat.messages.map(msg => (
               <div key={msg.id} className={`flex ${msg.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {msg.type === 'assistant' && (
-                  <div className="w-8 h-8 rounded-full bg-indigo-600 dark:bg-teal-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5 text-white shadow-sm">
+                  <div className="w-8 h-8 rounded-full bg-primary dark:bg-teal-600 flex items-center justify-center flex-shrink-0 mr-3 mt-0.5 text-white shadow-sm">
                     <Sparkles size={16} />
                   </div>
                 )}
                 <div
                   className={`max-w-[75%] rounded-lg px-4 py-2.5 text-sm leading-relaxed ${
                     msg.type === 'user'
-                      ? 'bg-indigo-600 dark:bg-teal-600 text-white rounded-br-none shadow-sm'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-bl-none border border-gray-200 dark:border-gray-600'
+                      ? 'bg-primary dark:bg-teal-600 text-white rounded-br-none shadow-sm'
+                      : 'bg-surface-container-low dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-bl-none border border-border dark:border-border'
                   }`}
                 >
                   {msg.content}
@@ -175,13 +175,13 @@ export default function PlexPage({
             ))}
             {isTyping && (
               <div className="flex justify-start items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-indigo-600 dark:bg-teal-600 flex items-center justify-center flex-shrink-0 text-white">
+                <div className="w-8 h-8 rounded-full bg-primary dark:bg-teal-600 flex items-center justify-center flex-shrink-0 text-white">
                   <Sparkles size={16} />
                 </div>
-                <div className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg rounded-bl-none px-4 py-3 flex gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style={{ animationDelay: '300ms' }} />
+                <div className="bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border rounded-lg rounded-bl-none px-4 py-3 flex gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-outline-variant dark:bg-outline animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-outline-variant dark:bg-outline animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-outline-variant dark:bg-outline animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             )}
@@ -192,7 +192,7 @@ export default function PlexPage({
           <div className="flex-1 flex flex-col items-center justify-center px-6">
             {/* Greeting */}
             <div className="flex items-center gap-3 mb-8">
-              <Sparkles size={38} className="text-indigo-600 dark:text-teal-500" />
+              <Sparkles size={38} className="text-primary-green dark:text-primary-green" />
               <h1 className="text-4xl font-semibold text-gray-950 dark:text-gray-50 tracking-tight">
                 {getGreeting()}, Oppie
               </h1>
@@ -200,7 +200,7 @@ export default function PlexPage({
 
             {/* Input */}
             <div className="w-full max-w-2xl mb-6">
-              <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 transition-all">
+              <div className="bg-white dark:bg-background rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 transition-all">
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -212,26 +212,26 @@ export default function PlexPage({
                   onKeyDown={handleKeyDown}
                   placeholder="How can I help you today?"
                   rows={1}
-                  className="w-full px-5 pt-4 pb-2 text-[15px] text-gray-900 dark:text-gray-100 bg-transparent placeholder-gray-400 dark:placeholder-gray-500 outline-none resize-none"
+                  className="w-full px-5 pt-4 pb-2 text-[15px] text-foreground dark:text-foreground bg-transparent placeholder-gray-400 dark:placeholder-gray-500 outline-none resize-none"
                   style={{ minHeight: '52px', maxHeight: '160px' }}
                 />
                 <div className="flex items-center justify-between px-4 pb-3 pt-1">
-                  <button className="w-7 h-7 rounded-full flex items-center justify-center border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-lg leading-none">
+                  <button className="w-7 h-7 rounded-full flex items-center justify-center border border-border dark:border-border text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors text-lg leading-none">
                     +
                   </button>
                   <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-1.5 text-[12px] text-gray-400 dark:text-gray-500">
-                      <span className="font-medium text-gray-600 dark:text-gray-400">Plex</span>
-                      <span className="text-gray-300 dark:text-gray-600">·</span>
+                    <div className="flex items-center gap-1.5 text-[12px] text-outline dark:text-muted-foreground">
+                      <span className="font-medium text-muted-foreground dark:text-muted-foreground">Plex</span>
+                      <span className="text-muted-foreground dark:text-muted-foreground">·</span>
                       <span>Default</span>
                     </div>
-                    <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+                    <button className="text-outline hover:text-muted-foreground dark:hover:text-on-surface-variant transition-colors">
                       <Mic size={16} strokeWidth={1.75} />
                     </button>
                     <button
                       onClick={handleSend}
                       disabled={!input.trim()}
-                      className="w-8 h-8 rounded-md flex items-center justify-center bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
+                      className="w-8 h-8 rounded-md flex items-center justify-center bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
                     >
                       <Send size={12} strokeWidth={2} />
                     </button>
@@ -245,9 +245,9 @@ export default function PlexPage({
                 <button
                   key={pill.id}
                   onClick={() => handleQuickAction(pill.prompt)}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-900 border border-gray-250 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-gray-305 dark:hover:border-gray-650 transition-all shadow-sm"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs text-on-surface dark:text-muted-foreground bg-white dark:bg-background border border-gray-250 dark:border-border hover:bg-surface-container-low dark:hover:bg-surface-container-high hover:border-gray-305 dark:hover:border-gray-650 transition-all shadow-sm"
                 >
-                  <pill.icon size={13} strokeWidth={1.75} className="text-gray-500 dark:text-gray-400" />
+                  <pill.icon size={13} strokeWidth={1.75} className="text-muted-foreground dark:text-muted-foreground" />
                   {pill.label}
                 </button>
               ))}
@@ -259,7 +259,7 @@ export default function PlexPage({
         {activeChat && (
           <div className="flex-shrink-0 px-6 pb-5">
             <div className="max-w-3xl mx-auto">
-              <div className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 transition-all">
+              <div className="bg-white dark:bg-background rounded-xl border border-border dark:border-border shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 dark:focus-within:ring-teal-500/50 transition-all">
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -271,21 +271,21 @@ export default function PlexPage({
                   onKeyDown={handleKeyDown}
                   placeholder="Reply to Plex\u2026"
                   rows={1}
-                  className="w-full px-5 pt-4 pb-2 text-[15px] text-gray-900 dark:text-gray-100 bg-transparent placeholder-gray-400 dark:placeholder-gray-500 outline-none resize-none"
+                  className="w-full px-5 pt-4 pb-2 text-[15px] text-foreground dark:text-foreground bg-transparent placeholder-gray-400 dark:placeholder-gray-500 outline-none resize-none"
                   style={{ minHeight: '52px', maxHeight: '160px' }}
                 />
                 <div className="flex items-center justify-between px-4 pb-3 pt-1">
-                  <button className="w-7 h-7 rounded-full flex items-center justify-center border border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-lg leading-none">
+                  <button className="w-7 h-7 rounded-full flex items-center justify-center border border-border dark:border-border text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors text-lg leading-none">
                     +
                   </button>
                   <div className="flex items-center gap-2">
-                    <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors">
+                    <button className="text-outline hover:text-muted-foreground dark:hover:text-on-surface-variant transition-colors">
                       <Mic size={16} strokeWidth={1.75} />
                     </button>
                     <button
                       onClick={handleSend}
                       disabled={!input.trim()}
-                      className="w-8 h-8 rounded-md flex items-center justify-center bg-indigo-600 dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
+                      className="w-8 h-8 rounded-md flex items-center justify-center bg-primary dark:bg-teal-600 hover:bg-indigo-700 dark:hover:bg-teal-700 text-white disabled:opacity-20 hover:opacity-90 transition-all disabled:cursor-not-allowed"
                     >
                       <Send size={12} strokeWidth={2} />
                     </button>

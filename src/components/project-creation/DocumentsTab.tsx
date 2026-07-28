@@ -32,10 +32,10 @@ export default function DocumentsTab({ documents, phases }: Props) {
   return (
     <div className="flex gap-6 h-[calc(100vh-16rem)]">
       {/* Document Tree */}
-      <div className="w-72 flex-shrink-0 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-y-auto">
-        <div className="p-4 border-b border-gray-200 dark:border-gray-700">
-          <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100">Project Documents</h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+      <div className="w-72 flex-shrink-0 bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border overflow-y-auto">
+        <div className="p-4 border-b border-border dark:border-border">
+          <h3 className="text-sm font-semibold text-foreground dark:text-foreground">Project Documents</h3>
+          <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-1">
             {documents.filter((d) => d.status !== 'locked').length}/{documents.length} unlocked
           </p>
         </div>
@@ -49,16 +49,16 @@ export default function DocumentsTab({ documents, phases }: Props) {
               <div key={category}>
                 <button
                   onClick={() => toggleCategory(category)}
-                  className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
                 >
                   {isExpanded ? (
-                    <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+                    <ChevronDown className="w-3.5 h-3.5 text-outline" />
                   ) : (
-                    <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
+                    <ChevronRight className="w-3.5 h-3.5 text-outline" />
                   )}
-                  <FolderOpen className="w-4 h-4 text-amber-500" />
-                  <span className="text-gray-700 dark:text-gray-300 font-medium">{category}</span>
-                  <span className="ml-auto text-[10px] text-gray-400">{catDocs.length}</span>
+                  <FolderOpen className="w-4 h-4 text-destructive" />
+                  <span className="text-on-surface dark:text-muted-foreground font-medium">{category}</span>
+                  <span className="ml-auto text-[10px] text-outline">{catDocs.length}</span>
                 </button>
 
                 <AnimatePresence>
@@ -78,12 +78,12 @@ export default function DocumentsTab({ documents, phases }: Props) {
                             doc.status === 'locked'
                               ? 'opacity-50 cursor-not-allowed'
                               : selectedDoc?.id === doc.id
-                              ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-blue-400'
-                              : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-400'
+                              ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-700 dark:text-tertiary'
+                              : 'hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground'
                           }`}
                         >
                           {doc.status === 'locked' ? (
-                            <Lock className="w-3 h-3 text-gray-400" />
+                            <Lock className="w-3 h-3 text-outline" />
                           ) : (
                             <FileText className="w-3 h-3" />
                           )}
@@ -103,7 +103,7 @@ export default function DocumentsTab({ documents, phases }: Props) {
       </div>
 
       {/* Document Viewer */}
-      <div className="flex-1 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-y-auto">
+      <div className="flex-1 bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border overflow-y-auto">
         {selectedDoc ? (
           <motion.div
             key={selectedDoc.id}
@@ -111,10 +111,10 @@ export default function DocumentsTab({ documents, phases }: Props) {
             animate={{ opacity: 1 }}
             className="p-6"
           >
-            <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between mb-4 pb-4 border-b border-border dark:border-border">
               <div>
-                <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">{selectedDoc.name}</h2>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                <h2 className="text-lg font-bold text-foreground dark:text-foreground">{selectedDoc.name}</h2>
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-1">
                   Phase: {getPhaseName(selectedDoc.phaseId)} | Category: {selectedDoc.category}
                 </p>
               </div>
@@ -124,9 +124,9 @@ export default function DocumentsTab({ documents, phases }: Props) {
             </div>
 
             <div className="prose dark:prose-invert prose-sm max-w-none">
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{selectedDoc.description}</p>
-              <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700">
-                <pre className="text-xs text-gray-600 dark:text-gray-400 whitespace-pre-wrap font-mono">
+              <p className="text-muted-foreground dark:text-muted-foreground leading-relaxed">{selectedDoc.description}</p>
+              <div className="mt-6 p-4 bg-surface-container-low dark:bg-background/50 rounded-lg border border-border dark:border-border">
+                <pre className="text-xs text-muted-foreground dark:text-muted-foreground whitespace-pre-wrap font-mono">
                   {selectedDoc.content}
                 </pre>
               </div>
@@ -134,9 +134,9 @@ export default function DocumentsTab({ documents, phases }: Props) {
           </motion.div>
         ) : (
           <div className="flex flex-col items-center justify-center h-full text-center p-8">
-            <FileText className="w-12 h-12 text-gray-300 dark:text-gray-600 mb-4" />
-            <h3 className="text-lg font-medium text-gray-600 dark:text-gray-400">Select a document</h3>
-            <p className="text-sm text-gray-400 dark:text-gray-500 mt-2 max-w-sm">
+            <FileText className="w-12 h-12 text-muted-foreground dark:text-muted-foreground mb-4" />
+            <h3 className="text-lg font-medium text-muted-foreground dark:text-muted-foreground">Select a document</h3>
+            <p className="text-sm text-outline dark:text-muted-foreground mt-2 max-w-sm">
               Choose an unlocked document from the tree to view its content. Documents unlock as phases progress.
             </p>
           </div>

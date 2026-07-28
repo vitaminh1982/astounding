@@ -21,8 +21,8 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
   onSectionClick
 }) => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 p-6 border border-gray-200 dark:border-gray-700 transition-colors">
-      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-6 transition-colors">Onboarding Progress</h2>
+    <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm dark:shadow-gray-900 p-6 border border-border dark:border-border transition-colors">
+      <h2 className="text-lg font-semibold text-on-surface dark:text-foreground mb-6 transition-colors">Onboarding Progress</h2>
       <div className="space-y-2">
         {sections.map((section) => {
           const isActive = activeSection === section.id;
@@ -32,12 +32,12 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
             <button
               key={section.id}
               onClick={() => onSectionClick(section.id)}
-              className={`w-full flex items-center p-3 rounded-lg text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              className={`w-full flex items-center p-3 rounded-lg text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 isActive
                   ? 'bg-indigo-50 dark:bg-teal-900 text-indigo-700 dark:text-teal-100 shadow-sm dark:shadow-gray-900'
                   : isCompleted
-                  ? 'text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:shadow-sm dark:hover:shadow-gray-900'
-                  : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                  ? 'text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest hover:shadow-sm dark:hover:shadow-gray-900'
+                  : 'text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
               }`}
               aria-label={`${isCompleted ? 'Completed' : isActive ? 'Current' : 'Pending'} section: ${section.title}`}
               aria-current={isActive ? 'step' : undefined}
@@ -47,19 +47,19 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
                   ? 'bg-indigo-100 dark:bg-teal-800' 
                   : isCompleted 
                   ? 'bg-green-100 dark:bg-green-900' 
-                  : 'bg-gray-100 dark:bg-gray-700'
+                  : 'bg-surface-container-low dark:bg-surface-container-highest'
               }`}>
                 {isCompleted ? (
                   <CheckCircle className={`w-5 h-5 transition-colors ${
                     isActive 
-                      ? 'text-indigo-600 dark:text-teal-300' 
+                      ? 'text-primary-green dark:text-teal-300' 
                       : 'text-green-600 dark:text-green-300'
                   }`} />
                 ) : (
                   <section.icon className={`w-5 h-5 transition-colors ${
                     isActive 
-                      ? 'text-indigo-600 dark:text-teal-300' 
-                      : 'text-gray-500 dark:text-gray-400'
+                      ? 'text-primary-green dark:text-teal-300' 
+                      : 'text-muted-foreground dark:text-muted-foreground'
                   }`} />
                 )}
               </div>
@@ -69,16 +69,16 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
         })}
       </div>
       
-      <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="mt-6 pt-6 border-t border-border dark:border-border transition-colors">
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Progress</span>
-          <span className="text-sm font-medium text-indigo-600 dark:text-teal-400 transition-colors">
+          <span className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Progress</span>
+          <span className="text-sm font-medium text-primary-green dark:text-teal-400 transition-colors">
             {Math.round((completedSections.length / sections.length) * 100)}%
           </span>
         </div>
-        <div className="mt-2 w-full h-2 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden transition-colors">
+        <div className="mt-2 w-full h-2 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden transition-colors">
           <div 
-            className="h-full bg-indigo-600 dark:bg-teal-500 transition-all duration-300"
+            className="h-full bg-primary dark:bg-primary transition-all duration-300"
             style={{ width: `${(completedSections.length / sections.length) * 100}%` }}
             role="progressbar"
             aria-valuenow={Math.round((completedSections.length / sections.length) * 100)}

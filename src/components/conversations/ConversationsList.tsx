@@ -12,7 +12,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
       {loading && (
         <div className="flex items-center justify-center py-2 mb-4 bg-indigo-50 dark:bg-teal-900/30 border border-indigo-100 dark:border-teal-800 rounded-lg transition-colors">
           <Loader className="w-4 h-4 text-indigo-500 dark:text-teal-400 animate-spin mr-2 transition-colors" />
-          <span className="text-sm text-indigo-600 dark:text-teal-300 transition-colors">Loading active conversations...</span>
+          <span className="text-sm text-primary-green dark:text-teal-300 transition-colors">Loading active conversations...</span>
         </div>
       )}
       
@@ -33,14 +33,14 @@ export default function ConversationsList({ onSelect, selectedId }) {
           className={`
             relative w-full p-4 rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm hover:shadow-md
             ${selectedId === conversation.id 
-              ? 'bg-indigo-50 dark:bg-teal-900/30 border-indigo-200 dark:border-teal-600 focus:ring-indigo-500 dark:focus:ring-teal-500 dark:focus:ring-offset-gray-800 shadow-md dark:shadow-gray-900' 
-              : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-teal-600 hover:bg-gray-50 dark:hover:bg-gray-700 focus:ring-gray-500 dark:focus:ring-teal-500 dark:focus:ring-offset-gray-900 dark:shadow-gray-900 dark:hover:shadow-gray-800'
+              ? 'bg-indigo-50 dark:bg-teal-900/30 border-indigo-200 dark:border-teal-600 focus:ring-ring dark:focus:ring-ring dark:focus:ring-offset-gray-800 shadow-md dark:shadow-gray-900' 
+              : 'bg-white dark:bg-surface-container-high border-border dark:border-border hover:border-indigo-200 dark:hover:border-teal-600 hover:bg-surface-container-low dark:hover:bg-surface-container-highest focus:ring-gray-500 dark:focus:ring-ring dark:focus:ring-offset-gray-900 dark:shadow-gray-900 dark:hover:shadow-gray-800'
             }
           `}
         >
           {conversation.needsAttention && (
-            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 dark:bg-red-400">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 dark:bg-red-300 opacity-75"></span>
+            <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-destructive dark:bg-destructive">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-destructive dark:bg-red-300 opacity-75"></span>
             </span>
           )}
 
@@ -61,8 +61,8 @@ export default function ConversationsList({ onSelect, selectedId }) {
                 )}
               </div>
               <div className="text-left">
-                <h3 className="font-medium text-gray-900 dark:text-gray-100 transition-colors">{conversation.client.name}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 line-clamp-1 transition-colors">{conversation.lastMessage}</p>
+                <h3 className="font-medium text-foreground dark:text-foreground transition-colors">{conversation.client.name}</h3>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground line-clamp-1 transition-colors">{conversation.lastMessage}</p>
               </div>
             </div>
             <div className="flex items-center gap-2">
@@ -70,10 +70,10 @@ export default function ConversationsList({ onSelect, selectedId }) {
                 <Star className="w-4 h-4 text-amber-400 dark:text-amber-300 transition-colors" />
               )}
               {conversation.needsAttention && (
-                <AlertTriangle className="w-4 h-4 text-amber-500 dark:text-amber-400 transition-colors" />
+                <AlertTriangle className="w-4 h-4 text-destructive dark:text-destructive transition-colors" />
               )}
               {conversation.initiatedByAI && (
-                <User className="w-4 h-4 text-blue-500 dark:text-blue-400 transition-colors" title="Initiated by AI" />
+                <User className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" title="Initiated by AI" />
               )}
               {conversation.isAIConversation && (
                 <Bot className="w-4 h-4 text-green-500 dark:text-green-400 transition-colors" title="AI-to-AI Conversation" />
@@ -88,15 +88,15 @@ export default function ConversationsList({ onSelect, selectedId }) {
             </div>
           </div>
           
-          <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 transition-colors">
+          <div className="flex items-center justify-between text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             <div className="flex items-center gap-2">
               <span className={`w-2 h-2 rounded-full transition-colors ${
-                conversation.status === 'active' ? 'bg-green-500 dark:bg-green-400' : 'bg-gray-400 dark:bg-gray-500'
+                conversation.status === 'active' ? 'bg-green-500 dark:bg-green-400' : 'bg-outline-variant dark:bg-outline'
               }`}></span>
               <span className="transition-colors">{conversation.agent}</span>
             </div>
             <div className="flex items-center gap-1">
-              <Clock className="w-4 h-4 text-gray-500 dark:text-gray-400 transition-colors" />
+              <Clock className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
               <span className="transition-colors">{conversation.lastActivity}</span>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function ConversationsList({ onSelect, selectedId }) {
       ))}
 
       {conversations.length === 0 && !loading && (
-        <div className="text-center py-8 text-gray-500 dark:text-gray-400 transition-colors">
+        <div className="text-center py-8 text-muted-foreground dark:text-muted-foreground transition-colors">
           No available discussions
         </div>
       )}

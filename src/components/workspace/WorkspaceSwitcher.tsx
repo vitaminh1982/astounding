@@ -80,24 +80,24 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
 
         {/* Name + plan */}
         <span className="flex-1 min-w-0 text-left">
-          <span className="block text-xs font-medium text-gray-900 dark:text-gray-100 truncate leading-tight">
+          <span className="block text-xs font-medium text-foreground dark:text-foreground truncate leading-tight">
             {activeWorkspace.name}
           </span>
-          <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 truncate leading-tight">
+          <span className="block text-[10px] font-normal text-muted-foreground dark:text-muted-foreground truncate leading-tight">
             {activeWorkspace.plan}
           </span>
         </span>
 
         {/* Chevron */}
         {isOpen
-          ? <ChevronUp size={14} className="flex-shrink-0 text-gray-400" />
-          : <ChevronDown size={14} className="flex-shrink-0 text-gray-400" />
+          ? <ChevronUp size={14} className="flex-shrink-0 text-outline" />
+          : <ChevronDown size={14} className="flex-shrink-0 text-outline" />
         }
       </button>
 
       {/* ── Popover Panel ───────────────────────────────── */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#141414] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50 text-sm">
+        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[var(--color-surface-container-low)] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50 text-sm">
 
           {/* Header: workspace info + quick actions */}
           <div className="px-3 pt-3 pb-2">
@@ -106,10 +106,10 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
                 {wsEmoji(activeWorkspace.icon)}
               </span>
               <div className="min-w-0">
-                <p className="text-xs font-medium text-gray-900 dark:text-gray-100 truncate">
+                <p className="text-xs font-medium text-foreground dark:text-foreground truncate">
                   {activeWorkspace.name}
                 </p>
-                <p className="text-[10px] font-normal text-gray-500 dark:text-gray-400">
+                <p className="text-[10px] font-normal text-muted-foreground dark:text-muted-foreground">
                   {activeWorkspace.plan} · {activeWorkspace.members}
                 </p>
               </div>
@@ -117,11 +117,11 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
 
             {/* Settings & Invite row */}
             <div className="flex gap-1.5">
-              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-medium text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <Settings size={12} />
                 Settings
               </button>
-              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-medium text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+              <button className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-md border border-black/10 dark:border-white/10 text-xs font-medium text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
                 <UserPlus size={12} />
                 Invite members
               </button>
@@ -137,14 +137,14 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
                 {/* Account row */}
                 <div className="flex items-center justify-between px-1.5 mb-0.5">
                   <div className="flex items-center gap-1.5 min-w-0">
-                    <span className="text-[10px] font-medium text-gray-400 dark:text-gray-500">
+                    <span className="text-[10px] font-medium text-outline dark:text-muted-foreground">
                       {account.avatar.length > 2 ? '👤' : account.avatar}
                     </span>
-                    <span className="text-[10px] font-medium text-gray-500 dark:text-gray-400 truncate">
+                    <span className="text-[10px] font-medium text-muted-foreground dark:text-muted-foreground truncate">
                       {account.email}
                     </span>
                   </div>
-                  <button className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 flex-shrink-0">
+                  <button className="text-outline hover:text-muted-foreground dark:hover:text-muted-foreground flex-shrink-0">
                     <MoreHorizontal size={13} />
                   </button>
                 </div>
@@ -173,20 +173,20 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
                         }}
                         className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg transition-colors text-left ${
                           isActive
-                            ? 'bg-black/5 dark:bg-white/5 text-gray-900 dark:text-gray-100 font-medium'
-                            : 'text-gray-700 dark:text-gray-300 hover:bg-black/5 dark:hover:bg-white/5 font-normal'
+                            ? 'bg-black/5 dark:bg-white/5 text-foreground dark:text-foreground font-medium'
+                            : 'text-on-surface dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 font-normal'
                         }`}
                       >
                         <span className="flex items-center gap-2 truncate">
                           <span className="text-xs leading-none">{wsEmoji(ws.icon)}</span>
                           <span className="text-xs truncate">{ws.name}</span>
                           {pillText && (
-                            <span className="text-[10px] bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300 border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">
+                            <span className="text-[10px] bg-black/5 dark:bg-white/10 text-muted-foreground dark:text-muted-foreground border border-black/10 dark:border-white/10 px-1.5 py-0.5 rounded font-normal flex-shrink-0">
                               {pillText}
                             </span>
                           )}
                         </span>
-                        {isActive && <Check size={13} className="flex-shrink-0 text-gray-700 dark:text-gray-200" />}
+                        {isActive && <Check size={13} className="flex-shrink-0 text-on-surface dark:text-on-surface-variant" />}
                       </button>
                     );
                   })}
@@ -216,7 +216,7 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
                   ) : (
                     <button
                       onClick={() => setAddingWorkspaceToAccount(account.id)}
-                      className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-normal text-gray-500 dark:text-gray-400 hover:text-gray-850 dark:hover:text-gray-200 text-left transition-colors"
+                      className="w-full flex items-center gap-2 px-2 py-1.5 rounded-lg text-xs font-normal text-muted-foreground dark:text-muted-foreground hover:text-gray-850 dark:hover:text-on-surface-variant text-left transition-colors"
                     >
                       <Plus size={11} />
                       New workspace
@@ -255,16 +255,16 @@ export default function WorkspaceSwitcher({ collapsed = false }: WorkspaceSwitch
             ) : (
               <button
                 onClick={() => setIsAddingAccount(true)}
-                className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors"
+                className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors"
               >
-                <UserPlus size={13} className="text-gray-400" />
+                <UserPlus size={13} className="text-outline" />
                 <span className="text-xs font-medium">Add new account</span>
               </button>
             )}
 
             <button
               onClick={logoutAll}
-              className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors"
+              className="w-full flex items-center gap-2.5 px-2 py-1.5 rounded-lg text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 text-left transition-colors"
             >
               <LogOut size={13} />
               <span className="text-xs font-medium">Log out all accounts</span>

@@ -179,48 +179,48 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'active': return 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300';
-      case 'inactive': return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
+      case 'inactive': return 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground';
       case 'error': return 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300';
-      default: return 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300';
+      default: return 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground';
     }
   };
 
   const getResourceStatusColor = (status: string) => {
     switch (status) {
       case 'optimal': return 'text-green-600 dark:text-green-400';
-      case 'good': return 'text-blue-600 dark:text-blue-400';
+      case 'good': return 'text-tertiary dark:text-tertiary';
       case 'warning': return 'text-yellow-600 dark:text-yellow-400';
-      case 'critical': return 'text-red-600 dark:text-red-400';
-      default: return 'text-gray-600 dark:text-gray-400';
+      case 'critical': return 'text-red-600 dark:text-destructive';
+      default: return 'text-muted-foreground dark:text-muted-foreground';
     }
   };
 
   const getResourceBarColor = (status: string) => {
     switch (status) {
       case 'optimal': return 'bg-green-500';
-      case 'good': return 'bg-blue-500';
+      case 'good': return 'bg-tertiary';
       case 'warning': return 'bg-yellow-500';
-      case 'critical': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      case 'critical': return 'bg-destructive';
+      default: return 'bg-outline';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors">
+    <div className="min-h-screen bg-surface-container-low dark:bg-background transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         {/* Header with breadcrumb */}
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">Resource & Environment Management</h1>
-              <p className="text-gray-600 dark:text-gray-400 transition-colors">Infrastructure and resource optimization</p>
+              <h1 className="text-2xl font-bold text-on-surface dark:text-foreground transition-colors">Resource & Environment Management</h1>
+              <p className="text-muted-foreground dark:text-muted-foreground transition-colors">Infrastructure and resource optimization</p>
             </div>
             <div className="flex gap-3">
-              <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors">
+              <button className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
                 <RefreshCw className="w-4 h-4" />
                 Refresh
               </button>
-              <button className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+              <button className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
                 <Settings className="w-4 h-4" />
                 Configure
               </button>
@@ -230,42 +230,42 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
 
         {/* Resource overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600 shadow-sm dark:shadow-gray-900 transition-colors">
+          <div className="bg-white dark:bg-surface-container-high rounded-lg p-4 border border-border dark:border-border shadow-sm dark:shadow-gray-900 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Total Resources</p>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Total Resources</p>
                 <p className="text-2xl font-bold text-teal-600 dark:text-teal-400 transition-colors">78%</p>
               </div>
-              <Server className="w-8 h-8 text-teal-500 dark:text-teal-400" />
+              <Server className="w-8 h-8 text-primary-green dark:text-teal-400" />
             </div>
             <div className="mt-2 text-xs text-green-600 dark:text-green-400 transition-colors">Within optimal range</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600 shadow-sm dark:shadow-gray-900 transition-colors">
+          <div className="bg-white dark:bg-surface-container-high rounded-lg p-4 border border-border dark:border-border shadow-sm dark:shadow-gray-900 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Active Environments</p>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Active Environments</p>
                 <p className="text-2xl font-bold text-green-600">3</p>
               </div>
               <Monitor className="w-8 h-8 text-green-500" />
             </div>
-            <div className="mt-2 text-xs text-blue-600 dark:text-blue-400 transition-colors">1 inactive</div>
+            <div className="mt-2 text-xs text-tertiary dark:text-tertiary transition-colors">1 inactive</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600 shadow-sm dark:shadow-gray-900 transition-colors">
+          <div className="bg-white dark:bg-surface-container-high rounded-lg p-4 border border-border dark:border-border shadow-sm dark:shadow-gray-900 transition-colors">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Auto-scaling Rules</p>
-                <p className="text-2xl font-bold text-purple-600">4</p>
+                <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Auto-scaling Rules</p>
+                <p className="text-2xl font-bold text-tertiary">4</p>
               </div>
-              <TrendingUp className="w-8 h-8 text-purple-500" />
+              <TrendingUp className="w-8 h-8 text-tertiary" />
             </div>
             <div className="mt-2 text-xs text-green-600 dark:text-green-400 transition-colors">All active</div>
           </div>
         </div>
 
         {/* Main content */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
+        <div className="bg-white dark:bg-surface-container-high rounded-lg shadow dark:shadow-gray-900 border border-border dark:border-border transition-colors">
           {/* Tabs */}
-          <div className="border-b border-gray-200 dark:border-gray-600 transition-colors">
+          <div className="border-b border-border dark:border-border transition-colors">
             <nav className="flex -mb-px">
               {[
                 { key: 'allocation', label: 'Resource Allocation', icon: Server },
@@ -278,7 +278,7 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                   className={`py-4 px-6 text-sm font-medium flex items-center gap-2 transition-colors ${
                     activeTab === key
                       ? 'border-b-2 border-teal-500 dark:border-teal-400 text-teal-600 dark:text-teal-400'
-                      : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-500'
+                      : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-outline'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -295,36 +295,36 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                 {/* Resource usage cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {resourceMetrics.map((resource) => (
-                    <div key={resource.id} className="bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 p-6 transition-colors">
+                    <div key={resource.id} className="bg-white dark:bg-surface-container-highest rounded-lg border border-border dark:border-border p-6 transition-colors">
                       <div className="flex justify-between items-center mb-4">
-                        <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 transition-colors">{resource.name}</h3>
+                        <h3 className="text-sm font-medium text-muted-foreground dark:text-muted-foreground transition-colors">{resource.name}</h3>
                         <div className={`text-sm font-medium transition-colors ${getResourceStatusColor(resource.status)}`}>
                           {resource.status.charAt(0).toUpperCase() + resource.status.slice(1)}
                         </div>
                       </div>
-                      <div className="text-3xl font-bold mb-2 text-gray-900 dark:text-gray-100 transition-colors">
+                      <div className="text-3xl font-bold mb-2 text-foreground dark:text-foreground transition-colors">
                         {resource.current}{resource.unit}
                       </div>
-                      <div className="text-sm text-gray-500 dark:text-gray-400 mb-3 transition-colors">
+                      <div className="text-sm text-muted-foreground dark:text-muted-foreground mb-3 transition-colors">
                         of {resource.max}{resource.unit}
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-2 mb-3">
+                      <div className="w-full bg-surface-container dark:bg-surface-container-highest rounded-full h-2 mb-3">
                         <div 
                           className={`h-2 rounded-full transition-all duration-300 ${getResourceBarColor(resource.status)}`}
                           style={{ width: `${(resource.current / resource.max) * 100}%` }}
                         ></div>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">{resource.details}</p>
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">{resource.details}</p>
                     </div>
                   ))}
                 </div>
 
                 {/* Resource allocation chart placeholder */}
-                <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-8 text-center transition-colors">
-                  <BarChart3 className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4 transition-colors" />
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2 transition-colors">Resource Usage Over Time</h3>
-                  <p className="text-gray-500 dark:text-gray-400 transition-colors">Interactive chart showing resource consumption patterns and trends</p>
-                  <button className="mt-4 px-4 py-2 bg-teal-600 dark:bg-teal-500 text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                <div className="bg-surface-container-low dark:bg-surface-container-highest/50 rounded-lg p-8 text-center transition-colors">
+                  <BarChart3 className="w-12 h-12 text-outline dark:text-muted-foreground mx-auto mb-4 transition-colors" />
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground mb-2 transition-colors">Resource Usage Over Time</h3>
+                  <p className="text-muted-foreground dark:text-muted-foreground transition-colors">Interactive chart showing resource consumption patterns and trends</p>
+                  <button className="mt-4 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                     View Detailed Analytics
                   </button>
                 </div>
@@ -334,8 +334,8 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
             {activeTab === 'environment' && (
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Environment Configuration</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-teal-600 dark:bg-teal-500 text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Environment Configuration</h3>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                     <Plus className="w-4 h-4" />
                     New Environment
                   </button>
@@ -343,12 +343,12 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {environments.map((env) => (
-                    <div key={env.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700 transition-colors">
+                    <div key={env.id} className="border border-border dark:border-border rounded-lg p-6 bg-white dark:bg-surface-container-highest transition-colors">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-gray-100 transition-colors">{env.name}</h3>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Region: {env.region}</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Last deployment: {env.lastDeployment}</p>
+                          <h3 className="font-semibold text-foreground dark:text-foreground transition-colors">{env.name}</h3>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Region: {env.region}</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Last deployment: {env.lastDeployment}</p>
                         </div>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium transition-colors ${getStatusColor(env.status)}`}>
                           {env.status.charAt(0).toUpperCase() + env.status.slice(1)}
@@ -357,48 +357,48 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                       
                       <div className="grid grid-cols-2 gap-4 mb-4">
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Active Agents</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Active Agents</p>
                           <p className="text-xl font-bold text-teal-600 dark:text-teal-400 transition-colors">{env.agents}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">Uptime</p>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">Uptime</p>
                           <p className="text-xl font-bold text-green-600">{env.uptime}</p>
                         </div>
                       </div>
 
                       {/* Resource usage for this environment */}
                       <div className="space-y-2 mb-4">
-                        <div className="flex justify-between text-sm text-gray-700 dark:text-gray-300 transition-colors">
+                        <div className="flex justify-between text-sm text-on-surface dark:text-muted-foreground transition-colors">
                           <span>CPU</span>
                           <span>{env.resources.cpu}%</span>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
+                        <div className="w-full bg-surface-container dark:bg-surface-container-highest rounded-full h-1.5">
                           <div 
-                            className="bg-blue-500 h-1.5 rounded-full"
+                            className="bg-tertiary h-1.5 rounded-full"
                             style={{ width: `${env.resources.cpu}%` }}
                           ></div>
                         </div>
-                        <div className="flex justify-between text-sm text-gray-700 dark:text-gray-300 transition-colors">
+                        <div className="flex justify-between text-sm text-on-surface dark:text-muted-foreground transition-colors">
                           <span>Memory</span>
                           <span>{env.resources.memory}%</span>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
+                        <div className="w-full bg-surface-container dark:bg-surface-container-highest rounded-full h-1.5">
                           <div 
-                            className="bg-purple-500 h-1.5 rounded-full"
+                            className="bg-tertiary h-1.5 rounded-full"
                             style={{ width: `${env.resources.memory}%` }}
                           ></div>
                         </div>
                       </div>
                       
-                      <div className="flex justify-end gap-2 pt-4 border-t border-gray-200 dark:border-gray-600 transition-colors">
-                        <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
+                      <div className="flex justify-end gap-2 pt-4 border-t border-border dark:border-border transition-colors">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Configure">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Configure">
                           <Edit2 className="w-4 h-4" />
                         </button>
                         {env.status === 'inactive' && (
-                          <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 rounded-full hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors" title="Delete">
+                          <button className="p-2 text-outline dark:text-muted-foreground hover:text-red-600 dark:hover:text-destructive rounded-full hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors" title="Delete">
                             <Trash2 className="w-4 h-4" />
                           </button>
                         )}
@@ -412,8 +412,8 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
             {activeTab === 'scalability' && (
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">Auto-scaling Rules</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-teal-600 dark:bg-teal-500 text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">Auto-scaling Rules</h3>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-teal-600 dark:bg-primary text-white rounded-lg hover:bg-teal-700 dark:hover:bg-teal-600 transition-colors">
                     <Plus className="w-4 h-4" />
                     New Rule
                   </button>
@@ -421,11 +421,11 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
 
                 <div className="space-y-4">
                   {scalingRules.map((rule) => (
-                    <div key={rule.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-6 bg-white dark:bg-gray-700 transition-colors">
+                    <div key={rule.id} className="border border-border dark:border-border rounded-lg p-6 bg-white dark:bg-surface-container-highest transition-colors">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="font-semibold text-gray-900 dark:text-gray-100 transition-colors">{rule.name}</h3>
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1 transition-colors">
+                          <h3 className="font-semibold text-foreground dark:text-foreground transition-colors">{rule.name}</h3>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
                             Last triggered: {rule.lastTriggered} • Triggered {rule.triggerCount} times
                           </p>
                         </div>
@@ -434,27 +434,27 @@ export default function ResourceManagementPage({ onNavigate }: ResourceManagemen
                         </span>
                       </div>
                       
-                      <div className="bg-gray-50 dark:bg-gray-600/50 rounded-lg p-4 transition-colors">
+                      <div className="bg-surface-container-low dark:bg-surface-container-highest/50 rounded-lg p-4 transition-colors">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Condition</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">{rule.condition}</p>
+                            <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">Condition</h4>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{rule.condition}</p>
                           </div>
                           <div>
-                            <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">Action</h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors">{rule.action}</p>
+                            <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">Action</h4>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{rule.action}</p>
                           </div>
                         </div>
                       </div>
                       
                       <div className="flex justify-end gap-2 mt-4">
-                        <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="View Details">
                           <Eye className="w-4 h-4" />
                         </button>
-                        <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Edit Rule">
+                        <button className="p-2 text-outline dark:text-muted-foreground hover:text-teal-600 dark:hover:text-teal-400 rounded-full hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors" title="Edit Rule">
                           <Edit2 className="w-4 h-4" />
                         </button>
-                        <button className="px-3 py-1 text-xs border border-gray-300 dark:border-gray-600 rounded hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 transition-colors">
+                        <button className="px-3 py-1 text-xs border border-border dark:border-border rounded hover:bg-surface-container-low dark:hover:bg-surface-container-highest text-on-surface dark:text-muted-foreground transition-colors">
                           Test Rule
                         </button>
                       </div>

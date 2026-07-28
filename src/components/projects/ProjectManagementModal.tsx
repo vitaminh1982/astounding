@@ -453,7 +453,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
       case 'admin': return 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300';
       case 'contributor': return 'bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300';
       case 'viewer': return 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-300';
-      default: return 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300';
+      default: return 'bg-surface-container-low dark:bg-surface-container-high text-on-surface dark:text-muted-foreground';
     }
   };
 
@@ -463,7 +463,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
       case 'internal': return 'bg-blue-100 dark:bg-blue-900/20 text-blue-800 dark:text-blue-300';
       case 'confidential': return 'bg-orange-100 dark:bg-orange-900/20 text-orange-800 dark:text-orange-300';
       case 'restricted': return 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-300';
-      default: return 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300';
+      default: return 'bg-surface-container-low dark:bg-surface-container-high text-on-surface dark:text-muted-foreground';
     }
   };
 
@@ -497,21 +497,21 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
           initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.95, opacity: 0 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl dark:shadow-gray-900 w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden border border-gray-200 dark:border-gray-600 transition-colors"
+          className="bg-white dark:bg-surface-container-high rounded-xl shadow-2xl dark:shadow-gray-900 w-full max-w-6xl max-h-[90vh] flex flex-col overflow-hidden border border-border dark:border-border transition-colors"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Modal Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-600">
+          <div className="flex items-center justify-between p-6 border-b border-border dark:border-border">
             <div>
-              <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">Project Management</h2>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              <h2 className="text-xl font-semibold text-foreground dark:text-foreground">Project Management</h2>
+              <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">
                 Configure {projectConfig.name} for {projectConfig.client.name}
               </p>
             </div>
             <button
               ref={firstFocusableRef}
               onClick={onClose}
-              className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+              className="p-2 text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-outline rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -519,7 +519,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
           </div>
 
           {/* Tab Navigation */}
-          <div className="border-b border-gray-200 dark:border-gray-600">
+          <div className="border-b border-border dark:border-border">
             <nav className="flex">
               {[
                 { key: 'info', label: 'Project Info', icon: Building },
@@ -532,8 +532,8 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                   onClick={() => setActiveTab(key as any)}
                   className={`flex items-center gap-2 px-6 py-4 text-sm font-medium border-b-2 transition-colors ${
                     activeTab === key
-                      ? 'border-indigo-500 dark:border-teal-500 text-indigo-600 dark:text-teal-400'
-                      : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600'
+                      ? 'border-primary-green dark:border-teal-500 text-primary-green dark:text-teal-400'
+                      : 'border-transparent text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:border-border dark:hover:border-border'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -550,95 +550,95 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Project Details */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Project Details</h3>
+                    <h3 className="text-lg font-medium text-foreground dark:text-foreground">Project Details</h3>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                         Project Name *
                       </label>
                       <input
                         type="text"
                         value={projectConfig.name}
                         onChange={(e) => updateProjectField('name', e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors ${
-                          errors.name ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors ${
+                          errors.name ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                         }`}
                         placeholder="Enter project name"
                       />
                       {errors.name && (
-                        <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.name}</p>
+                        <p className="mt-1 text-sm text-destructive dark:text-destructive">{errors.name}</p>
                       )}
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                         Description *
                       </label>
                       <textarea
                         value={projectConfig.description}
                         onChange={(e) => updateProjectField('description', e.target.value)}
                         rows={4}
-                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors ${
-                          errors.description ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                        className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors ${
+                          errors.description ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                         }`}
                         placeholder="Enter project description"
                       />
                       {errors.description && (
-                        <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.description}</p>
+                        <p className="mt-1 text-sm text-destructive dark:text-destructive">{errors.description}</p>
                       )}
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                           Start Date
                         </label>
                         <input
                           type="date"
                           value={projectConfig.startDate}
                           onChange={(e) => updateProjectField('startDate', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                          className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                           End Date
                         </label>
                         <input
                           type="date"
                           value={projectConfig.endDate}
                           onChange={(e) => updateProjectField('endDate', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                          className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                           Budget *
                         </label>
                         <input
                           type="text"
                           value={projectConfig.budget}
                           onChange={(e) => updateProjectField('budget', e.target.value)}
-                          className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors ${
-                            errors.budget ? 'border-red-500 dark:border-red-400' : 'border-gray-300 dark:border-gray-600'
+                          className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors ${
+                            errors.budget ? 'border-destructive dark:border-red-400' : 'border-border dark:border-border'
                           }`}
                           placeholder="€450,000"
                         />
                         {errors.budget && (
-                          <p className="mt-1 text-sm text-red-500 dark:text-red-400">{errors.budget}</p>
+                          <p className="mt-1 text-sm text-destructive dark:text-destructive">{errors.budget}</p>
                         )}
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                        <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
                           Priority
                         </label>
                         <select
                           value={projectConfig.priority}
                           onChange={(e) => updateProjectField('priority', e.target.value)}
-                          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                          className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                         >
                           <option value="high">High</option>
                           <option value="medium">Medium</option>
@@ -650,40 +650,40 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
 
                   {/* Client Information */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Client Information</h3>
+                    <h3 className="text-lg font-medium text-foreground dark:text-foreground">Client Information</h3>
                     
-                    <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
+                    <div className="bg-surface-container-low dark:bg-surface-container-highest rounded-lg p-4 border border-border dark:border-border">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 dark:from-teal-500 dark:to-cyan-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
                           {projectConfig.client.name.charAt(0)}
                         </div>
                         <div>
-                          <h4 className="font-medium text-gray-900 dark:text-gray-100">{projectConfig.client.name}</h4>
-                          <p className="text-sm text-gray-500 dark:text-gray-400">{projectConfig.client.industry}</p>
+                          <h4 className="font-medium text-foreground dark:text-foreground">{projectConfig.client.name}</h4>
+                          <p className="text-sm text-muted-foreground dark:text-muted-foreground">{projectConfig.client.industry}</p>
                         </div>
                       </div>
                       
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                          <User className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                          <span className="text-sm text-gray-700 dark:text-gray-300">{projectConfig.client.contactPerson.name} - {projectConfig.client.contactPerson.role}</span>
+                          <User className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
+                          <span className="text-sm text-on-surface dark:text-muted-foreground">{projectConfig.client.contactPerson.name} - {projectConfig.client.contactPerson.role}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                          <span className="text-sm text-gray-700 dark:text-gray-300">{projectConfig.client.contactPerson.email}</span>
+                          <Mail className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
+                          <span className="text-sm text-on-surface dark:text-muted-foreground">{projectConfig.client.contactPerson.email}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Phone className="w-4 h-4 text-gray-500 dark:text-gray-400" />
-                          <span className="text-sm text-gray-700 dark:text-gray-300">{projectConfig.client.contactPerson.phone}</span>
+                          <Phone className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
+                          <span className="text-sm text-on-surface dark:text-muted-foreground">{projectConfig.client.contactPerson.phone}</span>
                         </div>
                         {projectConfig.client.website && (
                           <div className="flex items-center gap-2">
-                            <Globe className="w-4 h-4 text-gray-500 dark:text-gray-400" />
+                            <Globe className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
                             <a 
                               href={projectConfig.client.website} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="text-sm text-indigo-600 dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300"
+                              className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300"
                             >
                               {projectConfig.client.website}
                             </a>
@@ -699,7 +699,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
             {activeTab === 'knowledge' && (
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Knowledge Base Management</h3>
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground">Knowledge Base Management</h3>
                   <div className="flex gap-3">
                     <input
                       ref={fileInputRef}
@@ -712,7 +712,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                     <button
                       onClick={() => fileInputRef.current?.click()}
                       disabled={isUploading}
-                      className="flex items-center gap-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 shadow-sm dark:shadow-gray-900"
+                      className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 shadow-sm dark:shadow-gray-900"
                     >
                       <Upload className="w-4 h-4" />
                       Upload Documents
@@ -724,12 +724,12 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                 {isUploading && (
                   <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
                     <div className="flex items-center gap-2 mb-2">
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600 dark:border-blue-400"></div>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-tertiary dark:border-blue-400"></div>
                       <span className="text-sm text-blue-800 dark:text-blue-300">Uploading... {uploadProgress}%</span>
                     </div>
                     <div className="w-full bg-blue-200 dark:bg-blue-800 rounded-full h-2">
                       <div 
-                        className="bg-blue-600 dark:bg-blue-400 h-2 rounded-full transition-all duration-300"
+                        className="bg-tertiary dark:bg-blue-400 h-2 rounded-full transition-all duration-300"
                         style={{ width: `${uploadProgress}%` }}
                       ></div>
                     </div>
@@ -738,29 +738,29 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
 
                 {/* Search Documents */}
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground w-4 h-4" />
                   <input
                     type="text"
                     placeholder="Search documents..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                    className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                   />
                 </div>
 
                 {/* Documents List */}
                 <div className="space-y-3">
                   {filteredDocuments.length === 0 ? (
-                    <div className="text-center py-12 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg">
-                      <FileText className="w-12 h-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
-                      <h4 className="text-lg font-medium text-gray-900 dark:text-gray-100 mb-2">No documents found</h4>
-                      <p className="text-gray-500 dark:text-gray-400 mb-4">
+                    <div className="text-center py-12 border-2 border-dashed border-border dark:border-border rounded-lg">
+                      <FileText className="w-12 h-12 text-outline dark:text-muted-foreground mx-auto mb-4" />
+                      <h4 className="text-lg font-medium text-foreground dark:text-foreground mb-2">No documents found</h4>
+                      <p className="text-muted-foreground dark:text-muted-foreground mb-4">
                         {searchQuery ? 'Try adjusting your search criteria' : 'Upload documents to get started'}
                       </p>
                       {!searchQuery && (
                         <button
                           onClick={() => fileInputRef.current?.click()}
-                          className="px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors"
+                          className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors"
                         >
                           Upload First Document
                         </button>
@@ -768,15 +768,15 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                     </div>
                   ) : (
                     filteredDocuments.map((document) => (
-                      <div key={document.id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-4 hover:shadow-md dark:hover:shadow-gray-800 transition-shadow bg-white dark:bg-gray-700/50">
+                      <div key={document.id} className="border border-border dark:border-border rounded-lg p-4 hover:shadow-md dark:hover:shadow-gray-800 transition-shadow bg-white dark:bg-surface-container-highest/50">
                         <div className="flex justify-between items-start">
                           <div className="flex items-start gap-3 flex-1">
-                            <div className="p-2 bg-gray-100 dark:bg-gray-600 rounded-lg">
-                              <FileText className="w-5 h-5 text-gray-600 dark:text-gray-400" />
+                            <div className="p-2 bg-surface-container-low dark:bg-surface-container-highest rounded-lg">
+                              <FileText className="w-5 h-5 text-muted-foreground dark:text-muted-foreground" />
                             </div>
                             <div className="flex-1">
-                              <h4 className="font-medium text-gray-900 dark:text-gray-100">{document.name}</h4>
-                              <div className="flex items-center gap-4 mt-1 text-sm text-gray-500 dark:text-gray-400">
+                              <h4 className="font-medium text-foreground dark:text-foreground">{document.name}</h4>
+                              <div className="flex items-center gap-4 mt-1 text-sm text-muted-foreground dark:text-muted-foreground">
                                 <span>{document.type}</span>
                                 <span>{formatFileSize(document.size)}</span>
                                 <span>Uploaded {document.uploadDate}</span>
@@ -793,7 +793,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                                   </span>
                                 )}
                                 {document.tags.map(tag => (
-                                  <span key={tag} className="px-2 py-1 bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-full text-xs">
+                                  <span key={tag} className="px-2 py-1 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground rounded-full text-xs">
                                     {tag}
                                   </span>
                                 ))}
@@ -801,15 +801,15 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" title="Download">
+                            <button className="p-2 text-outline dark:text-muted-foreground hover:text-tertiary dark:hover:text-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" title="Download">
                               <Download className="w-4 h-4" />
                             </button>
-                            <button className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" title="View">
+                            <button className="p-2 text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-outline rounded-lg hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors" title="View">
                               <Eye className="w-4 h-4" />
                             </button>
                             <button 
                               onClick={() => removeDocument(document.id)}
-                              className="p-2 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" 
+                              className="p-2 text-outline dark:text-muted-foreground hover:text-red-600 dark:hover:text-destructive rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" 
                               title="Remove"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -826,8 +826,8 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
             {activeTab === 'access' && (
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Access Control</h3>
-                  <button className="flex items-center gap-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
+                  <h3 className="text-lg font-medium text-foreground dark:text-foreground">Access Control</h3>
+                  <button className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900">
                     <Plus className="w-4 h-4" />
                     Invite User
                   </button>
@@ -835,40 +835,40 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
 
                 {/* Search Users */}
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground w-4 h-4" />
                   <input
                     type="text"
                     placeholder="Search users..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                    className="w-full pl-10 pr-4 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                   />
                 </div>
 
                 {/* Users Table */}
                 <div className="overflow-x-auto">
                   <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-                    <thead className="bg-gray-50 dark:bg-gray-700">
+                    <thead className="bg-surface-container-low dark:bg-surface-container-highest">
                       <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">User</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Access Level</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Permissions</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Last Access</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">User</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Access Level</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Permissions</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Last Access</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">Actions</th>
                       </tr>
                     </thead>
-                    <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody className="bg-white dark:bg-surface-container-high divide-y divide-gray-200 dark:divide-gray-700">
                       {filteredUsers.map((user) => (
-                        <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                        <tr key={user.id} className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
-                              <div className="w-8 h-8 bg-indigo-100 dark:bg-teal-900/30 rounded-full flex items-center justify-center text-indigo-600 dark:text-teal-400 font-medium mr-3">
+                              <div className="w-8 h-8 bg-indigo-100 dark:bg-teal-900/30 rounded-full flex items-center justify-center text-primary-green dark:text-teal-400 font-medium mr-3">
                                 {user.name.charAt(0)}
                               </div>
                               <div>
-                                <div className="text-sm font-medium text-gray-900 dark:text-gray-100">{user.name}</div>
-                                <div className="text-sm text-gray-500 dark:text-gray-400">{user.email}</div>
-                                <div className="text-xs text-gray-400 dark:text-gray-500">{user.role} • {user.department}</div>
+                                <div className="text-sm font-medium text-foreground dark:text-foreground">{user.name}</div>
+                                <div className="text-sm text-muted-foreground dark:text-muted-foreground">{user.email}</div>
+                                <div className="text-xs text-outline dark:text-muted-foreground">{user.role} • {user.department}</div>
                               </div>
                             </div>
                           </td>
@@ -876,7 +876,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                             <select
                               value={user.accessLevel}
                               onChange={(e) => updateUserAccess(user.id, e.target.value as ProjectUser['accessLevel'])}
-                              className="text-sm border border-gray-300 dark:border-gray-600 rounded-md px-2 py-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                              className="text-sm border border-border dark:border-border rounded-md px-2 py-1 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                             >
                               <option value="viewer">Viewer</option>
                               <option value="contributor">Contributor</option>
@@ -891,22 +891,22 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                                     type="checkbox"
                                     checked={enabled}
                                     onChange={() => toggleUserPermission(user.id, permission as keyof ProjectUser['permissions'])}
-                                    className="mr-2 rounded border-gray-300 dark:border-gray-600 text-indigo-600 dark:text-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500"
+                                    className="mr-2 rounded border-border dark:border-border text-primary-green dark:text-primary-green focus:ring-ring dark:focus:ring-ring"
                                   />
-                                  <span className="text-gray-700 dark:text-gray-300">
+                                  <span className="text-on-surface dark:text-muted-foreground">
                                     {permission.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
                                   </span>
                                 </label>
                               ))}
                             </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground">
                             {user.lastAccess}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             <button
                               onClick={() => removeUser(user.id)}
-                              className="text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-300 text-sm transition-colors"
+                              className="text-red-600 dark:text-destructive hover:text-red-800 dark:hover:text-red-300 text-sm transition-colors"
                             >
                               Remove
                             </button>
@@ -921,12 +921,12 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
 
             {activeTab === 'security' && (
               <div className="space-y-6">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Security Settings</h3>
+                <h3 className="text-lg font-medium text-foreground dark:text-foreground">Security Settings</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Security Controls */}
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-900 dark:text-gray-100">Security Controls</h4>
+                    <h4 className="font-medium text-foreground dark:text-foreground">Security Controls</h4>
                     
                     <div className="space-y-3">
                       {[
@@ -934,10 +934,10 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                         { key: 'accessLogging', label: 'Access Logging', description: 'Log all user access and actions for audit trail' },
                         { key: 'twoFactorRequired', label: 'Two-Factor Authentication', description: 'Require 2FA for all project access' }
                       ].map(({ key, label, description }) => (
-                        <div key={key} className="flex items-start justify-between p-4 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700/50">
+                        <div key={key} className="flex items-start justify-between p-4 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest/50">
                           <div className="flex-1">
-                            <h5 className="font-medium text-gray-900 dark:text-gray-100">{label}</h5>
-                            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{description}</p>
+                            <h5 className="font-medium text-foreground dark:text-foreground">{label}</h5>
+                            <p className="text-sm text-muted-foreground dark:text-muted-foreground mt-1">{description}</p>
                           </div>
                           <label className="relative inline-flex items-center cursor-pointer ml-4">
                             <input
@@ -946,7 +946,7 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                               onChange={(e) => updateSecuritySetting(key, e.target.checked)}
                               className="sr-only peer"
                             />
-                            <div className="w-11 h-6 bg-gray-200 dark:bg-gray-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-teal-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-indigo-600 dark:peer-checked:bg-teal-600"></div>
+                            <div className="w-11 h-6 bg-surface-container dark:bg-surface-container-highest peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-indigo-300 dark:peer-focus:ring-teal-800 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-border after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary dark:peer-checked:bg-teal-600"></div>
                           </label>
                         </div>
                       ))}
@@ -955,10 +955,10 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
 
                   {/* Session & Access Settings */}
                   <div className="space-y-4">
-                    <h4 className="font-medium text-gray-900 dark:text-gray-100">Session & Access</h4>
+                    <h4 className="font-medium text-foreground dark:text-foreground">Session & Access</h4>
                     
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2">
                         Session Timeout (minutes)
                       </label>
                       <input
@@ -967,22 +967,22 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
                         max="480"
                         value={projectConfig.securitySettings.sessionTimeout}
                         onChange={(e) => updateSecuritySetting('sessionTimeout', parseInt(e.target.value))}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                        className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2">
                         IP Restrictions
                       </label>
                       <textarea
                         value={projectConfig.securitySettings.ipRestrictions.join('\n')}
                         onChange={(e) => updateSecuritySetting('ipRestrictions', e.target.value.split('\n').filter(ip => ip.trim()))}
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                        className="w-full px-3 py-2 border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground transition-colors"
                         placeholder="Enter IP addresses (one per line)&#10;192.168.1.0/24&#10;10.0.0.0/8"
                       />
-                      <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                      <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">
                         Leave empty to allow access from any IP address
                       </p>
                     </div>
@@ -1004,23 +1004,23 @@ const ProjectManagementModal: React.FC<ProjectManagementModalProps> = ({
           </div>
 
           {/* Modal Footer */}
-          <div className="p-6 border-t border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/50">
+          <div className="p-6 border-t border-border dark:border-border bg-surface-container-low dark:bg-surface-container-highest/50">
             <div className="flex justify-between items-center">
-              <div className="text-sm text-gray-500 dark:text-gray-400">
+              <div className="text-sm text-muted-foreground dark:text-muted-foreground">
                 Last modified: {new Date(projectConfig.lastModified).toLocaleString()}
               </div>
               <div className="flex gap-3">
                 <button
                   onClick={onClose}
                   disabled={isSaving}
-                  className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+                  className="px-4 py-2 border border-border dark:border-border rounded-lg text-on-surface dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors disabled:opacity-50"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="flex items-center gap-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 shadow-sm dark:shadow-gray-900"
+                  className="flex items-center gap-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 shadow-sm dark:shadow-gray-900"
                 >
                   {isSaving && (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>

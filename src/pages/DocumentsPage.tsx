@@ -152,22 +152,22 @@ const DocumentsPage: React.FC = () => {
         <div className="mb-6">
           <div className="flex justify-between items-center">
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 transition-colors">{t('documents.title')}</h1>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
+              <h1 className="text-2xl font-bold text-on-surface dark:text-foreground transition-colors">{t('documents.title')}</h1>
+              <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground transition-colors">
                 {t('documents.subtitle')}
               </p>
             </div>
             {/* Actions rapides */}
             <div className="flex gap-3">
               <button
-                className="flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover: dark:hover:bg-gray-700 transition-colors shadow-sm dark:shadow-gray-900"
+                className="flex items-center gap-2 px-4 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-high text-on-surface dark:text-on-surface-variant hover: dark:hover:bg-surface-container-highest transition-colors shadow-sm dark:shadow-gray-900"
                 onClick={handleExport}
               >
                 <Download className="w-4 h-4" />
                 {t('documents.actions.export')}
               </button>
               <button
-                          className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                          className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         
                 onClick={() => setIsUploadModalOpen(true)}
               >
@@ -179,7 +179,7 @@ const DocumentsPage: React.FC = () => {
         </div>
 
         {/* Section principale */}
-        <section className="rounded-lg bg-white dark:bg-gray-800 shadow dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 transition-colors">
+        <section className="rounded-lg bg-white dark:bg-surface-container-high shadow dark:shadow-gray-900 border border-border dark:border-border transition-colors">
           <div className="p-4 sm:p-6">
             {/* Barre de recherche */}
             <div className="mb-6">

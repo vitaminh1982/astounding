@@ -121,14 +121,14 @@ export default function VariablesList() {
       label: 'Client', 
       icon: User,
       count: filteredVariables.client.length,
-      color: 'text-blue-600 dark:text-blue-400'
+      color: 'text-tertiary dark:text-tertiary'
     },
     { 
       id: 'company' as CategoryType, 
       label: 'Company', 
       icon: Building2,
       count: filteredVariables.company.length,
-      color: 'text-purple-600 dark:text-purple-400'
+      color: 'text-tertiary dark:text-tertiary'
     }
   ];
 
@@ -138,13 +138,13 @@ export default function VariablesList() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-indigo-100 dark:bg-cyan-900/30 border border-indigo-200 dark:border-cyan-800 rounded-lg transition-colors">
-            <Variable className="w-5 h-5 text-indigo-600 dark:text-cyan-400 transition-colors" />
+            <Variable className="w-5 h-5 text-primary-green dark:text-cyan-400 transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Available Variables
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               {totalVariables} variables ready to use
             </p>
           </div>
@@ -153,7 +153,7 @@ export default function VariablesList() {
         {/* Mobile Toggle */}
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="sm:hidden p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="sm:hidden p-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           aria-label={showDetails ? "Hide variables list" : "Show variables list"}
         >
           <ChevronRight className={`w-5 h-5 transition-transform ${showDetails ? 'rotate-90' : ''}`} />
@@ -169,22 +169,22 @@ export default function VariablesList() {
             exit={{ opacity: 0, height: 0 }}
             className="space-y-4"
           >
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
+            <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
               {/* Search Bar */}
-              <div className="p-4 border-b border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="p-4 border-b border-border dark:border-border transition-colors">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 transition-colors" />
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-outline dark:text-muted-foreground transition-colors" />
                   <input
                     type="text"
                     placeholder="Search variables by name or example..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-10 pr-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
+                    className="w-full pl-10 pr-4 py-2.5 border border-border dark:border-border rounded-lg text-sm bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none"
                   />
                   {searchTerm && (
                     <button
                       onClick={() => setSearchTerm('')}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-outline dark:text-muted-foreground hover:text-muted-foreground dark:hover:text-muted-foreground transition-colors"
                     >
                       <span className="sr-only">Clear search</span>
                       ×
@@ -192,14 +192,14 @@ export default function VariablesList() {
                   )}
                 </div>
                 {searchTerm && (
-                  <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                  <p className="mt-2 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                     Found {filteredCount} of {totalVariables} variables
                   </p>
                 )}
               </div>
 
               {/* Tabs */}
-              <div className="flex border-b border-gray-200 dark:border-gray-700 transition-colors">
+              <div className="flex border-b border-border dark:border-border transition-colors">
                 {tabs.map((tab) => {
                   const isActive = activeCategory === tab.id;
                   const Icon = tab.icon;
@@ -210,8 +210,8 @@ export default function VariablesList() {
                       onClick={() => setActiveCategory(tab.id)}
                       className={`relative flex-1 flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium transition-all duration-200 ${
                         isActive
-                          ? 'text-indigo-600 dark:text-teal-400'
-                          : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700'
+                          ? 'text-primary-green dark:text-teal-400'
+                          : 'text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                       }`}
                     >
                       <Icon className="w-4 h-4" />
@@ -219,14 +219,14 @@ export default function VariablesList() {
                       <span className={`px-1.5 py-0.5 rounded-full text-xs font-medium transition-colors ${
                         isActive
                           ? 'bg-indigo-100 dark:bg-teal-900/30 text-indigo-700 dark:text-teal-300'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
+                          : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground'
                       }`}>
                         {tab.count}
                       </span>
                       {isActive && (
                         <motion.div
                           layoutId="activeTab"
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-indigo-600 dark:bg-teal-400"
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary dark:bg-teal-400"
                           transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                         />
                       )}
@@ -251,36 +251,36 @@ export default function VariablesList() {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             transition={{ delay: index * 0.03 }}
-                            className="group p-3 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-teal-600 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800"
+                            className="group p-3 rounded-lg border border-border dark:border-border hover:border-indigo-300 dark:hover:border-teal-600 bg-white dark:bg-surface-container-high hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-all duration-200 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800"
                           >
                             <div className="flex items-start justify-between gap-3">
                               <div className="flex-1 min-w-0">
                                 {/* Variable Code */}
                                 <div className="flex items-center gap-2 mb-1">
-                                  <Hash className="w-3 h-3 text-gray-400 dark:text-gray-500 flex-shrink-0 transition-colors" />
-                                  <code className="text-sm font-mono text-indigo-600 dark:text-teal-400 font-semibold transition-colors">
+                                  <Hash className="w-3 h-3 text-outline dark:text-muted-foreground flex-shrink-0 transition-colors" />
+                                  <code className="text-sm font-mono text-primary-green dark:text-teal-400 font-semibold transition-colors">
                                     {variableString}
                                   </code>
                                 </div>
                                 
                                 {/* Label */}
-                                <div className="text-sm font-medium text-gray-900 dark:text-gray-100 mb-1 transition-colors">
+                                <div className="text-sm font-medium text-foreground dark:text-foreground mb-1 transition-colors">
                                   {variable.label}
                                 </div>
                                 
                                 {/* Description */}
                                 {variable.description && (
-                                  <div className="text-xs text-gray-500 dark:text-gray-400 mb-2 transition-colors">
+                                  <div className="text-xs text-muted-foreground dark:text-muted-foreground mb-2 transition-colors">
                                     {variable.description}
                                   </div>
                                 )}
                                 
                                 {/* Example */}
                                 <div className="flex items-center gap-2 text-xs">
-                                  <span className="text-gray-500 dark:text-gray-400 transition-colors">
+                                  <span className="text-muted-foreground dark:text-muted-foreground transition-colors">
                                     Example:
                                   </span>
-                                  <code className="px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded font-mono transition-colors">
+                                  <code className="px-2 py-0.5 bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground rounded font-mono transition-colors">
                                     {variable.example}
                                   </code>
                                 </div>
@@ -294,7 +294,7 @@ export default function VariablesList() {
                                 className={`p-2 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                                   isCopied
                                     ? 'bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 focus:ring-green-500 dark:focus:ring-green-400'
-                                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-indigo-100 dark:hover:bg-teal-900/30 hover:text-indigo-600 dark:hover:text-teal-400 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                                    : 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-indigo-100 dark:hover:bg-teal-900/30 hover:text-primary-green dark:hover:text-teal-400 focus:ring-ring dark:focus:ring-ring'
                                 }`}
                                 title={isCopied ? 'Copied!' : 'Copy variable'}
                               >
@@ -312,13 +312,13 @@ export default function VariablesList() {
                   </div>
                 ) : (
                   <div className="text-center py-12">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-full mb-4 transition-colors">
-                      <Search className="w-8 h-8 text-gray-400 dark:text-gray-500 transition-colors" />
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-surface-container-low dark:bg-surface-container-highest rounded-full mb-4 transition-colors">
+                      <Search className="w-8 h-8 text-outline dark:text-muted-foreground transition-colors" />
                     </div>
-                    <p className="text-gray-600 dark:text-gray-400 font-medium mb-1 transition-colors">
+                    <p className="text-muted-foreground dark:text-muted-foreground font-medium mb-1 transition-colors">
                       No variables found
                     </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+                    <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
                       Try adjusting your search terms
                     </p>
                   </div>
@@ -330,7 +330,7 @@ export default function VariablesList() {
             <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
               <div className="flex items-start gap-3">
                 <div className="p-1 bg-blue-100 dark:bg-blue-900/30 rounded transition-colors">
-                  <Info className="w-4 h-4 text-blue-600 dark:text-blue-400 transition-colors" />
+                  <Info className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
                 </div>
                 <div className="text-sm text-blue-700 dark:text-blue-300 transition-colors">
                   <p className="font-medium mb-1">How to use variables</p>
@@ -345,26 +345,26 @@ export default function VariablesList() {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+              <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
                 <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg inline-flex mb-2 transition-colors">
-                  <User className="w-4 h-4 text-blue-600 dark:text-blue-400 transition-colors" />
+                  <User className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                   {variables.client.length}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   Client Variables
                 </p>
               </div>
 
-              <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+              <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
                 <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg inline-flex mb-2 transition-colors">
-                  <Building2 className="w-4 h-4 text-purple-600 dark:text-purple-400 transition-colors" />
+                  <Building2 className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
                 </div>
-                <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                   {variables.company.length}
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                   Company Variables
                 </p>
               </div>
@@ -374,8 +374,8 @@ export default function VariablesList() {
       </AnimatePresence>
 
       {/* Mobile Hint */}
-      <div className="sm:hidden p-4 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-200 dark:border-gray-700 rounded-b-lg text-center transition-colors">
-        <div className="flex items-center justify-center gap-2 text-sm text-gray-600 dark:text-gray-400 transition-colors">
+      <div className="sm:hidden p-4 bg-surface-container-low dark:bg-surface-container-high/50 border-t border-border dark:border-border rounded-b-lg text-center transition-colors">
+        <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
           <Sparkles className="w-4 h-4" />
           <span>Tap the copy button to use a variable</span>
         </div>

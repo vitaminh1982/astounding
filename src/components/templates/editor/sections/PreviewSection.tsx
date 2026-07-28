@@ -46,13 +46,13 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 rounded-lg transition-colors">
-            <Eye className="w-5 h-5 text-purple-600 dark:text-purple-400 transition-colors" />
+            <Eye className="w-5 h-5 text-tertiary dark:text-tertiary transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Live Preview
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Preview your template in real-time
             </p>
           </div>
@@ -61,7 +61,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
         {/* Mobile Toggle */}
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="sm:hidden p-2 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+          className="sm:hidden p-2 text-muted-foreground dark:text-muted-foreground hover:text-on-surface dark:hover:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           aria-label={showDetails ? "Hide preview controls" : "Show preview controls"}
         >
           {showDetails ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -77,17 +77,17 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
             exit={{ opacity: 0, height: 0 }}
             className="space-y-4"
           >
-            <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm dark:shadow-gray-900 transition-colors">
+            <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-4 shadow-sm dark:shadow-gray-900 transition-colors">
               {/* Preview Controls */}
               <div className="flex flex-wrap items-center gap-3">
                 {/* Device Mode Toggle */}
-                <div className="flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden shadow-sm dark:shadow-gray-900 transition-colors">
+                <div className="flex rounded-lg border border-border dark:border-border overflow-hidden shadow-sm dark:shadow-gray-900 transition-colors">
                   <button
                     onClick={() => handleModeChange('desktop')}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       previewMode === 'desktop'
-                        ? 'bg-indigo-600 dark:bg-teal-600 text-white'
-                        : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
+                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="Desktop preview mode"
                   >
@@ -96,10 +96,10 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                   </button>
                   <button
                     onClick={() => handleModeChange('mobile')}
-                    className={`flex items-center px-4 py-2 text-sm font-medium border-l border-gray-300 dark:border-gray-600 transition-all duration-200 ${
+                    className={`flex items-center px-4 py-2 text-sm font-medium border-l border-border dark:border-border transition-all duration-200 ${
                       previewMode === 'mobile'
-                        ? 'bg-indigo-600 dark:bg-teal-600 text-white'
-                        : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
+                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="Mobile preview mode"
                   >
@@ -109,13 +109,13 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                 </div>
 
                 {/* Format Toggle */}
-                <div className="flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden shadow-sm dark:shadow-gray-900 transition-colors">
+                <div className="flex rounded-lg border border-border dark:border-border overflow-hidden shadow-sm dark:shadow-gray-900 transition-colors">
                   <button
                     onClick={() => handleFormatChange('html')}
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 ${
                       previewFormat === 'html'
-                        ? 'bg-indigo-600 dark:bg-teal-600 text-white'
-                        : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
+                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="HTML preview format"
                   >
@@ -124,10 +124,10 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                   </button>
                   <button
                     onClick={() => handleFormatChange('text')}
-                    className={`flex items-center px-4 py-2 text-sm font-medium border-l border-gray-300 dark:border-gray-600 transition-all duration-200 ${
+                    className={`flex items-center px-4 py-2 text-sm font-medium border-l border-border dark:border-border transition-all duration-200 ${
                       previewFormat === 'text'
-                        ? 'bg-indigo-600 dark:bg-teal-600 text-white'
-                        : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600'
+                        ? 'bg-primary dark:bg-teal-600 text-white'
+                        : 'bg-white dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container-low dark:hover:bg-surface-container-highest'
                     }`}
                     aria-label="Plain text preview format"
                   >
@@ -164,7 +164,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
               {/* Test Email Info */}
               <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
                 <div className="flex items-start gap-2">
-                  <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0 transition-colors" />
+                  <Mail className="w-4 h-4 text-tertiary dark:text-tertiary mt-0.5 flex-shrink-0 transition-colors" />
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-blue-900 dark:text-blue-200 mb-1 transition-colors">
                       Test Email Address
@@ -173,7 +173,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                       type="email"
                       value={testEmail}
                       onChange={(e) => setTestEmail(e.target.value)}
-                      className="w-full px-3 py-2 text-sm border border-blue-200 dark:border-blue-700 rounded-lg bg-white dark:bg-blue-900/30 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors focus:outline-none"
+                      className="w-full px-3 py-2 text-sm border border-blue-200 dark:border-blue-700 rounded-lg bg-white dark:bg-blue-900/30 text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:border-tertiary dark:focus:border-blue-400 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 transition-colors focus:outline-none"
                       placeholder="Enter email address"
                     />
                   </div>
@@ -208,7 +208,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
         <motion.div
           layout
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg dark:shadow-gray-900 border-2 border-gray-200 dark:border-gray-700 transition-all duration-300 ${
+          className={`bg-white dark:bg-surface-container-high rounded-lg shadow-lg dark:shadow-gray-900 border-2 border-border dark:border-border transition-all duration-300 ${
             previewMode === 'mobile' 
               ? 'max-w-[375px] mx-auto' 
               : 'w-full'
@@ -216,8 +216,8 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
         >
           {/* Mobile Status Bar */}
           {previewMode === 'mobile' && (
-            <div className="h-8 bg-gray-900 dark:bg-black rounded-t-lg flex items-center justify-center relative transition-colors">
-              <div className="w-20 h-1.5 bg-gray-700 dark:bg-gray-600 rounded-full transition-colors" />
+            <div className="h-8 bg-background dark:bg-black rounded-t-lg flex items-center justify-center relative transition-colors">
+              <div className="w-20 h-1.5 bg-surface-container-highest dark:bg-surface-container-highest rounded-full transition-colors" />
               <div className="absolute right-4 flex items-center gap-2 text-white text-xs">
                 <div className="flex items-center gap-0.5">
                   <div className="w-1 h-2 bg-white rounded-full" />
@@ -230,18 +230,18 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
           )}
 
           {/* Email Header */}
-          <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 transition-colors">
+          <div className="p-4 border-b border-border dark:border-border bg-surface-container-low dark:bg-surface-container-high/50 transition-colors">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-indigo-100 dark:bg-teal-900/30 flex items-center justify-center transition-colors">
-                <span className="text-sm font-semibold text-indigo-600 dark:text-teal-400 transition-colors">
+                <span className="text-sm font-semibold text-primary-green dark:text-teal-400 transition-colors">
                   SP
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate transition-colors">
+                <p className="text-sm font-medium text-foreground dark:text-foreground truncate transition-colors">
                   Sendplex Team
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 truncate transition-colors">
+                <p className="text-xs text-muted-foreground dark:text-muted-foreground truncate transition-colors">
                   noreply@sendplex.com
                 </p>
               </div>
@@ -260,12 +260,12 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                 </div>
 
                 {/* Content */}
-                <div className="space-y-3 text-gray-700 dark:text-gray-300 transition-colors">
-                  <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                <div className="space-y-3 text-on-surface dark:text-muted-foreground transition-colors">
+                  <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
                     Hello Thomas,
                   </p>
                   <p>
-                    Welcome to <strong className="text-indigo-600 dark:text-teal-400 transition-colors">Sendplex</strong>! 🎉
+                    Welcome to <strong className="text-primary-green dark:text-teal-400 transition-colors">Sendplex</strong>! 🎉
                   </p>
                   <p>
                     We are thrilled to have you as one of our new clients. To celebrate your arrival,
@@ -276,7 +276,7 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                   <div className="py-4">
                     <a
                       href="#"
-                      className="inline-block px-6 py-3 bg-indigo-600 dark:bg-teal-600 text-white font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-md dark:shadow-gray-900"
+                      className="inline-block px-6 py-3 bg-primary dark:bg-teal-600 text-white font-medium rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-md dark:shadow-gray-900"
                     >
                       Get Started
                     </a>
@@ -293,17 +293,17 @@ export default function PreviewSection({ template }: PreviewSectionProps) {
                 </div>
 
                 {/* Footer */}
-                <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700 text-xs text-gray-500 dark:text-gray-400 text-center transition-colors">
+                <div className="mt-6 pt-6 border-t border-border dark:border-border text-xs text-muted-foreground dark:text-muted-foreground text-center transition-colors">
                   <p>© 2025 Sendplex. All rights reserved.</p>
                   <p className="mt-1">
-                    <a href="#" className="hover:text-indigo-600 dark:hover:text-teal-400 transition-colors">Unsubscribe</a>
+                    <a href="#" className="hover:text-primary-green dark:hover:text-teal-400 transition-colors">Unsubscribe</a>
                     {' • '}
-                    <a href="#" className="hover:text-indigo-600 dark:hover:text-teal-400 transition-colors">Preferences</a>
+                    <a href="#" className="hover:text-primary-green dark:hover:text-teal-400 transition-colors">Preferences</a>
                   </p>
                 </div>
               </div>
             ) : (
-              <div className="space-y-3 text-gray-700 dark:text-gray-300 whitespace-pre-wrap transition-colors">
+              <div className="space-y-3 text-on-surface dark:text-muted-foreground whitespace-pre-wrap transition-colors">
                 {`Hello Thomas,
 
 Welcome to Sendplex!
@@ -332,11 +332,11 @@ Unsubscribe: https://sendplex.com/unsubscribe`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center rounded-lg transition-colors"
+              className="absolute inset-0 bg-white/80 dark:bg-background/80 backdrop-blur-sm flex items-center justify-center rounded-lg transition-colors"
             >
               <div className="flex flex-col items-center gap-3">
-                <Loader2 className="w-8 h-8 text-indigo-600 dark:text-teal-400 animate-spin transition-colors" />
-                <p className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
+                <Loader2 className="w-8 h-8 text-primary-green dark:text-teal-400 animate-spin transition-colors" />
+                <p className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">
                   Sending test email...
                 </p>
               </div>
@@ -346,13 +346,13 @@ Unsubscribe: https://sendplex.com/unsubscribe`}
       </div>
 
       {/* Preview Info */}
-      <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+      <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
         <div className="flex items-start gap-3">
           <div className="p-1 bg-purple-100 dark:bg-purple-900/30 rounded transition-colors">
-            <Eye className="w-4 h-4 text-purple-600 dark:text-purple-400 transition-colors" />
+            <Eye className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 transition-colors">
-            <p className="font-medium text-gray-900 dark:text-gray-100 mb-1 transition-colors">
+          <div className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
+            <p className="font-medium text-foreground dark:text-foreground mb-1 transition-colors">
               Preview Notes
             </p>
             <ul className="space-y-1 list-disc list-inside">
@@ -365,7 +365,7 @@ Unsubscribe: https://sendplex.com/unsubscribe`}
       </div>
 
       {/* Mobile Fixed Action Button */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg dark:shadow-gray-900 transition-colors z-10">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-white dark:bg-surface-container-high border-t border-border dark:border-border shadow-lg dark:shadow-gray-900 transition-colors z-10">
         <button
           onClick={handleSendTest}
           disabled={isLoading}

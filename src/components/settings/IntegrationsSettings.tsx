@@ -11,14 +11,14 @@ const integrations = [
 
 const IntegrationCard = ({ integration }) => {
   return (
-    <div className="flex items-center justify-between p-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-lg transition-colors">
+    <div className="flex items-center justify-between p-3 border border-border dark:border-border bg-white dark:bg-surface-container-high rounded-lg transition-colors">
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center transition-colors">
-          <Link2 className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+        <div className="w-8 h-8 bg-surface-container-low dark:bg-surface-container-highest rounded-lg flex items-center justify-center transition-colors">
+          <Link2 className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
         </div>
         <div>
-          <div className="font-medium text-gray-900 dark:text-gray-100">{integration.name}</div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">Last sync: {integration.lastSync}</div>
+          <div className="font-medium text-foreground dark:text-foreground">{integration.name}</div>
+          <div className="text-sm text-muted-foreground dark:text-muted-foreground">Last sync: {integration.lastSync}</div>
         </div>
       </div>
       <span className="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-200 rounded text-sm transition-colors">
@@ -30,19 +30,19 @@ const IntegrationCard = ({ integration }) => {
 
 const ApiCard = () => {
   return (
-    <div className="p-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-lg transition-colors">
+    <div className="p-3 border border-border dark:border-border bg-white dark:bg-surface-container-high rounded-lg transition-colors">
       <div className="flex items-center justify-between mb-2">
-        <div className="font-medium text-gray-900 dark:text-gray-100">API Key</div>
-        <Key className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+        <div className="font-medium text-foreground dark:text-foreground">API Key</div>
+        <Key className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
       </div>
       <div className="flex gap-2">
         <input
           type="password"
           value="sk_live_xxxxxxxxxxxxx"
-          className="flex-1 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-gray-100 rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
+          className="flex-1 text-sm bg-surface-container-low dark:bg-surface-container-highest border border-border dark:border-border text-foreground dark:text-foreground rounded px-3 py-1 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring transition-colors"
           readOnly
         />
-        <button className="text-sm text-indigo-600 dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
+        <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
           Copy
         </button>
       </div>
@@ -52,12 +52,12 @@ const ApiCard = () => {
 
 const WebhookCard = () => {
   return (
-    <div className="p-3 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-lg transition-colors">
+    <div className="p-3 border border-border dark:border-border bg-white dark:bg-surface-container-high rounded-lg transition-colors">
       <div className="flex items-center justify-between mb-2">
-        <div className="font-medium text-gray-900 dark:text-gray-100">Webhooks</div>
-        <Activity className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+        <div className="font-medium text-foreground dark:text-foreground">Webhooks</div>
+        <Activity className="w-4 h-4 text-muted-foreground dark:text-muted-foreground" />
       </div>
-      <div className="text-sm text-gray-600 dark:text-gray-400">
+      <div className="text-sm text-muted-foreground dark:text-muted-foreground">
         3 configured endpoints
       </div>
     </div>
@@ -66,18 +66,18 @@ const WebhookCard = () => {
 
 const SynchronizationCard = () => {
   return (
-    <div className="p-4 border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 rounded-lg transition-colors">
+    <div className="p-4 border border-border dark:border-border bg-white dark:bg-surface-container-high rounded-lg transition-colors">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <div className="font-medium text-gray-900 dark:text-gray-100">Frequency</div>
-          <div className="text-sm text-gray-500 dark:text-gray-400">Every 5 minutes</div>
+          <div className="font-medium text-foreground dark:text-foreground">Frequency</div>
+          <div className="text-sm text-muted-foreground dark:text-muted-foreground">Every 5 minutes</div>
         </div>
-        <button className="text-sm text-indigo-600 dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
+        <button className="text-sm text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors">
           Modify
         </button>
       </div>
-      <div className="h-1 bg-gray-200 dark:bg-gray-600 rounded-full overflow-hidden">
-        <div className="w-3/4 h-full bg-indigo-600 dark:bg-teal-500 transition-colors"></div>
+      <div className="h-1 bg-surface-container dark:bg-surface-container-highest rounded-full overflow-hidden">
+        <div className="w-3/4 h-full bg-primary dark:bg-primary transition-colors"></div>
       </div>
     </div>
   );
@@ -91,7 +91,7 @@ export default function IntegrationsSettings() {
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
         <div>
-          <h3 className="font-semibold text-gray-900 dark:text-gray-100 sm:text-sm md:text-base mb-4">Connected Services</h3>
+          <h3 className="font-semibold text-foreground dark:text-foreground sm:text-sm md:text-base mb-4">Connected Services</h3>
           <div className="space-y-3">
             {integrations.map((integration) => (
               <IntegrationCard key={integration.name} integration={integration} />

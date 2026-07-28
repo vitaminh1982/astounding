@@ -31,7 +31,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary: `bg-${WCAG_COLORS.primary.light} text-white hover:bg-${WCAG_COLORS.primary.dark}`,
-    secondary: 'bg-gray-100 text-gray-700 hover:bg-gray-200',
+    secondary: 'bg-surface-container-low text-on-surface hover:bg-surface-container',
     danger: 'bg-red-600 text-white hover:bg-red-700',
   };
 

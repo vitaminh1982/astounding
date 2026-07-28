@@ -82,11 +82,11 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
   
   return (
     <div 
-      className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 dark:bg-gray-900 dark:bg-opacity-80 flex items-center justify-center p-4 transition-colors" 
+      className="fixed inset-0 overflow-y-auto bg-black bg-opacity-50 dark:bg-background dark:bg-opacity-80 flex items-center justify-center p-4 transition-colors" 
       style={{ zIndex: 9999 }}
     >
       <div 
-        className="bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-gray-900 w-full max-w-6xl max-h-[90vh] flex flex-col relative transition-colors" 
+        className="bg-white dark:bg-surface-container-high rounded-xl shadow-xl dark:shadow-gray-900 w-full max-w-6xl max-h-[90vh] flex flex-col relative transition-colors" 
         style={{ zIndex: 10000 }}
       >
         {/* Header */}
@@ -98,7 +98,7 @@ export default function WorkspaceModal({ isOpen, onClose }: WorkspaceModalProps)
           <WorkspaceSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
           
           {/* Main content */}
-          <div className="flex-1 overflow-y-auto p-6 bg-gray-50 dark:bg-gray-900 transition-colors">
+          <div className="flex-1 overflow-y-auto p-6 bg-surface-container-low dark:bg-background transition-colors">
             {renderTabContent()}
           </div>
         </div>

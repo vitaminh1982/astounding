@@ -90,13 +90,13 @@ export default function Personalization({ client, onChange }: PersonalizationPro
       {/* Header */}
       <div className="flex items-center gap-3">
         <div className="p-2 bg-purple-100 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 rounded-lg transition-colors">
-          <User className="w-5 h-5 text-purple-600 dark:text-purple-400 transition-colors" />
+          <User className="w-5 h-5 text-tertiary dark:text-tertiary transition-colors" />
         </div>
         <div>
-          <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+          <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
             Client Customization
           </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
             Add custom fields to personalize client information
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function Personalization({ client, onChange }: PersonalizationPro
       {/* Existing Custom Fields */}
       {Object.keys(customFields).length > 0 && (
         <div>
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2 transition-colors">
+          <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground mb-4 flex items-center gap-2 transition-colors">
             <Tag className="w-4 h-4" />
             Custom Fields ({Object.keys(customFields).length})
           </h4>
@@ -118,15 +118,15 @@ export default function Personalization({ client, onChange }: PersonalizationPro
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900 transition-colors"
+                  className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-sm dark:shadow-gray-900 transition-colors"
                 >
                   <div className="flex items-start justify-between mb-3">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 capitalize transition-colors">
+                    <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground capitalize transition-colors">
                       {formatFieldLabel(field)}
                     </label>
                     <button
                       onClick={() => handleFieldRemove(field)}
-                      className="p-1 text-gray-400 dark:text-gray-500 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                      className="p-1 text-outline dark:text-muted-foreground hover:text-red-600 dark:hover:text-destructive hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                       aria-label={`Remove ${formatFieldLabel(field)} field`}
                       title="Remove field"
                     >
@@ -138,7 +138,7 @@ export default function Personalization({ client, onChange }: PersonalizationPro
                     type="text"
                     value={value}
                     onChange={(e) => handleFieldChange(field, e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500 dark:focus:ring-purple-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                    className="w-full px-3 py-2 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 focus:border-purple-500 dark:focus:border-purple-400 focus:ring-purple-500 dark:focus:ring-purple-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                     placeholder={`Enter ${formatFieldLabel(field).toLowerCase()}`}
                   />
                 </motion.div>
@@ -149,15 +149,15 @@ export default function Personalization({ client, onChange }: PersonalizationPro
       )}
 
       {/* Add New Field */}
-      <div className="p-6 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
-        <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-4 flex items-center gap-2 transition-colors">
+      <div className="p-6 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
+        <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground mb-4 flex items-center gap-2 transition-colors">
           <Plus className="w-4 h-4" />
           Add Custom Field
         </h4>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
               Field Name *
             </label>
             <input
@@ -168,26 +168,26 @@ export default function Personalization({ client, onChange }: PersonalizationPro
                 if (errors.name) setErrors(prev => ({ ...prev, name: undefined }));
               }}
               onKeyPress={(e) => handleKeyPress(e, handleAddField)}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.name
-                  ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-gray-300 dark:border-gray-600 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                  ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                  : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
               }`}
               placeholder="e.g., Department, Hobby, Notes"
               maxLength={50}
             />
             {errors.name && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400 transition-colors">
+              <p className="mt-1 text-sm text-red-600 dark:text-destructive transition-colors">
                 {errors.name}
               </p>
             )}
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
               {newFieldName.length}/50 characters
             </p>
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
               Field Value *
             </label>
             <input
@@ -198,20 +198,20 @@ export default function Personalization({ client, onChange }: PersonalizationPro
                 if (errors.value) setErrors(prev => ({ ...prev, value: undefined }));
               }}
               onKeyPress={(e) => handleKeyPress(e, handleAddField)}
-              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+              className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                 errors.value
-                  ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                  : 'border-gray-300 dark:border-gray-600 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                  ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                  : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
               }`}
               placeholder="Enter the field value"
               maxLength={200}
             />
             {errors.value && (
-              <p className="mt-1 text-sm text-red-600 dark:text-red-400 transition-colors">
+              <p className="mt-1 text-sm text-red-600 dark:text-destructive transition-colors">
                 {errors.value}
               </p>
             )}
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
               {newFieldValue.length}/200 characters
             </p>
           </div>
@@ -221,7 +221,7 @@ export default function Personalization({ client, onChange }: PersonalizationPro
           <button
             onClick={handleAddField}
             disabled={!newFieldName.trim() || !newFieldValue.trim()}
-            className="px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
+            className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
             aria-label="Add new custom field"
           >
             <Plus className="w-4 h-4" />
@@ -234,7 +234,7 @@ export default function Personalization({ client, onChange }: PersonalizationPro
       <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transition-colors">
         <div className="flex items-start gap-2">
           <div className="p-1 bg-blue-100 dark:bg-blue-900/30 rounded">
-            <Tag className="w-3 h-3 text-blue-600 dark:text-blue-400 transition-colors" />
+            <Tag className="w-3 h-3 text-tertiary dark:text-tertiary transition-colors" />
           </div>
           <div className="text-sm text-blue-700 dark:text-blue-300 transition-colors">
             <p className="font-medium mb-1">Custom Field Tips:</p>

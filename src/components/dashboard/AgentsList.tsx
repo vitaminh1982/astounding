@@ -63,13 +63,13 @@ export default function AgentsList({ onAgentSelect }: AgentsListProps) {
     indigo: {
       bg: 'bg-indigo-100 dark:bg-indigo-900/20',
       hoverBg: 'group-hover:bg-indigo-200 dark:group-hover:bg-indigo-900/30',
-      icon: 'text-indigo-600 dark:text-indigo-400',
+      icon: 'text-primary-green dark:text-primary-green',
       border: 'border-indigo-200 dark:border-indigo-800',
     },
     blue: {
       bg: 'bg-blue-100 dark:bg-blue-900/20',
       hoverBg: 'group-hover:bg-blue-200 dark:group-hover:bg-blue-900/30',
-      icon: 'text-blue-600 dark:text-blue-400',
+      icon: 'text-tertiary dark:text-tertiary',
       border: 'border-blue-200 dark:border-blue-800',
     },
     orange: {
@@ -81,7 +81,7 @@ export default function AgentsList({ onAgentSelect }: AgentsListProps) {
     purple: {
       bg: 'bg-purple-100 dark:bg-purple-900/20',
       hoverBg: 'group-hover:bg-purple-200 dark:group-hover:bg-purple-900/30',
-      icon: 'text-purple-600 dark:text-purple-400',
+      icon: 'text-tertiary dark:text-tertiary',
       border: 'border-purple-200 dark:border-purple-800',
     },
   }), []);
@@ -203,15 +203,15 @@ Remember that your main goal is customer satisfaction while respecting company p
   );
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-colors duration-200">
+    <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm border border-border dark:border-border transition-colors duration-200">
       {/* Header with search bar */}
-      <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700 transition-colors">
+      <div className="p-4 sm:p-6 border-b border-border dark:border-border transition-colors">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+            <h2 className="text-lg sm:text-xl font-semibold text-foreground dark:text-foreground transition-colors">
               {t('agentsList.title')}
             </h2>
-            <span className="inline-flex items-center justify-center min-w-[2rem] h-6 px-2 ml-3 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors">
+            <span className="inline-flex items-center justify-center min-w-[2rem] h-6 px-2 ml-3 text-xs font-medium rounded-full bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground transition-colors">
               {filteredAgents.length}
             </span>
           </div>
@@ -222,17 +222,17 @@ Remember that your main goal is customer satisfaction while respecting company p
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t('agentsList.searchPlaceholder')}
-              className="w-full sm:w-64 pl-10 pr-10 py-2.5 bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 focus:border-transparent text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
+              className="w-full sm:w-64 pl-10 pr-10 py-2.5 bg-surface-container-low dark:bg-background border border-border dark:border-border rounded-lg focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent text-sm text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 transition-colors"
               aria-label={t('agentsList.searchPlaceholder')}
             />
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-500 transition-colors" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-outline dark:text-muted-foreground transition-colors" />
             {searchQuery && (
               <button
                 onClick={handleClearSearch}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 hover:bg-surface-container dark:hover:bg-surface-container-highest rounded transition-colors"
                 aria-label="Clear search"
               >
-                <X className="h-4 w-4 text-gray-400 dark:text-gray-500" />
+                <X className="h-4 w-4 text-outline dark:text-muted-foreground" />
               </button>
             )}
           </div>
@@ -251,7 +251,7 @@ Remember that your main goal is customer satisfaction while respecting company p
               onClick={() => handleAgentClick(agent)}
               onMouseEnter={() => setHoveredAgent(agent.id)}
               onMouseLeave={() => setHoveredAgent(null)}
-              className="group p-4 sm:p-6 hover:bg-gray-50 dark:hover:bg-gray-700/50 cursor-pointer transition-all duration-200"
+              className="group p-4 sm:p-6 hover:bg-surface-container-low dark:hover:bg-surface-container-highest/50 cursor-pointer transition-all duration-200"
             >
               <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 {/* Agent information */}
@@ -264,12 +264,12 @@ Remember that your main goal is customer satisfaction while respecting company p
                   {/* Name and Type */}
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-sm sm:text-base text-gray-900 dark:text-gray-100 truncate transition-colors">
+                      <h3 className="font-semibold text-sm sm:text-base text-foreground dark:text-foreground truncate transition-colors">
                         {t(`agentsList.agents.${agent.name}.name`)}
                       </h3>
-                      <ChevronRight className={`h-4 w-4 text-gray-400 dark:text-gray-500 flex-shrink-0 transition-all duration-200 ${isHovered ? 'translate-x-1' : ''}`} />
+                      <ChevronRight className={`h-4 w-4 text-outline dark:text-muted-foreground flex-shrink-0 transition-all duration-200 ${isHovered ? 'translate-x-1' : ''}`} />
                     </div>
-                    <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 line-clamp-2 sm:line-clamp-1 mt-1 transition-colors">
+                    <p className="text-xs sm:text-sm text-muted-foreground dark:text-muted-foreground line-clamp-2 sm:line-clamp-1 mt-1 transition-colors">
                       {t(`agentsList.agents.${agent.type}.type`)}
                     </p>
                   </div>
@@ -280,20 +280,20 @@ Remember that your main goal is customer satisfaction while respecting company p
                   {/* Metrics */}
                   <div className="grid grid-cols-2 sm:flex gap-4 sm:gap-6">
                     <div className="text-center sm:text-right">
-                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                      <p className="text-sm font-semibold text-foreground dark:text-foreground transition-colors">
                         {agent.conversations}
                       </p>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                         {t('agentsList.metrics.discussions')}
                       </p>
                     </div>
                     <div className="text-center sm:text-right">
                       <div className="flex items-center justify-center sm:justify-end gap-1">
-                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+                        <p className="text-sm font-semibold text-foreground dark:text-foreground transition-colors">
                           {agent.satisfaction}%
                         </p>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+                      <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                         {t('agentsList.metrics.satisfaction')}
                       </p>
                     </div>
@@ -303,12 +303,12 @@ Remember that your main goal is customer satisfaction while respecting company p
                   <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold border transition-colors ${
                     agent.status === 'active' 
                       ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border-green-200 dark:border-green-800' 
-                      : 'bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-600'
+                      : 'bg-surface-container-low dark:bg-surface-container-highest text-on-surface dark:text-muted-foreground border-border dark:border-border'
                   }`}>
                     <span className={`w-1.5 h-1.5 rounded-full mr-1.5 ${
                       agent.status === 'active'
                         ? 'bg-green-500 dark:bg-green-400'
-                        : 'bg-gray-400 dark:bg-gray-500'
+                        : 'bg-outline-variant dark:bg-outline'
                     }`} />
                     {t(`agentsList.status.${agent.status}`)}
                   </span>
@@ -322,16 +322,16 @@ Remember that your main goal is customer satisfaction while respecting company p
       {/* Empty state */}
       {filteredAgents.length === 0 && (
         <div className="p-12 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 mb-4 transition-colors">
-            <Search className="w-8 h-8 text-gray-400 dark:text-gray-500" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-surface-container-low dark:bg-surface-container-highest mb-4 transition-colors">
+            <Search className="w-8 h-8 text-outline dark:text-muted-foreground" />
           </div>
-          <p className="text-gray-500 dark:text-gray-400 text-sm font-medium transition-colors">
+          <p className="text-muted-foreground dark:text-muted-foreground text-sm font-medium transition-colors">
             {t('agentsList.emptyState')}
           </p>
           {searchQuery && (
             <button
               onClick={handleClearSearch}
-              className="mt-4 text-sm text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors"
+              className="mt-4 text-sm text-primary-green dark:text-primary-green hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors"
             >
               {t('agentsList.clearSearch') || 'Clear search'}
             </button>

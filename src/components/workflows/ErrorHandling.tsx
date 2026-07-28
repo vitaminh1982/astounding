@@ -71,10 +71,10 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
 
   const getHandlerTypeColor = (type: ErrorHandler['type']) => {
     const colors = {
-      retry: 'text-blue-600 bg-blue-100',
+      retry: 'text-tertiary bg-blue-100',
       fallback: 'text-yellow-600 bg-yellow-100',
-      notification: 'text-purple-600 bg-purple-100',
-      custom: 'text-gray-600 bg-gray-100',
+      notification: 'text-tertiary bg-purple-100',
+      custom: 'text-muted-foreground bg-surface-container-low',
     };
     return colors[type];
   };
@@ -105,13 +105,13 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
         <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="text-lg font-semibold">Error Handling</h2>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-muted-foreground">
               Configure how your workflow handles errors and exceptions
             </p>
           </div>
           <button
             onClick={() => setIsAddingHandler(true)}
-            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
             <Plus className="w-4 h-4 mr-2" />
             Add Handler
@@ -124,10 +124,10 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
             placeholder="Search handlers..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 border rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border rounded-md pl-10 focus:outline-none focus:ring-2 focus:ring-ring"
           />
           <svg
-            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+            className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-outline"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -143,14 +143,14 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
             <div className="rounded-full bg-red-100 p-3 mx-auto w-fit">
               <AlertTriangle className="w-6 h-6 text-red-600" />
             </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">No error handlers</h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <h3 className="mt-4 text-lg font-medium text-foreground">No error handlers</h3>
+            <p className="mt-1 text-sm text-muted-foreground">
               {searchQuery ? 'No handlers match your search criteria.' : 'Start by adding an error handler to your workflow.'}
             </p>
             {!searchQuery && (
               <button
                 onClick={() => setIsAddingHandler(true)}
-                className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
+                className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900"
         >
                 <Plus className="w-4 h-4 mr-2" />
                 Add Handler
@@ -172,10 +172,10 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
                       </div>
                       <div>
                         <h3 className="font-medium text-lg">{handler.name}</h3>
-                        <p className="text-sm text-gray-500">{handler.description}</p>
+                        <p className="text-sm text-muted-foreground">{handler.description}</p>
                       </div>
                       <span className={`ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                        handler.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                        handler.isActive ? 'bg-green-100 text-green-800' : 'bg-surface-container-low text-on-surface'
                       }`}>
                         <Circle className="w-2 h-2 mr-1" fill={handler.isActive ? 'currentColor' : 'none'} />
                         {handler.isActive ? 'Active' : 'Inactive'}
@@ -185,14 +185,14 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
                   <div className="flex items-center space-x-2 ml-4">
                     <button
                       onClick={() => setEditingHandler(handler)}
-                      className="p-1 text-gray-400 hover:text-indigo-600 rounded-full hover:bg-gray-100"
+                      className="p-1 text-outline hover:text-primary-green rounded-full hover:bg-surface-container-low"
                       title="Edit"
                     >
                       <Edit2 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => setDeleteConfirmation(handler.id)}
-                      className="p-1 text-gray-400 hover:text-red-600 rounded-full hover:bg-red-100"
+                      className="p-1 text-outline hover:text-red-600 rounded-full hover:bg-red-100"
                       title="Delete"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -200,7 +200,7 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
                   </div>
                 </div>
 
-                <div className="mt-4 bg-gray-50 rounded-md p-4">
+                <div className="mt-4 bg-surface-container-low rounded-md p-4">
                   {handler.type === 'retry' && (
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
@@ -239,7 +239,7 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
                 </div>
 
                 {handler.lastTriggered && (
-                  <div className="mt-3 text-xs text-gray-500 flex items-center">
+                  <div className="mt-3 text-xs text-muted-foreground flex items-center">
                     <AlertTriangle className="w-3 h-3 mr-1" />
                     Last triggered: {new Date(handler.lastTriggered).toLocaleString()}
                     {handler.errorCount !== undefined && (
@@ -278,14 +278,14 @@ const ErrorHandling: React.FC<ErrorHandlingProps> = ({
       {deleteConfirmation && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg p-6 max-w-sm w-full">
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Delete Error Handler</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="text-lg font-medium text-foreground mb-2">Delete Error Handler</h3>
+            <p className="text-sm text-muted-foreground">
               Are you sure you want to delete this error handler? This action cannot be undone.
             </p>
             <div className="mt-4 flex justify-end space-x-3">
               <button
                 onClick={() => setDeleteConfirmation(null)}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50"
+                className="px-4 py-2 text-sm font-medium text-on-surface bg-white border border-border rounded-md hover:bg-surface-container-low"
               >
                 Cancel
               </button>
@@ -334,32 +334,32 @@ const ErrorHandlerEditor: React.FC<ErrorHandlerEditorProps> = ({
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Name
             </label>
             <input
               type="text"
               value={editedHandler.name}
               onChange={(e) => setEditedHandler({...editedHandler, name: e.target.value})}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Description
             </label>
             <textarea
               value={editedHandler.description}
               onChange={(e) => setEditedHandler({...editedHandler, description: e.target.value})}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
               rows={2}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-on-surface">
               Type
             </label>
             <select
@@ -369,7 +369,7 @@ const ErrorHandlerEditor: React.FC<ErrorHandlerEditorProps> = ({
                 type: e.target.value as ErrorHandler['type'],
                 config: {} // Reset config when type changes
               })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+              className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
             >
               <option value="retry">Retry</option>
               <option value="fallback">Fallback</option>
@@ -382,7 +382,7 @@ const ErrorHandlerEditor: React.FC<ErrorHandlerEditorProps> = ({
           {editedHandler.type === 'retry' && (
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-on-surface">
                   Max Retries
                 </label>
                 <input
@@ -395,11 +395,11 @@ const ErrorHandlerEditor: React.FC<ErrorHandlerEditorProps> = ({
                       maxRetries: parseInt(e.target.value)
                     }
                   })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-on-surface">
                   Retry Delay (ms)
                 </label>
                 <input
@@ -412,7 +412,7 @@ const ErrorHandlerEditor: React.FC<ErrorHandlerEditorProps> = ({
                       retryDelay: parseInt(e.target.value)
                     }
                   })}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500"
+                  className="mt-1 block w-full rounded-md border-border shadow-sm focus:border-primary-500 focus:ring-primary-500"
                 />
               </div>
             </div>
@@ -422,7 +422,7 @@ const ErrorHandlerEditor: React.FC<ErrorHandlerEditorProps> = ({
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 text-gray-700 border rounded-md hover:bg-gray-50"
+              className="px-4 py-2 text-on-surface border rounded-md hover:bg-surface-container-low"
             >
               Cancel
             </button>

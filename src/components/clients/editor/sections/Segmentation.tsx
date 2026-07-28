@@ -20,7 +20,7 @@ const SEGMENT_CONFIG = {
     description: 'Regular clients with standard engagement'
   },
   Occasionnel: {
-    color: 'text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 border-gray-200 dark:border-gray-600',
+    color: 'text-on-surface dark:text-muted-foreground bg-surface-container-low dark:bg-surface-container-highest border-border dark:border-border',
     icon: '💼',
     description: 'Occasional clients with basic interaction'
   }
@@ -121,9 +121,9 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
 
   const getEngagementLevel = (score: number) => {
     if (score >= 80) return { label: 'Excellent', color: 'text-green-600 dark:text-green-400' };
-    if (score >= 60) return { label: 'Good', color: 'text-blue-600 dark:text-blue-400' };
-    if (score >= 40) return { label: 'Average', color: 'text-amber-600 dark:text-amber-400' };
-    return { label: 'Low', color: 'text-red-600 dark:text-red-400' };
+    if (score >= 60) return { label: 'Good', color: 'text-tertiary dark:text-tertiary' };
+    if (score >= 40) return { label: 'Average', color: 'text-amber-600 dark:text-destructive' };
+    return { label: 'Low', color: 'text-red-600 dark:text-destructive' };
   };
 
   const getTagColor = (index: number) => {
@@ -138,13 +138,13 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="p-2 bg-indigo-100 dark:bg-teal-900/30 border border-indigo-200 dark:border-teal-800 rounded-lg transition-colors">
-            <Users className="w-5 h-5 text-indigo-600 dark:text-teal-400 transition-colors" />
+            <Users className="w-5 h-5 text-primary-green dark:text-teal-400 transition-colors" />
           </div>
           <div>
-            <h3 className="font-semibold text-lg text-gray-900 dark:text-gray-100 transition-colors">
+            <h3 className="font-semibold text-lg text-foreground dark:text-foreground transition-colors">
               Client Segmentation
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">
+            <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">
               Categorize and tag clients for better organization
             </p>
           </div>
@@ -165,17 +165,17 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Segment Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+          <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
             Client Segment
           </label>
           <div className="relative">
-            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500">
+            <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-outline dark:text-muted-foreground">
               <Target className="w-4 h-4" />
             </div>
             <select
               value={segment}
               onChange={handleSegmentChange}
-              className="w-full pl-10 pr-10 py-2.5 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm dark:shadow-gray-900 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
+              className="w-full pl-10 pr-10 py-2.5 border border-border dark:border-border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground shadow-sm dark:shadow-gray-900 focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 appearance-none"
             >
               {Object.entries(SEGMENT_CONFIG).map(([key, config]) => (
                 <option key={key} value={key}>
@@ -184,7 +184,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
               ))}
             </select>
             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 text-outline dark:text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </div>
@@ -204,14 +204,14 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
         
         {/* Engagement Score */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+          <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
             Engagement Score
           </label>
-          <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
+          <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg shadow-sm dark:shadow-gray-900 transition-colors">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
-                <Zap className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
+                <Zap className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
+                <span className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">
                   Current Score
                 </span>
               </div>
@@ -237,12 +237,12 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
                 onChange={handleEngagementScoreChange}
                 min="0"
                 max="100"
-                className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer slider-thumb transition-colors"
+                className="w-full h-2 bg-surface-container dark:bg-surface-container-highest rounded-lg appearance-none cursor-pointer slider-thumb transition-colors"
                 style={{
                   background: `linear-gradient(to right, rgb(59 130 246) 0%, rgb(59 130 246) ${engagementScore}%, rgb(229 231 235) ${engagementScore}%, rgb(229 231 235) 100%)`
                 }}
               />
-              <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400 transition-colors">
+              <div className="flex justify-between text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                 <span>0</span>
                 <span>25</span>
                 <span>50</span>
@@ -258,8 +258,8 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
       <div>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <Tag className="w-4 h-4 text-gray-600 dark:text-gray-400 transition-colors" />
-            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">
+            <Tag className="w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
+            <label className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">
               Client Tags ({tags.length}/10)
             </label>
           </div>
@@ -270,7 +270,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
                 setTags([]);
                 onChange({ tags: [] });
               }}
-              className="text-xs text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors flex items-center gap-1"
+              className="text-xs text-red-600 dark:text-destructive hover:text-red-700 dark:hover:text-red-300 transition-colors flex items-center gap-1"
             >
               <Trash2 className="w-3 h-3" />
               Clear all
@@ -308,7 +308,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
         )}
 
         {/* Add New Tag */}
-        <div className="p-4 bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg transition-colors">
+        <div className="p-4 bg-surface-container-low dark:bg-surface-container-high/50 border border-border dark:border-border rounded-lg transition-colors">
           <div className="flex items-center gap-3">
             <div className="flex-1">
               <input
@@ -321,20 +321,20 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
                 }}
                 onKeyPress={handleKeyPress}
                 placeholder="Enter a new tag (e.g., VIP, Marketing, Support)"
-                className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
+                className={`w-full px-3 py-2 border rounded-lg bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground placeholder-gray-500 dark:placeholder-gray-400 shadow-sm dark:shadow-gray-900 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800 ${
                   error
-                    ? 'border-red-300 dark:border-red-600 focus:border-red-500 focus:ring-red-500 dark:focus:ring-red-400'
-                    : 'border-gray-300 dark:border-gray-600 focus:border-indigo-500 dark:focus:border-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500'
+                    ? 'border-red-300 dark:border-red-600 focus:border-destructive focus:ring-red-500 dark:focus:ring-red-400'
+                    : 'border-border dark:border-border focus:border-primary-green dark:focus:border-teal-500 focus:ring-ring dark:focus:ring-ring'
                 }`}
                 maxLength={20}
                 disabled={tags.length >= 10}
               />
               {error && (
-                <p className="mt-1 text-sm text-red-600 dark:text-red-400 transition-colors">
+                <p className="mt-1 text-sm text-red-600 dark:text-destructive transition-colors">
                   {error}
                 </p>
               )}
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400 transition-colors">
+              <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                 {newTag.length}/20 characters • Press Enter to add
               </p>
             </div>
@@ -342,7 +342,7 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
             <button
               onClick={addTag}
               disabled={!newTag.trim() || tags.length >= 10}
-              className="px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
+              className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 shadow-sm dark:shadow-gray-900 hover:shadow-md dark:hover:shadow-gray-800 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 font-medium"
               aria-label="Add new tag"
             >
               <Plus className="w-4 h-4" />
@@ -354,38 +354,38 @@ export default function Segmentation({ client, onChange }: SegmentationProps) {
 
       {/* Summary Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+        <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
           <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg inline-flex mb-2 transition-colors">
-            <Target className="w-4 h-4 text-purple-600 dark:text-purple-400 transition-colors" />
+            <Target className="w-4 h-4 text-tertiary dark:text-tertiary transition-colors" />
           </div>
-          <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+          <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
             {segment}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
             Client Segment
           </p>
         </div>
 
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+        <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
           <div className="p-2 bg-blue-100 dark:bg-teal-900/30 rounded-lg inline-flex mb-2 transition-colors">
-            <Zap className="w-4 h-4 text-blue-600 dark:text-teal-400 transition-colors" />
+            <Zap className="w-4 h-4 text-tertiary dark:text-teal-400 transition-colors" />
           </div>
-          <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+          <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
             {engagementScore}%
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
             Engagement Score
           </p>
         </div>
 
-        <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
+        <div className="p-4 bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg text-center shadow-sm dark:shadow-gray-900 transition-colors">
           <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg inline-flex mb-2 transition-colors">
             <Tag className="w-4 h-4 text-green-600 dark:text-green-400 transition-colors" />
           </div>
-          <p className="text-lg font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+          <p className="text-lg font-semibold text-foreground dark:text-foreground transition-colors">
             {tags.length}
           </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+          <p className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
             Active Tags
           </p>
         </div>

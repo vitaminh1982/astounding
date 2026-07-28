@@ -125,11 +125,11 @@ export default function BasicInfo({
   return (
     <div className="space-y-3 sm:space-y-4">
       <div className="flex items-center gap-2">
-        <h3 className="font-semibold text-base sm:text-lg text-gray-900 dark:text-gray-100">
+        <h3 className="font-semibold text-base sm:text-lg text-foreground dark:text-foreground">
           Basic Information
         </h3>
         {!isEditable && (
-          <span className="text-xs text-gray-500 dark:text-gray-400">
+          <span className="text-xs text-muted-foreground dark:text-muted-foreground">
             (Read-only)
           </span>
         )}
@@ -138,10 +138,10 @@ export default function BasicInfo({
       {/* Grid layout responsive */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
         <div>
-          <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label className="block text-xs sm:text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
             Identifier
             {errors.identifier && (
-              <span className="text-red-500 text-xs ml-2">{errors.identifier}</span>
+              <span className="text-destructive text-xs ml-2">{errors.identifier}</span>
             )}
           </label>
           <input
@@ -153,51 +153,51 @@ export default function BasicInfo({
             maxLength={IDENTIFIER_MAX_LENGTH}
             className={`p-1.5 sm:p-2 block w-full rounded-md text-sm transition-colors
               ${isEditable 
-                ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-transparent' 
-                : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 cursor-not-allowed'
+                ? 'border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:border-transparent' 
+                : 'border-border dark:border-border bg-surface-container-low dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground cursor-not-allowed'
               }
-              ${errors.identifier ? 'border-red-300 dark:border-red-500' : ''}
+              ${errors.identifier ? 'border-red-300 dark:border-destructive' : ''}
             `}
           />
           {isEditable && (
-            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+            <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">
               {(editedTemplate.id || "TEMP_WELCOME_001").length}/{IDENTIFIER_MAX_LENGTH}
             </p>
           )}
         </div>
 
         <div>
-          <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+          <label className="block text-xs sm:text-sm font-medium text-on-surface dark:text-muted-foreground mb-1">
             Created by
           </label>
           <input
             type="text"
             value={editedTemplate.author || "Admin"}
             readOnly
-            className="p-1.5 sm:p-2 block w-full rounded-md border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-400 text-sm cursor-not-allowed"
+            className="p-1.5 sm:p-2 block w-full rounded-md border-border dark:border-border bg-surface-container-low dark:bg-surface-container-high text-muted-foreground dark:text-muted-foreground text-sm cursor-not-allowed"
           />
         </div>
       </div>
 
       {/* Tags section */}
       <div>
-        <label className="block text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label className="block text-xs sm:text-sm font-medium text-on-surface dark:text-muted-foreground mb-2">
           <div className="flex items-center gap-2">
             <Tag className="w-4 h-4" />
             <span>Tags</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400">
+            <span className="text-xs text-muted-foreground dark:text-muted-foreground">
               ({editedTemplate.tags.length}/{MAX_TAGS})
             </span>
           </div>
           {errors.tag && (
-            <span className="text-red-500 text-xs ml-2 block mt-1">{errors.tag}</span>
+            <span className="text-destructive text-xs ml-2 block mt-1">{errors.tag}</span>
           )}
         </label>
 
         <div className="space-y-2">
           {/* Tags list */}
           {editedTemplate.tags.length > 0 ? (
-            <div className="flex flex-wrap gap-1.5 sm:gap-2 p-2 rounded-md bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 p-2 rounded-md bg-surface-container-low dark:bg-surface-container-high border border-border dark:border-border">
               {editedTemplate.tags.map(tag => (
                 <span 
                   key={tag} 
@@ -207,7 +207,7 @@ export default function BasicInfo({
                   {isEditable && (
                     <button 
                       onClick={() => handleRemoveTag(tag)} 
-                      className="hover:text-indigo-900 dark:hover:text-teal-50 p-0.5 rounded-full hover:bg-indigo-200 dark:hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500"
+                      className="hover:text-indigo-900 dark:hover:text-teal-50 p-0.5 rounded-full hover:bg-indigo-200 dark:hover:bg-teal-800 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring"
                       aria-label={`Remove ${tag} tag`}
                     >
                       <X className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -217,7 +217,7 @@ export default function BasicInfo({
               ))}
             </div>
           ) : (
-            <div className="p-4 text-center text-sm text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md">
+            <div className="p-4 text-center text-sm text-muted-foreground dark:text-muted-foreground bg-surface-container-low dark:bg-surface-container-high border border-border dark:border-border rounded-md">
               No tags added yet
             </div>
           )}
@@ -235,21 +235,21 @@ export default function BasicInfo({
                   maxLength={TAG_MAX_LENGTH}
                   disabled={editedTemplate.tags.length >= MAX_TAGS}
                   className={`w-full px-2 sm:px-3 py-1.5 rounded-md text-sm transition-colors
-                    border-gray-300 dark:border-gray-600 
-                    bg-white dark:bg-gray-700 
-                    text-gray-900 dark:text-gray-100 
+                    border-border dark:border-border 
+                    bg-white dark:bg-surface-container-highest 
+                    text-foreground dark:text-foreground 
                     placeholder-gray-400 dark:placeholder-gray-500
-                    focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 
+                    focus:ring-2 focus:ring-ring dark:focus:ring-ring 
                     focus:border-transparent
-                    disabled:bg-gray-100 dark:disabled:bg-gray-800 
+                    disabled:bg-surface-container-low dark:disabled:bg-surface-container-high 
                     disabled:cursor-not-allowed
-                    disabled:text-gray-400 dark:disabled:text-gray-600
-                    ${errors.tag ? 'border-red-300 dark:border-red-500' : ''}
+                    disabled:text-outline dark:disabled:text-muted-foreground
+                    ${errors.tag ? 'border-red-300 dark:border-destructive' : ''}
                   `}
                   aria-label="New tag input"
                 />
                 {newTag && (
-                  <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <p className="mt-1 text-xs text-muted-foreground dark:text-muted-foreground">
                     {newTag.length}/{TAG_MAX_LENGTH}
                   </p>
                 )}
@@ -257,7 +257,7 @@ export default function BasicInfo({
               <button
                 onClick={handleAddTag}
                 disabled={!newTag.trim() || editedTemplate.tags.length >= MAX_TAGS}
-                className="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 rounded-md bg-indigo-600 dark:bg-teal-600 text-white text-xs sm:text-sm hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed disabled:text-gray-500 dark:disabled:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+                className="inline-flex items-center gap-1 px-2 sm:px-3 py-1.5 rounded-md bg-primary dark:bg-teal-600 text-white text-xs sm:text-sm hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors disabled:bg-surface-container dark:disabled:bg-surface-container-highest disabled:cursor-not-allowed disabled:text-muted-foreground dark:disabled:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="Add tag"
               >
                 <Plus className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -271,7 +271,7 @@ export default function BasicInfo({
 
       {/* Help text */}
       {isEditable && (
-        <p className="text-xs text-gray-500 dark:text-gray-400 italic">
+        <p className="text-xs text-muted-foreground dark:text-muted-foreground italic">
           Press Enter or click "Add Tag" to add a new tag. Click the X icon to remove a tag.
         </p>
       )}

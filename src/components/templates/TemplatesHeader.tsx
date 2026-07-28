@@ -32,10 +32,10 @@ export default function TemplatesHeader() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
         {/* Title and Subtitle */}
         <div className="space-y-1">
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 transition-colors">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground dark:text-foreground transition-colors">
             {t('templates.header.title')}
           </h1>
-          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors">
+          <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground transition-colors">
             {t('templates.header.subtitle')}
           </p>
         </div>
@@ -45,7 +45,7 @@ export default function TemplatesHeader() {
           {/* New Category Button */}
           <button
             onClick={handleNewCategory}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-400 dark:hover:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-white dark:bg-surface-container-high border border-border dark:border-border text-on-surface dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-highest hover:border-outline-variant dark:hover:border-outline focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow"
             aria-label={t('templates.header.newCategory')}
           >
             <Plus className="w-4 h-4" strokeWidth={2.5} />
@@ -57,7 +57,7 @@ export default function TemplatesHeader() {
           {/* New Template Button */}
           <button
             onClick={handleNewTemplate}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-600 dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 bg-primary dark:bg-teal-600 text-white hover:bg-indigo-700 dark:hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-900 shadow-sm hover:shadow-md active:scale-95"
             aria-label={t('templates.header.newTemplate')}
           >
             <Plus className="w-4 h-4" strokeWidth={2.5} />

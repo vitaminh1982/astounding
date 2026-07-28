@@ -44,10 +44,10 @@ const CreditConsumptionBar: React.FC<CreditConsumptionBarProps> = ({
         aria-label="Tokens restants — voir détails"
         aria-expanded={showInfo}
         className="flex items-center gap-1.5 h-9 px-3 rounded-full
-          bg-gray-100 dark:bg-gray-700
-          border border-gray-200 dark:border-gray-600
-          hover:bg-gray-200 dark:hover:bg-gray-600
-          text-gray-500 dark:text-gray-400
+          bg-surface-container-low dark:bg-surface-container-highest
+          border border-border dark:border-border
+          hover:bg-surface-container dark:hover:bg-surface-container-highest
+          text-muted-foreground dark:text-muted-foreground
           transition-colors focus:outline-none"
       >
         <Zap className="h-4 w-4 flex-shrink-0" strokeWidth={1.75} />
@@ -58,22 +58,22 @@ const CreditConsumptionBar: React.FC<CreditConsumptionBarProps> = ({
 
       {/* Info box — au clic seulement */}
       {showInfo && (
-        <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-gray-800 rounded-xl shadow-xl dark:shadow-gray-900 border border-gray-100 dark:border-gray-700 p-4 z-50">
-          <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-3">
+        <div className="absolute right-0 mt-2 w-72 bg-white dark:bg-surface-container-high rounded-xl shadow-xl dark:shadow-gray-900 border border-border dark:border-border p-4 z-50">
+          <h4 className="text-sm font-semibold text-on-surface dark:text-foreground mb-3">
             Token Usage
           </h4>
 
           {/* Active Conversations */}
           <div className="mb-3">
             <div className="flex justify-between items-center mb-1">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Active conversations</span>
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300 tabular-nums">
+              <span className="text-xs text-muted-foreground dark:text-muted-foreground">Active conversations</span>
+              <span className="text-xs font-medium text-on-surface dark:text-muted-foreground tabular-nums">
                 {directCredits.used.toLocaleString()} / {directCredits.total.toLocaleString()}
               </span>
             </div>
-            <div className="h-1.5 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+            <div className="h-1.5 rounded-full bg-surface-container-low dark:bg-surface-container-highest overflow-hidden">
               <div
-                className="h-full rounded-full bg-gray-400 dark:bg-gray-400 transition-all"
+                className="h-full rounded-full bg-outline-variant dark:bg-outline-variant transition-all"
                 style={{ width: `${directPct}%` }}
               />
             </div>
@@ -82,20 +82,20 @@ const CreditConsumptionBar: React.FC<CreditConsumptionBarProps> = ({
           {/* Background Processing */}
           <div className="mb-3">
             <div className="flex justify-between items-center mb-1">
-              <span className="text-xs text-gray-600 dark:text-gray-400">Background processing</span>
-              <span className="text-xs font-medium text-gray-700 dark:text-gray-300 tabular-nums">
+              <span className="text-xs text-muted-foreground dark:text-muted-foreground">Background processing</span>
+              <span className="text-xs font-medium text-on-surface dark:text-muted-foreground tabular-nums">
                 {backgroundCredits.used.toLocaleString()} / {backgroundCredits.total.toLocaleString()}
               </span>
             </div>
-            <div className="h-1.5 rounded-full bg-gray-100 dark:bg-gray-700 overflow-hidden">
+            <div className="h-1.5 rounded-full bg-surface-container-low dark:bg-surface-container-highest overflow-hidden">
               <div
-                className="h-full rounded-full bg-gray-400 dark:bg-gray-400 transition-all"
+                className="h-full rounded-full bg-outline-variant dark:bg-outline-variant transition-all"
                 style={{ width: `${backgroundPct}%` }}
               />
             </div>
           </div>
 
-          <p className="text-xs text-gray-400 dark:text-gray-500 pt-2 border-t border-gray-100 dark:border-gray-700">
+          <p className="text-xs text-outline dark:text-muted-foreground pt-2 border-t border-border dark:border-border">
             Resets on the 1st of each month. Unused tokens don't roll over.
           </p>
         </div>

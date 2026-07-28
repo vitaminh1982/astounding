@@ -16,7 +16,7 @@ const SystemMetricsGrid: React.FC<SystemMetricsGridProps> = ({ metrics }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm dark:shadow-gray-900 border border-gray-200 dark:border-gray-600 p-4 sm:p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200"
+          className="bg-white dark:bg-surface-container-high rounded-xl shadow-sm dark:shadow-gray-900 border border-border dark:border-border p-4 sm:p-6 hover:shadow-md dark:hover:shadow-gray-800 transition-all duration-200"
         >
           <div className="flex items-center justify-between mb-4">
             <div className={`${metric.bgColor} p-3 rounded-xl`}>
@@ -34,16 +34,16 @@ const SystemMetricsGrid: React.FC<SystemMetricsGridProps> = ({ metrics }) => {
             </div>
           </div>
           <div className="mb-2">
-            <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-1">
+            <h3 className="text-sm font-semibold text-on-surface dark:text-on-surface-variant mb-1">
               {metric.title}
             </h3>
             <div className="mt-2">
-              <span className="text-3xl font-bold text-gray-900 dark:text-gray-100">
+              <span className="text-3xl font-bold text-foreground dark:text-foreground">
                 {metric.value}
               </span>
             </div>
           </div>
-          <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">{metric.changeLabel}</p>
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground font-medium">{metric.changeLabel}</p>
         </motion.div>
       ))}
     </section>

@@ -79,25 +79,25 @@ export default function ProjectSwitcher({ onNavigate }: ProjectSwitcherProps) {
       >
         <ProjectAvatar project={displayed} size="sm" />
         <span className="flex-1 min-w-0 text-left">
-          <span className="block text-xs font-medium text-gray-900 dark:text-gray-100 truncate leading-tight">
+          <span className="block text-xs font-medium text-foreground dark:text-foreground truncate leading-tight">
             {displayed.name}
           </span>
-          <span className="block text-[10px] font-normal text-gray-500 dark:text-gray-400 truncate leading-tight">
+          <span className="block text-[10px] font-normal text-muted-foreground dark:text-muted-foreground truncate leading-tight">
             {displayed.deliveryTrackLabel}
           </span>
         </span>
         {isOpen
-          ? <ChevronUp size={14} className="flex-shrink-0 text-gray-400" />
-          : <ChevronDown size={14} className="flex-shrink-0 text-gray-400" />}
+          ? <ChevronUp size={14} className="flex-shrink-0 text-outline" />
+          : <ChevronDown size={14} className="flex-shrink-0 text-outline" />}
       </button>
 
       {/* ── Dropdown panel ───────────────────────────────────────────────────── */}
       {isOpen && (
-        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[#141414] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50">
+        <div className="absolute left-0 right-0 top-full mt-1 bg-white dark:bg-[var(--color-surface-container-low)] border border-black/10 dark:border-white/10 shadow-xl rounded-xl overflow-hidden z-50">
 
           {/* Header label */}
           <div className="px-3 pt-3 pb-1">
-            <p className="text-[10px] font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
+            <p className="text-[10px] font-medium text-outline dark:text-muted-foreground uppercase tracking-wider">
               Projects in this workspace
             </p>
           </div>
@@ -124,16 +124,16 @@ export default function ProjectSwitcher({ onNavigate }: ProjectSwitcherProps) {
                   <span className="flex-1 min-w-0">
                     <span className={`block text-xs truncate leading-tight ${
                       isActive
-                        ? 'font-semibold text-gray-900 dark:text-gray-100'
-                        : 'font-medium text-gray-700 dark:text-gray-300'
+                        ? 'font-semibold text-foreground dark:text-foreground'
+                        : 'font-medium text-on-surface dark:text-muted-foreground'
                     }`}>
                       {proj.name}
                     </span>
-                    <span className="block text-[10px] font-normal text-gray-400 dark:text-gray-500 truncate leading-tight mt-0.5">
+                    <span className="block text-[10px] font-normal text-outline dark:text-muted-foreground truncate leading-tight mt-0.5">
                       {proj.deliveryTrackLabel}
                     </span>
                   </span>
-                  {isActive && <Check size={14} className="flex-shrink-0 text-gray-600 dark:text-gray-300" />}
+                  {isActive && <Check size={14} className="flex-shrink-0 text-muted-foreground dark:text-muted-foreground" />}
                 </button>
               );
             })}

@@ -372,47 +372,47 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
   };
 
   return (
-    <div className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg p-6 transition-colors ${className}`}>
+    <div className={`bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-lg p-6 transition-colors ${className}`}>
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
         <div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100 transition-colors">{title}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 transition-colors">{description}</p>
+          <h3 className="text-lg font-medium text-foreground dark:text-foreground transition-colors">{title}</h3>
+          <p className="text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{description}</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {/* Time range selector */}
-          <div className="flex items-center bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden transition-colors">
-            <Calendar className="ml-3 w-4 h-4 text-gray-500 dark:text-gray-400 transition-colors" />
+          <div className="flex items-center bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg overflow-hidden transition-colors">
+            <Calendar className="ml-3 w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
             <select
-              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300 transition-colors focus:outline-none"
+              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-on-surface dark:text-muted-foreground transition-colors focus:outline-none"
               value={timeRange}
               onChange={(e) => handleTimeRangeChange(e.target.value as '7d' | '30d' | '90d' | 'custom')}
             >
-              <option value="7d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 7 Days</option>
-              <option value="30d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 30 Days</option>
-              <option value="90d" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Last 90 Days</option>
-              <option value="custom" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Custom Range</option>
+              <option value="7d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last 7 Days</option>
+              <option value="30d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last 30 Days</option>
+              <option value="90d" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Last 90 Days</option>
+              <option value="custom" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Custom Range</option>
             </select>
           </div>
           
           {/* Granularity selector */}
-          <div className="flex items-center bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden transition-colors">
-            <Filter className="ml-3 w-4 h-4 text-gray-500 dark:text-gray-400 transition-colors" />
+          <div className="flex items-center bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg overflow-hidden transition-colors">
+            <Filter className="ml-3 w-4 h-4 text-muted-foreground dark:text-muted-foreground transition-colors" />
             <select
-              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-gray-700 dark:text-gray-300 transition-colors focus:outline-none"
+              className="w-full py-2 pl-2 pr-8 bg-transparent border-none focus:ring-0 text-sm text-on-surface dark:text-muted-foreground transition-colors focus:outline-none"
               value={granularity}
               onChange={(e) => handleGranularityChange(e.target.value as 'daily' | 'weekly' | 'monthly')}
             >
-              <option value="daily" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Daily</option>
-              <option value="weekly" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Weekly</option>
-              <option value="monthly" className="bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">Monthly</option>
+              <option value="daily" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Daily</option>
+              <option value="weekly" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Weekly</option>
+              <option value="monthly" className="bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground">Monthly</option>
             </select>
           </div>
           
           {/* Export button */}
           <button 
             onClick={handleExport}
-            className="flex items-center gap-2 bg-indigo-600 dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+            className="flex items-center gap-2 bg-primary dark:bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors shadow-sm dark:shadow-gray-900 focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           >
             <Download className="w-4 h-4" />
             <span>Export</span>
@@ -422,13 +422,13 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
 
       {/* Custom date range picker (conditionally rendered) */}
       {isCustomRangeOpen && (
-        <div className="mb-6 p-4 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700/50 transition-colors">
+        <div className="mb-6 p-4 border border-border dark:border-border rounded-lg bg-surface-container-low dark:bg-surface-container-highest/50 transition-colors">
           <div className="flex flex-wrap gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors">Start Date</label>
+              <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">Start Date</label>
               <input
                 type="date"
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 transition-colors"
+                className="px-3 py-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors"
                 value={customDateRange.start ? format(customDateRange.start, 'yyyy-MM-dd') : ''}
                 onChange={(e) => setCustomDateRange({
                   ...customDateRange,
@@ -437,10 +437,10 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors">End Date</label>
+              <label className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-1 transition-colors">End Date</label>
               <input
                 type="date"
-                className="px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-md focus:ring-indigo-500 dark:focus:ring-teal-500 focus:border-indigo-500 dark:focus:border-teal-500 transition-colors"
+                className="px-3 py-2 border border-border dark:border-border bg-white dark:bg-surface-container-highest text-foreground dark:text-foreground rounded-md focus:ring-ring dark:focus:ring-ring focus:border-primary-green dark:focus:border-teal-500 transition-colors"
                 value={customDateRange.end ? format(customDateRange.end, 'yyyy-MM-dd') : ''}
                 onChange={(e) => setCustomDateRange({
                   ...customDateRange,
@@ -452,7 +452,7 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
             </div>
             <div className="flex items-end">
               <button
-                className="px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 onClick={() => {
                   if (customDateRange.start && customDateRange.end) {
                     // Apply custom date range
@@ -472,21 +472,21 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
       {/* Metric selector */}
       <div className="mb-6">
         <div className="flex justify-between items-center mb-2">
-          <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">Metrics</h4>
+          <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">Metrics</h4>
           <button
             onClick={() => setShowLegend(!showLegend)}
-            className="text-xs text-indigo-600 dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
+            className="text-xs text-primary-green dark:text-teal-400 hover:text-indigo-800 dark:hover:text-teal-300 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-800 rounded-sm px-1"
           >
             {showLegend ? 'Hide Legend' : 'Show Legend'}
           </button>
         </div>
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-600">
-            <thead className="bg-gray-50 dark:bg-gray-700 transition-colors">
+            <thead className="bg-surface-container-low dark:bg-surface-container-highest transition-colors">
               <tr>
-                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">
                   <button 
-                    className="flex items-center focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1"
+                    className="flex items-center focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700 rounded-sm px-1"
                     onClick={() => handleSortChange('name')}
                   >
                     Metric
@@ -495,27 +495,27 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
                     )}
                   </button>
                 </th>
-                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Description</th>
-                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Unit</th>
-                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors">Visible</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Description</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Unit</th>
+                <th scope="col" className="px-3 py-2 text-left text-xs font-medium text-muted-foreground dark:text-muted-foreground uppercase tracking-wider transition-colors">Visible</th>
               </tr>
             </thead>
-            <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
+            <tbody className="bg-white dark:bg-surface-container-high divide-y divide-gray-200 dark:divide-gray-600 transition-colors">
               {getSortedMetrics().map((metric) => (
-                <tr key={metric.id} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                <tr key={metric.id} className="hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors">
                   <td className="px-3 py-2 whitespace-nowrap">
                     <div className="flex items-center">
                       <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: metric.color }}></div>
-                      <span className="text-sm font-medium text-gray-900 dark:text-gray-100 transition-colors">{metric.name}</span>
+                      <span className="text-sm font-medium text-foreground dark:text-foreground transition-colors">{metric.name}</span>
                     </div>
                   </td>
-                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{metric.description}</td>
-                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400 transition-colors">{metric.unit}</td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{metric.description}</td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-muted-foreground dark:text-muted-foreground transition-colors">{metric.unit}</td>
                   <td className="px-3 py-2 whitespace-nowrap">
                     <label className="inline-flex items-center">
                       <input
                         type="checkbox"
-                        className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-indigo-600 dark:text-teal-500 focus:ring-indigo-500 dark:focus:ring-teal-500 transition-colors"
+                        className="rounded border-border dark:border-border bg-white dark:bg-surface-container-highest text-primary-green dark:text-primary-green focus:ring-ring dark:focus:ring-ring transition-colors"
                         checked={metric.visible}
                         onChange={() => toggleMetric(metric.id)}
                       />
@@ -531,16 +531,16 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
       {/* Chart */}
       <div style={{ height: `${height}px` }} className="relative">
         {isLoading ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-700/50 bg-opacity-75 rounded-lg transition-colors">
+          <div className="absolute inset-0 flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest/50 bg-opacity-75 rounded-lg transition-colors">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 dark:border-teal-500"></div>
           </div>
         ) : error ? (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-50 dark:bg-gray-700/50 bg-opacity-75 rounded-lg transition-colors">
-            <div className="text-red-500 dark:text-red-400 text-center transition-colors">
+          <div className="absolute inset-0 flex items-center justify-center bg-surface-container-low dark:bg-surface-container-highest/50 bg-opacity-75 rounded-lg transition-colors">
+            <div className="text-destructive dark:text-destructive text-center transition-colors">
               <AlertCircle className="h-12 w-12 mx-auto mb-2" />
               <p>{error}</p>
               <button 
-                className="mt-2 px-4 py-2 bg-indigo-600 dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-teal-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700"
+                className="mt-2 px-4 py-2 bg-primary dark:bg-teal-600 text-white rounded-md hover:bg-indigo-700 dark:hover:bg-teal-700 transition-colors focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-ring focus:ring-offset-2 dark:focus:ring-offset-gray-700"
                 onClick={() => {
                   setIsLoading(true);
                   setError(null);
@@ -573,27 +573,27 @@ const PerformanceChart: React.FC<PerformanceChartProps> = ({
           const percentChange = firstValue !== 0 ? (change / firstValue) * 100 : 0;
           
           return (
-            <div key={metric.id} className="bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg p-4 transition-colors">
+            <div key={metric.id} className="bg-white dark:bg-surface-container-highest border border-border dark:border-border rounded-lg p-4 transition-colors">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center">
                   <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: metric.color }}></div>
-                  <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 transition-colors">{metric.name}</h4>
+                  <h4 className="text-sm font-medium text-on-surface dark:text-muted-foreground transition-colors">{metric.name}</h4>
                 </div>
                 {percentChange !== 0 && (
-                  <div className={`flex items-center text-xs transition-colors ${percentChange > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                  <div className={`flex items-center text-xs transition-colors ${percentChange > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-destructive'}`}>
                     {percentChange > 0 ? <ArrowUp className="w-3 h-3 mr-1" /> : <ArrowDown className="w-3 h-3 mr-1" />}
                     {Math.abs(percentChange).toFixed(1)}%
                   </div>
                 )}
               </div>
-              <div className="text-xl font-semibold text-gray-900 dark:text-gray-100 transition-colors">
+              <div className="text-xl font-semibold text-foreground dark:text-foreground transition-colors">
                 {metric.unit === '%' ? `${avg.toFixed(1)}%` : 
                  metric.unit === '€' ? `€${avg.toFixed(3)}` :
                  metric.unit === 'seconds' ? `${avg.toFixed(1)}s` :
                  metric.unit === 'score' ? `${avg.toFixed(1)}/5` :
                  metric.unit === 'count' ? avg.toFixed(0) : avg.toFixed(1)}
               </div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 transition-colors">Average for selected period</div>
+              <div className="text-xs text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">Average for selected period</div>
             </div>
           );
         })}

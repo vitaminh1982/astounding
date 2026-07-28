@@ -49,23 +49,23 @@ const FileUploadButton: React.FC<FileUploadButtonProps> = ({
 
   const getButtonStyles = () => {
     if (disabled) {
-      return 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 cursor-not-allowed';
+      return 'bg-surface-container dark:bg-surface-container-highest text-outline dark:text-muted-foreground cursor-not-allowed';
     }
     
     if (uploadState.isUploading) {
-      return 'bg-blue-500 dark:bg-teal-600 text-white';
+      return 'bg-tertiary dark:bg-teal-600 text-white';
     }
     
     if (uploadState.selectedFile) {
       return 'bg-green-500 dark:bg-green-600 text-white hover:bg-green-600 dark:hover:bg-green-700';
     }
     
-    return 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600';
+    return 'bg-surface-container-low dark:bg-surface-container-highest text-muted-foreground dark:text-muted-foreground hover:bg-surface-container dark:hover:bg-surface-container-highest';
   };
 
   const getFocusStyles = () => {
     if (uploadState.isUploading) {
-      return 'focus:ring-blue-500 dark:focus:ring-teal-500';
+      return 'focus:ring-blue-500 dark:focus:ring-ring';
     }
     
     if (uploadState.selectedFile) {

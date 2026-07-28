@@ -9,7 +9,7 @@ import { WorkflowNodeProps } from '../types/workflowTypes';
  */
 const WorkflowNode: React.FC<WorkflowNodeProps> = ({ data, id }) => {
   return (
-    <div className="relative px-4 py-2 shadow-lg dark:shadow-gray-900 rounded-lg bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-600 group transition-colors">
+    <div className="relative px-4 py-2 shadow-lg dark:shadow-gray-900 rounded-lg bg-white dark:bg-surface-container-high border-2 border-border dark:border-border group transition-colors">
       {/* Delete Button */}
       <div className="absolute top-0 right-0 mt-1 mr-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
         <button
@@ -17,13 +17,13 @@ const WorkflowNode: React.FC<WorkflowNodeProps> = ({ data, id }) => {
           data-node-id={id}
           aria-label="Delete node"
         >
-          <Trash2 className="w-4 h-4 text-red-500 dark:text-red-400 transition-colors" />
+          <Trash2 className="w-4 h-4 text-destructive dark:text-destructive transition-colors" />
         </button>
       </div>
 
       {/* Drag Handle */}
       <div className="absolute top-0 left-0 mt-1 ml-1 opacity-0 group-hover:opacity-100 transition-opacity cursor-grab active:cursor-grabbing">
-        <GripHorizontal className="w-4 h-4 text-gray-400 dark:text-gray-500 transition-colors" />
+        <GripHorizontal className="w-4 h-4 text-outline dark:text-muted-foreground transition-colors" />
       </div>
 
       {/* Content */}
@@ -35,7 +35,7 @@ const WorkflowNode: React.FC<WorkflowNodeProps> = ({ data, id }) => {
             type={handle.type}
             position={handle.position}
             id={handle.id}
-            className="!bg-teal-500 dark:!bg-teal-400"
+            className="!bg-primary dark:!bg-teal-400"
             style={{
               width: 8,
               height: 8,
@@ -52,11 +52,11 @@ const WorkflowNode: React.FC<WorkflowNodeProps> = ({ data, id }) => {
             {data.icon}
           </div>
           <div className="flex flex-col">
-            <span className="font-medium text-sm text-gray-900 dark:text-gray-100 transition-colors">
+            <span className="font-medium text-sm text-foreground dark:text-foreground transition-colors">
               {data.label}
             </span>
             {data.description && (
-              <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors">
+              <span className="text-xs text-muted-foreground dark:text-muted-foreground transition-colors">
                 {data.description}
               </span>
             )}
