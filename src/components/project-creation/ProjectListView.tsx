@@ -34,7 +34,7 @@ interface ProjectTemplate {
 import templatesRaw from '../../data/templates.json';
 const TEMPLATES = templatesRaw as ProjectTemplate[];
 
-export default function ProjectListView() {
+export default function ProjectListView({ onNavigate }: { onNavigate?: (page: string) => void }) {
   const { dispatch } = useProjectCreation();
   const { activeWorkspace, activeProject, switchProject, addProjectToWorkspace } = useWorkspace();
 
@@ -50,6 +50,7 @@ export default function ProjectListView() {
 
   function handleOpenProject(projectId: string) {
     switchProject(projectId);
+    onNavigate?.('project-detail');
   }
 
   function handleCreateFromTemplate(template: ProjectTemplate) {
@@ -61,6 +62,12 @@ export default function ProjectListView() {
       emoji: template.emoji,
       color: template.color,
       image: template.image,
+      industry: template.category.charAt(0).toUpperCase() + template.category.slice(1),
+      description: template.description,
+      phaseLabel: 'Discovery',
+      phaseProgress: 0,
+      teamSize: 1,
+      vision: template.description,
     };
     addProjectToWorkspace(newProject);
     toast.success(`Project created: ${template.name}`);
@@ -138,7 +145,7 @@ export default function ProjectListView() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {workspaceProjects.map((project, i) => {
-                const colors = COLOR_MAP[project.color] ?? COLOR_MAP['indigo'];
+                const colors = COLOR_MAP['blue'];
                 return (
                   <motion.div
                     key={project.id}
@@ -251,7 +258,6 @@ export default function ProjectListView() {
             {featuredTemplates.length > 0 && (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 {featuredTemplates.map((template) => {
-                  const colors = COLOR_MAP[template.color] ?? COLOR_MAP['indigo'];
                   return (
                     <div
                       key={template.id}
@@ -291,7 +297,7 @@ export default function ProjectListView() {
             {standardTemplates.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {standardTemplates.map((template) => {
-                  const colors = COLOR_MAP[template.color] ?? COLOR_MAP['indigo'];
+                  const colors = COLOR_MAP['blue'];
                   return (
                     <div
                       key={template.id}

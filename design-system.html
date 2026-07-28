@@ -42,7 +42,7 @@
       --t-border-stronger: rgba(255, 255, 255, 0.20);
       --t-input: rgba(255, 255, 255, 0.10);
 
-      --t-primary: #4ade80;
+      --t-primary: #22c55e;
       --t-primary-fg: #003910;
       --t-secondary: #22c55e;
       --t-primary-container: #166534;
@@ -76,7 +76,7 @@
       --t-band-bg: rgba(255, 255, 255, 0.04);
       --t-band-border: rgba(255, 255, 255, 0.08);
       --t-band-fg: #a3aac4;
-      --t-band-dot: #4ade80;
+      --t-band-dot: #22c55e;
     }
 
     /* =====================================================
@@ -1158,7 +1158,7 @@
     }
 
     .c-cta-btn--hover {
-      background: linear-gradient(to right, #4ade80, #6ee7b7);
+      background: linear-gradient(to right, #22c55e, #6ee7b7);
       box-shadow: 0 6px 20px -3px rgba(34, 197, 94, 0.35);
     }
 
@@ -1537,7 +1537,7 @@
 
     .ds-prompt-banner__icon {
       font-size: 1rem;
-      color: #4ade80;
+      color: #22c55e;
       flex-shrink: 0;
     }
 
@@ -1560,7 +1560,7 @@
       font-family: var(--font-body);
       font-size: 0.6875rem;
       font-weight: 600;
-      color: #4ade80;
+      color: #22c55e;
       cursor: pointer;
       transition: background-color 0.15s, border-color 0.15s;
       flex-shrink: 0;
@@ -1721,7 +1721,7 @@ Add a subsection with a Do / Don't table:
 ### Style rules (non-negotiable)
 - Zero inline style="" on structural or typographic properties
 - All visual properties go in named CSS classes in the &lt;style&gt; block
-- Only acceptable inline style: color swatches where the value IS the content (e.g. style="background:#4ade80")
+- Only acceptable inline style: color swatches where the value IS the content (e.g. style="background:#22c55e")
 - Width: components use width: 100% — the .state-demo wrapper (244px) provides the constraint
 - All colors, spacing, radius and shadow values must reference CSS custom properties (--t-* tokens)
 - Never hardcode hex values in component styles — always use the token
@@ -1906,8 +1906,8 @@ Return the complete updated design-system.html file. No explanation, no markdown
               </td>
               <td class="col-dark">
                 <div class="swatch-pair">
-                  <div class="swatch" style="background:#4ade80" role="img" aria-label="#4ade80"></div>
-                  <p class="tok-val">#4ade80 (green-400)</p>
+                  <div class="swatch" style="background:#22c55e" role="img" aria-label="#22c55e"></div>
+                  <p class="tok-val">#22c55e (green-500)</p>
                 </div>
               </td>
               <td class="col-light">
@@ -2793,7 +2793,12 @@ Return the complete updated design-system.html file. No explanation, no markdown
            2.3 Mode Switch (Work / Studio / Govern)
            ───────────────────────────────────────────── -->
       <div class="ds-subsection">
-        <h3 class="ds-subsection__title">2.3 · 3-Way Switch — <code>Work / Studio / Govern</code></h3>
+        <h3 class="ds-subsection__title">2.3 · Segmented Switch — <code>2–3 Way</code></h3>
+        <p class="ds-section__desc">One shared component for every segmented switch in the product —
+          <code>#mode-switcher</code> (Work / Studio / Govern, with icons) and <code>#view-switcher</code> (PM /
+          Consultant / Freelance, no icons) both use <code>.c-mode-switch</code>. Icons are optional; the track, active
+          pill, and motion are identical everywhere.
+        </p>
 
         <!-- DARK -->
         <div class="dark-only">
@@ -2831,6 +2836,15 @@ Return the complete updated design-system.html file. No explanation, no markdown
                   Studio</button>
                 <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
                     aria-hidden="true">🛡</span> Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Icon-less variant &mdash; <code>#view-switcher</code></p>
+              <div class="c-mode-switch" role="tablist" aria-label="View selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab"
+                  aria-selected="true">PM</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false">Consultant</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false">Freelance</button>
               </div>
             </div>
           </div>
@@ -2909,6 +2923,15 @@ Return the complete updated design-system.html file. No explanation, no markdown
                   Studio</button>
                 <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab" aria-selected="true"><span
                     aria-hidden="true">🛡</span> Govern</button>
+              </div>
+            </div>
+            <div class="state-demo">
+              <p class="state-label">Icon-less variant &mdash; <code>#view-switcher</code></p>
+              <div class="c-mode-switch" role="tablist" aria-label="View selector">
+                <button class="c-mode-switch__btn c-mode-switch__btn--active" role="tab"
+                  aria-selected="true">PM</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false">Consultant</button>
+                <button class="c-mode-switch__btn" role="tab" aria-selected="false">Freelance</button>
               </div>
             </div>
           </div>
@@ -3080,14 +3103,25 @@ Return the complete updated design-system.html file. No explanation, no markdown
                 both themes.</td>
               <td>Use opaque dividers or padding alone — it breaks the glass aesthetic.</td>
             </tr>
+            <tr>
+              <td>Reuse the same panel recipe — <code>rounded-2xl</code> (<code>--radius-2xl</code>) +
+                <code>shadow-2xl</code> + <code>p-4</code> + <code>border</code> — for every flyout menu, not just
+                the profile popover: nested submenus (Appearance, Help &amp; Resources), the workspace/account
+                switchers, and any standalone dropdown (e.g. a project's <code>#view-switcher</code>). A short
+                selection list should still use the uppercase <code>10px</code> gray section label + trailing
+                checkmark on the active row, exactly like Appearance/Theme.
+              </td>
+              <td>Invent a lighter/smaller popover style for "minor" menus — a 3-item dropdown gets the exact same
+                chrome as the profile popover, just a narrower <code>w-*</code>.</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
       <div class="ds-subsection">
-        <h3 class="ds-subsection__title">3.3 · Work / Studio / Govern Switch</h3>
+        <h3 class="ds-subsection__title">3.3 · Segmented Switch</h3>
         <table class="usage-table">
-          <caption>Mode Switch — usage rules</caption>
+          <caption>Segmented Switch — usage rules</caption>
           <thead>
             <tr>
               <th scope="col" class="do-col col-half">✓ Do</th>
@@ -3111,6 +3145,16 @@ Return the complete updated design-system.html file. No explanation, no markdown
               </td>
               <td>Use CSS transitions alone for the indicator — instant snap or simple fade breaks the physicality of
                 the component.</td>
+            </tr>
+            <tr>
+              <td>Reuse <code>.c-mode-switch</code> / <code>.c-mode-switch__btn</code> for every segmented switch
+                (mode selector, view selector, etc.) — icons are optional, everything else stays identical. Give each
+                instance its own element <code>id</code> (e.g. <code>#mode-switcher</code>,
+                <code>#view-switcher</code>) and its own Framer Motion <code>layoutId</code> so their active-pill
+                animations don't collide.
+              </td>
+              <td>Fork a one-off switch style per screen — every new segmented control should look and animate like
+                this one.</td>
             </tr>
           </tbody>
         </table>

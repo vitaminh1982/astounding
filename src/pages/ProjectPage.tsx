@@ -199,8 +199,8 @@ const validateFile = (file: File): { valid: boolean; error?: string } => {
 // MAIN COMPONENT
 // ============================================================================
 
-export default function ProjectPage(): JSX.Element {
-  return <ProjectCreationPage />;
+export default function ProjectPage({ onNavigate }: { onNavigate?: (page: string) => void }): JSX.Element {
+  return <ProjectCreationPage onNavigate={onNavigate} />;
 }
 
 // Legacy Project Workspace (accessed from within workspace later)

@@ -47,7 +47,6 @@ import {
   Inbox,
   Code2,
   BotMessageSquare,
-  Search,
   ArrowRight,
   Library,
 } from 'lucide-react';
@@ -72,12 +71,6 @@ interface SidebarProps {
   activePlexChatId?: string | null;
   setActivePlexChatId?: (id: string | null) => void;
   onStartNewPlexChat?: () => void;
-
-  // Agents props
-  agentsSearchQuery?: string;
-  setAgentsSearchQuery?: (query: string) => void;
-  agentsStatusFilter?: 'all' | 'active' | 'paused';
-  setAgentsStatusFilter?: (filter: 'all' | 'active' | 'paused') => void;
 }
 
 interface Notification {
@@ -376,10 +369,6 @@ const Sidebar = ({
   activePlexChatId,
   setActivePlexChatId,
   onStartNewPlexChat,
-  agentsSearchQuery,
-  setAgentsSearchQuery,
-  agentsStatusFilter,
-  setAgentsStatusFilter,
 }: SidebarProps) => {
   const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
   const isProjectPage = hasSidebar && currentPage !== 'plex' && currentPage !== 'agents';
@@ -391,6 +380,7 @@ const Sidebar = ({
     activeWorkspace,
     activeProject,
     switchWorkspace,
+    switchProject,
     createWorkspace,
     addAccount,
     addProjectToWorkspace,
@@ -617,6 +607,13 @@ const Sidebar = ({
       deliveryTrackLabel: 'Kanban Flow',
       emoji: '📁',
       color: 'indigo',
+      image: '',
+      industry: '',
+      description: '',
+      phaseLabel: 'Discovery',
+      phaseProgress: 0,
+      teamSize: 1,
+      vision: '',
     });
   };
 
@@ -1172,8 +1169,8 @@ const Sidebar = ({
                                 </div>
                               </div>
 
-                              {/* Ellipsis Link with Tooltip */}
-                              <div className="relative group/tooltip flex justify-center">
+                              {/* Ellipsis Link */}
+                              <div className="relative flex justify-center">
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -1183,9 +1180,6 @@ const Sidebar = ({
                                 >
                                   <MoreHorizontal size={14} strokeWidth={2} />
                                 </button>
-                                <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
-                                  Project Actions
-                                </div>
                               </div>
 
                               {/* Plus Link with Tooltip */}
@@ -1227,6 +1221,10 @@ const Sidebar = ({
                               return (
                                 <button
                                   key={proj.id}
+                                  onClick={() => {
+                                    switchProject(proj.id);
+                                    handleNav('project-detail');
+                                  }}
                                   className={[
                                     'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors',
                                     isActive
@@ -1261,8 +1259,8 @@ const Sidebar = ({
                                 </div>
                               </div>
 
-                              {/* Ellipsis Link with Tooltip */}
-                              <div className="relative group/tooltip flex justify-center">
+                              {/* Ellipsis Link */}
+                              <div className="relative flex justify-center">
                                 <button
                                   onClick={(e) => {
                                     e.stopPropagation();
@@ -1272,9 +1270,6 @@ const Sidebar = ({
                                 >
                                   <MoreHorizontal size={14} strokeWidth={2} />
                                 </button>
-                                <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-gray-900 text-white dark:bg-gray-100 dark:text-black text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium border border-black/5 dark:border-white/5">
-                                  Agent Actions
-                                </div>
                               </div>
                             </div>
 
@@ -1469,60 +1464,6 @@ const Sidebar = ({
                   </motion.div>
                 )}
 
-                {currentPage === 'workspace-agents' && (
-                  <motion.div
-                    key="agents"
-                    id="agents-sidebar"
-                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left p-4 space-y-5 mb-2"
-                    initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scaleX: 1 }}
-                    exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div className="flex items-center justify-between border-b border-black/10 dark:border-white/10 pb-2">
-                      <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Filtres</span>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Recherche</span>
-                      <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
-                        <input
-                          type="text"
-                          placeholder="Nom, rôle, compétence..."
-                          value={agentsSearchQuery ?? ''}
-                          onChange={(e) => setAgentsSearchQuery?.(e.target.value)}
-                          className="w-full pl-9 pr-3 py-1.5 border border-black/10 dark:border-white/10 rounded-lg bg-black/5 dark:bg-white/5 text-gray-900 dark:text-gray-100 placeholder-gray-450 focus:outline-none focus:ring-1 focus:ring-teal-500 text-xs"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <span className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">Statut</span>
-                      <div className="flex flex-col gap-1">
-                        {[
-                          { value: 'all', label: 'Tous', count: WORKSPACE_AGENTS.length },
-                          { value: 'active', label: 'Actifs', count: WORKSPACE_AGENTS.filter(a => a.status === 'active').length },
-                          { value: 'paused', label: 'En pause', count: WORKSPACE_AGENTS.filter(a => a.status === 'paused').length },
-                        ].map((tab) => (
-                          <button
-                            key={tab.value}
-                            onClick={() => setAgentsStatusFilter?.(tab.value as any)}
-                            className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all ${agentsStatusFilter === tab.value
-                              ? 'bg-black/5 dark:bg-white/15 text-black dark:text-white font-semibold'
-                              : 'text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/5'
-                              }`}
-                          >
-                            <span>{tab.label}</span>
-                            <span className="bg-black/5 dark:bg-white/5 text-[10px] px-1.5 py-0.5 rounded text-gray-500 dark:text-gray-450">
-                              {tab.count}
-                            </span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
               </>
             )}
           </AnimatePresence>

@@ -37,17 +37,18 @@ const MonitoringAnalyticsPage = lazy(() => import('./components/orchestration/Mo
 const ResourceManagementPage = lazy(() => import('./components/orchestration/ResourceManagementPage'));
 const CollaborationPage = lazy(() => import('./components/orchestration/CollaborationPage'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
 const PlexPage = lazy(() => import('./pages/PlexPage'));
 const WorkspaceAgentsPage = lazy(() => import('./pages/WorkspaceAgentsPage'));
 
 // Types
-export type Page = 
-  | 'dashboard' 
-  | 'agents' 
-  | 'templates' 
-  | 'conversations' 
-  | 'clients' 
-  | 'documents' 
+export type Page =
+  | 'dashboard'
+  | 'agents'
+  | 'templates'
+  | 'conversations'
+  | 'clients'
+  | 'documents'
   | 'workflows'
   | 'integrations'
   | 'prompts'
@@ -61,6 +62,7 @@ export type Page =
   | 'usage'
   | 'orchestration'
   | 'projects'
+  | 'project-detail'
   | 'agent-management'
   | 'workflow-management'
   | 'monitoring-analytics'
@@ -90,7 +92,7 @@ const NAVIGATION_ITEMS: NavItem[] = [
   { id: 'onboarding', label: 'Onboarding', icon: 'onboarding' },
   { id: 'templates', label: 'Templates', icon: 'template' },
   { id: 'documents', label: 'Documents', icon: 'document' },
-  { id: 'integrations', label: 'Integrations', icon: 'link' }, 
+  { id: 'integrations', label: 'Integrations', icon: 'link' },
   { id: 'workflows', label: 'Workflows', icon: 'workflow' },
   { id: 'projects', label: 'All projects', icon: 'project' },
   { id: 'conversations', label: 'Conversations', icon: 'chat' },
@@ -135,6 +137,7 @@ const PAGE_CONFIG: Record<Page, PageConfig> = {
   'agent-configuration': { component: AgentConfigurationPage },
   workflows: { component: WorkflowsPage },
   projects: { component: ProjectPage, requiresNavigation: true },
+  'project-detail': { component: ProjectDetailPage },
   conversations: { component: ConversationsPage },
   clients: { component: ClientsPage },
   documents: { component: DocumentsPage },
@@ -167,10 +170,6 @@ function AppContent() {
   // Lifted Plex state
   const [plexChats, setPlexChats] = useState<Chat[]>([]);
   const [activePlexChatId, setActivePlexChatId] = useState<string | null>(null);
-
-  // Lifted Agents state
-  const [agentsSearchQuery, setAgentsSearchQuery] = useState('');
-  const [agentsStatusFilter, setAgentsStatusFilter] = useState<'all' | 'active' | 'paused'>('all');
 
   const handleNavigation = useMemo(
     () => (page: Page) => {
@@ -208,26 +207,29 @@ function AppContent() {
       ...(pageConfig.requiresNavigation ? { onNavigate: handleNavigation } : {}),
       ...(currentPage === 'plex'
         ? {
-            isSidebarExpanded,
-            onToggleSidebar: toggleSidebarExpand,
-            chats: plexChats,
-            setChats: setPlexChats,
-            activeChatId: activePlexChatId,
-            setActiveChatId: setActivePlexChatId,
-          }
+          isSidebarExpanded,
+          onToggleSidebar: toggleSidebarExpand,
+          chats: plexChats,
+          setChats: setPlexChats,
+          activeChatId: activePlexChatId,
+          setActiveChatId: setActivePlexChatId,
+        }
         : {}),
       ...(currentPage === 'workspace-agents'
         ? {
-            isSidebarExpanded,
-            onToggleSidebar: toggleSidebarExpand,
-            searchQuery: agentsSearchQuery,
-            statusFilter: agentsStatusFilter,
-          }
+          isSidebarExpanded,
+          onToggleSidebar: toggleSidebarExpand,
+        }
+        : {}),
+      ...(currentPage === 'project-detail'
+        ? {
+          isSidebarExpanded,
+        }
         : {})
     };
 
     return <Component {...props} />;
-  }, [currentPage, handleNavigation, isSidebarExpanded, plexChats, activePlexChatId, agentsSearchQuery, agentsStatusFilter]);
+  }, [currentPage, handleNavigation, isSidebarExpanded, plexChats, activePlexChatId]);
 
   const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
 
@@ -261,10 +263,6 @@ function AppContent() {
           activePlexChatId={activePlexChatId}
           setActivePlexChatId={setActivePlexChatId}
           onStartNewPlexChat={() => setActivePlexChatId(null)}
-          agentsSearchQuery={agentsSearchQuery}
-          setAgentsSearchQuery={setAgentsSearchQuery}
-          agentsStatusFilter={agentsStatusFilter}
-          setAgentsStatusFilter={setAgentsStatusFilter}
         />
 
         {/* Mobile overlay */}
@@ -278,7 +276,7 @@ function AppContent() {
 
         {/* Main content */}
         <main className="flex-1 overflow-y-auto px-4 min-h-0">
-          <div className="max-w-7xl mx-auto py-6">
+          <div className="max-w-7xl mx-auto pb-6">
             <Suspense fallback={<PageLoader />}>
               {CurrentPageComponent}
             </Suspense>

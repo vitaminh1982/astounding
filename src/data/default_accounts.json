@@ -12,7 +12,7 @@
         "plan": "Free",
         "members": "1 member",
         "projects": [
-          { "id": "oppie-proj-1", "name": "Personal Portfolio", "deliveryTrackLabel": "Kanban Flow", "emoji": "🎨", "color": "violet", "image": "/assets/images/projects/project-portfolio.jpg" }
+          { "id": "oppie-proj-1", "name": "Personal Portfolio", "deliveryTrackLabel": "Kanban Flow", "emoji": "🎨", "color": "violet", "image": "/assets/images/projects/project-portfolio.jpg", "industry": "Creative", "description": "Personal Branding · Portfolio Website Redesign", "phaseLabel": "Solution Design", "phaseProgress": 40, "teamSize": 1, "vision": "Showcase creative work through a clean, story-driven portfolio that turns visitors into clients." }
         ]
       },
       {
@@ -22,8 +22,8 @@
         "plan": "Pro",
         "members": "4 members",
         "projects": [
-          { "id": "fam-proj-1", "name": "Family Photo Archive", "deliveryTrackLabel": "Milestone Track", "emoji": "📸", "color": "amber", "image": "/assets/images/projects/project-family-photos.jpg" },
-          { "id": "fam-proj-2", "name": "Budget Tracking", "deliveryTrackLabel": "Kanban Flow", "emoji": "💰", "color": "emerald", "image": "/assets/images/projects/project-budget.jpg" }
+          { "id": "fam-proj-1", "name": "Family Photo Archive", "deliveryTrackLabel": "Milestone Track", "emoji": "📸", "color": "amber", "image": "/assets/images/projects/project-family-photos.jpg", "industry": "Personal", "description": "Family Memories · Photo Archiving & Organization", "phaseLabel": "Discovery", "phaseProgress": 20, "teamSize": 4, "vision": "Preserve and organize decades of family memories into one searchable, shareable archive." },
+          { "id": "fam-proj-2", "name": "Budget Tracking", "deliveryTrackLabel": "Kanban Flow", "emoji": "💰", "color": "emerald", "image": "/assets/images/projects/project-budget.jpg", "industry": "Personal Finance", "description": "Household Budgeting · Monthly Expense Tracking", "phaseLabel": "Execution", "phaseProgress": 55, "teamSize": 4, "vision": "Give the family full visibility into spending so every month starts with a clear plan." }
         ]
       }
     ]
@@ -41,8 +41,9 @@
         "plan": "Starter plan",
         "members": "3 members",
         "projects": [
-          { "id": "mir-proj-1", "name": "AI Integration Roadmap", "deliveryTrackLabel": "Sprint Track", "emoji": "🤖", "color": "sky", "image": "/assets/images/projects/project-roadmap.jpg" },
-          { "id": "mir-proj-2", "name": "Market Analysis", "deliveryTrackLabel": "Kanban Flow", "emoji": "📊", "color": "indigo", "image": "/assets/images/projects/project- marketanalysis.jpg" }
+          { "id": "mir-proj-1", "name": "AI Integration Roadmap", "deliveryTrackLabel": "Sprint Track", "emoji": "🤖", "color": "sky", "image": "/assets/images/projects/project-roadmap.jpg", "industry": "Technology", "description": "AI Startup Development · Collective SuperIntelligence Platform", "phaseLabel": "Solution Design", "phaseProgress": 60, "teamSize": 8, "vision": "Chart a pragmatic path for embedding AI across the organization's core workflows, one high-impact use case at a time." },
+          { "id": "mir-proj-2", "name": "Market Analysis", "deliveryTrackLabel": "Kanban Flow", "emoji": "📊", "color": "indigo", "image": "/assets/images/projects/project-marketanalysis.jpg", "industry": "Market Research", "description": "Competitive Analysis · Go-To-Market Strategy", "phaseLabel": "Discovery", "phaseProgress": 30, "teamSize": 5, "vision": "Map the competitive landscape and surface the openings worth betting the go-to-market strategy on." },
+          { "id": "mir-proj-3", "name": "Miranki", "deliveryTrackLabel": "Kanban Flow", "emoji": "🚀", "color": "violet", "image": "/assets/images/projects/project-goals.jpg", "industry": "Technology", "description": "AI Startup Development · Collective SuperIntelligence Platform", "phaseLabel": "Solution Design", "phaseProgress": 60, "teamSize": 8, "vision": "Building a Collective SuperIntelligence platform starting with the consulting sector — empowering Project Managers first, then expanding to all consultant types and methodologies." }
         ]
       },
       {
@@ -68,8 +69,8 @@
         "plan": "Enterprise plan",
         "members": "12 members",
         "projects": [
-          { "id": "acme-proj-1", "name": "SSO Security Configuration", "deliveryTrackLabel": "Milestone Track", "emoji": "🔐", "color": "rose", "image": "/assets/images/projects/project-sso-security.jpg" },
-          { "id": "acme-proj-2", "name": "SOC2 Audit Preparation", "deliveryTrackLabel": "Sprint Track", "emoji": "📋", "color": "teal", "image": "/assets/images/projects/project-soc2-audit.jpg" }
+          { "id": "acme-proj-1", "name": "SSO Security Configuration", "deliveryTrackLabel": "Milestone Track", "emoji": "🔐", "color": "rose", "image": "/assets/images/projects/project-sso-security.jpg", "industry": "Enterprise Security", "description": "Identity & Access Management · Single Sign-On Rollout", "phaseLabel": "Execution", "phaseProgress": 70, "teamSize": 12, "vision": "Roll out a single, secure sign-on experience across every Acme system without disrupting daily operations." },
+          { "id": "acme-proj-2", "name": "SOC2 Audit Preparation", "deliveryTrackLabel": "Sprint Track", "emoji": "📋", "color": "teal", "image": "/assets/images/projects/project-soc2-audit.jpg", "industry": "Compliance", "description": "Security Compliance · SOC2 Type II Readiness", "phaseLabel": "Delivery", "phaseProgress": 85, "teamSize": 12, "vision": "Get every control, policy, and piece of evidence audit-ready ahead of the SOC2 Type II review." }
         ]
       }
     ]

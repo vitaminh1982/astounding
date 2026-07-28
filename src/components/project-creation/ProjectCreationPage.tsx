@@ -5,12 +5,12 @@ import ConversationalIntake from './ConversationalIntake';
 import InitializingView from './InitializingView';
 import ProjectWorkspace from './ProjectWorkspace';
 
-function ProjectCreationContent() {
+function ProjectCreationContent({ onNavigate }: { onNavigate?: (page: string) => void }) {
   const { state } = useProjectCreation();
 
   switch (state.view) {
     case 'list':
-      return <ProjectListView />;
+      return <ProjectListView onNavigate={onNavigate} />;
     case 'intake':
       return <ConversationalIntake />;
     case 'initializing':
@@ -18,14 +18,14 @@ function ProjectCreationContent() {
     case 'workspace':
       return <ProjectWorkspace />;
     default:
-      return <ProjectListView />;
+      return <ProjectListView onNavigate={onNavigate} />;
   }
 }
 
-export default function ProjectCreationPage() {
+export default function ProjectCreationPage({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <ProjectCreationProvider>
-      <ProjectCreationContent />
+      <ProjectCreationContent onNavigate={onNavigate} />
     </ProjectCreationProvider>
   );
 }

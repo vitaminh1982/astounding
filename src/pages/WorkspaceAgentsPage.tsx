@@ -1,19 +1,17 @@
-import React, { useMemo } from 'react';
-import { Bot, CheckCircle2, Clock, ChevronRight } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
+import { Bot, CheckCircle2, Clock, ChevronRight, Search } from 'lucide-react';
 import { WORKSPACE_AGENTS, WorkspaceAgent as Agent } from '../data/workspace_agents';
 
 
 export default function WorkspaceAgentsPage({
   isSidebarExpanded = true,
   onToggleSidebar,
-  searchQuery = '',
-  statusFilter = 'all',
 }: {
   isSidebarExpanded?: boolean;
   onToggleSidebar?: () => void;
-  searchQuery?: string;
-  statusFilter?: 'all' | 'active' | 'paused';
 }) {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'paused'>('all');
 
   const filteredAgents = useMemo(() => {
     return WORKSPACE_AGENTS.filter(agent => {
@@ -52,7 +50,43 @@ export default function WorkspaceAgentsPage({
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 mt-6">
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
+          <div className="relative flex-1 sm:max-w-xs">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-4 h-4" />
+            <input
+              type="text"
+              placeholder="Nom, rôle, compétence..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-3 py-2 border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-450 focus:outline-none focus:ring-1 focus:ring-teal-500 text-sm"
+            />
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            {[
+              { value: 'all', label: 'Tous', count: WORKSPACE_AGENTS.length },
+              { value: 'active', label: 'Actifs', count: WORKSPACE_AGENTS.filter(a => a.status === 'active').length },
+              { value: 'paused', label: 'En pause', count: WORKSPACE_AGENTS.filter(a => a.status === 'paused').length },
+            ].map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => setStatusFilter(tab.value as 'all' | 'active' | 'paused')}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${statusFilter === tab.value
+                  ? 'bg-gray-900 dark:bg-white/15 text-white dark:text-white font-semibold'
+                  : 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-white/5'
+                  }`}
+              >
+                <span>{tab.label}</span>
+                <span className={`text-[10px] px-1.5 py-0.5 rounded ${statusFilter === tab.value ? 'bg-white/15 text-white' : 'bg-black/5 dark:bg-white/5 text-gray-500 dark:text-gray-450'}`}>
+                  {tab.count}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-6">
           {/* Grid Layout */}
           <div className="flex-1 min-w-0">
             {filteredAgents.length > 0 ? (

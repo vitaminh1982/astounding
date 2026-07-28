@@ -9,6 +9,12 @@ export interface WorkspaceProject {
   emoji: string;
   color: string; // tailwind bg color token e.g. 'violet', 'amber', 'sky'
   image: string;
+  industry: string;
+  description: string;
+  phaseLabel: string;
+  phaseProgress: number; // 0-100
+  teamSize: number;
+  vision: string;
 }
 
 // ─── Workspace / Account types ────────────────────────────────────────────────

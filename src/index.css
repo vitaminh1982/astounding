@@ -459,8 +459,8 @@ body,
 }
 
 .dark .app-bg {
-  background: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.04) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
+  background: radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
     #111827;
 }
 
@@ -475,7 +475,7 @@ body,
 }
 
 .dark .glass-sidebar {
-  background: rgba(10, 12, 16, 0.65);
+  background: rgba(10, 12, 16, 0.6);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.06);
