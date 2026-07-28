@@ -96,7 +96,7 @@ export default function ProjectDetailPage({
               <div id="view-switcher" ref={viewMenuRef} className="relative">
                 <button
                   onClick={() => setIsViewMenuOpen((prev) => !prev)}
-                  className="flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg text-xs font-medium bg-surface-container-high dark:bg-surface-container-high border border-border text-muted-foreground hover:text-primary-green hover:border-primary-green/30 transition-colors duration-200"
+                  className="flex items-center gap-1.5 py-1.5 px-2.5 rounded-lg text-xs font-medium bg-black/5 dark:bg-surface-container-high border border-border text-muted-foreground hover:text-foreground hover:border-outline transition-colors duration-200"
                 >
                   <LayoutFreeform size={14} strokeWidth={2} />
                   <ChevronDown size={12} strokeWidth={2} />
@@ -135,14 +135,14 @@ export default function ProjectDetailPage({
                 <strong className="font-bold text-foreground">{activeProject?.teamSize ?? 0}</strong> people have access to this project
               </span>
             </div>
-            <div className="rounded-2xl bg-surface-container-highest dark:bg-background p-4 flex items-center justify-between text-foreground">
-              <div className="flex items-center gap-2">
+            <div className="group cursor-pointer rounded-2xl bg-black/90 hover:bg-black p-4 flex items-center justify-between text-white backdrop-blur-sm transition-colors duration-200">
+              <div className="flex items-center gap-3">
                 <span className="text-2xl font-bold">{ACTIVE_AGENTS_COUNT}</span>
                 <span className="text-sm font-medium">Active agents</span>
               </div>
-              <button className="text-xs text-muted-foreground hover:text-primary-green transition-colors duration-200 flex items-center gap-1">
+              <span className="text-xs text-white/70 group-hover:text-primary-green transition-colors duration-200 flex-shrink-0 flex items-center gap-1">
                 Manage <ArrowRight size={12} />
-              </button>
+              </span>
             </div>
           </div>
 
@@ -157,7 +157,7 @@ export default function ProjectDetailPage({
               {/* Left: Vision */}
               <div className="lg:col-span-2 rounded-2xl p-4 text-white flex flex-col justify-between">
                 <div className="max-w-md">
-                  <p className="text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider mb-2">Vision</p>
+                  <p className="text-[10px] font-semibold text-white/70 uppercase tracking-wider mb-2">Vision</p>
                   <p className="text-lg italic leading-relaxed">
                     “{activeProject?.vision}”
                   </p>
@@ -170,8 +170,8 @@ export default function ProjectDetailPage({
                       style={{ width: `${activeProject?.phaseProgress ?? 0}%` }}
                     />
                   </div>
-                  <div className="text-xs text-on-surface-variant whitespace-nowrap">
-                      Progression : {activeProject?.phaseProgress ?? 0} %
+                  <div className="text-xs text-white/80 whitespace-nowrap">
+                    Progression : {activeProject?.phaseProgress ?? 0} %
                   </div>
                 </div>
               </div>
@@ -192,7 +192,7 @@ export default function ProjectDetailPage({
                         <span className="text-2xl font-bold">{card.value}</span>
                         <span className="text-s font-medium">{card.label}</span>
                       </div>
-                      <span className="text-xs text-muted-foreground group-hover:text-primary-green transition-colors duration-200 flex-shrink-0 flex items-center gap-1">{card.action} <ArrowRight size={12} /></span>
+                      <span className="text-xs text-white/70 group-hover:text-primary-green transition-colors duration-200 flex-shrink-0 flex items-center gap-1">{card.action} <ArrowRight size={12} /></span>
                     </motion.div>
                   ))}
                 </AnimatePresence>

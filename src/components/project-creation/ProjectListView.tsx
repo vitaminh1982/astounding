@@ -153,7 +153,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.05 }}
                     onClick={() => handleOpenProject(project.id)}
-                    className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-green-600 transition-all group"
+                    className="bg-white dark:bg-surface-container-high rounded-xl border border-border dark:border-border overflow-hidden cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-green-400 dark:hover:border-green-600 transition-all group"
                   >
                     {/* Project Image */}
                     <div className="h-32 w-full overflow-hidden bg-surface-container-low dark:bg-background relative">
@@ -170,7 +170,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     <div className="p-4">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className="text-sm font-semibold text-foreground dark:text-foreground group-hover:text-tertiary dark:group-hover:text-green-400 transition-colors">
+                          <h3 className="text-sm font-semibold text-foreground dark:text-foreground group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors">
                             {project.name}
                           </h3>
                           <div className="mt-1">
@@ -179,7 +179,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                             </span>
                           </div>
                         </div>
-                        <ArrowRight className="w-4 h-4 text-outline group-hover:text-tertiary dark:group-hover:text-green-400 transition-colors ml-1 flex-shrink-0" />
+                        <ArrowRight className="w-4 h-4 text-outline group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors ml-1 flex-shrink-0" />
                       </div>
                     </div>
                   </motion.div>
@@ -192,9 +192,9 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: workspaceProjects.length * 0.05 }}
                 onClick={() => setIsCreateModalOpen(true)}
-                className="border-2 border-dashed border-border dark:border-border hover:border-blue-400 dark:hover:border-green-500 bg-surface-container-low/50 dark:bg-surface-container-high/30 rounded-xl flex flex-col items-center justify-center min-h-[180px] cursor-pointer hover:shadow-md transition-all group"
+                className="border-2 border-dashed border-border dark:border-border hover:border-green-500 dark:hover:border-green-500 bg-surface-container-low/50 dark:bg-surface-container-high/30 rounded-xl flex flex-col items-center justify-center min-h-[180px] cursor-pointer hover:shadow-md transition-all group"
               >
-                <div className="flex flex-col items-center gap-2 text-outline dark:text-muted-foreground group-hover:text-tertiary dark:group-hover:text-green-400 transition-colors font-medium text-sm">
+                <div className="flex flex-col items-center gap-2 text-outline dark:text-muted-foreground group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors font-medium text-sm">
                   <Plus className="w-6 h-6" />
                   <span>New blank project</span>
                 </div>
@@ -262,7 +262,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     <div
                       key={template.id}
                       onClick={() => handleCreateFromTemplate(template)}
-                      className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl p-5 hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-green-600 transition-all cursor-pointer flex items-center justify-between group"
+                      className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl p-5 hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-green-400 dark:hover:border-green-600 transition-all cursor-pointer flex items-center justify-between group"
                     >
                       <div className="flex-1 pr-4 space-y-2">
                         <div className="flex items-center gap-2">
@@ -273,7 +273,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                             {template.id === 'tpl-plan-quarter' ? '🎯 Featured' : '🚀 Popular'}
                           </span>
                         </div>
-                        <h3 className="text-base font-bold text-foreground dark:text-foreground group-hover:text-tertiary dark:group-hover:text-green-400 transition-colors">
+                        <h3 className="text-base font-bold text-foreground dark:text-foreground group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors">
                           {template.name}
                         </h3>
                         <p className="text-xs text-muted-foreground dark:text-muted-foreground line-clamp-2">
@@ -302,7 +302,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                     <div
                       key={template.id}
                       onClick={() => handleCreateFromTemplate(template)}
-                      className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-blue-300 dark:hover:border-green-600 transition-all cursor-pointer overflow-hidden flex flex-col group"
+                      className="bg-white dark:bg-surface-container-high border border-border dark:border-border rounded-2xl hover:shadow-lg dark:hover:shadow-gray-900/50 hover:border-green-400 dark:hover:border-green-600 transition-all cursor-pointer overflow-hidden flex flex-col group"
                     >
                       <div className="h-28 w-full relative overflow-hidden border-b border-border dark:border-border">
                         <img
@@ -313,7 +313,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
                       </div>
                       <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                         <div>
-                          <h4 className="text-sm font-bold text-foreground dark:text-foreground group-hover:text-tertiary dark:group-hover:text-green-400 transition-colors">
+                          <h4 className="text-sm font-bold text-foreground dark:text-foreground group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors">
                             {template.name}
                           </h4>
                           <p className="text-xs text-outline dark:text-muted-foreground line-clamp-2 mt-1">
