@@ -1217,7 +1217,7 @@ const Sidebar = ({
                           </div>
                           <div className="space-y-0.5">
                             {(activeWorkspace.projects ?? []).map(proj => {
-                              const isActive = false;
+                              const isActive = currentPage === 'project-detail' && proj.id === activeProject?.id;
                               return (
                                 <button
                                   key={proj.id}
@@ -1228,7 +1228,7 @@ const Sidebar = ({
                                   className={[
                                     'w-full flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-left transition-colors',
                                     isActive
-                                      ? 'bg-white dark:bg-white/15 text-foreground dark:text-white font-semibold'
+                                      ? 'bg-white dark:bg-white/15 text-primary-green font-semibold'
                                       : 'text-on-surface dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10',
                                   ].join(' ')}
                                 >
