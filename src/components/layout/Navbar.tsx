@@ -294,39 +294,41 @@ const Navbar = ({
         </button>
       </div>
 
-      {/* Workspace selector — w-56 matches project-sidebar width */}
+      {/* Workspace selector — matches project-sidebar width */}
       {hasSidebar && (
-        <div className="relative flex-shrink-0 w-56 z-50">
+        <div className={`relative flex-shrink-0 transition-all duration-300 ease-in-out ${isSidebarExpanded ? 'w-56' : 'w-0 overflow-hidden'}`}>
           <NavWorkspaceSwitcher onNavigate={onNavigate} />
         </div>
       )}
 
-      {/* Project identity — shown on project-detail */}
-      {currentPage === 'project-detail' && activeProject && (
-        <div id="sendplex-project-identity" className="flex items-center gap-2 min-w-0 pl-3">
-          <div id="sendplex-project-emoji" className="w-8 h-8 rounded-full bg-surface-container-low dark:bg-surface-container flex items-center justify-center text-base flex-shrink-0">
-            {activeProject.emoji}
-          </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-2">
-              <h2 id="sendplex-project-name" className="text-xl font-bold text-foreground truncate">
-                {activeProject.name}
-              </h2>
-              <span id="sendplex-project-category" className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-surface-container-low dark:bg-surface-container text-muted-foreground flex-shrink-0">
-                {activeProject.industry}
-              </span>
+      {/* Main content header area — aligned with <main> and <ProjectDetailPage> max-w-7xl container */}
+      <div className="flex-1 flex items-center min-w-0 px-4">
+        <div className={`w-full max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}>
+          {/* Project identity — shown on project-detail */}
+          {currentPage === 'project-detail' && activeProject ? (
+            <div id="sendplex-project-identity" className="flex items-center gap-2 min-w-0">
+              <div id="sendplex-project-emoji" className="w-12 h-12 glass-sidebar rounded-full bg-surface-container-low dark:bg-surface-container flex items-center justify-center text-base flex-shrink-0">
+                {activeProject.emoji}
+              </div>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2">
+                  <h2 id="sendplex-project-name" className="text-xl font-bold text-foreground truncate">
+                    {activeProject.name}
+                  </h2>
+                  <span id="sendplex-project-category" className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-surface-container-low dark:bg-surface-container text-muted-foreground flex-shrink-0">
+                    {activeProject.industry}
+                  </span>
+                </div>
+                <p id="sendplex-project-description" className="text-[11px] text-muted-foreground truncate">
+                  {activeProject.description}
+                </p>
+              </div>
             </div>
-            <p id="sendplex-project-description" className="text-[11px] text-muted-foreground truncate">
-              {activeProject.description}
-            </p>
-          </div>
+          ) : (
+            <div />
+          )}
         </div>
-      )}
-
-      {/* Spacer */}
-      <div className="flex-1" />
-
-      {/* Right section — empty for now */}
+      </div>
     </header>
   );
 };

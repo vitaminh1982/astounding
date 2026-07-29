@@ -150,7 +150,7 @@ export default function ProjectDetailPage({
       </div>
       <div
         id="project-header"
-        className={`max-w-7xl mx-auto py-6 pt-2 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
+        className={`max-w-7xl mx-auto py-6 pt-4 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
       >
         {activeNavTab !== 'overview' && (
           <>
