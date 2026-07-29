@@ -112,7 +112,7 @@ export default function ProjectDetailPage({
   );
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-full">
       <div
         id="project-nav"
         className={`max-w-7xl mx-auto ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}

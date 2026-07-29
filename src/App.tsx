@@ -9,6 +9,7 @@ import { WorkspaceProvider } from './context/WorkspaceContext';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import FloatingAssistant from './components/assistant/FloatingAssistant';
+import ProjectAgentRail from './components/project/ProjectAgentRail';
 import LoadingSpinner from './components/common/LoadingSpinner';
 
 // Lazy load pages for better performance
@@ -297,6 +298,9 @@ function AppContent() {
             </Suspense>
           </div>
         </main>
+
+        {/* Project Agent Rail — project-detail only */}
+        {currentPage === 'project-detail' && <ProjectAgentRail />}
       </div>
 
       <div className="fixed bottom-4 right-4 z-40">

@@ -32,7 +32,7 @@ export default function UsagePage() {
   
   if (error) {
     return (
-      <div className="min-h-screen flex items-center justify-center transition-colors">
+      <div className="min-h-full flex items-center justify-center transition-colors">
         <div className="bg-white dark:bg-surface-container-high border border-border dark:border-border p-8 rounded-lg shadow-lg dark:shadow-gray-900 max-w-md w-full text-center transition-colors">
           <div className="text-destructive dark:text-destructive mb-4">
             <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -53,7 +53,7 @@ export default function UsagePage() {
   }
   
   return (
-    <div className="min-h-screen transition-colors">
+    <div className="min-h-full transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
         <UsageHeader
           onRefresh={handleRefresh}
