@@ -1,5 +1,6 @@
 // App.tsx
 import React, { useState, useMemo, lazy, Suspense } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Chat } from './types/plex';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
@@ -300,7 +301,20 @@ function AppContent() {
         </main>
 
         {/* Project Agent Rail — project-detail only */}
-        {currentPage === 'project-detail' && <ProjectAgentRail />}
+        <AnimatePresence>
+          {currentPage === 'project-detail' && (
+            <motion.div
+              key="project-agent-rail-wrapper"
+              initial={{ opacity: 0, x: 28 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 28, transition: { duration: 0.18, ease: [0.4, 0, 1, 1] } }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-shrink-0"
+            >
+              <ProjectAgentRail />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       <div className="fixed bottom-4 right-4 z-40">

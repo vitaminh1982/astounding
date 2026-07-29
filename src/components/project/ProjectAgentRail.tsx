@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ChevronLeft, Check, Loader, ChevronDown } from 'lucide-react';
+import { Send, ChevronLeft, Check, Loader, ChevronDown, Plus, Mic, CornerDownRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WORKSPACE_AGENTS, WorkspaceAgent } from '../../data/workspace_agents';
 
@@ -20,6 +20,19 @@ const AGENT_GREETINGS: Record<string, string> = {
   'agent-006': 'Bonjour ! Je peux vous aider sur la gouvernance PMO, le reporting et la gestion du portfolio de ce projet.',
 };
 
+// Contextual quick actions suggested right after the greeting, per agent role
+const AGENT_QUICK_ACTIONS: Record<string, string[]> = {
+  'agent-001': ['Voir les tickets ouverts', 'Relancer un client'],
+  'agent-002': ['Voir les jalons en retard', 'Générer un rapport d\'avancement'],
+  'agent-003': ['Clarifier une exigence', 'Modéliser un processus'],
+  'agent-004': ['Analyser les KPIs du projet', 'Générer un rapport'],
+  'agent-005': ['Vérifier la conformité', 'Estimer le budget'],
+  'agent-006': ['Voir le portfolio', 'Préparer le comité de pilotage'],
+};
+
+// Confirmation-style quick actions suggested after a simulated reply
+const FOLLOW_UP_ACTIONS = ['Oui, c\'est ça', 'Apporter des modifications'];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Types
 // ─────────────────────────────────────────────────────────────────────────────
@@ -29,6 +42,7 @@ interface Message {
   type: 'user' | 'agent';
   content: string;
   timestamp: Date;
+  actions?: string[];
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -151,6 +165,7 @@ export default function ProjectAgentRail() {
       type: 'agent',
       content: AGENT_GREETINGS[selectedAgent.id] ?? `Bonjour ! Je suis ${selectedAgent.name}. Comment puis-je vous aider ?`,
       timestamp: new Date(),
+      actions: AGENT_QUICK_ACTIONS[selectedAgent.id],
     }]);
   }, [selectedAgent]);
 
@@ -171,9 +186,10 @@ export default function ProjectAgentRail() {
     }
   };
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    const userMsg: Message = { id: Date.now().toString(), type: 'user', content: input, timestamp: new Date() };
+  const handleSend = (overrideText?: string) => {
+    const text = overrideText ?? input;
+    if (!text.trim()) return;
+    const userMsg: Message = { id: Date.now().toString(), type: 'user', content: text, timestamp: new Date() };
     setMessages(prev => [...prev, userMsg]);
     setInput('');
     setIsTyping(true);
@@ -183,6 +199,7 @@ export default function ProjectAgentRail() {
         type: 'agent',
         content: `Je prends note de votre demande concernant "${userMsg.content.slice(0, 60)}${userMsg.content.length > 60 ? '…' : ''}". Je vais analyser cela dans le contexte du projet.`,
         timestamp: new Date(),
+        actions: FOLLOW_UP_ACTIONS,
       }]);
       setIsTyping(false);
     }, 1200);
@@ -199,13 +216,19 @@ export default function ProjectAgentRail() {
     <motion.aside
       id="project-agent-rail"
       ref={railRef as React.RefObject<HTMLElement>}
+      initial={{ width: COLLAPSED_W }}
       animate={{ width: targetWidth }}
-      transition={{ duration: expanded ? 0.25 : 0, ease: [0.16, 1, 0.3, 1] }}
+      whileTap={!expanded ? { scale: 0.985 } : undefined}
+      transition={
+        expanded
+          ? { type: 'spring', stiffness: 340, damping: 32, mass: 0.9 }
+          : { type: 'spring', stiffness: 420, damping: 34, mass: 0.7 }
+      }
       onMouseEnter={() => !expanded && setRailHovered(true)}
       onMouseLeave={() => { setRailHovered(false); setHoveredId(null); }}
       onClick={handleRailClick}
       className="hidden xl:flex flex-col flex-shrink-0 glass-sidebar rounded-tl-2xl rounded-bl-2xl mb-4 cursor-pointer relative"
-      style={{ width: COLLAPSED_W, overflow: expanded ? 'hidden' : 'visible' }}
+      style={{ overflow: expanded ? 'hidden' : 'visible' }}
     >
       <AnimatePresence initial={false}>
         {!expanded ? (
@@ -213,21 +236,18 @@ export default function ProjectAgentRail() {
           <motion.div
             key="collapsed-strip"
             initial={{ opacity: 0, transition: { duration: 0 } }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
+            animate={{ opacity: 1, transition: { duration: 0.18, delay: 0.05 } }}
+            exit={{ opacity: 0, transition: { duration: 0.08 } }}
             className="absolute inset-0 flex flex-col items-center py-3 gap-2"
           >
-            {/* Collapse hint label */}
-            <p className="text-[8px] font-semibold text-outline uppercase tracking-widest mb-1 [writing-mode:vertical-rl] rotate-180 select-none">
-              Agents
-            </p>
-
-            {WORKSPACE_AGENTS.map(agent => {
+            {WORKSPACE_AGENTS.map((agent, index) => {
               const isHovered = hoveredId === agent.id;
               return (
-                <div
+                <motion.div
                   key={agent.id}
+                  initial={{ opacity: 0, y: 6, scale: 0.85 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ duration: 0.22, delay: 0.04 * index, ease: [0.16, 1, 0.3, 1] }}
                   className="relative flex-shrink-0"
                   onMouseEnter={() => setHoveredId(agent.id)}
                   onMouseLeave={() => setHoveredId(null)}
@@ -236,9 +256,9 @@ export default function ProjectAgentRail() {
                   <motion.button
                     onClick={e => { e.stopPropagation(); handleAvatarClick(agent); }}
                     animate={{ scale: isHovered ? 1.12 : 1 }}
+                    whileTap={{ scale: 0.94 }}
                     transition={{ duration: 0.15 }}
                     className="relative block focus:outline-none"
-                    title={agent.name}
                   >
                     <motion.div layoutId={`agent-avatar-${agent.id}`} className="relative" transition={{ duration: expanded ? 0.25 : 0 }}>
                       <img
@@ -276,7 +296,7 @@ export default function ProjectAgentRail() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </motion.div>
               );
             })}
           </motion.div>
@@ -284,10 +304,9 @@ export default function ProjectAgentRail() {
           /* ── EXPANDED : full panel ── */
           <motion.div
             key="expanded-panel"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 0 } }}
-            transition={{ duration: 0.15 }}
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0, transition: { duration: 0.22, delay: 0.08, ease: [0.16, 1, 0.3, 1] } }}
+            exit={{ opacity: 0, x: 6, transition: { duration: 0.1, ease: [0.4, 0, 1, 1] } }}
             className="absolute inset-0 flex flex-col min-h-0 overflow-hidden"
           >
             {/* Header */}
@@ -296,13 +315,15 @@ export default function ProjectAgentRail() {
                 <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Project Agents</p>
                 <p className="text-[9px] text-outline">Contextualisés à ce projet</p>
               </div>
-              <button
+              <motion.button
                 onClick={() => setExpanded(false)}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.9 }}
                 className="w-6 h-6 rounded-full flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
                 title="Réduire"
               >
                 <ChevronLeft size={13} />
-              </button>
+              </motion.button>
             </div>
 
             {/* Divider */}
@@ -316,11 +337,16 @@ export default function ProjectAgentRail() {
                     Agents du projet
                   </p>
                   <div className="space-y-0.5">
-                    {WORKSPACE_AGENTS.map(agent => {
+                    {WORKSPACE_AGENTS.map((agent, index) => {
                       const isActive = agent.status === 'active';
                       return (
-                        <button
+                        <motion.button
                           key={agent.id}
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.18, delay: 0.1 + 0.03 * index, ease: [0.16, 1, 0.3, 1] }}
+                          whileHover={{ x: 2 }}
+                          whileTap={{ scale: 0.98 }}
                           onClick={() => { setSelectedAgent(agent); setView('chat'); }}
                           className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors text-left group"
                         >
@@ -333,7 +359,7 @@ export default function ProjectAgentRail() {
                             <p className="text-[10px] text-muted-foreground truncate">{agent.role}</p>
                           </div>
                           <ChevronLeft size={12} className="rotate-180 text-outline opacity-0 group-hover:opacity-100 group-hover:text-primary-green transition-all" />
-                        </button>
+                        </motion.button>
                       );
                     })}
                   </div>
@@ -352,21 +378,47 @@ export default function ProjectAgentRail() {
                 {/* Messages */}
                 <div className="flex-1 min-h-0 overflow-y-auto px-3 py-1 space-y-2">
                   {messages.map(msg => (
-                    <div key={msg.id} className={['flex', msg.type === 'user' ? 'justify-end' : 'justify-start items-end gap-1.5'].join(' ')}>
-                      {msg.type === 'agent' && (
-                        <img src={selectedAgent.avatar} alt="" className="w-6 h-6 rounded-full object-cover flex-shrink-0 mb-0.5" />
-                      )}
-                      <div className={[
-                        'max-w-[80%] px-3 py-2 rounded-2xl text-xs leading-relaxed',
-                        msg.type === 'user'
-                          ? 'bg-primary-green text-white rounded-tr-none'
-                          : 'bg-black/5 dark:bg-white/5 text-foreground border border-border rounded-tl-none',
-                      ].join(' ')}>
-                        {msg.content}
-                        <p className={['text-[9px] mt-1', msg.type === 'user' ? 'text-white/60' : 'text-outline'].join(' ')}>
-                          {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                        </p>
+                    <div key={msg.id} className="space-y-1.5">
+                      <div className={['flex', msg.type === 'user' ? 'justify-end' : 'justify-start items-end gap-1.5'].join(' ')}>
+                        {msg.type === 'agent' && (
+                          <img src={selectedAgent.avatar} alt="" className="w-6 h-6 rounded-full object-cover flex-shrink-0 mb-0.5" />
+                        )}
+                        <div className={[
+                          'max-w-[80%] px-3 py-2 rounded-2xl text-xs leading-relaxed',
+                          msg.type === 'user'
+                            ? 'bg-primary-green text-white rounded-tr-none'
+                            : 'bg-black/5 dark:bg-white/5 text-foreground border border-border rounded-tl-none',
+                        ].join(' ')}>
+                          {msg.content}
+                          <p className={['text-[9px] mt-1', msg.type === 'user' ? 'text-white/60' : 'text-outline'].join(' ')}>
+                            {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </p>
+                        </div>
                       </div>
+
+                      {/* Contextual quick-action chips */}
+                      {msg.type === 'agent' && !!msg.actions?.length && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.18, delay: 0.1 }}
+                          className="flex flex-wrap gap-1.5 pl-7"
+                        >
+                          {msg.actions.map(action => (
+                            <motion.button
+                              key={action}
+                              onClick={() => handleSend(action)}
+                              disabled={isTyping}
+                              whileHover={{ y: -1 }}
+                              whileTap={{ scale: 0.96 }}
+                              className="flex items-center gap-1 px-2.5 py-1 rounded-full border border-border text-[10px] font-medium text-muted-foreground hover:text-primary-green hover:border-primary-green/40 hover:bg-primary-green/5 transition-colors disabled:opacity-40 disabled:pointer-events-none"
+                            >
+                              <CornerDownRight size={10} className="flex-shrink-0" />
+                              {action}
+                            </motion.button>
+                          ))}
+                        </motion.div>
+                      )}
                     </div>
                   ))}
 
@@ -387,24 +439,39 @@ export default function ProjectAgentRail() {
                 </div>
 
                 {/* Input */}
-                <div className="flex-shrink-0 px-3 pb-3 pt-2 border-t border-border">
-                  <div className="flex items-center gap-2 bg-black/5 dark:bg-white/5 rounded-xl px-3 py-2 border border-border focus-within:border-primary-green/40 transition-colors">
-                    <input
-                      type="text"
+                <div className="flex-shrink-0 px-3 pt-2 pb-5">
+                  <div className="flex flex-col gap-2 bg-white dark:bg-surface-container-high rounded-2xl px-3 py-2.5 border border-border shadow-sm focus-within:border-primary-green/40 transition-colors">
+                    <textarea
                       value={input}
                       onChange={e => setInput(e.target.value)}
                       onKeyDown={handleKey}
                       disabled={isTyping}
+                      rows={2}
                       placeholder={`Demander à ${selectedAgent.name.replace('AI ', '')}…`}
-                      className="flex-1 bg-transparent text-xs text-foreground placeholder:text-outline focus:outline-none disabled:opacity-50"
+                      className="w-full resize-none bg-transparent text-xs text-foreground placeholder:text-outline focus:outline-none disabled:opacity-50 leading-relaxed"
                     />
-                    <button
-                      onClick={handleSend}
-                      disabled={!input.trim() || isTyping}
-                      className="flex-shrink-0 w-6 h-6 rounded-full bg-primary-green text-white flex items-center justify-center hover:bg-primary-green/80 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-                    >
-                      <Send size={11} />
-                    </button>
+                    <div className="flex items-center justify-between">
+                      <button
+                        type="button"
+                        title="Ajouter une pièce jointe"
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                      >
+                        <Plus size={13} />
+                      </button>
+                      <div className="flex items-center gap-2">
+                        <span className="text-[10px] text-outline">{selectedAgent.name.replace('AI ', '')}</span>
+                        <Mic size={13} className="text-muted-foreground" />
+                        <motion.button
+                          onClick={() => handleSend()}
+                          disabled={!input.trim() || isTyping}
+                          whileHover={input.trim() && !isTyping ? { scale: 1.06 } : undefined}
+                          whileTap={input.trim() && !isTyping ? { scale: 0.92 } : undefined}
+                          className="flex-shrink-0 w-6 h-6 rounded-full bg-primary-green text-white flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                        >
+                          <Send size={11} />
+                        </motion.button>
+                      </div>
+                    </div>
                   </div>
                   <p className="text-[9px] text-outline mt-1.5 text-center">Entrée pour envoyer · Shift+Entrée pour nouvelle ligne</p>
                 </div>
