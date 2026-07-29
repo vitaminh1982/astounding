@@ -71,6 +71,10 @@ interface SidebarProps {
   activePlexChatId?: string | null;
   setActivePlexChatId?: (id: string | null) => void;
   onStartNewPlexChat?: () => void;
+
+  // Assistant toggle
+  showAssistant?: boolean;
+  onToggleAssistant?: () => void;
 }
 
 interface Notification {
@@ -369,6 +373,8 @@ const Sidebar = ({
   activePlexChatId,
   setActivePlexChatId,
   onStartNewPlexChat,
+  showAssistant = true,
+  onToggleAssistant,
 }: SidebarProps) => {
   const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
   const isProjectPage = hasSidebar && currentPage !== 'plex' && currentPage !== 'agents';
@@ -1152,22 +1158,17 @@ const Sidebar = ({
                         {/* Projects section */}
                         <div id="workspace-projects" className="mb-8">
                           <div className="flex items-center justify-between px-2 mb-1.5 group/proj-heading relative">
-                            <p className="text-[10px] font-semibold text-outline dark:text-muted-foreground uppercase tracking-wider">
-                              Projects
-                            </p>
+                            <button
+                              onClick={() => handleNav('projects')}
+                              className="group/title flex items-center gap-1 cursor-pointer text-left focus:outline-none"
+                            >
+                              <span className="text-[10px] font-semibold text-outline dark:text-muted-foreground uppercase tracking-wider group-hover/title:text-foreground transition-colors">
+                                Projects
+                              </span>
+                              <ArrowRight size={11} className="text-primary-green opacity-0 group-hover/title:opacity-100 transition-all transform -translate-x-1 group-hover/title:translate-x-0 flex-shrink-0" />
+                            </button>
                             <div className="flex items-center gap-1 opacity-0 group-hover/proj-heading:opacity-100 transition-opacity">
-                              {/* Library Link with Tooltip */}
-                              <div className="relative group/tooltip flex justify-center">
-                                <button
-                                  onClick={() => handleNav('projects')}
-                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
-                                >
-                                  <Library size={14} strokeWidth={2} />
-                                </button>
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium">
-                                  All Projects
-                                </div>
-                              </div>
+
 
                               {/* Ellipsis Link */}
                               <div className="relative flex justify-center">
@@ -1242,22 +1243,17 @@ const Sidebar = ({
                         {/* Agents section */}
                         <div id="workspace-agents" className="mb-8">
                           <div className="flex items-center justify-between px-2 mb-1.5 group/agent-heading relative">
-                            <p className="text-[10px] font-semibold text-outline dark:text-muted-foreground uppercase tracking-wider">
-                              Workspace agents
-                            </p>
+                            <button
+                              onClick={() => handleNav('workspace-agents')}
+                              className="group/title flex items-center gap-1 cursor-pointer text-left focus:outline-none"
+                            >
+                              <span className="text-[10px] font-semibold text-outline dark:text-muted-foreground uppercase tracking-wider group-hover/title:text-foreground transition-colors">
+                                Workspace agents
+                              </span>
+                              <ArrowRight size={11} className="text-primary-green opacity-0 group-hover/title:opacity-100 transition-all transform -translate-x-1 group-hover/title:translate-x-0 flex-shrink-0" />
+                            </button>
                             <div className="flex items-center gap-1 opacity-0 group-hover/agent-heading:opacity-100 transition-opacity">
-                              {/* Library Link with Tooltip */}
-                              <div className="relative group/tooltip flex justify-center">
-                                <button
-                                  onClick={() => handleNav('workspace-agents')}
-                                  className="p-1 rounded-md text-muted-foreground dark:text-muted-foreground hover:bg-white/40 dark:hover:bg-white/10 hover:text-foreground dark:hover:text-white transition-colors duration-150"
-                                >
-                                  <Library size={14} strokeWidth={2} />
-                                </button>
-                                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium">
-                                  All Agents
-                                </div>
-                              </div>
+
 
                               {/* Ellipsis Link */}
                               <div className="relative flex justify-center">
@@ -1418,6 +1414,26 @@ const Sidebar = ({
                             onClick={handleNav}
                             isExpanded={true}
                           />
+                          {/* Assistant toggle */}
+                          <div className="flex items-center justify-between px-2.5 py-1.5 rounded-lg">
+                            <span className="text-xs font-medium text-on-surface dark:text-muted-foreground">Sendplex Assistant</span>
+                            <button
+                              onClick={onToggleAssistant}
+                              className={[
+                                'relative inline-flex h-4 w-7 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 focus:outline-none',
+                                showAssistant ? 'bg-primary-green' : 'bg-black/15 dark:bg-white/15',
+                              ].join(' ')}
+                              role="switch"
+                              aria-checked={showAssistant}
+                            >
+                              <span
+                                className={[
+                                  'pointer-events-none inline-block h-3 w-3 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out',
+                                  showAssistant ? 'translate-x-3' : 'translate-x-0',
+                                ].join(' ')}
+                              />
+                            </button>
+                          </div>
                         </CollapsibleSection>
                       </div>
                     )}

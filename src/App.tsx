@@ -168,6 +168,16 @@ function AppContent() {
   );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [showAssistant, setShowAssistant] = useState(
+    () => localStorage.getItem('app-show-assistant') !== 'false'
+  );
+  const toggleAssistant = useMemo(() => () => {
+    setShowAssistant(prev => {
+      const next = !prev;
+      localStorage.setItem('app-show-assistant', String(next));
+      return next;
+    });
+  }, []);
 
   // Lifted Plex state
   const [plexChats, setPlexChats] = useState<Chat[]>([]);
@@ -255,7 +265,7 @@ function AppContent() {
 
         {/* Sidebar — in-flow on desktop, overlay on mobile */}
         <Sidebar
-          currentPage={currentPage}
+        currentPage={currentPage}
           onNavigate={handleNavigation}
           isOpen={isSidebarOpen}
           onClose={closeSidebar}
@@ -266,6 +276,8 @@ function AppContent() {
           activePlexChatId={activePlexChatId}
           setActivePlexChatId={setActivePlexChatId}
           onStartNewPlexChat={() => setActivePlexChatId(null)}
+          showAssistant={showAssistant}
+          onToggleAssistant={toggleAssistant}
         />
 
         {/* Mobile overlay */}
@@ -288,7 +300,7 @@ function AppContent() {
       </div>
 
       <div className="fixed bottom-4 right-4 z-40">
-        <FloatingAssistant />
+        {showAssistant && <FloatingAssistant />}
       </div>
     </div>
   );
