@@ -263,10 +263,12 @@ const Navbar = ({
     setIsProfileOpen(false);
   }, []);
 
+  const { activeProject } = useWorkspace();
+
   const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
 
   return (
-    <header id="sendplex-header" className="relative flex-shrink-0 flex items-center h-16 pr-4 z-50 transition-colors">
+    <header id="sendplex-header" className="relative flex-shrink-0 flex items-center h-20 pr-4 z-50 transition-colors">
 
       {/* Mobile hamburger */}
       <button
@@ -295,7 +297,29 @@ const Navbar = ({
       {/* Workspace selector — w-56 matches project-sidebar width */}
       {hasSidebar && (
         <div className="relative flex-shrink-0 w-56 z-50">
-          <NavWorkspaceSwitcher />
+          <NavWorkspaceSwitcher onNavigate={onNavigate} />
+        </div>
+      )}
+
+      {/* Project identity — shown on project-detail */}
+      {currentPage === 'project-detail' && activeProject && (
+        <div id="sendplex-project-identity" className="flex items-center gap-2 min-w-0 pl-3">
+          <div id="sendplex-project-emoji" className="w-8 h-8 rounded-full bg-surface-container-low dark:bg-surface-container flex items-center justify-center text-base flex-shrink-0">
+            {activeProject.emoji}
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h2 id="sendplex-project-name" className="text-xl font-bold text-foreground truncate">
+                {activeProject.name}
+              </h2>
+              <span id="sendplex-project-category" className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-surface-container-low dark:bg-surface-container text-muted-foreground flex-shrink-0">
+                {activeProject.industry}
+              </span>
+            </div>
+            <p id="sendplex-project-description" className="text-[11px] text-muted-foreground truncate">
+              {activeProject.description}
+            </p>
+          </div>
         </div>
       )}
 

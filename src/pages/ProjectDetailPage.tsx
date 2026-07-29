@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Check, ArrowRight, LayoutDashboard, ListTodo, Package } from 'lucide-react';
+import { ChevronDown, Check, ArrowRight, Globe, ListTodo, Package } from 'lucide-react';
 import LayoutFreeform from '../components/icons/LayoutFreeform';
 import { useWorkspace } from '../context/WorkspaceContext';
 
@@ -40,7 +40,7 @@ const STAT_CARDS: Record<ProjectView, StatCard[]> = {
 const ACTIVE_AGENTS_COUNT = 6;
 
 const PROJECT_NAV_ITEMS = [
-  { id: 'overview', label: 'Overview', icon: LayoutDashboard },
+  { id: 'overview', label: 'Overview', icon: Globe },
   { id: 'tasks', label: 'Tasks', icon: ListTodo },
   { id: 'deliverables', label: 'Deliverables', icon: Package },
 ] as const;
@@ -66,16 +66,13 @@ export default function ProjectDetailPage({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const activeTabLabel = PROJECT_NAV_ITEMS.find((item) => item.id === activeNavTab)?.label ?? '';
+
   const identityAndSwitcherRow = (
     <div className="flex items-center justify-between gap-4 p-6">
-      <div className="flex items-center gap-2">
-        <div className="w-10 h-10 rounded-full bg-surface-container-low dark:bg-surface-container flex items-center justify-center text-lg flex-shrink-0">
-          {activeProject?.emoji}
-        </div>
-        <h1 className="text-2xl font-bold text-foreground">
-          {activeProject?.name ?? ''}
-        </h1>
-      </div>
+      <h1 className="text-2xl font-bold text-foreground">
+        {activeTabLabel}
+      </h1>
 
       {/* view switcher */}
       <div className="flex-shrink-0">
@@ -131,7 +128,7 @@ export default function ProjectDetailPage({
                 className={[
                   'flex items-center gap-2 pl-1.5 pr-4 py-1.5 rounded-full text-sm transition-colors',
                   isActive
-                    ? 'bg-surface dark:bg-surface-container-low font-semibold text-foreground'
+                    ? 'bg-surface dark:bg-surface-container-low shadow-sm border border-black/5 dark:border-white/5 font-semibold text-foreground'
                     : 'font-medium text-muted-foreground hover:text-foreground',
                 ].join(' ')}
               >
@@ -182,21 +179,10 @@ export default function ProjectDetailPage({
             <div className="flex items-start justify-between gap-4 p-6">
               {/* Left: identity */}
               <div className="min-w-0">
-                <div className="flex items-center gap-2 mb-2">
-                  <div className="w-10 h-10 rounded-full bg-surface-container-low dark:bg-surface-container flex items-center justify-center text-lg flex-shrink-0">
-                    {activeProject?.emoji}
-                  </div>
-                  <h1 className="text-2xl font-bold text-foreground">
-                    {activeProject?.name ?? ''}
-                  </h1>
-                </div>
-                <p className="text-xs text-muted-foreground mt-1">
-                  {activeProject?.description}
-                </p>
+                <h1 className="text-2xl font-bold text-foreground">
+                  {activeTabLabel}
+                </h1>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-medium bg-surface-container-low dark:bg-surface-container text-muted-foreground">
-                    {activeProject?.industry}
-                  </span>
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border border-border text-on-surface">
                     <span className="w-1.5 h-1.5 rounded-full bg-destructive" />
                     À risque

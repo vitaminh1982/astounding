@@ -163,7 +163,9 @@ const PageLoader: React.FC = () => (
 
 // Main App Content Component
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<Page>('dashboard');
+  const [currentPage, setCurrentPage] = useState<Page>(
+    () => (localStorage.getItem('app-current-page') as Page | null) || 'dashboard'
+  );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
@@ -174,6 +176,7 @@ function AppContent() {
   const handleNavigation = useMemo(
     () => (page: Page) => {
       setCurrentPage(page);
+      localStorage.setItem('app-current-page', page);
       setIsSidebarOpen(false);
     },
     []

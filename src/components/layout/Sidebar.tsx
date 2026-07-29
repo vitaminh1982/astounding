@@ -807,7 +807,7 @@ const Sidebar = ({
                                       return (
                                         <button
                                           key={ws.id}
-                                          onClick={() => { switchWorkspace(account.id, ws.id); setPopoverView('main'); setIsProfileMenuOpen(false); }}
+                                          onClick={() => { switchWorkspace(account.id, ws.id); handleNav('projects'); setPopoverView('main'); setIsProfileMenuOpen(false); }}
                                           className={`w-full flex items-center justify-between px-2 py-1.5 rounded-lg transition-colors text-left ${isActive ? 'bg-black/5 dark:bg-white/5 text-foreground dark:text-foreground font-medium' : 'text-on-surface dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 font-normal'}`}
                                         >
                                           <span className="flex items-center gap-2 truncate">

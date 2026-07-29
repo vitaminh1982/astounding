@@ -14,7 +14,7 @@ function getPlanPill(plan: string): string | null {
 const wsEmoji = (icon: string) =>
   icon === 'briefcase' ? '💼' : icon === 'user' ? '👤' : '🏢';
 
-export default function NavWorkspaceSwitcher() {
+export default function NavWorkspaceSwitcher({ onNavigate }: { onNavigate?: (page: 'projects') => void }) {
   const { activeAccount, activeWorkspace, switchWorkspace } = useWorkspace();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -104,6 +104,7 @@ export default function NavWorkspaceSwitcher() {
                   key={ws.id}
                   onClick={() => {
                     switchWorkspace(activeAccount.id, ws.id);
+                    onNavigate?.('projects');
                     setIsOpen(false);
                   }}
                   className={`w-full flex items-center justify-between px-2.5 py-2 rounded-xl transition-colors text-left ${isActive
