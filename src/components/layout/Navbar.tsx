@@ -266,7 +266,7 @@ const Navbar = ({
   const hasSidebar = currentPage !== 'dashboard' && currentPage !== 'paramètres' && currentPage !== 'onboarding' && currentPage !== 'usage';
 
   return (
-    <header id="sendplex-header" className="relative flex-shrink-0 flex items-center h-12 pr-4 z-50 transition-colors">
+    <header id="sendplex-header" className="relative flex-shrink-0 flex items-center h-16 pr-4 z-50 transition-colors">
 
       {/* Mobile hamburger */}
       <button
@@ -277,8 +277,8 @@ const Navbar = ({
         <Menu className="h-4 w-4 text-muted-foreground dark:text-muted-foreground" />
       </button>
 
-      {/* Logo — w-16 matches sendplex-nav width */}
-      <div className="w-16 flex-shrink-0 flex items-center justify-center">
+      {/* Logo — w-20 matches sendplex-nav width */}
+      <div className="w-20 flex-shrink-0 flex items-center justify-center">
         <button
           onClick={() => onNavigate('projects')}
           className="flex items-center focus:outline-none hover:opacity-80 transition-opacity"

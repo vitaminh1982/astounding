@@ -659,7 +659,7 @@ const Sidebar = ({
           ══════════════════════════════════════════════════════════ */}
       <div
         id="sendplex-nav"
-        className="w-16 flex-shrink-0 flex flex-col rounded-2xl"
+        className="w-20 flex-shrink-0 flex flex-col rounded-2xl"
       >
 
         {/* Expand/Collapse Button */}
@@ -1064,7 +1064,7 @@ const Sidebar = ({
             ref={profileButtonRef}
             id="profile-btn"
             onClick={() => { setIsProfileMenuOpen(prev => !prev); setPopoverView('main'); }}
-            className="w-full flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-white/40 dark:hover:bg-white/5 transition-colors focus:outline-none"
+            className="w-full flex flex-col items-center gap-1.5 p-4 rounded-xl hover:bg-white/40 dark:hover:bg-white/5 transition-colors focus:outline-none"
           >
             <div className="relative">
               <div className="w-8 h-8 rounded-full bg-black/10 dark:bg-white/10 text-on-surface dark:text-on-surface-variant font-semibold flex items-center justify-center text-xs border border-black/5 dark:border-white/5 shadow-inner">
@@ -1098,7 +1098,7 @@ const Sidebar = ({
                   <motion.div
                     key="project"
                     id="project-sidebar"
-                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left mb-2"
+                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left mb-4"
                     initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
                     animate={{ opacity: 1, x: 0, scaleX: 1 }}
                     exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
@@ -1428,7 +1428,7 @@ const Sidebar = ({
                   <motion.div
                     key="plex"
                     id="plex-sidebar"
-                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left mb-2"
+                    className="group relative flex flex-col flex-1 glass-sidebar rounded-2xl overflow-hidden origin-left mb-4"
                     initial={{ opacity: 0, x: -80, scaleX: 0.9 }}
                     animate={{ opacity: 1, x: 0, scaleX: 1 }}
                     exit={{ opacity: 0, x: -80, scaleX: 0.9 }}
