@@ -610,7 +610,21 @@ const Sidebar = ({
     setIsPlexModalOpen(true);
   };
 
-  const handlePlexConfirm = (_prompt: string) => {
+  const handlePlexComplete = (data: Record<string, string>) => {
+    addProjectToWorkspace({
+      id: 'proj-' + Date.now(),
+      name: data.projectName || 'Untitled Project',
+      deliveryTrackLabel: data.projectType || 'Custom',
+      emoji: '🚀',
+      color: 'indigo',
+      image: '/assets/images/projects/project-roadmap.jpg',
+      industry: data.projectType || 'General',
+      description: data.goal || '',
+      phaseLabel: 'Discovery',
+      phaseProgress: 0,
+      teamSize: 1,
+      vision: data.goal || '',
+    });
     setIsPlexModalOpen(false);
     handleNav('projects');
   };
@@ -1482,7 +1496,7 @@ const Sidebar = ({
     {isPlexModalOpen && (
       <PlexCreateModal
         onClose={() => setIsPlexModalOpen(false)}
-        onConfirm={handlePlexConfirm}
+        onComplete={handlePlexComplete}
       />
     )}
     </>

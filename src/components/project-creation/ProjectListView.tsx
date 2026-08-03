@@ -5,6 +5,7 @@ import { useProjectCreation } from '../../context/ProjectCreationContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
 import { toast } from 'react-hot-toast';
 import PlexCreateModal from './PlexCreateModal';
+import ProjectSkeletonBackground from './ProjectSkeletonBackground';
 
 const COLOR_MAP: Record<string, { bg: string; text: string }> = {
   violet: { bg: 'bg-violet-100 dark:bg-violet-900/30', text: 'text-violet-700 dark:text-violet-400' },
@@ -39,6 +40,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
   const { activeWorkspace, activeProject, switchProject, addProjectToWorkspace } = useWorkspace();
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [intakeStep, setIntakeStep] = useState<{ step: number; total: number } | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -73,6 +75,34 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
     toast.success(`Project created: ${template.name}`);
   }
 
+  function handleIntakeComplete(data: Record<string, string>) {
+    const newId = 'proj-' + Date.now();
+    addProjectToWorkspace({
+      id: newId,
+      name: data.projectName || 'Untitled Project',
+      deliveryTrackLabel: data.projectType || 'Custom',
+      emoji: '🚀',
+      color: 'indigo',
+      image: '/assets/images/projects/project-roadmap.jpg',
+      industry: data.projectType || 'General',
+      description: data.goal || '',
+      phaseLabel: 'Discovery',
+      phaseProgress: 0,
+      teamSize: 1,
+      vision: data.goal || '',
+    });
+    toast.success(`Project created: ${data.projectName || 'Untitled Project'}`);
+    setIsCreateModalOpen(false);
+    setIntakeStep(null);
+    switchProject(newId);
+    onNavigate?.('project-detail');
+  }
+
+  function handleCloseModal() {
+    setIsCreateModalOpen(false);
+    setIntakeStep(null);
+  }
+
   const scrollToTemplates = () => {
     setIsCreateModalOpen(false);
     setTimeout(() => {
@@ -95,6 +125,10 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+      {intakeStep ? (
+        <ProjectSkeletonBackground step={intakeStep.step} totalSteps={intakeStep.total} />
+      ) : (
+        <>
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -343,15 +377,16 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
           </div>
         </div>
       )}
+        </>
+      )}
 
       {/* Plex-style Create Project Modal */}
       {isCreateModalOpen && (
         <PlexCreateModal
-          onClose={() => setIsCreateModalOpen(false)}
-          onConfirm={(prompt) => {
-            setIsCreateModalOpen(false);
-            handleNewProject();
-          }}
+          onClose={handleCloseModal}
+          onIntakeStart={() => setIntakeStep({ step: 0, total: 7 })}
+          onIntakeStep={(step, total) => setIntakeStep({ step, total })}
+          onComplete={handleIntakeComplete}
         />
       )}
     </div>
