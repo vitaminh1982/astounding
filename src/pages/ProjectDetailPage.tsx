@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Check, ArrowRight, Globe, ListTodo, Package } from 'lucide-react';
 import LayoutFreeform from '../components/icons/LayoutFreeform';
 import { useWorkspace } from '../context/WorkspaceContext';
+import ProjectKanbanBoard from '../components/project/ProjectKanbanBoard';
 
 type ProjectView = 'pm' | 'consultant' | 'freelance';
 
@@ -152,23 +153,27 @@ export default function ProjectDetailPage({
         id="project-header"
         className={`max-w-7xl mx-auto py-6 pt-4 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
       >
-        {activeNavTab !== 'overview' && (
+        {activeNavTab === 'tasks' && (
+          <>
+            <div className="bg-surface dark:bg-surface-container-low rounded-2xl mb-4">
+              {identityAndSwitcherRow}
+            </div>
+            <ProjectKanbanBoard />
+          </>
+        )}
+        {activeNavTab === 'deliverables' && (
           <>
             <div className="bg-surface dark:bg-surface-container-low rounded-2xl mb-4">
               {identityAndSwitcherRow}
             </div>
             <div className="rounded-2xl border border-dashed border-border bg-surface dark:bg-surface-container-low flex flex-col items-center justify-center gap-3 py-24 text-center">
               <span className="w-12 h-12 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-muted-foreground">
-                {activeNavTab === 'tasks' ? <ListTodo size={20} strokeWidth={2} /> : <Package size={20} strokeWidth={2} />}
+                <Package size={20} strokeWidth={2} />
               </span>
               <div>
-                <p className="text-sm font-semibold text-foreground">
-                  {activeNavTab === 'tasks' ? 'No tasks yet' : 'No deliverables yet'}
-                </p>
+                <p className="text-sm font-semibold text-foreground">No deliverables yet</p>
                 <p className="text-xs text-muted-foreground mt-1">
-                  {activeNavTab === 'tasks'
-                    ? 'Tasks for this project will show up here.'
-                    : 'Deliverables for this project will show up here.'}
+                  Deliverables for this project will show up here.
                 </p>
               </div>
             </div>
