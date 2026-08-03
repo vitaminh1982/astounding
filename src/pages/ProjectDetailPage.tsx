@@ -116,7 +116,7 @@ export default function ProjectDetailPage({
     <div className="min-h-full">
       <div
         id="project-nav"
-        className={`max-w-7xl mx-auto ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
+        className={`w-full ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
       >
         <nav className="glass-sidebar inline-flex items-center gap-1 p-1 rounded-full">
           {PROJECT_NAV_ITEMS.map((item) => {
@@ -151,7 +151,7 @@ export default function ProjectDetailPage({
       </div>
       <div
         id="project-header"
-        className={`max-w-7xl mx-auto py-6 pt-4 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
+        className={`w-full py-6 pt-4 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
       >
         {activeNavTab === 'tasks' && (
           <>

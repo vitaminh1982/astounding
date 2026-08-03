@@ -293,7 +293,7 @@ function AppContent() {
 
         {/* Main content */}
         <main className="flex-1 overflow-y-auto px-4 min-h-0">
-          <div className="max-w-7xl mx-auto pb-6">
+          <div className={`${currentPage === 'project-detail' ? 'w-full' : 'max-w-7xl mx-auto'} pb-6`}>
             <Suspense fallback={<PageLoader />}>
               {CurrentPageComponent}
             </Suspense>

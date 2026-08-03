@@ -12,13 +12,14 @@ const PEEK_W      = 72;   // px — hover peek width
 const EXPANDED_W  = 400;  // px — full panel width
 
 const AGENT_GREETINGS: Record<string, string> = {
-  'agent-001': 'Bonjour ! En tant que Support Client, je suis disponible pour vous aider sur toutes les demandes liées à ce projet.',
-  'agent-002': 'Bonjour ! Je peux vous aider à planifier vos jalons, suivre les délais et coordonner les ressources du projet.',
-  'agent-003': 'Bonjour ! Besoin de clarifier des exigences ou modéliser des processus métier pour ce projet ? Je suis là.',
-  'agent-004': 'Bonjour ! Je peux analyser les données de performance et produire des rapports d\'avancement pour ce projet.',
-  'agent-005': 'Bonjour ! En tant qu\'expert Finance, je suis disponible pour tout conseil réglementaire ou financier lié à ce projet.',
-  'agent-006': 'Bonjour ! Je peux vous aider sur la gouvernance PMO, le reporting et la gestion du portfolio de ce projet.',
+  'agent-001': 'Bonjour ! Je suis Aria (Customer Support 24/7), je suis disponible pour vous aider sur toutes les demandes liées à ce projet.',
+  'agent-002': 'Bonjour ! Je suis Oscar (Project Manager), je peux vous aider à planifier vos jalons, suivre les délais et coordonner les ressources du projet.',
+  'agent-003': 'Bonjour ! Je suis Zara (Business Analyst), besoin de clarifier des exigences ou modéliser des processus métier pour ce projet ? Je suis là.',
+  'agent-004': 'Bonjour ! Je suis Max (Data Analyst), je peux analyser les données de performance et produire des rapports d\'avancement pour ce projet.',
+  'agent-005': 'Bonjour ! Je suis Nova (Industry Expert Finance), disponible pour tout conseil réglementaire ou financier lié à ce projet.',
+  'agent-006': 'Bonjour ! Je suis Eli (PMO Analyst), je peux vous aider sur la gouvernance PMO, le reporting et la gestion du portfolio de ce projet.',
 };
+
 
 // Contextual quick actions suggested right after the greeting, per agent role
 const AGENT_QUICK_ACTIONS: Record<string, string[]> = {

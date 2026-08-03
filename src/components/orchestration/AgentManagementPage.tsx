@@ -33,8 +33,8 @@ interface AgentManagementPageProps {
 const agents = [
   {
     id: 'agent-001',
-    name: 'Customer Support 24/7',
-    type: 'Support',
+    name: 'Aria',
+    type: 'Customer Support 24/7',
     status: 'active',
     version: 'v2.1.3',
     purpose: 'Handle customer inquiries and support requests around the clock',
@@ -53,10 +53,10 @@ const agents = [
       requests: 1247
     }
   },
-    {
+  {
     id: 'agent-002',
-    name: 'AI Project Manager',
-    type: 'Project Management',
+    name: 'Oscar',
+    type: 'Project Manager',
     status: 'active',
     version: 'v1.8.2',
     purpose: 'Plan, coordinate, and deliver projects on scope, time, and budget while managing risks and stakeholders.',
@@ -84,8 +84,8 @@ const agents = [
   },
   {
     id: 'agent-003',
-    name: 'AI Business Analyst',
-    type: 'Business Analysis',
+    name: 'Zara',
+    type: 'Business Analyst',
     status: 'active',
     version: 'v2.0.1',
     purpose: 'Elicit requirements, model processes, and translate business needs into clear, testable specifications.',
@@ -113,8 +113,8 @@ const agents = [
   },
   {
     id: 'agent-004',
-    name: 'AI Data Analyst',
-    type: 'Data Analytics',
+    name: 'Max',
+    type: 'Data Analyst',
     status: 'active',
     version: 'v1.9.0',
     purpose: 'Explore, analyze, and visualize data to produce actionable insights and forecasts.',
@@ -142,8 +142,8 @@ const agents = [
   },
   {
     id: 'agent-005',
-    name: 'AI Industry Expert (Finance & Payments)',
-    type: 'Industry Expertise',
+    name: 'Nova',
+    type: 'Industry Expert (Finance)',
     status: 'active',
     version: 'v1.6.1',
     purpose: 'Provide financial services and payments domain guidance, best practices, and regulatory context.',
@@ -171,8 +171,8 @@ const agents = [
   },
   {
     id: 'agent-006',
-    name: 'AI PMO Analyst',
-    type: 'PMO',
+    name: 'Eli',
+    type: 'PMO Analyst',
     status: 'paused',
     version: 'v1.5.0',
     purpose: 'Standardize delivery, ensure governance, and provide portfolio-level reporting and insights.',
