@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useWorkspace } from '../../context/WorkspaceContext';
 import {
   X,
   Send,
@@ -10,7 +11,7 @@ import {
   Search,
   Layers,
   Lightbulb,
-  BotMessageSquare,
+  Sparkles,
 } from 'lucide-react';
 
 interface PlexCreateModalProps {
@@ -64,6 +65,7 @@ const PROJECT_PILLS = [
 ];
 
 export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalProps) {
+  const { activeWorkspace } = useWorkspace();
   const [input, setInput] = useState('');
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -104,6 +106,7 @@ export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalP
         onClick={(e) => e.target === e.currentTarget && onClose()}
       >
         <motion.div
+          id="PlexCreateModal"
           initial={{ opacity: 0, scale: 0.96, y: 8 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 8 }}
@@ -114,11 +117,13 @@ export default function PlexCreateModal({ onClose, onConfirm }: PlexCreateModalP
           <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-border dark:border-gray-800">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-primary dark:bg-green-600 flex items-center justify-center text-white">
-                <BotMessageSquare size={16} />
+                <Sparkles size={16} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground dark:text-foreground">Plex</p>
-                <p className="text-[10px] text-outline dark:text-muted-foreground">Create a new project with AI</p>
+                <h2 className="text-base font-bold text-foreground dark:text-foreground">Create new project</h2>
+                <p className="text-xs text-outline dark:text-muted-foreground">
+                  {activeWorkspace?.name || 'Workspace'}
+                </p>
               </div>
             </div>
             <button

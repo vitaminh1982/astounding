@@ -110,7 +110,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
           className="cta-btn px-5 py-2.5 text-sm"
         >
           <Plus className="w-4 h-4" />
-          Create Project
+          Create project
         </motion.button>
       </div>
 
@@ -196,7 +196,7 @@ export default function ProjectListView({ onNavigate }: { onNavigate?: (page: st
               >
                 <div className="flex flex-col items-center gap-2 text-outline dark:text-muted-foreground group-hover:text-primary-green dark:group-hover:text-green-400 transition-colors font-medium text-sm">
                   <Plus className="w-6 h-6" />
-                  <span>New blank project</span>
+                  <span>Create project</span>
                 </div>
               </motion.div>
             </div>

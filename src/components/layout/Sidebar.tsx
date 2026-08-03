@@ -1,6 +1,7 @@
 import React, { useState, useContext, memo, useEffect, useRef, useCallback } from 'react';
 import NavWorkspaceSwitcher from '../workspace/NavWorkspaceSwitcher';
 import { WORKSPACE_AGENTS } from '../../data/workspace_agents';
+import PlexCreateModal from '../project-creation/PlexCreateModal';
 import {
   LayoutDashboard,
   Bot,
@@ -422,6 +423,7 @@ const Sidebar = ({
 
   const [isProjectsDropdownOpen, setIsProjectsDropdownOpen] = useState(false);
   const [isAgentsDropdownOpen, setIsAgentsDropdownOpen] = useState(false);
+  const [isPlexModalOpen, setIsPlexModalOpen] = useState(false);
   const projectsDropdownRef = useRef<HTMLDivElement>(null);
   const agentsDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -605,22 +607,12 @@ const Sidebar = ({
   };
 
   const handleCreateProject = () => {
-    const name = prompt("Enter project name:") || "New Project";
-    const newId = 'proj-' + Date.now();
-    addProjectToWorkspace({
-      id: newId,
-      name,
-      deliveryTrackLabel: 'Kanban Flow',
-      emoji: '📁',
-      color: 'indigo',
-      image: '',
-      industry: '',
-      description: '',
-      phaseLabel: 'Discovery',
-      phaseProgress: 0,
-      teamSize: 1,
-      vision: '',
-    });
+    setIsPlexModalOpen(true);
+  };
+
+  const handlePlexConfirm = (_prompt: string) => {
+    setIsPlexModalOpen(false);
+    handleNav('projects');
   };
 
   const handleAgentsToggle = () => {
@@ -651,7 +643,8 @@ const Sidebar = ({
   };
 
   return (
-    <aside
+    <>
+      <aside
       className={[
         'h-full flex-shrink-0 flex flex-row group/sidebar',
         'fixed inset-y-0 left-0 z-40 lg:relative lg:inset-auto',
@@ -1192,7 +1185,7 @@ const Sidebar = ({
                                   <Plus size={14} strokeWidth={2.5} />
                                 </button>
                                 <div className="absolute top-full right-0 mt-1 hidden group-hover/tooltip:block bg-foreground text-background text-[9px] px-2 py-0.5 rounded shadow-md z-50 pointer-events-none whitespace-nowrap font-medium">
-                                  Add Project
+                                  Create project
                                 </div>
                               </div>
                             </div>
@@ -1211,7 +1204,7 @@ const Sidebar = ({
                                   className="w-full flex items-center gap-2 px-3 py-2 text-left text-on-surface dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors font-medium"
                                 >
                                   <Plus size={12} />
-                                  Add new project
+                                  Create project
                                 </button>
                               </div>
                             )}
@@ -1486,6 +1479,13 @@ const Sidebar = ({
         </div>
       )}
     </aside>
+    {isPlexModalOpen && (
+      <PlexCreateModal
+        onClose={() => setIsPlexModalOpen(false)}
+        onConfirm={handlePlexConfirm}
+      />
+    )}
+    </>
   );
 };
 

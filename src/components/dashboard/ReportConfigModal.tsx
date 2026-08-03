@@ -83,20 +83,20 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
 
   const validateForm = useCallback(() => {
     const newErrors: { name?: string } = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = t('dashboard.reportConfig.errors.nameRequired') || 'Report name is required';
     } else if (formData.name.length < 3) {
       newErrors.name = t('dashboard.reportConfig.errors.nameTooShort') || 'Name must be at least 3 characters';
     }
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   }, [formData.name, t]);
 
   const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       onSave(formData);
       onClose();
@@ -117,15 +117,15 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
 
   const modalVariants = {
     hidden: { opacity: 0, scale: 0.95, y: -20 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
       transition: { type: 'spring', duration: 0.3 }
     },
-    exit: { 
-      opacity: 0, 
-      scale: 0.95, 
+    exit: {
+      opacity: 0,
+      scale: 0.95,
       y: 20,
       transition: { duration: 0.2 }
     }
@@ -133,7 +133,7 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
 
   return (
     <AnimatePresence>
-      <motion.div 
+      <motion.div
         variants={backdropVariants}
         initial="hidden"
         animate="visible"
@@ -141,7 +141,7 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
         className="fixed inset-0 z-50 overflow-y-auto bg-black/50 dark:bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 transition-colors"
         onClick={handleBackdropClick}
       >
-        <motion.div 
+        <motion.div
           variants={modalVariants}
           initial="hidden"
           animate="visible"
@@ -194,14 +194,14 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
                   placeholder-gray-400 dark:placeholder-gray-500
                   transition-colors duration-200
                   focus:outline-none focus:ring-2 focus:ring-ring dark:focus:ring-indigo-400 focus:border-transparent
-                  ${errors.name 
-                    ? 'border-red-300 dark:border-red-600' 
+                  ${errors.name
+                    ? 'border-red-300 dark:border-red-600'
                     : 'border-border dark:border-border'
                   }`}
                 required
               />
               {errors.name && (
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="mt-2 text-sm text-red-600 dark:text-destructive flex items-center gap-1"
@@ -221,7 +221,7 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
                 {reportTypes.map((type) => {
                   const Icon = type.icon;
                   const isSelected = formData.type === type.value;
-                  
+
                   return (
                     <button
                       key={type.value}
@@ -236,21 +236,19 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
                       <div className={`${type.bgColor} w-10 h-10 rounded-lg flex items-center justify-center mb-3 transition-colors`}>
                         <Icon className={`h-5 w-5 ${type.color}`} />
                       </div>
-                      <h4 className={`font-medium text-sm mb-1 transition-colors ${
-                        isSelected 
-                          ? 'text-indigo-900 dark:text-indigo-100' 
+                      <h4 className={`font-medium text-sm mb-1 transition-colors ${isSelected
+                          ? 'text-indigo-900 dark:text-indigo-100'
                           : 'text-foreground dark:text-foreground'
-                      }`}>
+                        }`}>
                         {type.value}
                       </h4>
-                      <p className={`text-xs transition-colors ${
-                        isSelected 
-                          ? 'text-primary-green dark:text-indigo-300' 
+                      <p className={`text-xs transition-colors ${isSelected
+                          ? 'text-primary-green dark:text-indigo-300'
                           : 'text-muted-foreground dark:text-muted-foreground'
-                      }`}>
+                        }`}>
                         {type.description}
                       </p>
-                      
+
                       {/* Selection indicator */}
                       {isSelected && (
                         <motion.div
@@ -272,7 +270,7 @@ export default function ReportConfigModal({ onClose, onSave }: ReportConfigModal
             {/* Description (Optional) */}
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-on-surface dark:text-muted-foreground mb-2 transition-colors">
-                {t('dashboard.reportConfig.description') || 'Description'} 
+                {t('dashboard.reportConfig.description') || 'Description'}
                 <span className="text-outline dark:text-muted-foreground text-xs ml-1">
                   ({t('common.optional') || 'Optional'})
                 </span>
