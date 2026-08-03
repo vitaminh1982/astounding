@@ -80,6 +80,7 @@ export default {
         sans:    ['var(--font-sans)', 'sans-serif'],
         body:    ['var(--font-body)', 'sans-serif'],
         heading: ['var(--font-heading)', 'sans-serif'],
+        proza:   ['var(--font-proza)', 'sans-serif'],
       },
 
       // ── Border radius ─────────────────────────────────────────────────────

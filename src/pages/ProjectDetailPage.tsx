@@ -234,13 +234,16 @@ export default function ProjectDetailPage({
                   <strong className="font-bold text-foreground">{activeProject?.teamSize ?? 0}</strong> people have access to this project
                 </span>
               </div>
-              <div className="group cursor-pointer rounded-2xl bg-black/90 hover:bg-black p-4 flex items-center justify-between text-white backdrop-blur-sm transition-colors duration-200">
+              <div
+                onClick={() => window.dispatchEvent(new CustomEvent('open-agent-rail'))}
+                className="group cursor-pointer rounded-2xl bg-black/90 hover:bg-black p-4 flex items-center justify-between text-white backdrop-blur-sm transition-colors duration-200"
+              >
                 <div className="flex items-center gap-3">
                   <span className="text-2xl font-bold">{ACTIVE_AGENTS_COUNT}</span>
                   <span className="text-sm font-medium">Active agents</span>
                 </div>
                 <span className="text-xs text-white/70 group-hover:text-primary-green transition-colors duration-200 flex-shrink-0 flex items-center gap-1">
-                  Manage <ArrowRight size={12} />
+                  Ask Agent <ArrowRight size={12} />
                 </span>
               </div>
             </div>
@@ -256,8 +259,8 @@ export default function ProjectDetailPage({
                 {/* Left: Vision */}
                 <div className="lg:col-span-2 rounded-2xl p-4 text-white flex flex-col justify-between">
                   <div className="max-w-md">
-                    <p className="text-[10px] font-semibold text-white/70 uppercase tracking-wider mb-2">Vision</p>
-                    <p className="text-lg italic leading-relaxed">
+                    <p className="text-[10px] font-semibold text-white/70 uppercase tracking-wider mb-2 font-proza">Vision</p>
+                    <p className="text-lg italic leading-relaxed font-proza">
                       “{activeProject?.vision}”
                     </p>
                   </div>

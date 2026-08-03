@@ -158,6 +158,16 @@ export default function ProjectAgentRail() {
     return () => document.removeEventListener('mousedown', handleOutside);
   }, [expanded]);
 
+  // Listen for open-agent-rail event
+  useEffect(() => {
+    function handleOpenRail() {
+      setView('list');
+      setExpanded(true);
+    }
+    window.addEventListener('open-agent-rail', handleOpenRail);
+    return () => window.removeEventListener('open-agent-rail', handleOpenRail);
+  }, []);
+
   // Reset chat when agent changes
   useEffect(() => {
     setMessages([{
@@ -227,7 +237,7 @@ export default function ProjectAgentRail() {
       onMouseEnter={() => !expanded && setRailHovered(true)}
       onMouseLeave={() => { setRailHovered(false); setHoveredId(null); }}
       onClick={handleRailClick}
-      className="hidden xl:flex flex-col flex-shrink-0 glass-sidebar rounded-tl-2xl rounded-bl-2xl mb-4 cursor-pointer relative"
+      className="hidden lg:flex flex-col flex-shrink-0 glass-sidebar rounded-tl-2xl rounded-bl-2xl mb-4 cursor-pointer relative"
       style={{ overflow: expanded ? 'hidden' : 'visible' }}
     >
       <AnimatePresence initial={false}>
