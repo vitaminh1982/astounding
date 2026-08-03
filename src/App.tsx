@@ -42,6 +42,7 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
 const PlexPage = lazy(() => import('./pages/PlexPage'));
 const WorkspaceAgentsPage = lazy(() => import('./pages/WorkspaceAgentsPage'));
+const ProposalPage = lazy(() => import('./pages/ProposalPage'));
 
 // Types
 export type Page =
@@ -72,6 +73,7 @@ export type Page =
   | 'collaboration'
   | 'plex'
   | 'workspace-agents'
+  | 'proposal'
   | 'paramètres';
 
 interface NavItem {
@@ -154,6 +156,7 @@ const PAGE_CONFIG: Record<Page, PageConfig> = {
   paramètres: { component: SettingsPage },
   plex: { component: PlexPage },
   'workspace-agents': { component: WorkspaceAgentsPage },
+  proposal: { component: ProposalPage },
 };
 
 // Loading component

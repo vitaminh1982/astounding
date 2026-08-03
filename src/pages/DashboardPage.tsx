@@ -185,10 +185,10 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   <div className="mb-6">
     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-on-surface dark:text-foreground transition-colors">
+        <h1 className="text-2xl font-bold text-on-surface dark:text-foreground transition-colors">
           {title}
         </h1>
-        <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground mt-1 transition-colors">
+        <p className="text-muted-foreground dark:text-muted-foreground transition-colors">
           {subtitle}
         </p>
       </div>

@@ -192,8 +192,8 @@ export default function PlexPage({
           <div className="flex-1 flex flex-col items-center justify-center px-6">
             {/* Greeting */}
             <div className="flex items-center gap-3 mb-8">
-              <Sparkles size={38} className="text-primary-green dark:text-primary-green" />
-              <h1 className="text-4xl font-semibold text-gray-950 dark:text-gray-50 tracking-tight">
+              <Sparkles size={24} className="text-primary-green dark:text-primary-green" />
+              <h1 className="text-2xl font-bold text-on-surface dark:text-foreground">
                 {getGreeting()}, Oppie
               </h1>
             </div>

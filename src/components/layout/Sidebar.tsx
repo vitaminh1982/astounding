@@ -50,6 +50,7 @@ import {
   BotMessageSquare,
   ArrowRight,
   Library,
+  FileSignature,
 } from 'lucide-react';
 import { Page } from '../../App';
 import { LanguageContext } from '../../context/LanguageContext';
@@ -718,6 +719,13 @@ const Sidebar = ({
             icon={Sparkles}
             label="Plex"
             page="plex"
+            currentPage={currentPage}
+            onClick={handleNav}
+          />
+          <SendplexNavItem
+            icon={FileSignature}
+            label="Proposal"
+            page="proposal"
             currentPage={currentPage}
             onClick={handleNav}
           />

@@ -99,10 +99,10 @@ export default function AgentsHeader() {
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
         {/* Header Text */}
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-on-surface dark:text-foreground">
+          <h1 className="text-2xl font-bold text-on-surface dark:text-foreground">
             {t('agents.page.header.title')}
           </h1>
-          <p className="text-sm sm:text-base text-muted-foreground dark:text-muted-foreground mt-1">
+          <p className="text-muted-foreground dark:text-muted-foreground">
             {t('agents.page.header.subtitle')}
           </p>
         </div>
