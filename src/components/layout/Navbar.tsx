@@ -301,9 +301,9 @@ const Navbar = ({
         </div>
       )}
 
-      {/* Main content header area — aligned with <main> and <ProjectDetailPage> max-w-7xl container */}
+      {/* Main content header area — mirrors <main>: full width on project-detail, max-w-7xl elsewhere */}
       <div className="flex-1 flex items-center min-w-0 px-4">
-        <div className={`w-full max-w-7xl mx-auto flex items-center justify-between transition-all duration-300 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}>
+        <div className={`w-full ${currentPage === 'project-detail' ? '' : 'max-w-7xl mx-auto'} flex items-center justify-between transition-all duration-300 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}>
           {/* Project identity — shown on project-detail */}
           {currentPage === 'project-detail' && activeProject ? (
             <div id="sendplex-project-identity" className="flex items-center gap-2 min-w-0">

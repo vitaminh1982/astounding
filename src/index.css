@@ -567,6 +567,39 @@ body,
     inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
 }
 
+/* Inverted frosted glass — same treatment as .glass-sidebar, contrasted:
+   bluish-black in light mode, white in dark mode. Used by the Plex project orb. */
+.glass-inverse {
+  background: rgba(10, 12, 16, 0.88);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 36px 0 rgba(31, 38, 135, 0.26),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+  transition: background 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.glass-inverse:hover {
+  background: rgba(10, 12, 16, 0.72);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12);
+  transform: translateY(0);
+}
+
+.dark .glass-inverse {
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 12px 44px -10px rgba(0, 0, 0, 0.65),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.dark .glass-inverse:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.55),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.75);
+}
+
 /* Sendplex nav — green-tinted glass using DS green primitives */
 .sendplex-nav-bg {
   /* green-100/200 tints from DS primitive palette */

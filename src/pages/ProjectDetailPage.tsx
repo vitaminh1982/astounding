@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Check, ArrowRight, Globe, ListTodo, Package } from 'lucide-react';
+import { ChevronDown, Check, ArrowRight, Globe, ListTodo, Package, Sparkles } from 'lucide-react';
 import LayoutFreeform from '../components/icons/LayoutFreeform';
 import { useWorkspace } from '../context/WorkspaceContext';
 import ProjectKanbanBoard from '../components/project/ProjectKanbanBoard';
@@ -116,7 +116,7 @@ export default function ProjectDetailPage({
     <div className="min-h-full">
       <div
         id="project-nav"
-        className={`w-full ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
+        className={`w-full flex items-center justify-between gap-4 ${isSidebarExpanded ? 'px-4 sm:px-6 lg:px-8' : 'pl-0 -ml-4 pr-4 sm:pr-6 lg:pr-8'}`}
       >
         <nav className="glass-sidebar inline-flex items-center gap-1 p-1 rounded-full">
           {PROJECT_NAV_ITEMS.map((item) => {
@@ -148,6 +148,16 @@ export default function ProjectDetailPage({
             );
           })}
         </nav>
+
+        {/* Plex assistant scoped to this project — no action wired yet */}
+        <button
+          id="project-plex-orb"
+          type="button"
+          aria-label="Plex assistant for this project"
+          className="glass-inverse w-11 h-11 flex-shrink-0 rounded-full flex items-center justify-center text-white dark:text-surface-container-lowest focus:outline-none"
+        >
+          <Sparkles size={16} strokeWidth={2} className="text-white dark:text-[#0A0C10]" />
+        </button>
       </div>
       <div
         id="project-header"
