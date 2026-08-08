@@ -311,7 +311,7 @@ export default function PlexCreateModal({ onClose, onIntakeStart, onIntakeStep, 
 
           {mode === 'prompt' ? (
             <div className="px-6 py-5 bg-gray-50 dark:bg-surface-container-low">
-              <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-md dark:focus-within:ring-green-500/50 transition-all">
+              <div className="bg-white dark:bg-surface-container-high rounded-xl shadow-mdgit  dark:focus-within:ring-green-500/50 transition-all">
                 <textarea
                   ref={textareaRef}
                   value={input}
@@ -333,8 +333,8 @@ export default function PlexCreateModal({ onClose, onIntakeStart, onIntakeStep, 
                     onClick={handleSubmit}
                     disabled={!input.trim()}
                     className={`flex items-center justify-center w-8 h-8 rounded-lg transition-all ${input.trim()
-                        ? 'bg-primary dark:bg-green-600 text-white hover:bg-green-700 dark:hover:bg-green-700 shadow-sm'
-                        : 'bg-surface-container dark:bg-surface-container-highest text-outline cursor-not-allowed'
+                      ? 'bg-primary dark:bg-green-600 text-white hover:bg-green-700 dark:hover:bg-green-700 shadow-sm'
+                      : 'bg-surface-container dark:bg-surface-container-highest text-outline cursor-not-allowed'
                       }`}
                     aria-label="Send"
                   >
@@ -437,8 +437,8 @@ export default function PlexCreateModal({ onClose, onIntakeStart, onIntakeStep, 
                                   onClick={() => handleChipClick(chip)}
                                   disabled={!!selectedChip}
                                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${selectedChip === chip.value
-                                      ? 'bg-primary dark:bg-green-600 border-green-600 dark:border-green-600 text-white shadow-md'
-                                      : 'bg-white dark:bg-surface-container-high border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-green-400 dark:hover:border-green-500 hover:text-primary-green dark:hover:text-green-400'
+                                    ? 'bg-primary dark:bg-green-600 border-green-600 dark:border-green-600 text-white shadow-md'
+                                    : 'bg-white dark:bg-surface-container-high border-border dark:border-border text-on-surface dark:text-muted-foreground hover:border-green-400 dark:hover:border-green-500 hover:text-primary-green dark:hover:text-green-400'
                                     } disabled:pointer-events-none`}
                                 >
                                   {selectedChip === chip.value && <Check size={11} />}
