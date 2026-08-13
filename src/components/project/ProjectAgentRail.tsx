@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, ChevronLeft, Check, Loader, ChevronDown, Plus, Mic, CornerDownRight } from 'lucide-react';
+import { Send, ChevronLeft, ChevronsLeft, Check, Loader, ChevronDown, Plus, Mic, CornerDownRight, PanelRightClose } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WORKSPACE_AGENTS, WorkspaceAgent } from '../../data/workspace_agents';
 
@@ -220,27 +220,40 @@ export default function ProjectAgentRail() {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
   };
 
-  // Target width: expanded = full, rail hovered = peek, else = strip
-  const targetWidth = expanded ? EXPANDED_W : railHovered ? PEEK_W : COLLAPSED_W;
+  // Reserved layout width: only the genuinely-open (expanded) state should push
+  // sibling content (e.g. #project-header in ProjectDetailPage). The hover peek
+  // is a purely visual overlay (inner motion.div below) and must NOT change the
+  // width this flex item reserves, or every hover reflows the main content.
+  const reservedWidth = expanded ? EXPANDED_W : COLLAPSED_W;
+  // Visual width of the panel itself, including the hover peek.
+  const visualWidth = expanded ? EXPANDED_W : railHovered ? PEEK_W : COLLAPSED_W;
+  const railTransition = expanded
+    ? { type: 'spring' as const, stiffness: 340, damping: 32, mass: 0.9 }
+    : { type: 'spring' as const, stiffness: 420, damping: 34, mass: 0.7 };
 
   return (
     <motion.aside
       id="project-agent-rail"
       ref={railRef as React.RefObject<HTMLElement>}
       initial={{ width: COLLAPSED_W }}
-      animate={{ width: targetWidth }}
-      whileTap={!expanded ? { scale: 0.985 } : undefined}
-      transition={
-        expanded
-          ? { type: 'spring', stiffness: 340, damping: 32, mass: 0.9 }
-          : { type: 'spring', stiffness: 420, damping: 34, mass: 0.7 }
-      }
-      onMouseEnter={() => !expanded && setRailHovered(true)}
-      onMouseLeave={() => { setRailHovered(false); setHoveredId(null); }}
-      onClick={handleRailClick}
-      className="hidden lg:flex flex-col flex-shrink-0 glass-sidebar rounded-tl-2xl rounded-bl-2xl mb-4 cursor-pointer relative"
-      style={{ overflow: expanded ? 'hidden' : 'visible' }}
+      animate={{ width: reservedWidth }}
+      transition={railTransition}
+      className="hidden lg:block flex-shrink-0 mb-4 relative"
+      style={{ overflow: 'visible' }}
     >
+      {/* Visual panel — absolutely positioned so the hover peek overlays content
+          instead of resizing the reserved flex box above. */}
+      <motion.div
+        initial={{ width: COLLAPSED_W }}
+        animate={{ width: visualWidth }}
+        whileTap={!expanded ? { scale: 0.985 } : undefined}
+        transition={railTransition}
+        onMouseEnter={() => !expanded && setRailHovered(true)}
+        onMouseLeave={() => { setRailHovered(false); setHoveredId(null); }}
+        onClick={handleRailClick}
+        className="absolute top-0 right-0 h-full flex flex-col glass-sidebar rounded-tl-2xl rounded-bl-2xl cursor-pointer"
+        style={{ overflow: expanded ? 'hidden' : 'visible' }}
+      >
       <AnimatePresence initial={false}>
         {!expanded ? (
           /* ── COLLAPSED : avatar strip ── */
@@ -310,6 +323,19 @@ export default function ProjectAgentRail() {
                 </motion.div>
               );
             })}
+
+            {/* Expand affordance — centered in the rail, hints it can be enlarged on click */}
+            <motion.div
+              animate={{ opacity: railHovered ? 1 : 0.5 }}
+              transition={{ duration: 0.15 }}
+              className={[
+                'absolute inset-0 flex items-center justify-center',
+                'pointer-events-none',
+                railHovered ? 'text-primary-green' : 'text-outline',
+              ].join(' ')}
+            >
+              <ChevronsLeft size={12} />
+            </motion.div>
           </motion.div>
         ) : (
           /* ── EXPANDED : full panel ── */
@@ -321,20 +347,20 @@ export default function ProjectAgentRail() {
             className="absolute inset-0 flex flex-col min-h-0 overflow-hidden"
           >
             {/* Header */}
-            <div className="flex-shrink-0 flex items-center justify-between px-4 pt-4 pb-2">
+            <div className="flex-shrink-0 flex items-center gap-2 px-4 pt-4 pb-2">
+              <button
+                id="agent-rail-toggle-btn"
+                onClick={() => setExpanded(false)}
+                className="p-2 rounded-lg text-muted-foreground dark:text-muted-foreground hover:bg-black/5 dark:hover:bg-white/5 hover:text-foreground dark:hover:text-white transition-all duration-300 ease-in-out -ml-2"
+                aria-label="Réduire le rail"
+                title="Réduire"
+              >
+                <PanelRightClose size={18} strokeWidth={1.75} />
+              </button>
               <div>
                 <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Project Agents</p>
                 <p className="text-[9px] text-outline">Contextualisés à ce projet</p>
               </div>
-              <motion.button
-                onClick={() => setExpanded(false)}
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.9 }}
-                className="w-6 h-6 rounded-full flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 text-muted-foreground hover:text-foreground transition-colors"
-                title="Réduire"
-              >
-                <ChevronLeft size={13} />
-              </motion.button>
             </div>
 
             {/* Divider */}
@@ -492,6 +518,7 @@ export default function ProjectAgentRail() {
           </motion.div>
         )}
       </AnimatePresence>
+      </motion.div>
     </motion.aside>
   );
 }
